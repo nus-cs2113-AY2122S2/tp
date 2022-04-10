@@ -3,6 +3,7 @@
 
 box LOGIC_COLOR_T1
 participant "studyManager:StudyManager" as studyManager LOGIC_COLOR
+participant "moduleParser:ModuleParser" as moduleParser LOGIC_COLOR
 participant "module:Module" as module LOGIC_COLOR
 participant  "ModuleCalendarReader" as icsReader LOGIC_COLOR
 end box
@@ -10,13 +11,22 @@ end box
 
 [-> studyManager : studyManagerRunner()
 activate studyManager
+activate moduleParser
+
 alt add command
     studyManager->studyManager:addModule()
     activate studyManager
 
-    studyManager -> module ** : new Module(moduleCode, catgeory, day, timeSlot)
-    activate module
-    return :Module
+    studyManager -> moduleParser : validateAddInputs()
+    activate moduleParser
+    alt valid module
+        moduleParser -> module ** : new Module(moduleCode, category, day, timeSlot)
+        activate module
+        return :Module
+        return :Module
+    end
+
+
     deactivate module
     deactivate studyManager
 

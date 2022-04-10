@@ -25,6 +25,14 @@ In this project, we have referenced the following list of materials:
 * [NUSMods](https://nusmods.com/)
 * [Our individual projects](AboutUs.md)
 
+We have used the following third-party libraries:
+* [ical4j](https://www.ical4j.org/getting-started/)
+  - Version 3.1.3
+  - To read .ics files for easy addition to the module list.
+* [SLF4j NOP](https://www.slf4j.org/)
+  - Version 1.7.25
+  - To remove runtime logging warning messages that result from using ical4j.
+
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Product scope
@@ -141,7 +149,9 @@ If the isExitCommand() method returns true on the string representing user input
 method of the AllOnUs class, which then calls the static exit method in the same class to print a termination message, and then finally control
 is returned to the OS. 
 
-### Study Manager component
+### Modules
+
+#### Study Manager component
 API: `StudyManager.java`
 
 ![](images/ModuleClassDiagram.png)
@@ -149,29 +159,92 @@ API: `StudyManager.java`
 
 The `StudyManager` component,
 1. Stores the academic schedule, i.e. all `Module` objects are contained in a `modulesList` object.
-2. The storage can be bound to `modulesList` list such that everytime a change is observed in the list it is saved on to a file.
-3. Does not depend on other components like `ExpenseTracker` and `ContactsManager`
+2. Integrates `ModuleParser.java`, `ModuleCalendarReader.java`, `Module.java` and package `exceptions` with the rest of the application. 
+3. The storage is bound to `modulesList` list such that everytime a change is observed in the list it is saved on to a file.
+4. Does not depend on other components like `ExpenseTracker` and `ContactsManager`.
 
-How the StudyManager works:
+How `StudyManager` works:
 1. Based on a command entered by the user, StudyManager can perform the following functions 
-   1. add 
-   2. list
-   3. delete
-   4. edit
-   5. find 
-   6. read ics
-2. There are two ways to add to the `moduleList` to keep track of academic schedule 
-   1. Either the user can choose to add the modules one by one. (See user guide for add feature)
-   2. Or the user can choose to read from NUSMods .ics calendar file of their academic schedule.  (See user guide for read from ics feature)
-      1. This is more convenient as it can add multiple modules at a single go.
-      2. This feature makes use of the `ModuleCalendarReader.java` API.
-3. If there are any errors in the entry of `Module` parameters they are handled by the various exceptions in the `exceptions` package.
+   * `add` 
+   * `list` 
+   * `delete` 
+   * `edit` 
+   * `find` 
+   * `read ics`
+   
+
+2. The `StudyManager` class makes use of the `ModuleParser` class to validate user inputs and `Module` parameters. 
+   * If there are any errors in the entry of `Module` parameters they are handled by
+       the various exceptions in the `exceptions` package.
+   
+
+3. There are two ways to add to the `moduleList` to keep track of academic schedule 
+   * Either the user can choose to add the modules one by one. (See user guide for add feature)
+   * Or the user can choose to read from NUSMods .ics calendar file of their academic schedule. 
+     (See user guide for `read ics` feature)
+     * This is more convenient as it can add multiple modules at a single go. 
+     * This feature makes use of the `ModuleCalendarReader.java` API.
+
 
    
 The two ways to add modules are illustrated in the sequence diagram below:
 
 
 ![](images/StudyManagerSequenceDiagram.png)
+
+### ModuleCalendarReader Component
+API: `ModuleCalendarReader.java`
+
+Makes use of external library [ical4j](https://www.ical4j.org/getting-started/) to parse calendar files of .ics type 
+from [NUSmods](https://nusmods.com/). 
+
+1. The necessary details like module code, module class time, module category and module day are taken from this file 
+and parsed. 
+2. The timezones are originally in UTC which are converted to Singapore timezone. 
+3. The data is represented in a format that is used throughout the application for module paramters.  
+4. They are then loaded into a `ArrayList<Module>` and returned for use in `StudyManager.java`.
+
+### ModuleParser Component
+API: `ModuleParser.java`
+
+1. Used to parse user inputs and to validate input module parameters for add and edit functions, as well as to validate search
+query for find functions.
+2. Throws exceptions in package `exceptions` if there are any invalid inputs.
+
+### [Proposed] Graduation Tracker Feature
+
+Every semester the user can add the modules they have taken so far. This becomes easier with the `read ics` feature. 
+This can then be used and compiled to form the graduation requirements check list.
+
+More parameters could be added to the `Module` class like `moduleCredits` and `moduleClassification`
+which would signify a module's credits and classification into UEM, GE, core and TE breadth or TE Depth.
+
+A new class called `GradManager` could be created. A new `ArrayList<Module>` called `graduationList` could be created,
+such that the user can add their modules to it once every semester. This list could show important details that could 
+be set by the user such as total number of credits needed amd the number of credits in each `moduleClassification`.
+Based on the `moduleCredits` and `moduleClassification` the number of credits in each module classification can easily be calculated. 
+
+This list can then be used to track the user's graduation requirements and as a checklist to plan their remaining modules.
+
+The suggested architecture has been detailed in a class diagram depicted below:
+
+![](images/GradManagerClassDiagram.png)
+
+
+### [Proposed] Module Task Management Feature
+
+Each module at NUS usually has a set of deliverables like assignments, exam dates, projects. This could be integrated 
+into a task manager (similar to Duke) such that each module has a task list where the user can add any tasks that they 
+would associate with that particular module. 
+The architecture of the `taskList` has been detailed in a class diagram depicted below:
+
+![](images/ModulesTaskListClassDiagram.png)
+
+`StudyManager` can offer functions to view the combined task list for all modules or to just view for a specific module.
+
+A sample implementation has been demonstrated in the sequence diagram depicted below.
+
+![](images/ModulesTaskListSequenceDiagram.png)
 
 
 ### Expense Tracker Component
@@ -374,10 +447,10 @@ the `run()` method of AllOnUs, so that interactions with the user can begin.
 
 2. Adding a module to the list.
    1. Requires module code, category, day and time.
-   2. Test case: `add m/CS2113 c/lec d/Thursday t/2pm-4pm`
+   2. Test case: `add m/CS2113 c/lec d/Thursday t/2:00 pm-4:00 pm`
       1. Expected: Module is added to the list and details are shown on the console.
    3. Test case: `add m/CS2113`
       1. Expected: No module is added to the list. Error details are shown on console.
    4. Other incorrect add commands to try: `add`, `add c/lec t/4pm-6pm`
       1. Or any commands that exclude one of the four requirements to add module.
-      2. Expected: Error messge similar to above.
+      2. Expected: Error message similar to above.
