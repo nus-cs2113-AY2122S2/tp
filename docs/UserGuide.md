@@ -343,8 +343,9 @@ You will have to follow the formatting given below when calling the command.
 Format: `edit appointment /info [appointment id], [patient nric], [patient name], [doctor nric], [doctor name],
 [appointment date], [appointment details]`
 
-Example: `edit appointment /info 12356710156543, S1234567A, Doe, S7654321A, John, 2022-10-15, Regular knee checkup`
+Example: `edit appointment /info 12356710156543, S1234567A, Jamie, S7654321A, John, 2022-10-15, Knee checkup followup`
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.51.38 AM.png)
 
 ### Finding: `find`
 Allows user to find existing records of doctors, patients and medicine.
@@ -372,6 +373,7 @@ Example 5: `find doctor /info address, 10 BAKER STREET` <br>
 Example 6: `find doctor /info dob, 1999-12-31` <br>
 Example 7: `find doctor /info specialization, Urinology`
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.53.07 AM.png)
 
 #### FIND PATIENT
 
@@ -397,6 +399,8 @@ Example 5: `find patient /info address, 10 BAKER STREET` <br>
 Example 6: `find patient /info dob, 1999-12-31` <br>
 Example 7: `find patient /info admissiondate, 2021-02-15` <br>
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.54.23 AM.png)
+
 #### FIND MEDICINE
 
 To find an existing medicine in the application, you can use the `find medicine` command. This command requires an
@@ -417,6 +421,8 @@ Example 3: `find medicine /info dosage, 500` <br>
 Example 4: `find medicine /info expiry, 2023-06-11` <br>
 Example 5: `find medicine /info sideeffects, DROWSY` <br>
 Example 6: `find medicine /info quantity, 10`
+
+![](../../Desktop/Screenshot 2022-04-11 at 4.55.31 AM.png)
 
 #### FIND APPOINTMENT
 
@@ -441,6 +447,7 @@ Example 4: `find appointment /info doctor nric, S7654321A` <br>
 Example 5: `find appointment /info doctor name, John` <br>
 Example 6: `find appointment /info date, 2022-10-15`
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.56.21 AM.png)
 
 ### Features involving Medicine Inventory
 
