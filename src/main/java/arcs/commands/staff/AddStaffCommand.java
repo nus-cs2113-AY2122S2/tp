@@ -16,7 +16,7 @@ public class AddStaffCommand extends Command  {
     private static final String SUCCESS_MESSAGE = "OK! The following new staff is added: ";
     private static final String DUPLICATE_MESSAGE = "The id number already exits. This staff cannot be added.";
     private static final String EMPTY_FIELD_MESSAGE = "These necessary fields are not specified:";
-    private static final String INVALid_FIELD_MESSAGE = "These fields are invalid:";
+    private static final String INVALID_FIELD_MESSAGE = "These fields are invalid:";
 
     public AddStaffCommand(String id, String password, String name, String job, String phone, String email) {
         checkEmptyField(id, password,name, job,phone, email);
@@ -34,7 +34,7 @@ public class AddStaffCommand extends Command  {
             return new CommandResult(EMPTY_FIELD_MESSAGE, emptyFields);
         }
         if (!invalidFields.isEmpty()) {
-            return new CommandResult(INVALid_FIELD_MESSAGE, invalidFields);
+            return new CommandResult(INVALID_FIELD_MESSAGE, invalidFields);
         }
 
         try {
