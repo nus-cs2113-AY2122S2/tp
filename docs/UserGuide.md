@@ -183,7 +183,9 @@ Format: `add d/DATE a/AMOUNT c/CATEGORY r/REMARKS`
 
 **Expected Outcome:**
 ```
+---------------------------------------------------
 Added 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
+---------------------------------------------------
 ```
 #### List out all expenses: `list`
 Lists out all currently tracked expenses in a list using the keyword `list`. Each entry shows
@@ -197,9 +199,12 @@ Format: `list`
 
 **Expected outcome:**
 ```
+---------------------------------------------------
 Here are the expenses you have made so far:
  1. 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
  2. 2022-03-16 | $4.30 | Food | Chicken rice for lunch
+ 
+ ---------------------------------------------------
 ```
 
 #### Delete an expense: `rm`
@@ -219,15 +224,20 @@ Format:
 
 `list`
 ```
+---------------------------------------------------
 Here are the expenses you have made so far:
  1. 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
  2. 2022-03-14 | $4.30 | Food | Chicken rice for lunch
+ 
+ ---------------------------------------------------
 ```
 `rm 2`
 
 **Expected outcome:**
 ```
+---------------------------------------------------
 Deleted entry: 2022-03-14 | $4.30 | Food | Chicken rice for lunch
+---------------------------------------------------
 ```
 #### Editing an expense: `edit`
 Edits an existing expense record in the list of expenses. Users may choose to `list` out the expenses first 
@@ -254,15 +264,25 @@ Format:
 
 **Expected Outcome:**
 ```
+---------------------------------------------------
 Here is the expense record you have chosen to edit:
 2022-03-22 | $18.00 | Category | This is a remark
+---------------------------------------------------
+---------------------------------------------------
 Which field would you like to edit? Enter [field] [newValue] or enter 'DONE' when you have finished editing:
+---------------------------------------------------
 < category Movie
+---------------------------------------------------
 New category value set!
+---------------------------------------------------
 < done
+---------------------------------------------------
 Editing complete!
+---------------------------------------------------
+---------------------------------------------------
 Here is the newly edited expense record:
 2022-03-22 | $20.00 | Movie | This is a remark
+---------------------------------------------------
 ```
 
 #### Finding an expense: `find`
@@ -284,8 +304,10 @@ Format:
 
 **Expected outcome:**
 ```
+---------------------------------------------------
 Here are the matching expense records:
 2022-03-22 | $9.50 | Movie | Fast and Furious
+---------------------------------------------------
 ```
 
 ### Study Manager Features
