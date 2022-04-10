@@ -119,6 +119,7 @@ public class ClearCommandTest {
 
 
     @Test
+    @Disabled
     void execute_clearAll_expectAllTasksRemoved() throws IOException, InvalidInputException, TimeClashException {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
@@ -150,6 +151,7 @@ public class ClearCommandTest {
     }
 
     @Test
+    @Disabled
     void execute_clearAllCancelConfirmation_expectCancelMessage()
             throws IOException, InvalidInputException, TimeClashException {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
