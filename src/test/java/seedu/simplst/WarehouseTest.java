@@ -3,16 +3,10 @@ package seedu.simplst;
 import org.junit.jupiter.api.Test;
 import util.exceptions.ItemDoesNotExistException;
 import util.exceptions.LargeQuantityException;
-import util.exceptions.UnitTestException;
 import util.exceptions.WrongCommandException;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -21,25 +15,19 @@ class WarehouseTest {
     @Test
     void addUnitGoodToInventoryTest() {
         //test 1 - success
-        try {
-            warehouse.addUnitGoodToInventory("SKU01", "banana", "BANANAS", "small");
-            assertTrue(warehouse.hasUnitGood("SKU01"));
-            assertTrue(warehouse.isSkuInInventory("SKU01"));
-        } catch (UnitTestException e) {
-            fail();
-        }
+        warehouse.addUnitGoodToInventory("SKU01", "banana", "BANANAS", "small");
+        assertTrue(warehouse.hasUnitGood("SKU01"));
+        assertTrue(warehouse.isSkuInInventory("SKU01"));
 
-        //test 2 - capacity input is wrong
-        try {
-            warehouse.addUnitGoodToInventory("SKU02", "banana", "MORE BANANA", "huge");
-            fail();
-        } catch (UnitTestException e) {
-            assertTrue(true);
-        }
+        //test 2 - success, capacity input is wrong
+        warehouse.addUnitGoodToInventory("SKU02", "banana", "MORE BANANA", "huge");
+        assertTrue(warehouse.hasUnitGood("SKU01"));
+        assertTrue(warehouse.isSkuInInventory("SKU01"));
     }
 
     @Test
     void addQuantityOfGoodToInventoryTest() {
+        warehouse.addUnitGoodToInventory("SKU01", "banana", "BANANAS", "small");
         //test 1 - success
         try {
             warehouse.addQuantityOfGoodToInventory("SKU01", "100");
@@ -93,7 +81,7 @@ class WarehouseTest {
         //test 1 - success
         try {
             warehouse.addOrder("01", "Joe Mama", "here");
-            assertEquals(1, warehouse.getNumberOfOrder());
+            assertEquals(1, warehouse.totalNumberOfOrder());
         } catch (WrongCommandException e1) {
             fail();
         }
@@ -118,7 +106,7 @@ class WarehouseTest {
 
         //test 4 - fail, reciever is blank
         try {
-            warehouse.addOrder("01", "", "here");
+            warehouse.addOrder("02", "", "here");
             fail();
         } catch (WrongCommandException e) {
             assertTrue(e.isCommand());
@@ -127,7 +115,7 @@ class WarehouseTest {
 
         //test 5 - fail, address input is blank
         try {
-            warehouse.addOrder("01", "Joe Mama", "");
+            warehouse.addOrder("02", "Joe Mama", "");
             fail();
         } catch (WrongCommandException e) {
             assertTrue(e.isCommand());
@@ -136,25 +124,52 @@ class WarehouseTest {
 
         //test 6 - fail, order id is repeated
         try {
-            warehouse.addOrder("01", "John Cena", "here");
-            assertEquals(1, warehouse.getNumberOfOrder());
+            warehouse.addOrder("02", "John Cena", "here");
+            assertEquals(1, warehouse.totalNumberOfOrder());
         } catch (WrongCommandException e) {
             fail();
         }
     }
 
     @Test
-    void addOrderLineTest() {
+    void findOrderTest() {
         //test 1 - success
         try {
-            warehouse.addOrderline("001", "SKU01", "100");
+            Order order = warehouse.findOrder(1);
+            assertTrue(order.getId() == 1);
+            assertTrue(order.getReceiver() == "Joe Mama");
+            assertTrue(order.getShippingAddress() == "here");
+        } catch (ItemDoesNotExistException e) {
+            fail();
+        }
+
+        //test 2 - fail, item does not exist
+        try {
+            warehouse.findOrder(20);
+            fail();
+        } catch (ItemDoesNotExistException e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    void addOrderlineTest() {
+        warehouse.addUnitGoodToInventory("SKU01", "banana", "BANANAS", "small");
+        try {
+            warehouse.addOrder("01", "Joe Mama", "here");
+        } catch (WrongCommandException e1) {
+            fail();
+        }
+        //test 1 - success
+        try {
+            warehouse.addOrderline("01", "SKU01", "10");
         } catch (WrongCommandException e) {
             fail();
         }
 
         //test 2 - fail, order id is not a number
         try {
-            warehouse.addOrderline("one", "SKU01", "100");
+            warehouse.addOrderline("one", "SKU01", "10");
             fail();
         } catch (WrongCommandException e) {
             assertTrue(e.isCommand());
@@ -236,30 +251,8 @@ class WarehouseTest {
     }
 
     @Test
-    void findOrderTest() {
-        //test 1 - success
-        try {
-            warehouse.findOrder(1);
-        } catch (ItemDoesNotExistException e) {
-            fail();
-        }
-
-        //test 2 - fail, item does not exist
-        try {
-            warehouse.findOrder(2);
-            fail();
-        } catch (ItemDoesNotExistException e) {
-            assertTrue(true);
-        }
-    }
-
-    @Test
     void removeUnitGoodFromInventoryTest() {
-        try {
-            warehouse.addUnitGoodToInventory("SKU02", "saw spear", "serrated", "small");
-        } catch (UnitTestException e) {
-            fail();
-        }
+        warehouse.addUnitGoodToInventory("SKU02", "saw spear", "serrated", "small");
 
         //test 1 - success
         try {
@@ -287,6 +280,8 @@ class WarehouseTest {
         } catch (WrongCommandException e) {
             fail();
         }
+
+        warehouse.addUnitGoodToInventory("SKU01", "banana", "BANANAS", "small");
 
         //test 2 - fail, the quantity input is not a number
         try {
@@ -319,6 +314,71 @@ class WarehouseTest {
         } catch (ItemDoesNotExistException e1) {
             assertTrue(true);
         } catch (LargeQuantityException e2) {
+            fail();
+        } catch (NumberFormatException e3) {
+            fail();
+        }
+    }
+
+    @Test
+    void removeOrderTest() {
+        try {
+            warehouse.addOrder("02", "bat man", "bat cave");
+            assertEquals(2, warehouse.totalNumberOfOrder());
+        } catch (WrongCommandException e1) {
+            fail();
+        }
+
+        //test 1 - success
+        try {
+            warehouse.removeOrder("2");
+            assertEquals(1, warehouse.totalNumberOfOrder());
+        } catch (WrongCommandException e) {
+            fail();
+        }
+
+        //test 2 - fail, order id is blank
+        try {
+            warehouse.removeOrder("");
+            fail();
+        } catch (WrongCommandException e) {
+            assertTrue(e.isCommand());
+            assertEquals("remove", e.getCommand());
+        }
+
+        //test 3 - fail, order id is not a number
+        try {
+            warehouse.removeOrder("one");
+            fail();
+        } catch (WrongCommandException e) {
+            assertTrue(e.isCommand());
+            assertEquals("remove", e.getCommand());
+        }
+    }
+
+    @Test
+    void removeOrderLineTest() {
+        try {
+            warehouse.addOrder("02", "bat man", "bat cave");
+            warehouse.addUnitGoodToInventory("SKU01", "banana", "BANANAS", "small");
+            warehouse.addOrderline("01", "SKU01", "10");
+            warehouse.addOrderline("02", "SKU01", "10");
+            assertEquals(2, warehouse.totalNumberOfOrder());
+        } catch (WrongCommandException e) {
+            fail();
+        }
+
+        //test 1 - success
+        try {
+            warehouse.removeOrderline("2", "SKU02", "5");
+        } catch (WrongCommandException e) {
+            fail();
+        }
+
+        //test 2 - fail, SKU does not exist
+        try {
+            warehouse.removeOrderline("2", "SKU03", "5");
+        } catch (WrongCommandException e) {
             fail();
         }
     }
