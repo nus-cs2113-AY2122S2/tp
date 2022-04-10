@@ -47,28 +47,28 @@ public class CommandFactory {
     /**
      * Checks if the keyword of user instruction refers to AddRecordCommand.
      *
-     * @param keyword Keyword of user instruction parsed by Parser
-     * @return True if the keyword is referring to AddRecordCommand
+     * @param keyword Keyword of user instruction parsed by Parser.
+     * @return True if the keyword is referring to AddRecordCommand.
      */
     private boolean isAddRecordCommand(String keyword) {
         return Objects.equals(keyword, ADD_INCOME_CMD) || Objects.equals(keyword, ADD_SPENT_CMD);
     }
 
     /**
-     * Checks if the keyword of user instruction refers to AddRecordCommand.
+     * Checks if the keyword of user instruction refers to DeleteRecordCommand.
      *
-     * @param keyword Keyword of user instruction parsed by Parser
-     * @return True if the keyword is referring to AddRecordCommand
+     * @param keyword Keyword of user instruction parsed by Parser.
+     * @return True if the keyword is referring to DeleteRecordCommand.
      */
     private boolean isDeleteRecordCommand(String keyword) {
         return Objects.equals(keyword, DELETE_INCOME_CMD) || Objects.equals(keyword, DELETE_SPEND_CMD);
     }
 
     /**
-     * Checks if the keyword of user instruction refers to AddRecordCommand.
+     * Checks if the keyword of user instruction refers to AddPersonCommand.
      *
-     * @param keyword Keyword of user instruction parsed by Parser
-     * @return True if the keyword is referring to AddRecordCommand
+     * @param keyword Keyword of user instruction parsed by Parser.
+     * @return True if the keyword is referring to AddPersonCommand.
      */
     private boolean isAddPersonCommand(String keyword) {
         return Objects.equals(keyword, ADD_PERSON_CMD);
@@ -85,60 +85,60 @@ public class CommandFactory {
     }
 
     /**
-     * Checks if the keyword of user instruction refers to AddRecordCommand.
+     * Checks if the keyword of user instruction refers to ListCommand.
      *
-     * @param keyword Keyword of user instruction parsed by Parser
-     * @return True if the keyword is referring to AddRecordCommand
+     * @param keyword Keyword of user instruction parsed by Parser.
+     * @return True if the keyword is referring to ListCommand.
      */
     private boolean isListCommand(String keyword) {
         return Objects.equals(keyword, LIST_CMD);
     }
 
     /**
-     * Checks if the keyword of user instruction refers to AddRecordCommand.
+     * Checks if the keyword of user instruction refers to EditRecordCommand.
      *
      * @param keyword Keyword of user instruction parsed by Parser
-     * @return True if the keyword is referring to AddRecordCommand
+     * @return True if the keyword is referring to EditRecordCommand
      */
     private boolean isEditRecordCommand(String keyword) {
         return Objects.equals(keyword, EDIT_INCOME_CMD) || Objects.equals(keyword, EDIT_SPEND_CMD);
     }
 
     /**
-     * Checks if the keyword of user instruction refers to AddRecordCommand.
+     * Checks if the keyword of user instruction refers to ListCatCommand.
      *
      * @param keyword Keyword of user instruction parsed by Parser
-     * @return True if the keyword is referring to AddRecordCommand
+     * @return True if the keyword is referring to ListCatCommand
      */
     private boolean isListCatCommand(String keyword) {
         return Objects.equals(keyword, LIST_CAT_CMD);
     }
 
     /**
-     * Checks if the keyword of user instruction refers to AddRecordCommand.
+     * Checks if the keyword of user instruction refers to OverviewCommand.
      *
      * @param keyword Keyword of user instruction parsed by Parser
-     * @return True if the keyword is referring to AddRecordCommand
+     * @return True if the keyword is referring to Overview
      */
     private boolean isOverviewCommand(String keyword) {
         return Objects.equals(keyword, OVERVIEW_CMD);
     }
 
     /**
-     * Checks if the keyword of user instruction refers to AddRecordCommand.
+     * Checks if the keyword of user instruction refers to HelpCommand.
      *
-     * @param keyword Keyword of user instruction parsed by Parser
-     * @return True if the keyword is referring to AddRecordCommand
+     * @param keyword Keyword of user instruction parsed by Parser.
+     * @return True if the keyword is referring to HelpCommand.
      */
     private boolean isHelpCommand(String keyword) {
         return Objects.equals(keyword, HELP_CMD);
     }
 
     /**
-     * Checks if the keyword of user instruction refers to AddRecordCommand.
+     * Checks if the keyword of user instruction refers to SearchCommand.
      *
-     * @param keyword Keyword of user instruction parsed by Parser
-     * @return True if the keyword is referring to AddRecordCommand
+     * @param keyword Keyword of user instruction parsed by Parser.
+     * @return True if the keyword is referring to SearchCommand.
      */
     private boolean isSearchCommand(String keyword) {
         return Objects.equals(keyword, SEARCH_CMD);
