@@ -547,9 +547,13 @@ of Java's built-in `Scanner` class.
 
 Once the user has entered an input, `UI#getUserInput()` trims any preceding and trailing whitespaces before returning 
 the user's input as a `String` object to `WerkIt#startContinuousUserPrompt()`. Then, 
-`WerkIt#startContinuousUserPrompt()` calls `Parser#parseUserInput()` to parse the user's input and create an 
+`WerkIt#startContinuousUserPrompt()` calls `WerkIt#parseUserInput()`, an intermediary method to call
+`Parser#parseUserInput()`, which will parse the user's input and create an 
 object that is a subclass of the `Command` class. If there is no issue with the formatting of the user's input,
 this subclass-of-`Command` object is returned to `WerkIt#startContinuousUserPrompt()`.
+
+<span class="box info">:memo: The intermediary `WerkIt#parseUserInput()` is created to reduce the arrowhead code that
+was grossly present in `WerkIt#startContinuousUserPrompt()`.</span>
 
 <span class="box info">:memo: A detailed implementation of the parsing and creation of subclass-of-`Command` 
 object process can be found in 
