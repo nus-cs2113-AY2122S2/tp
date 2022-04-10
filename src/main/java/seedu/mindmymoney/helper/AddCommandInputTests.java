@@ -4,7 +4,9 @@ import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.ExpenditureCategoryTypes;
 import seedu.mindmymoney.constants.IncomeCategoryTypes;
 import seedu.mindmymoney.data.CreditCardList;
+import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.CreditCard;
+import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -188,6 +190,11 @@ public class AddCommandInputTests {
         }
     }
 
+    public static void testUpdateIncomeParameters(int inputAmount, String inputCategory) throws MindMyMoneyException {
+        testIncomeAmount(inputAmount);
+        testIncomeCategory(inputCategory);
+    }
+
     /**
      * Checks if user input of credit card name is valid.
      * Credit Card name as "Cash" and that already exist in the list are not accepted.
@@ -202,7 +209,7 @@ public class AddCommandInputTests {
         for (CreditCard creditCard : creditCardList.creditCardListArray) {
             if (creditCard.getNameOfCard().toLowerCase().equalsIgnoreCase(inputCreditCardName)) {
                 throw new MindMyMoneyException("You already have this card in the list! "
-                    + "Please abbreviate teh card as a different name.");
+                    + "Please abbreviate the card as a different name.");
             }
         }
 
@@ -279,6 +286,77 @@ public class AddCommandInputTests {
         checkValidDate(inputTime);
         LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         checkAfterCurrentDate(date);
+    }
+
+    /**
+     * Tests if the input parameters of update expenditure from the user are valid.
+     *
+     * @param newPaymentMethod The payment method used, either as cash or the credit card.
+     * @param inputCategory The category as indicated by the user.
+     * @param description The description of the expenditure.
+     * @param amountAsString Price of the expenditure.
+     * @param inputTime Date of when the expenditure was bought.
+     * @throws MindMyMoneyException when the parameters are invalid.
+     */
+    public static void testUpdateExpenditureParameters(int indexToUpdate, String newPaymentMethod, String inputCategory,
+                                                       String description, String amountAsString, String inputTime,
+                                                       CreditCardList creditCardList, ExpenditureList expenditureList)
+                                                        throws MindMyMoneyException {
+        testPaymentMethod(newPaymentMethod, creditCardList);
+        testExpenditureCategory(inputCategory);
+        testDescription(description);
+        checkValidDate(inputTime);
+        LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        checkAfterCurrentDate(date);
+
+        //Test updated expenditure amount
+        String oldPaymentMethod = getOldPaymentMethod(indexToUpdate, expenditureList);
+        if (isSamePaymentMethod(oldPaymentMethod, newPaymentMethod)
+                && !newPaymentMethod.equalsIgnoreCase("cash")) {
+            testSameCreditCardExpenditure(indexToUpdate, amountAsString, expenditureList, creditCardList,
+                    newPaymentMethod);
+        } else {
+            testExpenditureAmount(amountAsString, newPaymentMethod, creditCardList);
+        }
+    }
+
+    private static String getOldPaymentMethod(int indexToUpdate, ExpenditureList expenditureList) {
+        return expenditureList.get(indexToUpdate).getPaymentMethod();
+    }
+
+    private static boolean isSamePaymentMethod(String oldPaymentMethod, String newPaymentMethod) {
+        return oldPaymentMethod.equalsIgnoreCase(newPaymentMethod);
+    }
+
+    private static void testSameCreditCardExpenditure(int indexToUpdate, String inputAmount,
+                                                      ExpenditureList expenditureList, CreditCardList creditCardList,
+                                                      String paymentMethod)
+                                                        throws MindMyMoneyException {
+
+        float inputAmountAsFloat;
+        if (inputAmount == null) {
+            throw new MindMyMoneyException("Amount cannot be empty!");
+        }
+        try {
+            inputAmountAsFloat = Float.parseFloat(inputAmount);
+        } catch (NumberFormatException e) {
+            throw new MindMyMoneyException("Amount must be a number");
+        }
+
+        CreditCard creditCard = creditCardList.get(paymentMethod);
+        float oldExpenditureAmount = expenditureList.get(indexToUpdate).getAmount();
+        float newTotalExpenditure = creditCard.getTotalExpenditure() - oldExpenditureAmount
+                + inputAmountAsFloat;
+        boolean isOverLimit = creditCard.getMonthlyCardLimit() < newTotalExpenditure;
+
+        if (isOverLimit) {
+            throw new MindMyMoneyException("You have exceeded your credit card limit!");
+        }
+
+        if (inputAmountAsFloat <= MIN_EXPENDITURE_AMOUNT) {
+            throw new MindMyMoneyException("Amount must be more than 0");
+        }
+        assert inputAmountAsFloat > 0 : "Amount should have a positive value";
     }
 
     /**
