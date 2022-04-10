@@ -12,6 +12,7 @@ import static org.junit.Assert.fail;
 
 class WarehouseTest {
     Warehouse warehouse = new Warehouse(1000);
+
     @Test
     void addUnitGoodToInventoryTest() {
         //test 1 - success
