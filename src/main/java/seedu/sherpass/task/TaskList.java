@@ -13,13 +13,6 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static seedu.sherpass.constant.Message.NEWLINE;
-import static seedu.sherpass.constant.Message.TAB_INDENT;
-import static seedu.sherpass.constant.Message.ERROR_BY_DATE_BEFORE_DO_ON_DATE;
-import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_START_DATE_IN_THE_PAST_MESSAGE;
-
 public class TaskList {
     private ArrayList<Task> tasks;
     private final HashSet<Integer> identifierList;
@@ -61,7 +54,7 @@ public class TaskList {
         ArrayList<Task> taskListToAdd = new ArrayList<>();
         Task currentTask = newTask;
         do {
-            TaskUtil.checkDateTimeClash(tasks, currentTask, isFromFile);
+            TaskUtil.checkDateTimeClash(tasks, currentTask, isFromFile, false);
             taskListToAdd.add(currentTask);
             currentTask = TaskUtil.prepareNextTask(currentTask, frequency);
         } while (currentTask.getDoOnStartDateTime().isBefore(lastRecurrenceDate));
@@ -84,7 +77,8 @@ public class TaskList {
     public Task editSingleTask(int editIndex, String taskDescription,
                                LocalDateTime doOnStartDateTime,
                                LocalDateTime doOnEndDateTime,
-                               LocalDateTime byDateTime) throws TimeClashException, InvalidInputException {
+                               LocalDateTime byDateTime,
+                               boolean isEditByOnly) throws TimeClashException, InvalidInputException {
 
         Task taskToEdit = tasks.get(editIndex);
         ArrayList<Task> tempList = new ArrayList<>(tasks);
@@ -98,7 +92,7 @@ public class TaskList {
         updatedTask.editTask(generateIdentifier(), taskDescription,
                 startDateOffset, endDateOffset, byDateOffset);
 
-        TaskUtil.checkDateTimeClash(tempList, updatedTask, false);
+        TaskUtil.checkDateTimeClash(tempList, updatedTask, false, isEditByOnly);
 
         tasks.remove(editIndex);
         tasks.add(updatedTask);
@@ -121,7 +115,8 @@ public class TaskList {
     public Task editRepeatedTasks(int editIndex, String taskDescription,
                                   LocalDateTime doOnStartDateTime,
                                   LocalDateTime doOnEndDateTime,
-                                  LocalDateTime byDateTime) throws TimeClashException, InvalidInputException {
+                                  LocalDateTime byDateTime,
+                                  boolean isEditByOnly) throws TimeClashException, InvalidInputException {
         Task firstTask = getTask(editIndex);
         ArrayList<Task> affectedTasks = getAffectedTasks(editIndex);
         ArrayList<Task> tempList = new ArrayList<>(tasks);
@@ -139,7 +134,7 @@ public class TaskList {
             updatedTask.editTask(newIdentifier, taskDescription,
                     startDateOffset, endDateOffset, byDateOffset);
             updatedTask.setIdentifier(newIdentifier);
-            TaskUtil.checkDateTimeClash(tempList, updatedTask, false);
+            TaskUtil.checkDateTimeClash(tempList, updatedTask, false, isEditByOnly);
             editedTasks.add(updatedTask);
             tempList.add(updatedTask);
         }
