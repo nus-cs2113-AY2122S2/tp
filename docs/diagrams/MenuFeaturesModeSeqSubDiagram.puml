@@ -3,6 +3,7 @@
 
 skinparam guillemet false
 
+hide footbox
 mainframe sd Enter appropriate section depending on mode value
 activate ":AllOnUs"
 alt mode is contacts manager mode

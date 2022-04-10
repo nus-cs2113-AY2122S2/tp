@@ -671,21 +671,21 @@ Please ensure the version of both applications are the same.
 
 ## Command Summary
 
-| Action                  | Format, Examples                                                                                                            |
-|-------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| Add (Expense)           | `add d/DATE a/AMOUNT c/CATEGORY r/REMARK` <br> E.g. `add d/2022-04-03 a/500 c/Food r/At Supper Stretch`                     |
-| Add (Module)            | `add m/MODULE_CODE c/CATEGORY d/DAY t/TIME` <br> E.g. `add m/CS2113 c/lec d/Friday t/4pm-6pm`                               |
+| Action                  | Format, Examples                                                                                                          |
+|-------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| Add (Expense)           | `add d/DATE a/AMOUNT c/CATEGORY r/REMARK` <br> E.g. `add d/2022-04-03 a/500 c/Food r/At Supper Stretch`                   |
+| Add (Module)            | `add m/MODULE_CODE c/CATEGORY d/DAY t/TIME` <br> E.g. `add m/CS2113 c/lec d/Friday t/4pm-6pm`                             |
 | Add (Contact)           | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> E.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |  
-| Edit (Expense)          | `edit INDEX` <br>  `[FIELD] [NEW VALUE]  `<br>E.g. <br>`edit 1` <br> `category Food`                                        |
-| Edit (Module)           | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113` <br> `done`                                                                |
-| Edit (Contact)          | `edit INDEX [n/NAME] [f/FACULTY] [e/EMAIL] [d/DESCRIPTION]`                                                                 |
-| Read from .ics (Module) | `read ics`                                                                                                                  |
-| Find                    | `find KEYWORD`                                                                                                              |
-| Remove                  | `rm INDEX`                                                                                                                  |
-| List                    | `list`                                                                                                                      |
-| Return to Menu          | `menu`                                                                                                                      |
-| Help                    | `help`                                                                                                                      |
-| Navigate                | `goto m/SECTION`                                                                                                            |
-| Exit                    | `exit`                                                                                                                      |
+| Edit (Expense)          | `edit INDEX` <br>  `[FIELD] [NEW VALUE]  `<br>E.g. <br>`edit 1` <br> `category Food`                                      |
+| Edit (Module)           | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113` <br> `done`                                                              |
+| Edit (Contact)          | `edit INDEX [n/NAME] [f/FACULTY] [e/EMAIL] [d/DESCRIPTION]`                                                               |
+| Read from .ics (Module) | `read ics`                                                                                                                |
+| Find                    | `find KEYWORD`                                                                                                            |
+| Remove                  | `rm INDEX`                                                                                                                |
+| List                    | `list`                                                                                                                    |
+| Return to Menu          | `menu`                                                                                                                    |
+| Help                    | `help`                                                                                                                    |
+| Navigate                | `goto SECTION`                                                                                                            |
+| Exit                    | `exit`                                                                                                                    |
 
 [Back to main menu](https://ay2122s2-cs2113-f10-4.github.io/tp/)

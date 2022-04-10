@@ -2,7 +2,7 @@
 'https://plantuml.com/sequence-diagram
 
 skinparam guillemet false
-
+hide footbox
 mainframe sd Enter appropriate section or exit depending on user input
 activate ":AllOnUs"
 activate "AllOnUs <<class>>"

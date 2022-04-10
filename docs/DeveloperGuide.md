@@ -138,7 +138,7 @@ menu mode, step 2 executes. Else, step 3 executes.
 whether it is a command to enter a particular section (essentially step 2), to get help, to exit the application or 
 is an empty or unrecognizable command. 
 
-**Step 1 and 2**:
+**Steps 1 and 2**:
 
 `mode` can only take 4 possible values which are reflected in the class diagram above in the `Mode` enumeration. 
 * `mode = MENU` signifies that the program is currently in menu mode and should execute normally (i.e. step 3 above).
@@ -150,8 +150,9 @@ to `contactsManager` object (call to runner method of this object).
 to `expenseTracker` object.
 
 `mode` is updated upon every return from a method call to any of the manager/tracker objects. This allows for user to indicate 
-whether they actually want to return to the menu (`mode = MENU`) or want to enter another section of the application
-from the section they entered the command from (any other value of `mode`). The `mode` value is checked by calls to methods of 
+whether they actually want to return to the menu (`mode` is set to `MENU` when user enters `menu` command in any of the other sections)
+or want to enter another section of the application (`mode` is set to any other value of `mode` when user enters a valid `goto` command
+in any of the other sections) from the section they entered the command from. The `mode` value is checked by calls to methods of 
 the form `is*Mode()` which are `isContactsManagerMode()`, `isStudyManagerMode()` and `isExpenseTrackerMode()`. 
 
 For example, if user is currently in expense tracker (runner method of `expenseTracker` is executing) and user wants 
@@ -501,6 +502,9 @@ Given below are instructions to test the app manually:
    1. Download the jar file and copy into an empty directory.
    2. Using command line, navigate to the above directory and execute the jar file.
    
+2. Shutdown
+   1. Navigate to menu using `menu` command.
+   2. enter `exit` to appropriately terminate the application. 
 
 ### Study Manager
 

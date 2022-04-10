@@ -9,7 +9,7 @@ participant "studyManager:StudyManager"
 participant "expenseTracker:ExpenseTracker"
 
 
-
+hide footbox
  -> "storageFile:StorageFile"++: saveData()
 opt file does not exist
     "storageFile:StorageFile" -> "storageFile:StorageFile" ++: createFile()

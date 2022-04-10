@@ -34,7 +34,7 @@ enum Mode <<enumeration>> {
     EXPENSE_TRACKER
 }
 
-AllOnUs --> "1" Logger
+
 AllOnUs --> "1" Logger
 AllOnUs --> "1" StudyManager
 AllOnUs --> "1" ContactsManager
