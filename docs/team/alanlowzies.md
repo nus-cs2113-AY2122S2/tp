@@ -5,7 +5,7 @@ This page showcases my contributions to the development of WerkIt!, an applicati
 create a weekly workout schedule for them to refer to and follow. I co-developed this application with my peers as part 
 of a team project (tP) in the CS2113T module offered by NUS SoC. More details about the project can be found in the 
 [WerkIt! User Guide](../UserGuide.md), [Developer Guide](../DeveloperGuide.md), and 
-[GitHub repository](ttps://github.com/AY2122S2-CS2113T-T09-2/tp).
+[GitHub repository](https://github.com/AY2122S2-CS2113T-T09-2/tp).
 
 ## Summary of Contributions
 ### Code Contributed
