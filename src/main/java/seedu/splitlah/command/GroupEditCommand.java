@@ -67,11 +67,23 @@ public class GroupEditCommand extends Command {
             return;
         }
 
+        if (groupName != null) {
+            boolean duplicateName = existingGroupWithTheSameName(manager.getProfile().getGroupList(), groupName, groupId);
+            if (groupName.equals(group.getGroupName())) {
+                //ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_NOT_NEW);
+            } else if (duplicateName) {
+                ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_DUPLICATE);
+            } else {
+                editedGroupName = true;
+            }
+        }
+
         if (involvedList != null) {
             boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
             if (hasDuplicates) {
                 ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_GROUP);
                 Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITGROUP);
+                ui.printlnMessageWithDivider(Message.ERROR_GROUPEDIT_NO_CHANGE);
                 return;
             }
 
@@ -84,14 +96,8 @@ public class GroupEditCommand extends Command {
             }
         }
 
-        if (groupName != null) {
-            if (groupName.equals(group.getGroupName())) {
-                ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_NOT_NEW);
-            } else if (existingGroupWithTheSameName(manager.getProfile().getGroupList(), groupName, groupId)) {
-                ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_DUPLICATE);
-            } else {
-                editedGroupName = true;
-            }
+        if (groupName != null && groupName.equals(group.getGroupName()) && !editedPersonList) {
+            ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_NOT_NEW);
         }
 
         if (editedGroupName) {
@@ -104,13 +110,11 @@ public class GroupEditCommand extends Command {
 
         boolean isGroupEdited = (editedGroupName || editedPersonList);
         if (isGroupEdited) {
-            ui.printlnMessageWithDivider(COMMAND_SUCCESS);
+            ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + group);
         } else {
-            ui.printlnMessage(Message.ERROR_GROUPEDIT_NO_CHANGE);
+            ui.printlnMessageWithDivider(Message.ERROR_GROUPEDIT_NO_CHANGE);
             return;
         }
-
         manager.saveProfile();
-        ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + group);
     }
 }

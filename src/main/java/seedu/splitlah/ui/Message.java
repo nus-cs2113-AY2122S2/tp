@@ -455,7 +455,7 @@ public abstract class Message {
     public static final String ERROR_GROUPEDIT_GROUP_NAME_NOT_NEW =
              "The group name is the same as the old one, please rectify and try again.";
     public static final String ERROR_GROUPEDIT_NO_CHANGE =
-             "No changes made, please rectify and try again.";
+             "No changes made.";
 
     // Group Edit Command Parser
     public static final String ERROR_GROUPEDIT_NO_EDIT_DELIMITERS_FOUND =
