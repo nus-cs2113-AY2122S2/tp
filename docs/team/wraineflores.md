@@ -11,33 +11,30 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 
 | Contribution, Enhancement                | Description                                                   |
 |------------------------------------------|---------------------------------------------------------------|
+| Created Person                           | This class is is used to base Doctor & Person Classes         |
 | Find Doctor                              | Feature finds a doctor based on a specific parameter          |
 | Find Patient                             | Feature finds a patient based on a specific parameter         |
 | Find Medicine                            | Feature finds a medicine based on a specific parameter        |
-| Help Messages                            | Compiled all messages to be printed out                       |
+| Help Function                            | Compiled all help messages to be printed out                  |
 
 ## **UG contributions:**
 
-* Edited contents in the UG for continuity purposes
+* Edited contents in the UG for continuity purposes to see an overall picture 
 
 * Tests examples in the UG to ensure its validity
 
 ## **DG contributions:**
 
-* Helped explain the Manager class
+* Helped explain the Manager class of HalpMi
 
-* Helped explain the Command classes
+* Helped explain the Command classes of HalpMi
 
 ## **Team-based tasks contributions:**
 
-* Setting up the GitHub team org/repo is by Sharif & Wei Li
+* Helped to set up the milestones and labels on Github issues when necessary
 
-* Necessary general code enhancements is by everyone
+* Helped maintain issue trackers for our Github
 
-* Setting up tools e.g., GitHub, Gradle is by everyone
-
-* Maintaining the issue tracker is by everyone
-
-* Release management is done by consensus by the majority
+* Help remind our group of possible gaps in our product
 
 * Updating user/developer docs that are not specific to a feature is by everyone when we see a change fits
