@@ -283,12 +283,12 @@ The general workflow of the `session /create` command is as follows:
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionCreateCommand` object.
 3. `SessionCreateCommand#run` method is then invoked to run the `session /create` command.
 4. Once the command runs, `SessionCreateCommand#run` method checks if there is an existing session with the same session name.
-5. If an existing session with the specified session name is found, a message indicating that another session with the same name exists is printed using `TextUi#printlnMessage`.
+5. If an existing session with the specified session name is found, a message indicating that another session with the same name exists is printed using `TextUI#printlnMessage`.
 6. The `SessionCreateCommand` class creates a new `Session` object using the session name, session date, and person list.
 7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
    which is used to call the `Profile#addSession` method in order to store the new `Session` object.
 8. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with TextUi#printlnMessage.
+9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with TextUI#printlnMessage.
 
 ### Remove a session
 **API reference:** [`SessionDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
@@ -453,12 +453,12 @@ The general workflow of the `activity /create` command is as follows:
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityCreateCommand` object.
 3. `ActivityCreateCommand#run` method is then invoked to run the `activity /create` command.
 4. Once the command runs, `ActivityCreateCommand#run` method checks if there are duplicate names in the involved list. 
-   - If there are duplicate names in the involved list, a message indicating that there are duplicates is printed using `TextUi#printlnMessage`
+   - If there are duplicate names in the involved list, a message indicating that there are duplicates is printed using `TextUI#printlnMessage`
      and control is given back to `SplitLah`.
 5. The `ActivityCreateCommand` object updates the cost and cost list by invoking the `ActivityCreateCommand#updateCostAndCostList` method.
 6. The`ActivityCreateCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
 7. Then, `Profile#getSession` method is called to retrieve the `Session` object which the activity that the user wishes to delete is stored in.
-    - If the session does not exist, a message indicating that there is no such session is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
+    - If the session does not exist, a message indicating that there is no such session is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
     - Else, the `Session` object that the activity is stored in is returned.
     - This process is omitted in the sequence diagram for the sake of brevity.
 8. Other getter methods are then called to obtain the necessary parameters used to instantiate an Activity object. These getter methods are omitted in the sequence diagram.
@@ -467,7 +467,7 @@ The general workflow of the `activity /create` command is as follows:
 11. Then, the `Session#addActivity` method is called to add the new `Activity` object into the list of activities.
 12. After the activity is added to the `Session` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 13. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
-14. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully created with `TextUi#printlnMessage`.
+14. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully created with `TextUI#printlnMessage`.
 
 ### Remove an activity
 **API reference:** [`ActivityDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityDeleteCommand.java)
@@ -485,14 +485,14 @@ The general workflow of the `activity /delete` command is as follows:
 3. `ActivityDeleteCommand#run` method is then invoked to run the `activity /delete` command.
 4. Once the command runs, `ActivityDeleteCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
 5. The `Profile#getSession` method is called to retrieve the `Session` object which the activity that the user wishes to delete is stored in.
-    - If the session does not exist, a message indicating that there is no such session is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
+    - If the session does not exist, a message indicating that there is no such session is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
     - Else, the `Session` object that the activity is stored in is returned.
 6. Once the `Session` object is retrieved, the `Session#removeActivity()` method is invoked to remove the `Activity` object from the list of activities stored.
-   - If the activity does not exist, a message indicating that there is no such activity is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
+   - If the activity does not exist, a message indicating that there is no such activity is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
    - Else, the `Activity` object is removed from the list of activities.
 8. After the activity is removed from the `Session` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 9. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
-10. The `ActivityDeleteCommand` object then prints a message indicating that an activity has been successfully deleted with `TextUi#printlnMessage`.
+10. The `ActivityDeleteCommand` object then prints a message indicating that an activity has been successfully deleted with `TextUI#printlnMessage`.
 
 ### Edit an activity
 
@@ -542,10 +542,10 @@ The general workflow of the `group /create` command is as follows:
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
 3. A `GroupCreateCommand#run` method is then invoked to run the `group /create` command.
 4. Once the command starts to run, `GroupCreateCommand` class checks if there are duplicates in the name list.
-5. If there are duplicates, a message indicating that name list contains duplicates is printed using `TextUi#printlnMessage`. 
+5. If there are duplicates, a message indicating that name list contains duplicates is printed using `TextUI#printlnMessage`. 
 6. If there are no duplicates, `GroupCreateCommand` class converts each of the names into a `Person` object.
 7. `GroupCreateCommand` class then checks if there is an existing group with the same group name. 
-8. If existing groups with the group name are found, a message indicating that another group with the same name is printed using `TextUi#printlnMessage`.
+8. If existing groups with the group name are found, a message indicating that another group with the same name is printed using `TextUI#printlnMessage`.
 9. `GroupCreateCommand` class create a new `Group` object using the group name, name list, and group unique identifier. 
 10. The list of `Group` objects are managed by a `Profile` object, hence `Manager#getProfile#addGroup` is called to store the new `Group` object in the `Profile` object.
 11. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created.
@@ -658,7 +658,7 @@ they engage in during the outings.
 |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Manager  | A Manager manages and stores 3 different objects, namely the `Profile`, `TextUI` and `Storage` objects.                                                                                                                                                                                                     |
 | Profile  | A Profile is responsible for all data management and accesses within the lifetime of the application. It serves as a container and holds a list of all `Session` and `Group` objects and keeps track of the unique identifiers to be issued upon the creation of `Session`, `Activity` and `Group` objects. |
-| TextUi   | A TextUi is an user interface that the user sees on the CLI.                                                                                                                                                                                                                                                |
+| TextUI   | A TextUI is an user interface that the user sees on the CLI.                                                                                                                                                                                                                                                |
 | Storage  | A Storage is in charge of saving and reading to and from the save file respectively.                                                                                                                                                                                                                        |
 | Parser   | A Parser is responsible for making sense of the user inputs and processing them as commands for the application to run.                                                                                                                                                                                     |
 | Command  | A Command is an object that performs a task that corresponds to the user input.                                                                                                                                                                                                                             |
