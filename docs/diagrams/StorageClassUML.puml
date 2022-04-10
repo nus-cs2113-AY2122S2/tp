@@ -18,12 +18,12 @@ class Storage {
     String PATH_PAT
     String PATH_MED
     String PATH_APP
+    String PATH_APT_MEDS
     + Storage()
     + saveData()
     + loadData()
-    - loadMedicineData()
-    - loadPatientData()
-    - loadDoctorData()
+    - loadGenericData(filePath: String, listType : List)
+    - saveCorruptedData(filePath: String, stringArray : ArrayList)
     - saveMedicineData()
     - savePatientData()
     - saveDoctorData()

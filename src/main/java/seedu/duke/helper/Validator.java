@@ -347,7 +347,6 @@ public class Validator {
         minParameterCheck(parameters, 2);
         boolean check = true;
         switch (parameters[0].toLowerCase()) {
-
         case "name":
             check = validateMedicineName(parameters[1]);
             break;

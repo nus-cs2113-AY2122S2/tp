@@ -81,7 +81,6 @@ public class PatientList extends List {
     //view all patients
     public void view() throws UserInputErrorException {
         CommandLineTable patientTable = new CommandLineTable();
-        //st.setRightAlign(true);//if true then cell text is right aligned
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
         patientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
                 "DateRegistration");

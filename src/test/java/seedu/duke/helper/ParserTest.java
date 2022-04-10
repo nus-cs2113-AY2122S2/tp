@@ -13,9 +13,9 @@ class ParserTest {
     @Test
     void parseAddPatientTest() {
         String parameter = "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01,2022-01-01";
-        String[] parameterArray = {"S1234567A","JOHN","23","M","SINGAPORE","1999-01-01","2022-01-01"};
+        String[] parameterArray = {"S1234567A", "JOHN", "23", "M", "SINGAPORE", "1999-01-01", "2022-01-01"};
         try {
-            assertArrayEquals(parameterArray,Parser.parseAddPatient(parameter).parameterArray);
+            assertArrayEquals(parameterArray, Parser.parseAddPatient(parameter).parameterArray);
         } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
@@ -43,9 +43,9 @@ class ParserTest {
     @Test
     void parseAddDoctorTest() {
         String parameter = "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01,Paediatrics";
-        String[] parameterArray = {"S1234567A","JOHN","23","M","SINGAPORE","1999-01-01","Paediatrics"};
+        String[] parameterArray = {"S1234567A", "JOHN", "23", "M", "SINGAPORE", "1999-01-01", "Paediatrics"};
         try {
-            assertArrayEquals(parameterArray,Parser.parseAddDoctor(parameter).parameterArray);
+            assertArrayEquals(parameterArray, Parser.parseAddDoctor(parameter).parameterArray);
         } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
@@ -73,9 +73,9 @@ class ParserTest {
     @Test
     void parseAddMedicineTest() {
         String parameter = "S123,Paracetamol,500,2025-02-02,Headaches,100";
-        String[] parameterArray = { "S123","Paracetamol","500","2025-02-02","Headaches","100"};
+        String[] parameterArray = {"S123", "Paracetamol", "500", "2025-02-02", "Headaches", "100"};
         try {
-            assertArrayEquals(parameterArray,Parser.parseAddMedicine(parameter).parameterArray);
+            assertArrayEquals(parameterArray, Parser.parseAddMedicine(parameter).parameterArray);
         } catch (UserInputErrorException e) {
             fail("Should not be throwing exception");
         }
@@ -104,7 +104,7 @@ class ParserTest {
         String parameter = "S1234567A";
         String[] parameterArray = {"S1234567A"};
         try {
-            assertArrayEquals(parameterArray,Parser.parseDeletePatient(parameter).parameterArray);
+            assertArrayEquals(parameterArray, Parser.parseDeletePatient(parameter).parameterArray);
         } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
@@ -112,7 +112,7 @@ class ParserTest {
 
     @Test
     void parseDeletePatientInvalidParamTest() {
-        String[] parameters = {"S1234567","S1234567A,S1235467A", ""};
+        String[] parameters = {"S1234567", "S1234567A,S1235467A", ""};
         for (String s : parameters) {
             try {
                 Parser.parseDeletePatient(s);
@@ -128,7 +128,7 @@ class ParserTest {
         String parameter = "S1234567A";
         String[] parameterArray = {"S1234567A"};
         try {
-            assertArrayEquals(parameterArray,Parser.parseDeleteDoctor(parameter).parameterArray);
+            assertArrayEquals(parameterArray, Parser.parseDeleteDoctor(parameter).parameterArray);
         } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
@@ -136,7 +136,7 @@ class ParserTest {
 
     @Test
     void parseDeleteDoctorInvalidParamTest() {
-        String[] parameters = {"S1234567","S1234567A,S1235467A", ""};
+        String[] parameters = {"S1234567", "S1234567A,S1235467A", ""};
         for (String s : parameters) {
             try {
                 Parser.parseDeleteDoctor(s);
@@ -152,7 +152,7 @@ class ParserTest {
         String parameter = "S123";
         String[] parameterArray = {"S123"};
         try {
-            assertArrayEquals(parameterArray,Parser.parseDeleteMedicine(parameter).parameterArray);
+            assertArrayEquals(parameterArray, Parser.parseDeleteMedicine(parameter).parameterArray);
         } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
@@ -176,7 +176,7 @@ class ParserTest {
         String parameter = "nric, S1234567A";
         String[] parameterArray = {"nric", "S1234567A"};
         try {
-            assertArrayEquals(parameterArray,Parser.parseViewDoctor(parameter).parameterArray);
+            assertArrayEquals(parameterArray, Parser.parseViewDoctor(parameter).parameterArray);
         } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
@@ -187,7 +187,7 @@ class ParserTest {
         String parameter = null;
         String[] parameterArray = null;
         try {
-            assertArrayEquals(parameterArray,Parser.parseViewDoctor(parameter).parameterArray);
+            assertArrayEquals(parameterArray, Parser.parseViewDoctor(parameter).parameterArray);
         } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
@@ -195,7 +195,7 @@ class ParserTest {
 
     @Test
     void parseViewDoctorInvalidParamTest() {
-        String[] parameters = {"S1234567","S1234567A,S1235467A", ""};
+        String[] parameters = {"S1234567", "S1234567A,S1235467A", ""};
 
         for (String s : parameters) {
             try {
@@ -212,7 +212,7 @@ class ParserTest {
         String parameter = "nric, S1234567A";
         String[] parameterArray = {"nric", "S1234567A"};
         try {
-            assertArrayEquals(parameterArray,Parser.parseViewPatient(parameter).parameterArray);
+            assertArrayEquals(parameterArray, Parser.parseViewPatient(parameter).parameterArray);
         } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
@@ -223,7 +223,7 @@ class ParserTest {
         String parameter = null;
         String[] parameterArray = null;
         try {
-            assertArrayEquals(parameterArray,Parser.parseViewPatient(parameter).parameterArray);
+            assertArrayEquals(parameterArray, Parser.parseViewPatient(parameter).parameterArray);
         } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
@@ -231,7 +231,7 @@ class ParserTest {
 
     @Test
     void parseViewPatientInvalidParamTest() {
-        String[] parameters = {"S1234567","S1234567A,S1235467A", ""};
+        String[] parameters = {"S1234567", "S1234567A,S1235467A", ""};
 
         for (String s : parameters) {
             try {
@@ -246,9 +246,9 @@ class ParserTest {
     @Test
     void parseViewMedicineWithParamTest() {
         String parameter = "id, S1234";
-        String[] parameterArray = {"id","S1234"};
+        String[] parameterArray = {"id", "S1234"};
         try {
-            assertArrayEquals(parameterArray,Parser.parseViewMedicine(parameter).parameterArray);
+            assertArrayEquals(parameterArray, Parser.parseViewMedicine(parameter).parameterArray);
         } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
@@ -259,7 +259,7 @@ class ParserTest {
         String parameter = null;
         String[] parameterArray = null;
         try {
-            assertArrayEquals(parameterArray,Parser.parseViewMedicine(parameter).parameterArray);
+            assertArrayEquals(parameterArray, Parser.parseViewMedicine(parameter).parameterArray);
         } catch (UserInputErrorException e) {
             fail("Should not be throwing exception!");
         }
@@ -282,9 +282,9 @@ class ParserTest {
     @Test
     void parseEditMedicineTest() {
         String parameter = "S123,Paracetamol,500,2025-02-02,Headaches,100";
-        String[] parameterArray = { "S123","Paracetamol","500","2025-02-02","Headaches","100"};
+        String[] parameterArray = {"S123", "Paracetamol", "500", "2025-02-02", "Headaches", "100"};
         try {
-            assertArrayEquals(parameterArray,Parser.parseEditMedicine(parameter).parameterArray);
+            assertArrayEquals(parameterArray, Parser.parseEditMedicine(parameter).parameterArray);
         } catch (UserInputErrorException e) {
             fail("Should not be throwing exception");
         }

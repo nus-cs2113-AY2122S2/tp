@@ -72,6 +72,7 @@ public class UI {
         printFindMedicineMessage();
         printUpdateMedicineMessage();
         printClearMedicineMessage();
+        printDispenseMedicineMessage();
         printByeMessage();
         printNewLineSeparator();
     }
@@ -100,7 +101,7 @@ public class UI {
         System.out.print("Format: add medicine /info [batch id], [name], [dosage], ");
         System.out.println("[expiry date],[side effects],[quantity]");
         System.out.print("Example: add medicine /info A123, Paracetamol, ");
-        System.out.println("500, 2023-06-11, Drowsiness, 10");
+        System.out.println("500, 2023-06-11, Drowsy, 10");
     }
 
     public static void printAddAppointmentMessage() {
@@ -139,7 +140,7 @@ public class UI {
         System.out.println("Format: view appointment or view appointment /info [criteria],[input value]");
         System.out.print("Accepted Criteria: appointment id, patient nric, ");
         System.out.println("patient name, doctor name, doctor nric, date");
-        System.out.println("Example 1: view appointment /info appointment id, 12356701017647");
+        System.out.println("Example 1: view appointment /info appointment id, 12356710156543");
         System.out.println("Example 2: view appointment /info patient nric, S1234567A");
         System.out.println("Example 3: view appointment /info doctor name, John");
         System.out.println("Example 4: view appointment /info patient date, 2023-01-01");
@@ -149,7 +150,7 @@ public class UI {
         printNewLineSeparator();
         System.out.println("Feature: DELETE DOCTOR");
         System.out.println("Format: delete doctor /info [nric]");
-        System.out.println("Example: delete doctor /info S1234567A");
+        System.out.println("Example: delete doctor /info S7654321A");
     }
 
     public static void printDeletePatientMessage() {
@@ -163,14 +164,14 @@ public class UI {
         printNewLineSeparator();
         System.out.println("Feature: DELETE MEDICINE");
         System.out.println("Format: delete medicine /info [batch id]");
-        System.out.println("Example: delete medicine /info S234");
+        System.out.println("Example: delete medicine /info S123");
     }
 
     public static void printDeleteAppointmentMessage() {
         printNewLineSeparator();
         System.out.println("Feature: DELETE APPOINTMENT");
         System.out.println("Format: delete appointment /info [appointment id]");
-        System.out.println("Example: delete appointment /info 12356701017647");
+        System.out.println("Example: delete appointment /info 12356710156543");
     }
 
     public static void printEditDoctorMessage() {
@@ -178,8 +179,8 @@ public class UI {
         System.out.println("Feature: EDIT DOCTOR");
         System.out.print("Format: edit doctor /info [nric],[name],[age],[gender], ");
         System.out.println("[address],[DOB],[Specialisation]");
-        System.out.print("Example: edit doctor /info S1234567A, John Cena, ");
-        System.out.println("23, M, 10 Baker Street, 1999-12-31, Urinology");
+        System.out.print("Example: edit doctor /info S7654321, John Doe, ");
+        System.out.println("22, M, 10 Baker Street, 1999-12-31, Urinology");
     }
 
     public static void printEditPatientMessage() {
@@ -187,7 +188,7 @@ public class UI {
         System.out.println("Feature: Edit PATIENT");
         System.out.print("Format: edit patient /info [nric], [name], [age], [gender], ");
         System.out.println("[address], [DOB], [Date of Admission]");
-        System.out.print("Example: edit patient /info S1234567A, John Cena, 23, ");
+        System.out.print("Example: edit patient /info S1234567A, John Doe, 22, ");
         System.out.println("M, 10 Baker Street, 1999-12-31, 2021-02-15");
     }
 
@@ -197,7 +198,7 @@ public class UI {
         System.out.print("Format: edit medicine /info [batch id], [name], [dosage], ");
         System.out.println("[expiry date],[side effects],[quantity]");
         System.out.print("Example: edit medicine /info A123, Paracetamol, ");
-        System.out.println("500, 2023-06-11, Drowsiness, 10");
+        System.out.println("500, 2023-06-11, Drowsy, 10");
     }
 
     public static void printEditAppointmentMessage() {
@@ -205,8 +206,8 @@ public class UI {
         System.out.println("Feature: EDIT APPOINTMENT");
         System.out.print("Format: edit appointment /info [appointment id],[patient nric],");
         System.out.println("[patient name],[doctor nric],[doctor name],[appointment date],[appointment details]");
-        System.out.print("Example: edit appointment /info A123,S1234567A,Don,");
-        System.out.println("S1234567A,John,2022-10-15,Regular knee checkup");
+        System.out.print("Example: edit appointment /info A123,S1234567A,Doe,");
+        System.out.println("S7654321A,John,2022-10-15,Regular knee checkup");
     }
 
     public static void printFindDoctorMessage() {
@@ -228,7 +229,7 @@ public class UI {
         System.out.println("Format: find patient /info [parameter], [keyword to find]");
         System.out.println("Example 1: find patient /info name, Bruce Lee");
         System.out.println("Example 2: find patient /info nric, S1234567X");
-        System.out.println("Example 3: find patient /info age, 23");
+        System.out.println("Example 3: find patient /info age, 22");
         System.out.println("Example 4: find patient /info gender, M");
         System.out.println("Example 5: find patient /info address, 15 King's Avenue");
         System.out.println("Example 6: find patient /info dob, 1999-12-31");
@@ -239,26 +240,35 @@ public class UI {
         printNewLineSeparator();
         System.out.println("Feature: FIND MEDICINE");
         System.out.println("Format: find medicine /info [parameter], [keyword to find]");
-        System.out.println("Example 1: find medicine /info id, 12356701017647");
+        System.out.println("Example 1: find medicine /info id, 12356710156543");
         System.out.println("Example 2: find medicine /info name, Paracetamol");
         System.out.println("Example 3: find medicine /info dosage, 500");
         System.out.println("Example 4: find medicine /info expiry, 2023-06-11");
-        System.out.println("Example 5: find medicine /info sideeffects, headache");
+        System.out.println("Example 5: find medicine /info sideeffects, DROWSY");
         System.out.println("Example 6: find medicine /info quantity, 10");
     }
 
     public static void printUpdateMedicineMessage() {
         printNewLineSeparator();
-        System.out.println("Additional feature: UPDATE MEDICINE");
+        System.out.println("Feature: UPDATE MEDICINE");
         System.out.println("Format: update medicines");
         System.out.println("Example: update medicines");
     }
 
     public static void printClearMedicineMessage() {
         printNewLineSeparator();
-        System.out.println("Additional feature: CLEAR MEDICINE");
+        System.out.println("Feature: CLEAR MEDICINE");
         System.out.println("Format: clear medicines");
         System.out.println("Example: clear medicines");
+    }
+
+    public static void printDispenseMedicineMessage() {
+        printNewLineSeparator();
+        System.out.println("Feature: DISPENSE MEDICINE");
+        System.out.println("Format: dispense medicine /info [Patient NRIC],[Medicine Name],[Quantity]");
+        System.out.println("You can list multiple medicines as long as each medicine is in the form"
+                + "[Medicine Name],[Quantity]");
+        System.out.println("Example: dispense medicine /info S1234567A,Paracetamol,10,Aspirin,20");
     }
 
     public static void printByeMessage() {
@@ -357,7 +367,7 @@ public class UI {
     }
 
     public static void printPrompt() {
-        System.out.print("You: ");
+        System.out.print("\nYou: ");
     }
 
     public static void printParagraph(String paragraph) {
