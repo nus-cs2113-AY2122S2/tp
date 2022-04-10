@@ -62,7 +62,7 @@ complete the activities with the use of the study session.
   - **Documentation Guide**
     - Documentation related to showing of monthly Timetable schedule.  
   
-####Contribution to team-based tasks
+#### Contribution to team-based tasks
 - Refractor Parser Class
 - Refractor Timetable Class.
 - Modify the help Command
