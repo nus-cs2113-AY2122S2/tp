@@ -524,16 +524,16 @@ The general workflow of the `activity /edit` command is as follows:
     - If the activity does not exist, a message indicating that there is no such activity is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
     - Else, the `Activity` object to be edited is returned and stored temporarily as `oldActivity`.
 7. `ActivityEditCommand#retrieveDetailsFromOldActivity` is called on `oldActivity` to retrieve existing activity details
-   for delimiters not supplied by the user. This allows ActivityEditCommand to reuse existing details for details the user
+   for delimiters not supplied by the user. This allows `ActivityEditCommand` to reuse existing details for details the user
    does not wish to edit.
 8. `ActivityEditCommand#updateCostAndCostList` and `ActivityEditCommand#validateCostListAndInvolvedList` are called to 
    create a list of costs and validate them. These costs are necessary to recreate the activity after deleting it.
 9. `ActivityEditCommand#addAllActivityCost` is called to add the respective costs to each `Person` object involved in the activity.
-     - A dummy `activityId` that cannot be used by any other activity is when adding these costs.
+     - A dummy activity unique identifier that cannot be used by any other activity is when adding these costs.
 10. `Session#removeActivity()` method is invoked to remove `oldActivity` from the list of activities stored.
 11. A new `Activity` object is created using the new activity details and stored as `newActivity`.
 12. `Session#addActivity` is called to add `newActivity` to the session.
-13. `ActivityEditCommand#updateDummyActivityIdsInActivityCosts` is called on the session to update all dummy activityIds added by `ActivityEditCommand#addAllActivityCost` to
+13. `ActivityEditCommand#updateDummyActivityIdsInActivityCosts` is called on the session to update all dummy activity unique identifiers added by `ActivityEditCommand#addAllActivityCost` to
     the `activityId` of the old activity.
 14. `Manager#saveProfile` is called to save the changes to the local storage file.
 15. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully edited with `TextUi#printlnMessage`.
