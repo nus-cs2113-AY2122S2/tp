@@ -38,12 +38,14 @@ title: Developer Guide
     * [Edit a group](#edit-a-group)
     * [View a group](#view-a-group)
     * [List all groups](#list-groups)
-* [Project Scope](#product-scope)
-    * [Target user profile](#target-user-profile)
-    * [Value proposition](#value-proposition)
-* [User stories](#user-stories)
-* [Non-functional requirements](#non-functional-requirements)
-* [Glossary](#glossary)
+* [Appendix: Requirements](#appendix-requirements)
+  * [Project Scope](#product-scope)
+      * [Target user profile](#target-user-profile)
+      * [Value proposition](#value-proposition)
+  * [User stories](#user-stories)
+  * [Non-functional requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+* [Appendix: Instructions for Manual Testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 We would like to acknowledge [Address Book (Level-3)](https://github.com/se-edu/addressbook-level3) for providing much
