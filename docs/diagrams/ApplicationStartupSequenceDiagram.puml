@@ -6,8 +6,8 @@ skinparam sequenceStereotypeFontColor red
 skinparam sequenceStereotypeFontStyle bold
 
 participant ":InvMgr" as InvMgr
-participant "storage:Storage" as Storage
 participant "ui:Ui" as Ui
+participant "storage:Storage" as Storage
 participant "itemList:ItemList" as ItemList
 
 -> InvMgr: main()
