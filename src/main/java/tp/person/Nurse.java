@@ -14,7 +14,7 @@ public class Nurse extends Person {
         isOnDuty = false;
 
         //@@author cczhouqi
-        assert wardNumber == -1: "Default ward number should be set to -1";
+        assert wardNumber == -1 : "Default ward number should be set to -1";
     }
 
     //@@author sethlxk

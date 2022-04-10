@@ -12,7 +12,7 @@ public class Doctor extends Person {
         assignedWard = true;
         this.department = department;
         this.wardNumber = wardNumber;
-        assert wardNumber == -1: "Default ward number should be set to -1";
+        assert wardNumber == -1 : "Default ward number should be set to -1";
     }
 
     public void setDepartment(String department) {
