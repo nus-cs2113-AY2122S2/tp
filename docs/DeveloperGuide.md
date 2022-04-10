@@ -2565,14 +2565,14 @@ The following are some test cases for you to try:
 The following are some test cases for you to try:
 
 <span class="info box">:memo: **Important!** These test cases are done on the following assumptions:<br/><br/>
-(a) Resource files `workouts.txt`, `plans.txt`, and `schedule.txt` are empty.
-(b) `exercise.txt` is populated with its default exercises.<br/><br/>
+**(a)** Resource files `workouts.txt`, `plans.txt`, and `schedule.txt` are empty.<br/>
+**(b)** `exercise.txt` is populated with its default exercises.<br/><br/>
 If you have some data written into these files or modified `exercises.txt`, please do the following
 prior to conducting the test cases mentioned below:<br/><br/>
-(1) If WerkIt! is running, exit the application.<br/>
-(2) Backup your existing `werkItResources` directory.<br/>
-(3) Delete the `werkItResources` directory (not your backup!)<br/>
-(4) Start WerkIt! to generate a fresh set of `werkItResources` directory and its resource files.
+**(1)** If WerkIt! is running, exit the application.<br/>
+**(2)** Backup your existing `werkItResources` directory.<br/>
+**(3)** Delete the `werkItResources` directory (not your backup!)<br/>
+**(4)** Start WerkIt! to generate a fresh set of `werkItResources` directory and its resource files.
 </span>
 
 <span class="warning box">:warning: Please follow the test cases and its commands in sequence as subsequent test cases 
