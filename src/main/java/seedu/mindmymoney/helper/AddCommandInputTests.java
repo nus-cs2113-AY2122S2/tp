@@ -202,7 +202,7 @@ public class AddCommandInputTests {
         for (CreditCard creditCard : creditCardList.creditCardListArray) {
             if (creditCard.getNameOfCard().toLowerCase().equalsIgnoreCase(inputCreditCardName)) {
                 throw new MindMyMoneyException("You already have this card in the list! "
-                    + "Please abbreviate teh card as a different name.");
+                    + "Please abbreviate the card as a different name.");
             }
         }
 
