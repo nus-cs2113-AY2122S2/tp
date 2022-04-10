@@ -280,7 +280,8 @@ CCA Clubs that require assistance in inventory management, especially for fast t
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work across Windows, Linux and Mac OS X that has an installation of Java 11.
+2. A user with above average typing speed should be able to accomplish tasks faster relative to using a mouse.
 
 ## Glossary
 
