@@ -790,7 +790,9 @@ Test Scenario 1: A session has been created with a unique identifier of 1, named
    Expected: A success message should be printed, indicating the session was edited.
 4. Test Command: `session /edit /sid 1 /pl Alice`<br>
    Expected: An error message should be printed, indicating that there are missing persons from the original list of persons of the session.
-5. Test Command: `session /edit /sid 1`<br>
+5. Test Command: `session /edit /sid apple`<br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
+6. Test Command: `session /edit /sid 1`<br>
    Expected: An error message should be printed, indicating no delimiters were found.
 
 #### Settling a Session
