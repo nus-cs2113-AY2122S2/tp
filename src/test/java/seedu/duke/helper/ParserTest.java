@@ -20,7 +20,8 @@ class ParserTest {
             fail("Should not be throwing exception!");
         }
     }
-     /*
+
+    /*
     @Test
     void parseAddPatientInvalidParamTest() {
         String[] parameters = {"S1234567,JOHN,23,M,SINGAPORE,1999-01-01,2022-01-01",
