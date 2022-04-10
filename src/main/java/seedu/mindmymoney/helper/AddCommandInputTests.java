@@ -78,7 +78,7 @@ public class AddCommandInputTests {
      * @throws MindMyMoneyException when input is null or not a type of expenditure.
      */
     public static void testPaymentMethod(String inputPaymentMethod, CreditCardList creditCardList)
-            throws MindMyMoneyException {
+        throws MindMyMoneyException {
         if (inputPaymentMethod.trim().equals("")) {
             throw new MindMyMoneyException("Expenditure cannot be null!");
         }
@@ -100,7 +100,7 @@ public class AddCommandInputTests {
         }
         if (!isExpenditureCategoryInList(inputCategory)) {
             throw new MindMyMoneyException("Input Food, Transport, Utilities, Personal, Entertainment or Others after"
-                    + " the /c field!");
+                + " the /c field!");
         }
     }
 
@@ -147,7 +147,7 @@ public class AddCommandInputTests {
      * @throws MindMyMoneyException when input is less than or equal to 0 or null.
      */
     public static void testExpenditureAmount(String inputAmount, String paymentMethod,
-            CreditCardList creditCardList) throws MindMyMoneyException {
+                                             CreditCardList creditCardList) throws MindMyMoneyException {
         float inputAmountAsFloat;
 
         if (inputAmount == null) {
@@ -211,7 +211,7 @@ public class AddCommandInputTests {
         }
 
         try {
-            inputAmountAsDouble =  Double.parseDouble(inputCashback);
+            inputAmountAsDouble = Double.parseDouble(inputCashback);
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("Cashback must be a number");
         }
@@ -237,7 +237,7 @@ public class AddCommandInputTests {
         }
 
         try {
-            inputAmountAsDouble =  Float.parseFloat(inputLimit);
+            inputAmountAsDouble = Float.parseFloat(inputLimit);
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("Limit amount must be a number");
         }
@@ -249,7 +249,7 @@ public class AddCommandInputTests {
     }
 
     /**
-     * Tests if the input parameters from the user are valid.
+     * Tests if the input parameters of expenditure from the user are valid.
      *
      * @param paymentMethod The payment method used, either as cash or the credit card.
      * @param inputCategory The category as indicated by the user.
@@ -269,4 +269,32 @@ public class AddCommandInputTests {
         LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         checkAfterCurrentDate(date);
     }
+
+    /**
+     * Tests if the input parameters of income from the user are valid.
+     *
+     * @param amountAsInt Integer amount of the income.
+     * @param inputCategory Source of income.
+     * @throws MindMyMoneyException when the parameters are invalid.
+     */
+    public static void testIncomeParameters(int amountAsInt, String inputCategory) throws MindMyMoneyException {
+        testIncomeAmount(amountAsInt);
+        testIncomeCategory(inputCategory);
+    }
+
+    /**
+     * Tests if the input parameters of credit card from the user are valid.
+     *
+     * @param cardName The name of the credit card.
+     * @param cashBack The amount of cashback the card provides.
+     * @param cardLimit The spending limit of the credit card.
+     * @throws MindMyMoneyException when the parameters are invalid.
+     */
+    public static void testCreditCardParameters(String cardName, String cashBack, String cardLimit)
+        throws MindMyMoneyException {
+        testCreditCardName(cardName);
+        testCashbackAmount(cashBack);
+        testCreditCardLimit(cardLimit);
+    }
+
 }
