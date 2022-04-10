@@ -54,9 +54,8 @@ A summary of my code contributions are as follows:
 ### Contributions to the User Guide (UG)
 1. Wrote the guide on [creating a new workout](../UserGuide.md#create-a-workout-workout-new).
 2. Wrote the informational section on [WerkIt!'s local storage structure](../UserGuide.md#werkits-local-storage-information).
-3. Wrote the [Quick Start Guide](../UserGuide.md#quick-start-guide) section, which guides the user on the necessary
-prerequisites to download and the steps to get it running on the user's computer.
-   - Includes a list of recommended OSes, their versions, and the terminals to use for each OS.
+3. Wrote the [Quick Start Guide](../UserGuide.md#quick-start-guide) section, which includes a list of 
+   recommended terminals to use for each OS.
 4. Wrote the [frequently asked questions](../UserGuide.md#frequently-asked-questions-faq) section.
 
 ### Contributions to the Developer Guide (DG)
@@ -79,11 +78,10 @@ prerequisites to download and the steps to get it running on the user's computer
 7. Wrote the [table of contents](../DeveloperGuide.md#table-of-contents).
 
 ### Contributions to Team-Based Tasks
-- Set up the team's organisation and repository on GitHub
-- Created skeleton codes and packages for the project.
-- Set up and maintained the team's Google Drive folder, which includes the team's project notebook
-and other documents for the co-requsuite module CS2101 Effective Communication for Computing Professionals.
-- Helped to maintain the team's GitHub repository issue tracker.
+My contributions to team-based tasks includes **(1)** setting up the team's organisation and repository on GitHub; 
+**(2)** create skeleton codes and packages for the project source code; **(3)** set up and maintained the team's
+Google Drive folder, which includes the team's project notebook and documents for the CS2101 co-requisite module; 
+**(4)** helped to maintain the team's GitHub repository issue tracker.
 
 ### Review/Mentoring Contributions
 - Reviewed fellow team members' pull requests (PRs), including (but not limited to):
@@ -94,11 +92,9 @@ and other documents for the co-requsuite module CS2101 Effective Communication f
   - [PR #218 - Branch file bug](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/218#pullrequestreview-929510891)
 
 ### Contributions Beyond the Project Team
-- Provided feedback and potential bug reports to another team's project (CS2113T-T10-3's Mod Happy) as part
-  of the Practical Exam Dry-Run (PED). Some of the bugs reported include (but are not limited to):
-  - [(#3) Editing a task to add a duration does not show the new duration](https://github.com/alanlowzies/ped/issues/3)
-  - [(#5) Discrepancy in maximum allowable time for time values mentioned in UG](https://github.com/alanlowzies/ped/issues/4)
-  - [(#5) Editing a module to an empty description is not accepted](https://github.com/alanlowzies/ped/issues/5)
+Provided feedback and potential bug reports to another team's project (CS2113T-T10-3's Mod Happy) as part
+of the Practical Exam Dry-Run (PE-D). The bugs I have reported can be found in this 
+[GitHub issue tracker](https://github.com/alanlowzies/ped/issues).
 
 ---
 
