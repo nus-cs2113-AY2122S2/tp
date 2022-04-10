@@ -11,6 +11,7 @@ Code contribution can be found [here](https://nus-cs2113-ay2122s2.github.io/tp-d
 ### Enhancements implemented
 * In charge of the parsing of commands prior to command execution.
   * Parser implements a regex-based approach to parsing commands. This is challenging and necessary due to non-functional requirements of the project. 
+* Implement DateTime functionality throughout the application's classes.
 
 ### Contributions to UG
 * Add top-level introduction summary.
