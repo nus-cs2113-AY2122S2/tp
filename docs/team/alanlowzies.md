@@ -117,3 +117,19 @@ and other documents for the co-requsuite module CS2101 Effective Communication f
 ---
 
 ## Reflections on the Team Project (tP)
+Despite having done a couple of software engineering projects back in my polytechnic days, the tP has taught me many
+new things about the intricacies of a software engineering project. From learning to use Git to learning how to write
+proper documentations for the intended audience, the practical tP has given me the opportunity to learn these things  
+which may not have been possible or as effective if I just sat through lectures to learn about these concepts. In
+addition, the tP has reminded me the importance of communicating effectively with my team members on project matters,
+and to communicate professionally to get the team to achieve our goals in the project. Thus, I am grateful that the 
+co-module CS2101 Effective Communication for Computing Professionals was conducted alongside the CS2113T module as it
+gave us the additional experience of having to present our work to non-technical professionals, which I presume is the
+norm when working in the industry. Thus, learning how to convert technical topics into something that can be easily
+understood by non-technical professionals is also an important skill to have.
+
+Overall, this module has given me a greater appreciation for the 'art' of software engineering, especially when thinking
+about the large tech companies out there having to manage and maintain much more complex software and systems among a 
+large group of people, both technical (software developers) and non-technical (marketing managers).
+
+<div class="button-container"><a class="button" href="#">Back to Top</a></div>
