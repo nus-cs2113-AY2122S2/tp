@@ -49,7 +49,7 @@ public class Order {
         return null;
     }
 
-    public void addOrderline(UnitGood unitGood, String qty)
+    public Boolean addOrderline(UnitGood unitGood, String qty)
             throws WrongCommandException {
         try {
             int quantity = Integer.parseInt(qty);
@@ -57,19 +57,18 @@ public class Order {
                 Orderline orderline = getOrderline(unitGood.getSku());
                 assert orderline != null;
                 orderline.setQuantity(quantity);
-                System.out.printf("%s already exists in order. %d now required to fulfill\n",
-                        orderline.getName(), orderline.getQuantity());
-                return;
+                Display.orderlineAlreadyExists(orderline.getName(), orderline.getQuantity());
+                return false;
             }
             Orderline orderline = new Orderline(unitGood,
                     orderlines.size() + 1, quantity);
             orderlines.add(orderline);
-            System.out.printf("%s is added to order. %d required to fulfill\n",
-                    orderline.getName(), orderline.getQuantity());
+            Display.orderlineAdded(orderline.getName(), orderline.getQuantity());
         } catch (NumberFormatException e) {
             System.out.println("Quantity must be positive number");
             throw new WrongCommandException("add", true);
         }
+        return true;
     }
 
     public void removeOrderlineByQty(String sku, String qty)
@@ -209,7 +208,7 @@ public class Order {
 
 
     public static Order restoreOrder(JSONObject jo) {
-        Integer orderId = Integer.parseInt((String) jo.get(OrderKeys.orderId));
+        Integer orderId = Integer.parseInt(jo.get(OrderKeys.orderId).toString());
         String receiver = (String) jo.get(OrderKeys.receiver);
         String shippingAddress = (String) jo.get(OrderKeys.shippingAddress);
         Order cur = new Order(
@@ -217,7 +216,7 @@ public class Order {
                 receiver,
                 shippingAddress
         );
-        cur.setFulfilled(Boolean.parseBoolean((String) jo.get(OrderKeys.isFulfilled)));
+        cur.setFulfilled(Boolean.parseBoolean(jo.get(OrderKeys.isFulfilled).toString()));
         JSONArray orderLinesJson = (JSONArray) jo.get(OrderKeys.orderlines);
         orderLinesJson.forEach((item) -> {
             JSONObject jol = (JSONObject) item;

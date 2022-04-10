@@ -71,6 +71,14 @@ public class Display {
         System.out.println("Unit Good of SKU: " + sku + " added to warehouse");
     }
 
+    public static void orderAdded(int id){
+        System.out.println("Order " + id + " is added");
+    }
+
+    public static void orderlineAdded(String name, int qty){
+        System.out.printf("%s is added to order. %d required to fulfill\n",
+                name, qty);
+    }
 
     public static void displayStorageCapacity(Float percentageCapacity) {
         System.out.println("Storage capacity: " + percentageCapacity + '%');
@@ -85,6 +93,16 @@ public class Display {
     public static void skuAlreadyExists(String sku) {
         System.out.println("Item with SKU: " + sku + "already exists in the warehouse. "
                 + "Please check the SKU again.");
+    }
+
+    public static void orderIdAlreadyExists(Integer id) {
+        System.out.printf("Order id %d already exists, please choose another id\n",
+                id);
+    }
+
+    public static void orderlineAlreadyExists(String name, int qty){
+        System.out.printf("%s already exists in order. %d now required to fulfill\n",
+                name, qty);
     }
 
     public static void nonExistentGood() {
