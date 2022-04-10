@@ -421,25 +421,15 @@ Below are instructions to perform manual testing of the application. Please refe
 <br>
 
 ### Setting grade for a module
-<<<<<<< HEAD
 * Prerequisite: There are existing modules in the application.
 * Assumption: You have a module `CS2113T`.
-
 
 * Test Case: `grade CS2113T A+` <br>
   Expected: The grade of `CS2113T` has been set to `A+`.
 * Test Case: `grade CS2113T E` <br>
   Expected: No grade is set. Error details in the message shows that `E` is an invalid module grade.
-=======
-1. Prerequisite: There are existing modules in the application.
-2. Assumption: You have a module `CS2113T`.
-3. Test Case: `grade CS2113T A+` <br>
-   Expected: The grade of `CS2113T` has been set to `A+`.
-4. Test Case: `grade CS2113T E` <br>
-   Expected: No grade is set. Error details in the message shows that `E` is an invalid module grade.
-5. Test Case: `grade CS2113T -` <br>
-   Expected: The grade of `CS2113T` has been removed.
->>>>>>> master
+* Test Case: `grade CS2113T -` <br>
+  Expected: The grade of `CS2113T` has been removed.
 
 <br>
 
@@ -516,7 +506,7 @@ Below are instructions to perform manual testing of the application. Please refe
 * Test Case: `mark u 1` <br>
   Expected: The first task in `General Tasks` is marked as uncompleted.
 * Test Case: `mark t 1` <br>
-  Expected: No tasks are marked/unmarked. Error details in the message shows that `t` is an invalid flag.
+  Expected: No tasks are marked. Error details in the message shows that `t` is an invalid flag.
 
 <br>
 
