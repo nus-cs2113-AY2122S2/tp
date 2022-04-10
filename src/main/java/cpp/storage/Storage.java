@@ -4,6 +4,7 @@ import cpp.exceptions.DataConversionException;
 import cpp.model.ProjectList;
 import cpp.model.project.Project;
 import cpp.model.project.Todo;
+import cpp.ui.Constants;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -18,12 +19,11 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private static final String dataPath = "./src/data/projectList.txt";
-
     /**
-     * save the data based on certain style.
+     * Saves the data based on certain style.
      *
      */
+
     public static void save(ProjectList projectList) {
         try {
             saveData(projectList);
@@ -33,9 +33,10 @@ public class Storage {
     }
 
     /**
-     * Read data from hard disk.
+     * Reads data from hard disk.
      * @throws IOException if the file/ file path does not exist.
      */
+
     public static ProjectList read() {
         ProjectList projectList = new ProjectList();
         try {
@@ -54,18 +55,18 @@ public class Storage {
     }
 
     private static void clearData() throws FileNotFoundException {
-        PrintWriter writer = new PrintWriter(dataPath);
+        PrintWriter writer = new PrintWriter(Constants.FILEPATH);
         writer.print("");
         writer.close();
     }
 
     private static ProjectList readData() throws IOException, DataConversionException {
         try {
-            BufferedReader in = new BufferedReader(new FileReader("./src/data/projectList.txt"));
+            BufferedReader in = new BufferedReader(new FileReader(Constants.FILEPATH));
         } catch (IOException e) {
-            createFile("./src/data");
+            createFile(Constants.DIRECTORYPATH);
         }
-        BufferedReader in = new BufferedReader(new FileReader("./src/data/projectList.txt"));
+        BufferedReader in = new BufferedReader(new FileReader(Constants.FILEPATH));
         String projectLine;
         ProjectList projectList = new ProjectList();;
         int indexProject = 1;
@@ -102,8 +103,8 @@ public class Storage {
             if (!f.exists()) {
                 f.mkdirs();
             }
-            Files.createFile(Paths.get("./src/data/projectList.txt"));
-            File file = new File("./src/data/projectList.txt");
+            Files.createFile(Paths.get(Constants.FILEPATH));
+            File file = new File(Constants.FILEPATH);
             file.setWritable(true, false);
             file.setReadable(true, false);
             file.setExecutable(true, false);
@@ -118,7 +119,7 @@ public class Storage {
      *  @throws IOException if the file/ file path does not exist.
      */
     private static void saveData(ProjectList projectList) throws IOException {
-        FileWriter writer = new FileWriter("./src/data/projectList.txt");
+        FileWriter writer = new FileWriter(Constants.FILEPATH);
         int total = projectList.getProjectNo();
         for (int count = 0; count < total; count++) {
             Project project = projectList.getProject(count);
@@ -175,7 +176,7 @@ public class Storage {
             String todoStatus = todoInfo[3 * i + 1];
             String todoDeadline = todoInfo[3 * i + 2];
             projectList.addTodoToProject(indexProject, todoDescrip);
-            if (!todoDeadline.equalsIgnoreCase("No deadline specified")) {
+            if (!todoDeadline.equalsIgnoreCase(Constants.MESSAGE_NO_DEADLINE)) {
                 projectList.addTodoDeadline(indexProject, i + 1, todoDeadline);
             }
             //mark todo as done
