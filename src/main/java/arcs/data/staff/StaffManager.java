@@ -17,6 +17,11 @@ public class StaffManager {
         this.staffs = staffs;
     }
 
+    /**
+     * Checks whether the Id already exists in the list
+     * @param id the input Idd
+     * @return true if the Id already exists.
+     */
     public boolean hasDuplicateIc(String id) {
         for (Staff staff: staffs) {
             if (id.equals(staff.getId())) {
@@ -26,6 +31,11 @@ public class StaffManager {
         return false;
     }
 
+    /**
+     * Add a new staff into the list.
+     * @param c the new staff to be added
+     * @throws DuplicateDataException if the Id of the staff already exists.
+     */
     public void addStaff(Staff c) throws DuplicateDataException  {
         boolean hasDuplicateStaff = hasDuplicateIc(c.getId());
         if (hasDuplicateStaff) {
@@ -39,6 +49,12 @@ public class StaffManager {
         return staffs;
     }
 
+    /**
+     * Deletes a staff at the specified index.
+     * The index refers to the position of the staff in the customer list.
+     * @param index index of the customer tp be deleted
+     * @return the deleted staff
+     */
     public Staff deleteStaff(int index) throws ArcsException {
         assert staffs != null : "Staff list is null";
         if (index <= 0 || index > staffs.size()) {
@@ -49,18 +65,8 @@ public class StaffManager {
         return deleted;
     }
 
-    public Staff findStaff(String id) throws ArcsException {
-        assert id != null : "Id is null";
-        if (!Staff.isValidId(id)) {
-            throw new ArcsException("Id number is invalid.");
-        }
-        for (Staff staff: staffs) {
-            if (id.equals(staff.getId())) {
-                return staff;
-            }
-        }
-        return null;
-    }
-
 
 }
+
+
+
