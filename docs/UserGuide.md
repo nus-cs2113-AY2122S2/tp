@@ -193,6 +193,7 @@ Deletes an existing session so that you can remove sessions that you no longer n
 > 
 > **⚠️Warning:**
 >* This action is irreversible. The session is deleted immediately after entering this command.
+>* Additionally, all activities in the deleted session are deleted immediately as well.
 
 <br>
 
