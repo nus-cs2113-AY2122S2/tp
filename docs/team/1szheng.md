@@ -106,3 +106,113 @@ better management, and categorise your expenditures. PlanITarium is written in, 
       [#112](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/112),
       [#124](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/124),
       [#237](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/237)
+
+<br/>
+
+### Reproduced [User Guide](../UserGuide.md) Contribution
+
+#### Quick Notes
+
+The following table describes the **formats** used in this User Guide.
+
+| <div style="width:120px">Format</div> | Description                                                                                                                                              |
+|:--------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/x`                                  | A forward slash that is appended by a letter denotes a delimiter that should be accompanied by a parameter e.g. `/n NAME`.                               |
+| `PARAMETER`                           | The terms in upper casing are placeholders parameters for details to be supplied by you e.g. `add /n Alice` instead of `add /n NAME`.                    |
+| `/x PARAMETER`                        | The delimiter-parameter pairs not enclosed in any brackets are compulsory inputs to be supplied by you.                                                  |
+| `[/x PARAMETER]`                      | The delimiter-parameter pairs enclosed in square brackets are optional inputs that you may choose not to provide.                                        |
+| <code>/p <T&#124;(any)>               | The parameters enclosed in angle brackets indicates that they have fixed values. You may choose any of the values that are separated by a vertical pipe. |
+
+Some additional points to take note of:
+
+* You may provide the delimiter-parameter pairs in any preferred order.
+    * Example: `add /n Alice /g 2`, `add /g 2 /n Alice`
+* If you wish to use a forward slash `/` in any parameters, enclose them in whitespaces or use <code>&#92;</code>
+  instead.
+    * Example: `Bought on / off switch` or `Bought on\off switch` as a description
+* You need not include any currency symbols, and monetary values are in at most 2 decimal places.
+* You may provide duplicate entries such as when you have two family members with the same name. PlanITarium will track
+  each of them as separate entries via indexing.
+
+#### Features
+
+This section describes each command in detail.
+
+**How to use this section:**
+
+* The command formats and examples are provided in a `code block` so that you can **easily copy** them into PlanITarium.
+* Each command is described on an **incremental basis from the previous command**, you may refer to a previous command
+  for more information e.g. a `Delete` command using information from the `Add` command before it.
+* Sub-points with :information_source: indicates details that you should take note of.
+* Refer to the following table for more details on the parameters that you need to provide.
+
+| Parameter Glossary                | Description                                                                                                                                                                                                                                      |
+|:----------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/n NAME`                         | The name of someone you would like to track.                                                                                                                                                                                                     |
+| `/g GROUP_INDEX`                  | An index that helps you to categorise the individuals being tracked.<br/> There are currently three group indexes, numbered from 1 to 3.<br/>You can find the group names from the [overview command](#show-financial-summary-codeoverviewcode). |
+| `/u USER_INDEX`                   | An index that is tagged to someone you are tracking.<br/>You can find the user index from the [listing records command](#show-all-records-by-group-codelistcode).                                                                                |
+| `/d DESCRIPTION`                  | The description (or name) of the income and expenditure you wish to track.                                                                                                                                                                       |
+| `/c CATEGORY_INDEX`               | An index that refers to a category label such as "Food and Drinks".<br/>You can find the category index from the [list categories command](#show-expenditure-categories-codelistcatcode).                                                        |
+| `/i INCOME`                       | The monetary value of the income you wish to track.                                                                                                                                                                                              |
+| `/e EXPENDITURE`                  | The monetary value of the expenditure you wish to track.                                                                                                                                                                                         |
+| `/r (INCOME / EXPENDITURE)_INDEX` | An index that refers to an income or expenditure that you have recorded previously.<br/>You can find this index from the [listing records command](#show-all-records-by-group-codelistcode).                                                     |
+| <code>/p <T&#124;(any)>           | `T` indicates that an income or expense that you are tracking in the application is recurrent on a monthly-basis while `(any)` refers to any other inputs which will indicate that it is non-recurrent.                                          |
+
+---
+
+##### Add an income: `addin`
+
+> Adds an entry to your list of tracked incomes.
+
+Format: `addin /g GROUP_INDEX /u USER_INDEX /d DESCRIPTION /i INCOME /p <T/(any)>`
+
+* **GROUP_INDEX** refers to the index of the group that you belong to.
+* **USER_INDEX** refers to the index of that is tagged to you.
+* **DESCRIPTION** refers to the name or description of your income.
+* **INCOME** refers to the monetary value of your income.
+* **<T/(any)>** refers to whether your income is recurrent on a monthly-basis.
+
+> :information_source: Notes:
+> * Each person will have their incomes recorded separately from one another.
+> * The income entries will be indexed starting from 1 and **incremented** for every entry.
+
+Example of usage:
+
+* Add a monthly-recurrent Salary of $2,000, to Alice's income.
+
+  `addin /g 1 /u 1 /d Salary /i 2000 /p T`
+
+* _Result_: Entry for Salary is added to Alice's income list with an income index of **1**.
+
+  ![addin-command-screenshot](../images/AddIncome.png)
+
+---
+
+##### Delete an income: `deletein`
+
+> Deletes an entry from your list of tracked incomes.
+
+Format: `deletein /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX`
+
+* **GROUP_INDEX** refers to the index of the group that you belong to.
+* **USER_INDEX** refers to the index of that is tagged to you.
+* **INCOME_INDEX** refers to the index of the income you would like to delete.
+
+> :information_source: Notes:
+> * The income indexes that are higher than the deleted one will be **decremented** after the deletion is completed.
+    >     * E.g. If index 1 is a target for deletion, index 2 and beyond will be decremented.
+
+Example of usage:
+
+* Delete the monthly-recurrent Salary of $2,000 from Alice's income.
+
+  `deletein /g 1 /u 1 /r 1`
+
+* _Result_: Income entry for Salary of $2,000 is deleted from Alice's income list.
+
+  ![deletein-command-screenshot](../images/DeleteIncome.png)
+
+<br/>
+
+### Reproduced [Developer Guide](../DeveloperGuide.md) Contribution
+
