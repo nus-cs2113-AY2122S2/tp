@@ -82,7 +82,7 @@ public class Message {
     public static final String CLEAR_ALL_COMMAND_CONFIRMATION_MESSAGE = "Are you sure you want to delete all tasks?\n"
             + "You will not be able to recover them after deleting (Y/N): ";
     public static final String CLEAR_ALL_COMMAND_CONFIRMED_MESSAGE = "Understood. Proceeding to delete"
-            + " all tasks in the list..........";
+            + " all tasks in the list......";
     public static final String CLEAR_ALL_COMMAND_RESULT_MESSAGE = "Done! Now you have 0 tasks in the list.";
     public static final String CLEAR_ALL_COMMAND_CANCEL_MESSAGE = "Okay, we'll keep it as it is.";
     public static final String CLEAR_NO_EXPIRED_TASK_MESSAGE = "There are no expired tasks to be removed.";
