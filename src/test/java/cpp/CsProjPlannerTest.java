@@ -31,11 +31,11 @@ class CsProjPlannerTest {
             + "\nWelcome to CSProjPlanner\n\n"
             + "Enter \"help\" for available commands\n"
             + SEPARATOR + "What can I help you with?\n" + SEPARATOR;
-    private final String EXIT_MESSAGE = SEPARATOR + "Bye. Wish you have a nice day.\n" + SEPARATOR;
-    private final String HELP_NEXT = "What can I help you with next?\n" + SEPARATOR;
-    private final String UNKNOWN_COMMAND = SEPARATOR + "Execution result: Unknown Command.\n" + SEPARATOR
+    private static final String EXIT_MESSAGE = SEPARATOR + "Bye. Wish you have a nice day.\n" + SEPARATOR;
+    private static final String HELP_NEXT = "What can I help you with next?\n" + SEPARATOR;
+    private static final String UNKNOWN_COMMAND = SEPARATOR + "Execution result: Unknown Command.\n" + SEPARATOR
             + HELP_NEXT;
-    private final String HELP_MESSAGE = SEPARATOR + "Here are all the possible commands:\n"
+    private static final String HELP_MESSAGE = SEPARATOR + "Here are all the possible commands:\n"
             + "1. addproject [Project Name]\n"
             + "2. deleteproject [Project Name]\n"
             + "3. changegit [Project Index] [GitHub URL]\n"
