@@ -18,7 +18,7 @@ public class StaffManager {
     }
 
     /**
-     * Checks whether the Id already exists in the list
+     * Checks whether the Id already exists in the list.
      * @param id the input Idd
      * @return true if the Id already exists.
      */

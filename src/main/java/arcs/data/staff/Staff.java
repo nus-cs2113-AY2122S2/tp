@@ -97,7 +97,7 @@ public class Staff {
     }
 
     /**
-     * print staff object and its attributes excluding passward for security purpose
+     * print staff object and its attributes excluding passward for security purpose.
      */
     @Override
     public String toString() {
@@ -108,7 +108,7 @@ public class Staff {
     }
 
     /**
-     * print staff object and its attributes including passward
+     * print staff object and its attributes including passward.
      * used only for store app data
      */
     public String toStringStore() {
