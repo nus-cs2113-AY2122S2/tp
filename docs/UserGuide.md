@@ -53,17 +53,17 @@ it correctly and with ease. Here are some icons which we will use to convey impo
     - Mark tasks [`mark`](#marking-your-tasksmark-task_number--unmark-task_number)
     - Show tasks: [`show`](#generating-a-timetable-show)
     - Clear all tasks: [`clear`](#clearing-multiple-tasks-clear-all--clear-expired--clear-done)
-    - Study session
-      - Enter study session: [`study`](#enter-study-session-study)
-      - Start timer: [`start`](#starting-a-default-timer-start-mode_number)     
-      - Pause timer: [`pause`](#pausing-a-timerstopwatch-pause)
-      - Resume timer: [`resume`](#resuming-a-timerstopwatch-resume)
-      - Stop timer: [`stop`](#stopping-a-timerstopwatch-stop)
-      - Show tasks (identical to the one in Task management): [`show`](#show-your-tasks-show)
-      - Mark tasks as done (identical to the one in Task management):[`mark`](#mark-your-tasks-as-done-mark) 
-      - Exit study session: [`leave`](#leave-the-study-session-leave)
-      - Exit program: [`bye`]()
-- [Saving your tasks](#saving-your-tasks)
+  - Study session
+    - Enter study session: [`study`](#enter-study-session-study)
+    - Start timer: [`start`](#starting-a-default-timer-start-mode_number)     
+    - Pause timer: [`pause`](#pausing-a-timerstopwatch-pause)
+    - Resume timer: [`resume`](#resuming-a-timerstopwatch-resume)
+    - Stop timer: [`stop`](#stopping-a-timerstopwatch-stop)
+    - Show tasks (identical to the one in Task management): [`show`](#show-your-tasks-show)
+    - Mark tasks as done (identical to the one in Task management):[`mark`](#mark-your-tasks-as-done-mark) 
+    - Exit study session: [`leave`](#leave-the-study-session-leave)
+  - Exit program: [`bye`]()
+  - [Saving your tasks](#saving-your-tasks)
 - [FAQ](#faq)
 - [Glossary](#faq)
 - [Command Summary](#command-summary)
@@ -115,9 +115,11 @@ Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate 
 **Examples**
 - `add write final essay /do 25/6/2022 /start 20:00 /end 22:00 /bydate 27/6/2022 /bytime 23:59`
 
-
+![](images/addSingleTaskWithDeadline.png)
 
 - `add revise chapter 3 /do 25/6/2022 /start 20:00 /end 22:00`
+
+![](images/addSingleTaskWithoutDeadline.png)
 
 #### Adding a recurring task
 - All tasks will have the same task description.
@@ -139,11 +141,20 @@ Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate 
 |    FREQUENCY     | How often does the task repeat  | DAILY, WEEKLY, MONTHLY                                                              | No                      |
 
 
-**Examples**
+**Example**
 - `add cs2113t weekly quiz /do 21/6/2022 /start 16:00 /end 18:00 /bydate 25/6/2022 /bytime 16:00 /repeat WEEKLY`
 
+Before adding (current schedule of all tasks):
+![](images/scheduleBeforeAddingRecurringTasksOne.png)
 
-- `add browse internship offers /do 27/6/2022 /start 21:00 /end 21:30 /repeat DAILY`
+When adding the task:
+![](images/addRecurringTasksWithDeadline.png)
+
+After adding :
+
+![](images/scheduleAfterAddingRecurringTasksOne.png)
+
+<!--- extra example- `add browse internship offers /do 27/6/2022 /start 21:00 /end 21:30 /repeat DAILY` -->
 
 ### Deleting your tasks: `delete`
 
@@ -154,7 +165,16 @@ Format: `delete TASK_NUMBER`
 | TASK_NUMBER | The index of the task as seen in the `show` command | Any valid task number | No       |
 
 **Example**
-- `delete 1`
+- `delete 2`
+
+Before delete command:
+![](images/scheduleAfterAddingRecurringTasksOne.png)
+
+When executing delete command:
+![](images/deleteSingleTask.png)
+
+After delete command:
+![](images/scheduleAfterDeletingASingleTask.png)
 
 ### Deleting your recurring tasks
 - The specified task and all its future occurrence will be deleted.
@@ -170,11 +190,11 @@ Format: `delete TASK_NUMBER /repeat`
 
 Before delete command:
 
-![beforedelete](images/beforedelete.png)
+![before delete](images/beforedelete.png)
 
 After command: `delete 3 /repeat`
 
-![afterdelete](images/afterdelete.png)
+![after delete](images/afterdelete.png)
 
 ### Editing your tasks: `edit`
 
@@ -199,11 +219,21 @@ Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/en
 |     DUE_DATE     | Due date for the task                               | d/M/yyyy format, must be equal to or after DUE_DATE                                 | Yes                     |
 |     DUE_TIME     | Due time for the task                               | HH:mm format, must be after END_TIME if DUE_DATE is the same as DO_DATE             | No if DUE_DATE is given |
 
-**Examples**
+**Example**
 - `edit 2 write draft essay`
 
+Before edit command:
+![](images/scheduleAfterDeletingASingleTask.png)
 
-- `edit 3 submit draft essay /do 26/3/2022 /start 10:00 /end 13:00 /bydate 30/3/2022 /bytime 23:59`
+When executing edit command:
+![](images/editSingleTask.png)
+
+After edit command:
+![](images/scheduleAfterEditingASingleTask.png)
+
+
+
+<!--- extra example - `edit 3 submit draft essay /do 26/3/2022 /start 10:00 /end 13:00 /bydate 30/3/2022 /bytime 23:59`--->
 
 #### Editing a recurring task
 
