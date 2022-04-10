@@ -107,21 +107,11 @@ and other documents for the co-requsuite module CS2101 Effective Communication f
   - [PR #218 - Branch file bug](https://github.com/AY2122S2-CS2113T-T09-2/tp/pull/218#pullrequestreview-929510891)
 
 ### Contributions Beyond the Project Team
-Provided feedback and potential bug reports to another team's project (CS2113T-T10-3's Mod Happy) as part
-of the Practical Exam Dry-Run (PED).
-
-**Excerpt of One of the Bug Reports Given**<br/>
-<span class="info box">
-I have the following list of general tasks:<br/><br/>
-![Bug report image 1](https://raw.githubusercontent.com/alanlowzies/ped/main/files/6a5702c3-9686-48f8-80fe-af2bb95203e6.png)<br/><br/>
-I enter the following `edit task` command and yield a successful result:<br/><br/>
-![Bug report image 2](https://raw.githubusercontent.com/alanlowzies/ped/main/files/437fdce2-a3aa-405f-ab45-6ba09bf48ea1.png)<br/><br/>
-However, when using the list command again, the new duration does not show:<br/><br/>
-![Bug report image 3](https://raw.githubusercontent.com/alanlowzies/ped/main/files/96e36404-549b-49a9-a66f-dc20dc22ae8d.png))<br/><br/>
-</span>
-
-<br/><br/>([Link to the issue on GitHub](https://github.com/alanlowzies/ped/issues/3))
-
+- Provided feedback and potential bug reports to another team's project (CS2113T-T10-3's Mod Happy) as part
+  of the Practical Exam Dry-Run (PED). Some of the bugs reported include (but are not limited to):
+  - [(#3) Editing a task to add a duration does not show the new duration](https://github.com/alanlowzies/ped/issues/3)
+  - [(#5) Discrepancy in maximum allowable time for time values mentioned in UG](https://github.com/alanlowzies/ped/issues/4)
+  - [(#5) Editing a module to an empty description is not accepted](https://github.com/alanlowzies/ped/issues/5)
 ---
 
 ## Reflections on the Team Project (tP)
