@@ -35,10 +35,14 @@ public class Warehouse {
      * @param capacity Represents the size of the good using arbitrary units
      * @throws UnitTestException Exception when entering an invalid capacity
      */
-    public void addUnitGoodToInventory(String sku, String name, String description, String capacity)
-            throws UnitTestException {
+    public void addUnitGoodToInventory(String sku, String name, String description, String capacity) {
         UnitGood unitGood = new UnitGood(sku, name, description, capacity);
         Good newGood = new Good(unitGood, 0);
+        if (unitGoodHashMap.containsKey(sku)) {
+            System.out.println("Item with SKU: " + sku + "already exists in the warehouse. "
+                    + "Please check the SKU again.");
+            return;
+        }
         unitGoodHashMap.put(sku, unitGood);
         goodList.put(sku, newGood);
         System.out.println("Unit Good of SKU: " + sku + " added to warehouse");
@@ -75,6 +79,7 @@ public class Warehouse {
             throw new WrongCommandException("add", true);
         }
     }
+
 
     // Meant for batch adding goods, could be used with UI if i create a param map.
     public void addGoodToInventory(int id, Object goodObject) {
@@ -128,7 +133,7 @@ public class Warehouse {
      *
      * @return number of unique goods
      */
-    public int uniqueInventories() {
+    private int uniqueInventories() {
         ArrayList<Good> uniqueGoods = new ArrayList<>();
 
         goodList.forEach((sku, good) -> {
@@ -145,7 +150,7 @@ public class Warehouse {
             System.out.println(goodList.get(sku));
             System.out.println("Unit size of good: " + unitGoodHashMap.get(sku).getCapacity());
         } else {
-            System.out.println("Could not find unit good with given SKU! Please check input SKU!");
+            System.out.println("Could not find good with given SKU! Please check input SKU!");
         }
     }
 
@@ -154,7 +159,7 @@ public class Warehouse {
             Integer idToBeViewed = Integer.parseInt(orderId);
             for (Order order : orderLists) {
                 if (idToBeViewed.equals(order.getId())) {
-                    System.out.println("Viewing order with sku " + order.getId());
+                    System.out.println("Viewing order with order ID " + order.getId());
                     System.out.println("Receiver: " + order.getReceiver());
                     System.out.println("Shipping address:" + order.getShippingAddress());
                     System.out.println("Items in the order:");
@@ -415,7 +420,7 @@ public class Warehouse {
     }
     
     public void removeQuantityOfGoodFromInventory(String sku, String qty) throws
-            ItemDoesNotExistException, LargeQuantityException {
+            ItemDoesNotExistException, LargeQuantityException, NumberFormatException {
         if (!goodList.containsKey(sku)) {
             throw new ItemDoesNotExistException();
         }

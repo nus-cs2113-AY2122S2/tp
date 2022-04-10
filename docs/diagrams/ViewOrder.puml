@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+hide footbox
+
+Actor User as user
+Participant ":UI" as ui
+Participant ":View Parser" as viewParser
+
+user -> ui ++ : "view o/ oid/1"
+
+ui -> viewParser : parse()
+activate viewParser
+create MatchKeyword
+viewParser -> MatchKeyword ++
+ref over MatchKeyword : "Keyword Matching"
+viewParser -> MatchKeyword : getGroupValues()
+MatchKeyword --> viewParser : matchesHashMap
+deactivate MatchKeyword
+viewParser -> Warehouse ++ : viewOrderById()
+Warehouse -> Order ++ : getId()
+Order --> Warehouse : orderId
+Warehouse -> Order : getReceiver()
+Order --> Warehouse : receiver
+Warehouse -> Order : getShippingAddress()
+Order --> Warehouse : shippingAddress
+Warehouse -> Warehouse : listOrderlines()
+activate Warehouse
+Warehouse -> Order : getOrderlines()
+Order --> Warehouse : orderlines
+deactivate Warehouse
+
+@enduml

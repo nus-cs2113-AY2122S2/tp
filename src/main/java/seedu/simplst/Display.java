@@ -134,12 +134,12 @@ public class Display {
         System.out.println("\tExample: remove og/ oid/1 sku/WC1 q/1\n");
         System.out.println("Listing all orders");
         System.out.println("\tFormat: list o/\n");
-        System.out.println("Listing orderlines in a specific order");
+        System.out.println("Listing orderlines in an order");
         System.out.println("\tFormat: list og/ oid/[ORDER_ID]\n");
         System.out.println("\tExample: list og/ oid/1\n");
         System.out.println("View Command");
         System.out.println("\tFormat: view o/ oid/[ORDER_ID]");
-        System.out.println("\tExample: view ug/ oid/1\n");
+        System.out.println("\tExample: view o/ oid/1\n");
         System.out.println("Fulfill Command");
         System.out.println("\tFormat: fulfill oid/[ORDER_ID]");
         System.out.println("\tExample: fulfill oid/1\n");
