@@ -2249,7 +2249,7 @@ The following are some test cases for you to try:
 | Test Case                                     | Command                   | Expected result                                                 |
 |:----------------------------------------------|:--------------------------|:----------------------------------------------------------------|
 | Valid list command with extra arguments.      | `workout /list extraline` | Error response (invalid user argument), workouts not displayed. |
-| Extra whitespaces between commands arguments. | :x: `workout      /list`  | Error response (invalid user action), workouts not displayed.   |
+| Extra whitespaces between commands arguments. | `workout      /list`      | Error response (invalid user action), workouts not displayed.   |
 
 #### Deleting An Existing Workout
 (For details on the usage of this command, please refer to the [user guide](UserGuide.md#delete-a-workout-workout-delete).)
