@@ -109,7 +109,7 @@ better management, and categorise your expenditures. PlanITarium is written in, 
 
 ## Reproduced [User Guide](../UserGuide.md) Contribution
 
-This section contains the reproduction of some of my contributions to the Developer Guide. The hyperlinks have been
+This section contains the reproduction of some of my contributions to the User Guide. The hyperlinks have been
 reproduced for aesthetic purposes only and may not be operable.
 
 ### Features
