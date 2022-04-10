@@ -217,7 +217,7 @@ Added 2022-03-25 | $18.00 | Category | This is a remark
 Added 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
 ---------------------------------------------------
 ---------------------------------------------------
-Date field is of incorrect format! Type in YYYY-MM-DD and make sure valid values of months are used!
+Date field is of incorrect format! Type in YYYY-MM-DD and make sure valid dates are used!
 ---------------------------------------------------
 ---------------------------------------------------
 Please enter only numbers for the Amount field!
@@ -264,7 +264,7 @@ New amount value set!
 Amount cannot be negative!
 ---------------------------------------------------
 ---------------------------------------------------
-Date field is of incorrect format! Type in YYYY-MM-DD and make sure valid values of months are used!
+Date field is of incorrect format! Type in YYYY-MM-DD and make sure valid dates are used!
 ---------------------------------------------------
 ---------------------------------------------------
 / as first character must be surrounded by white spaces!
