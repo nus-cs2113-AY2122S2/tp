@@ -1333,7 +1333,7 @@ The following sequence diagram is the detailed procedure for Step 2's `PlanList#
 ![Delete Plan Detailed Sequence Diagram](uml/sequenceDiagrams/plans/images/deletePlan-Part2.png)
 
 <span class="box info">:memo: To improve the diagram's readability, logging-related and input-checking method calls,
-and exception throws in `planList#deletePlan()` have been omitted.</span>
+and exception throws in `PlanList#deletePlan()` have been omitted.</span>
 
 **(Before Step 2.1)** Method from `Integer` class is called to parse the user argument parameter given to
 `PlanList#deletePlan()` to obtain the plan index number.
