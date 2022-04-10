@@ -111,7 +111,6 @@ public class GroupEditCommand extends Command {
                 group.setGroupName(groupName);
             }
         }
-
         manager.saveProfile();
         ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + group);
     }
