@@ -1,9 +1,7 @@
 @startuml
 
-skinparam maxMessageSize 85
 
 hide footbox
-
 
 participant ":Ui" as Ui
 participant Main as Main
