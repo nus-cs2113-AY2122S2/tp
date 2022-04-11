@@ -87,6 +87,8 @@ public class TaskUtil {
         return 0;
     }
 
+
+    //@@author jltha
     /**
      * Checks if there is any date and time clashes
      * for a given array.

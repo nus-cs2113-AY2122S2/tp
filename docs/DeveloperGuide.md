@@ -30,7 +30,7 @@ users who can type fast will be able to plan out their tasks in a much quicker f
 
 ## Architecture
 
-![image](https://user-images.githubusercontent.com/69501969/160375887-d6da7278-5259-4458-83c7-f53d89fef640.png)
+![](images/ArchitectureDiagram.png)
 
 The above diagram provides a general overview of Sherpass and its major components. The four key areas are:
 
@@ -65,10 +65,13 @@ parsing of JSON from the saved data file.
 
 ### Timetable
 
-For components with more complicated use-cases (`Task` and `Timer`), we separate an extra Logic class to achieve better
+For components with more complicated use-cases (e.g., `Task` and `Timer`), we separate an extra Logic class to achieve better
 modularity, such that each class addresses a separate concern.
 
-Timetable component consists of `Timetable`, `Task`, `TaskList`, `TaskParser`, `TaskLogic` and various commands.
+Timetable component consists of `Timetable`, `TimetableLogic`, `TimetableParser` and `TimetablePrinting`.
+It also interacts with various other classes such as `TaskList` and `Ui` to successfully generate a timetable 
+for the user to view. Refer to its [implementation](#timetable-implementation) for more information on how
+the different classes interact with one another.
 
 ### Study session
 
@@ -246,9 +249,17 @@ The functionalities of the timetable include:
 - Prints the schedule of the day whenever the user starts up Sherpass.
 - Prints the schedule of the current month
 - Prints the schedule of any specific month. 
-- The timetable schedule is represented in a table form as shown below:
 
-![](images/timetableFormat.png)
+
+The full timetable schedule is represented in a table form as shown below:
+
+![](images/showDateTimetableFormat.PNG)
+
+This applies only when printing the daily/weekly schedule. For other schedule filters,
+the timetable is condensed to prevent cluttering of the terminal.
+
+Below is an example of a condensed version of the timetable:
+![](images/scheduleAfterAddingRecurringTasksOne.png)
 
 #### Task index of a task in timetable
 
@@ -258,62 +269,93 @@ This allows a more intuitive approach towards adding/editing/deleting/marking/un
 
 #### Time and Day column in timetable
 
-The **Time** and **Day** in the timetable follows the doOnDate attribute of a task.
+The **Time** and **Day** in the full timetable follows the doOnDate attribute of a task.
 Concept wise, this treats the doOnDate as the date and time when the task occurs,
 or the date and time the user has set out to accomplish the task.
 
 
-The **Timetable** is a class which interacts with the following components:
-1. Parser (includes TimetableParser)
-2. ShowCommand
-3. TaskList
+The **Timetable** is a component which contains the following classes:
+1. Timetable (Initialises any command sequence)
+2. TimetableLogic (Handles any computation necessary for the format of the timetable)
+3. TimetablePrinting (Executes the printing of the timetable)
 
-It also contains the following subclasses which will be called for logic handling or printing of output:
-- TimetableLogic
-- TimetablePrinting
 
-#### Parser Component
+It also interacts with the classes to obtain the necessary inputs or facilitate the printing of the timetable:
+- Parser (Includes TimetableParser)
+- ShowCommand
+- TaskList
+- Ui
+- Main
+
+#### Parser Class
 
 The **Parser** is a class which parses the inputs which the user enters. 
 To activate the timetable, the user inputs commands that start with `show`.
 This creates a **ShowCommand** object which will execute its method, thereby printing the timetable.
 
-#### ShowCommand Component
+#### ShowCommand Class
 
 Depending on the user input that was parsed by **Parser**, **ShowCommand** will call the 
 relative methods which prints the timetable.
 
-#### TaskList Component
+#### TaskList Class
 
 As **ShowCommand** is being executed, it will retrieve a filtered list
 of task by the date that is defined in the **ShowCommand** from the **TaskList** component. 
 The filtered list represents the schedule that the user has on that given date. 
 The list is assumed to be sorted previously when the user added/edited a task.
 
-Below are two sequence diagrams showing what happens 
+#### Ui Class
+The **Ui** component is heavily relied upon when printing the timetable, as it is the class which
+has a method called upon by **Timetable** to print the output into the terminal for the user to see.
+
+#### Main Class
+
+The overall component which accepts inputs read by **Ui** class, before assigning
+the input over to Parser to break down the input into a suitable data for command execution.
+
+
+
+### Timetable usage scenario
+
+Below is the overall sequence, represented by three sequence diagrams, showing what happens 
 as the user enters a command to see the schedule (timetable) for 25th May 2022:
 
-![](images/showScheduleForADateFirstPart.png)
+
+![](images/ShowScheduleForADateSDPartOne.png)
 
 The first diagram covers the interactions between the Parser component,
 the Timetable Parser, as well as the ShowCommand that is instantiated. It details
-of how the user's input is being parsed into data that is recognised by the program.
+of how the user's input is being parsed into data that is recognised by the program. 
+Here, we will assume that **Ui** will check and obtain any user input, before sending it to Main
+and then to Parser to obtain the appropriate command to execute.
 
 
-![](images/showScheduleForADateSecondPart.png)
+![](images/ShowScheduleForADateSDTwo.png)
 
 The second diagram shown above covers the next part of the interaction, which is after
 the ShowCommand is being executed in main. It shows the sequences of interactions between
-the ShowCommand, Timetable, and TimetablePrinting, in order to print out the timetable the user has requested to view.
+the ShowCommand, Timetable, TimetableLogic and TimetablePrinting, in order to print out the timetable 
+the user has requested to view.
+
+![](images/ShowScheduleForADateSDPartThree.png)
+
+The last sequence diagram shows the inner details behind the printing of the timetable, which
+follows the interactions between Timetable, TimetablePrinting and Ui.
+In this case, all method calls of showToUser() by the Ui class is an output that the user is able see,
+i.e. the printing of the timetable for viewing.
 
 
-**_Note: The sequence as shown above also happens in the same fashion as the user 
-requests to see the schedule for any day or the week the user is at._**
+> **Note**: 
+>- The sequence as shown above also happens in the same fashion as the user 
+> requests to see the schedule for any day or the week the user is at.
+>- The sequence is generally followed in the same order when printing a condensed timetable. 
+> The only difference is the methods that are called to initialise and print the timetable.
 
 The timetable for the current day is also shown to user as the user starts up
 the program.
 
-#### Design considerations for Timetable class (includes TimetableLogic and TimetablePrinting)
+#### Design considerations for generating the timetable
 - Current Implementation: Printing of timetable from scratch.
   - Pros: Easy to implement as timetable is generated based on request and input.
   - Pros: Adaptive as the timetable is only generated when needed and formatting is taken care of while generating it.

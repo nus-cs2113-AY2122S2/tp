@@ -20,6 +20,7 @@ import static seedu.sherpass.constant.TimetableConstant.WHITE_SPACE_FRONT_OFFSET
 import static seedu.sherpass.constant.TimetableConstant.WHITE_SPACE_FRONT_OFFSET_LENGTH_TWO;
 
 public class TimetableLogic {
+    //@@author jltha
     /**
      * Finds the maximum length of the task content with reference to its task content type.
      * Where task content type can be
@@ -64,6 +65,7 @@ public class TimetableLogic {
         return taskFullLength;
     }
 
+    //@@author
     protected static long calcOffset(boolean condition) {
         if (condition) {
             return WHITE_SPACE_FRONT_OFFSET_LENGTH_ONE;
