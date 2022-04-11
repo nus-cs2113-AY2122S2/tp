@@ -8,7 +8,8 @@ based on everyone’s availability via a Command Line Interface (CLI). If you ca
 MeetingJio can get your meeting management tasks done faster than manually eyeballing your timetable.
 
 ## Summary of Contributions
-###Code Contributed
+### Code Contributed
+
 **List Command**
 - Wrote the code to list out all events in the timetable
 - Added exception handling, error messages, JavaDoc and JUnit testing for List Command
@@ -23,7 +24,8 @@ MeetingJio can get your meeting management tasks done faster than manually eyeba
 ParserHelperMethods
 - Added JUnit testing for Add Lesson Command
 
-###Enhancements Implemented
+### Enhancements Implemented
+
 **List Command**
 - Extended `list` to `list_lesson` and `list_meeting` to allow users to specify what type of event to list out
 - Extended `list` to `list all` and `list NAME` to allow users to specify whose timetable to list out
@@ -32,14 +34,16 @@ ParserHelperMethods
 **Free Command**
 - Extended `free` to `free DURATION` to allow users to specify the minimum duration required for everyone to be free 
 
-###Contributions to UG
+### Contributions to UG
+
 **List Command**
 - Wrote the User Guide's sections on List Command and its extensions
 
 **Free Command**
 - Wrote the User Guide's section on Free Command
 
-###Contributions to DG
+### Contributions to DG
+
 **List Command**
 - Wrote the Developer Guide's sections on List Command and its extensions
 - Designed the UML diagram for the `list all` command
