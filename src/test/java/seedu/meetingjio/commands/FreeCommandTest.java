@@ -133,7 +133,7 @@ public class FreeCommandTest {
      * timeslots where everyone is free.
      */
     @Test
-    public void freeCommand_noFree() {
+    public void freeCommand_noFree_throwException() {
         addUserJohn.execute(masterTimetable);
         addUserJohnny.execute(masterTimetable);
         addCommand1.execute(masterTimetable);
@@ -152,7 +152,7 @@ public class FreeCommandTest {
      * invalid.
      */
     @Test
-    public void freeCommand_invalidInput() {
+    public void freeCommand_invalidInput_throwException() {
         FreeCommand freeCommand = new FreeCommand("abc");
         assertEquals(ERROR_FREE_INPUT_INVALID, freeCommand.execute(masterTimetable));
 

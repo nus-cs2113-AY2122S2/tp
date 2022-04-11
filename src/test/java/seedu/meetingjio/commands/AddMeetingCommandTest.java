@@ -1,10 +1,8 @@
 package seedu.meetingjio.commands;
 
 import org.junit.jupiter.api.Test;
-import seedu.meetingjio.parser.Parser;
-import seedu.meetingjio.timetables.MasterTimetable;
 
-import java.util.logging.Logger;
+import seedu.meetingjio.timetables.MasterTimetable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_NO_USER_TO_ADD_MEETING;
@@ -12,11 +10,10 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_MEETING;
 
 public class AddMeetingCommandTest {
-    public static Logger logger = Logger.getLogger(Parser.class.getName());
     MasterTimetable masterTimetable = new MasterTimetable();
 
     @Test
-    public void addMeetingNoUsers() {
+    public void addMeeting_noUsers_throwException() {
         ClearCommand clearCommand = new ClearCommand("all");
         clearCommand.execute(masterTimetable);
         AddMeetingCommand addMeetingCommand = new AddMeetingCommand("meeting", "Thursday",
@@ -27,7 +24,7 @@ public class AddMeetingCommandTest {
 
 
     @Test
-    public void addDuplicateMeetings() {
+    public void addMeeting_duplicateMeetings_throwException() {
         ClearCommand clearCommand = new ClearCommand("all");
         clearCommand.execute(masterTimetable);
         AddUserCommand addUserOne = new AddUserCommand("john");
@@ -43,7 +40,7 @@ public class AddMeetingCommandTest {
     }
 
     @Test
-    public void addOverlappingMeetings() {
+    public void addMeeting_overlappingMeetings_throwException() {
         ClearCommand clearCommand = new ClearCommand("all");
         clearCommand.execute(masterTimetable);
         AddUserCommand addUserOne = new AddUserCommand("john");
