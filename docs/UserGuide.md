@@ -1,4 +1,36 @@
 # User Guide
+- [Introduction](#introduction)
+- [Quick Start](#quick-start)
+- [Features](#features)
+- [Main Menu](#main-menu)
+- [Dish Management](#dish-management)
+  - [Introduction](#introduction-1)
+  - [Usage](#usage)
+    - [List dish](#list-dish-indexed-as-1)
+    - [Add dish](#add-dish-indexed-as-2)
+    - [Delete dish](#delete-dish-indexed-as-3)
+    - [Change the price of a dish](#change-the-price-of-a-dish-indexed-as-4)
+    - [Change the name of a dish](#change-the-name-of-a-dish-indexed-as-4)
+- [Order Management](#order-management)
+  - [Introduction](#introduction-2)
+  - [Usage](#usage-1)
+    - [Create a new order](#create-a-new-order-indexed-as-1)
+    - [Delete an Order](#delete-an-order-indexed-as-2)
+    - [Get total price of an order](#get-total-price-of-an-order-indexed-as-3)
+    - [Get total price of all orders](#get-total-price-of-all-orders-indexed-as-4)
+    - [Print receipt](#print-receipt-indexed-as-5)
+    - [Display order list](#display-order-list-indexed-as-6)
+    - [Display dish menu](#display-dish-menu-indexed-as-7)
+- [Staff Management](#staff-management)
+  - [Introduction](#introduction-3)
+  - [Usage](#usage-2)
+    - [Print staff](#print-staff-indexed-as-1)
+    - [Find staff](#find-staff-indexed-as-2)
+    - [Add staff](#add-staff-indexed-as-3)
+    - [Delete staff](#delete-staff-indexed-as-4)
+    - [Edit staff](#edit-staff-indexed-as-5)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
 
 ## Introduction
 
@@ -60,7 +92,7 @@ Enter choice:
 ```
 Enter corresponding index to use the feature.
 
-## List dish (indexed as 1)
+#### List dish (indexed as 1)
 When using `List dish`, there is no need for input, the program will print the dish name and the index.
 > Add some dish: Chicken Rice($3.5), Mala hotpot Set A($10), Soup (Along with Chicken Rice)($0), Chilli Crab($30)
 > Enter 1 to list dishes
@@ -74,28 +106,28 @@ Listing dishes...
 ----------------------------------------------
 ```
 
-#### Notice
-- If there is no dish in the menu. The output will be
-```
-Listing dishes...
-You haven't got a dish in menu!
-```
+- Notice
+  - If there is no dish in the menu. The output will be
+    ```
+    Listing dishes...
+    You haven't got a dish in menu!
+    ```
 
-- You cannot have the same dish (regardless of cases) in menu:
-```
-Listing dishes...
-----------------------------------------------
-1. Some Dish                      $1.1
-----------------------------------------------
-```
-> And you add `Some Dish` again
-```
-Adding new dish...
-The name of dish: sOme diSH
-Ooops, this dish already exists in your menu
-```
+  - You cannot have the same dish (regardless of cases) in menu:
+    ```
+    Listing dishes...
+    ----------------------------------------------
+    1. Some Dish                      $1.1
+    ----------------------------------------------
+    ```
+    > And you add `Some Dish` again
+    ```
+    Adding new dish...
+    The name of dish: sOme diSH
+    Ooops, this dish already exists in your menu
+    ```
 
-### Add dish (indexed as 2)
+#### Add dish (indexed as 2)
 When using `Add dish`, the program pops up an input panel.
 ```
 Adding new dish...
@@ -110,8 +142,49 @@ The price (will be rounded into 1 decimal place) of dish:
 ```
 > Enter the price of the new dish
 
-#### Notice
-`Name` of the dish cannot be empty, and `price` of the dish cannot be negative and will be rounded to 10 cents. (`price` being 0 means this dish is free to serve).
+- Notice
+  - `Name` of the dish cannot be empty, and `price` of the dish cannot be negative and will be rounded to 10 cents. (`price` being 0 means this dish is free to serve).
+
+#### Delete dish (indexed as 3)
+When using `Delete dish`, the program pops up an input panel
+```
+Deleting dish...
+The index of dish: 
+```
+> You delete `Some dish`, the index is 1.
+```
+Deleting dish...
+The index of dish: 1
+```
+
+- Notice
+  - If the index is not valid:
+    ```
+    Deleting dish...
+    The index of dish: 100
+    Please make sure the index is valid
+    ```
+    
+#### Change the price of a dish (indexed as 4)
+When using `Delete dish`, the program pops up an input panel
+```
+Changing price...
+The index of dish: 1
+The new price (will be rounded into 1 decimal place) of dish:
+```
+> Enter a valid price
+
+- Notice
+  - If the index or price is not valid:
+    ```
+    Please make sure the price is not negative
+    ```
+    ```
+    Please make sure the index is valid
+    ```
+    
+#### Change the name of a dish (indexed as 4)
+Similar to `Change the price of a dish`
 
 ## Order Management
 
@@ -135,10 +208,10 @@ Enter choice:
 ```
 Enter corresponding index to use the feature.
 
-## Accessing Order Menu
+#### Accessing Order Menu
 > Enter `2` in `Main Menu` to enter order management function.
 
-## Create a new order (indexed as 1)
+#### Create a new order (indexed as 1)
 When using `Create an order`, the user creates a new order and adds dishes to it. The program asks for user inputs.
 > Enter `1` in `Order Menu`
 
@@ -164,13 +237,13 @@ Added successfully!
 You have 3 dish(es), some more: 
 -1
 ```
-### Notice
-If the user input is invalid, the program issues an error.
-```
-Creating a new order...
-Please enter a valid dish index and try again.
-```
-## Delete an order (indexed as 2)
+- Notice
+  - If the user input is invalid, the program issues an error.
+    ```
+    Creating a new order...
+    Please enter a valid dish index and try again.
+    ```
+#### Delete an order (indexed as 2)
 When using `Delete an order`, the user deletes an existing order by index.
 Order index starts from 1.
 
@@ -184,14 +257,14 @@ Deleting an order...
 Enter the order you want to delete: 1
 Deleted successfully!
 ```
-### Notice
-If the user input is invalid, the program issues an error.
-```
-Deleting an order...
-Please enter a valid order index.
-```
+- Notice
+  - If the user input is invalid, the program issues an error.
+    ```
+    Deleting an order...
+    Please enter a valid order index.
+    ```
 
-## Get total price of an order (indexed as 3)
+#### Get total price of an order (indexed as 3)
 When using `Get total price of an order`, the user searches an order by index and checks the total price of the
  order. Order index starts from 1.
 
@@ -205,14 +278,14 @@ Getting total price of an order...
 Enter the order you want to get price: 1
 Total value of this order: 13.50. 
 ```
-### Notice
-If the user input is invalid, the program issues an error. The price is rounded to 2 decimal place.
-```
-Getting total price of an order...
-Please enter a valid order index.
-```
+- Notice
+  - If the user input is invalid, the program issues an error. The price is rounded to 2 decimal place.
+    ```
+    Getting total price of an order...
+    Please enter a valid order index.
+    ```
 
-## Get total price of all orders (indexed as 4)
+#### Get total price of all orders (indexed as 4)
 When using `Get total price of all orders`, the user gets the sum of prices of all created orders. 
 
 > Enter `4` in `Order Menu` 
@@ -223,7 +296,7 @@ Getting total price of all orders in the list...
 Total value of all orders: 13.50. 
 ```
 
-## Print Receipt (indexed as 5)
+#### Print Receipt (indexed as 5)
 When using `Print Receipt`, the user searches an order by index and print all dishes in the
 order. Order index starts from 1.
 
@@ -240,14 +313,14 @@ Chicken Rice ---- $3.5
 Mala Hotpot Set A ---- $10.0
 Total Price: 13.5
 ```
-### Notice
-If the user input is invalid, the program issues an error.
-```
-Printing receipt...
-Invalid order index.
-```
+- Notice
+  - If the user input is invalid, the program issues an error.
+    ```
+    Printing receipt...
+    Invalid order index.
+    ```
 
-## Display order list (indexed as 6)
+#### Display order list (indexed as 6)
 When using `Display order list`, the user checks the order list.
 
 > Enter `6` in `Order Menu` 
@@ -265,7 +338,7 @@ Mala Hotpot Set A ---- $10.0
 Total Price: 13.5
 ```
 
-## Display dish menu (indexed as 7)
+#### Display dish menu (indexed as 7)
 When using `Display dish menu`, the user checks the dish menu for reference. The function is the same as `List dish`.
 > Enter `7` in `Order Menu` 
 
@@ -291,7 +364,7 @@ Enter choice:
 ```
 Enter corresponding index to use the feature.
 
-### Print staff (indexed as 1)
+#### Print staff (indexed as 1)
 When using `Print staff`, there is no need for input, the program will print the order and index.
 > Add some staff: (100, John, Waiter, 2000), (101, Anna, Chef, 2500)
 ```
@@ -303,14 +376,14 @@ Printing staff...
 
 Details of all staff will be printed.
 
-#### Notice
-If there is no dish in the menu. The output will be
-```
-Printing staff...
-There is no staff.
-```
+- Notice
+  - If there is no dish in the menu. The output will be
+    ```
+    Printing staff...
+    There is no staff.
+    ```
 
-### Find staff (indexed as 2)
+#### Find staff (indexed as 2)
 When using `Find staff`, the program pops up an input panel.
 ```
 Finding staff...
@@ -320,10 +393,10 @@ ID of staff:
 
 Details of staff with the ID being inputted will be printed.
 
-#### Notice
-Staff with the `ID` being inputted should exist.
+- Notice
+  - Staff with the `ID` being inputted should exist.
 
-### Add staff (indexed as 3)
+#### Add staff (indexed as 3)
 When using `Add staff`, the program pops up an input panel.
 ```
 Adding new staff...
@@ -342,10 +415,10 @@ Salary of staff:
 
 Staff with the ID, name, position and salary being inputted will be created.
 
-#### Notice
-`Name` and `Position` of the staff cannot be empty, and `ID` and `salary` of the staff cannot be zero or negative (range: -2,147,483,648 to 2,147,483,647). `ID` of the staff should also not already be in use by an existing staff.
+- Notice
+  - `Name` and `Position` of the staff cannot be empty, and `ID` and `salary` of the staff cannot be zero or negative (range: -2,147,483,648 to 2,147,483,647). `ID` of the staff should also not already be in use by an existing staff.
 
-### Delete staff (indexed as 4)
+#### Delete staff (indexed as 4)
 When using `Delete staff`, the program pops up an input panel.
 ```
 Deleting staff...
@@ -355,10 +428,10 @@ ID of staff to delete:
 
 Staff with the ID being inputted will be deleted.
 
-#### Notice
-Staff with the `ID` being inputted should exist.
+- Notice
+  - Staff with the `ID` being inputted should exist.
 
-### Edit staff (indexed as 5)
+#### Edit staff (indexed as 5)
 When using `Edit staff`, the program pops up an input panel.
 ```
 Editing staff...
@@ -403,8 +476,8 @@ New salary of staff:
 ```
 > Enter new salary of staff
 
-#### Notice
-Staff with the `ID` being inputted should exist. `Name` and `Position` of the staff cannot be empty, and `ID` and `salary` of the staff cannot be zero or negative (range: -2,147,483,648 to 2,147,483,647). New `ID` of the staff should also not already be in use by an existing staff.
+- Notice
+  - Staff with the `ID` being inputted should exist. `Name` and `Position` of the staff cannot be empty, and `ID` and `salary` of the staff cannot be zero or negative (range: -2,147,483,648 to 2,147,483,647). New `ID` of the staff should also not already be in use by an existing staff.
 
 ## FAQ
 
