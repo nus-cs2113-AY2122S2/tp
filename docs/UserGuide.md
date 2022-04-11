@@ -5,6 +5,7 @@
 * [Introduction](#introduction)
 * [Quick start](#quick-start)
 * [Features](#features)
+    * [Introduction to Commands](#introduction-to-commands)
     * [Expenditure](#expenditure)
         * [Display help page for expenditures: `help`](#display-help-page-for-expenditures-help)
         * [Add an expenditure: `add`](#add-an-expenditure-add)
