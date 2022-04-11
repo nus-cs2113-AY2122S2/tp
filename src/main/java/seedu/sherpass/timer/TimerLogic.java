@@ -91,7 +91,9 @@ public class TimerLogic implements WindowListener {
 
     private void executeCommand(Storage storage, String parsedInput) {
         Command c = Parser.parseCommand(parsedInput, ui);
-        c.execute(taskList, ui, storage);
+        if (c != null) {
+            c.execute(taskList, ui, storage);
+        }
         printAvailableCommands();
     }
 
