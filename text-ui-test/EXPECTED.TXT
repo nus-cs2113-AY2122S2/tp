@@ -17,15 +17,15 @@ Here are all the possible commands:
 1. addproject [Project Name]
 2. deleteproject [Project Name]
 3. changegit [Project Index] [GitHub URL]
-4. opengit [Project Name]
+4. opengit [Project Index]
 5. projdeadline [Project Index] [Date]
 6. tododeadline [Project Index] [Todo Index] [Date]
 7. todo [Project Index] [Description]
 8. mark [Project Index] [Todo Index]
 9. listprojects/listproject
 10. addlanguage [Project Index] [Language]
-11. listlanguages [Project Name]
-12. view [Project Name]
+11. listlanguages [Project Index]
+12. view [Project Index]
 13. exit
 ____________________________________________________________
 What can I help you with next?
@@ -98,7 +98,7 @@ ____________________________________________________________
 ____________________________________________________________
 Execution result: Invalid command format!
 The correct format should be:
-opengit [project_name]
+opengit [project_index]
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
@@ -172,12 +172,12 @@ ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-Execution result: Unsuccessful. The index is a negative number!
+Execution result: Unsuccessful. The index is zero or a negative number!
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________
 ____________________________________________________________
-Execution result:Unsuccessful.The target index is not found in the list.
+Execution result:Unsuccessful. The target index is not found in the list.
 ____________________________________________________________
 What can I help you with next?
 ____________________________________________________________

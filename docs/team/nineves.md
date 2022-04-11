@@ -9,7 +9,7 @@ Given below are my contributions to the project.
 
 ### Summary of Contributions
 #### Code contributed
-[Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=nineves&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
+[Yiying tP code dashboard](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=nineves&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 * Implemented add todo feature.
 * Implemented mark todo as done feature.
 * Implemented customized exceptions.

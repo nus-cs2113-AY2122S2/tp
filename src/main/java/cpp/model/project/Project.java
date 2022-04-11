@@ -99,7 +99,7 @@ public class Project {
      */
     public String getDeadline() {
         if (deadline == null) {
-            return "No deadline specified";
+            return Constants.MESSAGE_NO_DEADLINE;
         }
         return deadline.toString();
     }

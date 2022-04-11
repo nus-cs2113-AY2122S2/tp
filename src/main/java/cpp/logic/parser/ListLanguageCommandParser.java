@@ -1,5 +1,6 @@
 package cpp.logic.parser;
 
+import cpp.logic.commands.OpenGitCommand;
 import cpp.ui.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.ListLanguageCommand;
@@ -21,16 +22,19 @@ public class ListLanguageCommandParser implements CommandParser<ListLanguageComm
     @Override
     public ListLanguageCommand parse(String[] userInput) throws IllegalCommandException {
         assert (userInput != null) : "Cannot list languages for this project.";
-        if (userInput.length < Constants.TWO_ARGUMENTS) {
+        if (userInput.length != Constants.TWO_ARGUMENTS) {
             throw new IllegalCommandException(Constants.MESSAGE_INVALID_LISTLANGUAGE_COMMAND_FORMAT);
         }
-        String projectTitle = getProjectTitle(userInput);
-        return new ListLanguageCommand(projectTitle);
-    }
-
-    private String getProjectTitle(String[] userInput) {
-        String[] splitedName = Arrays.copyOfRange(userInput, 1, userInput.length);
-        return String.join(" ", splitedName);
+        int index;
+        try {
+            index = Integer.parseInt(userInput[1]);
+        } catch (NumberFormatException e) {
+            throw new IllegalCommandException(Constants.INDEX_PARSING_ERROR);
+        }
+        if (index <= 0) {
+            throw new IllegalCommandException(Constants.NEGATIVE_INDEX);
+        }
+        return new ListLanguageCommand(index);
     }
 
 }

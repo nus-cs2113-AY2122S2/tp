@@ -1,7 +1,7 @@
 # Developer Guide
 
 - [Acknowledgements](#acknowledgements)  
-- [Design & Implementation](#design-&-implementation)
+- [Design & Implementation](#design--implementation)
     - [Architecture](#architecture)
 - [Implemented Features](#implemented-features)
   - [Add a Project](#add-a-project)
@@ -9,8 +9,10 @@
   - [Print Project List](#print-project-list)
   - [Todo feature](#todo-feature)
   - [View a Project](#view-a-project)
-  - [Add a Deadline to a Project](#add-a-deadline-to-a-project)
-  - [Add a Deadline to a Todo](#add-a-deadline-to-a-todo)
+  - [Set the Deadline to a Project](#set-the-deadline-to-a-project)
+  - [Set the Deadline to a Todo](#set-the-deadline-to-a-todo)
+  - [Change the GitHub Repo of a Project](#change-the-github-link-of-a-project)
+  - [Open the GitHub Repo of a Project](#open-the-github-link-of-a-project)
 - [Proposed Features](#proposed-features)
   - [Tasks Due Soon Feature](#tasks-due-soon-feature)
 - [Previous project structure](#previous-project-structure)
@@ -23,17 +25,17 @@
 - [Glossary](#glossary)
 - [Non-Functional Requirements](#non-functional-requirements)
 - [Instructions for manual testing](#instructions-for-manual-testing)
-  -[Launch and shutdown](#launch-and-shutdown)
-  -[Adding a project](#adding-a-project)
-  -[Deleting a project](#deleting-a-project)
-  -[Adding todos](#adding-todos)
-  -[Setting project deadline](#setting-project-deadline)
-  -[Changing the GitHub repo](#changing-the-github-repo)
-  -[Opening the GitHub repo](#opening-the-github-repo)
-  -[Setting todo's deadline](#setting-todos-deadline)
-  -[Viewing details of a project](#viewing-details-of-a-project)
-  -[Adding languages to a project](#adding-languages-to-a-project)
-  -[Listing languages of a project](#listing-languages-of-a-project)
+  - [Launch and shutdown](#launch-and-shutdown)
+  - [Adding a project](#adding-a-project)
+  - [Deleting a project](#deleting-a-project)
+  - [Adding todos](#adding-todos)
+  - [Setting project deadline](#setting-project-deadline)
+  - [Changing the GitHub repo](#changing-the-github-repo)
+  - [Opening the GitHub repo](#opening-the-github-repo)
+  - [Setting todo's deadline](#setting-todos-deadline)
+  - [Viewing details of a project](#viewing-details-of-a-project)
+  - [Adding languages to a project](#adding-languages-to-a-project)
+  - [Listing languages of a project](#listing-languages-of-a-project)
 
 
 ## Acknowledgements
@@ -101,7 +103,7 @@ The basic flow of the structure:
 The command to add a project is one example of this structure:
 
 #### Add a Project
-![image info](./UmlDiagrams/addProjectNew.png)
+![image info](./UmlDiagrams/AddProjectNew.png)
 
 **Step1.** After recieving the necessary method call, the `CommandHandler` class will self-call executeCommand with both the list of projects as well as a constructor call to AddProjectCommandParser (and a call to the parse method of AddProjectCommandParser) as its parameters
 
@@ -120,8 +122,21 @@ The command to add a project is one example of this structure:
 Deleting a project will follow nearly the exact same structure; the only difference is that the corresponding Parser and Command objects will be used (`DeleteProjectCommandParser` and `DeleteProjectCommand`)
 
 #### Delete a Project
-![image info](./UmlDiagrams/deleteProjectNew.png)
-*The steps are omitted here as they are the exact same as adding a project, only with the differing class names previously mentioned.
+![image info](./UmlDiagrams/DeleteProjectNew.png)
+
+**Step1.** After recieving the necessary method call, the `CommandHandler` class will self-call executeCommand with both the list of projects as well as a constructor call to DeleteProjectCommandParser (and a call to the parse method of DeleteProjectCommandParser) as its parameters
+
+**Step2.** The DeleteProjectCommandParser object instance is created
+
+**Step3.** The parse method of DeleteProjectCommandParser is called with `commands` (the user input) as its parameter.
+
+**Step4.** DeleteProjectCommandParser will self call its `getProjectTitle` method. This will split the user's input and return the correct name for the project
+
+**Step5.** After returning this projectTitle to itself, `DeleteProjectCommandParser` will call the constructor for a new `DeleteProjectCommand` object
+
+**Step6.** This `DeleteProjectCommand` object will use the newly gathered project name to call the `deleteProjct` command of the `ProjectList` class.
+
+**Step7.** The status of this command completing is returned to `CommandHandler`, and the output is sent to the user.
 
 #### Print Project List
 ![image info](./UmlDiagrams/printProject.png)
@@ -167,8 +182,8 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 
 
-#### Add a Deadline to a Project
-![image info](./UmlDiagrams/AddProjectDeadline.jpg)
+#### Set the Deadline to a Project
+![image info](./UmlDiagrams/ProjectDeadline.jpg)
 
 **Step 1.** When `CommandHandler` receives a user input starting with string “addprojdeadline”, it will create an `AddProjectDeadlineCommandParser` object and call its `parse()` function to parse the user input
 
@@ -178,20 +193,18 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 **Step 4.** `executeCommand()` will call `execute()` method of `AddProjectDeadlineCommand`.
 
-**Step 5.** If the number of arguments is valid, call the projectList’s `addProjectDeadline()` method, with the arguments of title and deadline.
+**Step 5.** If the number of arguments is valid, call the projectList’s `addProjectDeadline()` method, with the arguments of index and deadline.
 
-**Step 6.** We call the `findProjectIndex()` method to find the given project that matches the title provided. If the value indicates that the project does not exist, return immediately and indicate no deadline was added.
+**Step 6.** If the index of the project was found, call that specific Project’s `setDeadline()` method and update the deadline.
 
-**Step 7.** If the index of the project was found, call that specific Project’s `setDeadline()` method and update the deadline.
+**Step 7.** The string deadline is used to build the class object `Deadline`
 
-**Step 8.** The string deadline is used to build the class object `Deadline`
-
-**Step 9.** Inside the constructor it considers 2 types of inputs, a day of the week or a date format of yyyy-mm-dd. If it is a day of the week, it will properly detail next day that day of the week from the current day.
+**Step 8.** Inside the constructor it considers 2 types of inputs, a day of the week or a date format of yyyy-mm-dd. If it is a day of the week, it will properly detail next day that day of the week from the current day.
 
 
 
-#### Add a Deadline to a Todo
-![image info](./UmlDiagrams/AddTodoDeadline.jpg)
+#### Set the Deadline to a Todo
+![image info](./UmlDiagrams/TodoDeadline.jpg)
 
 **Step 1.** When `CommandHandler` receives a user input starting with string “addtododeadline”, it will create an `AddTodoDeadlineCommandParser` object and call its `parse()` function to parse the user input
 
@@ -212,6 +225,40 @@ Given below is an example usage scenario and how View Project behaves at each st
 **Step 9.** Inside the constructor it considers 2 types of inputs, a day of the week or a date format of yyyy-mm-dd. If it is a day of the week, it will properly detail next day that day of the week from the current day.
 
 
+#### Change the GitHub Link of a Project
+![image info](./UmlDiagrams/ChangeGit.png)
+
+**Step 1.** When `CommandHandler` receives a user input starting with string “changegit”, it will create a `ChangeGitHubLinkCommandParser` object and call its `parse()` function to parse the user input
+
+**Step 2.** The project index given by the user is parsed during this process. The `ChangeGitHubCommandParser` will then create a new `ChangeGitHubLinkCommand` object
+
+**Step 3.** This new `ChangeGitHubLinkCommand` is returned back to the `executeCommand` method, which will make a call to the `execute` method of the corresponding command object
+
+**Step 4.** The `getProject` method of `projectList` is called to return the project in question
+
+**Step 5.** The `changeGit` method of `projectList` is called, opening the GitHub URL in the user's primary browser
+
+**Step 6.** The status of this command is returned to the Command Handler. Unsuccessful status will be returned if the user makes an input mistake, or if an assertion error occurs.
+
+**Step 7.** Output is sent to the user.
+
+
+#### Open the GitHub Link of a Project
+![image info](./UmlDiagrams/OpenGit.png)
+
+**Step 1.** When `CommandHandler` receives a user input starting with string “opengit”, it will create a `OpenGitCommandParser` object and call its `parse()` function to parse the user input
+
+**Step 2.** The project index given by the user is parsed during this process. The `OpenGitCommandParser` will then create a new `OpenGitCommand` object
+
+**Step 3.** This new `OpenGitCommand` is returned back to the `executeCommand` method, which will make a call to the `execute` method of the corresponding command object
+
+**Step 4.** The `getProject` method of `projectList` is called to return the project in question
+
+**Step 5.** The `openGit` method of `projectList` is called, opening the GitHub URL in the user's primary browser
+
+**Step 6.** The status of this command is returned to the Command Handler. Unsuccessful status will be returned if the user makes an input mistake, or if an assertion error occurs.
+
+**Step 7.** Output is sent to the user.
 
 ### Proposed Features
 
@@ -232,6 +279,8 @@ The Tasks Due Soon feature makes use of `ProjectList` and `CommandHandler` class
 **Step 5.** `printDueSoon()` then calls `printTodos()` in `ProjectList` and passes in `tasksDue`.
 
 **Step 6.** `printTodos()` iterates through all `Todo`s in `tasksDue` and prints each of them using `Todo`’s `toString()` method.
+
+
 
 
 
@@ -347,7 +396,8 @@ Given below are instructions to test the app manually.
 |`deleteproject non-exist-projects`|when the target project does not exist|There is no such project named non-exist-projects.|
 |`deleteproject newproject`|successful operation|newproject deleted.|  
 
-### Print all projects  
+### Print all projects    
+
 | Command |Test case| Expected Output |  
 |-----------|----------|----------|
 |`listprojects`| when there are projects in the project list)| * The output will list all projects.|
@@ -393,6 +443,7 @@ Given below are instructions to test the app manually.
 
 
 ### Changing the GitHub repo
+
 * Prerequisites: List all projects using command `listprojects`.  
 
 | Command |Test case| Expected Output |  
@@ -401,7 +452,11 @@ Given below are instructions to test the app manually.
 |`changegit 1 https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when the command is valid|The Github Repo for newproject has been changed to: https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html|
 |`changegit 1`|when the url is not entered|Execution result: Invalid command format!<br>The correct format should be:<br>changegit [project_index] [website URL]|
 |`changegit 1 url`|when the url is in invalid format|Please make sure your link begins with the following: http:// or https://|
+<<<<<<< HEAD
 |`changegit -1 https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when project index is a negative number|Execution result: Unsuccessful. The index is not a positive number!|
+=======
+|`changegit -1 https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when project index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
+>>>>>>> df95ef18b5aa627834c22be00b18146a6bde33a9
 |`changegit 1000000000000000000000  https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when project index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
 
 ### Opening the GitHub repo  
@@ -412,7 +467,8 @@ Given below are instructions to test the app manually.
 |`opengit proj`|when target project does not exist|Sorry! There was no project with that name.|
 |`opengit non-exist-projects`|when command is valid|* The repo will be opened.|  
 
-### Setting todo's deadline
+### Setting todo's deadline. 
+
 * Prerequisites: view projects using command `view`.  
 
 | Command |Test case| Expected Output |  
@@ -443,7 +499,8 @@ Given below are instructions to test the app manually.
 |`addlanguage -1 java`|when the target project index is not a positive number|Execution result: Unsuccessful. The index is not a positive number!|
 |`addlanguage 1000000000000000000000 java`|when target index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
 
-### Listing languages of a project
+### Listing languages of a project. 
+
 | Command |Test case| Expected Output |  
 |-----------|----------|----------|
 |`listlanguages`|when command is invalid|Execution result: Invalid command format!<br>The correct format should be:<br>listlanguages [project_name]|

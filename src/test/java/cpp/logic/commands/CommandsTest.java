@@ -73,7 +73,7 @@ public class CommandsTest {
 
     @Test
     public void testViewProject() throws IllegalCommandException {
-        ViewProjectCommand viewProjectCommand = new ViewProjectCommand(PROJECT1NAME);
+        ViewProjectCommand viewProjectCommand = new ViewProjectCommand(1);
         String status = viewProjectCommand.execute(defaultProjectList);
         assertEquals(status, response.viewCommandExecuted());
     }

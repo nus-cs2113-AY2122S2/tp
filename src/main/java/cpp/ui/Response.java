@@ -35,22 +35,21 @@ public class Response {
         System.out.println(count++ + ". addproject [Project Name]");
         System.out.println(count++ + ". deleteproject [Project Name]");
         System.out.println(count++ + ". changegit [Project Index] [GitHub URL]");
-        System.out.println(count++ + ". opengit [Project Name]");
+        System.out.println(count++ + ". opengit [Project Index]");
         System.out.println(count++ + ". projdeadline [Project Index] [Date]");
         System.out.println(count++ + ". tododeadline [Project Index] [Todo Index] [Date]");
         System.out.println(count++ + ". todo [Project Index] [Description]");
         System.out.println(count++ + ". mark [Project Index] [Todo Index]");
         System.out.println(count++ + ". listprojects/listproject");
         System.out.println(count++ + ". addlanguage [Project Index] [Language]");
-        System.out.println(count++ + ". listlanguages [Project Name]");
-        System.out.println(count++ + ". view [Project Name]");
+        System.out.println(count++ + ". listlanguages [Project Index]");
+        System.out.println(count++ + ". view [Project Index]");
         System.out.println(count++ + ". exit");
     }
 
     public static void invalidHelp() {
         System.out.println("Sorry the \"help\" command is only one argument");
     }
-
 
     public static String addProjectSuccessfully(String name) {
         return ("The project " + name + " has been added successfully.");
@@ -72,16 +71,20 @@ public class Response {
         return ("Unsuccessful operation. Please check the target indexes.");
     }
 
-    public static String addLanguageSuccessfully() {
-        return ("Language added");
+    public static String addLanguageSuccessfully(String projectTitle, String language) {
+        return ("Language added to " + projectTitle + ": " + language);
+    }
+
+    public static String addLanguageUnsuccessfully() {
+        return ("Unsuccessful addition of language");
     }
 
     public static String listLanguageSuccessfully() {
         return ("Languages have been listed successfully.");
     }
 
-    public static String addMemberSuccessfully(String memberName) {
-        return ("Member " + memberName + "has been added successfully.");
+    public static String listLanguageUnsuccessfully() {
+        return "ListLanguage command unsuccessful.";
     }
 
     public static String deleteProjectSuccessfully(String projectTitle) {
@@ -100,12 +103,20 @@ public class Response {
         return ("View command has been executed successfully.");
     }
 
-    public static String addProjectDeadlineSuccessfully(String projectTitle, String deadline) {
+    public static String viewCommandUnsuccessfully() {
+        return "Viewing command unsuccessful";
+    }
+
+    public static String projectDeadlineSuccessfully(String projectTitle, String deadline) {
         return "Deadline added to " + projectTitle + ": " + deadline;
     }
 
-    public static String addProjectDeadlineUnsuccessfully() {
-        return "Deadline addition was Unsuccessful.";
+    public static String deadlineUnsuccessfully() {
+        return "Unsuccessful addition of Deadline.";
+    }
+
+    public static String todoDeadlineSuccessfully(String todoDescription, String deadline) {
+        return "Deadline added to " + todoDescription + ": " + deadline;
     }
 
     public static String addGithubLinkSuccessfully(String projectTitle, String githubLink) {
@@ -118,5 +129,13 @@ public class Response {
 
     public static String openGitCommandExecuted() {
         return "Open Git Command Executed";
+    }
+
+    public static String openGitSuccessfully(String projectTitle) {
+        return "Github link opened for " + projectTitle;
+    }
+
+    public static String openGitUnsuccessfully(int projectIndex) {
+        return "Github link was unsuccessful for " + projectIndex;
     }
 }

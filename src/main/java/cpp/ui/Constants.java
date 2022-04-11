@@ -8,18 +8,23 @@ import java.util.Set;
  * Stores Magic Constants.
  */
 public class Constants {
+    public static final String FILEPATH = "./src/data/projectList.txt";
+    public static final String DIRECTORYPATH = "./src/data";
     public static final String SEPARATOR = "____________________________________________________________";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n";
     public static final String NO_COMMAND_ENTERED = "No command is entered.";
-    public static final String NEGATIVE_INDEX = "Unsuccessful. The index is not a positive number!";
+    public static final String NEGATIVE_INDEX = "Unsuccessful. The index is zero or a negative number!";
     public static final String NON_INTEGER_INDEX = "Unsuccessful. The index is not an integer!";
     public static final String INDEX_PARSING_ERROR = "Unsuccessful. Cannot parse the index.\n "
             + "Please check if the index is too large or it is not a number.";
-    public static final String INDEX_OUT_OF_RANGE = "Unsuccessful.The target index is not found in the list.";
+    public static final String INDEX_OUT_OF_RANGE = "Unsuccessful. The target index is not found in the list.";
     public static final String NO_LANGUAGES_ADDED = "No languages have been added to this project.\n";
     public static final String EMPTY_LANGUAGES = "Unsuccessful. The language name cannot be empty.\n";
     public static final String UNKNOWN_COMMAND = "Unknown Command.";
     public static final String INVALID_INDEX = "The entered index is invalid.\n";
+    public static final String MESSAGE_NO_DEADLINE = "No deadline specified";
+    public static final String HTTP = "http://";
+    public static final String HTTPS = "https://";
     public static final String MESSAGE_INVALID_TODO_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
             + "todo [project_index] [todo_description]";
@@ -53,7 +58,7 @@ public class Constants {
             + "http:// or https://";
     public static final String MESSAGE_INVALID_OPENGIT_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
-            + "opengit [project_name]";
+            + "opengit [project_index]";
 
     public static final int PROJECT_NOT_FOUND = -1;
     public static final int TWO_ARGUMENTS = 2;
@@ -69,4 +74,21 @@ public class Constants {
     public static final String SATURDAY = "SATURDAY";
     public static final Set<String> DAYS_OF_THE_WEEK = new HashSet<String>(Arrays.asList(
                 SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY));
+
+    public static final String COMMAND_ADDPROJECT = "addproject";
+    public static final String COMMAND_DELETEPROJECT = "deleteproject";
+    public static final String COMMAND_LISTPROJECT = "listproject";
+    public static final String COMMAND_LISTPROJECTS = "listprojects";
+    public static final String COMMAND_TODO = "todo";
+    public static final String COMMAND_MARK = "mark";
+    public static final String COMMAND_PROJECTDEADLINE = "projdeadline";
+    public static final String COMMAND_TODODEADLINE = "tododeadline";
+    public static final String COMMAND_CHANGEGIT = "changegit";
+    public static final String COMMAND_OPENGIT = "opengit";
+    public static final String COMMAND_VIEW = "view";
+    public static final String COMMAND_ADDLANGUAGE = "addlanguage";
+    public static final String COMMAND_LISTLANGUAGE = "listlanguage";
+    public static final String COMMAND_LISTLANGUAGES = "listlanguages";
+    public static final String COMMAND_HELP = "help";
+
 }
