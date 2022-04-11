@@ -959,7 +959,7 @@ This section includes instructions to test SplitLah manually.
 2. Download the latest .jar version of SplitLah from [here](https://github.com/AY2122S2-CS2113T-T10-1/tp/releases)
 3. Copy the file to the folder you wish to use as a home folder for SplitLah.
 4. Open a terminal and set the working directory to the home folder.
-5. Start SplitLah by executing `java -jar splitlah.jar` in the terminal.
+5. Start SplitLah by executing `java -jar SplitLah.jar` in the terminal.
 6. When SplitLah has successfully launched a welcome message should appear.
    For the first launch, SplitLah should mention that no save files were found and loaded.
 
@@ -1420,13 +1420,13 @@ Test Scenario 2: At least 1 group exists in the application.
 
 **Test Cases:**
 
-Test Scenario 1: splitlah.jar is placed in a location where read and write permissions are given.
+Test Scenario 1: SplitLah.jar is placed in a location where read and write permissions are given.
 1. Test: No save file was found. <br>
    Expected: A new save file should be created when the application launches.
 2. Test: Save file was corrupted. <br>
    Expected: The application should detect it as a corrupted file and create a new save file.
 
-Test Scenario 2: splitlah.jar is placed in a location where read and write permissions are not given. 
+Test Scenario 2: SplitLah.jar is placed in a location where read and write permissions are not given. 
 * Test: No save file was found.<br>
    Expected: An error message should be printed indicating no save file was created and changes made in the run time of the application is not saved.
 
