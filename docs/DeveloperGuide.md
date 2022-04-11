@@ -280,7 +280,7 @@ invokes the`HousekeeperFileManager#save()` method.
 ![Sequence](team/falicia_deleteHousekeeperCommand/sequenceDeleteHousekeeperFinal.jpg)
 
 ### Item Related Commands
-This section showcases how the various item related commands such as Add, Search Item Commands are implemented.
+This section showcases how some of the various item related commands such as Add, Search Item Commands are implemented.
 
 #### Add Item, Delete Item, Update Item Pax, Update Item Name Command
 The Add Item, Delete Item, Update Item Pax, Update Item Name Commands have similiar class and sequence diagrams with the exception of some differing methods for each  command.
@@ -333,13 +333,30 @@ The `Update Item Name` Command is similar to that of the `Add Item` Command with
 3. The `printAddItemAcknowledgementMessage` method is replaced with the `updateItemNameInList` method.
 4. The `Update Item Name` throws an extra exception called `DuplicateItemNameException` if the `oldItemName` is equals to the `newItemName`.
 
-#### Search Item, View All Items, View Items With Zero Pax Commands
+#### Search Item Commands
+Below is the class diagram showcasing how the classes interact with each other when executing the Search Item Command.
+![alt text](team/SiewYangZhi_searchItemCommand/SearchItemCommandClassDiagram.png)
+:information_source: **Note:** : This class diagram omits the details of some classes involved, like the Duke, CommandParser and Command class
 
+Below is the sequence diagram which illustrates the process when an `Search Item` Command `Search Item Toilet Roll` is executed.
+![alt text](team/SiewYangZhi_searchItemCommand/SearchItemCommandSequenceDiagram.png)
+:information_source: **Note:** : This sequence diagram omits some of the more trivial details such as the getters and setters methods involved.
 
+Step 1: The user enters the `Search Item Toilet Roll` command to search for an item in the item list whose item name contains the string `Toilet Roll`. The `parse` method of `CommandParser` is called and the user input `Search Item Toilet Roll` is passed to it.
 
+Step 2: The `parse` method would identify the user input as a Search Item Command as the user input starts with `Search Item`. It would then remove `Search Item` from the user input causing the user input to be just `Toilet Roll`. The `parse` method would then call the constructor of `SearchItemCommand` and pass it `Toilet Roll`.
 
+Step 3:  A `SearchItemCommand` object would be created and it would contain the keyword `Toilet Roll`. The `SearchItemCommand` object would be passed back to the `parse` method of `CommandParser`.
 
+Step 5: The `parse` method would then call the `execute` method of `SearchItemCommand`. The `execute` method would then call the `getItemList` method of the `ListContainer` to get the `Item List` object stored within the `ListContainer`.
 
+Step 6: The `execute` method of `SearchItemCommand` would then call the `findItemsInList` method of the `Item List` object which would return an `Item List` object called listOfMatchingItems to the execute method.
+
+Step 7: The `execute` method would then call the `getSize` method of listOfMatchingItems.
+
+Step 8: If the `getSize` method returns 0 then the `execute` method would call the `printNoItemsFoundInListAcknowledgementMessage` method of the `UI` class which would print a message informing the user that there is no item within the item list whose item name contains their keyword. Step 9 is skipped.
+
+Step 9: If the `getSize` method returns an integer that is not zero then the `execute` method would call the `printItemList` method of the `UI` class which would print out the item name and pax of those items in the item list whose item name contains the keyword.
 
 
 ### check room information by level
