@@ -1,4 +1,4 @@
-# MindMyMoney User Guide
+# MindMyMoney (M<sup>3</sup>) User Guide
 
 ## Content Page
 
