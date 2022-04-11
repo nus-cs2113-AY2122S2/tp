@@ -14,14 +14,12 @@
   * [Viewing](#viewing-view)
   * [Deleting](#deleting-delete)
   * [Editing](#editing-edit)
-  * [Finding](#findingfind)
+  * [Finding](#finding-find)
   * [Additional Features]()
   * [Saving](#saving)
     * [Saved Data](#saving)
     * [Corrupt Files](#corrupt-files)
 * [Future Versions](#future-versions)
-* [Errors](#errors)
-* [FAQ](#faq)
 * [Command Summary](#command-summary)
 
 -----------------------------------------------
