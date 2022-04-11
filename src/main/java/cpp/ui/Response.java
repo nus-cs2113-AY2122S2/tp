@@ -35,15 +35,15 @@ public class Response {
         System.out.println(count++ + ". addproject [Project Name]");
         System.out.println(count++ + ". deleteproject [Project Name]");
         System.out.println(count++ + ". changegit [Project Index] [GitHub URL]");
-        System.out.println(count++ + ". opengit [Project Name]");
+        System.out.println(count++ + ". opengit [Project Index]");
         System.out.println(count++ + ". projdeadline [Project Index] [Date]");
         System.out.println(count++ + ". tododeadline [Project Index] [Todo Index] [Date]");
         System.out.println(count++ + ". todo [Project Index] [Description]");
         System.out.println(count++ + ". mark [Project Index] [Todo Index]");
         System.out.println(count++ + ". listprojects/listproject");
         System.out.println(count++ + ". addlanguage [Project Index] [Language]");
-        System.out.println(count++ + ". listlanguages [Project Name]");
-        System.out.println(count++ + ". view [Project Name]");
+        System.out.println(count++ + ". listlanguages [Project Index]");
+        System.out.println(count++ + ". view [Project Index]");
         System.out.println(count++ + ". exit");
     }
 
@@ -83,6 +83,10 @@ public class Response {
         return ("Languages have been listed successfully.");
     }
 
+    public static String listLanguageUnsuccessfully() {
+        return "ListLanguage command unsuccessful.";
+    }
+
     public static String deleteProjectSuccessfully(String projectTitle) {
         return (projectTitle + " deleted successfully.");
     }
@@ -97,6 +101,10 @@ public class Response {
 
     public static String viewCommandExecuted() {
         return ("View command has been executed successfully.");
+    }
+
+    public static String viewCommandUnsuccessfully() {
+        return "Viewing command unsuccessful";
     }
 
     public static String projectDeadlineSuccessfully(String projectTitle, String deadline) {
@@ -121,5 +129,13 @@ public class Response {
 
     public static String openGitCommandExecuted() {
         return "Open Git Command Executed";
+    }
+
+    public static String openGitSuccessfully(String projectTitle) {
+        return "Github link opened for " + projectTitle;
+    }
+
+    public static String openGitUnsuccessfully(int projectIndex) {
+        return "Github link was unsuccessful for " + projectIndex;
     }
 }

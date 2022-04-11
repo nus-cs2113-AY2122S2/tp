@@ -19,12 +19,20 @@ public class ViewProjectCommandParser implements CommandParser<ViewProjectComman
      */
 
     public ViewProjectCommand parse(String[] userInput) throws IllegalCommandException {
-        if (userInput.length < Constants.TWO_ARGUMENTS) {
-            // TODO: 2022/3/29 need add new format to constants
+        assert (userInput != null) : "Cannot view this project.";
+        if (userInput.length != Constants.TWO_ARGUMENTS) {
             throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
         }
-        String projectTitle = getProjectTitle(userInput);
-        return new ViewProjectCommand(projectTitle);
+        int index;
+        try {
+            index = Integer.parseInt(userInput[1]);
+        } catch (NumberFormatException e) {
+            throw new IllegalCommandException(Constants.INDEX_PARSING_ERROR);
+        }
+        if (index <= 0) {
+            throw new IllegalCommandException(Constants.NEGATIVE_INDEX);
+        }
+        return new ViewProjectCommand(index);
 
     }
 

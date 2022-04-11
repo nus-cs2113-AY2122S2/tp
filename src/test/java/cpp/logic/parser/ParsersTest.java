@@ -116,9 +116,9 @@ public class ParsersTest {
         assertThrows(IllegalCommandException.class, () ->
                 viewProjectCommandParser.parse(input)
         );
-        String[] input2 = new String[3];
+        String[] input2 = new String[2];
         input2[0] = "view";
-        input2[1] = PROJECT1NAME;
+        input2[1] = "1";
         assertNotNull(viewProjectCommandParser.parse(input2));
     }
 
