@@ -75,7 +75,7 @@ Therefore, airlines counter staff need a fast an efficient way to manage the man
 ## User Stories
 
 | Version | As a ...      | I want to ...                       | So that I can ...                                                                     |
-| ------- | ------------- | ----------------------------------- | ------------------------------------------------------------------------------------- |
+|---------|---------------|-------------------------------------|---------------------------------------------------------------------------------------|
 | v1.0    | Counter Staff | Add in flight menu item             | Add menu items available for in-flight meals                                          |
 | v1.0    | Counter Staff | Remove in flight menu item          | Remove menu items that can be reserved for in-flight meals                            |
 | v1.0    | Counter Staff | Find Menu Item by Name              | Find all Menu Items corresponding to a certain name                                   |
