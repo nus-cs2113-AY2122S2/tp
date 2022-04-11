@@ -868,6 +868,10 @@ You can find a summary of all available commands in the [Command Summary](#comma
 Stay tuned to future updates from us!
 <br>
 
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
 <hr>
 
 ## Command Summary
