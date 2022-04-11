@@ -58,9 +58,6 @@ public class Orderline extends Good {
 
     public JSONObject serialize() {
         JSONObject jo = super.serialize();
-        //System.out.println("Serializee orderline");
-        //System.out.println(this.isCheckedOff);
-        //System.out.println(this.quantityFulfilled);
         jo.put(OrderlinesKeys.isCheckedOff, this.isCheckedOff);
         jo.put(OrderlinesKeys.quantityFulfilled, this.quantityFulfilled);
         return jo;

@@ -673,7 +673,7 @@ public class Warehouse {
         // Create JSON Obj
         JSONObject state = this.serialize();
         // Save to file
-        Boolean status = LocalStorage.writeSaveFile(LocalStorage.json2str(state), fp);
+        Boolean status = LocalStorage.writeSaveFile(state.toJSONString(), fp);
         if (!status) {
             Display.warehouseStateNotSaved();
             return false;

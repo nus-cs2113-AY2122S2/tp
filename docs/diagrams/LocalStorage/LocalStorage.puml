@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide empty members
+hide footbox
+skinparam classAttributeIconSize 0
+
+Class LocalStorage {
+    -{static} OUT_DIR:String = "output"
+    -{static} WAREHOUSE_PATH:String = "output/WAREHOUSE.json"
+    +{static} readSaveFile(String filePath) : String
+    +{static} writeSaveFile(String storeStr, String filePath) : Boolean
+}
+
+@enduml
