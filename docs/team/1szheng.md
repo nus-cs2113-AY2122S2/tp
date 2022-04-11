@@ -285,7 +285,10 @@ The following Sequence Diagram shows how the classes of the `Parser` component i
 
 ![ParserOverviewSequenceDiagram](../images/ParserSequenceDiagram0.png)
 
-> :information_source: **Note:** The following are the range of indexes deemed valid:
+> :information_source: **Note:** the `warnIfNotSpacedForwardSlash` function is to be updated in future iterations and
+> currently does not work for forward slashes in the same format as our delimiters in use.
+
+The following are the range of indexes deemed valid:
 
 | Index       | Range                                                                               |
 |-------------|-------------------------------------------------------------------------------------|
