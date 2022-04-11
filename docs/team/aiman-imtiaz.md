@@ -13,7 +13,7 @@ and maintaining the state of checked-in/checked-out rooms.
 
 ### Summary of Contributions
 
-My code contributions to the project can be viewed as here:
+My code contributions to the project can be viewed using the link below.
 
 [Aiman Imtiaz - Reposense](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=aiman-imtiaz&tabRepo=AY2122S2-CS2113-T11-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
@@ -61,13 +61,13 @@ Incidentally, I implemented a generalised command to help the user. I collated a
 
 ```
 ================ Noted! ===================
-I am here to help!
-Given below are the formats commands related to customer satisfaction:
-1. add satisfaction CUSTOMER_NAME / SATISFACTION_RATING
-2. view satisfactions
-3. view average satisfaction
+I am here to help! 
+Given below are the formats commands related to customer satisfaction: 
+	 1. add satisfaction CUSTOMER_NAME / SATISFACTION_RATING 
+	 2. view satisfactions 
+	 3. view average satisfaction 
 ------------------------------------------
-	 For commands related with housekeepers, use following formats: 
+For commands related with housekeepers, use following formats: 
 	 1. add housekeeper NAME / AGE 
 	 2. availability NAME / DAY(S) 
 	 3. view recorded housekeepers 
@@ -79,28 +79,23 @@ Given below are the formats commands related to customer satisfaction:
 	 9. add performance HOUSEKEEPER_NAME / PERFORMANCE_RATING 
 	 10. view performances 
 ------------------------------------------
-For commands related with rooms, use following formats:
-1. check in ROOM_NUMBER
-2. check out ROOM_NUMBER
-3. check room ROOM_NUMBER
-4. check all room
-5. check level LEVEL_NUMBER
-6. check category CATEGORY
+For commands related with rooms, use following formats: 
+	 1. check in ROOM_NUMBER 
+	 2. check out ROOM_NUMBER 
+	 3. check room ROOM_NUMBER 
+	 4. check all room 
+	 5. check level LEVEL_NUMBER 
+	 6. check category CATEGORY 
 ------------------------------------------
 For commands related with inventory, use following formats:  
-1. add item ITEM NAME / PAX
-2. update item pax ITEM NAME / PAX
-3. update item name OLD ITEM NAME / NEW ITEM NAME
-4. delete item NAME
-5. view all items
-6. view items with zero pax
-7. search item KEYWORD
+	 1. add item ITEM NAME / PAX 
+	 2. update item pax ITEM NAME / PAX 
+	 3. update item name OLD ITEM NAME / NEW ITEM NAME 
+	 4. delete item NAME 
+	 5. view all items 
+	 6. view items with zero pax 
+	 7. search item KEYWORD 
 ------------------------------------------
-For commands related with events happening in the hotel, use following formats:
-1. add event DESCRIPTION / DATE
-2. delete event INDEX
-3. view events
-===========================================
 ```
 ### Review Contributions
 
