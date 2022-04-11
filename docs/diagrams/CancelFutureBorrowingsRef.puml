@@ -1,0 +1,32 @@
+@startuml
+
+hide footbox
+
+skinparam PackageBackgroundColor pink
+
+Participant ":CancelFutureBorrowingsCommand" as cancelcmd
+Participant "records:ArrayList<BorrowRecord>" as rmvrcd
+Participant "items:ArrayList<Item>" as itmlst
+Participant "item:Item" as itm
+Participant "itemRecords:ArrayList<borrowRecord>" as itmrcd
+
+group remove record in BorrowRecord
+activate cancelcmd
+cancelcmd -> rmvrcd:get(index)
+activate rmvrcd
+return removeRecord
+
+cancelcmd -> itmlst:get(index)
+activate itmlst
+return item
+
+cancelcmd -> itm:getBorrowRecords()
+activate itm
+return itemRecords
+
+cancelcmd -> itmrcd:remove(removeRecord)
+activate itmrcd
+return
+
+end
+@enduml

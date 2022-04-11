@@ -6,7 +6,7 @@ skinparam sequenceStereotypeFontColor red
 skinparam sequenceStereotypeFontStyle bold
 
 Participant ":InvMgr" as invmgr
-Participant "Parser" as parser <<class>>
+Participant "InputParser" as parser <<class>>
 Participant ":ListCommand" as lstcmd
 Participant "itemList:ItemList" as itmlst
 Participant "ui:Ui" as ui
@@ -18,7 +18,7 @@ invmgr -> parser:parse("list")
 activate parser
 
 create lstcmd
-parser -> lstcmd
+parser -> lstcmd:ListCommand()
 activate lstcmd
 return
 
@@ -38,6 +38,5 @@ loop int i = 0; i < itemList.getSize(); i++
 
 end
 return
-destroy lstcmd
 
 @enduml
