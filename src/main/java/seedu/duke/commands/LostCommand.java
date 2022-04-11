@@ -28,7 +28,7 @@ public class LostCommand extends Command {
     /**
      * Prepares the lost command for execution by extracting the task number of the task to be marked.
      *
-     * @param itemIndex Index of item to be marked as lost
+     * @param itemIndex Index of item to be marked as lost.
      */
     public LostCommand(int itemIndex, int itemQuantity) {
         this.itemIndex = itemIndex;
@@ -46,8 +46,8 @@ public class LostCommand extends Command {
      * Marks an item in ItemList.itemArrayList as list
      * Updates the lost status in the user's item list file in the user's hard disk
      *
-     * @param itemList Manages the user's task list
-     * @param ui Displays messages to the user
+     * @param itemList Manages the user's task list.
+     * @param ui Displays messages to the user.
      */
     @Override
     public void execute(ItemList itemList, Ui ui) throws InvMgrException {
@@ -83,9 +83,9 @@ public class LostCommand extends Command {
      * Returns true if a LostCommand object is the same object compared to another LostCommand object
      * or contains the same attributes as another LostCommand object.
      *
-     * @param o The other LostCommand object to compare to.
+     * @param o The other LostCommand object to compare to..
      * @return True if this LostCommand and another LostCommand
-     *     are the same object or contains the same attributes.
+     * are the same object or contains the same attributes.
      */
     @Override
     public boolean equals(Object o) {
