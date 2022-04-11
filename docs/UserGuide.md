@@ -121,7 +121,9 @@ Listing dishes...
     1. Some Dish                      $1.1
     ----------------------------------------------
     ```
+    
     > And you add `Some Dish` again
+
     ```
     Adding new dish...
     The name of dish: sOme diSH
