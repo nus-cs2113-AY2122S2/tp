@@ -38,7 +38,7 @@ Do not run the program between transition of days (11.59pm to 12.01am). Save you
 
 ### Add an Item: `add`
 
-Adds an item.
+Adds a new item into the inventory list.
 
 **Format:**
 
@@ -56,11 +56,20 @@ Adds an item.
 **Caveats**
 
 * All 3 arguments must be present.
+* Item of `quantity` 0 cannot be added.
 
 **Examples of usage:**
 
 ```
 > add n/Chalkboard q/1 d/Draw using chalk
+```
+
+If there is an item with the same name in the inventory list, you will be told to either edit the item already in the inventory list using the `edit` command, or change the name of the item to be added.
+```
+> add n/Chalkboard q/2 d/Draw more using chalk
+There is already a similar item in the list!
+Use edit command to edit the item's quantity/description instead.
+Or change the name of the item to be more specific.
 ```
 
 ### Search for Items: `search`
@@ -263,17 +272,30 @@ List all items that will be borrowed in the future. You can narrow down the list
 **Examples of usage (Assuming today's date is ***2021-03-18***):**
 ```
 > listfb
-Name of Item: Trolley
+Here is a list of future borrowings:
+1) Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-19 to 2021-03-21
 Borrow Quantity: 5
 
-Name of Item: JBLFlip5
+2) Name of Item: JBLFlip5
 Name of Borrower: John Smith
 Borrow Duration: 2021-03-21 to 2021-03-23
 Borrow Quantity: 1
 
-Name of Item: JBLFlip5
+3) Name of Item: Loudhailer
+Name of Borrower: Sally
+Borrow Duration: 2021-03-29 to 2021-04-01
+Borrow Quantity: 1
+
+> listfb p/Sally
+Here is a list of future borrowings for Sally:
+1) Name of Item: Trolley
+Name of Borrower: Sally
+Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Quantity: 5
+
+2) Name of Item: Loudhailer
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
 Borrow Quantity: 1
@@ -284,19 +306,6 @@ If there are no future borrowings, the `listfb` command will return:
 ```
 > listfb
 There are no future borrowings.
-```
-
-```
-> listfb p/Sally
-Name of Item: Trolley
-Name of Borrower: Sally
-Borrow Duration: 2021-03-19 to 2021-03-30
-Borrow Quantity: 5
-
-Name of Item: JBLFlip5
-Name of Borrower: Sally
-Borrow Duration: 2021-03-29 to 2021-04-01
-Borrow Quantity: 1
 ```
 
 If the person does not exist in the borrowings, the `listfb p/BORROWER_NAME` will return:
@@ -329,17 +338,30 @@ List all items should have been returned but have yet to be. You can narrow down
 
 ```
 > listob
-Name of Item: Trolley
+Here is a list of overdue borrowings:
+1) Name of Item: Trolley
 Name of Borrower: Sally
 Borrow Duration: 2021-03-19 to 2021-03-30
 Borrow Quantity: 5
 
-Name of Item: JBLFlip5
+2) Name of Item: JBLFlip5
 Name of Borrower: John Smith
 Borrow Duration: 2021-03-21 to 2021-03-23
 Borrow Quantity: 1
 
-Name of Item: JBLFlip5
+3) Name of Item: Loudhailer
+Name of Borrower: Sally
+Borrow Duration: 2021-03-29 to 2021-04-01
+Borrow Quantity: 1
+
+> listob p/Sally
+Here is a list of overdue borrowings for Sally:
+1) Name of Item: Trolley
+Name of Borrower: Sally
+Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Quantity: 5
+
+2) Name of Item: Loudhailer
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
 Borrow Quantity: 1
@@ -350,19 +372,6 @@ If there are no overdue borrowings, the `listob` command will return:
 ```
 > listob
 There are no overdue borrowings.
-```
-
-```
-> listob p/Sally
-Name of Item: Trolley
-Name of Borrower: Sally
-Borrow Duration: 2021-03-19 to 2021-03-30
-Borrow Quantity: 5
-
-Name of Item: JBLFlip5
-Name of Borrower: Sally
-Borrow Duration: 2021-03-29 to 2021-04-01
-Borrow Quantity: 1
 ```
 
 If the person does not exist in the borrowings, the `listob p/BORROWER_NAME` will return:
@@ -428,6 +437,13 @@ None.
 **Examples of usage:**
 
 ```
+> list
+Here are the items in your list:
+1.JBLFlip5 | 5
+2.Markers | 3
+3.Whiteboard | 1
+4.Chalkboard | 1
+
 > desc 1
 Name of Item: JBLFlip5
 Description: Waterproof up to 3m, fully charged batteries can last for 5 hours, bluetooth enabled.
@@ -449,7 +465,7 @@ Delete an item by entering the index (1-based indexing).
 
 **Caveats:**
 
-None.
+* `INDEX` needs to be within range (should not exceed the size of the inventory list, which is the number of unique items in the list).
 
 **Examples of usage:**
 
@@ -461,9 +477,12 @@ Here are the items in your list:
 3.Whiteboard | 1
 4.Chalkboard | 1
 
-Enter command: 
 > delete 1
 Paper | 5 has been deleted.
+
+> delete 5
+Sorry, there was an error!
+Error: The index you entered was invalid!
 ```
 
 ### Edit an Item: `edit`
@@ -604,9 +623,23 @@ bye
 
 ## Command Summary
 
-| Action                  | Format                                                   | Examples                                            |
-|-------------------------|----------------------------------------------------------|-----------------------------------------------------|
-| List                    | `list`                                                   ||
-| List current borrowings | `listcb`                                                 ||
-| Borrow                  | `borrow i/INDEX s/START_DATE e/END_DATE p/BORROWER_NAME` | `borrow i/1 s/2021-03-21 e/2021-03-25 p/John Smith` |
-| Description             | `desc INDEX`                                             | `desc 1`                                            |
+| Action                    | Format                                                                                                                                                                                             | Examples                                                                                            |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| Add an Item               | `add n/ITEM_NAME q/QUANTITY d/DESCRIPTION`                                                                                                                                                         | `add n/Chalk q/20 d/For writing on chalkboard`                                                      |
+| Search an Item            | `search [n/NAME] d/DESCRIPTION`<br/>`search n/NAME [d/DESCRIPTION`]                                                                                                                                | `search n/board`<br/>`search d/Draw`<br/>`search n/board d/Draw`<br/>`search d/Draw n/board`        |
+| List                      | `list`                                                                                                                                                                                             | `list`                                                                                              |
+| List Current borrowings   | `listcb [p/BORROWER_NAME]`                                                                                                                                                                         | `listcb`<br/> `listcb p/Sally`                                                                      |
+| List Future borrowings    | `listfb [p/BORROWER_NAME]`                                                                                                                                                                         | `listfb`<br/> `listfb p/Sally`                                                                      |
+| List Overdue borrowings   | `listob [p/BORROWER_NAME]`                                                                                                                                                                         | `listob`<br/> `listob p/Sally`                                                                      |
+| List Available borrowings | `listab s/START_DATE e/END_DATE`                                                                                                                                                                   | `listab s/2022-05-10 e/2022-05-11`                                                                  |
+| Borrow an Item            | `borrow i/INDEX s/START_DATE e/END_DATE p/BORROWER_NAME`                                                                                                                                           | `borrow i/1 s/2022-03-21 e/2022-03-25 p/John Smith`                                                 |
+| Description of an Item    | `desc INDEX`                                                                                                                                                                                       | `desc 1`                                                                                            |
+| Delete an Item            | `delete INDEX`                                                                                                                                                                                     | `delete 1`                                                                                          |
+| Edit an Item              | `edit INDEX n/NAME [q/QUANTITY [r/ + or -]] [d/DESCRIPTION]` </br> `edit INDEX [n/NAME] q/QUANTITY [r/ + or -] [d/DESCRIPTION]` </br> `edit INDEX [n/NAME] [q/QUANTITY [r/ + or -]] d/DESCRIPTION` | `edit 1 n/Pencils` </br> `edit 1 n/Markers q/5 r/ +` </br> `edit 1 q/5 r/- d/To draw on whiteboard` |
+| Cancel a Future Borrowing | `cancel p/BORROWER_NAME i/INDEX`                                                                                                                                                                   | `cancel p/Bob i/1`                                                                                  |
+| Return a Borrowed Item    | `return i/INDEX q/QUANTITY`                                                                                                                                                                        | `return i/1 q/20`                                                                                   |
+| Record Item as Lost       | `lost i/INDEX q/QUANTITY`                                                                                                                                                                          | `lost i/1 q/10`                                                                                     |
+| Help                      | `help`                                                                                                                                                                                             | `help`                                                                                              |
+| Exit                      | `exit`                                                                                                                                                                                             | `exit`                                                                                              |
+
+
