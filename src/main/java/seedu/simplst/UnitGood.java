@@ -81,19 +81,28 @@ public class UnitGood {
     }
 
     public static UnitGood restoreUnitGood(JSONObject jo) {
-        String sku = (String) jo.get(UnitGoodKeys.SKU);
-        String name = (String) jo.get(UnitGoodKeys.name);
-        String description = (String) jo.get(UnitGoodKeys.description);
-        String capacity = (String) jo.get(UnitGoodKeys.capacity);
+        Object sku = jo.get(UnitGoodKeys.SKU);
+        Object name = jo.get(UnitGoodKeys.name);
+        Object description = jo.get(UnitGoodKeys.description);
+        Object capacity = jo.get(UnitGoodKeys.capacity);
+        String desc = "";
+        if (sku == null || name == null || capacity == null){
+            return null;
+        }
+        if(description == null){
+            desc = "";
+        } else {
+            desc = description.toString();
+        }
 //        System.out.println("sku: " + sku);
 //        System.out.println("name: " + name);
 //        System.out.println("description: " + description);
 //        System.out.println("capacity: " + capacity);
         UnitGood ug = new UnitGood(
-                sku,
-                name,
-                description,
-                capacity
+                sku.toString(),
+                name.toString(),
+                desc,
+                capacity.toString()
         );
         return ug;
     }

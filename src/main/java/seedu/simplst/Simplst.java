@@ -16,6 +16,7 @@ public class Simplst {
         if (status) {
             Display.stateRestored();
         } else {
+            Display.warehouseStateNotRestored();
             Display.newLogin();
             w = new Warehouse(1000);
 //            System.out.println("New warehouse created");

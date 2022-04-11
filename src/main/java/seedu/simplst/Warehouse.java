@@ -25,6 +25,7 @@ public class Warehouse {
     private ArrayList<Order> orderLists = new ArrayList<>();
     private HashMap<String, UnitGood> unitGoodHashMap = new HashMap<>();
     private LinkedHashMap<String, Good> goodList = new LinkedHashMap<>();
+
     public Warehouse(Integer capacity) {
         this.totalCapacity = capacity;
     }
@@ -110,7 +111,7 @@ public class Warehouse {
             int id = Integer.parseInt(oid);
             Order order = findOrder(id);
             status = addGoodToOrder(order, sku, qty);
-            if(!status){
+            if (!status) {
                 return false;
             }
             System.out.printf("%s of %s is added to order number %d\n",
@@ -595,7 +596,6 @@ public class Warehouse {
     }
 
 
-
     /**
      * Getting the capacity left in the warehouse.
      *
@@ -653,7 +653,7 @@ public class Warehouse {
         JSONObject state = this.serialize();
         // Save to file
         Boolean status = LocalStorage.writeSaveFile(LocalStorage.json2str(state), fp);
-        if (!status){
+        if (!status) {
             Display.warehouseStateNotSaved();
             return false;
         }
@@ -676,11 +676,14 @@ public class Warehouse {
 
     private Boolean restoreOrders(JSONArray ja) {
         Boolean status = true;
-        for (Object o: ja){
+        for (Object o : ja) {
             JSONObject jo = (JSONObject) o;
             Order restoredOrder = Order.restoreOrder(jo);
+            if (restoredOrder == null){
+                return false;
+            }
             status = this.addOrder(restoredOrder);
-            if (!status){
+            if (!status) {
                 return false;
             }
         }
@@ -702,30 +705,39 @@ public class Warehouse {
 
     private Boolean restoreGoods(JSONObject jo) {
         Boolean status = true;
-        for (Object ko: jo.keySet()){
-            String sku = ko.toString();
+        try {
+            for (Object ko : jo.keySet()) {
+                String sku = ko.toString();
 //            System.out.println("sku: "+ sku);
-            JSONObject jg = (JSONObject) jo.get(ko);
-            UnitGood ug = UnitGood.restoreUnitGood((JSONObject) jg);
-            //Good curGood = Good.restoreGood((JSONObject) jg);
-            status = this.addUnitGoodToInventory(ug);
-            if (!status){
-                return false;
-            }
-//            String qty = String.valueOf(curGood.getQuantity());
-            String qty = ((JSONObject)jg).get(GoodKeys.quantity).toString();
-            try {
-                status = this.addQuantityOfGoodToInventory(ug.getSku(),qty);
-                if (!status){
+                JSONObject jg = (JSONObject) jo.get(ko);
+                UnitGood ug = UnitGood.restoreUnitGood(jg);
+                if (ug==null){
                     return false;
                 }
-            } catch (WrongCommandException e) {
-                e.printStackTrace();
-                return false;
-            } catch (ItemDoesNotExistException e) {
-                e.printStackTrace();
-                return false;
+                status = this.addUnitGoodToInventory(ug);
+                if (!status) {
+                    return false;
+                }
+                Object qtyO = (jg).get(GoodKeys.quantity);
+                if (qtyO == null){
+                    return false;
+                }
+                String qty = qtyO.toString();
+                try {
+                    status = this.addQuantityOfGoodToInventory(ug.getSku(), qty);
+                    if (!status) {
+                        return false;
+                    }
+                } catch (WrongCommandException e) {
+                    e.printStackTrace();
+                    return false;
+                } catch (ItemDoesNotExistException e) {
+                    e.printStackTrace();
+                    return false;
+                }
             }
+        } catch (NullPointerException e) {
+            return false;
         }
         return true;
     }
@@ -776,7 +788,6 @@ public class Warehouse {
         // PARSE
         try {
             JSONObject jWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
-            System.out.println("Parse success");
             boolean status = false;
             //addUnitGoodToInventory
             //Float totalCapacity = Float.parseFloat();

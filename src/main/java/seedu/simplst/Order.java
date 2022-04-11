@@ -177,29 +177,42 @@ public class Order {
 
 
     public static Order restoreOrder(JSONObject jo) {
-        Integer orderId = Integer.parseInt(jo.get(OrderKeys.orderId).toString());
-        String receiver = (String) jo.get(OrderKeys.receiver);
-        String shippingAddress = (String) jo.get(OrderKeys.shippingAddress);
+        Object idO = jo.get(OrderKeys.orderId);
+        Object rO = jo.get(OrderKeys.receiver);
+        Object saO = jo.get(OrderKeys.shippingAddress);
+        Object fO = jo.get(OrderKeys.isFulfilled);
+        Object olO = jo.get(OrderKeys.orderlines);
+        if (idO == null || rO == null || saO == null || fO == null || olO == null){
+            return null;
+        }
+        Integer orderId = Integer.parseInt(idO.toString());
+        String receiver = rO.toString();
+        String shippingAddress = saO.toString();
         Order cur = new Order(
                 orderId,
                 receiver,
                 shippingAddress
         );
-        cur.setFulfilled(Boolean.parseBoolean(jo.get(OrderKeys.isFulfilled).toString()));
-        JSONArray orderLinesJson = (JSONArray) jo.get(OrderKeys.orderlines);
-        orderLinesJson.forEach((item) -> {
-//            System.out.println("item");
-//            System.out.println(item);
+
+        cur.setFulfilled(Boolean.parseBoolean(fO.toString()));
+        JSONArray orderLinesJA = (JSONArray) olO;
+        for (Object item: orderLinesJA){
             JSONObject jol = (JSONObject) item;
             UnitGood ug = UnitGood.restoreUnitGood(jol);
-            String qty = jol.get(GoodKeys.quantity).toString();
+            if (ug == null){
+                return null;
+            }
+            Object qtyO = jol.get(GoodKeys.quantity);
+            if (qtyO == null){
+                return null;
+            }
+            String qty = qtyO.toString();
             try {
                 cur.addOrderline(ug, qty);
             } catch (WrongCommandException e) {
                 e.printStackTrace();
             }
-        });
-
+        }
 
         return cur;
     }

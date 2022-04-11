@@ -119,6 +119,10 @@ public class Display {
         System.out.println("Warehouse information can't save.");
     }
 
+    public static void warehouseStateNotRestored(){
+        System.out.println("Warehouse information can't restore.");
+    }
+
     // exception outputs
     public static void goodDontExistException() {
         System.out.println("This type of Good you are trying to remove does not exist.\n"
