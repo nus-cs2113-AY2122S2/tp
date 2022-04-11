@@ -101,7 +101,7 @@ Here are the items matching your search terms:
 2. Whiteboard | 1 | Draw using mar...
 3. Markers | 1 | To draw
 
-> search d/ Draw
+> search d/ Board
 Here are the items matching your search terms: 
 1. Chalkboard | 1 | Draw using cha...
 2. Whiteboard | 1 | Draw using mar...
@@ -473,17 +473,11 @@ Edit an item by entering the index (1-based indexing). Then, indicate the fields
 
 **Format:**
 
-`edit INDEX n/NAME [q/QUANTITY [r/ +|-]] [d/DESCRIPTION]`
+`edit INDEX n/NAME [q/QUANTITY] [d/DESCRIPTION]`
 
-`edit INDEX [n/NAME] q/QUANTITY [r/ +|-] [d/DESCRIPTION]`
+`edit INDEX [n/NAME] q/QUANTITY [d/DESCRIPTION]`
 
-`edit INDEX [n/NAME] [q/QUANTITY [r/ +|-]] d/DESCRIPTION`
-
-The arguments:
-1. `NAME` - changes the name of an item
-2. `QUANTITY` - changes the quantity of an item. Can be combined with `r/`, see 4.
-3. `DESCRIPTION` - changes the description of an item.
-4. `r/ +|-` (used only with quantity argument) - the Item's quantity will be added or subtracted from the specified quantity. Takes only two values.
+`edit INDEX [n/NAME] [q/QUANTITY] d/DESCRIPTION`
 
 **Arguments:**
 
@@ -492,13 +486,12 @@ The arguments:
 |       -       |     INDEX     |      String      |                              Index of item to edit in the list                              |
 |      n/       |     NAME      |      String      |                                      New name for item                                      |
 |      q/       |   QUANTITY    | Positive Integer |                                    New quantity for item                                    |
-|      r/       |   RELATIVE    |    `+` or `-`    | Will change the quantity relative to the item's current quantity. (`+` adds, `-` subtracts) |
 |      d/       |  DESCRIPTION  |      STRING      |                                  New description for item                                   |
 
 **Caveats:**
 
 * `NAME`, `DESCRIPTION`, and `QUANTITY` should not be empty (At least one present).
-* Using `n/`, `d/`, `q/` and `r/` without any values will result in ignored arguments (`edit 1 n/NAME d/` will only edit name, description will not be considered).
+* Using `n/`, `d/`, and `q/` without any values will result in ignored arguments (`edit 1 n/NAME d/` will only edit name, description will not be considered).
 * Only entered arguments will be considered when editing the values, e.g. specifying `NAME` only will change only the name of the item of interest.
 
 **Examples of usage:**
@@ -512,18 +505,18 @@ Here are the items in your list:
 
 > edit 1 n/Pencils
 Item at index 1 has been modified.
-Before: Markers | 1 | To draw
-After: Pencils | 1 | To draw
+Before: Markers | 3 | To draw
+After: Pencils | 3 | To draw
 
-> edit 1 n/Markers q/5 r/ +
+> edit 1 n/Markers q/5
 Item at index 1 has been modified.
-Before: Pencils | 1 | To draw
-After: Markers | 6 | To draw
+Before: Pencils | 3 | To draw
+After: Markers | 8 | To draw
 
-> edit 1 q/5 r/- d/To draw on whiteboard
+> edit 1 q/5 d/To draw on whiteboard
 Item at index 1 has been modified.
-Before: Markers | 6 | To draw
-After: Markers | 1 | To draw on whi...
+Before: Markers | 8 | To draw
+After: Markers | 13 | To draw on whi...
 ```
 
 ### Cancel a future borrowing: `cancel`
