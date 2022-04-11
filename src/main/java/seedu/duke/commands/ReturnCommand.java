@@ -22,7 +22,7 @@ public class ReturnCommand extends Command {
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n"
             + "[Function] "
             + USAGE_MESSAGE
-            + ":\n"
+            + "\n"
             + "[Command Format] "
             + COMMAND_FORMAT
             + "\n";
@@ -34,7 +34,7 @@ public class ReturnCommand extends Command {
     /**
      * Prepares the return command for execution by extracting the task number of the task to be marked.
      *
-     * @param itemIndex    Index of item to be returned
+     * @param itemIndex Index of item to be returned.
      */
     public ReturnCommand(int itemIndex) {
         this.itemIndex = itemIndex;
@@ -49,10 +49,10 @@ public class ReturnCommand extends Command {
     }
 
     /**
-     * Updates a current borrow record of item in ItemList.itemArrayList as returned
+     * Updates a current borrow record of item in ItemList.itemArrayList as returned.
      *
-     * @param itemList Manages the user's task list
-     * @param ui       Displays messages to the user
+     * @param itemList Manages the user's task list.
+     * @param ui Displays messages to the user.
      */
     @Override
     public void execute(ItemList itemList, Ui ui) throws InvMgrException {
@@ -84,7 +84,7 @@ public class ReturnCommand extends Command {
             }
         }
         if (!isValidReturnRequest) {
-            ui.showMessages(Messages.RETURN_ERROR_MESSAGE);
+            throw new InvMgrException(Messages.RETURN_ERROR_MESSAGE);
         }
     }
 

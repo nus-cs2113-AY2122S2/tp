@@ -43,18 +43,4 @@ public class ParserUtilsTest {
         int actualOutput = ParserUtils.parseQuantity(testInput);
         assertEquals(expectedOutput, actualOutput);
     }
-
-    @Test
-    void parseRelative_validPrefix_throwException() {
-        String testInput = "";
-        assertThrows(InvMgrException.class, () -> ParserUtils.parseRelative(testInput));
-    }
-
-    @Test
-    void parseRelative_validPrefix_returnInt() throws InvMgrException {
-        String testInput = "-";
-        boolean expectedOutput = false;
-        boolean actualOutput = ParserUtils.parseRelative(testInput);
-        assertEquals(expectedOutput, actualOutput);
-    }
 }

@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+skinparam guillemet false
+skinparam sequenceStereotypeFontColor red
+skinparam sequenceStereotypeFontStyle bold
+skinparam SequenceReferenceBackgroundColor pink
+
+Participant ":InvMgr" as invmgr
+Participant "InputParser" as parser <<class>>
+Participant "CancelFutureBorrowingsParser" as cancelparser <<class>>
+Participant ":CancelFutureBorrowingsCommand" as cancelcmd
+Participant "ui:Ui" as ui
+
+activate invmgr
+
+-> invmgr
+invmgr -> parser:parse("cancel p/ABC i/1")
+activate parser
+
+parser -> cancelparser:CancelFutureBorrowingsParser().parse()
+activate cancelparser
+create cancelcmd
+cancelparser -> cancelcmd:CancelFutureBorrowingsCommand(name, index)
+activate cancelcmd
+return
+return
+return inputCommand:CancelFutureBorrowingsCommand
+
+invmgr -> cancelcmd:execute(itemList: ItemList, ui: Ui)
+
+activate cancelcmd
+cancelcmd -> cancelcmd:getBorrowRecords(borrowerName, itemList)
+activate cancelcmd
+return records
+
+cancelcmd -> cancelcmd:getItems(borrowerName, itemList)
+activate cancelcmd
+return items
+
+ref over cancelcmd
+remove record in BorrowRecord
+end ref
+
+cancelcmd -> ui:showMessages()
+activate ui
+return
+return
+
+@enduml
