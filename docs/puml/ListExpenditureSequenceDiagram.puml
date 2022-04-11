@@ -23,11 +23,18 @@ activate C COMMANDS_COLOUR
 C -> C: printExpenditureList()
 activate C COMMANDS_COLOUR
 
-C -> C: expenditureListToString()
+alt listInput.equals("/e")
+C -> C: listString()
 activate C COMMANDS_COLOUR
-
 C --> C: listInString
 deactivate C
+
+else else
+C -> C: listStringWithDate()
+activate C COMMANDS_COLOUR
+C --> C: listInString
+deactivate C
+end
 
 C --> C
 deactivate C
