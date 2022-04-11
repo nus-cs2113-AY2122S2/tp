@@ -9,7 +9,7 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 ## **Code contributed & Enhancement implemented:** [RepoSense link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=wraineflores&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18)
 <br>
 
-| Contribution, Enhancement                | Description                                                   |
+| Contributions & Enhancements             | Description                                                   |
 |------------------------------------------|---------------------------------------------------------------|
 | Created Person                           | This class is is used to base Doctor & Person Classes         |
 | Find Doctor                              | Feature finds a doctor based on a specific parameter          |
@@ -23,7 +23,7 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 
 * Tests examples in the UG to ensure its validity
 
-* Checked every section in UG to know that 
+* Checked every section in UG to know that everything is in order
 
 ## **DG contributions:**
 
@@ -37,8 +37,8 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 
 * Helped maintain issue trackers for our Github
 
-* Help remind our group of possible gaps in our product
-
 * Updating user/developer docs that are not specific to a feature and see a change fits it
+
+* Regularly code reviews teammates' codes for merging into our master
 
 * Before the final release for v2.1, I have checked that all functions work as indicated in our guides

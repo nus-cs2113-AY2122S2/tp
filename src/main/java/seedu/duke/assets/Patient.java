@@ -80,4 +80,13 @@ public class Patient extends Person {
         }
         return returnString;
     }
+
+    public void removeAppointmentDate(String date) {
+        for (int i = 0; i < appointmentDate.size(); i++) {
+            if (appointmentDate.get(i).equals(date)) {
+                appointmentDate.remove(i);
+                break;
+            }
+        }
+    }
 }

@@ -103,6 +103,17 @@ public class AppointmentList extends List {
 
     }
 
+    public String appointmentInformation(String appointmentId) throws NotFoundException {
+        for (int i = 0; i < appointments.size(); i++) {
+            if (appointments.get(i).getAppointmentId().equals(appointmentId)) {
+                String appointmentInfo = appointments.get(i).doctorNric + "," + appointments.get(i).patientNric + ","
+                        + appointments.get(i).appointmentDate;
+                return appointmentInfo;
+            }
+        }
+        throw new NotFoundException("There is no appointment with the given appointment id.\n"
+                + "Please search by patient's nric or doctor's nric to find out the correct id if needed.");
+    }
 
 
 
@@ -255,6 +266,9 @@ public class AppointmentList extends List {
         switch (type) {
         case "P":
             foundAppointments = AppointmentFinder.findAppointmentByPatientNric(appointments, nric);
+            if (foundAppointments == null) {
+                throw new NotFoundException("Patient does not have an appointment today!");
+            }
             for (Appointment a : foundAppointments) {
                 LocalDate appointmentDate = LocalDate.parse(a.appointmentDate);
                 if (appointmentDate.equals(LocalDate.now())) {

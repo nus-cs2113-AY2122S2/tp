@@ -34,7 +34,7 @@ public class UI {
     }
 
     public static void printNewLineSeparator() {
-        System.out.println("-------------------------");
+        System.out.println("--------------------------------------------------------");
     }
 
     public void printGreeting() {
@@ -44,7 +44,7 @@ public class UI {
     }
 
     public void printLogo() {
-        String logo = "------------------------------\n"
+        String logo = "--------------------------------------------------------\n"
                 + "HALPMI";
 
         System.out.println(logo);
@@ -66,7 +66,6 @@ public class UI {
         printEditDoctorMessage();
         printEditPatientMessage();
         printEditMedicineMessage();
-        printEditAppointmentMessage();
         printFindDoctorMessage();
         printFindPatientMessage();
         printFindMedicineMessage();
@@ -233,7 +232,7 @@ public class UI {
         System.out.println("Example 4: find patient /info gender, M");
         System.out.println("Example 5: find patient /info address, 15 King's Avenue");
         System.out.println("Example 6: find patient /info dob, 1999-12-31");
-        System.out.println("Example 7: find patient /info admissiondate, 2021-02-15");
+        System.out.println("Example 7: find patient /info registrationdate, 2021-02-15");
     }
 
     public static void printFindMedicineMessage() {
@@ -372,7 +371,7 @@ public class UI {
 
     public static void printParagraph(String paragraph) {
         String[] arrayOfSentences = paragraph.split("\n");
-        System.out.println("HalpMi: " + arrayOfSentences[0]);
+        System.out.println("Duke: " + arrayOfSentences[0]);
         for (int i = 1; i < arrayOfSentences.length; i++) {
             System.out.print("        ");
             System.out.println(arrayOfSentences[i]);
