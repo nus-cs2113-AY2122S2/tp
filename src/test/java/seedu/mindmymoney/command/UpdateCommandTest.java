@@ -118,7 +118,7 @@ public class UpdateCommandTest {
      */
     @Test
     void updateCreditCardCommand_updateCreditCard_listUpdated() {
-        CreditCard testCreditCard = new CreditCard("DBS", 2, 1000);
+        CreditCard testCreditCard = new CreditCard("UOB", 2, 1000);
         CreditCard newCreditCard = new CreditCard("DBS", 5, 2000);
         User testUser = new User();
         testUser.setCreditCardListArray(new CreditCardList());

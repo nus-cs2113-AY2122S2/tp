@@ -10,8 +10,8 @@ boxBorderColor black
 
 box CalculateInputCommand
 participant ":MMM" as MMM MMM_COLOUR
-participant "Command:CalculateInputCommand" as CalculateInputCommand COMMANDS_COLOUR
-participant ":Calculations" as Calculations USERFINANCIAL_COLOUR
+participant "CommandType:CalculateInputCommand" as CalculateInputCommand COMMANDS_COLOUR
+participant ":Calculations" as Calculations HELPER_COLOUR
 participant ":GeneralFunctions" as GeneralFunctions  HELPER_COLOUR
 end box
 hide footbox
@@ -27,13 +27,13 @@ deactivate GeneralFunctions HELPER_COLOUR
 
 alt contain FLAG_OF_EXPENDITURE_PER_MONTH
 CalculateInputCommand -> Calculations: calculateExpenditure()
-activate Calculations USERFINANCIAL_COLOUR
+activate Calculations HELPER_COLOUR
 Calculations -> GeneralFunctions: findItemInList()
 activate GeneralFunctions HELPER_COLOUR
 GeneralFunctions --> Calculations
 deactivate GeneralFunctions HELPER_COLOUR
 Calculations -> Calculations: displayCalculationBreakdown()
-activate Calculations USERFINANCIAL_COLOUR
+activate Calculations HELPER_COLOUR
 Calculations --> Calculations
 deactivate Calculations HELPER_COLOUR
 Calculations --> CalculateInputCommand
