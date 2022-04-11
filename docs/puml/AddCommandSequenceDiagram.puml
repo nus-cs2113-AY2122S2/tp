@@ -7,6 +7,13 @@ participant "Command:AddCommand" as AddCommand COMMANDS_COLOUR
 end box
 hide footbox
 
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
 MMM -> AddCommand: executeCommand()
 activate AddCommand COMMANDS_COLOUR
 

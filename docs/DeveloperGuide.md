@@ -198,7 +198,7 @@ The Add Command has 3 parts. These parts are differentiated by their flags:
 
 The sequence diagram below shows the interactions when an `AddCommand` is executed.  
 
-![add_command_sequence_diagram](images/Add_Command_Sequence_Diagram.png)  
+![add_command_sequence_diagram](images/AddCommandSequenceDiagram.png)  
 Fig 7 - AddCommand Sequence Diagram  
 
 Below is an example showing how the AddCommand behaves at each step.
@@ -219,7 +219,7 @@ the `AddCommand.addExpenditure()` method, invoked when using the `/e` flag. Addi
 `CATEGORY`, `DESCRIPTION`, `AMOUNT` and `TIME` are also required.
 
 
-![add_expenditure_command_sequence_diagram](images/Add_Expenditure_Command_Sequence_Diagram.png)  
+![add_expenditure_command_sequence_diagram](images/AddExpenditureSequenceDiagram.png)  
 Fig 8 - Add Expenditure Command Sequence Diagram  
 
 The sequence diagram above shows the interactions of different classes when adding an expenditure
@@ -358,10 +358,12 @@ method, invoked when using the `/e` flag.
 The sequence diagram above shows the interactions when listing expenditures.
 1. After receiving the `ListCommand` object from `Parser`, `MMM` calls the `ListCommand.executeCommand()` method.
 2. `ListCommand.printExpenditureList()`method is invoked as the `/e` flag is present.
-3. `ListCommand.expenditureListToString()` method is then invoked, which loops through the `expenditureList` and
-concatenates each expenditure entry into a String `listInString`.
-4. The `listInString` is returned which is then printed out.
-5. Control is returned to `MMM`.
+3. If the optional parameter `{DATE}` is not present, `ListCommand.listString()` method is invoked. This loops through
+`expenditureList` and concatenates each expenditure entry into a String `listInString`.
+4. Else if `{DATE}` is present, `ListCommand.listStringWithDate()` method is invoked. This loops through `expenditureList`
+but only concatenates expenditure entries corresponding to the provided `{DATE}` into `listInString`.
+5. The `listInString` is returned which is then printed out.
+6. Control is returned to `MMM`.
 
 <br/>
 
