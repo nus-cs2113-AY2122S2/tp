@@ -698,9 +698,62 @@ for you to save manually. You can view the saved contents of MindMyMoney by read
 >- To load the backup data into MindMyMoney, copy `data.txt` from the backup folder into the folder containing 
 MindMyMoney, replacing the existing copy of `data.txt`.  
 
+
+If you are experienced in using MindMyMoney, you may wish to directly edit the `data.txt` file. 
+Below is a short description of its format.
+
 > **⚠️Warning⚠️**
->- Do not modify or delete the contents of `data.txt` in your current directory. This may corrupt the data in MindMyMoney.
+>- Be careful when modifying `data.txt` to follow the correct format, since doing so can corrupt the data in MindMyMoney.
+> When in doubt, keep a backup, as stated above. If you are less experienced, you may use the `update` and `add` 
+> commands to edit the data.
 <br/>
+
+`data.txt` must contain the following six lines, in this order:
+
+```
+# BEGIN EXPENDITURES
+# END EXPENDITURES
+# BEGIN CREDIT CARDS
+# END CREDIT CARDS
+# BEGIN INCOME SOURCES
+# END INCOME SOURCES
+```
+
+Each expenditure, credit card, and income is stored in one line between their respective `BEGIN`/`END` lines.
+No line should be left blank.
+
+Each piece of data is stored as a series of `key : value` pairs, separated by spaces. Both `key` and `value`
+are enclosed in quotes. A `\"` in a key or value represents a quotation mark, while a `\\` represents a backslash.
+
+The following are the keys required for each type of data:
+
+- Expenditures contain `amount`, `description`, `paymentMethod`, `time`, and `category` keys.
+- Credit cards contain `totalExpenditure`, `monthlyCardLimit`, `nameOfCard`, and `cashback` keys.
+- Incomes contain `amount` and `category` fields.
+
+Their meanings are the same as in the `add` commands. The `totalExpenditure` key of a credit card
+contains the total amount spent using that credit card.
+
+If a key is missing, MindMyMoney will consider the save file invalid.
+
+Here is an example of a valid save file:
+
+```
+# BEGIN EXPENDITURES
+ "amount": "3.0"  "description": "Commute"  "paymentMethod": "Cash"  "time": "08/03/2022"  "category": "Transport" 
+ "amount": "1.0"  "description": "Mala"  "paymentMethod": "DBS"  "time": "30/03/2022"  "category": "Food" 
+ "amount": "1.0"  "description": "Chicken rice"  "paymentMethod": "DBS"  "time": "30/03/2022"  "category": "Food"
+ "amount": "1.0"  "description": "Katsudon"  "paymentMethod": "Cash"  "time": "07/03/2022"  "category": "Food"
+# END EXPENDITURES
+# BEGIN CREDIT CARDS
+ "totalExpenditure": "2.0"  "monthlyCardLimit": "10000.0"  "nameOfCard": "DBS"  "cashback": "1.0"
+ "totalExpenditure": "0.0"  "monthlyCardLimit": "20000.0"  "nameOfCard": "OCBC"  "cashback": "4.0"
+# END CREDIT CARDS
+# BEGIN INCOME SOURCES
+ "amount": "200"  "category": "Allowance"
+ "amount": "500"  "category": "Investment" 
+# END INCOME SOURCES
+```
 
 ## FAQ
 
