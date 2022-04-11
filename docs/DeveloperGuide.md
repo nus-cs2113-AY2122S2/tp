@@ -546,6 +546,28 @@ The general workflow of the `activity /edit` command is as follows:
 15. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully edited with `TextUi#printlnMessage`.
 
 ### View an activity
+**API reference:** [`ActivityViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityViewCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `activity /view` command.
+<br>
+<br>
+![View Activity Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ActivityViewCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `activity /view` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityViewCommand` object.
+3. `ActivityViewCommand#run` method is invoked to run the `activity /view` command.
+4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
+5. The `ActivityViewCommand` object then runs the `Profile#getSession` method to retrieve the session represented
+   by the session unique identifier provided. 
+6. The `Session` object returned then runs the `Session#getActivity` method to retrieve the activity represented
+   by the activity unique identifier provided.
+     1. If the activity with the requested activity unique identifier does not exist, an error message is printed out with
+       `TextUI#printlnMessage`.
+     2. Else, a `String` object representing the details of the requested activity is retrieved using the
+        `Activity#toString` method and printed out using `TextUI#printlnMessageWithDivider`.
 
 ### List activities
 **API reference:** [`ActivityListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityListCommand.java)
