@@ -12,7 +12,6 @@ import static seedu.meetingjio.commands.ExitCommand.EXIT_COMMAND;
 import static seedu.meetingjio.common.Messages.MESSAGE_DIVIDER;
 import static seedu.meetingjio.common.Messages.LOGO;
 import static seedu.meetingjio.common.Messages.MESSAGE_WELCOME;
-import static seedu.meetingjio.common.Messages.MESSAGE_QUESTION_NAME;
 import static seedu.meetingjio.common.Messages.MESSAGE_HINT;
 import static seedu.meetingjio.common.Messages.MESSAGE_GOODBYE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INIT_FAILED;
