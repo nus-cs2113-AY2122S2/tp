@@ -553,4 +553,76 @@ Manage finances containing multiple payment methods faster than a typical mouse/
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are instructions to test the app manually.
+
+> **💡 Note:**
+>- These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
+
+### Launch and shutdown
+
+1. Initial launch
+   1. Download the jar file, and copy it into an empty folder.
+   2. Open a terminal window whose current directory is that folder, and run `java -jar [FILENAME].jar`,
+           where `[FILENAME].jar` is the name of the jar file.
+           Expected: Outputs a splash screen, with a daily finance tip.
+2. Shutdown
+   1. Enter `bye` to exit the software.
+      Expected: A farewell message is printed, and the software exits gracefully.
+   
+### Adding data
+
+1. Adding expenditure paid with cash
+   1. Test case: `add /e /pm Cash /c Food /d Chicken rice /a 4.50 /t 30/03/2022`
+      Expected: Expenditure added to account. Message displaying summary of new
+      expenditure is displayed.
+   2. Test case: Missing flag, or reordering of `/pm`, `/c`, `/d`, `/a`, `/t`
+      Expected: Add command is rejected, with an appropriate error message.
+   3. Test case: Invalid amount or date (date in incorrect format, future date, non-positive amount, etc.)
+      Expected: Add command is rejected, with an appropriate error message.
+   4. Test case: Other valid category (Transport, Utilities, Personal, Entertainment, Others)
+      (Note: Category is case-insensitive)
+      Expected: Expenditure added to account. Message displaying summary of new
+      expenditure is displayed.
+   5. Test case: Invalid category
+       Expected: Add command is rejected, with an appropriate error message.
+2. Adding credit card
+   1. Test case: `add /cc /n /cc DBS /cb 1.0 /cl 10000`
+      Expected: Credit card added to account. Message displaying summary of new
+      credit card is displayed. 
+   2. Test case: Missing flag, or reordering of `/cc`, `/cb`, or `cl`
+      Expected: Add command is rejected, with an appropriate error message.
+   3. Test case: Cashback not in range [0, 100]
+      Expected: Add command is rejected, with an appropriate error message.
+   4. Test case: Credit card limit is not positive
+      Expected: Add command is rejected, with an appropriate error message.
+   5. Test case: Name is the same as an already existent credit card
+      Expected: Add command is rejected, with an appropriate error message.
+3. Adding income source
+   1. Test case: `add /i /a 200 /c Allowance`
+      Expected: Income source added to account. Message displaying summary of new
+      income source is displayed. 
+   2. Test case: Missing flag, or reordering of `/a` and `c`
+      Expected: Add command is rejected, with an appropriate error message.
+   3. Test case: Other valid category (Salary, Investment, Others)
+      Expected: Income source added to account. Message displaying summary of new
+      income source is displayed.
+   4. Test case: Invalid category 
+      Expected: Add command is rejected, with an appropriate error message.
+   5. Test case: Invalid amount (not a positive integer)
+      Expected: Add command is rejected, with an appropriate error message.
+4. Adding expenditure paid for with credit card
+   1. Prerequisite: A credit card named `DBS` has been added, with an appropriately high
+      credit limit.
+   2. Test case: `add /e /pm DBS /c Personal /d Gift to friend /a 10.00 /t 01/01/2022`
+      Expected: Expenditure added to account. Message displaying summary of new
+      expenditure, along with updated balance of credit card, is displayed.
+   3. Test case: Non-existent credit card
+      Expected: Add command is rejected, with an appropriate error message.
+   4. Test case: Amount exceeding credit card's limit
+      Expected: Add command is rejected, with an appropriate error message.
+
+### Updating and deleting data
+
+### Displaying summary information
+
+### Saving data
