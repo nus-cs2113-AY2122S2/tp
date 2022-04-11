@@ -101,7 +101,7 @@ The basic flow of the structure:
 The command to add a project is one example of this structure:
 
 #### Add a Project
-![image info](./UmlDiagrams/addProjectNew.png)
+![image info](./UmlDiagrams/AddProjectNew.png)
 
 **Step1.** After recieving the necessary method call, the `CommandHandler` class will self-call executeCommand with both the list of projects as well as a constructor call to AddProjectCommandParser (and a call to the parse method of AddProjectCommandParser) as its parameters
 
@@ -120,7 +120,7 @@ The command to add a project is one example of this structure:
 Deleting a project will follow nearly the exact same structure; the only difference is that the corresponding Parser and Command objects will be used (`DeleteProjectCommandParser` and `DeleteProjectCommand`)
 
 #### Delete a Project
-![image info](./UmlDiagrams/deleteProjectNew.png)
+![image info](./UmlDiagrams/DeleteProjectNew.png)
 
 **Step1.** After recieving the necessary method call, the `CommandHandler` class will self-call executeCommand with both the list of projects as well as a constructor call to DeleteProjectCommandParser (and a call to the parse method of DeleteProjectCommandParser) as its parameters
 
@@ -224,7 +224,7 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 
 #### Change the GitHub Link of a Project
-![image info](./UmlDiagrams/ChangeGit.jpg)
+![image info](./UmlDiagrams/ChangeGit.png)
 
 **Step 1.** When `CommandHandler` receives a user input starting with string “changegit”, it will create a `ChangeGitHubLinkCommandParser` object and call its `parse()` function to parse the user input
 
@@ -242,7 +242,7 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 
 #### Open the GitHub Link of a Project
-![image info](./UmlDiagrams/ChangeGit.jpg)
+![image info](./UmlDiagrams/OpenGit.png)
 
 **Step 1.** When `CommandHandler` receives a user input starting with string “opengit”, it will create a `OpenGitCommandParser` object and call its `parse()` function to parse the user input
 
@@ -394,7 +394,8 @@ Given below are instructions to test the app manually.
 |`deleteproject non-exist-projects`|when the target project does not exist|There is no such project named non-exist-projects.|
 |`deleteproject newproject`|successful operation|newproject deleted.|  
 
-### Print all projects  
+### Print all projects    
+
 | Command |Test case| Expected Output |  
 |-----------|----------|----------|
 |`listprojects`| when there are projects in the project list)| * The output will list all projects.|
@@ -440,6 +441,7 @@ Given below are instructions to test the app manually.
 
 
 ### Changing the GitHub repo
+
 * Prerequisites: List all projects using command `listprojects`.  
 
 | Command |Test case| Expected Output |  
@@ -459,7 +461,8 @@ Given below are instructions to test the app manually.
 |`opengit proj`|when target project does not exist|Sorry! There was no project with that name.|
 |`opengit non-exist-projects`|when command is valid|* The repo will be opened.|  
 
-### Setting todo's deadline
+### Setting todo's deadline. 
+
 * Prerequisites: view projects using command `view`.  
 
 | Command |Test case| Expected Output |  
@@ -490,7 +493,8 @@ Given below are instructions to test the app manually.
 |`addlanguage -1 java`|when the target project index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
 |`addlanguage 1000000000000000000000 java`|when target index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
 
-### Listing languages of a project
+### Listing languages of a project. 
+
 | Command |Test case| Expected Output |  
 |-----------|----------|----------|
 |`listlanguages`|when command is invalid|Execution result: Invalid command format!<br>The correct format should be:<br>listlanguages [project_name]|
