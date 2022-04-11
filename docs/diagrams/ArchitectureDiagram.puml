@@ -22,16 +22,16 @@ Main -down[#grey]->Family
 Main -left[#grey]->Commands
 Main -right[#grey]->Storage
 
-Commands -up[COMMAND_COLOR].>UI
-Commands -left[COMMAND_COLOR]->Family
+Commands .up[COMMAND_COLOR].>UI
+Commands -[COMMAND_COLOR]>Family
+Commands .down[COMMAND_COLOR].>Parser
 
-Commands -down[COMMAND_COLOR].>Parser
-
-Family -down[MODEL_COLOR]->Money
+Family -[MODEL_COLOR]->Money
+Family -[MODEL_COLOR].> UI
 
 Storage -left[STORAGE_COLOR]->Family
 Storage -right[STORAGE_COLOR]->File
 
-User ..> Main
+User .D.> Main
 @enduml
 
