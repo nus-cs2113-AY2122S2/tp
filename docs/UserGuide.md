@@ -175,7 +175,7 @@ Format: `view doctor`
 
 Examples: `view doctor`
 
-
+![viewDoctor](photos/viewDoctor.jpg)
 
 #### VIEW PATIENT
 
@@ -186,7 +186,7 @@ Format: `view patient`
 
 Example: `view patient`
 
-![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_VHDNrB/Screenshot 2022-04-11 at 4.19.04 AM.png)
+![viewPatient](photos/viewPatient.jpg)
 
 #### VIEW MEDICINE
 
@@ -197,7 +197,7 @@ Format: `view medicine`
 
 Example: `view medicine`
 
-![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_nSOnp6/Screenshot 2022-04-11 at 4.20.06 AM.png)
+![viewMedicine](photos/viewMedicine.jpg)
 
 #### VIEW APPOINTMENT
 
@@ -208,13 +208,13 @@ Format: `view appointment`
 
 Example: `view appointment`
 
-![](../../Desktop/Screenshot 2022-04-11 at 4.20.39 AM.png)
-
+![viewDAppointment](photos/viewAppointment.jpg)
 
 
 ### Deleting: `delete`
-Allows user to delete existing records of doctors, patients, medicine or appointment. Do note that all delete commands
-are irreversible.
+Allows user to delete existing records of doctors, patients, medicine or appointment.
+
+> :warning:Do note that all delete commands are irreversible.
 
 #### DELETE DOCTOR
 
@@ -224,8 +224,7 @@ additional parameter which is the NRIC of the doctor.
 Format: `delete doctor /info [nric]`
 
 Example: `delete doctor /info S7654321A`
-
-![](../../Desktop/Screenshot 2022-04-11 at 4.30.41 AM.png)
+![deleteDoctor](photos/deleteDoctor.jpg)
 
 #### DELETE PATIENT
 
@@ -236,7 +235,7 @@ Format: `delete patient /info [nric]`
 
 Example: `delete patient /info S1234567A`
 
-![](../../Desktop/Screenshot 2022-04-11 at 4.32.59 AM.png)
+![deletePatient](photos/deletePatient.jpg)
 
 #### DELETE MEDICINE
 
@@ -247,7 +246,7 @@ Format: `delete medicine /info [batch id]`
 
 Example: `delete medicine /info A123`
 
-![](../../Desktop/Screenshot 2022-04-11 at 4.34.21 AM.png)
+![deleteMedicine](photos/deleteMedicine.jpg)
 
 #### DELETE APPOINTMENT
 
@@ -258,7 +257,7 @@ Format: `delete appointment /info [appointment id]`
 
 Example: `delete appointment /info 12356710156543`
 
-![](../../Desktop/Screenshot 2022-04-11 at 4.35.07 AM.png)
+![deleteAppointment](photos/deleteAppointment.jpg)
 
 ### Editing: `edit`
 Allows user to edit existing records of doctors, patients, medicine or appointment. Do note that successful edit
@@ -281,7 +280,7 @@ Format: `edit doctor /info [nric], [name], [age], [gender], [address], [DOB], [S
 
 Example: `edit doctor /info S7654321A, John Doe, 22, M, 12 Baker Street, 1999-12-31, Urinology`
 
-![](../../Desktop/Screenshot 2022-04-11 at 4.48.35 AM.png)
+![editDoctor](photos/editDoctor.jpg)
 
 #### EDIT PATIENT
 
@@ -301,7 +300,7 @@ Format: `edit patient /info [nric], [name], [age], [gender], [address], [DOB], [
 
 Example: `edit patient /info S1234567A, Jammie Doe, 22, F, 14 Baker Street, 1999-12-31, 2021-02-15`
 
-![](../../Desktop/Screenshot 2022-04-11 at 4.40.03 AM.png)
+![editPatient](photos/editPatient.jpg)
 
 #### EDIT MEDICINE
 
@@ -320,28 +319,8 @@ Format: `edit medicine /info [batch id], [name], [dosage], [expiry date], [side 
 
 Example: `edit medicine /info A123, Paracetamol, 1000, 2023-06-11, drowsy, 20`
 
-![](../../Desktop/Screenshot 2022-04-11 at 4.45.26 AM.png)
+![editMedicine](photos/editMedicine.jpg)
 
-#### EDIT APPOINTMENT
-
-To edit an existing appointment in your application you can use the `add appointment` command when prompted by HALPMI for your input.
-To edit an appointment there are some parameters that you would have to provide:
-1. Appointment ID (Must be already on the list)
-2. Patient name
-3. Patient NRIC
-4. Doctor name
-5. Doctor NRIC
-6. Appointment Date
-7. Appointment Details
-
-You will have to follow the formatting given below when calling the command.
-
-Format: `edit appointment /info [appointment id], [patient nric], [patient name], [doctor nric], [doctor name],
-[appointment date], [appointment details]`
-
-Example: `edit appointment /info 12356710156543, S1234567A, Jamie, S7654321A, John, 2022-10-15, Knee checkup followup`
-
-![](../../Desktop/Screenshot 2022-04-11 at 4.51.38 AM.png)
 
 ### Finding: `find`
 Allows user to find existing records of doctors, patients and medicine.
@@ -369,7 +348,7 @@ Example 5: `find doctor /info address, 10 BAKER STREET` <br>
 Example 6: `find doctor /info dob, 1999-12-31` <br>
 Example 7: `find doctor /info specialization, Urinology`
 
-![](../../Desktop/Screenshot 2022-04-11 at 4.53.07 AM.png)
+![findDoctor](photos/findDoctor.jpg)
 
 #### FIND PATIENT
 
@@ -395,7 +374,7 @@ Example 5: `find patient /info address, 10 BAKER STREET` <br>
 Example 6: `find patient /info dob, 1999-12-31` <br>
 Example 7: `find patient /info registrationdate, 2021-02-15` <br>
 
-![](../../Desktop/Screenshot 2022-04-11 at 4.54.23 AM.png)
+![findPatient](photos/findPatient.jpg)
 
 #### FIND MEDICINE
 
@@ -418,7 +397,7 @@ Example 4: `find medicine /info expiry, 2023-06-11` <br>
 Example 5: `find medicine /info sideeffects, DROWSY` <br>
 Example 6: `find medicine /info quantity, 10`
 
-![](../../Desktop/Screenshot 2022-04-11 at 4.55.31 AM.png)
+![findMedicine](photos/findMedicine.jpg)
 
 #### FIND APPOINTMENT
 
