@@ -8,6 +8,7 @@ import static seedu.duke.utils.ParserTestUtils.assertParseFailure;
 import static seedu.duke.utils.ParserTestUtils.assertParseSuccess;
 
 public class EditCommandParserTest {
+
     private EditCommandParser parser = new EditCommandParser();
 
     @Test

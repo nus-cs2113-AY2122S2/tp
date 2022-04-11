@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ItemList {
 
-    private static List<Item> itemArrayList;
+    private List<Item> itemArrayList;
 
     public ItemList(List<Item> itemList) {
         this.itemArrayList = itemList;
@@ -24,7 +24,7 @@ public class ItemList {
         return this.itemArrayList.get(index);
     }
 
-    public static int getSize() {
+    public int getSize() {
         return itemArrayList.size();
     }
 
@@ -41,7 +41,7 @@ public class ItemList {
      * by the itemIndex.
      *
      * @param itemIndex A legal item index on the itemArrayList. Zero-based indexing.
-     * @param newRecord A borrow record
+     * @param newRecord A borrow record.
      * @return The item that has been added with the new borrow record.
      */
     public Item addBorrowRecord(int itemIndex, BorrowRecord newRecord) throws InvMgrException {
@@ -49,6 +49,12 @@ public class ItemList {
         return item;
     }
 
+    /**
+     * Used to check for equality between two ItemLists.
+     *
+     * @param other the object to compare against.
+     * @return true if equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         ItemList toCompare;
@@ -59,7 +65,7 @@ public class ItemList {
         if (other instanceof ItemList) {
             // cast only if other is instance of EditCommand
             toCompare = (ItemList) other;
-            return this.itemArrayList.equals(toCompare.itemArrayList);
+            return this.itemArrayList.containsAll(toCompare.itemArrayList);
         } else {
             // null, or object not EditCommand
             return false;

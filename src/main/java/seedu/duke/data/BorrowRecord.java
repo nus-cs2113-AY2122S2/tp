@@ -60,6 +60,10 @@ public class BorrowRecord {
         this.endDate = LocalDate.now();
     }
 
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
     public boolean getReturnStatus() {
         return isReturned;
     }

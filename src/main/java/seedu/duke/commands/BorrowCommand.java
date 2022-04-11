@@ -41,13 +41,7 @@ public class BorrowCommand extends Command {
         if (itemIndex > itemList.getSize() - 1) {
             throw new InvMgrException(Messages.INVALID_INDEX);
         }
-
-        // If item is lost, can't be borrowed.
         Item item = itemList.getItem(itemIndex);
-        if (item.getLost()) {
-            throw new InvMgrException(Messages.INVALID_BORROW_LOST_ITEM);
-        }
-
         // Create a new borrow record and add to item
         BorrowRecord newRecord = new BorrowRecord(quantity, startDate, endDate, borrowerName);
         item.addBorrowRecord(newRecord);

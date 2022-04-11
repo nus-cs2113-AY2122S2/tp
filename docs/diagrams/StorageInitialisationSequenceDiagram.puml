@@ -8,9 +8,9 @@ participant "storage:Storage" as Storage
 
 activate InvMgr
     create Storage
-    InvMgr -> Storage : Storage(filePath)
+    InvMgr -> Storage : Storage(filePath: String)
     activate Storage
-        Storage -> Storage : validatePathExists(filePath)
+        Storage -> Storage : validatePathExists(filePath: String)
         activate Storage
         return dataPath: Path
     return
