@@ -663,8 +663,8 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 <hr>
 
 ### Creating a group: `group /create`
-Creates a new group consisting of a group of individuals. You can use this group whenever creating a new session that
-involves the same group of individuals. This saves you time when entering the list of participants for a session.
+Creates a new group consisting of a group of individuals. You can use this group whenever you are creating a new session
+that involves the same group of individuals. This saves you time when entering the list of participants for the session.
 
 > Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
 >
