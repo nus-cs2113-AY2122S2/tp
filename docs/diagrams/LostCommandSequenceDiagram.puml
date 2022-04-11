@@ -1,0 +1,59 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+skinparam dpi 300
+skinparam guillemet false
+skinparam sequenceStereotypeFontColor red
+skinparam sequenceStereotypeFontStyle bold
+
+Participant ":InvMgr" as invmgr
+Participant "Parser" as parser <<class>>
+Participant "LostCommandParser" as LostCommandParser <<class>>
+Participant "inputCommand:LostCommand" as cmd
+
+Participant "itemList:ItemList" as list
+Participant "ui:Ui" as ui
+
+activate invmgr
+
+-> invmgr
+invmgr -> parser:parse("lost i/1")
+activate parser
+
+parser -> LostCommandParser: parse( " i/1")
+activate LostCommandParser
+create cmd
+LostCommandParser -> cmd:LostCommand(itemIndex: Integer)
+activate cmd
+return :LostCommand
+return :LostCommand
+return inputCommand:LostCommand
+
+invmgr -> cmd:execute(itemList: ItemList, ui: Ui)
+activate cmd
+
+cmd -> cmd:checkItemListSize()
+activate cmd
+cmd -> list: getSize()
+activate list
+return :Integer
+return :boolean
+
+cmd -> list: getItem(itemIndex: Integer)
+activate list
+return lostItem: Item
+
+cmd -> list: removeItem(itemIndex: Integer)
+activate list
+return
+
+cmd -> ui: showMessages(lostItem + "has been deleted.")
+activate ui
+return
+cmd -> ui: showMessages(Messages.REPORTED_LOST_AND_DELETED_MESSAGE)
+activate ui
+return
+
+return
+@enduml

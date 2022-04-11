@@ -166,6 +166,18 @@ The above diagram shows the sequence diagram for retrieving the description of a
 
 For a user who is unaware of what an item is about, he/she can enter the command eg. `desc 2` command to extract the description for the second item in the inventory list. This command is interpreted by the `Parser` and a `DescCommand` is returned to `InvMgr`. `InvMgr` calls the execute command of `DescCommand` which retrieves the item's information from the `ItemList` and then outputs them into the `Ui` for the user to see.
 
+### Help Command
+
+![HelpCommandSequenceDiagram](img/HelpCommandSequenceDiagram.png)
+
+The above diagram shows the sequence diagram for displaying the help menu. The help menu contains a list of all functions of Inventory Manager, as well as their function and syntax for calling them. 
+<br> For a user who is unfamiliar with Inventory Manager, this help menu will enable the user to utilise Inventory Manager to its full capabilities.  
+<br> The user starts by typing the `help` command. 
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. parse()` generates a new `HelpCommand` which is returned to the `run()` method of `InvMgr`.
+3. The `run()` method calls on the `execute()` function in `HelpCommand`.
+4. The `execute()` function calls `showMesages()`, taking in each Command class' help message as the argument and displaying them to the user.
 
 ### Delete Command
 ![DeleteCommandSequenceDiagram](img/DeleteCommandSequenceDiagram.png)
@@ -179,6 +191,65 @@ The user starts by typing an add command. The example used in the diagram above 
 3. `parse()` generates a new `AddCommand` using the index which is returned to the `run()` method.
 4. The `run()` method calls on the `execute()` function in the `DeleteCommand` which will delete the item with that index from the `ItemList` using its `removeItem()` method.
 5. `DeleteCommand` will converse with `Ui` to show a message that the item has been removed. In this case, the item to add will be printed as the name of the item, followed by " has been deleted.".
+
+### Return Command
+
+![ReturnCommandSequenceDiagram](img/ReturnCommandSequenceDiagram.png)
+
+The above diagram shows the sequence diagram of Return command, which allows users to return an item that is either overdue or currently on loan.
+
+The user starts by typing a return command. The diagram above uses the example of a user who wishes to mark an item of index `1` as returned. The full return command is `return i/1`.
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, which then calls the `parse()` method in `ReturnCommandParser`.
+2. `ReturnCommandParser` parses the user input into `itemIndex`, and returns a `ReturnCommand` object that is returned to `InputParser` and then `InvMgr`.
+3. The `run()` method calls on the `execute()` function in `ReturnCommand`.
+4. The `execute()` function calls `checkItemListSize()`, which then calls `getSize()` to check if the item list is empty. If it is, an exception is thrown and return cannot be performed. 
+5. Then, it calls `getItem()` to check if the item index is within range. If it is not, an exception is thrown and return cannot be performed. 
+6. Then, it obtains the item's borrow records by calling `getBorrowRecords()` from `Item`.
+7. Each borrow record is iterated over and its borrow status and return status are obtained using `getBorrowStatus()` and `getReturnStatus()` respectively.
+8. A borrow record is considered overdue if its borrow status is past and its return status is false, while a borrow record is outstanding if its borrow status is present and its return status is false.
+   If a borrow record is either overdue or outstanding, then it is marked as returned using `setReturnStatus`. The end date of the borrow record is changed to the day of return using `setEndDate()`. 
+   `ReturnCommand` then converses with `Ui` to show the successful returned message.
+9. If none of the borrow records are overdue or outstanding, then it is taken to be an invalid return request. In this scenario, `ReturnCommand` throws an exception.
+
+**Error handling**
+
+`ReturnCommandParser` throws/handles exceptions in the following situations:
+1. When the user enters a command without any item index (missing `i/ `). This is done in `ReturnCommandParser`.
+2. When the user enters an invalid item index (item index < 0). This is done in `ReturnCommandParser`.
+3. When the user enters an invalid item index (item index is not an integer). This is done in `ReturnCommandParser`.
+
+`ReturnCommand` throws/handles exceptions in the following situations: 
+1. When the user enters an item index that is out of range (> total number of items in inventory).
+2. When the user tries to return an item but the inventory is empty. 
+3. When there are no items that are overdue or currently on loan and hence no items are due to be returned.
+
+### Lost Command
+
+![LostCommandSequenceDiagram](img/LostCommandSequenceDiagram.png)
+
+The above diagram shows the sequence diagram of Lost command, which allows users to mark an item as missing and update the inventory accordingly.
+
+The user starts by typing a lost command. The diagram above uses the example of a user who wishes to mark `10` quantities of an item of index `1` as lost. The full return command is `lost i/1 q/10`.
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, which then calls the `parse()` method in `LostCommandParser`.
+2. `LostCommandParser` parses the user input into `itemIndex`, and returns a `LostCommand` object that is returned to `InputParser` and then `InvMgr`.
+3. The `run()` method calls on the `execute()` function in `LostCommand`.
+4. The `execute()` function calls `checkItemListSize()`, which then calls `getSize()` to check if the item list is empty. If it is, an exception is thrown and no items can be marked as lost.
+5. Then, it calls `getItem()` to check if the item index is within range. If it is not, an exception is thrown and lost cannot be performed.
+6. `removeItem(itemIndex: Integer)` is called to remove the item from the item list. Then, `showMessages(lostItem + "has been deleted")` is called to display a message that tells the user that the item has been deleted. 
+7. `showMessages(Messages.REPORTED_LOST_AND_DELETED` is called to tell the user that the item has been reported lost and deleted from the inventory.
+
+**Error handling**
+
+`LostCommandParser` throws/handles exceptions in the following situations:
+1. When the user enters a command without any item index (missing `i/ `). This is done in `ReturnCommandParser`.
+2. When the user enters an invalid item index (item index < 0). This is done in `ReturnCommandParser`.
+3. When the user enters an invalid item index (item index is not an integer). This is done in `ReturnCommandParser`.
+
+`LostCommand` throws/handles exceptions in the following situations:
+1. When the user enters an item index that is out of range (> total number of items in inventory).
+2. When the user tries to report an item as lost but the inventory is empty.
 
 ### List Command
 
