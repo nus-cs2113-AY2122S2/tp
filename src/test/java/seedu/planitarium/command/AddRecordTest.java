@@ -54,16 +54,7 @@ public class AddRecordTest {
         try {
             initialize();
             addRec = new AddRecordCommand(CommandsForTesting.ADDINCOME3, family);
-            fail();
-        } catch (PlanITariumException e) {
-            assertEquals(e.toString(), INVALID_IMONEY_MSG2);
-        } catch (Exception e) {
-            fail();
-        }
-
-        try {
-            initialize();
-            addRec = new AddRecordCommand(CommandsForTesting.ADDINCOME4, family);
+            addRec.execute();
             fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_IMONEY_MSG);
@@ -73,7 +64,19 @@ public class AddRecordTest {
 
         try {
             initialize();
+            addRec = new AddRecordCommand(CommandsForTesting.ADDINCOME4, family);
+            addRec.execute();
+            fail();
+        } catch (PlanITariumException e) {
+            assertEquals(e.toString(), INVALID_IMONEY_MSG2);
+        } catch (Exception e) {
+            fail();
+        }
+
+        try {
+            initialize();
             addRec = new AddRecordCommand(CommandsForTesting.ADDEXPEND2, family);
+            addRec.execute();
             fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_EMONEY_MSG);
@@ -96,7 +99,7 @@ public class AddRecordTest {
     }
 
     @Test
-    void find_invalidDes_fail() {
+    void addRec_invalidDes_fail() {
         try {
             initialize();
             addIn = new AddRecordCommand(CommandsForTesting.ADDINCOME6, family);
@@ -109,10 +112,11 @@ public class AddRecordTest {
     }
 
     @Test
-    void find_invalidCatInx_fail() {
+    void addRec_invalidCatInx_fail() {
         try {
             initialize();
             addOut = new AddRecordCommand(CommandsForTesting.ADDEXPEND3, family);
+            addOut.execute();
             fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_CAT_MSG);

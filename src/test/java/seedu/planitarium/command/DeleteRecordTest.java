@@ -16,7 +16,7 @@ public class DeleteRecordTest {
     protected static final String INVALID_GROUPINX_ERROR_MSG =
             "Unknown error is detected from 'Empty string after `/g`', please check again.";
     protected static final String INVALID_RECINX_MSG1 =
-            "Unknown error is detected from 'Invalid income index `3`', please check again.";
+            "Unknown error is detected from 'Invalid income index `0`', please check again.";
     protected static final String INVALID_RECINX_MSG2 =
             "Unknown error is detected from 'Invalid expenditure index `0`', please check again.";
 
@@ -65,6 +65,7 @@ public class DeleteRecordTest {
         try {
             initialize();
             deleteIn = new DeleteRecordCommand(CommandsForTesting.DELETEINCOME2, family);
+            deleteIn.execute();
             fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_RECINX_MSG1);
@@ -75,6 +76,7 @@ public class DeleteRecordTest {
         try {
             initialize();
             deleteOut = new DeleteRecordCommand(CommandsForTesting.DELETEEXPEND2, family);
+            deleteOut.execute();
             fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_RECINX_MSG2);

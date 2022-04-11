@@ -43,7 +43,7 @@ public class EditRecordTest {
     }
 
     @Test
-    void deleteRec_invalidUid_fail() {
+    void editRec_invalidUid_fail() {
         try {
             initialize();
             editIn = new EditRecordCommand(CommandsForTesting.EDITINCOME6, family);
@@ -56,7 +56,7 @@ public class EditRecordTest {
     }
 
     @Test
-    void deleteRec_invalidGroupInx_fail() {
+    void editRec_invalidGroupInx_fail() {
         try {
             initialize();
             editIn = new EditRecordCommand(CommandsForTesting.EDITINCOME2, family);
@@ -69,7 +69,7 @@ public class EditRecordTest {
     }
 
     @Test
-    void find_invalidDes_fail() {
+    void editRec_invalidDes_fail() {
         try {
             initialize();
             editIn = new EditRecordCommand(CommandsForTesting.EDITINCOME5, family);
@@ -82,10 +82,11 @@ public class EditRecordTest {
     }
 
     @Test
-    void deleteRec_invalidRecInx_fail() {
+    void editRec_invalidRecInx_fail() {
         try {
             initialize();
             editIn = new EditRecordCommand(CommandsForTesting.EDITINCOME3, family);
+            editIn.execute();
             fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_RECINX_MSG1);
@@ -96,6 +97,7 @@ public class EditRecordTest {
         try {
             initialize();
             editOut = new EditRecordCommand(CommandsForTesting.EDITEXPEND2, family);
+            editOut.execute();
             fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_RECINX_MSG2);
@@ -105,10 +107,11 @@ public class EditRecordTest {
     }
 
     @Test
-    void addIncome_invalidMoney_fail() {
+    void editIncome_invalidMoney_fail() {
         try {
             initialize();
             editIn = new EditRecordCommand(CommandsForTesting.EDITINCOME4, family);
+            editIn.execute();
             fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_IMONEY_MSG);
@@ -119,6 +122,7 @@ public class EditRecordTest {
         try {
             initialize();
             editOut = new EditRecordCommand(CommandsForTesting.EDITEXPEND3, family);
+            editOut.execute();
             fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_EMONEY_MSG);
@@ -133,6 +137,7 @@ public class EditRecordTest {
         try {
             initialize();
             editOut = new EditRecordCommand(CommandsForTesting.EDITEXPEND4, family);
+            editOut.execute();
             fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_CATINX_MSG);
