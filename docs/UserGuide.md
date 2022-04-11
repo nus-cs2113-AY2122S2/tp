@@ -36,16 +36,16 @@
 
 ### MindMyMoney
 
-`MindMyMoney` (M<sup>3</sup>) is a desktop app for managing your personal finances, optimized for use via a Command Line
+`MindMyMoney` (M<sup>3</sup>) is a desktop application for managing your personal finances, optimized for use via a Command Line
 Interface (CLI). You can use it to track your expenditures across multiple payment methods, calculate monthly
-expenditure, and set financial goals. If you are a student looking to manage your personal finances, this app is for
+expenditure, and set financial goals. If you are a student looking to manage your personal finances, this application is for
 you!
 
 ### Using the User Guide
 
 This guide aims to equip you with the knowledge on how to set up the application and to utilise its many features. Click
 on the hyperlinks in the [Content Page](#content-page) to quickly navigate the user guide! Along the guide you may
-encounter several icons. These icons will provide several useful information.
+encounter several icons. These icons will provide you with several useful information.
 > **💡 Note:**
 >- This tells you that there is additional information that is useful when you are using the application.
 
@@ -88,7 +88,7 @@ What can I do for you?
       Updates the first expenditure on your expenditure list to reflect a $4.50 expenditure of the description 'Chicken
       Rice' that was paid in cash on 12 March 2022.
     * **`delete`**`/e 1` : Deletes the first expenditure in your expenditure list.
-    * **`bye`** : Exits the app.
+    * **`bye`** : Exits the application.
 
 6. Refer to the [Features](#features) for more details of each command.
 
