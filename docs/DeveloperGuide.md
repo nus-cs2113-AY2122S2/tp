@@ -644,6 +644,40 @@ The general workflow of the `group /delete` command is as follows:
 8. The `GroupDeleteCommand` class then prints a message indicating that a group has been successfully deleted.
 
 ### Edit a group
+**API reference:** [`GroupEditCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupEditCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `group /edit` command.
+<br>
+<br>
+![Edit Group Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupEditCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `group /edit` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupEditCommand` object.
+3. The `GroupEditCommand#run` method is invoked to run the `group /edit` command.
+4. The list of Groups are stored in a `Profile` object, hence `Manager#getProfile` is called
+   before the list of groups can be retrieved.
+5. Once the `Profile` object is returned, `Profile#getGroup` is called to retrieve the `Group` object with the specified
+   group unique identifier from the list of groups.
+    * If a `Group` object with the specified group unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
+    * Else, the `Group` object with the specified group unique identifier is returned.
+6. The details of how a group is updated are displayed in the reference diagram below.<br>
+![Reference Frame Update Group Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateGroup.png)
+7. `GroupEditCommand#run` checks if there is an update for a new group name, or a new list of persons.
+    *`GroupEditCommand#existingGroupWithTheSameName` method is called to check if the provided group name already exists in the list of groups.
+       * If the provided group name exists within the list of groups, an exception is thrown, an error message is printed.
+       * Else, the provided group name is returned to be used as the updated name for the group.
+    * It checks if there is update for the provided list of persons.
+       * `PersonList#hasNameDuplicates` is called to check for duplicate names within the provided list of persons.
+          * If duplicated names are detected, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+          * Else, it calls `PersonList#isSamePersonList` to check if the newly supplied list of persons is exactly the same as the old list.
+             * If `PersonList#isSamePersonList` returns `true`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+             * Else, a new `PersonList` object to be stored is created to be used as the updated list of persons.
+9. After the group is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
+10. The `GroupEditCommand` class then prints a message indicating that a group has been successfully edited.
+
 
 ### View a group
 **API reference:** [`GroupViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
