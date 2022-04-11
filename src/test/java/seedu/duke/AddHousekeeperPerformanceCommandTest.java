@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import seedu.duke.command.Command;
 import seedu.duke.command.housekeepercommands.AddHousekeeperPerformanceCommand;
-import seedu.duke.exceptions.EmptyHousekeeperPerformanceRatingException;
 import seedu.duke.exceptions.EmptyHousekeeperPerformanceNameException;
 import seedu.duke.exceptions.InvalidHousekeeperPerformanceRatingException;
 import seedu.duke.exceptions.InvalidHousekeeperPerformanceNameException;
 import seedu.duke.exceptions.InvalidCommandException;
+import seedu.duke.exceptions.DuplicateCommandException;
 import seedu.duke.housekeeperperformancelists.HousekeeperPerformance;
 
 /**
@@ -58,5 +58,11 @@ public class AddHousekeeperPerformanceCommandTest {
     public void commandParser_addCommandWithHousekeeperPerformanceName_exceptionThrown() {
         assertThrows(InvalidHousekeeperPerformanceNameException.class, ()
             -> new CommandParser().parse("add performance Steve the 3rd / 2"));
+    }
+
+    @Test
+    public void commandParser_addCommandWithDuplicatePerformanceCommands_exceptionThrown() {
+        assertThrows(DuplicateCommandException.class, ()
+            -> new CommandParser().parse("add performance add performance Steve / 2"));
     }
 }

@@ -104,4 +104,6 @@ public class SatisfactionList {
     public void clearSatisfactionList() {
         satisfactionList.clear();
     }
+
+
 }

@@ -179,4 +179,8 @@ public class HousekeeperList {
             throw new UserDoesNotExistException();
         }
     }
+
+    public void clearHousekeeperList() {
+        housekeeperList.clear();
+    }
 }
