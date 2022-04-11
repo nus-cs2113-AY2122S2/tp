@@ -197,7 +197,8 @@ public class Validator {
         }
     }
 
-    /* Validate medicine */
+    // Validate medicine
+    
     public static void validateMedicine(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 6);
         assert parameters.length == 6 : "Validate failed to check parameter length";
@@ -206,7 +207,9 @@ public class Validator {
         validateExpiry(parameters[3]);
         validateQuantity(parameters[5]);
     }
-    /* Validate appointment */
+    
+    // Validate appointment
+    
     private static void validateAppointmentDetails(String appointmentDetails) throws UserInputErrorException {
         if (appointmentDetails.isBlank() || appointmentDetails.isEmpty()) {
             throw new UserInputErrorException("Appointment details cannot be empty. Please indicate some details.");

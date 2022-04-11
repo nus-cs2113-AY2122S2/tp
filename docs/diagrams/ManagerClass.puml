@@ -8,6 +8,12 @@ class Manager {
 - storage: Storage = new Storage
 + runLoop() : void
 - executeCommand(commandWord: String, parameters: String) : Status
++ executeAddCommand(commandWord: String, parameters: String) : Status
++ executeDeleteCommand(commandWord: String, parameters: String) : Status
++ executeViewCommand(commandWord: String, parameters: String) : Status
++ executeEditCommand(commandWord: String, parameters: String) : Status
++ executeFindCommand(commandWord: String, parameters: String) : Status
++ executeOtherCommand(commandWord: String, parameters: String) : Status
 }
 
 
