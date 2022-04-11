@@ -73,8 +73,8 @@ Enhancements implemented:
 
 ### DG Contribution
 1. Contributed to the `Add Command` portion.
-    - Added `Add Expenditure` portion
-    - Added the initial Fig 7 - AddCommand Sequence Diagram and Fig 8 - Add Expenditure Command Sequence Diagram
+    - Added `Add Expenditure` portion.
+    - Added the initial Fig 7 - AddCommand Sequence Diagram and Fig 8 - Add Expenditure Command Sequence Diagram.
       
 2. Wrote the `Introduction` and `Appendix Requirements`.
     - Added Product Scope, Non-Functional Requirements, Glossary.
