@@ -50,7 +50,7 @@ and contact management tasks done faster than traditional GUI apps.
 ### Main Menu Features
 #### Navigating from menu to section of interest: `goto`
 Allows access to subsections of the application, namely, to the expense tracker, contacts manager and task manager.
-This command can be used from other sections as well to directly go to another section. 
+This command can be used from other sections as well to directly go to another section. This command is case-insensitive.
 
 Format: `goto SECTION`
 
@@ -101,7 +101,7 @@ MENU:
 ```
 
 #### Getting guidance on the usage of the application: `help`
-Displays guidance for menu features.
+Displays guidance for menu features. This command is case-insensitive.
 
 Format: `help`
 
@@ -160,7 +160,7 @@ MENU:
 ```
 
 #### Exiting the application: `exit`
-Terminates the application. Can only be called from the menu. 
+Terminates the application. Can only be called from the menu. This command is case-insensitive.
 
 Format: `exit`
 
@@ -735,7 +735,7 @@ the program and this load and save feature.
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: After you exit the program, your application data will be automatically stored in a folder called "Data", which contains
+**A**: After you exit the program, your application data will be automatically stored in a folder called "data", which contains
 text file locally called "allonusData.txt". 
 You can transfer your data to another computer by copying this folder and placing
 it in the same directory as the application in the new computer. 
