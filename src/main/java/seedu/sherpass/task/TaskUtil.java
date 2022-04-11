@@ -62,7 +62,7 @@ public class TaskUtil {
      * @param frequency   The frequency of recurrence.
      * @return The incremented date according to the frequency
      */
-    public static LocalDateTime incrementDate(LocalDateTime currentDate, Frequency frequency) {
+    private static LocalDateTime incrementDate(LocalDateTime currentDate, Frequency frequency) {
         if (frequency == Frequency.SINGLE) {
             return currentDate;
         } else if (frequency == Frequency.DAILY) {

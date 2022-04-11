@@ -3,14 +3,14 @@
 
 hide footbox
 participant Storage as "storage:Storage"
-participant File as "<<class>>\nFile"
+participant File as "<font color=red>**<<class>>** \nFile"
 participant JSONObject as ":JSONObject"
 participant JSONArray as "taskArray:JSONArray"
-participant Parser as "<<class>>\nParser"
+participant Parser as "<font color=red>**<<class>>** \nParser"
 participant Task as "newTask:Task"
 participant List as "taskList:TaskList"
 
-[-> Storage ++: load(taskList: TaskList)
+[-> Storage ++: load(taskList:TaskList)
 
 Storage -> File as "<<class>>\nFile" ++: readAllLines(saveFilePath)
 
@@ -24,10 +24,12 @@ opt fileContent not empty
     Storage -> JSONObject ++:getJSONArray()
 
     create JSONArray
-    JSONObject -> JSONArray ++:
+    JSONObject -> JSONArray ++: new :JSONArray
+
+    JSONArray --> JSONObject --: taskArray
+    JSONObject --> Storage: taskArray
     deactivate JSONObject
 
-    JSONArray --> Storage --: taskArray
 
     loop all element in taskArray
         Storage -> Parser ++: parseSaveData(taskElement)
