@@ -109,9 +109,16 @@ The `UI` component
 
 ### Data Component
 
-![stuff](todo)
+![ItemListClassDiagram](img/ItemListClassDiagram.png)
 
-The above diagram todo...
+The above diagram shows the class diagram for an `ItemList`.
+
+The `ItemList` component represents an inventory list:
+- An `ItemList` contains 0 or more `Item`.
+  - Example of `Item`: JBX Speakers.
+- An `Item` contains 0 or more `BorrowRecord`.
+- A `BorrowRecord` contains only 1 `BorrowStatus`.
+  - `BorrowStatus`: Whether a borrow record is still current, or in the future or happened already in the past.
 
 ### Parser Components
 
