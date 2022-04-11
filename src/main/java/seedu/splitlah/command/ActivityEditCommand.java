@@ -154,6 +154,9 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Updates cost list using the list of involved Person objects.
+     */
     private void updateCostListFromActivity() {
         int listLength = involvedListPersonArray.size();
         costList = new double[listLength];
@@ -323,6 +326,11 @@ public class ActivityEditCommand extends Command {
         retrieveServiceChargeIfNotSupplied(oldActivity);
     }
 
+    /**
+     * Retrieves service charge from an Activity object, but only if the user did not supply a service charge.
+     *
+     * @param oldActivity An Activity object representing the old activity to retrieve the service charge from.
+     */
     private void retrieveServiceChargeIfNotSupplied(Activity oldActivity) {
         if (serviceCharge == MISSING_SERVICECHARGE) {
             serviceCharge = oldActivity.getServiceCharge();
@@ -331,6 +339,11 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Retrieves GST from an Activity object, but only if the user did not supply a GST.
+     *
+     * @param oldActivity An Activity object representing the old activity to retrieve the GST from.
+     */
     private void retrieveGstIfNotSupplied(Activity oldActivity) {
         if (gst == MISSING_GST) {
             gst = oldActivity.getGst();
@@ -339,6 +352,11 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Retrieves payer from an Activity object, but only if the user did not supply a payer.
+     *
+     * @param oldActivity An Activity object representing the old activity to retrieve the payer from.
+     */
     private void retrievePayerIfNotSupplied(Activity oldActivity) {
         if (Objects.equals(payer, MISSING_PAYER)) {
             payer = oldActivity.getPersonPaid().getName();
@@ -347,6 +365,11 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Checks if both a total cost and cost list are supplied, which is invalid input from the user.
+     *
+     * @throws InvalidDataException If both a total cost and cost list are supplied by the user.
+     */
     private void checkIfBothCostAndCostListSupplied() throws InvalidDataException {
         if (totalCost != MISSING_TOTALCOST && costList != MISSING_COSTLIST) {
             throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_COSTLIST_AND_COSTOVERALL_SUPPLIED);
@@ -361,6 +384,11 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Retrieves the activity name from an Activity object, but only if the user did not supply an activity name.
+     *
+     * @param oldActivity An Activity object representing the old activity to retrieve the activity name from.
+     */
     private void retrieveActivityNameIfNotSupplied(Activity oldActivity) {
         if (Objects.equals(activityName, MISSING_ACTIVITYNAME)) {
             activityName = oldActivity.getActivityName();
@@ -393,7 +421,13 @@ public class ActivityEditCommand extends Command {
         return involvedListStringArray;
     }
 
-    private void checkIfNoChangesMade(Activity oldActivity) throws InvalidDataException, InvalidFormatException {
+    /**
+     * Checks if no changes are made to the activity.
+     *
+     * @param oldActivity An Activity object representing the old activity to compare the edited activity against.
+     * @throws InvalidDataException If no changes are made to the activity.
+     */
+    private void checkIfNoChangesMade(Activity oldActivity) throws InvalidDataException {
         boolean isActivityNameUnnecessary = checkIfActivityNameIsUnnecessary(oldActivity);
         boolean isInvolvedListUnnecessary = checkIfInvolvedListIsUnnecessary(oldActivity);
         boolean isCostListUnnecessary = checkIfCostListIsUnnecessary(oldActivity);
@@ -411,6 +445,13 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the service charge is unnecessary when editing the activity.
+     *
+     * @param oldActivity An Activity object representing the old activity to be compared against.
+     * @return true if the service charge was not supplied by the user, or if it is identical to the old service charge.
+     *         false if the service charge was supplied by the user and is different from the old service charge.
+     */
     private boolean checkIfScIsUnnecessary(Activity oldActivity) {
         if (!isScSupplied) {
             return true;
@@ -418,6 +459,13 @@ public class ActivityEditCommand extends Command {
         return serviceCharge == oldActivity.getServiceCharge();
     }
 
+    /**
+     * Checks if the GST is unnecessary when editing the activity.
+     *
+     * @param oldActivity An Activity object representing the old activity to be compared against.
+     * @return true if the GST was not supplied by the user, or if it is identical to the old GST.
+     *         false if the GST was supplied by the user and is different from the old GST.
+     */
     private boolean checkIfGstIsUnnecessary(Activity oldActivity) {
         if (!isGstSupplied) {
             return true;
@@ -425,6 +473,13 @@ public class ActivityEditCommand extends Command {
         return gst == oldActivity.getGst();
     }
 
+    /**
+     * Checks if the payer is unnecessary when editing the activity.
+     *
+     * @param oldActivity An Activity object representing the old activity to be compared against.
+     * @return true if the payer was not supplied by the user, or if it is identical to the old payer.
+     *         false if the payer was supplied by the user and is different from the old payer.
+     */
     private boolean checkIfPayerIsUnnecessary(Activity oldActivity) {
         if (!isPayerSupplied) {
             return true;
@@ -434,6 +489,15 @@ public class ActivityEditCommand extends Command {
         return newPayer.equals(oldActivity.getPersonPaid());
     }
 
+    /**
+     * Checks if the cost list or total cost is unnecessary when editing the activity.
+     *
+     * @param oldActivity An Activity object representing the old activity to be compared against.
+     * @return true if the cost list or total cost was not supplied by the user, or if it is identical to the old cost
+     *              list.
+     *         false if the cost list or total cost was supplied by the user and is different from the old cost list
+     *               or total cost.
+     */
     private boolean checkIfCostListIsUnnecessary(Activity oldActivity) throws InvalidDataException {
         if (!isCostListSupplied) {
             return true;
@@ -453,6 +517,7 @@ public class ActivityEditCommand extends Command {
 
     /**
      * Fills a cost list with the costs from an Activity object.
+     *
      * @param oldCostList A double array object representing the cost list to be filled.
      * @param oldActivity An Activity object representing the activity to retrieve costs from.
      * @throws InvalidDataException If a nonexistent unique activity identifier is used when retrieving costs.
@@ -464,6 +529,13 @@ public class ActivityEditCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the list of participants is unnecessary when editing the activity.
+     *
+     * @param oldActivity An Activity object representing the old activity to be compared against.
+     * @return true if the list of participants was not supplied by the user, or if it is identical to the old list of participants.
+     *         false if the list of participants was supplied by the user and is different from the old list of participants.
+     */
     private boolean checkIfInvolvedListIsUnnecessary(Activity oldActivity) {
         if (!isInvolvedListSupplied) {
             return true;
@@ -480,6 +552,13 @@ public class ActivityEditCommand extends Command {
         return true;
     }
 
+    /**
+     * Checks if the activity name is unnecessary when editing the activity.
+     *
+     * @param oldActivity An Activity object representing the old activity to be compared against.
+     * @return true if the activity name was not supplied by the user, or if it is identical to the old activity name.
+     *         false if the activity name was supplied by the user and is different from the old activity name.
+     */
     private boolean checkIfActivityNameIsUnnecessary(Activity oldActivity) {
         if (!isActivityNameSupplied) {
             return true;
