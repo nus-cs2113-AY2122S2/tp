@@ -5,7 +5,7 @@ package seedu.duke.exceptions;
  * is not found.
  */
 public class ItemNotFoundException extends HotelLiteManagerException {
-    private static final String ERROR_MESSAGE = "Error! Item not found in inventory.";
+    private static final String ERROR_MESSAGE = "Error! Item not found in item list.";
 
     @Override
     public String getErrorMessage() {
