@@ -28,6 +28,9 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
    * Justification: One of the key features of `SplitLah`. Serves to simplify the payment process when users split
      bills during group outings as it minimises the number of transactions required to be made by consolidating all
      debts to be paid.
+   * Highlights: This was slightly challenging as there were floating point errors to take into account for when
+     splitting costs between multiple people. Additionally, a new class [`PersonCostPair`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/util/PersonCostPair.java)
+     had to be made to assist the sorting of `Person` objects by their overall cost in the session.
 * [Help command](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/HelpCommand.java)
    * What it does: Provides users a reference of all available commands while they are using `SplitLah`.
    * Justification: Gives users a quick way to find out the syntax of all available commands while using `SplitLah` 
@@ -35,6 +38,7 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 * [PersonCostPair](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/util/PersonCostPair.java)
    * What it does: It is a utility class that supports `SessionSummaryCommand` in minimising transactions required to be
      made by encapsulates a `Person` object and their overall cost in the session as a debt owed by or owed to an individual.
+     It also keeps track of whether a debt has been fully paid or not, assisting in the algorithm used in `SessionSummaryCommand`.
    * Justification: Enables `SessionSummaryCommand` to sort all debts in the session without losing the ability to
      refer to the `Person` object that bears the debt.
 
