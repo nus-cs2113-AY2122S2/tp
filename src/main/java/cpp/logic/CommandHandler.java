@@ -35,44 +35,45 @@ public class CommandHandler {
         String executeResult = "Default Result";
 
         switch (commands[0].toLowerCase()) {
-        case "addproject": //add a project into list
+        case Constants.COMMAND_ADDPROJECT: //add a project into list
             executeResult = executeCommand(projectList, new AddProjectCommandParser().parse(commands));
             break;
-        case "deleteproject": //delete a project based on its name
+        case Constants.COMMAND_DELETEPROJECT: //delete a project based on its name
             executeResult = executeCommand(projectList, new DeleteProjectCommandParser().parse(commands));
             break;
-        case "listprojects": //Fallthrough
-        case "listproject": //view all project(s) by name
+        case Constants.COMMAND_LISTPROJECT: //Fallthrough
+        case Constants.COMMAND_LISTPROJECTS: //view all project(s) by name
             executeResult = executeCommand(projectList, new ListProjectCommand());
             break;
-        case "todo":
+        case Constants.COMMAND_TODO:
             executeResult = executeCommand(projectList, new AddTodoCommandParser().parse(commands));
             break;
-        case "mark":
+        case Constants.COMMAND_MARK:
             executeResult = executeCommand(projectList, new MarkCommandParser().parse(commands));
             break;
-        case "projdeadline":
+        case Constants.COMMAND_PROJECTDEADLINE:
             executeResult = executeCommand(projectList, new ProjectDeadlineCommandParser().parse(commands));
             break;
-        case "tododeadline":
+        case Constants.COMMAND_TODODEADLINE:
             executeResult = executeCommand(projectList, new TodoDeadlineCommandParser().parse(commands));
             break;
-        case "changegit":
+        case Constants.COMMAND_CHANGEGIT:
             executeResult = executeCommand(projectList, new ChangeGitHubLinkCommandParser().parse(commands));
             break;
-        case "opengit":
+        case Constants.COMMAND_OPENGIT:
             executeResult = executeCommand(projectList, new OpenGitCommandParser().parse(commands));
             break;
-        case "view":
+        case Constants.COMMAND_VIEW:
             executeResult = executeCommand(projectList, new ViewProjectCommandParser().parse(commands));
             break;
-        case "addlanguage":
+        case Constants.COMMAND_ADDLANGUAGE:
             executeResult = executeCommand(projectList, new AddLanguageCommandParser().parse(commands));
             break;
-        case "listlanguages":
+        case Constants.COMMAND_LISTLANGUAGE: // fall-through
+        case Constants.COMMAND_LISTLANGUAGES:
             executeResult = executeCommand(projectList, new ListLanguageCommandParser().parse(commands));
             break;
-        case "help":
+        case Constants.COMMAND_HELP:
             if (commands.length == 1) {
                 Response.printHelp();
             } else {

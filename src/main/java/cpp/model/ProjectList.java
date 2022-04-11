@@ -247,7 +247,7 @@ public class ProjectList {
     public void listLanguages(String title) {
         assert (title != null && !title.equals("")) : "Cannot list languages for this project.";
         int index = findProjectIndex(title);
-        if (index == Constants.PROJECT_NOT_FOUND) { //project not found
+        if (index == Constants.PROJECT_NOT_FOUND) {
             System.out.println("Sorry! There was no project with that name.");
         } else {
             Project project = projectList.get(index);

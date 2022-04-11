@@ -74,4 +74,21 @@ public class Constants {
     public static final String SATURDAY = "SATURDAY";
     public static final Set<String> DAYS_OF_THE_WEEK = new HashSet<String>(Arrays.asList(
                 SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY));
+
+    public static final String COMMAND_ADDPROJECT = "addproject";
+    public static final String COMMAND_DELETEPROJECT = "deleteproject";
+    public static final String COMMAND_LISTPROJECT = "listproject";
+    public static final String COMMAND_LISTPROJECTS = "listprojects";
+    public static final String COMMAND_TODO = "todo";
+    public static final String COMMAND_MARK = "mark";
+    public static final String COMMAND_PROJECTDEADLINE = "projdeadline";
+    public static final String COMMAND_TODODEADLINE = "tododeadline";
+    public static final String COMMAND_CHANGEGIT = "changegit";
+    public static final String COMMAND_OPENGIT = "opengit";
+    public static final String COMMAND_VIEW = "view";
+    public static final String COMMAND_ADDLANGUAGE = "addlanguage";
+    public static final String COMMAND_LISTLANGUAGE = "listlanguage";
+    public static final String COMMAND_LISTLANGUAGES = "listlanguages";
+    public static final String COMMAND_HELP = "help";
+
 }
