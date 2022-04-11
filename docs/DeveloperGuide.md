@@ -341,8 +341,8 @@ Below are instructions to perform manual testing of the application. Please refe
 <br>
 
 ### Launch and exit
-1. Download the jar file and copy the file to an empty folder.
-2. Launch a command terminal and start the application by typing `java -jar tp.jar`.
+1. Download the JAR file and copy the file to an empty folder.
+2. Launch a command terminal and start the application by typing `java -jar FILENAME`, where `FILENAME` is the name of the JAR file (e.g. `tp.jar`).
 3. Exit the application by typing `exit`.
 
 <br>
