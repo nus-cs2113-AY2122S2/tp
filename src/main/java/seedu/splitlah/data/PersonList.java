@@ -164,13 +164,13 @@ public class PersonList implements Serializable {
      * @param oldList An ArrayList object of Person objects.
      */
     public boolean isSamePersonList(ArrayList<Person> oldList) {
+        if (this.getSize() != oldList.size()) {
+            return false;
+        }
         for (Person person : this.getPersonList()) {
             if (!oldList.contains(person)) {
                 return false;
             }
-        }
-        if (this.getSize() != oldList.size()) {
-            return false;
         }
         return true;
     }
