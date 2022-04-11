@@ -85,6 +85,6 @@ public class DeleteItemCommand extends Command {
     public void writeItemListToFile(ListContainer listContainer) throws IOException {
         ItemList listOfItems = listContainer.getItemList();
         ItemListFileManager itemListFileManager = new ItemListFileManager();
-        itemListFileManager.writeItemListToFile(listOfItems);
+        itemListFileManager.save(listOfItems);
     }
 }
