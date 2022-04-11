@@ -409,12 +409,16 @@ Format:
 **Example**
 
 Below are some sample outputs for `clear all`, which asks a confirmation message before executing the clear:
-![image](images/clear_all_confirmation.png)
-If the user inputs `y`:
-![image](images/clear_all_execute.png)
-If the user inputs `n`:
-![image](images/clear_all_no_execute.png)
 
+![image](images/clear_all_confirmation.png)
+
+If the user inputs `y`:
+
+![image](images/clear_all_execute.png)
+
+If the user inputs `n`:
+
+![image](images/clear_all_no_execute.png)
 
 ### Enter study session: `study`
 Enter the study session where you can start timers to help finish your tasks.
