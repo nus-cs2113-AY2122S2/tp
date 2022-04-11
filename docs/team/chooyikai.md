@@ -44,7 +44,7 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
 
 - **Team tasks:**
   - Performed code cleanup and fixed bugs throughout the codebase, as well as resolved formatting, language and consistency issues in the user and developer guides.
-  - Managed releases `v1.0` and `v2.0` on GitHub.
+  - Managed releases `v1.0`, `v2.0` and `v2.1` on GitHub.
   - Cleaned up issues which were not closed after being addressed, and removed user stories which were no longer in scope due to time constraints or shifting project vision. 
 
 
