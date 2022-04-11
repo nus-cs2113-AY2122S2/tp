@@ -1,6 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 hide empty members
+hide footbox
 skinparam classAttributeIconSize 0
 
 Class LocalStorage {
