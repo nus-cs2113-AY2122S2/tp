@@ -10,14 +10,14 @@ The sections below are my contributions to this project.
 You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=Ch40gRv1-Mu&breakdown=true).
 
 - **Foundational code:**
-  - Wrote `Parser`, which is the parent class of other parsers. I applied java regex to implement the parserString method, that is utilized by all other parsers. [#69](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/69)
-  - Wrote the skeleton logic structure of `ModHappyParser` and `Main` with referring to [AB3](https://github.com/se-edu/addressbook-level3). [#69](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/69)
-  - Wrote major classes of storage (`Storage`,`JsonStorage`,`ListStorage`,`ModuleListStorage`,`TaskListStorage`, `ConfigurationStorage`). [#91](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/91)
-  - Wrote `Configuration`, which standardizes the user options and manages the states of user's customized options in the app. [#102](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/102)
-  - Wrote `Command`, which is the parent class of other Command, this abstract class defines the logic of Command and is utilized in the current program. [#69](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/69)
-  - Wrote `CommandResult`, which stores the result of commands and is passed to UI for displaying to users. [#69](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/69)
-  - Wrote `ModHappyException`, which is the parent class of other exceptions in the app(Only contributed to the skeleton). [#69](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/69)
-    
+    - Wrote `Parser`, which is the parent class of other parsers. I applied java regex to implement the parserString method, that is utilized by all other parsers. [#69](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/69)
+    - Wrote the skeleton logic structure of `ModHappyParser` and `Main` with referring to [AB3](https://github.com/se-edu/addressbook-level3). [#69](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/69)
+    - Wrote major classes of storage (`Storage`,`JsonStorage`,`ListStorage`,`ModuleListStorage`,`TaskListStorage`, `ConfigurationStorage`). [#91](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/91)
+    - Wrote `Configuration`, which standardizes the user options and manages the states of user's customized options in the app. [#102](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/102)
+    - Wrote `Command`, which is the parent class of other Command, this abstract class defines the logic of Command and is utilized in the current program. [#69](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/69)
+    - Wrote `CommandResult`, which stores the result of commands and is passed to UI for displaying to users. [#69](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/69)
+    - Wrote `ModHappyException`, which is the parent class of other exceptions in the app(Only contributed to the skeleton). [#69](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/69)
+
 
 - **New features:**
     - Added the ability to save, which will save the state of the program(modules, tasks, user options) and significant enhance the usability of the app, because it enables users to access the data across multiple usage sessions. [#91](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/91)
@@ -36,7 +36,7 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
         - Added supported system explaining the operating systems that the app are well tested on. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
         - Added expected output to all sample input and keep the output of the user guide updated when the app is updated. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
         - Added sample input in the command summary. [#173](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/173)
-      
+
     - Developer guide:
         - Added section explaining the format and usage of estimated time. [#118](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/118)
         - Added explanation of the overview of the app and created the relevant class diagrams within that section. [#99](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/99),  [#109](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/109)
@@ -46,8 +46,9 @@ You can view my contributed code [here](https://nus-cs2113-ay2122s2.github.io/tp
 - **Team tasks:**
     - Performed code cleanup and fixed bugs.
     - Confirmed meeting time and created Zoom for each meeting.
-    - Checked the releases `v1.0` and `v2.0` on multiple systems(macOS, Kali Linux, Ubuntu, CentOS) for each release.
-    - Keep tracking potential bugs and created multiple bug issues after discussing with teammates. [#170](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/170), [#135](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/135), [#134](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/134), [#172](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/172) , [#136](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/136) , [#119](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/119), [#71](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/71), [#189](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/189)
+    - Checked the releases `v1.0`, `v2.0` and `v2.1` on multiple systems(macOS, Kali Linux, Ubuntu, CentOS) for each release.
+    - Keep tracking potential bugs and created multiple bug issues after discussing with teammates. [#170](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/170), [#135](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/135), [#134](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/134), [#172](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/172) , [#136](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/136) , [#119](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/119), [#71](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/71)
+    - Static analysis on code and improved code quality. [#188](https://github.com/AY2122S2-CS2113T-T10-3/tp/pull/188)
 
 
 - **Community:**
