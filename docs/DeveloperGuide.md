@@ -1,4 +1,16 @@
 # Developer Guide
+- [Acknowledgements](#acknowledgements)
+- [Design & implementation](#design--implementation)
+  - [Controllers](#controllers)
+  - [Managers](#managers)
+  - [InputParser](#inputparser)
+- [Menu Management](#menu-dishes-management)
+- [Order Management](#order-management)
+- [Staff Management](#staff-management)
+- [Product Scope](#product-scope)
+- [User Stories](#user-stories)
+- [Class Diagram](#class-diagram)
+- [Non-functional Requirements](#non-functional-requirements)
 
 ## Acknowledgements
 
@@ -112,16 +124,16 @@ The implementation of the last 2 methods depend on the implementation of the fir
 and further isolates the area of concern for which errors are most prone. In addition, it enables easy addition of more
 methods if required. If possible, additional methods should continue to depend on the first `getString` method.
 
-### Menu (dishes) Management
-## Overview
+## Menu (dishes) Management
+### Overview
 ![](diagrams/class/DishManagementOverview.png)
 
-## Dish
+### Dish
 
 `Dish` consists of `name` and `price` and corresponding modification methods.
 It is used as a structure to store dish information.
 
-## DishManager
+### DishManager
 The management of menu is handled by `DishManager`, which implements following methods:
 
 - `printDishes()` -- print all dishes and their menu index in current menu.
@@ -150,7 +162,7 @@ For example, `printDishes()`, iterates through `dishes` and calls `get(int)` met
 `void setName(int, String)` is similar:
 ![](diagrams/sqeuence/DishManager_setName.png)
 
-## DishController
+### DishController
 `DishController` is the user-facing part of `DishManagement`
 It offers the functions of `DishManager` to user and get input from user.
 
@@ -162,7 +174,8 @@ The index and corresponding function can be found at `DishController.CHOICES`:
 - `void deleteDish()` -- get dish index and delete corresponding dish
 - `void addDish()` -- get new dish name and price then create a dish
 - `getDishManager()` -- get the list in `dishManager`, this is for `OrderManager` since it might need menu information.
-### Order Management
+
+## Order Management
 
 The management of menu is functioned by `OrderManager`, which implements following methods:
 - `addDishToOrder(Dish dish, int orderIdx)` -- add dishes in to an order.
@@ -185,7 +198,7 @@ For example, `addDishToOrder(Dish dish, int orderIdx)`, iterates through `orders
 Both methods `getOrderPrice(int)` and `getAllOrderValue()` call `getTotalPrice()`:
 ![](diagrams/sqeuence/OrderManager_displayAllOrderPrice.png)
 
-### Staff Management
+## Staff Management
 
 I/O for staff is being handled by `StaffController`, and handles the following method:
 
@@ -239,20 +252,20 @@ As such, this application provides many functionalities to do so. The possibilit
 
 ## User Stories
 
-| Version | As a ... | I want to ...               | So that I can ...                 |
-|---------|----------|-----------------------------|-----------------------------------|
-| v1.0    | staff    | add orders                  | keep the order up to date         |
-| v1.0    | staff    | delete orders               | keep the order up to date         |
-| v1.0    | staff    | check orders                | keep the order up to date         |
-| v1.0    | staff    | add menu items              | keep the menu up to date          |
-| v1.0    | staff    | delete menu items           | keep the menu up to date          |
-| v1.0    | staff    | modify menu items           | keep the menu up to date          |
- | v1.0    | staff    | add staff info              | keep the roster up to date        | 
-| v1.0    | staff    | delete staff info           | keep the roster up to date        | 
-| v1.0    | staff    | modify staff info           | keep the roster up to date        | 
-| v2.0    | staff    | print out the order receipt | refer to the order anytime        |
-| v2.0    | staff    | store the application data  | save data across different uses   |
-| v2.0    | staff    | mark the deleted dish in order  | keep the order up to date   |
+| Version | As a ... | I want to ...                  | So that I can ...               |
+|---------|----------|--------------------------------|---------------------------------|
+| v1.0    | staff    | add orders                     | keep the order up to date       |
+| v1.0    | staff    | delete orders                  | keep the order up to date       |
+| v1.0    | staff    | check orders                   | keep the order up to date       |
+| v1.0    | staff    | add menu items                 | keep the menu up to date        |
+| v1.0    | staff    | delete menu items              | keep the menu up to date        |
+| v1.0    | staff    | modify menu items              | keep the menu up to date        |
+ | v1.0    | staff    | add staff info                 | keep the roster up to date      | 
+| v1.0    | staff    | delete staff info              | keep the roster up to date      | 
+| v1.0    | staff    | modify staff info              | keep the roster up to date      | 
+| v2.0    | staff    | print out the order receipt    | refer to the order anytime      |
+| v2.0    | staff    | store the application data     | save data across different uses |
+| v2.0    | staff    | mark the deleted dish in order | keep the order up to date       |
 
 ## Class diagram
 ![](diagrams/class/all.png)
