@@ -17,6 +17,10 @@
 - [Instructions for manual testing](#instructions-for-manual-testing)
 - [Glossary](#glossary)
 
+## Warning
+**Please do not touch the save files (in the `ListFolder` folder) that save the
+user's application usage history.** This will interfere with the function of the program.
+
 
 ## Architecture
 <p align="center">

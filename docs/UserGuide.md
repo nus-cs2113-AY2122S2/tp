@@ -13,6 +13,8 @@ and maintaining the state of checked-in/checked-out rooms.
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Hotel Lite` from [here](http://link.to/duke).
 3. To get a list of commands available type `help` after running the application.
+4. **WARNING: Please do not touch the save files (in the `ListFolder` folder) that save the
+user's application usage history.** This will interfere with the function of the program. 
 
 ## Features
 1. [Customer Satisfaction Related Commands](#customer-satisfaction-related-commands)
