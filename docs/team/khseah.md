@@ -61,11 +61,7 @@ Sequence Diagram and Fig 15 - List Income Sequence Diagram
    - Created and assigned issues for `v1.0` based on user stories.
    - Created and closed `v1.0` Milestone.
 
-2. Enabled:
-   - Status checks to pass before merging.
-   - GitHub Pages.
-
-3. Released `v1.0` and `v2.0` JAR files.
+2. Released `v1.0` and `v2.0` JAR files.
 
 ### Miscellaneous Contribution
 PR reviews (with non-trivial comments):
