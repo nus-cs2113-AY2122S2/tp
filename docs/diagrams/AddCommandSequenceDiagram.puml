@@ -9,7 +9,7 @@ participant ":AddCommand" as AddCommand
 activate Ui
 user -> Ui : "add..."
 create Parser
-Ui -> Parser : Parser("add...")
+Ui -> Parser : new Parser("add...")
 activate Parser
 Ui <-- Parser : parser :Parser
 deactivate Parser
