@@ -114,6 +114,31 @@ The user starts by typing a return command. The diagram above uses the example o
    `ReturnCommand` then converses with `Ui` to show the successful returned message.
 10. If none of the borrow records are overdue or outstanding, then it is taken to be an invalid return request. In this scenario, `ReturnCommand` will converse with `Ui` to display the return error message.
 
+### Return Command
+
+![LostCommandSequenceDiagram](img/LostCommandSequenceDiagram.png)
+
+The above diagram shows the sequence diagram of Lost command, which allows users to mark an item as missing and update the inventory accordingly.
+
+The user starts by typing a lost command. The diagram above uses the example of a user who wishes to mark `10` quantities of an item of index `1` as lost. The full return command is `lost i/1 q/10`.
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. `parse` calls the `arePrefixesPresent()` function to check that the user's input contains the compulsory fields, item index and item quantity. This function returns `true` if the user's input syntax is correct.
+3. `parse()` uses the parsed `itemIndex` and `itemQuantity` to generate a new `LostCommand` which is returned to the `run()` method of `InvMgr`.
+4. The `run()` method calls on the `execute()` function in `LostCommand`.
+5. The `execute()` function calls `checkItemListSize()` to check if the item list is empty. If it is, an exception is thrown and no items can be marked as lost.
+6. Then, it calls `getItem()` to check if the item index is within range. If it is not, an exception is thrown and lost cannot be performed.
+7. Then, it calls `getQuantity()` to get the lost item's current quantity as reflected in the inventory.
+8. `updatedItemQuantity` refers to `lostItemQuantity - itemQuantity`. 3 scenarios can occur: 
+   1. `updatedItemQuantity > 0` This describes the scenario where a partial quantity of an item has been lost. 
+      `setQuantity()` is called to change the item's quantity in the inventory to `updatedItemQuantity`. 
+       Then, `showMessages(Messages.REPORTED_LOST_MESSAGE)` is called to display a message that tells the user that the item has been successfully reported lost and that the inventory has been updated.
+   2. `updatedItemQuantity == 0` This describes the scenario where all quantities of an item have been lost. In this scenario, the item should be deleted from the inventory.
+      `removeItem(itemIndex: Integer)` is called to remove the item from the item list.
+       Then, `showMessages()` is called to display a message that tells the user that the item has been deleted and that it has successfully been reported as lost.
+   3. `updatedItemQuantity < 0` This describes the scenario where the quantity of item lost is impossible since it exceeds the quantity of item in the inventory. This is an invalid lost command that will throw an exception.
+9. Finally, `showDivider()` is called to display a dividing line.
+
 ### List Command
 ![ListCommandSequenceDiagram](img/ListCommandSequenceDiagram.png)
 
