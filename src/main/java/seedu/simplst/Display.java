@@ -8,19 +8,11 @@ public class Display {
     }
 
     public static void bye() {
-        System.out.println("Thanks for using Simplst 1.0!");
+        System.out.println("Thanks for using Simplst 2.1!");
     }
 
     public static void stateRestored() {
         System.out.println("State restored!");
-    }
-
-    public static void stateSaved() {
-        System.out.println("State saved!");
-    }
-
-    public static void stateNotSaved() {
-        System.out.println("State not saved!");
     }
 
     public static void newLogin() {
@@ -28,13 +20,6 @@ public class Display {
     }
 
     // successful output
-    public static void inventoryGoodQtyRemoved(Float qty, String goodName) {
-        System.out.println(qty + " of " + goodName + " has been removed.");
-    }
-
-    public static void orderlineCheckedOff(String unitGoodName, String orderId) {
-        System.out.println(unitGoodName + "of order " + orderId + " has been removed.");
-    }
 
     public static void unitGoodAdded(String sku) {
         System.out.println("Unit Good of SKU: " + sku + " added to warehouse");
@@ -88,7 +73,7 @@ public class Display {
         System.out.println("Warehouse information can't save.");
     }
 
-    public static void warehouseStateNotRestored(){
+    public static void warehouseStateNotRestored() {
         System.out.println("Warehouse information can't restore.");
     }
 
@@ -155,15 +140,15 @@ public class Display {
         System.out.println("\tExample: add o/ oid/1 r/Danny Phantom "
                 + "addr/Amity Park\n");
         System.out.println("Add good to order Command");
-        System.out.println("\tFormat: add og/ oid/[ORDER_ID] sku/[SKU] q/[QUANTITY_NEEDED_FOR_ORDER]");
-        System.out.println("\tExample: add og/ oid/1 sku/WC1 q/10");
+        System.out.println("\tFormat: add og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_NEEDED_FOR_ORDER]");
+        System.out.println("\tExample: add og/ oid/1 sku/WC1 qty/10\n");
         System.out.println("Remove order Command");
         System.out.println("\tFormat: remove o/ oid/[ORDER_ID]");
         System.out.println("\tExample: remove o/ oid/1\n");
         System.out.println("Remove a specific quantity of orderline in an order");
         System.out.println("\tFormat: remove og/ oid/[ORDER_ID] sku/[SKU]"
-                + " q/[QUANTITY_TO_REMOVE]");
-        System.out.println("\tExample: remove og/ oid/1 sku/WC1 q/1\n");
+                + " qty/[QUANTITY_TO_REMOVE]");
+        System.out.println("\tExample: remove og/ oid/1 sku/WC1 qty/1\n");
         System.out.println("Listing all orders");
         System.out.println("\tFormat: list o/\n");
         System.out.println("Listing orderlines in an order");

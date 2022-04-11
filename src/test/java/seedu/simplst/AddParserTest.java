@@ -36,7 +36,6 @@ public class AddParserTest {
         addParserTwo.initExtractParams();
         addParserTwo.extractParams();
         UnitGood ug = warehouse.getUnitGoodHashMap().get("WC1");
-        Good g = warehouse.getGoodList().get("WC1");
 
         assertNotNull(ug);
         assertEquals("WC1", ug.getSku());
@@ -44,13 +43,14 @@ public class AddParserTest {
         assertEquals("Wooden Chair", ug.getName());
         assertEquals("German oak", ug.getDescription());
 
+        Good g = warehouse.getGoodList().get("WC1");
         assertNotNull(g);
         assertEquals("WC1", g.getSku());
         assertEquals(30, g.getQuantity());
     }
 
     @Test
-    public void OrderFlag_addGood_matchInput() throws WrongCommandException, InvalidFileException, InvalidObjectType,
+    public void orderFlagAddGoodMatchInput() throws WrongCommandException, InvalidFileException, InvalidObjectType,
             MissingFlagException, EmptyFieldException {
         String userInput = "add o/ oid/1 r/John Doe addr/123 Maple Ave";
         AddParser addParser = new AddParser(warehouse, userInput);

@@ -99,12 +99,6 @@ public class Warehouse {
         return true;
     }
 
-
-    // Meant for batch adding goods, could be used with UI if i create a param map.
-    public void addGoodToInventory(int id, Object goodObject) {
-
-    }
-
     public Boolean addOrderline(String oid, String sku, String qty) throws WrongCommandException {
         Boolean status = true;
         try {
@@ -138,7 +132,7 @@ public class Warehouse {
         }
 
         Orderline ol =  order.addOrderline(getUnitGoodBySku(sku), qty);
-        if (ol == null){
+        if (ol == null) {
             return false;
         }
         return true;
@@ -515,23 +509,6 @@ public class Warehouse {
         }
     }
 
-    /**
-     * Adds all stuff in a csv or json (it's either one).
-     *
-     * @param filePath path to file
-     * @throws InvalidFileException Invalid File
-     */
-    public void batchSetGoodsToInventory(String filePath) throws InvalidFileException {
-        // READ JSON FILE
-
-        JSONArray jsonGoods = new JSONArray();
-        int idx = 0;
-        for (Object goodObject : jsonGoods) {
-            addGoodToInventory(idx, goodObject);
-            idx += 1;
-        }
-    }
-
     private boolean hasOrderId(int oid) {
         for (Order order : orderLists) {
             if (order.getId() == oid) {
@@ -652,7 +629,7 @@ public class Warehouse {
                     + " than input capacity");
         } catch (NumberFormatException numberFormatException) {
             System.out.println("Please set the Warehouse capacity again.");
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("Warehouse capacity can't be null");
         }
         return false;
@@ -704,7 +681,7 @@ public class Warehouse {
         for (Object o : ja) {
             JSONObject jo = (JSONObject) o;
             Order restoredOrder = Order.restoreOrder(jo);
-            if (restoredOrder == null){
+            if (restoredOrder == null) {
                 return false;
             }
             status = this.addOrder(restoredOrder);
@@ -735,7 +712,7 @@ public class Warehouse {
                 String sku = ko.toString();
                 JSONObject jg = (JSONObject) jo.get(ko);
                 UnitGood ug = UnitGood.restoreUnitGood(jg);
-                if (ug==null){
+                if (ug == null) {
                     return false;
                 }
                 status = this.addUnitGoodToInventory(ug);
@@ -744,7 +721,7 @@ public class Warehouse {
                     return false;
                 }
                 Object qtyO = (jg).get(GoodKeys.quantity);
-                if (qtyO == null){
+                if (qtyO == null) {
                     return false;
                 }
                 String qty = qtyO.toString();
@@ -815,7 +792,7 @@ public class Warehouse {
             JSONObject jsonWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
             boolean status = false;
             Object capO = jsonWarehouse.get(WarehouseKeys.totalCapacity);
-            if (capO == null){
+            if (capO == null) {
                 return false;
             }
             status = this.setTotalCapacity(capO.toString());
@@ -823,20 +800,20 @@ public class Warehouse {
                 return false;
             }
             Object olO = jsonWarehouse.get(WarehouseKeys.orderLists);
-            if (olO == null){
+            if (olO == null) {
                 return false;
             }
-            JSONArray sol = (JSONArray) olO ;
+            JSONArray sol = (JSONArray) olO;
             status = this.restoreOrders(sol);
             if (!status) {
                 return false;
             }
             Object glO = jsonWarehouse.get(WarehouseKeys.goodList);
-            if (glO == null){
+            if (glO == null) {
                 return false;
             }
             JSONObject sgl = (JSONObject) glO;
-            if (sgl == null){
+            if (sgl == null) {
                 return false;
             }
             status = this.restoreGoods(sgl);

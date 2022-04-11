@@ -9,7 +9,8 @@ import util.exceptions.InvalidObjectType;
 import util.exceptions.MissingFlagException;
 import util.exceptions.EmptyFieldException;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 public class ViewParserTest {
     Warehouse warehouse = new Warehouse(1000);

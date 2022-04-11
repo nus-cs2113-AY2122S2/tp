@@ -5,5 +5,6 @@
 | ![](https://via.placeholder.com/100.png?text=Photo) |  Shyun Yin  | [Github](https://github.com/Shyunyin)  | [Portfolio](team/Shyunyin.md)  |
 | ![](https://via.placeholder.com/100.png?text=Photo) |    Tuan     | [Github](https://github.com/tuan0369)  | [Portfolio](team/tuan0369.md)  |
 | ![](https://via.placeholder.com/100.png?text=Photo) | Haziq Hakim |  [Github](https://github.com/LDerpy)   |  [Portfolio](team/lderpy.md)   |
-| ![](https://via.placeholder.com/100.png?text=Photo) |  Jun Leong  | [Github](https://github.com/hjunleon)  |  [Portfolio](team/hjunleon.md)  |
+| ![](https://via.placeholder.com/100.png?text=Photo) |  Jun Leong  | [Github](https://github.com/hjunleon)  |  [Portfolio](team/hjunleon.md) |
+
 
