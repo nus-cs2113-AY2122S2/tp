@@ -650,7 +650,7 @@ Fig 23 - Saving Sequence Diagram
 The sequence diagram above shows the interactions when saving user data.
 
 1. After every command, `MMM` invokes `Storage.save()`.
-2. `Storage` invokes `User::serialize`.
+2. `Storage` invokes `User.serialize()`.
 3. `User` calls `ExpenditureList::serialize`, which returns a `String`, representing the serialized 
 `ExpenditureList`.
 4. `User` then does the same for `CreditCardList::deserializeFrom` and `IncomeList::deserializeFrom`, which
