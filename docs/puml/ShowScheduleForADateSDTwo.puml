@@ -16,9 +16,9 @@ activate Timetable
 
 Timetable -> TaskList: getFilteredTasksByDate(dateInput: LocalDate)
 activate TaskList
+
 TaskList --> Timetable: filteredTasks: ArrayList<Task>
 deactivate TaskList
-destroy TaskList
 
 Timetable -> Timetable: setInitialTimetableInputs(dateInput: LocalDate, filtererdTasks: ArrayList<Task>, ui: Ui)
 activate Timetable
