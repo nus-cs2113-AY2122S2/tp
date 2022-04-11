@@ -41,9 +41,9 @@ public class Manager {
     }
 
     public void logo() {
-        String logo =  "                   " +  "╔╦╦═╦╗╔═╦══╦╗\n" +
-                       "                   " +  "║═║╩║╚╣╔╣║║║║\n" +
-                       "                   " +  "╚╩╩╩╩═╩╝╚╩╩╩╝";
+        String logo =  "                   " +  "╔╦╦═╦╗╔═╦══╦╗\n"
+                     + "                   " +  "║═║╩║╚╣╔╣║║║║\n"
+                     + "                   " +  "╚╩╩╩╩═╩╝╚╩╩╩╝";
         System.out.println(logo);
     }
 
