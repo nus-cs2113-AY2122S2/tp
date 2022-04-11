@@ -76,6 +76,12 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 * [`Command`](#command-component)
     * Defines how a command is executed.
 
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
 <hr>
 
 ### Interaction between components
@@ -372,6 +378,10 @@ The general workflow of the `session /create` command is as follows:
 7. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with `TextUI#printlnMessage`.
 
+<br>
+<div class="button-box">
+  <a class="back-button" href="#session-commands">Back to Session Commands</a>
+</div>
 <hr>
 
 ### Remove a session
@@ -398,6 +408,10 @@ session unique identifier from the list of sessions.
 7. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully deleted.
 
+<br>
+<div class="button-box">
+  <a class="back-button" href="#session-commands">Back to Session Commands</a>
+</div>
 <hr>
 
 ### Edit a session
@@ -437,6 +451,10 @@ The general workflow of the `session /edit` command is as follows:
 12. After the session is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
 13. The `SessionEditCommand` class then prints a message indicating that a session has been successfully edited.
 
+<br>
+<div class="button-box">
+  <a class="back-button" href="#session-commands">Back to Session Commands</a>
+</div>
 <hr>
 
 ### View a session
@@ -461,6 +479,10 @@ The general workflow of the `session /view` command is as follows:
    * Else, a `String` object representing the details of the requested session is retrieved using the 
      `Session#toString` method and printed out using `TextUI#printlnMessageWithDivider`.
 
+<br>
+<div class="button-box">
+  <a class="back-button" href="#session-commands">Back to Session Commands</a>
+</div>
 <hr>
 
 ### List sessions
@@ -486,6 +508,10 @@ The general workflow of the `session /list` command is as follows:
      profile is returned.
 6. Following that, the `String` object retrieved is printed out with `TextUI#printlnMessage`.
 
+<br>
+<div class="button-box">
+  <a class="back-button" href="#session-commands">Back to Session Commands</a>
+</div>
 <hr>
 
 ### Settle a session
@@ -580,6 +606,12 @@ The general workflow of the `activity /create` command is as follows:
 13. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
 14. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully created with `TextUI#printlnMessage`.
 
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#activity-commands">Back to Activity Commands</a>
+</div>
+
 <hr>
 
 ### Remove an activity
@@ -607,6 +639,12 @@ The general workflow of the `activity /delete` command is as follows:
 7. After the activity is removed from the `Session` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
 9. The `ActivityDeleteCommand` object then prints a message indicating that an activity has been successfully deleted with `TextUI#printlnMessage`.
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#activity-commands">Back to Activity Commands</a>
+</div>
 
 <hr>
 
@@ -652,6 +690,12 @@ The general workflow of the `activity /edit` command is as follows:
 14. `Manager#saveProfile` is called to save the changes to the local storage file.
 15. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully edited with `TextUi#printlnMessage`.
 
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#activity-commands">Back to Activity Commands</a>
+</div>
+
 <hr>
 
 ### View an activity
@@ -679,6 +723,12 @@ The general workflow of the `activity /view` command is as follows:
      `TextUI#printlnMessage` and control is given back to `SplitLah`.
    * Else, a `String` object representing the details of the requested activity is retrieved using the
       `Activity#toString` method and printed out using `TextUI#printlnMessageWithDivider`.
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#activity-commands">Back to Activity Commands</a>
+</div>
 
 <hr>
   
@@ -752,6 +802,12 @@ The general workflow of the `group /create` command is as follows:
 7. After the group is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created with `TextUI#printlnMessage`.
 
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#group-commands">Back to Group Commands</a>
+</div>
+
 <hr>
 
 ### Remove a group
@@ -777,6 +833,12 @@ The general workflow of the `group /delete` command is as follows:
 6. To remove the `Group` object from the list of groups stored in `Profile` object, the `Profile#removeGroup` method is invoked.
 7. After the group is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `GroupDeleteCommand` class then prints a message indicating that a group has been successfully deleted.
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#group-commands">Back to Group Commands</a>
+</div>
 
 <hr>
 
@@ -815,6 +877,12 @@ The general workflow of the `group /edit` command is as follows:
 11. After the group is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
 12. The `GroupEditCommand` class then prints a message indicating that the group has been successfully edited.
 
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#group-commands">Back to Group Commands</a>
+</div>
+
 <hr>
 
 ### View a group
@@ -838,6 +906,12 @@ The general workflow of the `group /view` command is as follows:
      `TextUI#printlnMessage`.
    * Else, the `String` object representing the details of the requested group is retrieved using the `Group#toString`
      method. The `String` object is then printed out with `TextUI#printlnMessageWithDivider`.
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#group-commands">Back to Group Commands</a>
+</div>
 
 <hr>
 
