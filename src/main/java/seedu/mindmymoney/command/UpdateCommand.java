@@ -103,7 +103,7 @@ public class UpdateCommand extends Command {
      * @throws MindMyMoneyException when the payment method is not cash and is not found in user's credit card list.
      */
     private void updatePaymentMethod(String newPaymentMethod, float newExpenditureAmount, int expenditureIndex)
-                                        throws MindMyMoneyException {
+        throws MindMyMoneyException {
         Expenditure oldExpenditure = expenditureList.get(expenditureIndex);
         String oldPaymentMethod = oldExpenditure.getPaymentMethod();
         if (!oldPaymentMethod.equals("Cash")) {
@@ -131,14 +131,15 @@ public class UpdateCommand extends Command {
             String indexAsString = parseUpdateInput[INDEX_OF_SECOND_ITEM];
             final int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
 
-            String newPaymentMethod = parseInputWithCommandFlag(updateInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY);
-            String inputCategory = parseInputWithCommandFlag(updateInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
-            String newDescription = parseInputWithCommandFlag(updateInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
-            String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
-            String inputTime = parseInputWithCommandFlag(updateInput, FLAG_OF_TIME, FLAG_END_VALUE);
+            String newPaymentMethod =
+                parseInputWithCommandFlag(updateInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY).trim();
+            String inputCategory = parseInputWithCommandFlag(updateInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION).trim();
+            String newDescription = parseInputWithCommandFlag(updateInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT).trim();
+            String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT, FLAG_OF_TIME).trim();
+            String inputTime = parseInputWithCommandFlag(updateInput, FLAG_OF_TIME, FLAG_END_VALUE).trim();
 
             testUpdateExpenditureParameters(indexToUpdate, newPaymentMethod, inputCategory, newDescription,
-                    newAmountAsString, inputTime, creditCardList, expenditureList);
+                newAmountAsString, inputTime, creditCardList, expenditureList);
 
             if (capitalise(newPaymentMethod).equals("Cash")) {
                 newPaymentMethod = capitalise(newPaymentMethod);
@@ -147,21 +148,22 @@ public class UpdateCommand extends Command {
             float newAmountAsFloat = formatFloat(Float.parseFloat(newAmountAsString));
 
             if (isSimilarExpenditure(indexToUpdate, newPaymentMethod, newCategory, newDescription, newAmountAsFloat,
-                    inputTime)) {
+                inputTime)) {
                 throw new MindMyMoneyException("Expense fields to be updated is similar to the expense in the list.\n"
-                        + "Please make sure the field descriptions you want to change are different.");
+                    + "Please make sure the field descriptions you want to change are different.");
             }
 
             updatePaymentMethod(newPaymentMethod, newAmountAsFloat, indexToUpdate);
 
             // Create new expenditure object to substitute in
             Expenditure newExpenditure = new Expenditure(newPaymentMethod, newCategory, newDescription,
-                    newAmountAsFloat, inputTime);
+                newAmountAsFloat, inputTime);
             expenditureList.set(indexToUpdate, newExpenditure);
             System.out.println("Successfully set expenditure " + indexAsString + " to:\n"
-                    + "$" + newExpenditure.getAmount() + " was spent on " + newExpenditure.getDescription()
-                    + "(" + newExpenditure.getCategory() + ") " + "using " + newExpenditure.getPaymentMethod()
-                    + " [" + newExpenditure.getTime() + "]");
+                + "$" + String.format("%.2f", newExpenditure.getAmount()) + " was spent on "
+                + newExpenditure.getDescription()
+                + "(" + newExpenditure.getCategory() + ") " + "using " + newExpenditure.getPaymentMethod()
+                + " [" + newExpenditure.getTime() + "]");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Did you forget to input INDEX, DESCRIPTION or AMOUNT?");
         } catch (NumberFormatException e) {
@@ -183,12 +185,12 @@ public class UpdateCommand extends Command {
      * @return true if fields are similar, false otherwise.
      */
     public boolean isSimilarExpenditure(int index, String newPaymentMethod, String newCategory, String newDescription,
-                             float newAmountAsFloat, String newTime) {
+                                        float newAmountAsFloat, String newTime) {
         if (isEqualPaymentMethod(expenditureList, index, newPaymentMethod)
-                && isEqualCategory(expenditureList, index, newCategory)
-                && isEqualDescription(expenditureList, index, newDescription)
-                && isEqualAmount(expenditureList, index, newAmountAsFloat)
-                && isEqualTime(expenditureList, index, newTime)) {
+            && isEqualCategory(expenditureList, index, newCategory)
+            && isEqualDescription(expenditureList, index, newDescription)
+            && isEqualAmount(expenditureList, index, newAmountAsFloat)
+            && isEqualTime(expenditureList, index, newTime)) {
             return true;
         }
         return false;
@@ -208,30 +210,28 @@ public class UpdateCommand extends Command {
 
             // Parse data from input
             String newCardName = parseInputWithCommandFlag(updateInput, FLAG_OF_CARD_NAME,
-                    FLAG_OF_CASHBACK);
+                FLAG_OF_CASHBACK).trim();
             String newCashBack = parseInputWithCommandFlag(updateInput, FLAG_OF_CASHBACK,
-                    FLAG_OF_CARD_LIMIT);
+                FLAG_OF_CARD_LIMIT).trim();
             String newCardLimit = parseInputWithCommandFlag(updateInput, FLAG_OF_CARD_LIMIT,
-                    FLAG_END_VALUE);
+                FLAG_END_VALUE).trim();
             int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
-
-            double newCashBackAsDouble = Double.parseDouble(newCashBack);
-            float newCardLimitAsFloat = Float.parseFloat(newCardLimit);
-
+            float newCashBackAsDouble = formatFloat(Float.parseFloat(newCashBack));
+            float newCardLimitAsFloat = formatFloat(Float.parseFloat(newCardLimit));
             CreditCard oldCreditCard = creditCardList.get(indexToUpdate);
             if (oldCreditCard.getTotalExpenditure() > newCardLimitAsFloat) {
                 throw new MindMyMoneyException("Current spending has already exceeded the new limit!");
             }
             if (isSimilarCreditCard(indexToUpdate, newCardName, newCashBackAsDouble, newCardLimitAsFloat)) {
                 throw new MindMyMoneyException("Credit Card fields to be updated is similar to the credit card in "
-                        + "the list.\n" + "Please make sure the field descriptions you want to change are different.");
+                    + "the list.\n" + "Please make sure the field descriptions you want to change are different.");
             }
             CreditCard newCreditCard = new CreditCard(newCardName, newCashBackAsDouble,
-                    newCardLimitAsFloat);
+                newCardLimitAsFloat);
 
             creditCardList.set(indexToUpdate, newCreditCard);
             System.out.println("Successfully set credit card " + indexAsString + " to:\n"
-                    + newCreditCard);
+                + newCreditCard);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Did you forget to input INDEX, NAME, CASHBACK or CREDIT LIMIT?");
         } catch (NumberFormatException e) {
@@ -252,8 +252,8 @@ public class UpdateCommand extends Command {
      */
     public boolean isSimilarCreditCard(int index, String newCardName, double newCashback, float newCardLimit) {
         if (isEqualName(creditCardList, index, newCardName)
-                && isEqualCashback(creditCardList, index, newCashback)
-                && isEqualCardLimit(creditCardList, index, newCardLimit)) {
+            && isEqualCashback(creditCardList, index, newCashback)
+            && isEqualCardLimit(creditCardList, index, newCardLimit)) {
             return true;
         }
         return false;
@@ -272,25 +272,25 @@ public class UpdateCommand extends Command {
             int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
 
             String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT,
-                    FLAG_OF_CATEGORY);
+                FLAG_OF_CATEGORY).trim();
             int newAmountAsInt = Integer.parseInt(newAmountAsString);
 
             String inputCategory = parseInputWithCommandFlag(updateInput, FLAG_OF_CATEGORY,
-                    FLAG_END_VALUE);
+                FLAG_END_VALUE).trim();
 
             testUpdateIncomeParameters(newAmountAsInt, inputCategory);
             String newCategory = capitalise(inputCategory);
             if (isSimilarIncome(indexToUpdate, newAmountAsInt, newCategory)) {
                 throw new MindMyMoneyException("Income fields to be updated is similar to the income in the list.\n"
-                        + "Please make sure the field descriptions you want to change are different.");
+                    + "Please make sure the field descriptions you want to change are different.");
             }
             Income newIncome = new Income(newAmountAsInt, newCategory);
             incomeList.set(indexToUpdate, newIncome);
 
             System.out.print("Successfully set income " + indexAsString + " to:\n"
-                    + "Amount: $" + newAmountAsString + "\n"
-                    + "Category: " + newCategory + "\n"
-                    + System.lineSeparator());
+                + "Amount: $" + newAmountAsString + "\n"
+                + "Category: " + newCategory + "\n"
+                + System.lineSeparator());
 
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Did you forget to input AMOUNT or CATEGORY?");
@@ -311,7 +311,7 @@ public class UpdateCommand extends Command {
      */
     public boolean isSimilarIncome(int index, int newAmount, String newCategory) {
         if (isEqualIncomeCategory(incomeList, index, newCategory)
-                && isEqualIncomeAmount(incomeList, index, newAmount)) {
+            && isEqualIncomeAmount(incomeList, index, newAmount)) {
             return true;
         }
         return false;
@@ -332,9 +332,9 @@ public class UpdateCommand extends Command {
             updateIncome();
         } else {
             throw new MindMyMoneyException("You are missing a flag in your command\n"
-                    + "Type \"help /e\" to view the list of supported expenditure commands\n"
-                    + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
-                    + "Type \"help /i\" to view the list of supported income commands\n");
+                + "Type \"help /e\" to view the list of supported expenditure commands\n"
+                + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
+                + "Type \"help /i\" to view the list of supported income commands\n");
         }
     }
 }
