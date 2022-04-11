@@ -40,19 +40,25 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 
 #### Enhancements to existing features
  * [CommandParser interface](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/CommandParser.java)
-   * To isolate Parser component related dependencies from Command classes.
-   * Set up to encourage other developers to separate the dependency of the `Parser` component from the `Command`
-     subclasses that they are working on.
+   * What it does: Isolates `Parser` component related dependencies from `Command` classes by shifting all input parsing
+     functionality to the `CommandParser` itself, allowing the `Command` class to focus on carrying out the command
+     as specified by the user.
+   * Justification: To encourage other developers to separate the dependency of the `Parser` component from the `Command`
+     subclasses that they are working on. This improves the overall quality of the code of the project as testing can be
+     much more modular.
  * [ParserUtils](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/ParserUtils.java)
-   * Separated the handling of argument parsing from `Parser` class into `ParserUtils` class, allowing `Parser` class to
+   * What it does: Handles all argument parsing delegated to the `Parser` component, allowing `Parser` class to
      have the sole purpose of returning an `XYZCommand` object corresponding to the given user input.
+   * Justification: To improve the code quality by reducing unnecessary dependencies and following the separation of
+     concerns principle.
  * [ParserErrors](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/ParserErrors.java)
-   * Separated the handling of `Parser` component related error messages to `ParserError` class.
+   * What it does: Handles the generation of `Parser` component related error messages.
  * Integration of [`TableFormatter`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/ui/TableFormatter.java) class to 
    [`Session`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Session.java) class
-   * Improve the readability of details of a `Session` object when printed.
+   * What it does: Improve the readability of details of a `Session` object when printed.
  * Add support and future-proofing to parsing GST and Service charge percentages in [`ParserUtils`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/ParserUtils.java) class
-   * Allow the use of up to two decimal points to support potential changes and variability in charges.
+   * Allow the use of real numbers up to two decimal points to support potential changes and variability in charges.
+   * Previously, only integers were allowed which may not support changes in percentages less than 1%.
 
 #### Testing
  * Added comprehensive JUnit tests for
