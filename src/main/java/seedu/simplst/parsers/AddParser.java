@@ -16,7 +16,15 @@ public class AddParser extends CommandParser {
         super(warehouse);
     }
 
-    protected void init_extract_params() throws MissingFlagException, EmptyFieldException {
+    /*For testing*/
+    public AddParser(Warehouse warehouse, String userInput) {
+        super(warehouse);
+        this.userInput = userInput;
+    }
+
+
+    @Override
+    public void initExtractParams() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[ugbo]{1,2})/";
@@ -24,7 +32,9 @@ public class AddParser extends CommandParser {
         this.matches = matchKeywordsMatch.getGroupValues();
     }
 
-    protected void extract_params() throws WrongCommandException, InvalidFileException, InvalidObjectType,
+
+    @Override
+    public void extractParams() throws WrongCommandException, InvalidFileException, InvalidObjectType,
             MissingFlagException, EmptyFieldException {
         if (matches.get("flag").equals("g")) {
             String regexGood = "sku/(?<sku>.*) qty/(?<qty>.*)";
@@ -39,7 +49,7 @@ public class AddParser extends CommandParser {
             String regexUnitGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) size/(?<size>.*)";
             HashMap<String, String> regexUnitGoodMatch = new MatchKeywords(userInput, regexUnitGood).getGroupValues();
             warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
-                        regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));
+                    regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));
 
         } else if (matches.get("flag").equals("o")) {
             // adding the base details for order
@@ -56,7 +66,6 @@ public class AddParser extends CommandParser {
                     userInput, regexOrderline).getGroupValues();
             warehouse.addOrderline(regexOrderlineMatch.get("oid"),
                     regexOrderlineMatch.get("sku"), regexOrderlineMatch.get("qty"));
-
         } else if (matches.get("flag").equals("bg")) {
             // batch goods
             String regexBatchGoods = "fp/(?<filepath>.*)";
@@ -73,4 +82,5 @@ public class AddParser extends CommandParser {
             throw new WrongCommandException("add", true);
         }
     }
+
 }

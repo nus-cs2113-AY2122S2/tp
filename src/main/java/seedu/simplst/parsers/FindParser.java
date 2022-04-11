@@ -12,8 +12,13 @@ public class FindParser extends CommandParser {
         super(warehouse);
     }
 
+    public FindParser(Warehouse warehouse, String userInput) {
+        super(warehouse);
+        this.userInput = userInput;
+    }
+
     @Override
-    protected void init_extract_params() throws MissingFlagException, EmptyFieldException {
+    public void initExtractParams() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "n/(?<name>.*)";
@@ -22,7 +27,7 @@ public class FindParser extends CommandParser {
     }
 
     @Override
-    protected void extract_params() throws WrongCommandException {
+    public void extractParams() throws WrongCommandException {
         if (matches.get("name").equals("")) {
             throw new WrongCommandException("find", true);
         }
