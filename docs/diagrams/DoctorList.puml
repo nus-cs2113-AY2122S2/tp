@@ -22,7 +22,8 @@ class DoctorList {
 +findByAddress(String[]) : void
 +findByDob(String[]) : void
 +findBySpecialization(String[]) : void
-+createArrayOfFoundDoctors() : void
++displayFoundDoctorList() : void
++loadDate(String[]) : void
 }
 
 @enduml
