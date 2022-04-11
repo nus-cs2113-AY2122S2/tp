@@ -702,7 +702,7 @@ public class Warehouse {
         Boolean status = true;
         for (Object ko: jo.keySet()) {
             String sku = ko.toString();
-//            System.out.println("sku: "+ sku);
+//          System.out.println("sku: "+ sku);
             JSONObject jg = (JSONObject) jo.get(ko);
             UnitGood ug = UnitGood.restoreUnitGood((JSONObject) jg);
             //Good curGood = Good.restoreGood((JSONObject) jg);
@@ -730,9 +730,9 @@ public class Warehouse {
 
     private JSONObject serializeUnitGoods() {
         JSONObject jo = new JSONObject();
-//        System.out.println("Unit Good Hash Map");
+//      System.out.println("Unit Good Hash Map");
         unitGoodHashMap.forEach((sku, ug) -> {
-//            System.out.println("SKU: " + sku);
+//          System.out.println("SKU: " + sku);
             jo.put(sku, ug.serialize());
         });
         return jo;
@@ -770,7 +770,7 @@ public class Warehouse {
         if (saveStr == null) {
             return false;
         }
-//        System.out.println(saveStr);
+//      System.out.println(saveStr);
         // PARSE
         try {
             JSONObject jsonWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
