@@ -18,8 +18,6 @@ bin/
 /text-ui-test/EXPECTED-UNIX.TXT
 /text-ui-test/EXPECTED-UNIX.txt
 
-
 # Storage files
 /data/
 /data/SplitLah.data
-
