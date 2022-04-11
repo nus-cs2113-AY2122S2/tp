@@ -79,15 +79,22 @@ public class ListCommand extends Command {
      * @throws MindMyMoneyException Throws an exception when the date is not in the correct format
      */
     public String expenditureListToString() throws MindMyMoneyException {
-        int count = COUNTVALUE;
-        String listInString = "";
-        if (listInput.equals(FLAG_OF_EXPENSES)) {
-            listInString = listString(count, listInString);
-        } else {
-            listInString = outputListWithDate(count, listInString);
+        try {
+            int count = COUNTVALUE;
+            String listInString = "";
+            if (listInput.equals(FLAG_OF_EXPENSES)) {
+                listInString = listString(count, listInString);
+            } else {
+                listInString = outputListWithDate(count, listInString);
+            }
+            assert listInString.length() != 0 : "Return string should be non-empty";
+            return listInString;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new MindMyMoneyException("Please ensure that you have entered a valid list command.\n"
+                + "Use 'list /e' to view your current list of expenditure\n"
+                + "Use 'list /cc' to view your current list of stored credit cards\n"
+                + "Use list /i to view your current list of incomes");
         }
-        assert listInString.length() != 0 : "Return string should be non-empty";
-        return listInString;
     }
 
     /**
