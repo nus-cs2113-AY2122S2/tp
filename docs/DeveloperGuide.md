@@ -1,6 +1,7 @@
 # Developer Guide
 
 ## Design & implementation
+![](arch.jpg)
 
 ### Update patient information
 Step 1:Patient inform the nurse of their change in personal information. Nurse will open up the IHospital system and request to submit the change. 
