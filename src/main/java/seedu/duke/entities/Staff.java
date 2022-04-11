@@ -1,5 +1,7 @@
 package seedu.duke.entities;
 
+import seedu.duke.loggers.MainLogger;
+
 import java.io.Serializable;
 
 public class Staff implements Serializable {
@@ -66,7 +68,7 @@ public class Staff implements Serializable {
 
     public void setSalary(double salary) {
         if (salary <= 0) {
-            throw new IllegalArgumentException("Salary cannot be 0 or negative.");
+            throw new IllegalArgumentException("Salary cannot be zero or negative.");
         }
         assert salary > 0 : "Salary should be more than 0.";
         this.salary = salary;

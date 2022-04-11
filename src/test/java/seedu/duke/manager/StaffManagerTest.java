@@ -50,11 +50,4 @@ public class StaffManagerTest {
         assertThrows(IllegalArgumentException.class, () -> staffManager.findByStaffId(-1));
         assertThrows(IllegalArgumentException.class, () -> staffManager.findByStaffId(0));
     }
-
-    @Test
-    void printStaff_test_invalidId() {
-        StaffManager.resetInstance();
-        StaffManager staffManager = StaffManager.getInstance();
-        assertThrows(IllegalStateException.class, () -> staffManager.printStaff());
-    }
 }
