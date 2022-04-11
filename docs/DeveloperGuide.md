@@ -835,14 +835,14 @@ Test Scenario 1: No sessions are currently stored in the application.
 3. Test Command: `session /create /n SessionTest3 /pl Alice Alice /d today` <br>
    Expected: An error message should be printed, indicating that there are duplicates in the list of persons provided.
 
-Test Scenario 2: Only a single session with a session unique identifier of `1`, named SessionTest1, exists in the application after creating
+Test Scenario 2: Only a single session with a session unique identifier of `1`, named `SessionTest1`, exists in the application after creating
 it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
 1. Test Command: `session /create /n SessionTest3 /pl Alice Bob /d today` <br>
    Expected: A success message should be printed, indicating the details of the session as provided in the command.
 2. Test Command: `session /create /n SessionTest1 /pl Alice Bob /d 10-04-2022` <br>
    Expected: An error message should be printed, indicating that a session with the same name already exists within the application.
 
-Test Scenario 3: Only a single group with a group unique identifier of `1`, named GroupTest1 with Alice, Bob and Charlie exists in the application after creating
+Test Scenario 3: Only a single group with a group unique identifier of `1`, named `GroupTest1` with `Alice`, `Bob` and `Charlie` exists in the application after creating
 it with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-group-group-create) command.
 1. Test Command: `session /create /n SessionTest4 /gid 1 /d today`<br>
    Expected: A success message should be printed, indicating the details of the session as provided in the command. 
@@ -874,7 +874,7 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 
 **Test Cases:**
 
-Test Scenario 1: Only a single session with a session unique identifier of `1`, named SessionTest1 with Alice and Bob involved on 10-04-2022, exists in the application after creating
+Test Scenario 1: Only a single session with a session unique identifier of `1`, named `SessionTest1` with `Alice` and `Bob` involved on `10-04-2022`, exists in the application after creating
 it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
 1. Test Command: `session /edit /sid 1 /n SessionTest1`<br>
    Expected: A message should be printed, indicating that no edits were made.
@@ -973,7 +973,7 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 4. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Alice Bob /cl 5 10 /gst 7 /sc 10` <br>
    Expected: A success message should be printed, along with the details of the activity as provided in the command. Each person's cost should have been multiplied by 1.177.
 
-Test Scenario 3: Only a single session with a session unique identifier of `1`, consisting of only Alice and Bob, exists in the application after creating
+Test Scenario 3: Only a single session with a session unique identifier of `1`, consisting of only `Alice` and `Bob`, exists in the application after creating
 a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
 1. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Mallory /i Alice Bob /co 20 /gst 7 /sc 10` <br>
    Expected: An error message should be printed, indicating that a person specified was not found in the particular session.
@@ -991,17 +991,17 @@ Test Scenario 1: No sessions are currently stored in the application.
 * Test Command: `activity /delete /sid 1 /aid 1` <br>
   Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
 
-Test Scenario 1: Only a single session with a session unique identifier of `1` exists in the application after creating
+Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
 a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command. No activities are currently stored in the session.
 * Test Command: `activity /delete /sid 1 /aid 1` <br>
   Expected: An error message should be printed, indicating that the list of activities in the session is currently empty.
 
-Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
+Test Scenario 3: Only a single session with a session unique identifier of `1` exists in the application after creating
 a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
 Also, only an activity with an activity unique identifier of `1` within this session exists in the application after creating
 an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-an-activity-activity-create) command.
 1. Test Command: `activity /delete /sid 1 /aid 1` <br>
-   Expected: A success message should be printed, indicating that the activity was deleted successfully.
+   Expected: A success message should be printed, indicating that the activity was deleted.
 2. Test Command: `activity /delete /sid 3 /aid 1` <br>
    Expected: An error message should be printed, indicating that the session specified was not found.
 3. Test Command: `activity /delete /sid 1 /aid 4` <br>
@@ -1012,6 +1012,29 @@ an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.
 #### Editing an Activity
 > For details on the usage of `activity /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-an-activity-activity-edit).
 
+**Test Cases:**
+
+Test Scenario 1: No sessions are currently stored in the application.
+* Test Command: `activity /edit /sid 1 /aid 1 /n ActivityTest2` <br>
+  Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
+
+Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command. No activities are currently stored in the session.
+* Test Command: `activity /edit /sid 1 /aid 1 /n ActivityTets2` <br>
+  Expected: An error message should be printed, indicating that the list of activities in the session is currently empty.
+
+Test Scenario 3: Only a single session with a session unique identifier of `1`, consisting of only `Alice` and `Bob`, exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
+Also, only an activity with an activity unique identifier of `1`, named `ActivityTest1` with a total cost of `$20`, paid by `Alice`, involving `Alice` and `Bob` within this session exists in the application after creating
+an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-an-activity-activity-create) command.
+1. Test Command: `activity /edit /sid 1 /aid 2 /n ActivityTest2` <br>
+   Expected: An error message should be printed, indicating that the activity specified was not found in the particular session.
+2. Test Command: `activity /edit /sid 1 /aid 1 /n ActivityTest1`
+   Expected: A message should be printed, indicating that no edits were made.
+3. Test Command: `activity /edit /sid 1 /aid 1 /n ActivityTest2` <br>
+   Expected: A success message should be printed, indicating that the activity was edited.
+4. Test Command: `activity /edit /sid 1 /aid 1 /p Bob` <br>
+   Expected: A success message should be printed, indicating that the activity was edited.
 
 <hr>
 
