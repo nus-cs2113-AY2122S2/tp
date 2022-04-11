@@ -66,6 +66,8 @@ Example of usage:
 
 `add nurse /id 001 /n Hermione Granger /ph 11111111 /e ministerForMagic@gmail.com /t Minister`
 
+Expected output:
+![](AddNurseOutput.png)
 
 ### Adding a ward: `add ward`
 Adds a new ward to the system. 
@@ -134,6 +136,8 @@ Example of usage:
 
 `search appointment 2007-12-03T10:15:30`
 
+Expected output:
+![](SearchAppointmentOutput.png)
 
 ### Editing a person's information
 Editing an existing person's information.
