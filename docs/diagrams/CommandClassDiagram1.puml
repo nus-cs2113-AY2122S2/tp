@@ -8,7 +8,7 @@ Command <|-up- AddLessonCommand
 Command <|-up- AddMeetingCommand
 Command <|-- AddUserCommand
 Command <|-- ClearCommand
-Command -right-|> CommandResult : creates
+Command <|-- CommandResult
 Command <|-left- DeleteCommand
 
 class AddLessonCommand {
