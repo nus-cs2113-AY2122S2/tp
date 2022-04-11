@@ -391,6 +391,7 @@ List all items that is available all the time between a start date and an end da
 
 * `START_DATE` and `END_DATE` must be in `YYYY-MM-DD` format.
 * `START_DATE` cannot be after `END_DATE`.
+* The printed result will show the quantity of item that can be borrowed throughout the time period. i.e. If the time period is 2 days and 3 projectors can be borrowed on the first day while only 1 projector can be borrowed on the second day, the printed result will reflect that only 1 projector can be borrowed.
 
 **Examples of usage:**
 
