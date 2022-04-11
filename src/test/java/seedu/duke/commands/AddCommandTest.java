@@ -4,26 +4,29 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
-import seedu.duke.stubs.ItemStubs;
 import seedu.duke.stubs.UiStub;
-import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import static seedu.duke.stubs.ItemStubs.ITEM_DVI_CABLE;
+import static seedu.duke.stubs.ItemStubs.ITEM_HDMI_CABLE;
+import static seedu.duke.stubs.ItemStubs.ITEM_MARKER;
+import static seedu.duke.stubs.ItemStubs.ITEM_WHITEBOARD;
+
 public class AddCommandTest {
 
-    private static ItemList EXPECTED_ITEMLIST;
+    private static ItemList LIST_BEFORE;
+    private static ItemList LIST_AFTER;
+    private static ItemList LIST_MATCHING_BEFORE;
 
     @BeforeAll
     public static void generateExpectedList() {
-        EXPECTED_ITEMLIST = new ItemList(new ArrayList<>());
-        EXPECTED_ITEMLIST.addItem(ItemStubs.ITEM_MARKER);
-        EXPECTED_ITEMLIST.addItem(ItemStubs.ITEM_WHITEBOARD);
-        EXPECTED_ITEMLIST.addItem(ItemStubs.ITEM_HDMI_CABLE);
-        EXPECTED_ITEMLIST.addItem(ItemStubs.ITEM_DVI_CABLE);
+        LIST_BEFORE = generateItemList(ITEM_DVI_CABLE, ITEM_HDMI_CABLE, ITEM_MARKER);
+        LIST_AFTER = generateItemList(ITEM_DVI_CABLE, ITEM_HDMI_CABLE, ITEM_MARKER, ITEM_WHITEBOARD);
+        LIST_MATCHING_BEFORE = generateItemList(ITEM_DVI_CABLE, ITEM_HDMI_CABLE, ITEM_MARKER);
     }
 
     @Test
@@ -33,21 +36,32 @@ public class AddCommandTest {
 
     @Test
     public void execute_validItemList_addSuccessful() {
-        ItemList actualItemList = new ItemList(new ArrayList<>());
-        // It's alright to use the ItemStubs directly here since AddCommand is a non-mutating command.
-        Item item1 = ItemStubs.ITEM_MARKER;
-        Item item2 = ItemStubs.ITEM_WHITEBOARD;
-        Item item3 = ItemStubs.ITEM_HDMI_CABLE;
-        actualItemList.addItem(item1);
-        actualItemList.addItem(item2);
-        actualItemList.addItem(item3);
+        UiStub uiStub = new UiStub();
 
-        Ui ui = new UiStub();
+        AddCommand testCmd = new AddCommand(ITEM_WHITEBOARD);
+        testCmd.execute(LIST_BEFORE, uiStub);
 
-        AddCommand testComd = new AddCommand(ItemStubs.ITEM_DVI_CABLE);
-        testComd.execute(actualItemList, ui);
+        assertEquals(LIST_AFTER, LIST_BEFORE);
+    }
 
-        assertEquals(EXPECTED_ITEMLIST, actualItemList);
+    @Test
+    public void execute_existingItem_addUnsuccessful() {
+        UiStub uiStub = new UiStub();
+
+        // Test adding ITEM_DVI_CABLE which already exists in the list
+        AddCommand testCmd = new AddCommand(ITEM_DVI_CABLE);
+        testCmd.execute(LIST_BEFORE, uiStub);
+
+        // LIST_BEFORE should not have changed
+        assertEquals(LIST_MATCHING_BEFORE, LIST_BEFORE);
+    }
+
+    private static ItemList generateItemList(Item... items) {
+        ArrayList<Item> list = new ArrayList<>();
+        for (Item item : items) {
+            list.add(Item.copyItem(item));
+        }
+        return new ItemList(list);
     }
 
 }
