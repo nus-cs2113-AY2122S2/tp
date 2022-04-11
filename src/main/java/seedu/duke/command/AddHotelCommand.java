@@ -15,6 +15,7 @@ public class AddHotelCommand extends Command{
         boolean isFoundID = false;
         for (int i = 0; i < packages.getSize(); i++) {
             if (packages.getPackage(i).getID() == newHotel.getPackageID()) {
+                packages.getPackage(i).getHotelsList().addHotel(this.newHotel);
                 isFoundID = true;
                 System.out.println("Hotel has been added!");
                 break;
