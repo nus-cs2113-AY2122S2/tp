@@ -2,7 +2,6 @@
 
 ## Overview
 
-![](Logo/logo.jpg)
 
 I am one of the developers of Hotel Lite, a CLI application designed for hotel owners to keep track of multiple management tasks.
 This application offers functionalities for keeping track of hotel inventory,
@@ -40,6 +39,69 @@ I added a command which links the functionalities added by my teammates __Xunyi_
 * Once __Falicia__'s `delete housekeeper` command is called, I also use `AssignmentMap` to make sure that the given assignment entry is deleted from the program as well.
 * The `FileManager` for `AssignmentMap` saves both the `ROOMID` and the `NAME` to ensure that correct information is restored from the files once the program is reloaded.
 
+### General outlook
+I made the greeting for our application that uses a function to print a pattern of `*`s. The size of the pattern was set at `5` rows and can be increased in the `Ui` class.
+
+```
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+Hi, I am Hotel Lite, and I will do the managing for you.
+What shall we start with today?
+(You may type 'help' to get a full list of commands.)
+```
+
+Incidentally, I implemented a generalised command to help the user. I collated all commands written by my teammates and me to be printed when user types `help`. It allowed me to thoroughly go through the User Guide and even test out the commands written by everyone. The `help` command returns the following message:
+
+```
+================ Noted! ===================
+I am here to help!
+Given below are the formats commands related to customer satisfaction:
+1. add satisfaction CUSTOMER_NAME / SATISFACTION_RATING
+2. view satisfactions
+3. view average satisfaction
+------------------------------------------
+	 For commands related with housekeepers, use following formats: 
+	 1. add housekeeper NAME / AGE 
+	 2. availability NAME / DAY(S) 
+	 3. view recorded housekeepers 
+	 4. delete housekeeper NAME 
+	 5. get available on DAY 
+	 6. is a new week 
+	 7. is a new year 
+	 8. assign NAME / ROOM_NUMBER 
+	 9. add performance HOUSEKEEPER_NAME / PERFORMANCE_RATING 
+	 10. view performances 
+------------------------------------------
+For commands related with rooms, use following formats:
+1. check in ROOM_NUMBER
+2. check out ROOM_NUMBER
+3. check room ROOM_NUMBER
+4. check all room
+5. check level LEVEL_NUMBER
+6. check category CATEGORY
+------------------------------------------
+For commands related with inventory, use following formats:  
+1. add item ITEM NAME / PAX
+2. update item pax ITEM NAME / PAX
+3. update item name OLD ITEM NAME / NEW ITEM NAME
+4. delete item NAME
+5. view all items
+6. view items with zero pax
+7. search item KEYWORD
+------------------------------------------
+For commands related with events happening in the hotel, use following formats:
+1. add event DESCRIPTION / DATE
+2. delete event INDEX
+3. view events
+===========================================
+```
 ### Review Contributions
 
 I reviewed my teammates PRs on many occasions. Some of them are linked below:
@@ -102,4 +164,65 @@ __Interaction__ To understand the interaction between objects of these classes i
 ![Step Sequence Diagram](aiman_assignment/sequence.png)
 
 The command object passes on the ID of the room and the name of the housekeeper to the `AssignmentMap` object after parsing the input appropriately. The `addAssignment` function first locates the appropriate `Room` object from `RoomList`, and then looks for the `Housekeeper` object in the `HousekeeperList` and finally adds the mapping to the hash map.
+
+## Manual Testing
+#### Assign Housekeeper
+* The format of the command is `assign NAME / ROOMID`.
+* Prerequisites:
+    - the housekeeper with this `NAME` should already exist in the system.
+    - the room with this `ROOMID` should already exist in the system.
+
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:-------------|:-------------------|
+| Assign `Susan` to room `301` |`assign susan / 301`  | Registers the assignment|
+| Assign housekeeper that does not exist |`assign james / 301`  | Error message to the user|
+| Add `susan` to invalid room  | `assign susan / 90` | Error message to the user|
+| Add `susan` to non-integer room id | `assign susan / ioduf`  | Error message to the user|
+| Fail to separate fields | `assign susan 301`  | Error message to the user|
+
+### Event Related Functions
+#### Add Event
+* The format of the command is `add event DESCRIPTION / DATE`.
+* Prerequisites:
+    - date should be in `yyyy-mm-dd` format.
+    - the description should only contain alphanumeric characters.
+    - the event should not already exist in the system.
+
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:-------------|:-------------------|
+| Add event `study` on 19 Nov 2022 |`add event study / 2022-11-19`  | Adds the event|
+| Add event `study` with no date |`add event study`  | Error message to the user|
+| Add event `st*&udy` |`add event st*&udy / 2022-11-21`  | Error message to the user|
+| Add duplicate event | `add event study / 2022-11-19`  | Error message to the user|
+| Add extra fields to the command | `add event submit TP / 2022-04-11 / blah`  | Error message to the user|
+| Fail to separate fields | `add event submit TP 2022-04-11`  | Error message to the user|
+
+#### Delete Event
+* The format of the command is `delete event INDEX`.
+* Prerequisites:
+    - index should be an integer.
+    - the event should exist in the system.
+
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:-------------|:-------------------|
+| Delete event `study` from the list |`delete event 1`  | Deletes the event|
+| Delete event with index out of bounds |`delete event 6`  | Error message to the user|
+| Delete event with non-integer index |`delete event sf`  | Error message to the user|
+| Delete event with no index |`delete event`  | Error message to the user|
+
+## Product scope
+### Target user profile
+
+
+This application is designed for __hotel managers__ who:
+* have a need to manage inventory of items in the hotel
+* have a need to store and view the events happening in the hotel
+* have a need to view and record the status of rooms (whether they've been checked into or checked out of)
+* need to keep track of the information related to their housekeeping staff, including their available hours
+  and performance ratings
+* like to keep track of customer ratings
+* prefer desktop apps over other types
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
