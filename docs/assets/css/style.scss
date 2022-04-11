@@ -3,10 +3,15 @@
 
 @import "{{ site.theme }}";
 
-a.button {
+div.button-box {
+    text-align: center;
+    width: 100%;
+}
+
+a.btn {
     background-color: #155a95;
     color: white;
-    padding: 5px 8px 5px 8px;
+    padding: 5px 20px 5px 20px;
     border-radius: 30px;
     text-align: center;
 }
