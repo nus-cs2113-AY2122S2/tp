@@ -8,19 +8,11 @@ public class Display {
     }
 
     public static void bye() {
-        System.out.println("Thanks for using Simplst 1.0!");
+        System.out.println("Thanks for using Simplst 2.1!");
     }
 
     public static void stateRestored() {
         System.out.println("State restored!");
-    }
-
-    public static void stateSaved() {
-        System.out.println("State saved!");
-    }
-
-    public static void stateNotSaved() {
-        System.out.println("State not saved!");
     }
 
     public static void newLogin() {
@@ -28,13 +20,6 @@ public class Display {
     }
 
     // successful output
-    public static void inventoryGoodQtyRemoved(Float qty, String goodName) {
-        System.out.println(qty + " of " + goodName + " has been removed.");
-    }
-
-    public static void orderlineCheckedOff(String unitGoodName, String orderId) {
-        System.out.println(unitGoodName + "of order " + orderId + " has been removed.");
-    }
 
     public static void unitGoodAdded(String sku) {
         System.out.println("Unit Good of SKU: " + sku + " added to warehouse");
