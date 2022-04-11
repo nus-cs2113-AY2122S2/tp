@@ -11,10 +11,10 @@ participant ":System" as System SYSTEM_COLOR
 
 [-> Ilist: editIncome(1:Integer, 1:Integer, "Bills":String,\n null ,null)
 Ilist -> Alist: get(0:Integer)
+activate Ilist
 activate Alist
 Alist --> Ilist : item:Income
 deactivate Alist
-activate Ilist
 Ilist -> Ilist: isDescEdited(item:Income, "Bills":Integer)
 activate Ilist
 Ilist -> Inc: getDescription()
@@ -72,7 +72,7 @@ note right: True returned if opt taken,\n False otherwise.
 deactivate Ilist
 deactivate Alist
 
-Ilist -> Ilist: printEditMsg(isDescEdited:Boolean, isPermEdited:Boolean, isAmountEdited:Boolean)
+Ilist -> Ilist: printEditMsg(isDescEdited:Boolean, isPermEdited:Boolean, \nisAmountEdited:Boolean)
 activate Ilist
 alt OPT_COLOR isDescEdited || isAmountEdited || isPermEdited
     Ilist -> System:println("Your Income have been edited")
