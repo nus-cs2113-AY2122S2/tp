@@ -45,6 +45,7 @@ public class CommandParser {
     private static final String DELETE = "delete ";
     private static final String ADD = "add ";
     private static final String CHECK = "check ";
+    private static final String VIEW = "view ";
     private static final String ADD_ITEM_COMMAND = "add item ";
     private static final String VIEW_ITEM_LIST_COMMAND = "view all items";
     private static final String VIEW_ITEMS_WITH_ZERO_PAX_COMMAND = "view items with zero pax";
@@ -72,7 +73,7 @@ public class CommandParser {
     private static final String DELETE_PROFILE = "delete housekeeper ";
     private static final String UPDATE_AGE_BY_ONE = "is a new year";
     private static final String ADD_EVENT = "add event ";
-    private static final String VIEW_EVENTS = "list events";
+    private static final String VIEW_EVENTS = "view events";
     private static final String DELETE_EVENT = "delete event ";
 
     /**
@@ -95,21 +96,8 @@ public class CommandParser {
             userCommand = parseDelete(userInputLowerCase);
         } else if (userInputLowerCase.startsWith(CHECK)) {
             userCommand = parseCheck(userInputLowerCase);
-        } else if (userInputLowerCase.trim().equals(VIEW_SATISFACTIONS_COMMAND)) {
-            userCommand = new ViewSatisfactionsCommand();
-        } else if (userInputLowerCase.equals(AVERAGE_SATISFACTION_COMMAND)) {
-            userCommand = new ViewAverageSatisfactionCommand();
-        } else if (userInputLowerCase.startsWith(VIEW_ITEM_LIST_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(VIEW_ITEM_LIST_COMMAND, "");
-            userInputLowerCaseWithoutCommand = userInputLowerCaseWithoutCommand.trim();
-            userCommand = new ViewItemListCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND,
-                    "");
-            userInputLowerCaseWithoutCommand = userInputLowerCaseWithoutCommand.trim();
-            userCommand = new ViewItemsWithZeroPaxCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.trim().equals(VIEW_PERFORMANCES_COMMAND)) {
-            userCommand = new ViewHousekeeperPerformancesCommand();
+        } else if (userInputLowerCase.startsWith(VIEW)) {
+            userCommand = parseView(userInputLowerCase);
         } else if (userInputLowerCase.startsWith(UPDATE_ITEM_PAX_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(UPDATE_ITEM_PAX_COMMAND, "");
             userCommand = new UpdateItemPaxCommand(userInputLowerCaseWithoutCommand);
@@ -119,12 +107,6 @@ public class CommandParser {
         } else if (userInputLowerCase.startsWith(ADD_AVAILABILITY_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_AVAILABILITY_COMMAND, "");
             userCommand = new AddAvailabilityCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.contains((VIEW_HOUSEKEEPER_COMMAND))) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
-            userCommand = new ViewHousekeeperListCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(VIEW_EVENTS)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_EVENTS, "");
-            userCommand = new ViewEventsCommand(userInputLowerCaseWithoutCommand);
         } else {
             userCommand = parseMiscellaneous(userInputLowerCase);
         }
@@ -252,7 +234,7 @@ public class CommandParser {
             userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
             userCommand = new AgeIncreaseCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(ASSIGN_HOUSEKEEPER)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ASSIGN_HOUSEKEEPER, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ASSIGN_HOUSEKEEPER, "");
             userCommand = new AssignHousekeeperCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(SEARCH_ITEM_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(SEARCH_ITEM_COMMAND, "");
@@ -263,6 +245,44 @@ public class CommandParser {
         } else if (userInputLowerCase.startsWith(UPDATE_ITEM_NAME_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(UPDATE_ITEM_NAME_COMMAND, "");
             userCommand = new UpdateItemNameCommand(userInputLowerCaseWithoutCommand);
+        } else {
+            throw new InvalidCommandException();
+        }
+        return userCommand;
+    }
+
+    /**
+     * Parses the user-provided add-related command and creates the relevant Command object.
+     *
+     * @param userInputLowerCase User input to be parsed and turned into a delete-related Command object.
+     * @return The relevant Command object created based on the user input.
+     * @throws HotelLiteManagerException If there is an error in user input that prevents it from being parsed into
+     *                                   the relevant Command object.
+     */
+    public Command parseView(String userInputLowerCase) throws HotelLiteManagerException {
+        Command userCommand;
+        String userInputLowerCaseWithoutCommand;
+        if (userInputLowerCase.trim().equals(VIEW_SATISFACTIONS_COMMAND)) {
+            userCommand = new ViewSatisfactionsCommand();
+        } else if (userInputLowerCase.startsWith(VIEW_ITEM_LIST_COMMAND)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(VIEW_ITEM_LIST_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCaseWithoutCommand.trim();
+            userCommand = new ViewItemListCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND,
+                    "");
+            userInputLowerCaseWithoutCommand = userInputLowerCaseWithoutCommand.trim();
+            userCommand = new ViewItemsWithZeroPaxCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.trim().equals(VIEW_PERFORMANCES_COMMAND)) {
+            userCommand = new ViewHousekeeperPerformancesCommand();
+        } else if (userInputLowerCase.contains((VIEW_HOUSEKEEPER_COMMAND))) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
+            userCommand = new ViewHousekeeperListCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.equals(AVERAGE_SATISFACTION_COMMAND)) {
+            userCommand = new ViewAverageSatisfactionCommand();
+        } else if (userInputLowerCase.startsWith(VIEW_EVENTS)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_EVENTS, "");
+            userCommand = new ViewEventsCommand(userInputLowerCaseWithoutCommand);
         } else {
             throw new InvalidCommandException();
         }
