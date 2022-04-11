@@ -17,17 +17,16 @@ activate staffcontroller
 staffcontroller --> staffcontroller
 deactivate staffcontroller
 
-alt staff records empty
+opt staff records empty
 staffcontroller --> user
+end
 
-else staff records not empty
 staffcontroller->staffmanager: printStaff()
 activate staffmanager
 group loop [for each dish]
-staffmanager --> staff: toString()
+staffmanager -> staff: toString()
 activate staff
 staff --> staffmanager
-end
 
 end
 @enduml

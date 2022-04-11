@@ -16,13 +16,19 @@ activate staffcontroller
 staffcontroller --> staffcontroller
 deactivate staffcontroller
 
-alt staff records empty
+opt staff records empty
 staffcontroller --> user
+end
 
-else staff records not empty
 staffcontroller -> staffmanager: staff  = findByStaffId(int staffId)
 activate staffmanager
+
+opt staff ID <= 0
+staffmanager --> staffcontroller: IllegalArgumentException
+end
+
 staffmanager --> staffcontroller
 
-end
+
+
 @enduml

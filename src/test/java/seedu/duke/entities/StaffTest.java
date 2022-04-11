@@ -13,8 +13,8 @@ class StaffTest {
     void staff_testCreateStaff_createCorrectly() {
         Staff staff1 =  new Staff(1, "Jay", "Waiter", 5000);
         Staff staff2 = new Staff(2, "Mary", "Chef", 5000);
-        assertTrue(staff1.toString().equals("1     | Jay             | Waiter     | 5000.00"));
-        assertTrue(staff2.toString().equals("2     | Mary            | Chef       | 5000.00"));
+        assertTrue(staff1.toString().equals("1     | Jay             | Waiter     | $5000.00"));
+        assertTrue(staff2.toString().equals("2     | Mary            | Chef       | $5000.00"));
     }
 
     @Test

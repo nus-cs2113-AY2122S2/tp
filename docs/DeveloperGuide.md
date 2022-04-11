@@ -146,21 +146,21 @@ These functions are "delegated" to `ArrayList<Dish>`, which is associated with `
 
 For example, `printDishes()`, iterates through `dishes` and calls `get(int)` method (`setPrice(int, double)`, `setName(int, String)` also call `get(int)`):
 
-![](diagrams/sqeuence/DishManager_printDishes.png)
+![](diagrams/sequence/DishManager_printDishes.png)
 
 `deleteDish(int)` calls `remove(int)`:
 
-![](diagrams/sqeuence/DishManager_deleteDish.png)
+![](diagrams/sequence/DishManager_deleteDish.png)
 
 `addDish(Dish)` calls `add(Dish)`:
 
-![](diagrams/sqeuence/DishManager_addDish.png)
+![](diagrams/sequence/DishManager_addDish.png)
 
 `void setPrice(int, double)`:
-![](diagrams/sqeuence/DishManager_setPrice.png)
+![](diagrams/sequence/DishManager_setPrice.png)
 
 `void setName(int, String)` is similar:
-![](diagrams/sqeuence/DishManager_setName.png)
+![](diagrams/sequence/DishManager_setName.png)
 
 ### DishController
 `DishController` is the user-facing part of `DishManagement`
@@ -190,13 +190,13 @@ Methods call `get(int)` to get the element.
 
 For example, `addDishToOrder(Dish dish, int orderIdx)`, iterates through `orders` and calls `addDish(Dish dish)` method:
 
-![](diagrams/sqeuence/OrderManager_addDishToOrder.png)
+![](diagrams/sequence/OrderManager_addDishToOrder.png)
 
 `deleteOrder(int)` calls `getOrderCount()`:
-![](diagrams/sqeuence/OrderManager_deleteOrder.png)
+![](diagrams/sequence/OrderManager_deleteOrder.png)
 
 Both methods `getOrderPrice(int)` and `getAllOrderValue()` call `getTotalPrice()`:
-![](diagrams/sqeuence/OrderManager_displayAllOrderPrice.png)
+![](diagrams/sequence/OrderManager_displayAllOrderPrice.png)
 
 ## Staff Management
 
@@ -216,23 +216,23 @@ The sequence diagrams for each feature of staff handling is attached below.
 
 Sequence diagram for `printStaff()`:
 
-![](diagrams/sqeuence/StaffManager_printStaff.png)
+![](diagrams/sequence/StaffManager_printStaff.png)
 
 Sequence diagram for `findStaff()`:
 
-![](diagrams/sqeuence/StaffManager_findStaff.png)
+![](diagrams/sequence/StaffManager_findStaff.png)
 
 Sequence diagram for `addStaff()`:
 
-![](diagrams/sqeuence/StaffManager_addStaff.png)
+![](diagrams/sequence/StaffManager_addStaff.png)
 
 Sequence diagram for `deleteStaff()`:
 
-![](diagrams/sqeuence/StaffManager_deleteStaff.png)
+![](diagrams/sequence/StaffManager_deleteStaff.png)
 
 Sequence diagram for `edittStaff()`:
 
-![](diagrams/sqeuence/StaffManager_editStaff.png)
+![](diagrams/sequence/StaffManager_editStaff.png)
 
 
 ## Product scope

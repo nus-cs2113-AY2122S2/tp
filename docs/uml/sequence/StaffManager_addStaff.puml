@@ -12,16 +12,19 @@ participant ":Staff" as staff
 user -> staffcontroller: addStaff()
 activate staffcontroller
 
-group loop [while staff with inputted ID already exists]
 staffcontroller -> staffcontroller: checkNoStaffClash(int staffId)
 activate staffcontroller
 staffcontroller -> staffmanager: findByStaffId(int staffId)
 activate staffmanager
+
+opt staff ID <= 0
+staffmanager --> staffcontroller: IllegalArgumentException
+end
+
 staffmanager --> staffcontroller
 deactivate staffmanager
 staffcontroller --> staffcontroller
 deactivate staffcontroller
-end
 
 staffcontroller -> staffmanager: addStaff(int staffId, String name, String position, double salary)
 activate staffmanager
