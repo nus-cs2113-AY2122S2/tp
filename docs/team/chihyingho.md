@@ -56,12 +56,13 @@ Click <a href="https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=chihyi
    The justification for doing this was so that other commands could utilise the `isReturned` attribute in conjunction with the `BorrowStatus` class and attribute to assess if an item was currently available, currently on loan, or overdue.
 5. Implemented `ListCurrentBorrowingsCommand` to list all items that are currently being borrowed.
 6. Implemented `DescCommand` class to retrieve the description from a chosen item by the user.
+7. Wrote JUnit tests for `ReturnCommand` and `LostCommand`
 
 <h3 id="ug">4. Contributions to the User Guide </h3>
 1. Wrote the user guide for `help`, `lost`, `return`.
 
 <h3 id="dg">5. Contributions to the Developer's Guide </h3>
-1. Created `Lost Command`, `Return Command` sequence diagrams and wrote both sections.
+1. Created `Lost Command`, `Return Command` and `HelpCommand` sequence diagrams and wrote implementation sections for all 3 commands.
 2. Create `UI` class diagram and wrote UI Component section.
 
 <h3 id="team">6. Contributions to Team Based Tasks </h3>
@@ -72,8 +73,13 @@ Click <a href="https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=chihyi
 Team CS2113-T11-2 Repo (DG Review):
 1. [Link](https://github.com/nus-cs2113-AY2122S2/tp/pull/17/files/fe0608ed4b787b900a45390816f1c55f088a9559)
 
-Own Team
+Our Team's Repo 
 - General reviewing and approval of PRs
+- [#PR 199] https://github.com/AY2122S2-CS2113-F10-2/tp/pull/199
+- [#PR 185] https://github.com/AY2122S2-CS2113-F10-2/tp/pull/185
+- [#PR 179] https://github.com/AY2122S2-CS2113-F10-2/tp/pull/179
+- [#PR 92] https://github.com/AY2122S2-CS2113-F10-2/tp/pull/92
+- [#PR 91] https://github.com/AY2122S2-CS2113-F10-2/tp/pull/91
 
 
 
