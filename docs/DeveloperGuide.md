@@ -165,8 +165,8 @@ The `TimerParser` component
 i.e. program will ask the user to key in a new input if it does not recognise the inputs given.
 
 The `StudyCommand` component
-- Accepts user inputs in the study session
-- Facilitates interaction between Parser and TimerLogic
+- Passes user input from `Ui` component to necessary components
+- Facilitates interaction between TimerParser and TimerLogic
 
 The `TimerLogic` component
 - Manages the timer component when study session is launched
