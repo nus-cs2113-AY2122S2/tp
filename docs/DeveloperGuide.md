@@ -125,7 +125,9 @@ How the parsing works:
 
 ### Command Component
 
-![CommandClassDiagram](img/CommandClassDiagram1.png)
+![CommandClassDiagram1](img/CommandClassDiagram1.png)
+![CommandClassDiagram2](img/CommandClassDiagram2.png)
+![CommandClassDiagram2](img/CommandClassDiagram3.png)
 
 The above diagram shows the class diagram for the `Command` component.
 
