@@ -1,6 +1,7 @@
 # Li Hao - Project Portfolio Page
 
 ## Overview
+
 **Project: MeetingJio**
 
 MeetingJio is a program written in Java for finding potential time slots for team meetings
@@ -8,7 +9,9 @@ based on everyone’s availability via a Command Line Interface (CLI). If you ca
 MeetingJio can get your meeting management tasks done faster than manually eyeballing your timetable.
 
 ## Summary of Contributions
+
 ###Code Contributed
+
 **MeetingJio Interface**
 - Designed the logo for MeetingJio.
 - Wrote the code for application initiation.
@@ -29,6 +32,7 @@ back into the lists.
 - Wrote the code to ensure that it informs on the specified error in the MeetingJio.txt.
 
 ###Enhancements Implemented
+
 **Parser for Local Data**
 - Users can edit the data from the data file. The new data will be parsed and added into the lists
 when the application starts.
@@ -36,6 +40,7 @@ when the application starts.
 Specified error will be shown to the user so that he can correct it.
 
 ###Contributions to UG
+
 **Help Command**
 - Wrote the help command section in the User Guide.
 
@@ -43,6 +48,7 @@ Specified error will be shown to the user so that he can correct it.
 - Wrote the exit command section in the User Guide.
 
 ###Contributions to DG
+
 **Data Saving Feature**
 - Wrote the Data Saving Feature section in the Developer Guide.
 - Designed the Sequence Diagram for the feature.
@@ -52,5 +58,6 @@ Specified error will be shown to the user so that he can correct it.
 - Designed the Sequence Diagram for the feature.
 
 ###Contributions to team-based tasks
+
 - In charge of defining, assigning, and tracking project tasks.
 
