@@ -1,6 +1,7 @@
 # Developer Guide
 
 ## Table of contents
+* [Acknowledgements](#acknowledgements)
 * [Design](#design)
   * [Unit Good Class](#unit-good-class)
   * [Good Class](#good-class)
@@ -20,6 +21,11 @@
   * [Non-Functional Requirements](#non-functional-requirements)
   * [Glossary](#glossary)
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
+
+## Acknowledgements
+* Reference for User Guide from AB-3 [UG](https://se-education.org/addressbook-level3/UserGuide.html)
+* Reference for Developer Guide from AB-3 [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+* Guide for [PlantUML Diagrams](https://se-education.org/guides/tutorials/plantUml.html)
 
 ## Design
 ![Architecture Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/ArchitectureDiagram.puml)
