@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -77,13 +78,18 @@ public class LocalStorage {
 
     }
 
-    public static void writeSaveFile(String storeStr, String filePath) {
-        Path dir = Paths.get(filePath);
+    public static Boolean writeSaveFile(String storeStr, String filePath) throws IOException {
+//        System.out.println("filePath: " + filePath);
+        Path dir = Paths.get(filePath).toAbsolutePath().normalize().getParent();
+//        System.out.println("dir: ");
+//        System.out.println(dir);
         if (!Files.exists(dir)) {   //createTempDirectory
             try {
-                Files.createDirectory(Path.of(filePath));
+                Files.createDirectory(dir);
+                System.out.printf("Output Directory created at %s!\n", dir.toString());
             } catch (IOException e) {
                 System.err.println("Failed to create directory! " + e.getMessage());
+                return false;
             }
         }
         try {
@@ -92,8 +98,9 @@ public class LocalStorage {
             fw.close();
         } catch (IOException e) {
             System.err.println("Failed to write to save file!" + e.getMessage());
+            return false;
         }
-
+        return true;
     }
 
     public static String json2str(JSONObject jo) {
