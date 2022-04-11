@@ -66,7 +66,7 @@ it correctly and with ease. Here are some icons which we will use to convey impo
   - Exit program: [`bye`](#exit-program-bye)
   - [Saving your tasks](#saving-your-tasks)
 - [FAQ](#faq)
-- [Glossary](#faq)
+- [Glossary](#glossary)
 - [Command Summary](#command-summary)
 
 ## Quick Start
