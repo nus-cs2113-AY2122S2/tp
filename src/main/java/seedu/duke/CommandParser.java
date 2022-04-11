@@ -100,15 +100,6 @@ public class CommandParser {
             userCommand = parseCheck(userInputLowerCase);
         } else if (userInputLowerCase.startsWith(VIEW)) {
             userCommand = parseView(userInputLowerCase);
-        } else if (userInputLowerCase.startsWith(UPDATE_ITEM_PAX_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(UPDATE_ITEM_PAX_COMMAND, "");
-            userCommand = new UpdateItemPaxCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(UPDATE_ITEM_NAME_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(UPDATE_ITEM_NAME_COMMAND, "");
-            userCommand = new UpdateItemNameCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(ADD_AVAILABILITY_COMMAND)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_AVAILABILITY_COMMAND, "");
-            userCommand = new AddAvailabilityCommand(userInputLowerCaseWithoutCommand);
         } else {
             userCommand = parseMiscellaneous(userInputLowerCase);
         }

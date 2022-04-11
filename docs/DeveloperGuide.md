@@ -512,7 +512,7 @@ The instructions below provide a quick summary of how to manually test the funct
 ### Set up and Launching the program
 1. Download the JAR file 
 2. Open command terminal and go to the directory that stores the JAR file
-3. Run the application by typing: java -jar NameOfFile. NameOfFile represents
+3. Run the application by typing: `java -jar NameOfFile`. NameOfFile represents
 the JAR file name
    
 ---
@@ -542,8 +542,30 @@ the JAR file name
 
 ---
 ### Housekeeper Related Functions
+
+#### Housekeeper functions
+* Assume that the `HousekeeperList` has a `Housekeeper` named `Steve` and a `Housekeeper` named `Fred`.
+* Assume `Steve` is `24` years old and is available on `Monday`.
+* Assume `Fred` is `30` years old and is available on `Monday` and `Wednesday`.
+
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:-------------|:-------------------|
+|Add 1 housekeeper.|`add housekeeper mary / 33`  | Adds housekeeper name `mary` and is `33` years old |
+|Add empty name and empty age.|`add housekeeper /` |Error message to user |
+|Add existing housekeeper.|`add housekeeper steve / 33` |Error message to user  |
+|Add availability to `Steve`.|`availability Steve/1,3`  | Adds `steve` availability to `Monday` and `Wednesday` |
+|Add availability is not between 1 and 7.|`availability Steve/1,3,10`  | Error message to user |
+|View recorded housekeepers in the list.|```view recorded housekeepers`` | Lists out all housekeeper profiles that user has recorded so far|
+|Delete housekeeper `Fred`.| `delete housekeeper Fred` |`Fred` has been deleted from the list|
+|Delete housekeeper not in list.| `delete housekeeper Manny` | Error message to user |
+|Get Housekeeper available on Monday.|`get available on 1`| Shows `Fred` and `Steve` being available to work on Monday|
+|Get Housekeeper available on not valid day.|`get available on 18` | Error message to user|
+|Reset availability of all housekeepers.|`is a new week ` | All housekeeper availabilities in the list will now show `N/A`|
+|Increase all age of housekeeper by one.| `is a new year `| All housekeeper age increase by one. <br/> `Fred` age :` 31` <br/> `Steve` age : `25`|
+
+#### Housekeeper Performance functions
 * Prerequisite: For `HousekeeperPerformance`-related commands, the the `HousekeeperList` must contain all the housekeepers that the user wants to record performances for.
-  Assume that the `HousekeeperList` has a `Housekeeper` named `Steve` and a `Housekeeper` named `Fred`.
+* Assume that the `HousekeeperList` has a `Housekeeper` named `Steve` and a `Housekeeper` named `Fred`.
 
 | **Test Case** | **Command** | **Expected Result** |
 |:-------------:|:-------------|:-------------------|
@@ -553,7 +575,7 @@ the JAR file name
 | View recorded housekeeper performances | `view performances` | Lists out all housekeeper performances that user has recorded so far|
 | Add extra characters to view recorded housekeeper performances | `view performances blah blah` | Error message to user |
 
-#### Assign Housekeeper
+#### Assignment of Housekeeper function
 * The format of the command is `assign NAME / ROOMID`.
 * Prerequisites:
     - the housekeeper with this `NAME` should already exist in the system.
@@ -566,6 +588,7 @@ the JAR file name
 | Add `susan` to invalid room  | `assign susan / 90` | Error message to the user|
 | Add `susan` to non-integer room id | `assign susan / ioduf`  | Error message to the user|
 | Fail to separate fields | `assign susan 301`  | Error message to the user|
+
 
 ---
 ### Room Related Functions
