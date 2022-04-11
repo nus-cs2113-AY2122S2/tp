@@ -4,20 +4,19 @@ This document contains the User Guide to the **PlanITarium** application. It ser
 application and provide examples of its utilisation. Each feature, or also known as **commands**, are described in
 detail in the [Features](#features) section below.
 
-**PlanITarium** is a Command-Line Interface application that helps you and your family to track your finances. It allows
-you to:
+**PlanITarium** is a Finance Manager packaged as a Command-Line Interface application that helps to track the finances 
+for you and your family. It allows you to:
 
-* add your family members and **track** their income and expenditure,
-* get a monthly **view** on your financial status,
-* **group** your loved ones for better management,
-* **categorise** your expenses to assist with financial planning.
+* **Add** and **Track** your family member’s income and expenditure.
+* **View** your financial status on a monthly basis.
+* **Group** your loved ones for better management.
+* **Categorise** your expenses to assist with financial planning.
 
 **Who this product is meant for:**
 
-* Young adults who are looking for a **fast and easy** financial tracker.
-* Individuals that needs a **monthly overview** on their financial status.
-* Those who wish to track the **financial status** of their family members.
-* **Experienced typists** who can operate the application on a terminal.
+* **Young Adults** who are looking for a fast and efficient financial tracker.
+* **Family members** who wish to track the financial status for their family.
+* **Experienced Typists** who are comfortable operating the application on a terminal.
 
 ## Table of Contents
 

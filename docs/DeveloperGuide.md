@@ -295,6 +295,8 @@ https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/pla
 and [`ExpenditureList.java`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/money/ExpenditureList.java)
 
+The Class Diagram below shows the full structure of the `Money` component and the components it interacts with.
+
 ![MoneyClassDiagram](images/MoneyClassDiagram.png)
 
 The `Money` components consists of two abstract classes, `Money` and `MoneyList`, of which contains the basic attributes
@@ -451,19 +453,8 @@ updated value. Else, the user is notified that no changes were made.
 
 The following sequence diagram shows how the `editin` operation works after the `EditCommand` has been parsed
 and called by `PersonList`:
+
 ![EditIncomeSequence](images/EditIncomeSequence.png)
-
-#### Design considerations:
-
-**Aspect: How to search through income and expenditures to be listed:**
-
-* **Alternative 1 (current choice):** Maintain an individual array list for found income and expenditure
-    * Pros: Easy and fast access of found results, no additional logic needed to separate income from expenditure
-    * Cons: Additional memory management, needs to manage 2 array list.
-
-* **Alternative 2 :** Maintain a single array list for both found income and expenditure
-    * Pros: Easy to implement and less memory usage.
-    * Cons: Additional logic check is needed to print the income and expenditure in a well formatted way
 
 ---
 

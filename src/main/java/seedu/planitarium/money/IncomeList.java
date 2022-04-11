@@ -185,16 +185,17 @@ public class IncomeList extends MoneyList {
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfIncomes);
         logger.log(Level.INFO, LOG_ASSERT_PASSED);
-        boolean isDescEdited = editIncDesc(index, description);
-        boolean isAmountEdited = editIncAmount(index, amount);
-        boolean isPermEdited = editIncPerm(index, isPermanent);
-        printEditMsg(index, isDescEdited, isAmountEdited, isPermEdited);
+        Income item = incomeArrayList.get(index - 1);
+        boolean isDescEdited = editIncDesc(item, description);
+        boolean isAmountEdited = editIncAmount(item, amount);
+        boolean isPermEdited = editIncPerm(item, isPermanent);
+        printEditMsg(item, isDescEdited, isAmountEdited, isPermEdited);
     }
 
-    private void printEditMsg(int index, boolean isDescEdited, boolean isAmountEdited, boolean isPermEdited) {
+    private void printEditMsg(Income item, boolean isDescEdited, boolean isAmountEdited, boolean isPermEdited) {
         if (isDescEdited || isAmountEdited || isPermEdited) {
             System.out.println("Your Income have been edited");
-            System.out.println(incomeArrayList.get(index - 1));
+            System.out.println(item);
             return;
         }
         System.out.println("No changes have been made.");
@@ -203,14 +204,14 @@ public class IncomeList extends MoneyList {
     /**
      * Edits the income's recurring status.
      *
-     * @param index       The income's index in the list
+     * @param item        The income object in the list
      * @param isPermanent The income's recurring status
      * @return true if recurring status have been edited, false otherwise
      */
-    private boolean editIncPerm(int index, Boolean isPermanent) {
-        Boolean itemPerm = incomeArrayList.get(index - 1).isPermanent();
+    private boolean editIncPerm(Income item, Boolean isPermanent) {
+        Boolean itemPerm = item.isPermanent();
         if (isPermanent != null && itemPerm != isPermanent) {
-            incomeArrayList.get(index - 1).setPermanent(isPermanent);
+            item.setPermanent(isPermanent);
             return true;
         }
         return false;
@@ -219,14 +220,14 @@ public class IncomeList extends MoneyList {
     /**
      * Edits the income's amount.
      *
-     * @param index  The income's index in the list
+     * @param item   The income object in the list
      * @param amount The income's amount
      * @return true if amount have been edited, false otherwise
      */
-    private boolean editIncAmount(int index, Double amount) {
-        Double itemAmount = incomeArrayList.get(index - 1).getAmount();
+    private boolean editIncAmount(Income item, Double amount) {
+        Double itemAmount = item.getAmount();
         if (amount != null && itemAmount != amount) {
-            incomeArrayList.get(index - 1).setAmount(amount);
+            item.setAmount(amount);
             return true;
         }
         return false;
@@ -235,14 +236,14 @@ public class IncomeList extends MoneyList {
     /**
      * Edits the income's description.
      *
-     * @param index       The income's index in the list
+     * @param item        The income object in the list
      * @param description The income's description.
      * @return true if description have been edited, false otherwise
      */
-    private boolean editIncDesc(int index, String description) {
-        String oldDesc = incomeArrayList.get(index - 1).getDescription();
+    private boolean editIncDesc(Income item, String description) {
+        String oldDesc = item.getDescription();
         if (description != null && !oldDesc.equals(description)) {
-            incomeArrayList.get(index - 1).setDescription(description);
+            item.setDescription(description);
             return true;
         }
         return false;

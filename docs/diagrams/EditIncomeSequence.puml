@@ -3,98 +3,83 @@
 
 box
     participant ":IncomeList" as Ilist MONEY_COLOR
-    participant ":Income" as Inc MONEY_COLOR_T1
+    participant "item:Income" as Inc MONEY_COLOR_T1
     participant ":ArrayList<Income>" as Alist MONEY_COLOR_T2
 end box
 
 participant ":System" as System SYSTEM_COLOR
 
-[-> Ilist: editIncome(1, 1, "Bills", null ,null)
+[-> Ilist: editIncome(1:Integer, 1:Integer, "Bills":String,\n null ,null)
+Ilist -> Alist: get(0:Integer)
 activate Ilist
-Ilist -> Ilist: isDescEdited(1, "Bills")
-activate Ilist
-Ilist -> Alist: get(0)
 activate Alist
-Alist --> Ilist : item: Income
+Alist --> Ilist : item:Income
 deactivate Alist
+Ilist -> Ilist: isDescEdited(item:Income, "Bills":Integer)
+activate Ilist
 Ilist -> Inc: getDescription()
 activate Inc
 Inc --> Ilist: description:String
 deactivate Inc
 
-alt OPT_COLOR description != null && !Description.equals("Bills")
-    Ilist -> Inc: setDescription("Bills")
+opt OPT_COLOR description != null && !Description.equals("Bills":String)
+    Ilist -> Inc: setDescription("Bills":String)
     activate Inc
-    Inc --> Ilist: True
-else else
-    Inc --> Ilist: False
+    Inc --> Ilist
     deactivate Inc
-end alt
+end opt
 
-Ilist --> Ilist: True:Boolean
+Ilist --> Ilist: isDescEdited:Boolean
+note right: True returned if opt taken,\n False otherwise.
 deactivate Ilist
 deactivate Alist
 
-Ilist -> Ilist: isPermEdited(1, null)
+Ilist -> Ilist: isPermEdited(item:Income, null)
 activate Ilist
-Ilist -> Alist: get(0)
-activate Alist
-Alist --> Ilist : item: Income
-deactivate Alist
 Ilist -> Inc: isPermanent()
 activate Inc
 Inc --> Ilist: isPermanent:Boolean
 deactivate Inc
 
-alt OPT_COLOR isPermanent != null && !isPermanent.equals(null)
+opt OPT_COLOR isPermanent != null && !isPermanent.equals(null)
     Ilist -> Inc: setPermanent(null)
     activate Inc
-    Inc --> Ilist: True
-else else
-    Inc --> Ilist: False
+    Inc --> Ilist:
     deactivate Inc
-end alt
+end opt
 
-Ilist --> Ilist: False:Boolean
+Ilist --> Ilist: isPermEdited:Boolean
+note right: True returned if opt taken,\n False otherwise.
 deactivate Ilist
 deactivate Alist
 
-Ilist -> Ilist: isAmountEdited(1, null)
+Ilist -> Ilist: isAmountEdited(item:Income, null)
 activate Ilist
-Ilist -> Alist: get(0)
-activate Alist
-Alist --> Ilist : item: Income
-deactivate Alist
 Ilist -> Inc: getAmount()
 activate Inc
 Inc --> Ilist: amount:Double
 deactivate Inc
 
-alt OPT_COLOR Amount != null && !Amount.equals(null)
+opt OPT_COLOR Amount != null && !Amount.equals(null)
     Ilist -> Inc: setAmount(null)
     activate Inc
-    Inc --> Ilist: True
-else else
-    Inc --> Ilist: False
+    Inc --> Ilist
     deactivate Inc
-end alt
+end opt
 
-Ilist --> Ilist: False:Boolean
+Ilist --> Ilist: isAmountEdited:Boolean
+note right: True returned if opt taken,\n False otherwise.
 deactivate Ilist
 deactivate Alist
 
-Ilist -> Ilist: printEditMsg(True, False, False)
+Ilist -> Ilist: printEditMsg(isDescEdited:Boolean, isPermEdited:Boolean, \nisAmountEdited:Boolean)
 activate Ilist
 alt OPT_COLOR isDescEdited || isAmountEdited || isPermEdited
     Ilist -> System:println("Your Income have been edited")
     activate System
     Ilist <-- System
     deactivate System
-    Ilist -> Alist: get(0)
-    activate Alist
-    Alist --> Ilist : item: Income
-    deactivate Alist
-    Ilist -> System:println(item)
+    Ilist -> System:println(item:Income)
     activate System
     Ilist <-- System
     deactivate System
@@ -105,7 +90,7 @@ else else
     deactivate System
 end alt
 
-
-
+Ilist -->[
+deactivate Ilist
 
 @enduml
