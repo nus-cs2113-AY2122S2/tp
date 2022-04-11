@@ -1,32 +1,18 @@
 @startuml
 hide footbox
-actor user
 
-
-user -> ":Ui" ++ :"add_meeting t/meeting1 d/Thursday st/1230 et/1330 m/online"
-create ":Parser"
-":Ui" -> ":Parser" ++: new Parser("add_meeting t/meeting1 d/Thursday st/1230 et/1330 m/online")
-":Parser" --> ":Ui" --: parser:Parser
-":Ui" -> ":Parser" ++: parseCommand("add_meeting t/meeting1 d/Thursday st/1230 et/1330 m/online")
-create ":AddMeetingCommand"
-":Parser" -> ":AddMeetingCommand" ++: new AddMeetingCommand("meeting1": String,"Thursday":String,1230:int,1330:int,"online":String)
-":AddMeetingCommand" --> ":Parser" --: addMeetingCommand:AddMeetingCommand
-":Parser" --> ":Ui" --: addMeetingCommand:AddMeetingCommand
 ":Ui" -> ":AddMeetingCommand" ++: execute(masterTimetable)
 ":AddMeetingCommand" -> ":Meeting" ++ : new()
 ":Meeting" --> ":AddMeetingCommand" --: meeting:Meeting
 
 ":AddMeetingCommand" -> ":MasterTimetable" ++: addMeetingToEveryoneTimetable(meeting:Meeting)
 ":MasterTimetable" -> ":Timetable" ++ : add(meeting:Meeting)
-":Timetable" -> ":Timetable": addMeetingConfirmation(meeting:Meeting)
+":Timetable" -> ":Timetable"++: addMeetingConfirmation(meeting:Meeting)
 ":Timetable" --> ":MasterTimetable" --: addMeetingConfirmation:String
 ":MasterTimetable" --> ":AddMeetingCommand" -- :
 ":AddMeetingCommand" --> ":Ui" --:
-":Ui" --> "user" --:
+
 destroy ":AddMeetingCommand"
-destroy ":Parser"
-destroy ":Meeting"
-destroy ":Timetable"
-destroy ":MasterTimetable"
-destroy ":Ui"
+
+
 @enduml
