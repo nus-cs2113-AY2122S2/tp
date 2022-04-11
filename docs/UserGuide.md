@@ -1,5 +1,21 @@
 # User Guide
+- [Introduction](#introduction)
+- [Quick Start](#quick-start)
+- [Features](#features)
+- [Main Menu](#main-menu)
+- [Dish Management](#dish-management)
+  - [Introduction](#introduction-1)
+  - [Usage](#usage)
+    - [List dish](#list-dish-indexed-as-1)
+    - [Add dish](#Add dish)
+    - []()
+- [Dish Management](#dish-management)
+- [Dish Management](#dish-management)
 
+- [Product Scope](#product-scope)
+- [User Stories](#user-stories)
+- [Class Diagram](#class-diagram)
+- [Non-functional Requirements](#non-functional-requirements)
 ## Introduction
 
 Restaurant-Information-Programme (R.I.P.) is a command line programme for restaurant owners to keep track of menus, staff information, and order management.
