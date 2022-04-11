@@ -17,7 +17,8 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_NAME = "Edit Item";
     public static final String USAGE_MESSAGE = "Edits the name and/or description of an item.";
-    public static final String COMMAND_FORMAT = COMMAND_WORD + "INDEX [n/Name] [d/Description] [q/Quantity [r/ +|-]]\n One of n/, d/, or q/ should be present!";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + "INDEX [n/Name] [d/Description] "
+            + "[q/Quantity [r/ +|-]]\n One of n/, d/, or q/ should be present!";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
             + "[Command Format] " + COMMAND_FORMAT + "\n";
 

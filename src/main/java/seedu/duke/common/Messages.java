@@ -20,7 +20,7 @@ public class Messages {
             + "not available for borrowing.";
     public static final String INVALID_BORROW_DURATION = "Error. You can only borrow for a maximum of 7 days.";
 
-    /** General messages **/
+    /** General messages. **/
     public static final String WELCOME_MESSAGE = "Welcome to Inventory Manager! What can I do for you today?";
     public static final String HELP_MESSAGE = "To find out more about my functions and how to call them,"
             + " key in 'help'.";
@@ -34,13 +34,13 @@ public class Messages {
     public static final String INVALID_DATE_FORMAT = "Error: Incorrect date format. Please enter "
             + "dates in YYYY-MM-DD format.";
 
-    /** EditCommandParser messages **/
+    /** EditCommandParser messages. **/
     public static final String INVALID_RELATIVE_MESSAGE = "The relative multiplier you entered was invalid! "
             + "Only '+' and '-' is allowed.\n";
     public static final String INVALID_RELATIVE_WITHOUT_QUANTITY = "The relative multiplier must be used in "
             + "conjunction with a quantity!";
 
-    /** EditCommand messages **/
+    /** EditCommand messages. **/
     public static final String NEGATIVE_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "
             + "would be negative! "
             + "Your command has been terminated; no changes were made.";
@@ -48,7 +48,7 @@ public class Messages {
             + "would overflow! (too large) "
             + "Your command has been terminated; no changes were made.";
 
-    /** Storage messages **/
+    /** Storage messages. **/
     public static final String WRITER_IO_ERROR = "An IO error occured while writing the data file. "
             + "Your data may or may not have been saved.";
     public static final String CREATE_FILE_IOERROR = "An IO error occured while creating the data file. "
