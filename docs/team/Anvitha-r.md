@@ -27,10 +27,8 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 * Edited contents in the UG for continuity purposes
 * Fixed the bugs in the UG according to the feedback from pe2 dry run 
 * Add images and screenshots to ease the readability
-* updated help commands
-* updated required sections whenever necessary 
-
-
+* Updated help commands
+* Updated required sections whenever necessary 
 
 ## **DG contributions:**
 
@@ -39,8 +37,6 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 * Structured the user stories intially 
 
 ## **Team-based tasks contributions:**
-
-
 
 * Necessary general code enhancements is by everyone
 
@@ -51,3 +47,4 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 * Release management is done by consensus by the majority
 
 * Updating user/developer docs that are not specific to a feature is by everyone when we see a change fits 
+
