@@ -15,21 +15,29 @@ the activities they participated in, for a particular session.
 Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=froststein&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 #### New Features
 * [Session Create](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionCreateCommand.java)
-  * Allows users to create sessions in the application.
+  * What it does: Allows users to create sessions in the application.
+  * Justification: This feature allows users to record the details of their outing and keep track of the expenditure of each activity.
 * [Session Delete](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
-  * Allows users to delete sessions in the application.
+  * What it does: Allows users to delete sessions in the application.
+  * Justification: This feature allows users to remove unnecessary sessions that were previously created.
 * [Session Edit](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionEditCommand.java) 
-  * Allows users to edit previously created sessions.
+  * What it does: Allows users to edit previously created sessions.
+  * Justification: This features allows users to amend a mistake previously made when creating a session.
+  * Highlights: This was challenging as the edits made had to be crossed check with existing sessions within the application.
+                In addition, the supplied person list for the edit had to contain the existing persons in the session.
 * [Session List](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
-  * Allows users to view all previously created sessions.
+  * What it does: Allows users to view all previously created sessions.
+  * Justification: This features allows users to see a list of all the outings that were recorded.
 * [Manager](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Manager.java)
   * Contains an instance of `Profile`, `Storage` and `TextUI` to support commands within SplitLah.
 * [Profile](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Profile.java)
   * The `Profile` class serves as a container and holds a list of all `Session` and `Group` objects created by the user.
   * It also keeps track of and issues new _unique identifiers_ for the creation of `Session`, `Activity` and `Group` objects.
 * [Storage](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/storage/Storage.java)
-  * This feature was implemented so that data entered by the user during the lifetime of the application would be stored.
-  * This is done by using the `Serializable` class in `java`.
+  * What it does: Allows storing of data that was created during the runtime of the application.
+  * Justification: This feature was implemented so that data entered by the user during the lifetime of the application would be stored.
+  * Highlights: As our team found it troublesome to catch all the corner cases if we were to create a csv file. 
+                We used the `Serializable` class in `java` to help us simplify file storage.
 
 #### Enhancements to existing features:
 * [PersonList](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/PersonList.java)
@@ -59,6 +67,7 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 * Added documentation for [`Creating a session`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create),
   [`Deleting a session`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-session-session-delete) and
   [`Editing a session`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-session-session-edit) sections of the User Guide.
+* Managed all command screenshots for the user guide.
 
 #### Developer Guide
 * Added the introduction and a how to use section.
