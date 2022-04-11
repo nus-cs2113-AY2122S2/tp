@@ -630,11 +630,22 @@ The general workflow of the `group /edit` command is as follows:
    group unique identifier from the list of groups.
     * If a `Group` object with the specified group unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
     * Else, the `Group` object with the specified group unique identifier is returned.
-6. `GroupEditCommand#run` checks if there is an update for a new group name, or a new list of persons.
-    * If there is an update on the group name, 
-    * If there is an update on the list of persons,
-7. After the group is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
-8. The `GroupEditCommand` class then prints a message indicating that a group has been successfully edited.
+6. The details of how a group is updated are displayed in the reference diagram below.<br>
+![Reference Frame Update Group Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateGroup.png)
+7. `GroupEditCommand#run` checks if there is an update for a new group name, or a new list of persons.
+    * If there is an update on the group name, it will check if the provided group name already exists in the list of groups.
+      * If the provided session name exists within the list of groups, an exception is thrown, an error message is printed.
+      * Else, the provided group name is returned to be used as the updated name for the group.
+
+    * If there is an update on the list of persons,`SessionEditCommand#getNewPersonList` is called to return a new list of persons to be stored.
+        * The method checks if the newly provided list of persons contains duplicated names.
+            * If duplicated names are detected, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+            * Else, it calls `PersonList#isSuperSet` to check if the newly supplied list of persons contains all existing persons in the session.
+                * If `PersonList#isSuperSet` returns `false`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+                * Else, a new list of persons ready to be stored in the session is returned.
+
+8. After the group is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
+9. The `GroupEditCommand` class then prints a message indicating that a group has been successfully edited.
 
 
 ### View a group
