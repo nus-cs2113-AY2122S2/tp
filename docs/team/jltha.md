@@ -66,8 +66,7 @@ complete the activities with the use of the study session.
   (pull request [#83](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/83)).
   - Implemented the feature of checking of date and time clashes when adding/editing tasks
   (as the schedules in a timetable should not have such clashes)
-  (pull requests [#83](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/83),
-  - [#137](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/137)).
+  (pull requests [#83](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/83), [#137](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/137)).
   - Clean up the code in various occasions (pull requests [#41](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/41),
     [#64](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/64), [#150](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/150)).
 
