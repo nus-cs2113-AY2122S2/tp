@@ -225,6 +225,35 @@ Fulfill can be called on any order which is not fulfilled, or partially fulfille
 A step by step description of how the fulfill feature can be seen below
 
 
+
+
+#### Operation
+
+![Fulfill Order Sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/FulfillSequence.puml)
+
+The above sequence diagram shows the operation of how the fulfill feature will be called. 
+1. The User input will be read by the User Interface Class
+2. The [User Interface Class](#userinterface-class) will then match the command keyword `fulfill`
+3. The User Interface Class will hand over to the [Fulfill Parser](#command-parser)
+4. The [Match Keyword Class](#match-keyword-class) will then be call to match the Order id number to be fulfilled.
+5. The Fulfill Parser will now call fulfillOrder(String oid) method within the warehouse class with the order id number received from the Match Keyword Class
+6. This method will first find the corresponding order with the given order id in the warehouse by calling findOrder()
+7. If the order exists, then it will return the corresponding order
+8. Next thing is to check if the current order in question is already fulfilled, if it is, then fulfillOrder() will return immediately as there is nothing more to do
+9. We will then get the orderlines associated with this order through order.getOrderlines()
+10. fulfillOrder() will then loop for each orderline in orderlines. It will call the helper function fulfillOrderlines() for each orderline
+11. fulfillOrderlines() will aim to individually fulfill each orderline. This is done by checking if there is enough quantity of Goods with the same SKU as the orderline. In this instance, enough is defined as having more or equal to the quantity required by that orderline.
+12. If the above condition is met, setQuantityFulfilled() will be called for that orderline to set the quantityFulfilled variable in the orderline
+13. setQuantityFulfilled() will call checkOff() to set the isFulfilled variable in the orderline if quantity is equal to quantityFulfilled
+14. fulfillOrder() will then call removeQuantity() of the corresponding Good from the inventory in the warehouse
+15. fulfillOrder() will now call checkOrderComplete() to check if all the orderlines in the order are fulfilled
+16. If they are, checkOrderComplete() will set the order to fulfilled as well
+17. The result of whether the order is fulfilled or not will then be printed out to the user and marks the end of fulfill order feature.
+
+For more examples of how a user can use a command, refer to the [UserGuide](/UserGuide.md)
+
+
+
 ## Local Storage
 
 Local storage has two general functions:
@@ -259,7 +288,7 @@ restoreWarehouseState().
 ![OrderLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Order.puml)
 
 ##### Order serialize
-![Order Serialize Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Order.puml)
+![Order Serialize Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/OrderSerialize.puml)
 
 
 #### Orderline class
@@ -279,30 +308,12 @@ restoreWarehouseState().
 
 
 
-#### Operation
 
-![Fulfill Order Sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/FulfillSequence.puml)
 
-The above sequence diagram shows the operation of how the fulfill feature will be called. 
-1. The User input will be read by the User Interface Class
-2. The [User Interface Class](#userinterface-class) will then match the command keyword `fulfill`
-3. The User Interface Class will hand over to the [Fulfill Parser](#command-parser)
-4. The [Match Keyword Class](#match-keyword-class) will then be call to match the Order id number to be fulfilled.
-5. The Fulfill Parser will now call fulfillOrder(String oid) method within the warehouse class with the order id number received from the Match Keyword Class
-6. This method will first find the corresponding order with the given order id in the warehouse by calling findOrder()
-7. If the order exists, then it will return the corresponding order
-8. Next thing is to check if the current order in question is already fulfilled, if it is, then fulfillOrder() will return immediately as there is nothing more to do
-9. We will then get the orderlines associated with this order through order.getOrderlines()
-10. fulfillOrder() will then loop for each orderline in orderlines. It will call the helper function fulfillOrderlines() for each orderline
-11. fulfillOrderlines() will aim to individually fulfill each orderline. This is done by checking if there is enough quantity of Goods with the same SKU as the orderline. In this instance, enough is defined as having more or equal to the quantity required by that orderline.
-12. If the above condition is met, setQuantityFulfilled() will be called for that orderline to set the quantityFulfilled variable in the orderline
-13. setQuantityFulfilled() will call checkOff() to set the isFulfilled variable in the orderline if quantity is equal to quantityFulfilled
-14. fulfillOrder() will then call removeQuantity() of the corresponding Good from the inventory in the warehouse
-15. fulfillOrder() will now call checkOrderComplete() to check if all the orderlines in the order are fulfilled
-16. If they are, checkOrderComplete() will set the order to fulfilled as well
-17. The result of whether the order is fulfilled or not will then be printed out to the user and marks the end of fulfill order feature.
 
-For more examples of how a user can use a command, refer to the [UserGuide](/UserGuide.md)
+
+
+
 
 ## Product scope
 ### Target user profile
