@@ -50,8 +50,10 @@ public class ListOverdueBorrowingsCommand extends Command {
             ui.showMessages("Here is a list of overdue borrowings: ");
         }
 
+        int counter = 1;
         for (String record: overdueRecords) {
-            ui.showMessages(record);
+            ui.showMessages(counter + ") " + record);
+            counter++;
         }
     }
 
