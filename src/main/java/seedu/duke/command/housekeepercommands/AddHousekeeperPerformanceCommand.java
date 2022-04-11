@@ -21,7 +21,9 @@ import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.ListContainer;
 
 import seedu.duke.command.Command;
+import seedu.duke.satisfactionlists.SatisfactionList;
 import seedu.duke.storage.HousekeeperPerformanceFileManager;
+import seedu.duke.storage.SatisfactionListFileManager;
 
 
 /**
@@ -152,8 +154,13 @@ public class AddHousekeeperPerformanceCommand extends Command {
         }
         housekeeperPerformanceList.addHousekeeperPerformance(housekeeperPerformance);
         ui.printAddHousekeeperPerformanceAcknowledgementMessage(housekeeperPerformanceList, housekeeperPerformance);
-        HousekeeperPerformanceFileManager housekeeperPerformanceFileManager = new HousekeeperPerformanceFileManager();
-        housekeeperPerformanceFileManager.writePerformanceListToFile(housekeeperPerformanceList);
     }
+
+    public void writeHousekeeperPerformanceListToFile(ListContainer listContainer) throws IOException {
+        HousekeeperPerformanceList housekeeperPerformanceList = listContainer.getHousekeeperPerformanceList();
+        HousekeeperPerformanceFileManager housekeeperPerformanceFileManager = new HousekeeperPerformanceFileManager();
+        housekeeperPerformanceFileManager.save(housekeeperPerformanceList);
+    }
+
 
 }

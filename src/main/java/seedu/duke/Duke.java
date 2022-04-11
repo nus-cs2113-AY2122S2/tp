@@ -10,6 +10,7 @@ import seedu.duke.command.housekeepercommands.AddHousekeeperCommand;
 import seedu.duke.command.housekeepercommands.AgeIncreaseCommand;
 import seedu.duke.command.housekeepercommands.ResetAvailabilityCommand;
 import seedu.duke.command.housekeepercommands.DeleteHousekeeperCommand;
+import seedu.duke.command.housekeepercommands.AddHousekeeperPerformanceCommand;
 import seedu.duke.command.itemcommands.AddItemCommand;
 import seedu.duke.command.itemcommands.DeleteItemCommand;
 import seedu.duke.command.itemcommands.UpdateItemNameCommand;
@@ -37,7 +38,7 @@ public class Duke {
             writeItemListsToFile(command, listContainer);
         } else if (command instanceof AddAvailabilityCommand || command instanceof AddHousekeeperCommand || command
                 instanceof AgeIncreaseCommand || command instanceof ResetAvailabilityCommand || command
-                instanceof DeleteHousekeeperCommand) {
+                instanceof DeleteHousekeeperCommand || command instanceof AddHousekeeperPerformanceCommand) {
             writeHousekeeperListsToFile(command, listContainer);
         } else if (command instanceof CheckAllRoomCommand || command instanceof CheckInCommand || command
                 instanceof CheckOutCommand || command instanceof CheckRoomByCatCommand || command
@@ -64,6 +65,10 @@ public class Duke {
         } else if (command instanceof ResetAvailabilityCommand) {
             ResetAvailabilityCommand resetAvailabilityCommand = (ResetAvailabilityCommand) command;
             resetAvailabilityCommand.writeHousekeeperToFile(listContainer);
+        } else if (command instanceof AddHousekeeperPerformanceCommand) {
+            AddHousekeeperPerformanceCommand addHousekeeperPerformanceCommand
+                    = (AddHousekeeperPerformanceCommand) command;
+            addHousekeeperPerformanceCommand.writeHousekeeperPerformanceListToFile(listContainer);
         }
     }
 

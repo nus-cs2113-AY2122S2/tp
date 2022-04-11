@@ -82,6 +82,7 @@ Given below are my contribution to the projects:
 
 * __Contribution to DG__:
     * Consolidate all user stories into DG.
+    * Created content page in DG. 
     * Create a Sequence Diagram and Class Diagram for
         * Add housekeeper command
         * Delete housekeeper command
