@@ -74,6 +74,7 @@ Some additional points to take note of:
   instead.
     * Example: `Bought on / off switch` or `Bought on\off switch` as a description
 * You need not include any currency symbols, and monetary values are in at most 2 decimal places.
+* Commas should be removed from monetary values provided. E.g. `10,000` will not be a valid input.
 * You may provide duplicate entries such as when you have two family members with the same name. PlanITarium will track
   each of them as separate entries via indexing.
 
