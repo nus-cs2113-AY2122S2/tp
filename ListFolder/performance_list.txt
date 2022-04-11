@@ -1,2 +1,2 @@
-steve|5
-bob|3
+joe|3
+john|2
