@@ -4,10 +4,13 @@ import org.junit.jupiter.api.Test;
 
 
 import seedu.simplst.parsers.AddParser;
-import util.exceptions.*;
+import util.exceptions.WrongCommandException;
+import util.exceptions.InvalidFileException;
+import util.exceptions.InvalidObjectType;
+import util.exceptions.MissingFlagException;
+import util.exceptions.EmptyFieldException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -15,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 //whatIsBeingTested_descriptionOfTestInputs_expectedOutcome
 
-public class AddParserTest{
+public class AddParserTest {
 
     Warehouse warehouse = new Warehouse(1000);
     String regex = "(?<flag>[ugbo]{1,2})/";
@@ -55,9 +58,9 @@ public class AddParserTest{
         addParser.extractParams();
         ArrayList<Order> o = warehouse.getOrderLists();
         assertNotNull(o);
-        assertEquals(1 , o.get(0).getId());
-        assertEquals("John Doe" , o.get(0).getReceiver());
-        assertEquals("123 Maple Ave" , o.get(0).getShippingAddress());
+        assertEquals(1, o.get(0).getId());
+        assertEquals("John Doe", o.get(0).getReceiver());
+        assertEquals("123 Maple Ave", o.get(0).getShippingAddress());
     }
 
 }
