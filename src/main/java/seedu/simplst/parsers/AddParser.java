@@ -37,7 +37,7 @@ public class AddParser extends CommandParser {
     public void extractParams() throws WrongCommandException, InvalidFileException, InvalidObjectType,
             MissingFlagException, EmptyFieldException {
         if (matches.get("flag").equals("g")) {
-            String regexGood = "sku/(?<sku>.*) qty/(?<qty>.*)";
+            String regexGood = "sku/(?<sku>.*) qty/(?<qty>\\d*)";
             HashMap<String, String> regexGoodMatch = new MatchKeywords(userInput, regexGood).getGroupValues();
             try {
                 warehouse.addQuantityOfGoodToInventory(regexGoodMatch.get("sku"), regexGoodMatch.get("qty"));

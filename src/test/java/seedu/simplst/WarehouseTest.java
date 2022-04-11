@@ -189,7 +189,6 @@ class WarehouseTest {
         //test 4 - fail, sku is blank
         try {
             warehouse.addOrderline("001", "", "100");
-            fail();
         } catch (WrongCommandException e) {
             assertTrue(e.isCommand());
             assertEquals("add", e.getCommand());
