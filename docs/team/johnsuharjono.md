@@ -10,8 +10,6 @@ Below are my contributions to the project:
     * What it does: allows the staff/user to find the customer by name.
     * Justification: This feature helps the staff to differentiate customer and non customer efficiently.
 
-* **Code Contributed**: [RepoSense link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=johnsuharjono&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
-
 * **Documentation**:
     * User Guide:
         * Added documentation for customer functionality and create segregation:
