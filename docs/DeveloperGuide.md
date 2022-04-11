@@ -417,7 +417,18 @@ Step 6. In the `CheckRoomByLevelCommand`, it will iterate for roomList and print
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+
+This application is designed for __hotel managers__ who:
+* have a need to manage inventory of items in the hotel
+* have a need to store and view the events happening in the hotel
+* have a need to view and record the status of rooms (whether they've been checked into or checked out of)
+* need to keep track of the information related to their housekeeping staff, including their available hours
+  and performance ratings
+* like to keep track of customer ratings
+* prefer desktop apps over other types
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
 ### Value proposition
 Hotels can be difficult to manage, as hotel managers must keep track of their employees, their inventory, and
@@ -499,16 +510,37 @@ the JAR file name
 
 ### Satisfaction Related Functions
 
-| **Test Case** | **Command** | **Expected Result** |
-|:-------------:|:-------------|:-------------------|
-|x|x  | x|
+|                                      **Test Case**                                       | **Command**                           | **Expected Result**  |
+|:----------------------------------------------------------------------------------------:|:--------------------------------------|:---------------------|
+|                                   Add 1 Satisfaction.                                    | `add satisfaction Bob / 5`            | Adds a Satisfaction object representing customer Bob with rating 5 |
+| Add Satisfaction corresponding to customer whose satisfaction has already been recorded. | `add satisfaction Bob / 5`            | Error message to user|
+|                                  Missing customer name.                                  | `add Satisfaction / 5`                | Error message to user|
+|                                     Missing rating.                                      | `add satisfaction Bob / `             | Error message to user|
+|           Customer name contains non-alphabetic (excluding space) characters.            | `add satisfaction Bob123 / 5`         | Error message to user|
+|                        Rating is out of range of 1-5, inclusive.                         | `add satisfaction Bob / -1`           | Error message to user|
+|                               View recorded satisfactions.                               | `view satifactions`                   | Lists out all satisfactions that user has recorded so far|
+|               Add extra characters to view recorded satisfactions command.               | `view satisfactions blah blah `       | Error message to user|
+| View average satisfaction. | `view average satisfaction`           | Reports the average customer satisfaction|
+|Add extra characters to view average satisfaction. | `view average satisfaction blah blah` | Error message to user|
+
+
+
+
 
 ---
 ### Housekeeper Related Functions
+* Prerequisite: For `HousekeeperPerformance`-related commands, the the `HousekeeperList` must contain all the housekeepers that the user wants to record performances for.
+  Assume that the `HousekeeperList` has a `Housekeeper` named `Steve` and a `Housekeeper` named `Fred`.
 
 | **Test Case** | **Command** | **Expected Result** |
 |:-------------:|:-------------|:-------------------|
-|x|x  | x|
+| Add 1 housekeeper performance for `Steve`| `add performance Steve / 3`.| Adds performance rating of `3` for housekeeper `Steve`|
+| Add 1 housekeeper performance for `Joe`, who is not in the `HousekeeperList`.| `add performance Joe / 3`| Error message to user|
+| Add 1 housekeeper performance for `Fred` with rating that is not within range of 1-5, inclusive. | `add performance Fred / -1` | Error message to user|
+| View recorded housekeeper performances | `view performances` | Lists out all housekeeper performances that user has recorded so far|
+| Add extra characters to view recorded housekeeper performances | `view performances blah blah` | Error message to user |
+
+
 ---
 ### Room Related Functions
 | **Test Case** | **Command** | **Expected Result** |
