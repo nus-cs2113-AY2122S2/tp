@@ -200,8 +200,8 @@ The above diagram shows the sequence diagram of Return command, which allows use
 
 The user starts by typing a return command. The diagram above uses the example of a user who wishes to mark an item of index `1` as returned. The full return command is `return i/1`.
 
-1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
-2. parse()` uses the parsed `itemIndex` to generate a new `ReturnCommand` which is returned to the `run()` method of `InvMgr`.
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, which then calls the `parse()` method in `ReturnCommandParser`.
+2. `ReturnCommandParser` parses the user input into `itemIndex`, and returns a `ReturnCommand` object that is returned to `InputParser` and then `InvMgr`.
 3. The `run()` method calls on the `execute()` function in `ReturnCommand`.
 4. The `execute()` function calls `checkItemListSize()`, which then calls `getSize()` to check if the item list is empty. If it is, an exception is thrown and return cannot be performed. 
 5. Then, it calls `getItem()` to check if the item index is within range. If it is not, an exception is thrown and return cannot be performed. 
@@ -232,8 +232,8 @@ The above diagram shows the sequence diagram of Lost command, which allows users
 
 The user starts by typing a lost command. The diagram above uses the example of a user who wishes to mark `10` quantities of an item of index `1` as lost. The full return command is `lost i/1 q/10`.
 
-1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
-2. `parse()` uses the parsed `itemIndex` to generate a new `LostCommand` which is returned to the `run()` method of `InvMgr`.
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, which then calls the `parse()` method in `LostCommandParser`.
+2. `LostCommandParser` parses the user input into `itemIndex`, and returns a `LostCommand` object that is returned to `InputParser` and then `InvMgr`.
 3. The `run()` method calls on the `execute()` function in `LostCommand`.
 4. The `execute()` function calls `checkItemListSize()`, which then calls `getSize()` to check if the item list is empty. If it is, an exception is thrown and no items can be marked as lost.
 5. Then, it calls `getItem()` to check if the item index is within range. If it is not, an exception is thrown and lost cannot be performed.

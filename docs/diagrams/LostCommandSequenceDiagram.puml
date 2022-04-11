@@ -9,21 +9,25 @@ skinparam sequenceStereotypeFontStyle bold
 
 Participant ":InvMgr" as invmgr
 Participant "Parser" as parser <<class>>
+Participant "LostCommandParser" as LostCommandParser <<class>>
 Participant "inputCommand:LostCommand" as cmd
+
 Participant "itemList:ItemList" as list
 Participant "ui:Ui" as ui
 
 activate invmgr
 
 -> invmgr
-invmgr -> parser:parse("lost i/1 q/10")
+invmgr -> parser:parse("lost i/1")
 activate parser
 
+parser -> LostCommandParser: parse( " i/1")
+activate LostCommandParser
 create cmd
-parser -> cmd:LostCommand(itemIndex: Integer)
+LostCommandParser -> cmd:LostCommand(itemIndex: Integer)
 activate cmd
 return :LostCommand
-
+return :LostCommand
 return inputCommand:LostCommand
 
 invmgr -> cmd:execute(itemList: ItemList, ui: Ui)

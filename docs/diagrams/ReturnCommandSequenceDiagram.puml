@@ -8,8 +8,9 @@ skinparam sequenceStereotypeFontColor red
 skinparam sequenceStereotypeFontStyle bold
 
 Participant ":InvMgr" as invmgr
-Participant "Parser" as parser <<class>>
-Participant "inputCommand:ReturnCommand" as cmd
+Participant "InputParser" as parser <<class>>
+Participant "ReturnCommandParser" as ReturnCommandParser <<class>>
+Participant ":ReturnCommand" as cmd
 Participant "itemList:ItemList" as list
 Participant "ui:Ui" as ui
 Participant "item:Item" as item
@@ -21,11 +22,13 @@ activate invmgr
 invmgr -> parser:parse("return i/1")
 activate parser
 
+parser -> ReturnCommandParser: parse( " i/1")
+activate ReturnCommandParser
 create cmd
-parser -> cmd:ReturnCommand(itemIndex: Integer)
+ReturnCommandParser -> cmd:ReturnCommand(itemIndex: Integer)
 activate cmd
 return :ReturnCommand
-
+return :ReturnCommand
 return inputCommand:ReturnCommand
 
 invmgr -> cmd:execute(itemList: ItemList, ui: Ui)
