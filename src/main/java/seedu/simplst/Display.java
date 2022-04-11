@@ -89,7 +89,7 @@ public class Display {
     // error outputs
 
     public static void skuAlreadyExists(String sku) {
-        System.out.println("Item with SKU: " + sku + "already exists in the warehouse. "
+        System.out.println("Item with SKU: " + sku + " already exists in the warehouse. "
                 + "Please check the SKU again.");
     }
 
