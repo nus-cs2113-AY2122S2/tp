@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+actor user
+participant ":OrderController" as ordercontroller
+participant ":OrderManager" as ordermanager
+participant ":Order" as order_
+
+user -> ordercontroller: addNewOrder()
+activate ordercontroller
+
+ordercontroller -> ordermanager: addDishToOrder(Dish dish, int orderIdx)
+activate ordermanager
+
+activate order_
+ordermanager -> order_  : addDish(Dish dish)
+
+order_ --> ordermanager
+
+@enduml

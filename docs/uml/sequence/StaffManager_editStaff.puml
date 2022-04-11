@@ -1,0 +1,80 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+actor user
+participant ":StaffController" as staffcontroller
+participant ":StaffManager" as staffmanager
+participant ":Staff" as staff
+
+
+user -> staffcontroller: editStaff()
+activate staffcontroller
+
+staffcontroller -> staffcontroller: isEmpty = checkStaffEmpty()
+activate staffcontroller
+staffcontroller --> staffcontroller
+deactivate staffcontroller
+
+alt staff records empty
+staffcontroller --> user
+end
+
+staffcontroller -> staffcontroller: checkNoStaffClash(int staffId)
+activate staffcontroller
+staffcontroller -> staffmanager: staff = findByStaffId(int staffId)
+activate staffmanager
+staffmanager --> staffcontroller
+deactivate staffmanager
+staffcontroller --> staffcontroller
+deactivate staffcontroller
+
+staffcontroller -> staffcontroller: editStaffByField(Staff staff)
+activate staffcontroller
+
+
+alt option 1: id
+staffcontroller -> staffcontroller: editStaffId(Staff staff)
+activate staffcontroller
+staffcontroller -> staffcontroller: checkNoStaffClash(int staffId)
+activate staffcontroller
+staffcontroller -> staffmanager: findByStaffId(int staffId)
+activate staffmanager
+staffmanager --> staffcontroller
+deactivate staffmanager
+staffcontroller --> staffcontroller
+deactivate staffcontroller
+staffcontroller -> staff: setStaffId(int staffId)
+activate staff
+deactivate staff
+deactivate staffcontroller
+
+else option 2: name
+staffcontroller -> staffcontroller: editStaffName(Staff staff)
+activate staffcontroller
+staffcontroller -> staff: setStaffName(String staffName)
+activate staff
+deactivate staff
+deactivate staffcontroller
+
+else option 3: position
+staffcontroller -> staffcontroller: editStaffPosition(Staff staff)
+activate staffcontroller
+staffcontroller -> staff: setPosition(String position)
+activate staff
+deactivate staff
+deactivate staffcontroller
+
+else option 4: salary
+staffcontroller -> staffcontroller: editStaffSalary(Staff staff)
+activate staffcontroller
+staffcontroller -> staff: setSalary(double salary)
+activate staff
+deactivate staff
+deactivate staffcontroller
+
+else option 0: exit
+
+end
+@enduml

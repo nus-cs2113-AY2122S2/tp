@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+actor user
+participant ":DishManager" as dishmanager
+participant "dishes:ArrayList<Dish>" as dishes
+participant "dish:Dish" as dish
+
+user -> dishmanager: addDish(dish)
+activate dishmanager
+dishmanager -> dishes: add(dish)
+activate dishes
+dishes --> dishmanager
+deactivate dishes
+dishmanager --> user
+deactivate dishmanager
+
+@enduml

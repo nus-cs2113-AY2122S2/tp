@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+actor user
+participant ":StaffController" as staffcontroller
+participant ":StaffManager" as staffmanager
+
+
+user -> staffcontroller: findStaff()
+activate staffcontroller
+
+staffcontroller -> staffcontroller: isEmpty = checkStaffEmpty()
+activate staffcontroller
+staffcontroller --> staffcontroller
+deactivate staffcontroller
+
+opt staff records empty
+staffcontroller --> user
+end
+
+staffcontroller -> staffmanager: staff  = findByStaffId(int staffId)
+activate staffmanager
+
+opt staff ID <= 0
+staffmanager --> staffcontroller: IllegalArgumentException
+end
+
+staffmanager --> staffcontroller
+
+
+
+@enduml

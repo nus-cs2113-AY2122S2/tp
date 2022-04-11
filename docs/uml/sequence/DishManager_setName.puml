@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+actor user
+participant ":DishManager" as dishmanager
+participant "dishes:ArrayList<Dish>" as dishes
+participant ":Dish" as dish
+
+
+user -> dishmanager: setPrice(index, newName)
+activate dishmanager
+
+dishmanager -> dishmanager: throwIfIndexNotValid(index)
+activate dishmanager
+
+dishmanager -> dishes: size()
+activate dishes
+dishes --> dishmanager
+deactivate dishes
+group opt [index > size]
+dishmanager --> user: IndexOutOfBoundsException
+end
+
+deactivate dishmanager
+
+dishmanager -> dishes: get(index)
+activate dishes
+dishes --> dishmanager
+deactivate dishes
+dishmanager -> dish
+activate dish
+dish -> dish: setName(newName)
+activate dish
+deactivate dish
+deactivate dish
+deactivate dishmanager
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+actor user
+participant ":StaffController" as staffcontroller
+participant ":StaffManager" as staffmanager
+participant ":Staff" as staff
+
+
+user -> staffcontroller: printStaff()
+activate staffcontroller
+
+staffcontroller -> staffcontroller: isEmpty = checkStaffEmpty()
+activate staffcontroller
+staffcontroller --> staffcontroller
+deactivate staffcontroller
+
+opt staff records empty
+staffcontroller --> user
+end
+
+staffcontroller->staffmanager: printStaff()
+activate staffmanager
+group loop [for each dish]
+staffmanager -> staff: toString()
+activate staff
+staff --> staffmanager
+
+end
+@enduml
