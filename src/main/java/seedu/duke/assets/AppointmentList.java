@@ -266,7 +266,7 @@ public class AppointmentList extends List {
         switch (type) {
         case "P":
             foundAppointments = AppointmentFinder.findAppointmentByPatientNric(appointments, nric);
-            if ( foundAppointments == null) {
+            if (foundAppointments == null) {
                 throw new NotFoundException("Patient does not have an appointment today!");
             }
             for (Appointment a : foundAppointments) {
