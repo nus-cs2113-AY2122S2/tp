@@ -45,7 +45,7 @@ title: Developer Guide
   * [User stories](#user-stories)
   * [Non-functional requirements](#non-functional-requirements)
   * [Glossary](#glossary)
-* [Appendix: Instructions for Manual Testing](#instructions-for-manual-testing)
+* [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
 
 ## Acknowledgements
 We would like to acknowledge [Address Book (Level-3)](https://github.com/se-edu/addressbook-level3) for providing much
@@ -291,14 +291,15 @@ when the user invokes the `session /create` command.
 The general workflow of the `session /create` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionCreateCommand` object.
-3. `SessionCreateCommand#run` method is invoked to run the `session /create` command.
+3. `SessionCreateCommand#run` method is then invoked to run the `session /create` command.
 4. Once the command runs, `SessionCreateCommand#run` method checks if there is an existing session with the same session name.
-5. If an existing session with the specified session name is found, a message indicating that another session with the same name exists is printed using `TextUI#printlnMessage`.
-6. The `SessionCreateCommand` class creates a new `Session` object using the session name, session date, and person list.
-7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
+   * If an existing session with the specified session name is found, a message indicating that another session with the same name exists is printed using `TextUI#printlnMessage`
+     and control is returned to `Splitlah`.
+5. The `SessionCreateCommand` class creates a new `Session` object using the session name, session date, and person list.
+6. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
    which is used to call the `Profile#addSession` method in order to store the new `Session` object.
-8. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with `TextUI#printlnMessage`.
+7. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+8. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with `TextUI#printlnMessage`.
 
 ### Remove a session
 **API reference:** [`SessionDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
@@ -313,13 +314,13 @@ when the user invokes the `session /delete` command.
 The general workflow of the `session /delete` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionDeleteCommand` object.
-3. The `SessionDeleteCommand#run` method is invoked to run the `session /delete` command.
+3. The `SessionDeleteCommand#run` method is then invoked to run the `session /delete` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
    before the list of sessions can be retrieved.
 5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object with the specified 
 session unique identifier from the list of sessions.
-   * If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
-   * Else, the `Session` object with the specified session unique identifier is returned.
+   1. If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`. 
+   2. Else, the `Session` object with the specified session unique identifier is returned.
 6. To remove the `Session` object from the list of sessions stored in `Profile` object, the `Profile#removeSession` method is invoked.
 7. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully deleted.
@@ -337,30 +338,28 @@ when the user invokes the `session /edit` command.
 The general workflow of the `session /edit` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionEditCommand` object.
-3. The `SessionEditCommand#run` method is invoked to run the `session /edit` command.
+3. The `SessionEditCommand#run` method is then invoked to run the `session /edit` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
    before the list of sessions can be retrieved.
 5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object with the specified
    session unique identifier from the list of sessions.
-   * If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
-   * Else, the `Session` object with the specified session unique identifier is returned.
+   1. If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
+   2. Else, the `Session` object with the specified session unique identifier is returned.
 6. The details of how a session is updated are displayed in the reference diagram below.<br>
    ![Reference Frame Update Session Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateSession.png)
 7. `SessionEditCommand#run` checks if there is an update for a new list of persons, new session or new session date.
-   * If there is an update on the list of persons, `SessionEditCommand#getNewPersonList` is called to return a new list of persons to be stored. 
-     * The method checks if the newly provided list of persons contains duplicated names.
-       * If duplicated names are detected, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
-       * Else, it calls `PersonList#isSuperSet` to check if the newly supplied list of persons contains all existing persons in the session.
-         * If `PersonList#isSuperSet` returns `false`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
-         * Else, a new list of persons ready to be stored in the session is returned.
-   * If there is an update on the session name, `SessionEditCommand#getNewSessionName` is called to return the new session name.
-     * The method checks if the provided session name already exists in the list of sessions.
-       * If the provided session name exists within the list of sessions, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
-       * Else, the provided session name is returned to be used as the updated name for the session
-   * If there is an update on the session date, `Session#setDateCreated` is called to set the new session date.
-   * After which, the necessary setter methods are called to update the session name and the list of persons for the session that is being edited.
-8. After the session is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
-9. The `SessionEditCommand` class then prints a message indicating that a session has been successfully edited.
+8. If there is an update on the list of persons, `SessionEditCommand#getNewPersonList` is called to return a new list of persons to be stored. The method checks if the newly provided list of persons contains duplicated names.
+   1. If duplicated names are detected, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+   2. Else, it calls `PersonList#isSuperSet` to check if the newly supplied list of persons contains all existing persons in the session.
+      1. If `PersonList#isSuperSet` returns `false`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+      2. Else, a new list of persons ready to be stored in the session is returned.
+9. If there is an update on the session name, `SessionEditCommand#getNewSessionName` is called to return the new session name. The method checks if the specified session name already exists in the list of sessions.
+   1. If the specified session name exists within the list of sessions, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+   2. Else, the specified session name is returned to be used as the updated name for the session
+10. If there is an update on the session date, `Session#setDateCreated` is called to set the new session date.
+11. After which, the necessary setter methods are called to update the session name and the list of persons for the session that is being edited.
+12. After the session is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
+13. The `SessionEditCommand` class then prints a message indicating that a session has been successfully edited.
 
 ### View a session
 **API reference:** [`SessionViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionViewCommand.java)
@@ -375,10 +374,10 @@ when the user invokes the `session /view` command.
 The general workflow of the `session /view` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionViewCommand` object.
-3. `SessionViewCommand#run` method is invoked to run the `session /view` command.
+3. `SessionViewCommand#run` method is then invoked to run the `session /view` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
-5. The `SessionViewCommand` object then runs the `Profile#getSession` method to retrieve the session represented
-   by the session unique identifier provided.
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object with the specified
+   session unique identifier from the list of sessions.
    1. If the session with the requested session unique identifier does not exist, an error message is printed out with 
       `TextUI#printlnMessage`.
    2. Else, a `String` object representing the details of the requested session is retrieved using the 
@@ -397,11 +396,11 @@ when the user invokes the `session /list` command.
 The general workflow of the `session /list` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionListCommand` object.
-3. `SessionListCommand#run` method is invoked to run the `session /list` command.
+3. `SessionListCommand#run` method is then invoked to run the `session /list` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called which returns a `Profile`
    object.
-5. Once the profile is retrieved, `SessionListCommand` runs the `Profile#getSessionListSummaryString` method.
-   1. If the session list in the profile is empty, the `Profile` class returns a `String` object containing an error 
+5. Once the `Profile` object is returned, `SessionListCommand` runs the `Profile#getSessionListSummaryString` method.
+   1. If the session list in the `Profile` object is empty, the `Profile` class returns a `String` object containing an error 
       message.
    2. Else, a `String` object representing a table summarising the list of sessions in the 
       profile is returned.
@@ -420,14 +419,14 @@ when the user invokes the `session /summary` command
 The general workflow of the `session /summary` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionSummaryCommand` object.
-3. `SessionSummaryCommand#run` method is invoked to run the `session /summary` command.
+3. `SessionSummaryCommand#run` method is then invoked to run the `session /summary` command.
 4. The `Profile` object that stores all sessions is obtained with the `Manager#getProfile` method.
 5. The `TextUI` object that handles all reading and printing operations with the user interface
    is obtained with the `Manager#getUi` method.
-6. From the `Profile` object obtained, the `Profile#getSession` method is invoked with the session unique identifier
-   parsed from the user input to obtain the `Session` object that we want to settle all transactions for.
+6. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object that we want to settle all transactions for,
+   with the specified session unique identifier from the list of sessions.
 7. The `Session#getPersonList` method is called to retrieve an `ArrayList<Person>` object containing all persons 
-  participating in the session.
+   participating in the session.
 8. With the list of participants, an `ArrayList<PersonCostPair>` object is obtained with the
    `SessionSummaryCommand#getPersonCostPairList` method.
    * This method first calculates all costs borne by each person in the list of participants, 
@@ -438,11 +437,11 @@ The general workflow of the `session /summary` command is as follows:
      to be collected between all persons. Each of such matches is referred to as a transaction.
      The matching process is repeated until no more transactions can be made,
      i.e. all debts are paid and all debts are collected.
-   * If no transactions are required to be made, a message explaining that no transactions are required to be made
-     is returned.
-   * Else, a `String` object containing information regarding all transactions that have to be made is returned.
    * For the sake of brevity, the specifics of the method `SessionSumamryCommand#processAllTransactions` is omitted
      from the sequence diagram.
+   1. If no transactions are required to be made, a message explaining that no transactions are required to be made
+     is returned.
+   2. Else, a `String` object containing information regarding all transactions that have to be made is returned.
 10. Finally, with the `TextUI` object, the method `TextUI#printlnMessageWithDivider` is called to print the message
     obtained from the `SessionSummaryCommand#processAllTransactions` method.
 
@@ -463,14 +462,15 @@ The general workflow of the `activity /create` command is as follows:
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityCreateCommand` object.
 3. `ActivityCreateCommand#run` method is then invoked to run the `activity /create` command.
 4. Once the command runs, `ActivityCreateCommand#run` method checks if there are duplicate names in the involved list. 
-   - If there are duplicate names in the involved list, a message indicating that there are duplicates is printed using `TextUI#printlnMessage`
+   * If there are duplicate names in the involved list, a message indicating that there are duplicates is printed using `TextUI#printlnMessage`
      and control is given back to `SplitLah`.
 5. The `ActivityCreateCommand` object updates the cost and cost list by invoking the `ActivityCreateCommand#updateCostAndCostList` method.
 6. The`ActivityCreateCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
-7. Then, `Profile#getSession` method is called to retrieve the `Session` object which the activity that the user wishes to delete is stored in.
-    - If the session does not exist, a message indicating that there is no such session is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
-    - Else, the `Session` object that the activity is stored in is returned.
-    - This process is omitted in the sequence diagram for the sake of brevity.
+7. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object that the activity is stored in,
+   with the specified session unique identifier from the list of sessions.
+   * This process is omitted in the sequence diagram for the sake of brevity.
+   1. If the session does not exist, a message indicating that there is no such session is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
+   2. Else, the `Session` object that the activity is stored in is returned.
 8. Other getter methods are then called to obtain the necessary parameters used to instantiate an Activity object. These getter methods are omitted in the sequence diagram.
 9. The `ActivityCreateCommand` object then adds the respective costs to each `Person` object involved in the activity using the `ActivityCreateCommand#addAllActivityCost` method.
 10. Using the updated details as parameters, the `ActivityCreateCommand` object instantiates an `Activity` object to represent the new activity.
@@ -493,16 +493,17 @@ The general workflow of the `activity /delete` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityDeleteCommand` object.
 3. `ActivityDeleteCommand#run` method is then invoked to run the `activity /delete` command.
-4. Once the command runs, `ActivityDeleteCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
-5. The `Profile#getSession` method is called to retrieve the `Session` object which the activity that the user wishes to delete is stored in.
-    - If the session does not exist, a message indicating that there is no such session is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
-    - Else, the `Session` object that the activity is stored in is returned.
-6. Once the `Session` object is retrieved, the `Session#removeActivity()` method is invoked to remove the `Activity` object from the list of activities stored.
-   - If the activity does not exist, a message indicating that there is no such activity is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
-   - Else, the `Activity` object is removed from the list of activities.
-8. After the activity is removed from the `Session` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-9. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
-10. The `ActivityDeleteCommand` object then prints a message indicating that an activity has been successfully deleted with `TextUI#printlnMessage`.
+4. When the command runs, `ActivityDeleteCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object that the activity is stored in,
+   with the specified session unique identifier from the list of sessions.
+   1. If the session does not exist, a message indicating that there is no such session is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
+   2. Else, the `Session` object that the activity is stored in is returned.
+6. Upon retrieving the `Session` object, the `Session#removeActivity` method is invoked to remove the `Activity` object from the list of activities stored.
+   1. If the activity does not exist, a message indicating that there is no such activity is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
+   2. Else, the `Activity` object is removed from the list of activities.
+7. After the activity is removed from the `Session` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+8. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
+9. The `ActivityDeleteCommand` object then prints a message indicating that an activity has been successfully deleted with `TextUI#printlnMessage`.
 
 ### Edit an activity
 **API reference:** [`ActivityEditCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityEditCommand.java)
@@ -522,22 +523,23 @@ The general workflow of the `activity /edit` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input using methods in the `Parser` class to obtain an `ActivityEditCommand` object.
 3. `ActivityEditCommand#run` method is then invoked to run the `activity /edit` command.
-4. Once the command runs, `ActivityEditCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
-5. The `Profile#getSession` method is called to retrieve the `Session` object which the activity that the user wishes to edit is stored in.
-    - If the session does not exist, a message indicating that there is no such session is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
-    - Else, the `Session` object that the activity is stored in is returned.
+4. When the command runs, `ActivityEditCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object that the activity is stored in,
+   with the specified session unique identifier from the list of sessions.
+   1. If the session does not exist, a message indicating that there is no such session is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
+   2. Else, the `Session` object that the activity is stored in is returned.
 6. `Session#getActivity` is called on the `activityId` provided by the user to fetch the `Activity` object representing
    the activity to be edited. 
-    - If the activity does not exist, a message indicating that there is no such activity is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
-    - Else, the `Activity` object to be edited is returned and stored temporarily as `oldActivity`.
+   1. If the activity does not exist, a message indicating that there is no such activity is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
+   2. Else, the `Activity` object to be edited is returned and stored temporarily as `oldActivity`.
 7. `ActivityEditCommand#retrieveDetailsFromOldActivity` is called on `oldActivity` to retrieve existing activity details
    for delimiters not supplied by the user. This allows `ActivityEditCommand` to reuse existing details for details the user
    does not wish to edit.
 8. `ActivityEditCommand#updateCostAndCostList` and `ActivityEditCommand#validateCostListAndInvolvedList` are called to 
    create a list of costs and validate them. These costs are necessary to recreate the activity after deleting it.
 9. `ActivityEditCommand#addAllActivityCost` is called to add the respective costs to each `Person` object involved in the activity.
-     - A dummy activity unique identifier that cannot be used by any other activity is when adding these costs.
-10. `Session#removeActivity()` method is invoked to remove `oldActivity` from the list of activities stored.
+   * A dummy activity unique identifier that cannot be used by any other activity is when adding these costs.
+10. `Session#removeActivity` method is invoked to remove `oldActivity` from the list of activities stored.
 11. A new `Activity` object is created using the new activity details and stored as `newActivity`.
 12. `Session#addActivity` is called to add `newActivity` to the session.
 13. `ActivityEditCommand#updateDummyActivityIdsInActivityCosts` is called on the session to update all dummy activity unique identifiers added by `ActivityEditCommand#addAllActivityCost` to
@@ -562,10 +564,11 @@ The general workflow of the `activity /list` command is as follows:
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityListCommand` object.
 3. `ActivityListCommand#run` method is then invoked to run the `activity /list` command.
 4. The list of activities are stored in a `Profile` object, hence `Manager#getProfile` is called.
-5. To retrieve the session containing the activity list from the `Profile` object, `Profile#getSession` is executed, returning a session containing all the activities to be listed.
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object that the list of activities is stored in,
+   with the specified session unique identifier from the list of sessions.
 6. Once the session is retrieved, `ActivityListCommand` class runs `Session#getActivityListSummaryString`.
-   1. If the activity list in the session is empty, the Session class returns a `String` object containing an error message.
-   2. If it's not empty, a `String` object representing a table summarising the list of activities in the session is returned. 
+   1. If the activity list in the `Session` object is empty, the `Session` class returns a `String` object containing an error message.
+   2. Else, a `String` object representing a table summarising the list of activities in the session is returned. 
 7. Finally, the method `TextUI#printlnMessageWithDivider` is called to print the message returned.
 
 ## Group Commands
@@ -579,36 +582,40 @@ The interactions of `GroupCreateCommand` with `Profile` and `Storage` classes ar
 
 Please refer to the [sequence diagram](#add-a-session) of `SessionCreateCommand` for reference.
 
-The sequence diagram below models the interactions between various entities in SplitLah
-when the user invokes the `group /create` command.
-<br>
-<br>
-![Create Group Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupCreateCommand.drawio.png)
-<br>
-<br>
 The general workflow of the `group /create` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
-3. A `GroupCreateCommand#run` method is then invoked to run the `group /create` command.
-4. Once the command starts to run, `GroupCreateCommand` class checks if there are duplicates in the name list.
-5. If there are duplicates, a message indicating that name list contains duplicates is printed using `TextUI#printlnMessage`. 
-6. If there are no duplicates, `GroupCreateCommand` class converts each of the names into a `Person` object.
-7. `GroupCreateCommand` class then checks if there is an existing group with the same group name. 
-8. If existing groups with the group name are found, a message indicating that another group with the same name is printed using `TextUI#printlnMessage`.
-9. `GroupCreateCommand` class create a new `Group` object using the group name, name list, and group unique identifier. 
-10. The list of `Group` objects are managed by a `Profile` object, hence `Manager#getProfile#addGroup` is called to store the new `Group` object in the `Profile` object.
-11. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created.
+3. `GroupCreateCommand#run` method is then invoked to run the `group /create` command.
+4. Once the command runs, `GroupCreateCommand#run` method checks if there is an existing group with the same group name.
+   * If an existing group with the specified group name is found, a message indicating that another group with the same name exists is printed using `TextUI#printlnMessage`
+     and control is returned to `SplitLah`.
+5. The `GroupCreateCommand` class creates a new `Group` object using the group name and person list.
+6. The list of `Group` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
+   which is used to call the `Profile#addGroup` method in order to store the new `Group` object.
+7. After the group is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+8. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created with `TextUI#printlnMessage`.
 
 ### Remove a group
 **API reference:** [`GroupDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupDeleteCommand.java)
 
-The sequence diagram below models the interactions between various entities in SplitLah
-when the user invokes the `group /delete` command.
-<br>
-<br>
-![Delete Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupDeleteCommand.drawio.png)
-<br>
-<br>
+The sequence diagram for `GroupDeleteCommand` is omitted as it bears many similarities with [`SessionDeleteCommand`](#remove-a-session).<br>
+The interactions of `GroupDeleteCommand` with `Profile` and `Storage` classes are identical but the key differences lie in the arguments being parsed:
+* `GroupViewCommand` parses the **group unique identifier** instead of the **session unique identifier**.
+* It then removes the `Group` object from the list of groups managed by the `Profile` class corresponding to the **group unique identifier**.
+
+The general workflow of the `group /delete` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupDeleteCommand` object.
+3. The `GroupDeleteCommand#run` method is then invoked to run the `group /delete` command.
+4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile` is called
+   before the list of groups can be retrieved.
+5. Once the `Profile` object is returned, `Profile#getGroup` is called to retrieve the `Group` object with the specified
+   group unique identifier from the list of groups.
+    1. If a `Group` object with the specified group unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
+    2. Else, the `Group` object with the specified group unique identifier is returned.
+6. To remove the `Group` object from the list of groups stored in `Profile` object, the `Profile#removeGroup` method is invoked.
+7. After the group is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+8. The `GroupDeleteCommand` class then prints a message indicating that a group has been successfully deleted.
 
 ### Edit a group
 
