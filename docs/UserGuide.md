@@ -222,6 +222,9 @@ Deletes an existing session so that you can remove sessions that you no longer n
 ### Editing a session: `session /edit`
 Edits an existing session so that you can change the details of a session.<br>
 
+You only have to supply delimiters for the details you wish to edit. However, the `/sid`
+delimiter is compulsory to identify the session you wish to edit.
+
 >Format: `session /edit /sid [SESSION_ID] {/n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...]}`
 >* `[SESSION_ID]` refers to the unique identifier of the session.
 >   * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
@@ -466,14 +469,10 @@ delimiters are compulsory to identify the activity you wish to edit.
 > Format 2: `activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER]
   /i [NAME1 NAME2...] /cl [COST1 COST2...] /gst [GST_PERCENTAGE] /sc [SERVICE_CHARGE]}`
 > 
-> Compulsory arguments:
 >* `[SESSION_ID]` refers to the unique identifier of the session.
 >    * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 >* `[ACTIVITY_ID]` refers to the unique identifier of the activity.
 >    * The unique identifier for an activity can be retrieved with the [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
-> 
-> Optional arguments:
-> 
 >* `[ACTIVITY_NAME]` refers to the name of the activity.
 >     * The activity name is **case-insensitive**.
 >     * If one is not provided, the original activity name is left unchanged.
@@ -507,6 +506,7 @@ distributed amongst all participants.
 >    * Changing the service charge will automatically recalculate all costs associated with this activity to reflect the new
 >service charge.
 >    * To remove the service charge entirely, you must explicitly specify `/sc 0`.
+
 <br>
 
 > **💡 Notes:**
@@ -729,6 +729,9 @@ Deletes an existing group so that you can remove groups that you no longer need.
 
 ### Editing a group: `group /edit`
 Edits an existing group so that you can change the details of a group.<br>
+
+You only have to supply delimiters for the details you wish to edit. However, the `/gid`
+delimiter is compulsory to identify the group you wish to edit.
 
 >Format: `group /edit /gid [GROUP_ID] {/n [GROUP_NAME] /pl [NAME1 NAME2...]}`
 >* `[GROUP_ID]` refers to the unique identifier of the group.
