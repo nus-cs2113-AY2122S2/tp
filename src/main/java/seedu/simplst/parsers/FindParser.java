@@ -21,7 +21,7 @@ public class FindParser extends CommandParser {
     public void initExtractParams() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
-        regex = "n/(?<name>.*)";
+        regex = " n/(?<name>.*)";
         matchKeywordsMatch = new MatchKeywords(this.userInput, regex);
         this.matches = matchKeywordsMatch.getGroupValues();
     }

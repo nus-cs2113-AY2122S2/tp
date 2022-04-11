@@ -79,10 +79,7 @@ public class LocalStorage {
     }
 
     public static Boolean writeSaveFile(String storeStr, String filePath) throws IOException {
-//        System.out.println("filePath: " + filePath);
         Path dir = Paths.get(filePath).toAbsolutePath().normalize().getParent();
-//        System.out.println("dir: ");
-//        System.out.println(dir);
         if (!Files.exists(dir)) {   //createTempDirectory
             try {
                 Files.createDirectory(dir);

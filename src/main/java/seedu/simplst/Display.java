@@ -1,35 +1,6 @@
 package seedu.simplst;
 
 public class Display {
-
-    //    public static void addGood(String id, String name, String qty,
-    //                               String desc, ArrayList<Orderline> userOrderlines) throws WrongCommandException {
-    //        if (id.isBlank() || name.isBlank() || qty.isBlank()) {
-    //            throw new WrongCommandException("add", true);
-    //        }
-    //        try {
-    //            Orderline orderline = new Orderline(
-    //                    Integer.parseInt(id),
-    //                    name,
-    //                    Integer.parseInt(qty),
-    //                    desc);
-    //            userOrderlines.add(orderline);
-    //            System.out.printf("%d %s %s added\n", orderline.getQuantity(), orderline,
-    //                    checkPlural(orderline.getQuantity()));
-    //        } catch (NumberFormatException e) {
-    //            throw new WrongCommandException("add", true);
-    //        }
-    //    }
-
-    // Function to print grammar for statements to print
-    //    public static String checkPlural(int numberOfGoods) {
-    //        if (numberOfGoods <= 1) {
-    //            return "is ";
-    //        } else {
-    //            return "are ";
-    //        }
-    //    }
-
     public static void hello() {
         String logo = "Simplst";
         System.out.println("Hello from\n" + logo);
@@ -117,7 +88,7 @@ public class Display {
         System.out.println("Warehouse information can't save.");
     }
 
-    public static void warehouseStateNotRestored(){
+    public static void warehouseStateNotRestored() {
         System.out.println("Warehouse information can't restore.");
     }
 
@@ -184,15 +155,15 @@ public class Display {
         System.out.println("\tExample: add o/ oid/1 r/Danny Phantom "
                 + "addr/Amity Park\n");
         System.out.println("Add good to order Command");
-        System.out.println("\tFormat: add og/ oid/[ORDER_ID] sku/[SKU] q/[QUANTITY_NEEDED_FOR_ORDER]");
-        System.out.println("\tExample: add og/ oid/1 sku/WC1 q/10");
+        System.out.println("\tFormat: add og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_NEEDED_FOR_ORDER]");
+        System.out.println("\tExample: add og/ oid/1 sku/WC1 qty/10\n");
         System.out.println("Remove order Command");
         System.out.println("\tFormat: remove o/ oid/[ORDER_ID]");
         System.out.println("\tExample: remove o/ oid/1\n");
         System.out.println("Remove a specific quantity of orderline in an order");
         System.out.println("\tFormat: remove og/ oid/[ORDER_ID] sku/[SKU]"
-                + " q/[QUANTITY_TO_REMOVE]");
-        System.out.println("\tExample: remove og/ oid/1 sku/WC1 q/1\n");
+                + " qty/[QUANTITY_TO_REMOVE]");
+        System.out.println("\tExample: remove og/ oid/1 sku/WC1 qty/1\n");
         System.out.println("Listing all orders");
         System.out.println("\tFormat: list o/\n");
         System.out.println("Listing orderlines in an order");

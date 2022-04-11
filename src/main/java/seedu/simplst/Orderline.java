@@ -15,7 +15,7 @@ public class Orderline extends Good {
     private int quantityFulfilled = 0;
     private Boolean isCheckedOff = false;
 
-    public Orderline(UnitGood unitGood, int id, int quantity) {
+    public Orderline(UnitGood unitGood, int quantity) {
         super(unitGood, quantity);
     }
 
@@ -32,7 +32,7 @@ public class Orderline extends Good {
         if (quantityFulfilled == super.getQuantity()) {
             checkOff();
         }
-}
+    }
 
     private String isDone() {
         if (isCheckedOff) {
@@ -52,15 +52,8 @@ public class Orderline extends Good {
                 + isDone();
     }
 
-    public int getId() {
-        return 0;
-    }
-
     public JSONObject serialize() {
         JSONObject jo = super.serialize();
-//      System.out.println("Serializee orderline");
-//      System.out.println(this.isCheckedOff);
-//      System.out.println(this.quantityFulfilled);
         jo.put(OrderlinesKeys.isCheckedOff, this.isCheckedOff);
         jo.put(OrderlinesKeys.quantityFulfilled, this.quantityFulfilled);
         return jo;

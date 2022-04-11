@@ -12,6 +12,7 @@ setup and quick to use. Simplst will mainly be used to add, remove, list and vie
 * [Explanation of Key Terms or Symbols](#explanation-of-key-terms-or-symbols)
 * [Quick start](#quick-start)
 * [Features](#features)
+  * [Help Command]()
   * [Unit Good Commands](#unit-good-commands)
     * [Adding a Unit Good](#adding-a-unit-good-add-ug)
     * [Removing a Unit Good](#removing-a-unit-good-remove-ug)
@@ -76,15 +77,26 @@ ____________________________________________________________
 
 ## Features
 
+### Help Command `help`
+All the features can be viewed on the Command-Line Interface using the help command if you want to view the commands
+there instead. This is done by using the `help` command. You can also use flags to indicate which specific set of commands
+to view.
+
+Help Commands:
+* `help` - View all commands
+* `help ug` - View commands related to Unit Goods
+* `help g` - View commands related to Goods
+* `help o` - View commands related to Orders and Orderlines
+
 ### ***Unit Good Commands***
 A Unit Good is a template of a good. A unit good should be added to the warehouse to allow Simplst to know what kind goods will be added to the warehouse later.
 Unit Goods can help Simplst to estimate storage capacity in the future and other predicitive features for future versions. 
 
 A Unit Good contains:
-* unique SKU
-* name
-* description of unit good
-* capacity
+* Unique SKU
+* Name
+* Description of unit good
+* Capacity
 
 ### Adding a Unit Good `add ug/`
 Add a new unit good to the warehouse, creating a Good with quantity 0 in the process.

@@ -86,18 +86,14 @@ public class UnitGood {
         Object description = jo.get(UnitGoodKeys.description);
         Object capacity = jo.get(UnitGoodKeys.capacity);
         String desc = "";
-        if (sku == null || name == null || capacity == null){
+        if (sku == null || name == null || capacity == null) {
             return null;
         }
-        if(description == null){
+        if (description == null) {
             desc = "";
         } else {
             desc = description.toString();
         }
-//        System.out.println("sku: " + sku);
-//        System.out.println("name: " + name);
-//        System.out.println("description: " + description);
-//        System.out.println("capacity: " + capacity);
         UnitGood ug = new UnitGood(
                 sku.toString(),
                 name.toString(),

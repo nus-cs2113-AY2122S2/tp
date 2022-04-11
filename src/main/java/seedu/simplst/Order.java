@@ -62,8 +62,7 @@ public class Order {
                 Display.orderlineAlreadyExists(orderline.getName(), orderline.getQuantity());
                 return null;
             }
-            orderline = new Orderline(unitGood,
-                    orderlines.size() + 1, quantity);
+            orderline = new Orderline(unitGood, quantity);
             orderlines.add(orderline);
             Display.orderlineAdded(orderline.getName(), orderline.getQuantity());
         } catch (NumberFormatException e) {
@@ -190,7 +189,7 @@ public class Order {
         Object saO = jo.get(OrderKeys.shippingAddress);
         Object fO = jo.get(OrderKeys.isFulfilled);
         Object olO = jo.get(OrderKeys.orderlines);
-        if (idO == null || rO == null || saO == null || fO == null || olO == null){
+        if (idO == null || rO == null || saO == null || fO == null || olO == null) {
             return null;
         }
         Integer orderId = Integer.parseInt(idO.toString());
@@ -204,26 +203,26 @@ public class Order {
 
         cur.setFulfilled(Boolean.parseBoolean(fO.toString()));
         JSONArray orderLinesJA = (JSONArray) olO;
-        for (Object item: orderLinesJA){
+        for (Object item: orderLinesJA) {
             JSONObject jol = (JSONObject) item;
             UnitGood ug = UnitGood.restoreUnitGood(jol);
-            if (ug == null){
+            if (ug == null) {
                 return null;
             }
             Object qtyO = jol.get(GoodKeys.quantity);
             Object qfO = jol.get(OrderlinesKeys.quantityFulfilled);
             Object ifO = jol.get(OrderlinesKeys.isCheckedOff);
-            if (qtyO == null || qfO == null || ifO == null){
+            if (qtyO == null || qfO == null || ifO == null) {
                 return null;
             }
             String qty = qtyO.toString();
             try {
                 Orderline ol = cur.addOrderline(ug, qty);
-                if (ol == null){
+                if (ol == null) {
                     return null;
                 }
                 Boolean isCheckOff = Boolean.parseBoolean(ifO.toString());
-                if (isCheckOff){
+                if (isCheckOff) {
                     ol.checkOff();
                 }
                 Integer qtyF = Integer.parseInt(qfO.toString());

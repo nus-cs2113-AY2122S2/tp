@@ -10,7 +10,7 @@ public class OrderlineTest {
         Order testOrder = new Order(1, "John Doe", "123 Maple ave");
         UnitGood testUnitGood = new UnitGood("WC1", "Wooden Chairs", "German Oak", "small");
         Good testGood = new Good(testUnitGood, 50);
-        Orderline testOrderline = new Orderline(testGood, 1, 20);
+        Orderline testOrderline = new Orderline(testGood, 20);
 
         testOrderline.setQuantityFulfilled(20);
         assertEquals(20, testOrderline.getQuantityFulfilled());
@@ -22,7 +22,7 @@ public class OrderlineTest {
         Order testOrder = new Order(2, "John Day", "321 Maple ave");
         UnitGood testUnitGood = new UnitGood("WC2", "Wooden Table", "German Oak", "small");
         Good testGood = new Good(testUnitGood, 50);
-        Orderline testOrderline = new Orderline(testGood, 2, 20);
+        Orderline testOrderline = new Orderline(testGood, 20);
 
         testOrderline.setQuantityFulfilled(10);
         assertEquals(false, testOrderline.getCheckedOff());
