@@ -11,30 +11,32 @@ the activities they participated in, for a particular session.
 Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=matheril&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 #### New Features
-* Activity Cost
+* [Activity Cost](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/ActivityCost.java)
     * This class encapsulates the cost paid and owed for a specific activity by a person.
-* Activity Edit
+* [Activity Edit](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityEditCommand.java)
     * Allows users to edit an activity, only having to specify the details they wish to change.
-* Session View
+* [Session View](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionViewCommand.java)
     * Allows users to view a session. Displays session details and a list of the activities involved.
-* Text UI
+* [Text UI](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/ui/TextUI.java)
     * Acts as a user interface, and offers methods to other classes to print to and read from the user interface.
-* Person
+* [Person](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Person.java)
     * This class represents a person. It encapsulates its `Name` and a list of `ActivityCost`s associated with it.
-* Name
+* [Name](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Name.java)
     * This class represents a name. It sanitises the name used to instantiate it by stripping whitespace from it, and 
       includes a method that checks if the name is valid (contains only alphabetical characters).
      
 #### Enhanced Features
-* Separated dependency of the `Parser` class from the `Command` class by creating `ActivityEditCommandParser` and 
-  `SessionViewCommandParser`.
-* TableFormatter
+* Separated dependency of parser class from command class by creating Command Parser classes for certain features.
+    * These include the [ActivityEditCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/ActivityEditCommandParser.java),
+      [SessionViewCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/SessionViewCommandParser.java) classes.
+* [TableFormatter](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/ui/TableFormatter.java)
     * A `TableFormatter` object creates a table that can be modified with new data at any time. When printed, it
       produces a neatly formatted and decorated table that automatically aligns its borders to the data stored within.
       Other classes can create `TableFormatter` objects, edit them and pass them to `TextUI` to be printed to the user 
       interface.
-* TableFormatterRow
-    * A helper class for `TableFormatter`. It represents a single row of the table.
+    * This allows all developers to print neatly to the interface in a standardized format.
+    * Makes use of the helper class [TableFormatterRow](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/ui/TableFormatterRow.java) that represents
+      a single row of the `TableFormatter` object.
 * Message
     * Set up this class so other developers can store their hardcoded strings in it, such as error and logging messages.
 * InvalidDataException
