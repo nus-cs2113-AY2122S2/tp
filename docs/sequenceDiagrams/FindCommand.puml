@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+group FindCommand
+?-> Parser: Find Command
+Activate Parser
+
+Parser -> ListCommand **
+Activate ListCommand
+
+ListCommand -> recordMgr :getAllRecords
+activate recordMgr
+ListCommand <-- recordMgr : records
+ListCommand -> ListCommand : filteredRecords
+deactivate recordMgr
+
+Parser <-- ListCommand
+Deactivate ListCommand
+
+Deactivate Parser
+?<-- Parser
+Deactivate Parser
+end
+@enduml

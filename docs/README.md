@@ -1,6 +1,4 @@
-# Duke
-
-{Give product intro here}
+# Spendvelope
 
 Useful links:
 * [User Guide](UserGuide.md)

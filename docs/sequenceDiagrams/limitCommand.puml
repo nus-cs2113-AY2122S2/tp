@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+autonumber
+group LimitCommand
+?-> Parser: Limit command
+Activate Parser
+Parser -> Parser: setLimitCommand(args)
+Activate Parser
+
+opt no parameter input
+    |||
+    ref over Parser: IncorrectCommand
+    Parser --> Parser
+    ?<-- Parser
+end
+
+Parser -> LimitCommand **
+Activate LimitCommand
+Parser <-- LimitCommand
+Deactivate LimitCommand
+
+Parser --> Parser: Return LimitCommand
+Deactivate Parser
+?<-- Parser
+Deactivate Parser
+
+end
+@enduml

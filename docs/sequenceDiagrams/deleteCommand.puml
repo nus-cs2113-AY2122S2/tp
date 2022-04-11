@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+group DeleteCommand
+?-> Parser: Delete command
+Activate Parser
+Parser -> Parser: prepareDeleteCommand(args)
+Activate Parser
+
+opt no parameter input
+    |||
+    ref over Parser: IncorrectCommand
+    Parser --> Parser
+    ?<-- Parser
+end
+
+|||
+activate Parser
+opt wrong parameter input
+    |||
+    ref over Parser: IncorrectCommand
+    Parser --> Parser
+    ?<-- Parser
+end
+
+Parser -> DeleteCommand **
+Activate DeleteCommand
+Parser <-- DeleteCommand
+Deactivate DeleteCommand
+|||
+Parser --> Parser: Return DeleteCommand
+Deactivate Parser
+?<-- Parser
+Deactivate Parser
+end
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+
+group IncorrectCommand
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+autonumber
+
+
+Parser -> IncorrectCommand **: IncorrectCommand
+Activate IncorrectCommand
+Parser <-- IncorrectCommand: return
+Deactivate IncorrectCommand
+end
+@enduml

@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+autonumber
+autoactivate on
+
+loop while not exit command
+|||
+ref over Spendvelope, TextUi: getUserInput
+
+Spendvelope -> Parser: parseCommand(fullUserInput)
+alt Add command
+    |||
+    ref over Parser, Command: addCommand
+else Delete command
+    |||
+    ref over Parser, Command: deleteCommand
+else List Command
+    |||
+    ref over Parser, Command : ListCommand
+else Limit Command
+    |||
+    ref over Parser, Command : LimitCommand
+else Find Command
+    |||
+    ref over Parser, Command : FindCommand
+else Summary Command
+    |||
+    ref over Parser, Command : SummaryCommand
+else
+    |||
+    ref over Parser, Command : IncorrectCommand
+    note right: Command object is created and returned to \nParser in each of the command references
+end
+Spendvelope <-- Parser: command
+
+Spendvelope -> Spendvelope: executeCommand(command)
+Spendvelope -> Command: execute()
+Command -> CommandResult**
+Activate CommandResult
+Command <-- CommandResult:result
+Spendvelope <-- Command: result
+destroy Command
+Spendvelope --> Spendvelope: result
+
+Spendvelope -> TextUi: showResultToUser(result)
+TextUi -> CommandResult: getRelevantRecords()
+TextUi <-- CommandResult
+TextUi -> CommandResult: getFeedbackToUser()
+TextUi <-- CommandResult
+destroy CommandResult
+Spendvelope <-- TextUi
+end
+
+@enduml

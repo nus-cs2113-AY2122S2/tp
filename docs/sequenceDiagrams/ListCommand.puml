@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+group ListCommand
+?-> Parser: List Command
+Activate Parser
+
+Parser -> ListCommand **
+Activate ListCommand
+
+ListCommand -> recordMgr :getAllRecords
+activate recordMgr
+ListCommand <-- recordMgr : records
+deactivate recordMgr
+
+Parser <-- ListCommand
+Deactivate ListCommand
+
+Deactivate Parser
+?<-- Parser
+Deactivate Parser
+end
+@enduml

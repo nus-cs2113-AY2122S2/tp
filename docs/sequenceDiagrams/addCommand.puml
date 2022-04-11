@@ -1,0 +1,83 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+autonumber
+group addCommand
+?-> Parser: Add command
+Activate Parser
+Parser -> Parser: prepareAddCommand(args)
+Activate Parser
+
+opt no parameter input
+    |||
+    ref over Parser: IncorrectCommand
+    Parser --> Parser
+    ?<-- Parser
+end
+
+|||
+activate Parser
+opt missing item name, price, or date parameter
+    |||
+    ref over Parser: IncorrectCommand
+    Parser --> Parser
+    ?<-- Parser
+end
+
+|||
+loop for item name, price, and date
+    Parser -> Parser: extractParameter()
+end
+
+Parser -> AddCommand **
+Activate AddCommand
+Parser <-- AddCommand
+Deactivate AddCommand
+|||
+alt product category
+    |||
+    opt missing product type parameter
+        |||
+        ref over Parser: IncorrectCommand
+        Parser --> Parser
+        ?<-- Parser
+    end
+
+    Parser -> Parser: extractParameter()
+
+    alt valid product type
+        Parser -> AddCommand: AddProductCommand(params)
+        Activate AddCommand
+        Parser <-- AddCommand
+        Deactivate AddCommand
+    else invalid product type
+        |||
+        ref over Parser: IncorrectCommand
+                Parser --> Parser
+                ?<-- Parser
+    end
+
+else subscription category
+    |||
+    opt missing renewal parameter
+        |||
+        ref over Parser: IncorrectCommand
+        Parser --> Parser
+        ?<-- Parser
+    end
+
+    Parser -> Parser: extractParameter()
+
+    Parser -> AddCommand: AddSubscriptionCommand(params)
+    Activate AddCommand
+    Parser <-- AddCommand
+    Deactivate AddCommand
+end
+
+Parser --> Parser: Return AddCommand
+Deactivate Parser
+?<-- Parser
+Deactivate Parser
+end
+@enduml

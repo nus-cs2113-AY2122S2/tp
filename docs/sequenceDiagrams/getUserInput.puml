@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+autonumber
+group getUserInput
+autoactivate on
+
+Spendvelope -> TextUi: getUserCommand()
+loop shouldIgnore == true
+    TextUi -> TextUi: shouldIgnore()
+    TextUi --> TextUi
+    |||
+end
+
+TextUi -> TextUi: showToUser()
+TextUi --> TextUi
+TextUi --> Spendvelope: fullInputLine
+end
+@enduml

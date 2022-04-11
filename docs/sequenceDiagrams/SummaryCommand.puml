@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+autonumber
+group SummaryCommand
+?-> Parser: Summary command
+Activate Parser
+
+Parser -> SummaryCommand **
+Activate SummaryCommand
+Parser <-- SummaryCommand
+Deactivate SummaryCommand
+
+Parser --> Parser: Return SummaryCommand
+Deactivate Parser
+?<-- Parser
+Deactivate Parser
+
+end
+@enduml
