@@ -21,7 +21,7 @@
 - [Product Scope](#product-scope)
   - [Target user profile](#target-user-profile)
   - [Value proposition](#value-proposition)
-  - [User Stories](#user-Stories)
+  - [User Stories](#user-stories)
   - [Non-Functional Requirements](#non-functional-requirements)
   - [Glossary](#glossary)
   - [Instruction for manual testing](#instructions-for-manual-testing)
