@@ -5,7 +5,7 @@ import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.loggers.MainLogger;
 import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
-import seedu.duke.entities.Order;
+import java.text.DecimalFormat;
 
 public class OrderController extends Controller {
     private static final String[] CHOICES = {"Exit Order Menu",
@@ -129,8 +129,9 @@ public class OrderController extends Controller {
         MainLogger.logInfo(this, "User is displaying the price of an order");
         System.out.println("Getting total price of an order...");
         try {
+            DecimalFormat df = new DecimalFormat("#.00");
             int userInputInt = InputParser.getInteger("Enter the order you want to get price: ") - 1;
-            System.out.printf("Total value of this order: %.2f. \n", orderManager.getPrice(userInputInt));
+            System.out.println("Total value of this order: " + df.format(orderManager.getPrice(userInputInt)));
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Please enter a valid order index.");
         }
@@ -145,7 +146,8 @@ public class OrderController extends Controller {
         if (orderManager.getOrderCount() == 0) {
             System.out.println("No order now.");
         } else {
-            System.out.printf("Total value of all orders: %.2f. \n", orderManager.getAllValue());
+            DecimalFormat df = new DecimalFormat("#.00");
+            System.out.println("Total value of all orders: " + df.format(orderManager.getAllValue()));
         }
     }
 
