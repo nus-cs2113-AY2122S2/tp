@@ -28,6 +28,11 @@ public class Parser {
 
     public static final Pattern ONE_ARGS_FORMAT = Pattern.compile("(?<id>[\\d]+)");
 
+    public static final Pattern HOTEL_ARGS_FORMAT = Pattern.compile(
+            "(?<id>[\\d]+),(?<name>.+),(?<country>.+),(?<price>.+),(?<packageid>[\\d]+)");
+
+    public static final Pattern HOTELS_ARGS_FORMAT = Pattern.compile("(?<id>[\\d]+)");
+
     public static DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/uuuu")
             .withResolverStyle(ResolverStyle.STRICT);
 
@@ -67,6 +72,16 @@ public class Parser {
 
         case PrintReservationsCommand.COMMAND_WORD:
             return prepareReservations(arguments);
+            
+        case AddHotelCommand.COMMAND_WORD:
+            return prepareAddHotel(arguments);
+
+        case PrintHotelsCommand.COMMAND_WORD:
+            return prepareHotels(arguments);
+            
+            
+        case PrintAllCommand.COMMAND_WORD:
+            return new PrintAllCommand();
 
         default:
             return new ErrorCommand(input);
@@ -173,6 +188,40 @@ public class Parser {
             return new WrongFormatCommand(e.getMessage());
         }
     }
+
+
+    private static Command prepareAddHotel(String args) {
+        final Matcher matcher = HOTEL_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new WrongFormatCommand(args);
+        }
+        try {
+            int hotelID = Integer.parseInt(matcher.group("id"));
+            String hotelName = matcher.group("name");
+            String country = matcher.group("country");
+            double price = Double.parseDouble(matcher.group("price"));
+            int packageID = Integer.parseInt(matcher.group("packageid"));
+            return new AddHotelCommand(hotelID, hotelName, country, price, packageID);
+        } catch (Exception e) {
+            return new WrongFormatCommand(e.getMessage());
+        }
+    }
+
+    private static Command prepareHotels(String args) {
+        final Matcher matcher = HOTELS_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new WrongFormatCommand(args);
+        }
+        try {
+            int id = Integer.parseInt(matcher.group("id"));
+            return new PrintHotelsCommand(id);
+        } catch (Exception e) {
+            return new WrongFormatCommand(e.getMessage());
+        }
+    }
+
+
+
 
     public static boolean dateStartEndValid(LocalDate startDate, LocalDate endDate) {
         return endDate.isAfter(startDate);
