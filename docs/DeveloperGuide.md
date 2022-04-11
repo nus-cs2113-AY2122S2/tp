@@ -793,26 +793,22 @@ Given below are instructions to test the app manually.
    1. Test case: `add /cc /n /cc DBS /cb 1.0 /cl 10000`
       Expected: Credit card added to account. Message displaying summary of new
       credit card is displayed. 
-   2. Test case: Missing flag, or reordering of `/cc`, `/cb`, or `cl`
+   2. Test case: Cashback not in range [0, 100]
       Expected: Add command is rejected, with an appropriate error message.
-   3. Test case: Cashback not in range [0, 100]
+   3. Test case: Credit card limit is invalid
       Expected: Add command is rejected, with an appropriate error message.
-   4. Test case: Credit card limit is not positive
-      Expected: Add command is rejected, with an appropriate error message.
-   5. Test case: Name is the same as an already existent credit card
+   4. Test case: Name is the same as an already existing credit card
       Expected: Add command is rejected, with an appropriate error message.
 3. Adding income source
    1. Test case: `add /i /a 200 /c Allowance`
       Expected: Income source added to account. Message displaying summary of new
       income source is displayed. 
-   2. Test case: Missing flag, or reordering of `/a` and `c`
-      Expected: Add command is rejected, with an appropriate error message.
-   3. Test case: Other valid category (Salary, Investment, Others)
+   2. Test case: Other valid category (Salary, Investment, Others)
       Expected: Income source added to account. Message displaying summary of new
       income source is displayed.
-   4. Test case: Invalid category 
+   3. Test case: Invalid category 
       Expected: Add command is rejected, with an appropriate error message.
-   5. Test case: Invalid amount (not a positive integer)
+   4. Test case: Invalid amount (not a positive integer)
       Expected: Add command is rejected, with an appropriate error message.
 4. Adding expenditure paid for with credit card
    1. Prerequisite: A credit card named `DBS` has been added, with an appropriately high
@@ -827,6 +823,62 @@ Given below are instructions to test the app manually.
 
 ### Updating and deleting data
 
+1. Updating and deleting expenditures
+   1. Prerequisite: There is at least 1 expenditure.
+   2. Test case: `update /e 1 /pm Cash /c Entertainment /d PS5 /a 899.00 /t 25/03/2022`
+      Expected: First expenditure is updated accordingly, with a message summarizing
+      the new data.
+2. Updating and deleting credit cards
+   1. Prerequisite: There are at least 4 credit cards.
+   2. Test case: `update /cc 4 /n OCBC /cb 2.00 /cl 30000`
+      Expected: Fourth credit card is updated accordingly, with a message summarizing
+       the new data.
+3. Updating and deleting income sources
+   1. Prerequisite: There are at least 2 income sources.
+   2. Test case: `update /i 2 /a 500 /c Investment`
+      Expected: Second income source is updated accordingly, with a message summarizing
+       the new data.
+4. Update edge cases
+   1. Test case: Invalid index into list (not integer, negative, out of bounds, etc)
+      Expected: Update command is rejected, with an appropriate message.
+   2. Note that all input format edge cases from `add` also apply here.
+
 ### Displaying summary information
 
+1. Listing information
+   1. Prerequisite for ii, iii, iv: Some expenditures, credit cards, and income sources have already been `add`ed.
+   2. Test case: `list /cc`
+      Expected: A list of credit cards is shown. For each credit card, its name,
+      cashback percentage, cashback gained, card limit, and current remaining balance
+      is displayed.
+   3. Test case: `list /i`
+      Expected: A list of income sources is shown. For each income source, its
+      amount and category is displayed.
+   4. Test case: `list /e`
+      Expected: A list of expenditures is displayed. For each expenditure, its
+      amount, category, description, and date is displayed, as well as how it was 
+      paid for. 
+   5. Test case: `list` when the respective data source (expenditures, credit cards, income sources) is empty.
+      Expected: An error message telling the user to add data is displayed.
+2. Calculating summary expenses
+   1. Prerequisite: Some expenses have been added, under appropriate categories, all occurring sometime in March 2022.
+   2. Test case: `calculate /epm 03/2022`
+      Expected: A breakdown of expenses in March 2022 per category is displayed.
+
 ### Saving data
+
+1. Normal operations
+   1. Prerequisites: Some data has already been added into the system.
+   2. Test case: There is no `data.txt` file on startup.
+      Expected: A new file is created, and operation continues as normal.
+   3. Test case: Perform `list /e`, `list /cc`, and `list /i` to view the data in the system.
+      Restart the software, and perform the list commands again.
+      Expected: The two sets of list commands will have the same output.
+2. Manual editing
+   1. Prerequisites: A save file has been created, with relevant data.
+   2. Test case: A value in the save file is manually edited
+         Expected: Upon restarting the program, the new value is correctly reflected.
+   3. Test case: The save file is corrupted (e.g. missing/misspelled parameters, improper
+         begin block/end block, missing quotes, improper values for parameters)
+         Expected: An error message detailing the parse error is displayed, and 
+         the software proceeds to work as if the save file started as empty.
