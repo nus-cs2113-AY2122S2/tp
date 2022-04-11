@@ -2,8 +2,8 @@
 !include style.puml
 
 Package "Money" <<Rectangle>> {
-    abstract class Money MONEY_COLOR_T1
-    abstract class MoneyList MONEY_COLOR
+    class "{abstract}\nMoney" as Money MONEY_COLOR_T1
+    class "{abstract}\nMoneyList" as MoneyList MONEY_COLOR
     class Income MONEY_COLOR_T1
     class IncomeList MONEY_COLOR
     class Expenditure MONEY_COLOR_T1
@@ -16,7 +16,11 @@ Expenditure --up[#grey]-|> Money
 IncomeList --up[#grey]-|> MoneyList
 ExpenditureList --up[#grey]-|> MoneyList
 
-IncomeList "1" -down[#grey]-> "*" Income
-ExpenditureList "1" -down[#grey]-> "*" Expenditure
+IncomeList "1" -down[#grey]-> "      *" Income
+ExpenditureList "        1" -down[#grey]-> "*" Expenditure
+
+Money -L[#hidden]> IncomeList
+Money -R[#hidden]> ExpenditureList
+Money -U[#hidden]> MoneyList
 
 @enduml
