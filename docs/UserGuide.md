@@ -335,11 +335,11 @@ However, deleted sessions are not listed.
 > An activity represents a single group activity and stores its name, costs and the name of the payer.
 
 ### Overview
-* [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
-  * [Deleting an activity: `activity /delete`](#deleting-an-activity-activity-delete)
-  * [Editing an activity: `activity /edit`](#editing-an-activity-activity-edit)
-  * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
-  * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
+ * [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
+ * [Deleting an activity: `activity /delete`](#deleting-an-activity-activity-delete)
+ * [Editing an activity: `activity /edit`](#editing-an-activity-activity-edit)
+ * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
+ * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
 
 <br>
 <div class="button-box">
