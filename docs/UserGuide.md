@@ -7,7 +7,7 @@
   - [Introduction](#introduction-1)
   - [Usage](#usage)
     - [List dish](#list-dish-indexed-as-1)
-    - [Add dish](#Add dish)
+    - [Add dish](#add-dish)
     - []()
 - [Dish Management](#dish-management)
 - [Dish Management](#dish-management)
