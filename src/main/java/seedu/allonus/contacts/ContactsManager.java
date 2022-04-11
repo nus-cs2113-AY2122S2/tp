@@ -33,7 +33,7 @@ public class ContactsManager {
             "Invalid command to Contacts Manager: %s";
     private static final String CONTACTS_INVALID_COMMAND_MESSAGE =
             "Please enter a valid command for the Contacts Manager!\n"
-            + "You can try \"list\", \"add\", or \"rm\"";
+            + "You can try \"menu\", \"list\", \"add\", \"edit\", \"find\", or \"rm\"";
 
     private static final String CONTACTS_ENUMERATE_HEADER = " %d. %s\n";
     private static final String CONTACTS_EMPTY_LIST_MESSAGE =

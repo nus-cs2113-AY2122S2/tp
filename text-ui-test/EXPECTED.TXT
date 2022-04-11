@@ -9,7 +9,7 @@ Welcome to Contacts Manager
 ---------------------------------------------------
 ---------------------------------------------------
 Please enter a valid command for the Contacts Manager!
-You can try "list", "add", or "rm"
+You can try "menu", "list", "add", "edit", "find", or "rm"
 ---------------------------------------------------
 ---------------------------------------------------
 Got it. I've added this contact:

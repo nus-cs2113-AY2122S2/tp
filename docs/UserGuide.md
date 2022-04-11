@@ -644,7 +644,7 @@ Okay, I've updated the information of this contact:
 
 #### Finding a contact: `find`
 Finds an existing contact from the current list of contacts. 
-Only the Name field will be considered when looking for a contact record.
+Only the Name field will be searched when looking for a contact record.
 
 Format: `find KEYWORD`
 
