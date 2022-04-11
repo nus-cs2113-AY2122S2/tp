@@ -18,6 +18,7 @@ for you and your family. It allows you to:
 * **Family members** who wish to track the financial status for their family.
 * **Experienced Typists** who are comfortable operating the application on a terminal.
 
+<div style="page-break-after: always;"></div>
 ## Table of Contents
 
 * [Quick Start](#quick-start)
@@ -53,6 +54,7 @@ for you and your family. It allows you to:
 5. Type your commands into the terminal and press [Enter] to execute it.
 6. Refer to [Features](#features) below for details on each command.
 
+<div style="page-break-after: always;"></div>
 ## Quick Notes
 
 The following table describes the **formats** used in this User Guide.
@@ -77,6 +79,7 @@ Some additional points to take note of:
 * You may provide duplicate entries such as when you have two family members with the same name. PlanITarium will track
   each of them as separate entries via indexing.
 
+<div style="page-break-after: always;"></div>
 ## Features
 
 This section describes each command in detail.
@@ -102,7 +105,7 @@ This section describes each command in detail.
 | <code>/p <T&#124;(any)>           | `T` indicates that an income or expense that you are tracking in the application is recurrent on a monthly-basis while `(any)` refers to any other inputs which will indicate that it is non-recurrent. Non-recurrent entries will be deleted on the following month. |
 
 ---
-
+<div style="page-break-after: always;"></div>
 ### Viewing all commands: `help`
 
 > Shows you a list of available commands that is described in this section.
@@ -137,6 +140,7 @@ Example of usage:
 
 ---
 
+<div style="page-break-after: always;"></div>
 ### Delete a person: `delete`
 
 > Deletes a person from your family group.
@@ -161,6 +165,7 @@ Example of usage:
   ![delete-command-screenshot](images/DeletePerson.png)
 ---
 
+<div style="page-break-after: always;"></div>
 ### Add an income: `addin`
 
 > Adds an entry to your list of tracked incomes.
@@ -189,6 +194,7 @@ Example of usage:
 
 ---
 
+<div style="page-break-after: always;"></div>
 ### Delete an income: `deletein`
 
 > Deletes an entry from your list of tracked incomes.
@@ -215,6 +221,7 @@ Example of usage:
 
 ---
 
+<div style="page-break-after: always;"></div>
 ### Edit an income: `editin`
 
 > Edits an entry in your list of tracked incomes.
@@ -244,6 +251,7 @@ Example of usage:
 
 ---
 
+<div style="page-break-after: always;"></div>
 ### Add an expenditure: `addout`
 
 > Adds an entry to your list of tracked expenditures.
@@ -274,6 +282,7 @@ Example of usage:
 
 ---
 
+<div style="page-break-after: always;"></div>
 ### Delete an expenditure: `deleteout`
 
 > Deletes an entry from your list of tracked expenditure.
@@ -300,6 +309,7 @@ Example of usage:
 
 ---
 
+<div style="page-break-after: always;"></div>
 ### Edit an expenditure: `editout`
 
 > Edits an entry from your list of tracked expenditures.
@@ -330,6 +340,7 @@ Example of usage:
 
 ---
 
+<div style="page-break-after: always;"></div>
 ### Show financial summary: `overview`
 
 > Shows a summary of the total income, expenditure and disposable income of each group.
@@ -340,6 +351,7 @@ Format: `overview`
 
 ---
 
+<div style="page-break-after: always;"></div>
 ### Show all records by group: `list`
 
 > Shows a list of incomes and expenditures for each person in a given group.
@@ -368,6 +380,7 @@ Format: `listcat`
 
 ---
 
+<div style="page-break-after: always;"></div>
 ### Searching for details: `find`
 
 > Search for a string as provided by you throughout all your income and expenditure.
@@ -414,6 +427,7 @@ Format: `bye`
 
 ---
 
+<div style="page-break-after: always;"></div>
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
