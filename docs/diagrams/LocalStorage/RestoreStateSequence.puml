@@ -6,9 +6,9 @@ participant Warehouse as w
 participant LocalStorage as ls
 
 create w
-S -> w
-activate w
-w -> w ++ : restoreWarehouseState()
+S -> w : create instance with 0  capacity
+w --> S : return warehouse instance
+S -> w ++ : restoreWarehouseState()
 w -> ls ++ : readSaveFile(fp)
 ls --> w -- : Raw savefile string
 w -> w ++ : setTotalCapacity(capacity)
