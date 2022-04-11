@@ -2,6 +2,7 @@ package seedu.mindmymoney.userfinancial;
 
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.helper.PropertyList;
+import seedu.mindmymoney.helper.ValidatorFunctions;
 
 /**
  * Represents the income entry.
@@ -64,11 +65,17 @@ public class Income implements MindMyMoneySerializable {
     public static Income deserialize(String serialized) throws MindMyMoneyException {
         PropertyList plist = PropertyList.deserialize(serialized);
         try {
+            int amount = Integer.parseInt(plist.getValue("amount"));
+            String category = plist.getValue("category");
+            ValidatorFunctions.validateIncomeCategory(category);
+            ValidatorFunctions.validateLowerBound(amount, 0, true, "amount");
             return new Income(Integer.parseInt(plist.getValue("amount")),
                     plist.getValue("category"));
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("Invalid number for amount during deserialization of " + serialized);
-        } catch (MindMyMoneyException e) {
+        } catch (ValidationException e) {
+            throw e;
+        } catch (MindMyMoneyException e) { // catches errors that are NOT ValidationExceptions
             String missingProperty = e.getMessage();
             throw new MindMyMoneyException("Line [" + serialized + "] does not contain required value "
                     + missingProperty);
