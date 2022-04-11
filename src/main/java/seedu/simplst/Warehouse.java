@@ -13,6 +13,7 @@ import util.exceptions.LargeQuantityException;
 import util.exceptions.UnitTestException;
 import util.exceptions.WrongCommandException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -646,12 +647,16 @@ public class Warehouse {
 
 
     // Related to saving state outside program
-    public Boolean saveWarehouseState() {
+    public Boolean saveWarehouseState() throws IOException {
         String fp = LocalStorage.WAREHOUSE_PATH;
         // Create JSON Obj
         JSONObject state = this.serialize();
         // Save to file
-        LocalStorage.writeSaveFile(LocalStorage.json2str(state), fp);
+        Boolean status = LocalStorage.writeSaveFile(LocalStorage.json2str(state), fp);
+        if (!status){
+            Display.warehouseStateNotSaved();
+            return false;
+        }
         Display.warehouseStateSaved(fp);
         return true;
     }

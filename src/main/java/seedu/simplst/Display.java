@@ -37,7 +37,7 @@ public class Display {
     }
 
     public static void bye() {
-        System.out.println("Bye");
+        System.out.println("Thanks for using Simplst 1.0!");
     }
 
     public static void stateRestored() {
@@ -113,6 +113,10 @@ public class Display {
     public static void qtyRemoveMoreThanExists() {
         System.out.println("The quantity input is larger than the current quantity of the goods. "
                 + "Please enter the command again with a smaller quantity.");
+    }
+
+    public static void warehouseStateNotSaved() {
+        System.out.println("Warehouse information can't save.");
     }
 
     // exception outputs
