@@ -35,7 +35,7 @@
 |v2.0|User ready to start using the app|Make reservations based on custom input and edit them where necessary|Get familiar with inputting|
 |v2.1|Expert user|Ascertain the error in my input based on the error messages from the application|Quickly troubleshoot any mistakes that would slow down my work|
 |v2.1|Expert user|View all reservations currently under a specific travel package|Optimize that travel package according to user’s feedback|
-|v2.1|Expert user|Sort all reservations according to month|Analyze trends throughout the year|
+|v2.1|Expert user|Sort all packages according to date, price or vacancies|Give better recommendations to customers|
 
 
 ## Non-Functional Requirements
