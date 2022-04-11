@@ -631,7 +631,7 @@ that deserializes a line of input. Here, `Expenditure.deserialize()` is passed t
 2. For each line in the input which corresponds to an `Expenditure`, `SerializerFunctions`
 invokes `Expenditure.deserialize()` on this line, which returns an `Expenditure`. This is repeated until
 the designated terminator is read from the `Scanner`.
-3. `Expenditure` invokes `PropertyList.deserialize` to convert the input line into a set of key-value pairs.
+3. `Expenditure` invokes `PropertyList.deserialize()` to convert the input line into a set of key-value pairs.
 Then, it makes a series of `PropertyList::getValue` calls to obtain the values of each individual property.
 4. Once all attributes have been processed, `Expenditure.deserialize` returns an `Expenditure`.
 5. These expenditures are aggregated into an `ExpenditureList`, which is returned 
