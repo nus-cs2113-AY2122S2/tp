@@ -126,7 +126,6 @@ public class UpdateItemPaxCommand extends Command {
      * variable named item within the UpdateItemPaxCommand object.
      *
      * @param ui The object that deals with user interface for the program.
-     * @return
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
     @Override
