@@ -12,10 +12,20 @@ public class HelpParser extends CommandParser {
         super(warehouse);
     }
 
+    //for testing
+    public HelpParser(Warehouse warehouse, String userInput) {
+        super(warehouse);
+        this.userInput = userInput;
+    }
+
     boolean isNoFlag = false; //is set when user inputs help without flags
 
+    public boolean isNoFlag() {
+        return isNoFlag;
+    }
+
     @Override
-    protected void initExtractParams() throws MissingFlagException, EmptyFieldException {
+    public void initExtractParams() throws MissingFlagException, EmptyFieldException {
         System.out.println(this.userInput);
         System.out.println(isNoFlag);
         if (!this.userInput.equalsIgnoreCase("help")) { //for help commands with flag
