@@ -18,27 +18,28 @@
       * [Add Expenditure](#add-expenditure-e)
       * [Add Credit Card](#add-credit-card-cc)
       * [Add Income](#add-income-i)
-      * [Design Considerations](#addcommand-design-considerations)
-    * [CalculateInputCommand feature](#calculateinputcommand-feature)
+      * [AddCommand Design Considerations](#addcommand-design-considerations)
+    * [CalculateInput Command](#calculateinputcommand-feature)
+      * [CalculateInputCommand Design Considerations](#calculateinputcommand-design-considerations)
     * [List Command](#list-command)
       * [List Expenditure](#list-expenditure-e)
       * [List Credit Card](#list-credit-card-cc)
       * [List Income](#list-income-i)
-      * [Design Considerations](#list-command-design-considerations)
+      * [ListCommand Design Considerations](#list-command-design-considerations)
     * [Delete Command](#delete-command)
       * [Delete Expenditure](#delete-expenditure-e)
       * [Delete Credit Card](#delete-credit-card-cc)
       * [Delete Income](#delete-income-i)
-      * [Design Considerations](#delete-command-design-considerations)
+      * [DeleteCommand Design Considerations](#delete-command-design-considerations)
     * [Update Command](#update-command)
       * [Update Expenditure](#update-expenditure-e)
       * [Update Credit Card](#update-credit-card-cc)
       * [Update Income](#update-income-i)
-      * [Update Considerations](#update-command-design-considerations)
+      * [UpdateCommand Design Considerations](#update-command-design-considerations)
     * [Storage](#storage)
       * [Loading](#loading)
       * [Saving](#saving)
-      * [Design Considerations](#storage-design-considerations)
+      * [StorageCommand Design Considerations](#storage-design-considerations)
 * [Appendix Requirements](#appendix-requirements)
   * [Product scope](#product-scope)
   * [User Stories](#user-stories)
@@ -324,7 +325,7 @@ find the items that contain the specified date.
 
 <br/>
 
-#### CalculateCommand Design Considerations
+#### CalculateInputCommand Design Considerations
 Aspect: How to allow users to have a better understanding of their own expenses.
 * User is required to input either the date, month or year in order to calculate their expenses.
   * Pros: User can have a better understanding of their expenditure breakdowns by the specified time they want to look for.
@@ -535,7 +536,7 @@ The sequence diagram above shows the interactions when an `UpdateCommand` is exe
 Updates an `Expenditure` specified by the user using the `Expenditure`'s index. The `Expenditure` is updated through the `UpdateCommand.updateExpenditure()`
 method, invoked when using the `/e` flag.
 
-![update_expenditure_sequence_diagram](images/UpdateExpenditureSequenceDiagram.png)
+![update_expenditure_sequence_diagram](images/UpdateExpenditureSequenceDiagramFinal.png)
 <br/> Fig 21 - Update Expenditure Sequence Diagram
 
 The sequence diagram above shows the interactions when updating an `Expenditure`.
@@ -554,7 +555,7 @@ The sequence diagram above shows the interactions when updating an `Expenditure`
 Updates a `Credit Card` specified by the user using the `Credit Card`'s index. The `Credit Card` is updated through the `UpdateCommand.updateCreditCard()`
 method, invoked when using the `/cc` flag.
 
-![Update_credit_card_sequence_diagram](images/UpdateCreditCardSequenceDiagram.png)
+![Update_credit_card_sequence_diagram](images/UpdateCreditCardSequenceDiagramFinal.png)
 <br/> Fig 22 - Update Credit Card Sequence Diagram
 
 The sequence diagram above shows the interactions when updating a `Credit Card`.
@@ -570,7 +571,7 @@ The sequence diagram above shows the interactions when updating a `Credit Card`.
 Updates an `Income` specified by the user using the `Income`'s index. The `Income` is updated through the `UpdateCommand.updateIncome()`
 method, invoked when using the `/i` flag.
 
-![Update_income_sequence_diagram](images/UpdateIncomeSequenceDiagram.png)
+![Update_income_sequence_diagram](images/UpdateIncomeSequenceDiagramFinal.png)
 <br/> Fig 23 - Update Income Sequence Diagram
 
 The sequence diagram above shows the interactions when updating an `Income`.
@@ -605,9 +606,9 @@ command execution.
 
 Loads the user's saved information upon startup.
 
-![Loading_sequence_diagram](images/Loading_Sequence_Diagram.png)
+![Loading_sequence_diagram](images/LoadingSequenceDiagramFinal.png)
 <br/>
-Fig 21 - Loading Sequence Diagram
+Fig 24 - Loading Sequence Diagram
 
 The sequence diagram above shows the interactions when loading user data.
 
@@ -619,10 +620,10 @@ creates the file if it does not exist.
 5. `User` then does the same for `CreditCardList.deserializeFrom()` and `IncomeList.deserializeFrom()`, which
 return a `CreditCardList` and `IncomeList`, respectively.
 
-![Deserialize_list_sequence_diagram](images/DeserializeListSequenceDiagram.png)
+![Deserialize_list_sequence_diagram](images/DeserializeListSequenceDiagramFinal.png)
 <br/>
 
-Fig 22 - ExpenditureList Deserialization Sequence Diagram
+Fig 25 - ExpenditureList Deserialization Sequence Diagram
 
 The above sequence diagram shows the interactions when a list of 
 `MMMSerializable`s is being deserialized. Although the given diagram shows the interaction for an 
@@ -644,10 +645,10 @@ to the `deserializeFrom()` call.
 Saves user information after every successful
 command execution.
 
-![Saving_sequence_diagram](images/Saving_Sequence_Diagram.png)
+![Saving_sequence_diagram](images/SavingSequenceDiagramFinal.png)
 <br/>
 
-Fig 23 - Saving Sequence Diagram
+Fig 26 - Saving Sequence Diagram
 
 The sequence diagram above shows the interactions when saving user data.
 
@@ -660,10 +661,10 @@ The sequence diagram above shows the interactions when saving user data.
 5. `User` compiles all these into one `String`, and returns this to `Storage`.
 6. `Storage` writes the returned serialized `User` into the data file.
 
-![Serialize_list_sequence_diagram](images/SerializeListSequenceDiagram.png)
+![Serialize_list_sequence_diagram](images/SerializeListSequenceDiagramFinal.png)
 <br/>
 
-Fig 24 - ExpenditureList Serialization Sequence Diagram
+Fig 27 - ExpenditureList Serialization Sequence Diagram
 
 The above sequence diagram shows the interactions when a list of
 `MMMSerializable` is being serialized. Although the given diagram shows the interaction for an

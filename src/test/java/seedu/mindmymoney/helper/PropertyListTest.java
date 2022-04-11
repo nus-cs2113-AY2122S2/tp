@@ -2,6 +2,7 @@ package seedu.mindmymoney.helper;
 
 import org.junit.jupiter.api.Test;
 import seedu.mindmymoney.MindMyMoneyException;
+import seedu.mindmymoney.data.PropertyList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

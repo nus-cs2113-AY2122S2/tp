@@ -16,7 +16,6 @@ participant ":MMM" as MMM MMM_COLOUR
 participant "CommandType:UpdateCommand" as C COMMANDS_COLOUR
 end box
 
-activate MMM MMM_COLOUR
 MMM -> C: executeCommand()
 activate C COMMANDS_COLOUR
 

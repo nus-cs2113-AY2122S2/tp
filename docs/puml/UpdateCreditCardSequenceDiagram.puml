@@ -1,9 +1,16 @@
 @startuml
 !include Style.puml
 
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
 box updateCreditCard()
 participant ":MMM" as MMM MMM_COLOUR
-participant "Command:UpdateCommand" as updateCommand COMMANDS_COLOUR
+participant "CommandType:UpdateCommand" as updateCommand COMMANDS_COLOUR
 participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
 participant ":CreditCard" as CreditCard USERFINANCIAL_COLOUR
 participant ":CreditCardList" as CreditCardList DATA_COLOUR

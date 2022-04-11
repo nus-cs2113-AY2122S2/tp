@@ -17,7 +17,6 @@ participant "CommandType:DeleteCommand" as C COMMANDS_COLOUR
 participant ":CreditCardList" as CreditCardList DATA_COLOUR
 end box
 
-activate MMM MMM_COLOUR
 MMM -> C: executeCommand()
 activate C COMMANDS_COLOUR
 
