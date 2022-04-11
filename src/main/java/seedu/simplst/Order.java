@@ -185,15 +185,15 @@ public class Order {
 
     public static Order restoreOrder(JSONObject jo) {
         Object idO = jo.get(OrderKeys.orderId);
-        Object rO = jo.get(OrderKeys.receiver);
+        Object ro = jo.get(OrderKeys.receiver);
         Object saO = jo.get(OrderKeys.shippingAddress);
-        Object fO = jo.get(OrderKeys.isFulfilled);
+        Object fo = jo.get(OrderKeys.isFulfilled);
         Object olO = jo.get(OrderKeys.orderlines);
-        if (idO == null || rO == null || saO == null || fO == null || olO == null) {
+        if (idO == null || ro == null || saO == null || fo == null || olO == null) {
             return null;
         }
         Integer orderId = Integer.parseInt(idO.toString());
-        String receiver = rO.toString();
+        String receiver = ro.toString();
         String shippingAddress = saO.toString();
         Order cur = new Order(
                 orderId,
@@ -201,7 +201,7 @@ public class Order {
                 shippingAddress
         );
 
-        cur.setFulfilled(Boolean.parseBoolean(fO.toString()));
+        cur.setFulfilled(Boolean.parseBoolean(fo.toString()));
         JSONArray orderLinesJA = (JSONArray) olO;
         for (Object item: orderLinesJA) {
             JSONObject jol = (JSONObject) item;
