@@ -313,5 +313,12 @@ public class Ui {
     public void printBottomLine() {
         System.out.println("===========================================");
     }
+
+    public void printNotifiedDeletionOfHousekeeper(HousekeeperList housekeeperList, String name) {
+        printNotedLine();
+        printMessage("Deleted " + name + " from the list of profile");
+        printMessage("Take note! Total pax of housekeeper:  " + housekeeperList.getTotalHousekeeper());
+        printBottomLine();
+    }
 }
 
