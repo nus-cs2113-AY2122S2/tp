@@ -140,5 +140,3 @@ Expected output: ![](EditAppointmentOutput2.png)
 7. Test case for `search`: `search appointment 2022-06-01T16:30`
 
 Expected output: ![](SearchAppointmentOutput.png)
-
-8. Test case for `add ward`: `add ward /d 1 /p 1 /n 1 /id 233`
