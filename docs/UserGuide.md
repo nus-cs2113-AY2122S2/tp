@@ -154,7 +154,7 @@ Enter dishes you want to add to the order (enter negative number to exit):
 ```
 Enter choice: 1
 Creating a new order...
-Enter dishes you want to add to the order (enter negative number to exit): 0
+Enter dishes you want to add to the order (enter 0 to exit): 0
 You have 1 dish(es), some more: 
 1
 Added successfully!
@@ -203,10 +203,10 @@ When using `Get total price of an order`, the user searches an order by index an
 Enter choice: 3
 Getting total price of an order...
 Enter the order you want to get price: 1
-Total value of this order: 13.500000. 
+Total value of this order: 13.5. 
 ```
 ### Notice
-If the user input is invalid, the program issues an error.
+If the user input is invalid, the program issues an error. The price is rounded to 2 decimal place.
 ```
 Getting total price of an order...
 Please enter a valid order index.
