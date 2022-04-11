@@ -9,7 +9,7 @@ end box
 
 participant ":System" as System SYSTEM_COLOR
 
-[-> Ilist: editIncome(1:Integer, 1:Integer, "Bills":String, null ,null)
+[-> Ilist: editIncome(1:Integer, 1:Integer, "Bills":String,\n null ,null)
 Ilist -> Alist: get(0:Integer)
 activate Alist
 Alist --> Ilist : item:Income
@@ -22,16 +22,15 @@ activate Inc
 Inc --> Ilist: description:String
 deactivate Inc
 
-alt OPT_COLOR description != null && !Description.equals("Bills":String)
+opt OPT_COLOR description != null && !Description.equals("Bills":String)
     Ilist -> Inc: setDescription("Bills":String)
     activate Inc
-    Inc --> Ilist: True:Boolean
-else else
-    Inc --> Ilist: False:Boolean
+    Inc --> Ilist
     deactivate Inc
-end alt
+end opt
 
-Ilist --> Ilist: True:Boolean
+Ilist --> Ilist: isDescEdited:Boolean
+note right: True returned if opt taken,\n False otherwise.
 deactivate Ilist
 deactivate Alist
 
@@ -42,16 +41,15 @@ activate Inc
 Inc --> Ilist: isPermanent:Boolean
 deactivate Inc
 
-alt OPT_COLOR isPermanent != null && !isPermanent.equals(null)
+opt OPT_COLOR isPermanent != null && !isPermanent.equals(null)
     Ilist -> Inc: setPermanent(null)
     activate Inc
-    Inc --> Ilist: True:Boolean
-else else
-    Inc --> Ilist: False:Boolean
+    Inc --> Ilist:
     deactivate Inc
-end alt
+end opt
 
-Ilist --> Ilist: False:Boolean
+Ilist --> Ilist: isPermEdited:Boolean
+note right: True returned if opt taken,\n False otherwise.
 deactivate Ilist
 deactivate Alist
 
@@ -62,20 +60,19 @@ activate Inc
 Inc --> Ilist: amount:Double
 deactivate Inc
 
-alt OPT_COLOR Amount != null && !Amount.equals(null)
+opt OPT_COLOR Amount != null && !Amount.equals(null)
     Ilist -> Inc: setAmount(null)
     activate Inc
-    Inc --> Ilist: True:Boolean
-else else
-    Inc --> Ilist: False:Boolean
+    Inc --> Ilist
     deactivate Inc
-end alt
+end opt
 
-Ilist --> Ilist: False:Boolean
+Ilist --> Ilist: isAmountEdited:Boolean
+note right: True returned if opt taken,\n False otherwise.
 deactivate Ilist
 deactivate Alist
 
-Ilist -> Ilist: printEditMsg(True:Boolean, False:Boolean, False:Boolean)
+Ilist -> Ilist: printEditMsg(isDescEdited:Boolean, isPermEdited:Boolean, isAmountEdited:Boolean)
 activate Ilist
 alt OPT_COLOR isDescEdited || isAmountEdited || isPermEdited
     Ilist -> System:println("Your Income have been edited")
@@ -93,7 +90,7 @@ else else
     deactivate System
 end alt
 
-
-
+Ilist -->[
+deactivate Ilist
 
 @enduml
