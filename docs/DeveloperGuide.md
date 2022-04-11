@@ -586,6 +586,7 @@ the JAR file name
 | Check all room in level `3`| `check level 3`| Lists out all room in level `3`|
 | Check all room in level `5`, which is not within the level range of 1-4| `check level 5`| Error message to user|
 
+
 ---
 
 ### Item Related Functions
