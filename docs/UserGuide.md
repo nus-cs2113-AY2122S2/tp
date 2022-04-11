@@ -4,16 +4,35 @@
 
 {Travel Agency Reservation Booking System (TARBS) is a desktop app for managing reservations for travel packages and tourist attractions, optimised for use via a Command Line Interface (CLI). If you can type fast, TARBS can help to improve efficiency of adding and editing reservations, amongst many other features.}
 
-## Quick Start
 
-{Give steps to get started quickly}
+### Why do we need TARBS?
+Travel agencies often have to manage multiple customers and their respective bookings or plans.
+
+## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
 1. Down the latest version of `TARBS` from [here](https://github.com/AY2122S2-CS2113-F10-3/tp/releases).
 
 ## Features 
 
-{Give detailed description of each feature}
+### Quick Help: `help`
+Print detailed instructions on the available commands that users may input
+
+Usage: `help`
+
+### Show all packages: `packages`
+
+View a list of all available packages
+
+Usage: `packages`
+
+### Get info on a specific package: `info`
+
+Displays the detailed information of a specific travel package
+
+Format: `info {num}`
+
+Usage: `info 2`
 
 ### Adding a package: `add`
 Adds a new Travel Package to the list of Packages.
@@ -80,15 +99,17 @@ Example of usage:
 
 ## Command Summary
 
-| Command | Syntax                                                                   |
-| --- |:-------------------------------------------------------------------------|
-| packages | packages                                                                 |
-| info | info {num}                                                               |
-| add | add {package_name} {country} {start_date} {end_date] {price} {vacancies} |
-| delete | delete {package_number}                                                  |
-| reserve  | reserve {package_number} {contact_name} {contact_number} {number_pax}    |
-| remove | remove {reservation_id} {contact_number}                                 |
-| reservations | reservations {package_number}                                            |
+
+| Command | Syntax |
+| --- | :---  |
+| help | help |
+| packages | packages |
+| info | info {package_number} |
+| add | add {package_name} {country} {duration} {price} {vacancies} |
+| delete | delete {package_number} |
+| reserve  | reserve {package_number} {contact_name} {contact_number} {number_pax} |
+| remove | remove {reservation_id} |
+| reservations | reservations {package_number} |
 
 
 
