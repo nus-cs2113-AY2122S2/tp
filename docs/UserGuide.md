@@ -19,7 +19,7 @@
     12. [Cancel a future borrowing](#cancel-a-future-borrowing-cancel)
     13. [Exit](#exit-exit)
 5. [FAQ](#faq)
-6. [Command Summary][(#command-summary)]
+6. [Command Summary](#command-summary)
 
 ## Introduction
 
@@ -35,6 +35,8 @@ Do not run the program between transition of days (11.59pm to 12.01am). Save you
 1. Download the latest version of `InvMgr` from [here](todo).TODO
 
 ## Features
+
+Square brackets denote optional fields, e.g. `search n/NAME [d/DESCRIPTION]` means `DESCRIPTION` is not necessary.
 
 ### Add an Item: `add`
 
@@ -578,11 +580,11 @@ Exits the program.
 
 **Arguments:**
 
-None?
+None
 
 **Caveats:**
 
-None?
+Arguments after `exit` will be ignored. i.e. `exit foo` will behave the same way `exit` does.
 
 **Examples of usage:**
 ```
