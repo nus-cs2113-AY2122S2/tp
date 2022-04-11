@@ -95,21 +95,21 @@ Map<Room, Housekeeper> map = new HashMap<>();
 ``
 
 The following steps exhibit how `AssignHousekeeperCommand` 
-and `AssignmentMap` fit together in the structure and how the mechanism for adding an assinment behaves at each step.
+and `AssignmentMap` fit together in the structure and how the mechanism for adding an assingment behaves at each step.
 
 __Step 1.__ The user launches the application. In the `Duke` class, an empty instance of the `AssignmentMap` class,
 called `assignmentMap`, is created.
 
 ![Step 1](team/aiman_assignment/step1.png)
 
-__Step 2.__ The user types the command `Assign Susan ## 301`. In the `Duke` class, a `Command` object
+__Step 2.__ The user types the command `Assign susan / 301`. In the `Duke` class, a `Command` object
 is created by invoking the `CommandParser` class's constructor on the user input. The details of this
 step are further described below.
 
 ![Step 2](team/aiman_assignment/step2.png)
 
-__Step 3.__ The `CommandParser` class replaces the `Assign Susan ## 301` in the user input with an empty string,
-leaving just `Susan ## 301`. Then, an instance of `AssignHousekeeperCommand` is created which extends the class `Command`.
+__Step 3.__ The `CommandParser` class replaces the `assign susan / 301` in the user input with an empty string,
+leaving just `susan / 301`. Then, an instance of `AssignHousekeeperCommand` is created which extends the class `Command`.
 
 ![Step 3](team/aiman_assignment/step3.png)
 
