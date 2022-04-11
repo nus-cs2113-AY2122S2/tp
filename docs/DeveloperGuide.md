@@ -164,13 +164,20 @@ The above diagram shows the sequence diagram of the addition of an item.
 The user starts by typing an add command. The example used in the diagram above is the addition of an item with the name `Paper Cup`, quantity of `25` and description of `100ml paper cups`. The full command is `add n/Paper Cup q/25 d/100ml paper cups`.
 
 1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
-2. Within `parse()`, the string is identified to start with the word `add`, and executes the code within the case. The case attempts to create an item using the string by self-invoking `createItem()`.
-3. `createItem()` extracts the relevant arguments from the input string and generates a new `Item` which is returned to the `parse()` case block.
-4. `parse()` uses the `Item` to generate a new `AddCommand` which is returned to the `run()` method.
-5. The `run()` method calls on the `execute()` function in the `AddCommand` which will add the generated item to the `ItemList` using its `addItem()` method.
-6. `AddCommand` will converse with `Ui` to show a message that the item has been added. In this case, the item to add will be printed as the name of the item, followed by " has been added!".
+2. Within `parse()`, the string is first split into 2 parts, the command word and the arguments. The command word is identified to be `add`, and executes the code within the case. The case calls the `parse()` method in `AddCommandParser`.
+3. `AddCommandParser.parse()` uses the string argument and extracts the `NAME`, `QUANTITY`, and `DESCRIPTION` using to an `ArgumentMultimap` using `ArgumentTokenizer.tokenize()`.
+4. The `QUANTITY` is then checked using `ParserUtils.parseQuantity()` to see if it is a positive non-zero integer.
+5. If the `QUANTITY` is valid, an `Item` is created using the extracted arguments.
+6. `parse()` uses the `Item` to generate a new `AddCommand` which is returned to the `run()` method.
+7. The `run()` method calls on the `execute()` function in the `AddCommand`
+8. `execute()` first creates a list of items using the `itemList`'s `getItemArrayList()` method.
+9. The method then uses Java Streams to check if there are any items in the list that match the name of the item to be added.
+10. If there is no item with matching name, the item will be added through `ItemList`'s `addItem()` method, and `AddCommand` will converse with `Ui` to show a message that the item has been added. In this case, the item to add will be printed as the name of the item, followed by " has been added!".
+11. If there is in fact an item with matching name, `AddCommand` will not add the item to the item list, and will converse with `Ui` to show `DUPLICATE_ITEM_MESSAGE` from `common/Messages`, "There is already a similar item in the list! Use edit command to edit the item's quantity/description instead. Or change the name of the item to be more specific."
 
 ### Description Command
+
+**Normal function**
 
 ![DescCommandSequenceDiagram](img/DescCommandSequenceDiagram.png)
 
@@ -191,6 +198,8 @@ Exceptions are thrown/handled for the following:
 
 ### Help Command
 
+**Normal function**
+
 ![HelpCommandSequenceDiagram](img/HelpCommandSequenceDiagram.png)
 
 The above diagram shows the sequence diagram for displaying the help menu. The help menu contains a list of all functions of Inventory Manager, as well as their function and syntax for calling them. 
@@ -203,19 +212,26 @@ The above diagram shows the sequence diagram for displaying the help menu. The h
 4. The `execute()` function calls `showMesages()`, taking in each Command class' help message as the argument and displaying them to the user.
 
 ### Delete Command
+
+**Normal function**
+
 ![DeleteCommandSequenceDiagram](img/DeleteCommandSequenceDiagram.png)
 
 The above diagram shows the sequence diagram of the addition of an item.
 
-The user starts by typing an add command. The example used in the diagram above is the addition of an item with the index `1`, based on the list when the user types the `list` command.
+The user starts by typing a delete command. The example used in the diagram above is the deletion of an item with the index `1`, based on the list when the user types the `list` command.
 
-1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
-2. Within `parse()`, the string is identified to start with the word `delete`, and executes the code within the case. The case finds the index of the item by splitting the string and indexing it.
-3. `parse()` generates a new `AddCommand` using the index which is returned to the `run()` method.
-4. The `run()` method calls on the `execute()` function in the `DeleteCommand` which will delete the item with that index from the `ItemList` using its `removeItem()` method.
-5. `DeleteCommand` will converse with `Ui` to show a message that the item has been removed. In this case, the item to add will be printed as the name of the item, followed by " has been deleted.".
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `InputParser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is first split into 2 parts, the command word and the arguments. The command word is identified to be `delete`, and executes the code within the case. The case calls the `parse()` method in `DeleteCommandParser`.
+3. Within `DeleteCommandParser.parse()`, the argument is a number that is taken through a check to see if the number is a positive integer. This is done so by calling `ParserUtils.parseIndex()`.
+4. If the argument is valid, `parse()` generates a new `DeleteCommand` using the index which is returned to the `run()` method.
+5. The `run()` method calls on the `execute()` function in the `DeleteCommand` which will delete the item with that index from the `ItemList` using its `removeItem()` method.
+6. If the argument is an invalid index beyond the range of the inventory list, an exception will be thrown.
+7. `DeleteCommand` will converse with `Ui` to show a message that the item has been removed. In this case, the item to add will be printed as the name of the item, followed by " has been deleted.".
 
 ### Return Command
+
+**Normal function**
 
 ![ReturnCommandSequenceDiagram](img/ReturnCommandSequenceDiagram.png)
 
@@ -249,6 +265,8 @@ The user starts by typing a return command. The diagram above uses the example o
 
 ### Lost Command
 
+**Normal function**
+
 ![LostCommandSequenceDiagram](img/LostCommandSequenceDiagram.png)
 
 The above diagram shows the sequence diagram of Lost command, which allows users to mark an item as missing and update the inventory accordingly.
@@ -276,6 +294,8 @@ The user starts by typing a lost command. The diagram above uses the example of 
 
 ### List Command
 
+**Normal function**
+
 ![ListCommandSequenceDiagram](img/ListCommandSequenceDiagram.png)
 
 The above diagram shows the sequence diagram of the listing of items in `itemList`.
@@ -287,6 +307,9 @@ The user starts by typing a list command.
 3. `ListCommand` loops through every `Item` in `itemList` and prints them line by line and numbers them.
 
 ### List Available Borrowings Command
+
+**Normal function**
+
 ![ListAvailableBorrowingsSequenceDiagram](img/ListAvailableBorrowingsSequenceDiagram.png)
 
 The above diagram shows the sequence diagram of listing the minimum number of items that can be borrowed between a start date and an end date
@@ -300,6 +323,9 @@ The user starts by typing a `listab s/STARTDATE e/ENDDATE` command.
 5. If `minQuantity` is more than 0, the item is printed out with the quantity that can be borrowed.
 
 ### Cancel Future Borrowings Command
+
+**Normal function**
+
 ![CancelFutureBorrowingsSequenceDiagram](img/CancelFutureBorrowingsSequenceDiagram.png)
 ![CancelFutureBorrowingsRef](img/CancelFutureBorrowingsRef.png)
 
@@ -397,6 +423,46 @@ Exceptions are thrown/handled for the following:
 3. If there are any missing arguments `i/`, `q/`, `s/`, `e/`, `p/`.
 4. if borrow duration is longer than the maximum borrow duration of 7 days.
 5. If `startDate` > `endDate`. Ie. Dates need to be in non-descending order.
+
+### ListFutureBorrowings Command
+
+**Normal function**
+
+![ListFutureBorrowings1SequenceDiagram](img/ListFutureBorrowings1SequenceDiagram.png)
+![ListFutureBorrowings2SequenceDiagram](img/ListFutureBorrowings2SequenceDiagram.png)
+
+The above diagrams shows the sequence diagram of listing future borrowings.
+
+The user starts by typing a `listfb` command. The example used in the diagrams above is listing of future borrowings for person `Jasper`
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is first split into 2 parts, the command word and the arguments. The command word is identified to be `listfb`, and executes the code within the case. The case calls the `parse()` method in `ListFutureBorrowingsParser`.
+3. `ListFutureBorrowingsParser.parse()` uses the string argument and extracts the `BORROWER_NAME` which is optional using an `ArgumentMultimap` through the method `ArgumentTokenizer.tokenize()`.
+4. `parse()` uses the `BORROWER_NAME` to generate a new `ListFutureBorrowingsCommand` which is returned to the `run()` method.
+5. The `run()` method calls on the `execute()` function in the `ListFutureBorrowingsCommand`
+6. `execute()` first creates a list of items using the `itemList`'s `getItemArrayList()` method.
+7. The method then uses Java Streams to check if there are any relevant `BorrowRecords`. These records are stored as strings in a list called `futureRecords`
+8. Based on the size of the `futureRecords`, the `itemList` will converse with `Ui` to give the appropriate output.
+
+### ListOverdueBorrowings Command
+
+**Normal function**
+
+![ListOverdueBorrowings1SequenceDiagram](img/ListOverdueBorrowings1SequenceDiagram.png)
+![ListOverdueBorrowings2SequenceDiagram](img/ListOverdueBorrowings2SequenceDiagram.png)
+
+The above diagrams shows the sequence diagram of listing overdue borrowings.
+
+The user starts by typing a `listfb` command. The example used in the diagrams above is listing of overdue borrowings for person `Jasper`
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is first split into 2 parts, the command word and the arguments. The command word is identified to be `listfb`, and executes the code within the case. The case calls the `parse()` method in `ListOverdueBorrowingsParser`.
+3. `ListOverdueBorrowingsParser.parse()` uses the string argument and extracts the `BORROWER_NAME` which is optional using an `ArgumentMultimap` through the method `ArgumentTokenizer.tokenize()`.
+4. `parse()` uses the `BORROWER_NAME` to generate a new `ListOverdueBorrowingsCommand` which is returned to the `run()` method.
+5. The `run()` method calls on the `execute()` function in the `ListOverdueBorrowingsCommand`
+6. `execute()` first creates a list of items using the `itemList`'s `getItemArrayList()` method.
+7. The method then uses Java Streams to check if there are any relevant `BorrowRecords`. These records are stored as strings in a list called `overdueRecords`
+8. Based on the size of the `overdueRecords`, the `itemList` will converse with `Ui` to give the appropriate output.
 
 ### Storage
 

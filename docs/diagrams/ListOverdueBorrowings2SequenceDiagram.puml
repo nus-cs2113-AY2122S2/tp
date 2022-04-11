@@ -1,0 +1,42 @@
+@startuml
+
+hide footbox
+
+skinparam dpi 300
+
+Participant "itemList:ItemList" as itemlist
+Participant "ui:Ui" as ui
+
+group sd converse with Ui based on overdueRecords: List<String>
+    activate itemlist
+    alt overdueRecords.size() == 0
+        alt name.isPresent()
+            itemlist -> ui: showMessages("There are no overdue borrowings for " + name.get() + ".")
+            activate ui
+            return
+        else else
+            itemlist -> ui: showMessages("There are no overdue borrowings.")
+            activate ui
+            return
+        end
+    else else
+        alt name.isPresent()
+            itemlist -> ui: showMessages("Here is a list of overdue borrowings for " + name.get() + ": ")
+            activate ui
+            return
+        else else
+            itemlist -> ui: showMessages("Here is a list of overdue borrowings: ")
+            activate ui
+            return
+        end
+
+        loop for each record
+            itemlist -> ui: showMessages(counter + ") " + record);
+            activate ui
+            return
+        end
+    end
+
+
+end
+@enduml

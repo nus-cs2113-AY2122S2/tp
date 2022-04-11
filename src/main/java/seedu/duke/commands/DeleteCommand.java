@@ -1,6 +1,5 @@
 package seedu.duke.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.duke.common.Messages.ERROR_MESSAGE;
 import static seedu.duke.common.Messages.INVALID_INDEX;
 
