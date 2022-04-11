@@ -84,7 +84,7 @@ public class ReturnCommand extends Command {
             }
         }
         if (!isValidReturnRequest) {
-            ui.showMessages(Messages.RETURN_ERROR_MESSAGE);
+            throw new InvMgrException(Messages.RETURN_ERROR_MESSAGE);
         }
     }
 

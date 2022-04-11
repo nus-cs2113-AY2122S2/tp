@@ -40,14 +40,19 @@ public class ReturnCommandTest {
     }
 
     /**
-     * Asserts that isValidReturnRequest is false when there is no outstanding loan of an item.
+     * Checks that InvMgrException is thrown when no items are overdue nor currently on loan.
+     * Checks that Messages.RETURN_ERROR_MESSAGE is displayed.
      * */
     @Test
-    public void execute_noOutstandingLoan_printsReturnErrorMessage() throws InvMgrException {
+    public void execute_noItemsToBeReturned_InvMgrExceptionThrown() {
         Ui ui = new Ui();
         ReturnCommand c = new ReturnCommand(0);
-        c.execute(itemList, ui);
-        assertEquals(false, c.getValidityOfReturn());
+        try {
+            c.execute(itemList, ui);
+            fail();
+        } catch (InvMgrException e) {
+            assertEquals(Messages.RETURN_ERROR_MESSAGE, e.getMessage());
+        }
     }
 
     /**
