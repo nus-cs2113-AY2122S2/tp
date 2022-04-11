@@ -96,14 +96,40 @@ The user starts by typing an add command. The example used in the diagram above 
 ### List Command
 ![ListCommandSequenceDiagram](img/ListCommandSequenceDiagram.png)
 
-The following diagram shows the sequence diagram of the listing of items in `itemList`.
+The above diagram shows the sequence diagram of the listing of items in `itemList`.
 
 The user starts by typing a list command.
 
-1. `InvMgr` calls `parse("list")` method in `Parser` class, which returns a ListCommand object.
+1. `InvMgr` calls `parse("list")` method in `InputParser` class, which returns a ListCommand object.
 2. `InvMgr` calls `execute(itemList, ui)` method in `ListCommand` object.
-3. `ListCommand` loops through every `Item` in `itemList` and prints them line by line
-   and numbers them.
+3. `ListCommand` loops through every `Item` in `itemList` and prints them line by line and numbers them.
+
+### List Available Borrowings Command
+![ListAvailableBorrowingsSequenceDiagram](img/ListAvailableBorrowingsSequenceDiagram.png)
+
+The above diagram shows the sequence diagram of listing the minimum number of items that can be borrowed between a start date and an end date
+
+The user starts by typing a `listab s/STARTDATE e/ENDDATE` command. 
+
+1. `InvMgr` calls `parse("listab s/XYZ e/ABC")` method in `InputParser` class, which then calls `parse("listab s/XYZ e/ABC")` method in `ListAvailableBorrowingsParser`.
+2. `ListAvailableBorrowingsParser` parses the user input into `startDate` and `endDate`, and returns a `ListAvailableBorrowingsCommand` object.
+3. `InvMgr` calls `execute(itemList, ui)` method in `ListAvailableBorrowingsCommand` object.
+4. `ListAvailableBorrowingsCommand` loops through each item in `itemList`, and calls the `minQuantityAvailable` method to check the minimum quantity that can be borrowed throughout `startDate` to `endDate`.
+5. If `minQuantity` is more than 0, the item is printed out with the quantity that can be borrowed.
+
+### Cancel Future Borrowings Command
+![CancelFutureBorrowingsSequenceDiagram](img/CancelFutureBorrowingsSequenceDiagram.png)
+
+The above diagram shows the sequence diagram of cancelling future reservations of items
+
+The user starts by typing `cancel p/NAME i/INDEX` command. 
+
+1. `InvMgr` calls `parse("cancel p/ABC i/1")` method in `InputParser` class, which then calls `parse("cancel p/ABC i/1")` method in `CancelFutureBorrowingsParser`.
+2. `CancelFutureBorrowingsParser` parses the input into `name` and `index`, and returns a `CancelFutureBorrowingsCommand` object.
+3. `InvMgr` calls `execute(itemList, ui)` method in `CancelFutureBorrowingsCommand` object.
+4. `CancelFutureBorrowingsCommand` retrieves the `BorrowRecord` that is to be removed, and the `Item` that contains this `BorrowRecord`
+5. `BorrowRecord` is then removed from the `Item`'s BorrowRecord list.
+
 
 ### Storage
 

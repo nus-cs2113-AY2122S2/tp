@@ -107,6 +107,7 @@ public class CancelFutureBorrowingsCommand extends Command {
                 || borrowIndex < 0) {
             throw new InvMgrException(INVALID_INDEX);
         }
+        
         BorrowRecord removeRecord = records.get(borrowIndex);
         Item item = items.get(borrowIndex);
         int itemQuantity = removeRecord.getQuantity();

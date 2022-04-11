@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+skinparam guillemet false
+skinparam sequenceStereotypeFontColor red
+skinparam sequenceStereotypeFontStyle bold
+
+Participant ":InvMgr" as invmgr
+Participant "InputParser" as parser <<class>>
+Participant ":ListAvailableBorrowingsParser" as lstabparser <<class>>
+Participant ":ListAvailableBorrowingsCommand" as lstabcmd
+Participant "itemList:ItemList" as itmlst
+Participant "ui:Ui" as ui
+
+activate invmgr
+
+-> invmgr
+invmgr -> parser:parse("listab s/XYZ e/ABC")
+activate parser
+
+parser -> lstabparser:ListAvailableBorrowingsParser().parse()
+activate lstabparser
+create lstabcmd
+lstabparser -> lstabcmd:ListAvailableBorrowingsCommand(startDate, endDate)
+activate lstabcmd
+return
+return
+return inputCommand:ListAvailableBorrowingsCommand
+
+invmgr -> lstabcmd:execute(itemList: ItemList, ui: Ui)
+
+activate lstabcmd
+loop int i = 0; i < itemList.getSize(); i++
+    lstabcmd -> itmlst:getItem(i)
+    activate itmlst
+    return item
+
+    lstabcmd -> lstabcmd:minQuantityAvailable(item)
+    activate lstabcmd
+    return minQuantity:Integer
+
+    alt minQuantity > 0
+        lstabcmd -> ui:showMessages(String.valueOf(i + 1) + "." + item.getName() + " | " + minQuantityAvailable(item))
+        activate ui
+        return
+    end 
+
+end
+return
+
+@enduml
