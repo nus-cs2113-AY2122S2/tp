@@ -24,6 +24,7 @@
         * [Display incomes: `list`](#display-incomes-list)
         * [Modify an income: `update`](#modify-an-income-update)
         * [Remove an income: `delete`](#remove-an-income-delete)
+        * [Calculate cashback: `calculate` [coming in v3.0]](#calculate-cashback-calculate-coming-in-v30)
     * [Exit MindMyMoney application: `bye`](#exit-mindmymoney-application-bye)
     * [Save the data](#save-the-data)
 * [FAQ](#faq)
@@ -666,6 +667,12 @@ I have removed Salary from your list of income(s).
 > **💡 Note:**
 >- Only enter `[INDEX]` that exist in your list. For example: if you have 4 incomes in your income list, specify `[INDEX]` to be a number from 1 to 4.
 >- Do not use `delete /i` when your income list is empty.
+
+<br/>
+
+### Calculate cashback: `calculate` [coming in v3.0]
+
+Details coming soon...
 
 <br/>
 
