@@ -47,7 +47,6 @@ and contact management tasks done faster than traditional GUI apps.
 
 ## Features 
 
-
 ### Main Menu Features
 #### Navigating from menu to section of interest: `goto`
 Allows access to subsections of the application, namely, to the expense tracker, contacts manager and task manager.
@@ -700,10 +699,12 @@ Here are the matching contacts in your list:
 ### Load and Save
 
 Loading and saving is done automatically and the user does not need to worry about manually saving or loading
-data. However, do not tamper with the load and save files. 
+data. However, do not tamper with the load and save files. The file will be called "allonusData.txt" and
+it will be placed in a folder "data" which will be in the same folder/directory as the jar file. Do not replicate
+the "data" folder within the directory the jar file is in. Do not replicate the data file within the "data" folder either.
 
 Furthermore, exit the application properly using the `exit` command from menu for guaranteed correctness of 
-the program and this load and save feature. 
+the program and this load and save feature.  
 
 ## FAQ
 
@@ -733,7 +734,7 @@ Please ensure the version of both applications are the same.
 | List                    | `list`                                                                                                                      |
 | Return to Menu          | `menu`                                                                                                                      |
 | Help                    | `help`                                                                                                                      |
-| Navigate                | `goto m/SECTION`                                                                                                            |
+| Navigate                | `goto SECTION`                                                                                                            |
 | Exit                    | `exit`                                                                                                                      |
 
 [Back to main menu](https://ay2122s2-cs2113-f10-4.github.io/tp/)

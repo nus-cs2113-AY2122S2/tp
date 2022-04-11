@@ -88,7 +88,7 @@ menu mode, step 2 executes. Else, step 3 executes.
 whether it is a command to enter a particular section (essentially step 2), to get help, to exit the application or 
 is an empty or unrecognizable command. 
 
-**Step 1 and 2**:
+**Steps 1 and 2**:
 
 `mode` can only take 4 possible values which are reflected in the class diagram above in the `Mode` enumeration. 
 * `mode = MENU` signifies that the program is currently in menu mode and should execute normally (i.e. step 3 above).
@@ -100,8 +100,9 @@ to `contactsManager` object (call to runner method of this object).
 to `expenseTracker` object.
 
 `mode` is updated upon every return from a method call to any of the manager/tracker objects. This allows for user to indicate 
-whether they actually want to return to the menu (`mode = MENU`) or want to enter another section of the application
-from the section they entered the command from (any other value of `mode`). The `mode` value is checked by calls to methods of 
+whether they actually want to return to the menu (`mode` is set to `MENU` when user enters `menu` command in any of the other sections)
+or want to enter another section of the application (`mode` is set to any other value of `mode` when user enters a valid `goto` command
+in any of the other sections) from the section they entered the command from. The `mode` value is checked by calls to methods of 
 the form `is*Mode()` which are `isContactsManagerMode()`, `isStudyManagerMode()` and `isExpenseTrackerMode()`. 
 
 For example, if user is currently in expense tracker (runner method of `expenseTracker` is executing) and user wants 
@@ -141,7 +142,7 @@ which indicate whether `userInput` is a command concerning either of the followi
 * Exit command:
   * If the `isExitCommand()` method returns `true` on `userInput`, the loop breaks, and control is returned to the static `main()`
   method of the `AllOnUs` class, which then calls the static `exit` method in the same class to print a termination message, and then finally control
-  is returned to the OS. 
+  is returned to the OS.  
 
 ### Modules
 
@@ -359,7 +360,8 @@ call to update the value of the corresponding field of `contact`.
 ![](images/StorageFileClassDiagram.png)
 
 Note: Exception classes are left out of this diagram that aims to show the core structure of the load-save functionality.
-Some methods and attributes are not mentioned to keep the diagram simple while keeping the core information visible.
+TextUi class is also left out since it is used once for printing an error message. 
+Some methods and attributes are not mentioned to keep the diagram simple while keeping the core information visible. 
 
 As seen from the class diagram above (which shows the portions relevant to the `StorageFile` class), 
 the `StorageFile` class associates to a `Logger` class, a `ContactsManager` class, an `ExpenseTracker` class

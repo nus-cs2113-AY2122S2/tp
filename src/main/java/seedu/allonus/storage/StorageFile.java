@@ -8,6 +8,7 @@ import seedu.allonus.expense.ExpenseParser;
 import seedu.allonus.expense.ExpenseTracker;
 import seedu.allonus.modules.Module;
 import seedu.allonus.modules.StudyManager;
+import seedu.allonus.ui.TextUi;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -60,6 +61,8 @@ public class StorageFile {
     public static final int INDEX_OF_FIRST_ELEMENT = 0;
     public static final String WHITESPACE = " ";
     public static final String FORWARD_SLASH = "/";
+    public static final String MESSAGE_CORRUPTED_ENTRY = "Corrupted entry in file. It will be overwritten. Please go "
+            + "through the managers and trackers to observe non-corrupted entries.";
 
     private static ContactsManager contactsManager;
     private static StudyManager studyManager;
@@ -178,6 +181,7 @@ public class StorageFile {
      * @see FileNotFoundException
      */
     public void transferDataFromFileToList() throws FileNotFoundException {
+        TextUi ui = new TextUi();
         File f = new File(datafileRelativePath);
         Scanner fileReader = new Scanner(f);
         while (fileReader.hasNext()) {
@@ -194,6 +198,7 @@ public class StorageFile {
                 loadContact(dataEntry[INDEX_OF_DATA_SEGMENT]);
             } else {
                 logger.log(Level.WARNING, LOG_CORRUPTED_ENTRY);
+                ui.showToUser(MESSAGE_CORRUPTED_ENTRY);
                 continue;
             }
         }
@@ -309,7 +314,7 @@ public class StorageFile {
      * @see FileNotFoundException
      */
     public void loadData() {
-        logger.setLevel(Level.WARNING);
+        logger.setLevel(Level.SEVERE);
         expenseTracker.getLogger().setLevel(Level.SEVERE);
         studyManager.getLogger().setLevel(Level.WARNING);
         contactsManager.getLogger().setLevel(Level.SEVERE);
@@ -332,6 +337,7 @@ public class StorageFile {
      * @see IOException
      */
     public void saveData() {
+        logger.setLevel(Level.SEVERE);
         File f = new File(datafileRelativePath);
         while (!f.exists()) {
             logger.log(Level.INFO, LOG_FILE_NOT_FOUND);
