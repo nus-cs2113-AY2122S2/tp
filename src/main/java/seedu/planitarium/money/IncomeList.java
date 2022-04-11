@@ -194,7 +194,7 @@ public class IncomeList extends MoneyList {
 
     private void printEditMsg(Income item, boolean isDescEdited, boolean isAmountEdited, boolean isPermEdited) {
         if (isDescEdited || isAmountEdited || isPermEdited) {
-            System.out.println("Your Income have been edited");
+            System.out.println("Your Income has been edited");
             System.out.println(item);
             return;
         }
@@ -225,8 +225,9 @@ public class IncomeList extends MoneyList {
      * @return true if amount have been edited, false otherwise
      */
     private boolean editIncAmount(Income item, Double amount) {
-        Double itemAmount = item.getAmount();
-        if (amount != null && itemAmount != amount) {
+        String itemAmount = String.valueOf(item.getAmount());
+        String newAmount = String.valueOf(amount);
+        if (amount != null && !itemAmount.equals(newAmount)) {
             item.setAmount(amount);
             return true;
         }
