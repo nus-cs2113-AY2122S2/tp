@@ -1,3 +1,4 @@
+<!-- @@author YitHien -->
 # User Guide
 
 ## Introduction
@@ -49,6 +50,7 @@ and contact management tasks done faster than traditional GUI apps.
 6. Refer to the [Features](#features) below to try out some commands!
 
 ## Features 
+<!-- @@author OzairHasan -->
 
 ### Main Menu Features
 #### Navigating from menu to section of interest: `goto`
@@ -175,7 +177,7 @@ Goodbye! Hope to see you again...
 ---------------------------------------------------
 ```
 
-
+<!-- @@author YitHien -->
 ### Expense Tracker Features
 
 #### Adding an expense: `add`
@@ -338,6 +340,7 @@ Here are the matching expense record(s):
 ---------------------------------------------------
 ```
 
+<!-- @@author mathanmahe -->
 ### Study Manager Features
 If you are not already in Study Manager, please enter `goto Study_Manager` to access these features.
 #### Adding a module: `add`
@@ -578,6 +581,7 @@ Expected outcome:
 The .ics file from [nusmods](https://nusmods.com/) has been parsed to get the relevant module details and has automatically added them to your module list.
 You can now perform all other StudyManager functions on this list as per normal.
 
+<!-- @@author wli-linda -->
 ### Contacts Manager Features
 The Contacts Manager allows the user to keep track of the people they know.
 Each contact should contain these fields: name, faculty, email, and description.
@@ -724,6 +728,7 @@ Here are the matching contacts in your list:
 ---------------------------------------------------
 ```
 
+<!-- @@author OzairHasan -->
 ### Load and Save
 
 Loading and saving is done automatically and the user does not need to worry about manually saving or loading
@@ -734,6 +739,7 @@ the "data" folder within the directory the jar file is in. Do not replicate the 
 Furthermore, exit the application properly using the `exit` command from menu for guaranteed correctness of 
 the program and this load and save feature.  
 
+<!-- @@author mathanmahe -->
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 

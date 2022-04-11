@@ -1,3 +1,4 @@
+<!-- @@author YitHien -->
 # Developer Guide
 
 ## Table of Contents 
@@ -21,7 +22,7 @@
   * [Contacts Manager](#contacts-manager)
 
 
-
+<!-- @@author mathanmahe -->
 ## Acknowledgements
 In this project, we have referenced the following list of materials:
 
@@ -42,6 +43,7 @@ We have used the following third-party libraries:
 
 ## Design & Implementation
 
+<!-- @@author OzairHasan -->
 ### Main Menu
 This section describes the implementation of core main menu features.
 
@@ -147,6 +149,7 @@ which indicate whether `userInput` is a command concerning either of the followi
   method of the `AllOnUs` class, which then calls the static `exit` method in the same class to print a termination message, and then finally control
   is returned to the OS.  
 
+<!-- @@author mathanmahe -->
 ### Modules
 
 #### Study Manager component
@@ -245,6 +248,7 @@ A sample implementation has been demonstrated in the sequence diagram depicted b
 ![](images/ModulesTaskListSequenceDiagram.png)
 
 
+<!-- @@author YitHien -->
 ### Expense Tracker Component
 API:[`ExpenseTracker.java`](https://github.com/AY2122S2-CS2113-F10-4/tp/blob/master/src/main/java/seedu/allonus/expense/ExpenseTracker.java)
 
@@ -315,6 +319,7 @@ The following sequence diagram shows how the budget is checked upon every new ad
 
 ![](images/BudgetingReminderSequenceDiagram.png)
 
+<!-- @@author wli-linda -->
 ### Contacts
 
 #### Contacts Manager Component
@@ -388,6 +393,7 @@ customized information if we prevent entering certain symbols.
   * The same rationales apply. We do not have data validation checks in place
   to give our users a larger degree of freedom.
 
+<!-- @@author OzairHasan -->
 ### Load and Store
 
 **API:** `StorageFile.java`
@@ -462,6 +468,7 @@ Similar operations occur for entries of type module and contact.
 Once all the entries have been loaded and there are no more lines to be read, the loop breaks and control returns to 
 the `run()` method of `:AllOnUs`, so that interactions with the user can begin. 
 
+<!-- @@author mathanmahe -->
 ##  Appendix
 ## Product scope
 ### Target user profile
@@ -513,6 +520,7 @@ faster than a typical mouse driven or GUI driven apps.
 3. Application should be able to perform load and store operations on any mainstream operating
    system without difficulty.
 
+<!-- @@author YitHien -->
 ## Glossary
 
 | Terms     | Definition                                                                                                                                                            |
@@ -541,8 +549,9 @@ Given below are instructions to test the app manually:
 2. Shutdown
    1. Navigate to menu using `menu` command.
    2. Enter `exit` command to appropriately terminate the application. 
-   
 
+
+<!-- @@author mathanmahe -->
 ### Study Manager
 
 1. Deleting a module while all modules are shown.
@@ -563,7 +572,8 @@ Given below are instructions to test the app manually:
    4. Other incorrect add commands to try: `add`, `add c/lec t/4pm-6pm`
       1. Or any commands that exclude one of the four requirements to add module.
       2. Expected: Error message similar to above.
-      
+
+<!-- @@author YitHien -->
 ### Expense Tracker
 1. Adding a new expense record to the list
    1. Requires date, amount, category and remarks in proper format
@@ -615,6 +625,7 @@ Given below are instructions to test the app manually:
       1. Expected: No expense record retrieved as keyword not specified. Error details shown on console.
       2. Expected: Error messge similar to above.
 
+<!-- @@author wli-linda -->
 ### Contacts Manager
 1. Adding a new contact
    1. Test case: `add n/Name1 f/Faculty e/email@u.nus.edu d/Description` <br/>
@@ -638,15 +649,15 @@ Given below are instructions to test the app manually:
    1. Prerequisites: Show all contacts using the `list` command. 
    Ensure that there are contacts in the list. 
    A message will be shown to indicate an empty list.
-   2. Test case: `rm 1` </br>
+   2. Test case: `rm 1` <br>
    Expected: First contact is deleted from the list. 
    Details of the deleted contact shown in the status message. 
    Number of contacts left in the list are also shown. 
-   3. Test case: `rm 0` </br>
+   3. Test case: `rm 0` <br>
    Expected: No contact is deleted. Error details shown in the status message. 
    4. Other incorrect delete commands to try: `rm`, `rm x` 
    (where x is negative or larger than the list size), 
-   `rm not_a_number`, ... </br>
+   `rm not_a_number`, ... <br>
    Expected: Similar to previous.
 
 [Back to main menu](https://ay2122s2-cs2113-f10-4.github.io/tp/)
