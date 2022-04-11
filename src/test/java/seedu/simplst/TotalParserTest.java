@@ -3,9 +3,16 @@ package seedu.simplst;
 import org.junit.jupiter.api.Test;
 import seedu.simplst.parsers.AddParser;
 import seedu.simplst.parsers.TotalParser;
-import util.exceptions.*;
+import util.exceptions.MissingFlagException;
+import util.exceptions.EmptyFieldException;
+import util.exceptions.WrongCommandException;
+import util.exceptions.InvalidFileException;
+import util.exceptions.InvalidObjectType;
+import util.exceptions.NullException;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertFalse;
 
 public class TotalParserTest {
     Warehouse warehouse = new Warehouse(1000);

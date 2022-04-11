@@ -9,8 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
-//whatIsBeingTested_descriptionOfTestInputs_expectedOutcome
-
 public class HelpParserTest {
     Warehouse warehouse = new Warehouse(1000);
     String regex = "(?<flag>[uog]{1,2})";
