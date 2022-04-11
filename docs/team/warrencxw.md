@@ -99,6 +99,12 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
    [`Settle a session`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#settle-a-session)
    * Created sequence diagrams for both sections
    * Added explanation for the sequence diagrams
+ * Added various sections under [Instructions for Manual Testing](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#appendix-instructions-for-manual-testing)
+   * [Launch and Shutdown](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#launch-and-shutdown)
+   * [Session:](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#session-testing) 
+     [`Settling a Session`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#settling-a-session),
+     [`Viewing a Session`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#viewing-a-session) and
+     [`Listing all Sessions`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#listing-all-sessions)
 
 ### Miscellaneous Contributions
  * Spearheaded replacement of `XYZCommand#prepare` method with a [`XYZCommandParser`](https://github.com/AY2122S2-CS2113T-T10-1/tp/tree/master/src/main/java/seedu/splitlah/parser/commandparser) class
