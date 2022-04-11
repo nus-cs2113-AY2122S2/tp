@@ -61,7 +61,7 @@ Click <a href="https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=chihyi
 1. Wrote the user guide for `help`, `lost`, `return`.
 
 <h3 id="dg">5. Contributions to the Developer's Guide </h3>
-1. Created `Lost Command`, `Return Command` sequence diagrams and wrote both sections.
+1. Created `Lost Command`, `Return Command` and `HelpCommand` sequence diagrams and wrote both sections.
 2. Create `UI` class diagram and wrote UI Component section.
 
 <h3 id="team">6. Contributions to Team Based Tasks </h3>
