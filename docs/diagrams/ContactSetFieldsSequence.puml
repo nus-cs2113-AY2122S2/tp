@@ -1,0 +1,31 @@
+@startuml
+!include Style.puml
+
+box LOGIC_COLOR_T1
+participant "contactsManager:ContactsManager" LOGIC_COLOR
+participant ":Field" LOGIC_COLOR
+participant "contact:Contact" LOGIC_COLOR
+end box
+
+
+box  MODEL_COLOR_T1
+participant  "ContactParser" <<class>> MODEL_COLOR
+end box
+
+"contactsManager:ContactsManager" -> "ContactParser" : setContactFields(contact, fieldStrings)
+activate "ContactParser"
+
+loop for each fieldString in fieldStrings
+    ref over "ContactParser", "contact:Contact" : get Field object to be updated
+
+    "ContactParser" -> ":Field" : setField(fieldString)
+    activate ":Field"
+
+    ":Field" --> "ContactParser"
+    deactivate ":Field"
+end
+
+"ContactParser" --> "contactsManager:ContactsManager"
+deactivate "ContactParser"
+
+@enduml

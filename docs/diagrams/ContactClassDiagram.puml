@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor black
+skinparam classBackgroundColor LOGIC_COLOR
+
+Package Contacts {
+    Class ContactsManager
+    Class ContactParser MODEL_COLOR
+    Class InvalidContactField
+
+    Package Entry {
+        Class Contact
+        Class "{abstract}\nField" as Field
+        Class Name
+        Class Faculty
+        Class Email
+        Class Description
+    }
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> ContactsManager
+
+ContactsManager -left-> ContactParser
+ContactParser --> InvalidContactField
+ContactParser ..> Contact
+
+ContactsManager *-down-> "*" Contact
+Contact *-down-> "1" Name
+Contact *-down-> "1" Faculty
+Contact *-down-> "1" Email
+Contact *-down-> "1" Description
+
+Name --|> Field
+Faculty --|> Field
+Email --|> Field
+Description --|> Field
+
+Name -[hidden]right-> Faculty
+Faculty -[hidden]right-> Email
+Email -[hidden]right-> Description
+
+@enduml

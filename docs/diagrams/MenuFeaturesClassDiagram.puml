@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+skinparam guillemet false
+
+hide circle
+class AllOnUs
+AllOnUs : <u>+main()
+AllOnUs : <u>+is*Command()
+AllOnUs : <u>+is*Mode()
+AllOnUs : <u>+greet()
+AllOnUs : <u>+exit()
+AllOnUs : +run()
+AllOnUs : +displayHelp()
+
+class Logger
+
+class TextUi
+TextUi : +getUserInput()
+
+class ContactsManager
+
+class ExpenseTracker
+
+class StudyManager
+
+class StorageFile
+
+enum Mode <<enumeration>> {
+    MENU
+    CONTACTS_MANAGER
+    STUDY_MANAGER
+    EXPENSE_TRACKER
+}
+
+
+AllOnUs --> "1" Logger
+AllOnUs --> "1" StudyManager
+AllOnUs --> "1" ContactsManager
+AllOnUs --> "1" TextUi
+AllOnUs --> "1" ExpenseTracker
+AllOnUs --> "1" StorageFile
+
+
+
+@enduml

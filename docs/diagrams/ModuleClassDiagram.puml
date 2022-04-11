@@ -1,0 +1,37 @@
+ @startuml
+ skinparam arrowThickness 1.1
+ skinparam arrowColor black
+ skinparam classBackgroundColor LOGIC_COLOR
+ hide circle
+package modules {
+
+    Class Module {
+        -moduleCode: String
+        -category: String
+        -day: String
+        -timeSlot: String
+    }
+    Package exceptions {
+        class InvalidFindInputException
+        class ModuleCategoryException
+        class ModuleCodeException
+        class ModuleDayException
+        class ModuleTImeException
+    }
+
+    Class ModuleParser {
+
+    }
+Class StudyManager {
+    -modulesList: Arraylist<String>
+}
+Class ModuleCalendarReader
+
+}
+StudyManager --> ModuleCalendarReader : uses
+StudyManager --> ModuleParser : uses
+ModuleParser -->  Module : creates
+StudyManager --> Module
+ModuleCalendarReader --> Module
+ModuleParser --> exceptions : throws
+ @enduml

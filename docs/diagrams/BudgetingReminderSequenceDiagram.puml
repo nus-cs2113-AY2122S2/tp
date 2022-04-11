@@ -1,0 +1,45 @@
+@startuml
+!include Style.puml
+
+box LOGIC_COLOR_T1
+participant ":ExpenseTracker" as ExpenseTracker LOGIC_COLOR
+participant ":Expense" as Expense LOGIC_COLOR
+end box
+
+box  MODEL_COLOR_T1
+participant ":ExpenseParser" as ExpenseParser MODEL_COLOR
+end box
+
+[-> ExpenseTracker : expenseRunner()
+activate ExpenseTracker
+
+ExpenseTracker -> ExpenseTracker : enable(int)
+activate ExpenseTracker
+deactivate ExpenseTracker
+create Expense
+ExpenseTracker -> Expense : setBudget(int)
+activate Expense
+
+
+ExpenseTracker -> ExpenseParser : parseNewExpense(String)
+activate ExpenseParser
+ExpenseParser -> ExpenseParser : checkBudget()
+activate ExpenseParser
+deactivate ExpenseParser
+
+ExpenseParser -> Expense : getBudget()
+activate Expense
+
+Expense --> ExpenseParser : budget(int)
+deactivate Expense
+
+ExpenseParser --> ExpenseTracker : Expense Object
+deactivate ExpenseParser
+
+
+ExpenseTracker -> ExpenseTracker :  addExpense(Expense)
+activate ExpenseTracker
+
+deactivate ExpenseTracker
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+!include Style.puml
+
+box LOGIC_COLOR_T1
+participant "studyManager:StudyManager" as studyManager LOGIC_COLOR
+participant "module:Module" as module LOGIC_COLOR
+end box
+
+
+[-> studyManager : studyManagerRunner()
+activate studyManager
+
+    studyManager->studyManager:viewTasks()
+    activate studyManager
+    alt view CS2113
+        studyManager -> module **: getTaskList()
+
+        activate module
+        return taskListforCS2113: ArrayList<Task>
+
+    else view all
+        loop until end of moduleList
+        studyManager -> module **: getTaskList()
+        activate module
+        return taskList per Module
+        end
+    deactivate module
+
+    end
+    deactivate studyManager
+
+@enduml

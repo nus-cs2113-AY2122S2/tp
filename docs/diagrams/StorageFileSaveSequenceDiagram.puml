@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+
+participant "storageFile:StorageFile"
+participant "contactsManager:ContactsManager"
+participant "studyManager:StudyManager"
+participant "expenseTracker:ExpenseTracker"
+
+
+hide footbox
+ -> "storageFile:StorageFile"++: saveData()
+opt file does not exist
+    "storageFile:StorageFile" -> "storageFile:StorageFile" ++: createFile()
+    opt directory does not exist
+        "storageFile:StorageFile" -> "storageFile:StorageFile" ++: createDirectory()
+        "storageFile:StorageFile" --> "storageFile:StorageFile" --:
+    end
+    "storageFile:StorageFile" --> "storageFile:StorageFile" --:
+end
+
+"storageFile:StorageFile" -> "storageFile:StorageFile" ++: writeDataToFile()
+
+ref over "contactsManager:ContactsManager", "studyManager:StudyManager", "expenseTracker:ExpenseTracker", "storageFile:StorageFile"
+Write data from managers and tracker to file
+end
+
+"storageFile:StorageFile" --> "storageFile:StorageFile" --
+<--"storageFile:StorageFile" --:
+
+
+@enduml

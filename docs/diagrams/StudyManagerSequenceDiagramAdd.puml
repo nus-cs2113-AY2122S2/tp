@@ -1,0 +1,46 @@
+@startuml
+!include Style.puml
+
+box LOGIC_COLOR_T1
+participant "studyManager:StudyManager" as studyManager LOGIC_COLOR
+participant "moduleParser:ModuleParser" as moduleParser LOGIC_COLOR
+participant "module:Module" as module LOGIC_COLOR
+participant  "ModuleCalendarReader" as icsReader LOGIC_COLOR
+end box
+
+
+[-> studyManager : studyManagerRunner()
+activate studyManager
+activate moduleParser
+
+alt add command
+    studyManager->studyManager:addModule()
+    activate studyManager
+
+    studyManager -> moduleParser : validateAddInputs()
+    activate moduleParser
+    alt valid module
+        moduleParser -> module ** : new Module(moduleCode, category, day, timeSlot)
+        activate module
+        return :Module
+        return :Module
+    end
+
+
+    deactivate module
+    deactivate studyManager
+
+else read ics command
+    studyManager->studyManager ++: openIcsFile(fileName)
+    studyManager -> icsReader: readIcsFile(fileName)
+    activate icsReader
+    icsReader -> icsReader ++: parseIcsCalendar(fileName)
+    icsReader-> module **: new Module(moduleCode,category,day,timeslot)
+    activate module
+    return :Module
+    deactivate module
+    return modulesList: ArrayList<String>
+    deactivate icsReader
+end
+
+@enduml

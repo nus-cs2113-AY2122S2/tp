@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+skinparam guillemet false
+
+hide circle
+class StorageFile
+StorageFile : -fileName
+StorageFile : -dataFileRelativePath
+StorageFile : +saveData()
+StorageFile : +loadData()
+StorageFile : +writeDataToFile()
+StorageFile : +get*InFileFormat()
+StorageFile : +transferDataFromFileToList()
+StorageFile : +load*()
+StorageFile : +create*()
+StorageFile : <u>+setFields()
+
+
+
+class Logger
+
+class ContactsManager
+
+class ExpenseTracker
+
+class StudyManager
+
+
+StorageFile --> "1" Logger
+StorageFile "1" <--> "1" StudyManager
+StorageFile "1" <--> "1" ContactsManager
+StorageFile "1" <--> "1" ExpenseTracker
+
+@enduml

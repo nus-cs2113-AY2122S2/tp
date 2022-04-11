@@ -1,0 +1,37 @@
+@startuml
+!include Style.puml
+
+box  MODEL_COLOR_T1
+participant  "ContactParser" <<class>> MODEL_COLOR
+end box
+
+box LOGIC_COLOR_T1
+participant "contact:Contact" LOGIC_COLOR
+participant ":InvalidContactField" LOGIC_COLOR
+end box
+
+mainframe sd get Field object to be updated
+alt #00000000 Update to the name field
+    "ContactParser" -> "contact:Contact" : getName()
+    activate "contact:Contact"
+    "contact:Contact" --> "ContactParser" : Name object
+    deactivate "contact:Contact"
+else Update to the faculty field
+    "ContactParser" -> "contact:Contact" : getFaculty()
+    activate "contact:Contact"
+    "contact:Contact" --> "ContactParser" : Faculty object
+    deactivate "contact:Contact"
+else Update to the email field
+    "ContactParser" -> "contact:Contact" : getEmail()
+    activate "contact:Contact"
+    "contact:Contact" --> "ContactParser" : Email object
+    deactivate "contact:Contact"
+else Update to the description field
+    "ContactParser" -> "contact:Contact" : getDescription()
+    activate "contact:Contact"
+    "contact:Contact" --> "ContactParser" : Description object
+    deactivate "contact:Contact"
+else Unrecognized/invalid field
+    "ContactParser" -> ":InvalidContactField" : throw InvalidContactField exception
+end
+@enduml

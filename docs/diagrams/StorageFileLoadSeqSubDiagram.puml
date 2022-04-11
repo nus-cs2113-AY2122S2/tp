@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+mainframe sd Write data from managers and tracker to file
+
+participant "storageFile:StorageFile"
+participant "contactsManager:ContactsManager"
+participant "studyManager:StudyManager"
+participant "expenseTracker:ExpenseTracker"
+
+hide footbox
+activate "storageFile:StorageFile"
+
+
+loop for each saved entry in file
+
+alt saved entry is an expense
+    "storageFile:StorageFile" -> "storageFile:StorageFile" ++: loadExpense()
+    "storageFile:StorageFile" -> "expenseTracker:ExpenseTracker" ++: loadAdd()
+    "expenseTracker:ExpenseTracker" --> "storageFile:StorageFile" --
+    "storageFile:StorageFile" --> "storageFile:StorageFile" --
+else saved entry is module
+    "storageFile:StorageFile" -> "storageFile:StorageFile" ++: loadModule()
+    "storageFile:StorageFile" -> "studyManager:StudyManager" ++: loadAdd()
+    "studyManager:StudyManager" --> "storageFile:StorageFile" --
+    "storageFile:StorageFile" --> "storageFile:StorageFile" --
+else saved entry is contact
+    "storageFile:StorageFile" -> "storageFile:StorageFile" ++: loadContact()
+    "storageFile:StorageFile" -> "contactsManager:ContactsManager" ++: loadAdd()
+    "contactsManager:ContactsManager" --> "storageFile:StorageFile" --
+    "storageFile:StorageFile" --> "storageFile:StorageFile" --
+end
+end
+
+@enduml

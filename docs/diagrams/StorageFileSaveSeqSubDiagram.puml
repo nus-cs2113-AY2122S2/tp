@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+mainframe sd Write data from managers and tracker to file
+
+participant "storageFile:StorageFile"
+participant "contactsManager:ContactsManager"
+participant "studyManager:StudyManager"
+participant "expenseTracker:ExpenseTracker"
+
+hide footbox
+activate "storageFile:StorageFile"
+
+"storageFile:StorageFile" -> "expenseTracker:ExpenseTracker" ++: getExpenseCount()
+"expenseTracker:ExpenseTracker" --> "storageFile:StorageFile" --
+
+loop for each expense
+    "storageFile:StorageFile" -> "storageFile:StorageFile" ++: getExpenseInFileFormat()
+    "storageFile:StorageFile" -> "expenseTracker:ExpenseTracker" ++: getExpenseList()
+    "expenseTracker:ExpenseTracker" --> "storageFile:StorageFile" --
+    "storageFile:StorageFile" --> "storageFile:StorageFile" --
+end
+
+"storageFile:StorageFile" -> "studyManager:StudyManager" ++: getModuleCount()
+"studyManager:StudyManager" --> "storageFile:StorageFile" --
+
+loop for each module
+    "storageFile:StorageFile" -> "storageFile:StorageFile" ++: getModuleInFileFormat()
+    "storageFile:StorageFile" -> "studyManager:StudyManager" ++: getModulesList()
+    "studyManager:StudyManager" --> "storageFile:StorageFile" --
+    "storageFile:StorageFile" --> "storageFile:StorageFile" --
+end
+
+"storageFile:StorageFile" -> "contactsManager:ContactsManager" ++: getContactsCount()
+"contactsManager:ContactsManager" --> "storageFile:StorageFile" --
+
+loop for each contact
+    "storageFile:StorageFile" -> "storageFile:StorageFile" ++: getContactInFileFormat()
+    "storageFile:StorageFile" -> "contactsManager:ContactsManager" ++: getContactsList()
+    "contactsManager:ContactsManager" --> "storageFile:StorageFile" --
+    "storageFile:StorageFile" --> "storageFile:StorageFile" --
+end
+
+@enduml

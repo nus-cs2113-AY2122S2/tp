@@ -1,0 +1,25 @@
+@startuml
+ skinparam arrowThickness 1.1
+ skinparam arrowColor black
+ skinparam classBackgroundColor LOGIC_COLOR
+    hide circle
+    Class Module {
+        -moduleCode: String
+        -category: String
+        -day: String
+        -timeSlot: String
+    }
+
+    Class TaskList {
+
+    }
+
+    Class Task {
+        -Description: String
+        -isDone: boolean
+    }
+
+    TaskList *--> "*" Task
+    Module --> "1" TaskList
+
+@enduml

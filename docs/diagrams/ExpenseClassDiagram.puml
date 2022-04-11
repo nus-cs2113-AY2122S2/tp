@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor black
+skinparam classBackgroundColor LOGIC_COLOR
+
+package Expense{
+    Class ExpenseTracker
+    Class ExpenseParser #RED
+    Class Expense
+}
+package Exceptions{
+    Class ExpenseAmountException
+    Class ExpenseEmptyFieldException
+    Class ExpenseExtraFieldException
+    Class ExpenseMissingFieldException
+    Class ExpenseSurroundSlashSpaceException
+    Class ExpenseInvalidYearException
+}
+package MainMenu as "Main Menu Component" {
+}
+
+Class HiddenOutside #FFFFFF
+ExpenseTracker -down-> ExpenseAmountException : "<<throws>>"
+ExpenseTracker -down-> ExpenseExtraFieldException : "<<throws>>"
+ExpenseTracker -down-> ExpenseEmptyFieldException : "<<throws>>"
+ExpenseTracker -down-> ExpenseMissingFieldException : "<<throws>>"
+ExpenseTracker -down-> ExpenseSurroundSlashSpaceException : "<<throws>>"
+ExpenseTracker -down-> ExpenseInvalidYearException : "<<throws>>"
+MainMenu ..> ExpenseTracker : Enters Expense module >
+ExpenseTracker -left--> "*" Expense
+ExpenseTracker -right-> "ExpenseParser" : Parses input >
+
+
+@enduml
