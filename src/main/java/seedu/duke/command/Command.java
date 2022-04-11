@@ -22,11 +22,10 @@ public abstract class Command {
     /**
      * Abstract execute command that all Command classes should
      * override based on their specific behavior.
-     *
      * @param ui The instance of the Ui class (used for printing additional messages when a command is executed.
      * @throws HotelLiteManagerException If there is any error with user input.
      */
-    public abstract void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException;
+    public abstract Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException;
 
     public boolean isExit() {
         return this.isExit;

@@ -7,7 +7,6 @@ import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.eventlists.EventList;
 import seedu.duke.exceptions.InvalidDeleteEventException;
-import seedu.duke.exceptions.InvalidEventException;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -61,9 +60,10 @@ public class DeleteEventCommand extends Command {
      * his/her availability into housekeeper list.
      *
      * @param ui The user interface for this execution method.
+     * @return
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui)
+    public Object execute(ListContainer listContainer, Ui ui)
             throws HotelLiteManagerException, IOException {
 
         final EventList eventList = listContainer.getEventList();
@@ -74,6 +74,7 @@ public class DeleteEventCommand extends Command {
         logger.log(Level.INFO, "about to update file.");
         eventList.save();
         logger.log(Level.INFO, "end of deleting event.");
+        return null;
     }
 
 }

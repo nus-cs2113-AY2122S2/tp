@@ -140,7 +140,7 @@ public class AddSatisfactionCommand extends Command {
      *                 must be included for the execution override.
      * @param ui The user interface for this execution method.
      */
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
+    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         SatisfactionList satisfactionList = listContainer.getSatisfactionList();
         if (satisfactionList.isCustomerInSatisfactionList(satisfaction.getCustomerName())) {
             throw new RepeatCustomerException();
@@ -150,6 +150,7 @@ public class AddSatisfactionCommand extends Command {
         SatisfactionListFileManager satisfactionListFileManager = new SatisfactionListFileManager();
         satisfactionListFileManager.save(satisfactionList);
 
+        return null;
     }
 
     public Satisfaction getSatisfaction() {

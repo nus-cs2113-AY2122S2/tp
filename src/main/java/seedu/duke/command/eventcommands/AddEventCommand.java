@@ -1,7 +1,6 @@
 package seedu.duke.command.eventcommands;
 
 import seedu.duke.exceptions.HotelLiteManagerException;
-import seedu.duke.exceptions.InvalidAvailabilityException;
 import seedu.duke.command.Command;
 
 import seedu.duke.ListContainer;
@@ -82,9 +81,10 @@ public class AddEventCommand extends Command {
      * his/her availability into housekeeper list.
      *
      * @param ui The user interface for this execution method.
+     * @return
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui)
+    public Object execute(ListContainer listContainer, Ui ui)
             throws HotelLiteManagerException, IOException {
 
         final EventList eventList = listContainer.getEventList();
@@ -97,6 +97,7 @@ public class AddEventCommand extends Command {
         logger.log(Level.INFO, "about to add to file.");
         eventList.save();
         logger.log(Level.INFO, "end of adding event.");
+        return null;
     }
 
 }

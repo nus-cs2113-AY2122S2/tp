@@ -13,22 +13,35 @@ import seedu.duke.command.itemcommands.AddItemCommand;
 import seedu.duke.command.itemcommands.DeleteItemCommand;
 import seedu.duke.command.itemcommands.UpdateItemNameCommand;
 import seedu.duke.command.itemcommands.UpdateItemPaxCommand;
+import seedu.duke.command.roomcommand.CheckAllRoomCommand;
+import seedu.duke.command.roomcommand.CheckInCommand;
+import seedu.duke.command.roomcommand.CheckOutCommand;
+import seedu.duke.command.roomcommand.CheckRoomByCatCommand;
+import seedu.duke.command.roomcommand.CheckRoomByLevelCommand;
+import seedu.duke.command.roomcommand.CheckRoomCommand;
 import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.roomlists.RoomList;
+import seedu.duke.storage.RoomFileManager;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
 
-    private void writeListsToFile(Command command, ListContainer listContainer) throws IOException {
-        if (command instanceof AddItemCommand || command instanceof UpdateItemPaxCommand || command
-                instanceof UpdateItemNameCommand || command instanceof UpdateItemNameCommand || command
-                instanceof DeleteItemCommand) {
+    private void writeListsToFile(Command command, ListContainer listContainer)
+            throws IOException, HotelLiteManagerException {
+        if (command instanceof AddItemCommand || command instanceof UpdateItemPaxCommand
+                || command instanceof UpdateItemNameCommand || command  instanceof UpdateItemNameCommand
+                || command instanceof DeleteItemCommand) {
             writeItemListsToFile(command, listContainer);
         } else if (command instanceof AddAvailabilityCommand || command instanceof AddHousekeeperCommand || command
                 instanceof AgeIncreaseCommand || command instanceof ResetAvailabilityCommand || command
                 instanceof DeleteHousekeeperCommand) {
             writeHousekeeperListsToFile(command, listContainer);
+        } else if (command instanceof CheckAllRoomCommand || command instanceof CheckInCommand || command
+                instanceof CheckOutCommand || command instanceof CheckRoomByCatCommand || command
+                instanceof CheckRoomByLevelCommand || command instanceof CheckRoomCommand) {
+            writeRoomListToFile(listContainer);
         }
     }
 
@@ -49,6 +62,13 @@ public class Duke {
             ResetAvailabilityCommand resetAvailabilityCommand = (ResetAvailabilityCommand) command;
             resetAvailabilityCommand.writeHousekeeperToFile(listContainer);
         }
+    }
+
+
+    private void writeRoomListToFile(ListContainer listContainer) throws IOException, HotelLiteManagerException {
+        RoomList roomList = listContainer.getRoomList();
+        RoomFileManager fileManager = new RoomFileManager();
+        fileManager.save(roomList.getRoomList());
     }
 
 

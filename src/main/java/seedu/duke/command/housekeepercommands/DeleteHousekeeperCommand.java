@@ -45,9 +45,10 @@ public class DeleteHousekeeperCommand extends Command {
      * @param listContainer List of information.
      * @param ui The instance of the Ui class (used for printing additional messages when a command is executed.
      * @throws HotelLiteManagerException User given is not in housekeeper list.
+     * @return
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
+    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.removeHousekeeperInList(name);
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
@@ -57,6 +58,7 @@ public class DeleteHousekeeperCommand extends Command {
         ui.printMessage("Deleted " + name + " from the list of profile");
         ui.printMessage("Take note! Total pax of housekeeper:  " + housekeeperList.getTotalHousekeeper());
         ui.printBottomLine();
+        return null;
     }
 
     /**

@@ -9,7 +9,8 @@ public class ExitCommand extends Command {
         isExit = true;
     }
 
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         System.out.println("see u again!");
+        return null;
     }
 }

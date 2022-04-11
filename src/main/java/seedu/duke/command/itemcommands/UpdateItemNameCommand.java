@@ -125,9 +125,10 @@ public class UpdateItemNameCommand extends Command {
      * @param ui            The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      * @throws IOException               if we are unable to write to the file ListFolder/ItemList.txt
+     * @return
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         ItemList listOfItems = listContainer.getItemList();
         Item item = getItem();
         String oldItemName = item.getName();
@@ -143,6 +144,7 @@ public class UpdateItemNameCommand extends Command {
         oldItemName = oldItemName.toUpperCase();
         newItemName = newItemName.toUpperCase();
         ui.printUpdateItemNameAcknowledgementMessage(oldItemName, newItemName);
+        return null;
     }
 
     public void writeItemListToFile(ListContainer listContainer) throws IOException {

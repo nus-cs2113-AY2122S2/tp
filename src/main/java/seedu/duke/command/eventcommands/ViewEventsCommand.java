@@ -1,7 +1,6 @@
 package seedu.duke.command.eventcommands;
 
 import seedu.duke.exceptions.HotelLiteManagerException;
-import seedu.duke.exceptions.InvalidAvailabilityException;
 import seedu.duke.command.Command;
 
 import seedu.duke.ListContainer;
@@ -26,13 +25,15 @@ public class ViewEventsCommand extends Command {
      * his/her availability into housekeeper list.
      *
      * @param ui The user interface for this execution method.
+     * @return
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui)
+    public Object execute(ListContainer listContainer, Ui ui)
             throws InvalidRoomNumberException, IOException {
         final EventList eventList = listContainer.getEventList();
         ui.printAllEvents(eventList.getEventList());
         logger.log(Level.INFO, "log: all events displayed");
+        return null;
     }
 
 }

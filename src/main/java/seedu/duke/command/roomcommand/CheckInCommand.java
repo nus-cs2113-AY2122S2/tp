@@ -1,5 +1,6 @@
 package seedu.duke.command.roomcommand;
 
+import seedu.duke.exceptions.RoomAlrOccupiedException;
 import seedu.duke.roomlists.RoomList;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
@@ -29,28 +30,23 @@ public class CheckInCommand extends Command {
      * @param listContainer The object containing the necessary data structure.
      * @param ui            The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the room number is not in the room list.
+     * @return
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
+    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         this.roomList = listContainer.getRoomList();
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         for (Room room : roomList.getRoomList()) {
             if (room.getRoomId() == roomId) {
                 if (!room.getIsVacant()) {
-                    System.out.println("Error! This room is already occupied.");
-                    ui.printTableHeader();
-                    System.out.println(room
-                            + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
-                    );
-                    return;
+                    throw new RoomAlrOccupiedException();
                 }
                 room.checkIn();
                 ui.printTableHeader();
                 System.out.println(room
                         + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
                 );
-                roomList.save();
-                return;
+                return null;
             }
         }
 

@@ -21,8 +21,4 @@ public class RoomList {
         return roomList;
     }
 
-    public void save() throws IOException, HotelLiteManagerException {
-        RoomFileManager roomFileManager = new RoomFileManager();
-        roomFileManager.save(roomList);
-    }
 }

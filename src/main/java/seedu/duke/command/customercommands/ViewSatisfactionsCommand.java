@@ -22,11 +22,13 @@ public class ViewSatisfactionsCommand extends Command {
      * corresponding customer name and satisfaction value).
      *
      * @param ui               The user interface for this execution method.
+     * @return
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) {
+    public Object execute(ListContainer listContainer, Ui ui) {
         SatisfactionList satisfactionList = listContainer.getSatisfactionList();
         satisfactionList.viewSatisfactions();
+        return null;
     }
 
     

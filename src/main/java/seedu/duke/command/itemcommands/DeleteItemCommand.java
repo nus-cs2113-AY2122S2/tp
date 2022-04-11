@@ -66,14 +66,16 @@ public class DeleteItemCommand extends Command {
      * @param ui            The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      * @throws IOException               if we are unable to write to the file ListFolder/ItemList.txt
+     * @return
      */
 
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         Item itemToDelete = getItem();
         ItemList listOfItems = listContainer.getItemList();
         listOfItems.deleteItemInList(itemToDelete);
         ui.printDeleteItemAcknowledgementMessage(itemToDelete, listOfItems);
+        return null;
     }
 
     public void writeItemListToFile(ListContainer listContainer) throws IOException {

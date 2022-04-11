@@ -51,10 +51,11 @@ public class SearchItemCommand extends Command {
      *                      list.
      *                      In this case, we require access to the ItemList object which is within listContainer.
      * @throws HotelLiteManagerException if the keyword is empty.
+     * @return
      */
 
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         ItemList listOfItems = listContainer.getItemList();
         String keyword = getKeyword();
         ItemList listOfMatchingItems = listOfItems.findItemsInList(keyword);
@@ -64,6 +65,7 @@ public class SearchItemCommand extends Command {
         } else {
             ui.printItemList(listOfMatchingItems);
         }
+        return null;
     }
 
     public String getKeyword() {
