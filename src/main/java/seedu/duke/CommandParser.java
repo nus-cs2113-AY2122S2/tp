@@ -144,21 +144,21 @@ public class CommandParser {
         Command userCommand = null;
         String userInputLowerCaseWithoutCommand;
         if (userInputLowerCase.startsWith(CHECK_IN)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_IN, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(CHECK_IN, "");
             userCommand = new CheckInCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(CHECK_OUT)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_OUT, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(CHECK_OUT, "");
             userCommand = new CheckOutCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(CHECK_BY_CATEGORY)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_BY_CATEGORY, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(CHECK_BY_CATEGORY, "");
             userCommand = new CheckRoomByCatCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(CHECK_ROOM)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_ROOM, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(CHECK_ROOM, "");
             userCommand = new CheckRoomCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.trim().equals(CHECK_ALL_ROOM)) {
             userCommand = new CheckAllRoomCommand();
         } else if (userInputLowerCase.startsWith(CHECK_ROOM_BY_LEVEL)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_ROOM_BY_LEVEL, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(CHECK_ROOM_BY_LEVEL, "");
             userCommand = new CheckRoomByLevelCommand(userInputLowerCaseWithoutCommand);
         } else {
             throw new InvalidCommandException();
