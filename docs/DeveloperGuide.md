@@ -2,7 +2,6 @@
 
 ## Table of contents
 * [Design](#design)
-* [Implementation](#implementation)
   * [Unit Good Class](#unit-good-class)
   * [Good Class](#good-class)
   * [Order Class](#order-class)
@@ -11,6 +10,9 @@
   * [Command Parser](#command-parser)
   * [User Interface Class](#user-interface-class)
   * [Match Keyword Class](#match-keyword-class)
+* [Implementation](#implementation)
+  * [View Order Feature](#view-order)
+  * [Fulfill Order Feature](#fulfill-order)
 * [Product Scope](#product-scope)
   * [Target User Profile](#target-user-profile)
   * [Value Proposition](#value-proposition)
@@ -28,13 +30,12 @@ The **Architecture Diagram** above shows the high level design of Simplst. A use
 3. The parser will then check the flags indicated in the user input to check which function from the [Warehouse Class](#warehouse-class) to call
 4. The [Warehouse Class](#warehouse-class) will contain a collection of [Unit Good](#unit-good-class), [Good](#good-class) and [Order](#order-class)
 
-The sequence diagram using the [View Parser](#view-parser) below shows an example of how the user will send Simplst `view o/ oid/1` with the aim of viewing details of order id 1
+The sequence diagram using the [View Parser](#command-parser) below shows an example of how the user will send Simplst `view o/ oid/1` with the aim of viewing details of order id 1
 
 ![View Order Sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/ViewOrder.puml)
 
-The specific details of exactly how view order command will run will be described later in [View Parser](#view-parser)
+The specific details of exactly how view order command will run will be described later in [View Parser](#command-parser)
 
-## Implementation
 ### Unit Good Class
 The Unit good class keep track of the unit goods in the warehouse.
 #### Description
@@ -82,7 +83,7 @@ The Order Class is used to imitate how orders will be stored in Simplst.
 Orders will contain the Order ID which will be used to identity the order. The Order ID has to be a unique positive number.
 As seen in the class diagram above, Orders will hold a collection of [Orderlines](#orderline-class). This will be used to indicate what goods are required to fulfill the Order.
 
-To [fulfill](#fulfill-parser) an order, this would go through all the orderlines in that order and attempt to fulfill them.
+To [fulfill](#fulfill-order) an order, this would go through all the orderlines in that order and attempt to fulfill them.
 When all orderlines in the order are fulfilled, this will indicate that the order is fulfilled.
 
 ### Orderline Class
@@ -102,7 +103,7 @@ The warehouse class is created to simulate an entire warehouse.
 
 Most of the methods in the Warehouse Class will require users to know the SKU of the Good that they want to interact with.
 
-The find method within the Find Parser is aimed at helping users find the SKU of Good that they need.
+The find method within the [Find Parser](#command-parser) is aimed at helping users find the SKU of Good that they need.
 
 The warehouse class will contain:
 - List of orders
@@ -180,93 +181,66 @@ String quantity = matches.get("qty");
 String description = matches.get("desc");
 ```
 
-### View Good
+## Implementation
+Some features will be explained here with more explanation. View Order will be a simple feature, similar to many other features such as adding, removing or both order and goods. It will be used as an overarching example of how these similar features will run in Simplst. Fulfill feature is much more complex and hence it will be explained here too.
+### View Order
+This feature can be used to view a current order in the warehouse
 #### Description
+View Order will require the [Warehouse Class](#warehouse-class) to find the corresponding [Order](#order-class) with the user input order id.
+The order will then print out its order id, receiver, shipping address, and details of orderlines.
 
 #### Operation
 
-![View Good Sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/viewGood.puml)
+![View Order Sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/ViewOrder.puml)
 
-The above sequence diagram shows the operation of how the view orderline method will be called.
+The above sequence diagram shows the operation of how the view order feature will be called.
 1. The User input will be read by the User Interface Class
-2. The User Interface Class will then match the command keyword `view`
-3. The Regex Class will then be call to match the rest of the user's input to find the id required for retrieving information of the inverntory.
-4. The User Interface Class will call the viewGood() method from the Commands Class
-5. This method will retrieve information of an inventory item by searching through the userOrderlines array list for the corresponding id.
-6. The information retrieved will then be formatted and returned to screen for the user the see the information.
+2. The [User Interface Class](#userinterface-class) will then match the command keyword `view`
+3. The User Interface Class will hand over to the [View Parser](#command-parser)
+4. The [Match Keyword Class](#match-keyword-class) will then be call to match the Order id number to be viewed.
+5. The View Parser will now call viewOrderById(String oid) method within the warehouse class with the order id number received from the Match Keyword Class
+6. This will then run a loop of the orders in the orderLists of the warehouse to find the matching Order using the order id. Since order id is unique, only 1 order can be matched here
+7. If an order is found, viewOrderById() will call multiple getter classes from order to get the orderId, receiver name, shipping address and orderlines associated
+  - these are done through getId(), getReceiver(), getShippingAddress() and getOrderlines() respectively
+8. These details will then be printed out to the user and marks the end of view order feature.
 
-### Add Goods Method
+### Fulfill Order
+This feature will help to fulfill an order that is currently in the warehouse. More description can be found [here](/UserGuide.md)
 #### Description
-Add Goods belongs as part of the Commands Class. It is used to add a Good Object into the Collection of Goods Objects currently in the Warehouse.
+Fulfill Order will require the [Warehouse Class](#warehouse-class) to first find the corresponding [Order](#order-class) to fulfill. 
+Then it will check all the [Orderlines](#orderline-class) in that Order to check if they are already fulfilled. 
+If they are not, an attempt will be made to fulfill them by checking against the current quantity of the corresponding [Good](#good-class) in the warehouse. 
+If there is enough quantity of the good in the warehouse to fulfill the orderline, then the orderline will be checked off and fulfilled, reducing the quantity of the Good in the warehouse.
+If there not enough quantity of the good in the Warehouse, then nothing will happen and the orderline will be considered as not fulfill.
+After going through all the orderlines, the order will only be fulfilled if all the orderlines are fulfilled.
+
+Fulfill can be called on any order which is not fulfilled, or partially fulfilled.
+A step by step description of how the fulfill feature can be seen below
 
 #### Operation
 
-![Regex Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/addGood.puml)
+![Fulfill Order Sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/FulfillSequence.puml)
 
-The above sequence diagram shows the operation of how the add goods method will be called. 
+The above sequence diagram shows the operation of how the fulfill feature will be called. 
 1. The User input will be read by the User Interface Class
-2. The User Interface Class will then match the command keyword `add`
-3. The Regex Class will then be call to match the rest of the user's input to find the necessary values required for the Good Class
-4. Afterwards, the User Interface class will call addGoods() method from the Commands Class
-5. This method will then call the constructor of the Good class, creating a new instance of the Good Object
-6. The addGood() method will then add the Good to the Collections storing the Good Objects currently in the WareHouse
+2. The [User Interface Class](#userinterface-class) will then match the command keyword `fulfill`
+3. The User Interface Class will hand over to the [Fulfill Parser](#command-parser)
+4. The [Match Keyword Class](#match-keyword-class) will then be call to match the Order id number to be fulfilled.
+5. The Fulfill Parser will now call fulfillOrder(String oid) method within the warehouse class with the order id number received from the Match Keyword Class
+6. This method will first find the corresponding order with the given order id in the warehouse by calling findOrder()
+7. If the order exists, then it will return the corresponding order
+8. Next thing is to check if the current order in question is already fulfilled, if it is, then fulfillOrder() will return immediately as there is nothing more to do
+9. We will then get the orderlines associated with this order through order.getOrderlines()
+10. fulfillOrder() will then loop for each orderline in orderlines. It will call the helper function fulfillOrderlines() for each orderline
+11. fulfillOrderlines() will aim to individually fulfill each orderline. This is done by checking if there is enough quantity of Goods with the same SKU as the orderline. In this instance, enough is defined as having more or equal to the quantity required by that orderline.
+12. If the above condition is met, setQuantityFulfilled() will be called for that orderline to set the quantityFulfilled variable in the orderline
+13. setQuantityFulfilled() will call checkOff() to set the isFulfilled variable in the orderline if quantity is equal to quantityFulfilled
+14. fulfillOrder() will then call removeQuantity() of the corresponding Good from the inventory in the warehouse
+15. fulfillOrder() will now call checkOrderComplete() to check if all the orderlines in the order are fulfilled
+16. If they are, checkOrderComplete() will set the order to fulfilled as well
+17. The result of whether the order is fulfilled or not will then be printed out to the user and marks the end of fulfill order feature.
 
 For more examples of how a user can use a command, refer to the [UserGuide](/UserGuide.md)
-
-### Remove Goods Method
-#### Description
-Remove Goods belongs as part of the Commands Class. It is used to remove a certain amount of goods from the inventory.
-#### Operation
-
-![removeGood diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/removeGood.puml)
-
-The above sequence diagram shows the operation of how the add goods method will be called.
-1. The User input will be read by the User Interface Class
-2. The User Interface Class will then match the command keyword `remove`
-3. The Regex Class will then be called to match the rest of the user's input to find the values required to remove goods from the inventory.
-4. Afterwards, the User Interface class will call removeGood() method from the Commands Class
-5. This method will then reduce the quantity of a type of goods if the quantity input is not larger than the existing quantity. If the quantity input is the same as the existing quantity, the goods object will be removed from the inventory.
-6. The UI will show a message of format
-    > `quantity` `name` have been removed
-to show that the operation is successful.
-
-For more examples of how a user can use a command, refer to the [UserGuide](/UserGuide.md)
-
-### List Goods or List Orders Method
-#### Description
-The list goods or list orders method belongs to the Warehouse Class. It is used to display the list of existing goods 
-or existing orders in the warehouse to the User.
-
-![List sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/List.puml)
-
-The above sequence diagram shows the operation of how the list goods method will be called.
-
-1. The User input will be read by the User Interface Class
-2. The User Interface Class will the match the command keyword `list`
-3. Together with the previous step, the User Interface Class will check the flag followed by `list`
-   3.1 If the flag is `o/`, the User Interface Class will call the listOrders() method in the Warehouse class
-      3.1.1 Lastly, the list of orders is printed to the command line.
-   3.2 Else, if the flag is `g/`, the User Interface Class will call the listGoods() method in the Warehouse class
-      3.2.1 Following that, the Warehouse class will call the getGoods() method on the Good class
-      3.2.2 Lastly, the list of goods is printed to the command line.
-### Total Goods Method
-#### Description
-Total Goods belongs as part of the Commands Class. It is used to show the total quantity of Goods Objects currently in the Warehouse.
-
-#### Operation
-
-![Regex Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/totalGoods.puml)
-
-The above sequence diagram shows the operation of how the add goods method will be called.
-1. The User input will be read by the User Interface Class
-2. The User Interface Class will then match the command keyword `total`
-3. Afterwards, the User Interface class will call totalGoods() method from the Commands Class
-4. This method will then iterate through orderLists and sum up each quantity of each Good object in each order.
-5. The totalGoods() method will return an integer of the number of goods in the warehouse. 
-
-For more examples of how a user can use a command, refer to the [UserGuide](/UserGuide.md)
-
-
 
 ## Product scope
 ### Target user profile
