@@ -11,7 +11,7 @@ and maintaining the state of checked-in/checked-out rooms.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Hotel Lite` from [here](http://link.to/duke).
+2. Download the latest version of `Hotel Lite` from [here](https://github.com/AY2122S2-CS2113-T11-1/tp/releases/tag/v2.1).
 3. To get a list of commands available type `help` after running the application.
 4. **WARNING: Please do not touch the save files (in the `ListFolder` folder) that save the
 user's application usage history.** This will interfere with the function of the program. 
