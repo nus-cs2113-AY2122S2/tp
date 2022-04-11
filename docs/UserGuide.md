@@ -607,8 +607,6 @@ However, deleted activities are not listed.
 
 ## _Transaction Management_
 
-<hr>
-
 ### Settling all transactions for a session: `session /summary`
 
 Displays a transaction summary for a session. The transaction summary helps you calculate how much each person in the session
