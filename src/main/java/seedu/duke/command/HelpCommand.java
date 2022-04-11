@@ -3,8 +3,10 @@ package seedu.duke.command;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.InvalidHelpException;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class HelpCommand extends Command {
     private static final String line = "------------------------------------------\n";
@@ -48,9 +50,13 @@ public class HelpCommand extends Command {
             + "\t 2. delete event INDEX \n"
             + "\t 3. view events";
 
-    public HelpCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
+    public HelpCommand(String c) throws HotelLiteManagerException {
+        if (!c.equals("")) {
+            throw new InvalidHelpException();
+        }
 
     }
+
 
 
     /**

@@ -27,7 +27,7 @@ public class AssignHousekeeperCommand extends Command {
     private String name;
     private String roomID;
     private static final String ASSIGNMENT_INDICATE = "/";
-    private static final int ONLY_ONE_FIELD_ENTERED = 1;
+    private static final int FIELDS_ENTERED = 2;
     private static Logger logger = Logger.getLogger("Assign Housekeeper");
 
     public AssignHousekeeperCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
@@ -36,7 +36,7 @@ public class AssignHousekeeperCommand extends Command {
         }
         String[] input = extractInput(commandStringWithoutCommand);
         String name = input[0].trim();
-        if (input.length == ONLY_ONE_FIELD_ENTERED) {
+        if (input.length != FIELDS_ENTERED) {
             throw new InvalidAssignmentException();
         }
         String id = input[1].trim();
