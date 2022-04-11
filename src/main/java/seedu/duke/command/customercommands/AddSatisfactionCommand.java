@@ -14,10 +14,12 @@ import seedu.duke.exceptions.EmptySatisfactionCustomerException;
 import seedu.duke.exceptions.InvalidSatisfactionValueException;
 import seedu.duke.exceptions.InvalidSatisfactionCustomerNameException;
 import seedu.duke.exceptions.RepeatCustomerException;
+import seedu.duke.itemlists.ItemList;
 import seedu.duke.satisfactionlists.Satisfaction;
 import seedu.duke.satisfactionlists.SatisfactionList;
 import seedu.duke.Ui;
 import seedu.duke.command.Command;
+import seedu.duke.storage.ItemListFileManager;
 import seedu.duke.storage.SatisfactionListFileManager;
 
 
@@ -147,10 +149,14 @@ public class AddSatisfactionCommand extends Command {
         }
         satisfactionList.addSatisfaction(satisfaction);
         ui.printAddSatisfactionAcknowledgementMessage(satisfactionList, satisfaction);
+    }
+
+    public void writeSatisfactionListToFile(ListContainer listContainer) throws IOException {
+        SatisfactionList satisfactionList = listContainer.getSatisfactionList();
         SatisfactionListFileManager satisfactionListFileManager = new SatisfactionListFileManager();
         satisfactionListFileManager.save(satisfactionList);
-
     }
+
 
     public Satisfaction getSatisfaction() {
         return satisfaction;

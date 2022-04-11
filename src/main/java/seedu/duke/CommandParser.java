@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.HelpCommand;
 import seedu.duke.command.customercommands.AddSatisfactionCommand;
 import seedu.duke.command.customercommands.ViewAverageSatisfactionCommand;
 import seedu.duke.command.customercommands.ViewSatisfactionsCommand;
@@ -46,6 +47,7 @@ public class CommandParser {
     private static final String ADD = "add ";
     private static final String CHECK = "check ";
     private static final String VIEW = "view ";
+    private static final String HELP = "help";
     private static final String ADD_ITEM_COMMAND = "add item ";
     private static final String VIEW_ITEM_LIST_COMMAND = "view all items";
     private static final String VIEW_ITEMS_WITH_ZERO_PAX_COMMAND = "view items with zero pax";
@@ -220,6 +222,9 @@ public class CommandParser {
         String userInputLowerCaseWithoutCommand;
         if (userInputLowerCase.equals(BYE)) {
             userCommand = new ExitCommand();
+        } else if (userInputLowerCase.startsWith(HELP)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(HELP, "");
+            userCommand = new HelpCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(ADD_AVAILABILITY_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_AVAILABILITY_COMMAND, "");
             userCommand = new AddAvailabilityCommand(userInputLowerCaseWithoutCommand);
@@ -234,7 +239,7 @@ public class CommandParser {
             userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
             userCommand = new AgeIncreaseCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(ASSIGN_HOUSEKEEPER)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(ASSIGN_HOUSEKEEPER, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ASSIGN_HOUSEKEEPER, "");
             userCommand = new AssignHousekeeperCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(SEARCH_ITEM_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(SEARCH_ITEM_COMMAND, "");

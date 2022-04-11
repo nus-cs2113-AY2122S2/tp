@@ -40,6 +40,12 @@ public class Ui {
         return userInput;
     }
 
+    public void printHelp(String message) {
+        System.out.println(MESSAGE_HEADER);
+        System.out.println(message);
+        System.out.println(END_OF_MESSAGE_LINE);
+    }
+
     public void printEventAdded(Event event) {
         System.out.println(MESSAGE_HEADER);
         System.out.println("I have added the following event in your list:");

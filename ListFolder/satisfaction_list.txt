@@ -1,5 +1,4 @@
-george|2
 bob|3
-ted|3
-ned|5
-chad|4
+joe|2
+alina|2
+steve|3
