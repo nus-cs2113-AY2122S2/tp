@@ -14,10 +14,12 @@ import seedu.duke.exceptions.EmptySatisfactionCustomerException;
 import seedu.duke.exceptions.InvalidSatisfactionValueException;
 import seedu.duke.exceptions.InvalidSatisfactionCustomerNameException;
 import seedu.duke.exceptions.RepeatCustomerException;
+import seedu.duke.itemlists.ItemList;
 import seedu.duke.satisfactionlists.Satisfaction;
 import seedu.duke.satisfactionlists.SatisfactionList;
 import seedu.duke.Ui;
 import seedu.duke.command.Command;
+import seedu.duke.storage.ItemListFileManager;
 import seedu.duke.storage.SatisfactionListFileManager;
 
 
@@ -140,17 +142,19 @@ public class AddSatisfactionCommand extends Command {
      *                 must be included for the execution override.
      * @param ui The user interface for this execution method.
      */
-    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         SatisfactionList satisfactionList = listContainer.getSatisfactionList();
         if (satisfactionList.isCustomerInSatisfactionList(satisfaction.getCustomerName())) {
             throw new RepeatCustomerException();
         }
         satisfactionList.addSatisfaction(satisfaction);
         ui.printAddSatisfactionAcknowledgementMessage(satisfactionList, satisfaction);
+    }
+
+    public void writeSatisfactionListToFile(ListContainer listContainer) throws IOException {
+        SatisfactionList satisfactionList = listContainer.getSatisfactionList();
         SatisfactionListFileManager satisfactionListFileManager = new SatisfactionListFileManager();
         satisfactionListFileManager.save(satisfactionList);
-
-        return null;
     }
 
     public Satisfaction getSatisfaction() {

@@ -11,7 +11,8 @@ and maintaining the state of checked-in/checked-out rooms.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Download the latest version of `Hotel Lite` from [here](http://link.to/duke).
+3. To get a list of commands available type `help` after running the application.
 
 ## Features
 1. [Customer Satisfaction Related Commands](#customer-satisfaction-related-commands)
@@ -419,9 +420,9 @@ assign susan / 301
 Expected output:
 
 ```
-======================================================================
-I have assigned susan to room number 301.
-======================================================================
+================ Noted! ===================
+ I have assigned susan to room number 301.
+===========================================
 ```
 
 ### Adding a housekeeper's performance: `add performance`
@@ -512,13 +513,13 @@ I have added the following event in your list:
 =================================================
 ```
 
-### View the list of events: `list events`
+### View the list of events: `view events`
 
 Lists all the events present in the system in order. No additional argument is required. The list of events inside the system will not change; the existing events will merely be displayed.
 
 This command helps us know which index each event is added in. The index from this list can be referenced when the `delete` function (described below) is called.
 
-Format: `list events`
+Format: `view events`
 
 Expected output:
 
@@ -923,4 +924,4 @@ Expected output:
 | --- | --- |
 | add an event | ```add event DESCRIPTION / DATE```<br/>eg. ```add event Submit TP / 2022-04-11```|
 | delete an event | ```delete event INDEX```<br/>eg. ```delete event 1```|
-| view all events | ```list events```|
+| view all events | ```view events```|

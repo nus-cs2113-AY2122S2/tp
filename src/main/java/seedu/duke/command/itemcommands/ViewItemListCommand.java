@@ -26,9 +26,8 @@ public class ViewItemListCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) {
+    public void execute(ListContainer listContainer, Ui ui) {
         ItemList listOfItems = listContainer.getItemList();
         ui.printItemList(listOfItems);
-        return null;
     }
 }

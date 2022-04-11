@@ -1,6 +1,7 @@
 package seedu.duke.command.eventcommands;
 
 import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.InvalidDescriptionException;
 import seedu.duke.command.Command;
 
 import seedu.duke.ListContainer;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
 public class AddEventCommand extends Command {
     private String description;
     private String at;
+    private static final String REGEX = "[a-zA-Z0-9 ]*";
     private static final String EVENT_INDICATE = "/";
     private static final int NUMBER_OF_FIELDS = 2;
     private static Logger logger = Logger.getLogger("Add Event");
@@ -38,6 +40,9 @@ public class AddEventCommand extends Command {
         String at = input[1].trim();
         if (at.isEmpty()) {
             throw new InvalidEventException();
+        }
+        if (!description.matches(REGEX)) {
+            throw new InvalidDescriptionException();
         }
         setDescription(description);
         setAt(at);
@@ -84,7 +89,7 @@ public class AddEventCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui)
+    public void execute(ListContainer listContainer, Ui ui)
             throws HotelLiteManagerException, IOException {
 
         final EventList eventList = listContainer.getEventList();
@@ -97,7 +102,6 @@ public class AddEventCommand extends Command {
         logger.log(Level.INFO, "about to add to file.");
         eventList.save();
         logger.log(Level.INFO, "end of adding event.");
-        return null;
     }
 
 }

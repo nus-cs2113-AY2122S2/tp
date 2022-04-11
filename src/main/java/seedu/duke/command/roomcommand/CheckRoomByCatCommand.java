@@ -60,7 +60,7 @@ public class CheckRoomByCatCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) {
+    public void execute(ListContainer listContainer, Ui ui) {
         RoomList roomList = listContainer.getRoomList();
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         ui.printTableHeader();
@@ -71,7 +71,6 @@ public class CheckRoomByCatCommand extends Command {
                 );
             }
         }
-        return null;
     }
 }
 

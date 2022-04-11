@@ -63,7 +63,7 @@ public class DeleteEventCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui)
+    public void execute(ListContainer listContainer, Ui ui)
             throws HotelLiteManagerException, IOException {
 
         final EventList eventList = listContainer.getEventList();
@@ -74,7 +74,6 @@ public class DeleteEventCommand extends Command {
         logger.log(Level.INFO, "about to update file.");
         eventList.save();
         logger.log(Level.INFO, "end of deleting event.");
-        return null;
     }
 
 }

@@ -14,9 +14,8 @@ import seedu.duke.exceptions.HotelLiteManagerException;
 public class ViewHousekeeperPerformancesCommand extends Command {
 
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         HousekeeperPerformanceList housekeeperPerformanceList = listContainer.getHousekeeperPerformanceList();
         housekeeperPerformanceList.viewPerformances();
-        return null;
     }
 }

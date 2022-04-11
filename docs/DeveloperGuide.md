@@ -12,7 +12,8 @@ this information will be added into a new Housekeeper object, which will be reco
 housekeeper. The class diagram below depicts how the `AddHousekeeperCommand` interacts with other classes.
 
 PLEASE NOTE: This class diagram omits the details of some classes involved, like the `Duke`, `CommandParser` and `Command` class.
-![class](team/falicia_addHousekeeperCommand/classAddHousekeeperv3.jpg)
+It also omits some unused methods.
+![class](team/falicia_addHousekeeperCommand/classAddHousekeeperFinal.jpg)
 
 Below is an example showing the usage of `AddHousekeeperCommand`.
 
@@ -33,7 +34,8 @@ method.
 Step 6: `printHousekeeperNoted` will be called to print a confirmation to show that the housekeeper 
 has been entered into the list.
 
-Step 7. Housekeeper file storing all profile will be updated by calling method `save` from `HousekeeperFileManager`.
+Step 7. Housekeeper file storing all profile will be updated by calling `writeHousekeeperToFile` method.
+This method will then call method `save` from `HousekeeperFileManager`.
 
 ### Delete Housekeeper Command
 
@@ -42,7 +44,8 @@ housekeeper's profile would be completely removed from records in the `housekeep
 
 
 PLEASE NOTE: This class diagram omits the details of some classes involved, like the `Duke`, `CommandParser` and `Command` class.
-![Class Delete](team/falicia_deleteHousekeeperCommand/deleteHousekeeperClassv1.jpg)
+It also omits unused methods.
+![Class Delete](team/falicia_deleteHousekeeperCommand/deleteHousekeeperClassFINAL.jpg)
 
 Below is an example showing the usage of `DeleteHousekeeperCommand`.
 
@@ -56,7 +59,7 @@ Step 4: The `removeHousekeeperInList` method from `HousekeeperList` would be cal
 is in the `housekeeperList`.
 
 Step 5: `removeHousekeeperInList` will call `getHousekeeperRemove` method which will derive the index of the housekeeper
-recorded in the list. It would return an integer. Assume housekeeper `susan` is recorded in the list and is is in index `0`
+recorded in the list. It would return an integer. Assume housekeeper `susan` is recorded in the list and is in index `0`
 of the list.
 
 Step 6: With the index given, method `removeHousekeeper` will be called to remove housekeeper profile from the list.
@@ -64,8 +67,8 @@ Step 6: With the index given, method `removeHousekeeper` will be called to remov
 Step 7: User will then be able to see a message notifying them that the housekeeper `susan` has been deleted and the total
 number of housekeeper currently in working in the hotel.
 
-Step 8: To update the current `housekeeperList` into housekeeper file, `save` method from `HousekeeperFileManager`
-would be called.
+Step 8: To update the current `housekeeperList` into housekeeper file, `writeHousekeeperToFile` method will be call in which
+it calls `save` method from `HousekeeperFileManager` to reload housekeeper's information into the housekeeper file.
 
 
 
@@ -95,21 +98,21 @@ Map<Room, Housekeeper> map = new HashMap<>();
 ``
 
 The following steps exhibit how `AssignHousekeeperCommand` 
-and `AssignmentMap` fit together in the structure and how the mechanism for adding an assinment behaves at each step.
+and `AssignmentMap` fit together in the structure and how the mechanism for adding an assingment behaves at each step.
 
 __Step 1.__ The user launches the application. In the `Duke` class, an empty instance of the `AssignmentMap` class,
 called `assignmentMap`, is created.
 
 ![Step 1](team/aiman_assignment/step1.png)
 
-__Step 2.__ The user types the command `Assign Susan ## 301`. In the `Duke` class, a `Command` object
+__Step 2.__ The user types the command `Assign susan / 301`. In the `Duke` class, a `Command` object
 is created by invoking the `CommandParser` class's constructor on the user input. The details of this
 step are further described below.
 
 ![Step 2](team/aiman_assignment/step2.png)
 
-__Step 3.__ The `CommandParser` class replaces the `Assign Susan ## 301` in the user input with an empty string,
-leaving just `Susan ## 301`. Then, an instance of `AssignHousekeeperCommand` is created which extends the class `Command`.
+__Step 3.__ The `CommandParser` class replaces the `assign susan / 301` in the user input with an empty string,
+leaving just `susan / 301`. Then, an instance of `AssignHousekeeperCommand` is created which extends the class `Command`.
 
 ![Step 3](team/aiman_assignment/step3.png)
 
@@ -185,13 +188,14 @@ PLEASE NOTE: This sequence diagram omits the details of some behavior and classe
 ### Add Housekeeper feature
 
 PLEASE NOTE: This sequence diagram omits the details of some behavior and classes involved, like the `Duke` class.
-
+It gives an overview of how the AddHousekeeperCommands runs.
 
 The add housekeeper mechanism is facilitated by `AddHousekeeperCommand`. It extends command. Additionally, 
 it implements the following operations:
 * `AddHousekeeperCommand#extractName()`— Derive the name of the Housekeeper
 * `AddHousekeeperCommand#extractAge()`— Derive the age of Housekeeper and cast it into an integer
 * `AddHousekeeperCommand#execute()` — Executes the addition of new housekeeper into list
+* `AddHousekeeperCommand#writeHousekeeperToFile()`— Executes the updating of housekeeper list to housekeeper file
 * `HousekeeperList#addHousekeeperInList()` — Facilitates the adding of new housekeeper into the list
 * `HousekeeperList#hasNameAdded()` — Checks if name of housekeeper has been recorded
 * `HousekeeperList#addHousekeeper()` — Method to add housekeeper into the list
@@ -221,23 +225,27 @@ add the housekeeper, `susan` and `33` into the housekeeperList.
 
 Step 7: It will then call `Ui#printHousekeeperNoted()` to notify user that housekeeper has been added into the list.
 
-Step 8: Since a housekeeper has been added, `HousekeeperFileManager#save()` will be called to save the contents of the
-`housekeeperlist` into housekeeper file.
+Step 8: Since a housekeeper has been added, `AddHousekeeperCommand#writeHousekeeperToFile()` will be run. It then invoked
+`HousekeeperFileManager#save()` method to save the contents of the `housekeeperlist` into housekeeper file.
 
 
-![Sequence](team/falicia_addHousekeeperCommand/sequenceAddHousekeeperCommandv4.jpg)
+![Sequence](team/falicia_addHousekeeperCommand/sequenceAddHousekeeperCommandFinal.jpg)
 
 ### Delete Housekeeper feature 
 
 PLEASE NOTE: This sequence diagram omits the details of some behavior and classes involved, like the `Duke` class.
+It gives an overview of how the DeleteHousekeeperCommand runs.
 
 The add housekeeper mechanism is facilitated by `DeleteHousekeeperCommand`. It extends command. Additionally, it 
 implements the following operations:
 * `DeleteHousekeeperCommand#execute()` — Executes the addition of new housekeeper into list
+* `DeleteHousekeeperCommand#writeHousekeeperToFile()` — Update the housekeeper file after deletion of a housekeeper
 * `HousekeeperList#hasNameAdded()` — Checks if name of housekeeper has been recorded
 * `HousekeeperList#removeHousekeeperInlist()`  — Checks if housekeeper name exist and remove them from the list
 * `HousekeeperList#getHousekeeperRemove()` — Derive the index of the housekeeper name in the list
 * `HousekeeperList#removeHouseekeeper()` — Given housekeeper's index in the list, remove housekeeper from the list
+* `Ui#printNotifiedDeletionOfHousekeeper()` — Prints all information to notify user on total pax of housekeeper left and
+  housekeeper to be deleted has been deleted
 * `Ui#printNoted()` — Prints noted line at the top of message
 * `Ui#printBottomLine` — Prints bottom line to denote end of message
 * `Ui#printMessage()` — Used to inform user total pax left in list as well as housekeeper's profile has already
@@ -262,12 +270,14 @@ Step 5: Since `susan` is recorded in the list, the program can proceed to delete
 Assuming `susan` is in the front of the list, the method will return `0`. This index will then be pass to 
 `HousekeeperList#removeHouseekeeper()` which removes `susan` from the list
 
-Step 6: It will then proceed to print noted message to inform user that the deletion has been completed by calling
-`Ui#printNoted()`, `Ui#printMessage()` and `Ui#printBottomLine`.
+Step 6: It will then proceed to invoked `Ui#printNotifiedDeletionOfHousekeeper()` to print noted message to inform user 
+that the deletion has been completed and the total head count of housekeeper currently working in the hotel
+by calling `Ui#printNoted()`, `Ui#printMessage()` and `Ui#printBottomLine`.
 
-Step 7: Changes in the list will be updated to file by calling `HousekeeperFileManager#save()` method.
+Step 7: Changes in the list will be updated to file by calling `DeleteHousekeeperCommand#writeHousekeeperToFile()` which
+invokes the`HousekeeperFileManager#save()` method.
 
-![Sequence](team/falicia_deleteHousekeeperCommand/sequenceDeleteHousekeeperv3.jpg)
+![Sequence](team/falicia_deleteHousekeeperCommand/sequenceDeleteHousekeeperFinal.jpg)
 
 ### Item Related Commands
 This section showcases how the various item related commands such as Add, Search Item Commands are implemented.
@@ -304,6 +314,24 @@ Step 9: The `printErrorMessage` method would then print out  a message informing
 Step 10: If there are no items with a matching name found, we would then add the `Item` object to the ArrayList of `Item` objects called listOfItems. The  `printAddItemAcknowledgementMessage` method of `UI` would be executed. It would then print an acknowledgement message to the user informing him that the item has been added into the item list.
 
 :information_source: **Note:** As the Add Item, Delete Item, Update Item Pax or Update Item Name Commands have similair class and sequence diagrams, we only require a few changes to be able to use the above class and sequence diagrams to represent the Delete Item, Update Item Pax or Update Item Name Commands. The changes would be mentioned below.
+
+The `Delete Item` Command is similar to that of the `Add Item` Command with the difference being:
+1. The `Delete Item` command uses the `Item(name:String)` constructor instead of `item(name:String,pax:Int)` constructor as the `Delete Item` command only uses the `name` variable.
+2. The `writeItemListToFile` method is replaced with the `deleteItemInList` method and the `extractItemName(tokens:StringTokenizer)` and `extractItemPax(token:StringTokenizer)` methods are omitted.
+3. The `addItemToList` method is replaced with the `deleteItemInList` method;
+4. The `checkForItemDuplicates` method is removed.
+5. The `printAddItemAcknowledgementMessage` method is replaced with the `printDeleteItemAcknowledgementMessage` method.
+
+The `Update Item Pax` Command is similar to that of the `Add Item` Command with the difference being:
+1. The `addItemToList` method is replaced with the `updateItemPaxInList` method.
+2. The `checkForItemDuplicates` method is removed.
+3. The `printAddItemAcknowledgementMessage` method is replaced with the `printUpdateItemPaxAcknowledgementMessage` method.
+
+The `Update Item Name` Command is similar to that of the `Add Item` Command with the difference being:
+1. The `extractItemName(tokens)` and `extractItemPax(tokens)` methods are replaced with `extractCurrentItemName(tokens)` and `extractNewItemName(tokens)`;
+2. The `Item(name:String,pax:Int)` constructor is replaced with the `Item(oldItemName:String, newItemName:String)` constructor;
+3. The `printAddItemAcknowledgementMessage` method is replaced with the `updateItemNameInList` method.
+4. The `Update Item Name` throws an extra exception called `DuplicateItemNameException` if the `oldItemName` is equals to the `newItemName`.
 
 #### Search Item, View All Items, View Items With Zero Pax Commands
 

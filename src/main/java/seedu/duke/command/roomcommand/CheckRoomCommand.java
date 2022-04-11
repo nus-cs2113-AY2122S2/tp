@@ -40,7 +40,7 @@ public class CheckRoomCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) throws InvalidRoomNumberException {
+    public void execute(ListContainer listContainer, Ui ui) throws InvalidRoomNumberException {
         RoomList roomList = listContainer.getRoomList();
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         for (Room room : roomList.getRoomList()) {
@@ -49,7 +49,6 @@ public class CheckRoomCommand extends Command {
                 System.out.println(room.toString()
                         + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
                 );
-                return null;
             }
         }
         throw new InvalidRoomNumberException();

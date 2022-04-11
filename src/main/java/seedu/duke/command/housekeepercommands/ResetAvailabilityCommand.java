@@ -29,11 +29,10 @@ public class ResetAvailabilityCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) throws IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.resetAvailability();
         ui.printHousekeeperListReset(housekeeperList);
-        return null;
     }
 
     /**

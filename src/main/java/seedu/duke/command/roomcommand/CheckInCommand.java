@@ -33,7 +33,7 @@ public class CheckInCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         this.roomList = listContainer.getRoomList();
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         for (Room room : roomList.getRoomList()) {
@@ -46,7 +46,7 @@ public class CheckInCommand extends Command {
                 System.out.println(room
                         + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
                 );
-                return null;
+                return;
             }
         }
 

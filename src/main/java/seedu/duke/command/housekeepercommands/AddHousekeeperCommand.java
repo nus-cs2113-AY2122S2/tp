@@ -163,11 +163,10 @@ public class AddHousekeeperCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.addHousekeeperInList(getHousekeeper());
         ui.printHousekeeperNoted(housekeeper);
-        return null;
     }
 
     /**

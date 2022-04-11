@@ -128,7 +128,7 @@ public class UpdateItemNameCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         ItemList listOfItems = listContainer.getItemList();
         Item item = getItem();
         String oldItemName = item.getName();
@@ -144,7 +144,6 @@ public class UpdateItemNameCommand extends Command {
         oldItemName = oldItemName.toUpperCase();
         newItemName = newItemName.toUpperCase();
         ui.printUpdateItemNameAcknowledgementMessage(oldItemName, newItemName);
-        return null;
     }
 
     public void writeItemListToFile(ListContainer listContainer) throws IOException {

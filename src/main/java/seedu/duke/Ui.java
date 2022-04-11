@@ -92,7 +92,9 @@ public class Ui {
         }
         System.out.println("Hi, I am Hotel Lite, and "
                 + "I will do the managing for you.");
-        System.out.println("How can I help you today?");
+        System.out.println("What shall we start with today?");
+        System.out.println("(You may type 'help' to get a full "
+                + "list of commands.)");
     }
 
 
@@ -312,6 +314,13 @@ public class Ui {
 
     public void printBottomLine() {
         System.out.println("===========================================");
+    }
+
+    public void printNotifiedDeletionOfHousekeeper(HousekeeperList housekeeperList, String name) {
+        printNotedLine();
+        printMessage("Deleted " + name + " from the list of profile");
+        printMessage("Take note! Total pax of housekeeper:  " + housekeeperList.getTotalHousekeeper());
+        printBottomLine();
     }
 }
 

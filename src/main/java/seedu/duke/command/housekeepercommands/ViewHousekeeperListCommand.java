@@ -23,10 +23,9 @@ public class ViewHousekeeperListCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         ui.printHousekeeperList(housekeeperList);
-        return null;
     }
 
 }

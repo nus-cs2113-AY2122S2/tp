@@ -29,7 +29,7 @@ public class AgeIncreaseCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) throws IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.increaseAllAgeByOne();
         ui.printMessage("Everyone age has increased by one");
@@ -37,7 +37,6 @@ public class AgeIncreaseCommand extends Command {
         ui.printMessage("**Over age limit housekeeper will be removed from list**");
         ui.printOverAgeList(overAgeHousekeeperList);
         housekeeperList.deleteOverAgeHousekeeper();
-        return null;
     }
 
     /**

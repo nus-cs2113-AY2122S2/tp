@@ -126,7 +126,7 @@ public class AddItemCommand extends Command {
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      * @throws IOException               if we are unable to write to the file ListFolder/ItemList.txt
      */
-    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         ItemList listOfItems = listContainer.getItemList();
         Item item = getItem();
         String nameOfItemToAdd = item.getName();
@@ -138,7 +138,6 @@ public class AddItemCommand extends Command {
 
         listOfItems.addItemToList(item);
         ui.printAddItemAcknowledgementMessage(listOfItems);
-        return null;
     }
 
     public void writeItemListToFile(ListContainer listContainer) throws IOException {

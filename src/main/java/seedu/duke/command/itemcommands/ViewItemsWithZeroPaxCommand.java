@@ -26,14 +26,12 @@ public class ViewItemsWithZeroPaxCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) {
+    public void execute(ListContainer listContainer, Ui ui) {
         ItemList listOfItems = listContainer.getItemList();
         ItemList listOfItemsWithZeroPax = listOfItems.findItemsWithZeroPaxInList();
         if (listOfItems.getSize() == 0) {
             ui.printNoItemsFoundInListAcknowledgementMessage();
-            return null;
         }
         ui.printItemList(listOfItemsWithZeroPax);
-        return null;
     }
 }

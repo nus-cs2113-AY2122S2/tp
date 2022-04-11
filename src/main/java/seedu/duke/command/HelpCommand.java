@@ -60,9 +60,8 @@ public class HelpCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui)
+    public void execute(ListContainer listContainer, Ui ui)
             throws HotelLiteManagerException, IOException {
         ui.printHelp(HELP_MESSAGE);
-        return null;
     }
 }

@@ -28,12 +28,11 @@ public class ViewEventsCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui)
+    public void execute(ListContainer listContainer, Ui ui)
             throws InvalidRoomNumberException, IOException {
         final EventList eventList = listContainer.getEventList();
         ui.printAllEvents(eventList.getEventList());
         logger.log(Level.INFO, "log: all events displayed");
-        return null;
     }
 
 }

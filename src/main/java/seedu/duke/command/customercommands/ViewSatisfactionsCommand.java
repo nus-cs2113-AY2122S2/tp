@@ -25,10 +25,9 @@ public class ViewSatisfactionsCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) {
+    public void execute(ListContainer listContainer, Ui ui) {
         SatisfactionList satisfactionList = listContainer.getSatisfactionList();
         satisfactionList.viewSatisfactions();
-        return null;
     }
 
     

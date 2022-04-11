@@ -70,12 +70,11 @@ public class DeleteItemCommand extends Command {
      */
 
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         Item itemToDelete = getItem();
         ItemList listOfItems = listContainer.getItemList();
         listOfItems.deleteItemInList(itemToDelete);
         ui.printDeleteItemAcknowledgementMessage(itemToDelete, listOfItems);
-        return null;
     }
 
     public void writeItemListToFile(ListContainer listContainer) throws IOException {

@@ -25,10 +25,9 @@ public class ViewAverageSatisfactionCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         SatisfactionList satisfactionList = listContainer.getSatisfactionList();
         System.out.println("Average customer satisfaction: " + satisfactionList.calculateAverageSatisfaction());
-        return null;
     }
 
 }

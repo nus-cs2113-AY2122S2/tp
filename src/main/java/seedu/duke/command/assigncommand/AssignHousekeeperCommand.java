@@ -88,7 +88,7 @@ public class AssignHousekeeperCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui)
+    public void execute(ListContainer listContainer, Ui ui)
             throws HotelLiteManagerException, IOException {
 
         final AssignmentMap assignmentMap = listContainer.getAssignmentMap();
@@ -122,7 +122,6 @@ public class AssignHousekeeperCommand extends Command {
         ui.printAssignedHousekeeper(roomID, name);
         ui.printMessage("Assigned " + name + " to room no. " + roomID + ".");
         logger.log(Level.INFO, "end of processing");
-        return null;
     }
 
     private boolean isRoomIdValid(int roomIdNumber, RoomList roomList) {

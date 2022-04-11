@@ -43,7 +43,7 @@ public class CheckRoomByLevelCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui)
+    public void execute(ListContainer listContainer, Ui ui)
             throws InvalidLevelException {
         RoomList roomList = listContainer.getRoomList();
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
@@ -59,7 +59,6 @@ public class CheckRoomByLevelCommand extends Command {
                 );
             }
         }
-        return null;
     }
 
     private boolean isValidLevel(int level, RoomList roomList) {

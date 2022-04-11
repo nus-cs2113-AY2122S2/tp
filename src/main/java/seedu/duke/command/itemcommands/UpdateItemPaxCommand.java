@@ -129,12 +129,11 @@ public class UpdateItemPaxCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         ItemList listOfItems = listContainer.getItemList();
         assert (item != null) : "Assertion Failed! There is no item within the UpdateItemPaxCommand object.";
         listOfItems.updateItemPaxInList(item);
         ui.printUpdateItemPaxAcknowledgementMessage(item);
-        return null;
     }
 
     public void writeItemListToFile(ListContainer listContainer) throws IOException {

@@ -141,7 +141,7 @@ public class AddHousekeeperPerformanceCommand extends Command {
      * @param ui            The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
-    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         HousekeeperPerformanceList housekeeperPerformanceList = listContainer.getHousekeeperPerformanceList();
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         // Checks if the user tries to add a housekeeper performance for a housekeeper not the HousekeeperList records
@@ -154,8 +154,6 @@ public class AddHousekeeperPerformanceCommand extends Command {
         ui.printAddHousekeeperPerformanceAcknowledgementMessage(housekeeperPerformanceList, housekeeperPerformance);
         HousekeeperPerformanceFileManager housekeeperPerformanceFileManager = new HousekeeperPerformanceFileManager();
         housekeeperPerformanceFileManager.writePerformanceListToFile(housekeeperPerformanceList);
-
-        return null;
     }
 
 }

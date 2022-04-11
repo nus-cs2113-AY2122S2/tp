@@ -24,10 +24,9 @@ public class CheckAllRoomCommand extends Command {
      * type, room number, level, status and assigned housekeeper.
      * @param listContainer The object containing the necessary data structure.
      * @param ui The object that deals with user interface for the program.
-     * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) {
+    public void execute(ListContainer listContainer, Ui ui) {
         this.roomList = listContainer.getRoomList();
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         ui.printTableHeader();
@@ -36,7 +35,6 @@ public class CheckAllRoomCommand extends Command {
                     + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
             );
         }
-        return null;
     }
 
 }

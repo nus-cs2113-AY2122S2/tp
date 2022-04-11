@@ -48,17 +48,13 @@ public class DeleteHousekeeperCommand extends Command {
      * @return
      */
     @Override
-    public Object execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.removeHousekeeperInList(name);
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         assignmentMap.removeAssignment(name);
         assignmentMap.save();
-        ui.printNotedLine();
-        ui.printMessage("Deleted " + name + " from the list of profile");
-        ui.printMessage("Take note! Total pax of housekeeper:  " + housekeeperList.getTotalHousekeeper());
-        ui.printBottomLine();
-        return null;
+        ui.printNotifiedDeletionOfHousekeeper(housekeeperList, getName());
     }
 
     /**
