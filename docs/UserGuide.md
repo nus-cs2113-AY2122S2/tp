@@ -372,8 +372,8 @@ There are 2 ways that you can specify the costs of an activity:
 >* `[TOTAL_COST]` refers to the total cost of the activity.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
 >    * Example: `/i Alice Bob /cl 10 20` means that _Alice's_ portion cost $10 while _Bob's_ portion cost $20.
->* `[GST_PERCENTAGE]` refers to the additional percentage GST that may be charged during your activity.
->* `[SERVICE_CHARGE]` refers to the additional percentage service charge that may be charged during your activity.
+>* `[GST_PERCENTAGE]` refers to the additional percentage GST that may be charged during the activity.
+>* `[SERVICE_CHARGE]` refers to the additional percentage service charge that may be charged during the activity.
 
 <br>
 
@@ -495,13 +495,13 @@ distributed amongst all participants.
 >    * You can use this even if the activity was originally created using an overall cost. The new cost list will be assigned 
 >to the existing participants in the order displayed when viewing the activity.
 >    * You are encouraged to additionally provide a participant list with `/i` to confirm the distribution of costs.
->* `[GST_PERCENTAGE]` refers to the additional GST that may be charged during your activity.
+>* `[GST_PERCENTAGE]` refers to the additional GST that may be charged during the activity.
 >    * If one is not provided, the original GST is left unchanged and will be applied to any changes to the overall cost or
 >cost list.
 >    * Changing the GST percentage will automatically recalculate all costs associated with this activity to reflect the new
 >GST value.
 >    * To remove the GST entirely, you must explicitly specify `/gst 0`.
->* `[SERVICE_CHARGE]` refers to the additional service charge that may be charged during your activity.
+>* `[SERVICE_CHARGE]` refers to the additional service charge that may be charged during the activity.
 >    * If one is not provided, the original service charge is left unchanged and will be applied to any changes to the
 >overall cost or cost list.
 >    * Changing the service charge will automatically recalculate all costs associated with this activity to reflect the new
