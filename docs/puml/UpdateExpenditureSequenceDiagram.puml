@@ -27,46 +27,6 @@ deactivate GeneralFunctions
 updateCommand -> AddCommandInputTest: testUpdateExpenditureParameters()
 activate AddCommandInputTest HELPER_COLOUR
 
-AddCommandInputTest -> AddCommandInputTest: testsPaymentMethod()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-AddCommandInputTest -> AddCommandInputTest: testExpenditureCategory()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-AddCommandInputTest -> AddCommandInputTest: testDescription()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-AddCommandInputTest -> AddCommandInputTest: checkValidDate()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-AddCommandInputTest -> AddCommandInputTest: checkAfterCurrentDate()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-alt isSamePaymentMethod() && NEW_PAYMENT_METHOD != cash
-
-AddCommandInputTest -> AddCommandInputTest: testSameCreditCardExpenditure()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-else else
-
-AddCommandInputTest -> AddCommandInputTest: testExpenditureAmount()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-end
 
 AddCommandInputTest --> updateCommand
 deactivate AddCommandInputTest

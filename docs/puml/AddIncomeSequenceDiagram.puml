@@ -34,16 +34,6 @@ deactivate GF
 C -> IT: testIncomeParameters()
 activate IT HELPER_COLOUR
 
-IT -> IT: testIncomeAmount()
-activate IT HELPER_COLOUR
-IT --> IT
-deactivate IT HELPER_COLOUR
-
-IT -> IT: testIncomeCategory()
-activate IT HELPER_COLOUR
-IT --> IT
-deactivate IT HELPER_COLOUR
-
 IT --> C
 deactivate IT
 

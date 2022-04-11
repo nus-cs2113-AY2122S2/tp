@@ -93,10 +93,6 @@ public class UpdateCommand extends Command {
         return updateInput.contains(FLAG_OF_INCOME);
     }
 
-    private boolean isSamePaymentMethod(String oldPaymentMethod, String newPaymentMethod) {
-        return oldPaymentMethod.equalsIgnoreCase(newPaymentMethod);
-    }
-
     /**
      * Updates the total expenditure field in the credit card specified in the expenditure item, if the payment
      * method is not Cash.
