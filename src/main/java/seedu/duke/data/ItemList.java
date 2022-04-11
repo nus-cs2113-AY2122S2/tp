@@ -41,7 +41,7 @@ public class ItemList {
      * by the itemIndex.
      *
      * @param itemIndex A legal item index on the itemArrayList. Zero-based indexing.
-     * @param newRecord A borrow record
+     * @param newRecord A borrow record.
      * @return The item that has been added with the new borrow record.
      */
     public Item addBorrowRecord(int itemIndex, BorrowRecord newRecord) throws InvMgrException {
@@ -49,6 +49,12 @@ public class ItemList {
         return item;
     }
 
+    /**
+     * Used to check for equality between two ItemLists.
+     *
+     * @param other the object to compare against.
+     * @return true if equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         ItemList toCompare;

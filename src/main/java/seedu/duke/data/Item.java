@@ -143,6 +143,12 @@ public class Item {
         return output;
     }
 
+    /**
+     * Returns a more detailed view of the Item.
+     * Typically used in EditCommand and SearchCommand.
+     *
+     * @return more detailed String representation of an item.
+     */
     public String toDetailedString() {
         if (this.description.length() > 15) {
             return String.format("%s | %d | %s", this.name, this.quantity, this.description.substring(0, 14) + "...");
@@ -150,6 +156,12 @@ public class Item {
         return String.format("%s | %d | %s", this.name, this.quantity, this.description);
     }
 
+    /**
+     * Used to check equality between two Items.
+     *
+     * @param other the Object to compare this Item against.
+     * @return true if equals, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -166,6 +178,14 @@ public class Item {
         return false;
     }
 
+    /**
+     * Used to clone an Item.
+     * Cloneable is frowned upon, see:
+     * https://www.artima.com/articles/josh-bloch-on-design#part13
+     *
+     * @param item the Item to clone.
+     * @return an Item that is the copy of {@code item}.
+     */
     public static Item copyItem(Item item) {
         String name = item.getName();
         int quantity = item.getQuantity();

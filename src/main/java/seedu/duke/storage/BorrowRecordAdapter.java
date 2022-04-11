@@ -12,14 +12,27 @@ import seedu.duke.parser.ParserUtils;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * A {@code TypeAdapter} object to be registered with a {@code GsonManager}.
+ * This tells the {@code GsonManager} that the {@code Gson} object that will be
+ * created will use this {@code TypeAdapter} to handle objects
+ * that are of type {@code BorrowRecord}.
+ */
 public class BorrowRecordAdapter extends TypeAdapter<BorrowRecord> {
 
+    /**
+     * The field names that will be serialized.
+     * They should correspond to those existing in {@code BorrowRecord}.
+     */
     private static final String BORROWER_NAME_FIELD = "borrowerName";
     private static final String END_DATE_FIELD = "endDate";
     private static final String START_DATE_FIELD = "startDate";
     private static final String QUANTITY_FIELD = "quantity";
     private static final String IS_RETURNED_FIELD = "isReturned";
 
+    /**
+     * See Gson (2.9.0) documentation.
+     */
     @Override
     public BorrowRecord read(JsonReader reader) throws IOException {
         String startDateString = null;
@@ -66,6 +79,9 @@ public class BorrowRecordAdapter extends TypeAdapter<BorrowRecord> {
         return br1;
     }
 
+    /**
+     * See Gson (2.9.0) documentation.
+     */
     @Override
     public void write(JsonWriter writer, BorrowRecord borrowRecord) throws IOException {
         writer.beginObject();

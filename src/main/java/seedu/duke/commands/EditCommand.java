@@ -9,14 +9,19 @@ import java.lang.Math;
 
 import java.util.Optional;
 
+/**
+ * Edits an Item at a particular index. The name, quantity and description of the Item is only modified
+ * if they are given new values. Otherwise, the old values will remain.
+ */
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_NAME = "Edit Item";
     public static final String USAGE_MESSAGE = "Edits the name and/or description of an item.";
-    public static final String COMMAND_FORMAT = COMMAND_WORD + "/n name [/d description] | [/n name] /d description]";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + "INDEX [n/Name] [d/Description] [q/Quantity [r/ +|-]]\n One of n/, d/, or q/ should be present!";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
             + "[Command Format] " + COMMAND_FORMAT + "\n";
-    public static final String EDIT_RESULT_FORMAT = "Item at index %d has been modified."
+
+    private static final String EDIT_RESULT_FORMAT = "Item at index %d has been modified."
             + "\nBefore: %s"
             + "\nAfter: %s";
 
@@ -74,6 +79,12 @@ public class EditCommand extends Command {
 
     }
 
+    /**
+     * Check if another object is equal to this EditCommand object.
+     *
+     * @param other the Object to compare against.
+     * @return true if equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         EditCommand toCompare;

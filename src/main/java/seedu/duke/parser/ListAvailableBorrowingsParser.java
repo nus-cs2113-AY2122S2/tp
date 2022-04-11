@@ -19,7 +19,8 @@ public class ListAvailableBorrowingsParser implements Parser<ListAvailableBorrow
      * Parses the given {@code String} of arguments in the context of the 
      * ListAvailableBorrowingsCommand and returns an ListAvailableBorrowingsCommand 
      * object for execution.
-     * @throws InvMgrException if the user input does not conform the expected format
+     *
+     * @throws InvMgrException if the user input does not conform the expected format.
      */
     public ListAvailableBorrowingsCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap = 

@@ -13,7 +13,8 @@ public class ReturnCommandParser implements Parser<ReturnCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ReturnCommand
      * and returns a ReturnCommand object for execution.
-     * @throws InvMgrException if the user's input does not adhere to the expected command format
+     *
+     * @throws InvMgrException if the user's input does not adhere to the expected command format.
      */
     public ReturnCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM_INDEX);
