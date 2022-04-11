@@ -40,4 +40,24 @@ public class AddCommandParserTest {
                 CliSyntax.PREFIX_QUANTITY.getPrefix(), "asd");
         assertParseFailure(parser, testInput, Messages.INVALID_QUANTITY);
     }
+
+    @Test
+    void parse_zeroQuantity_throwException() {
+        String testInputFormat = " %s%s %s%s %s%s";
+        String testInput = String.format(testInputFormat,
+                CliSyntax.PREFIX_NAME.getPrefix(), ParserStubs.PAPERCUP_NAME,
+                CliSyntax.PREFIX_DESCRIPTION.getPrefix(), ParserStubs.PAPERCUP_DESCRIPTION,
+                CliSyntax.PREFIX_QUANTITY.getPrefix(), 0);
+        assertParseFailure(parser, testInput, Messages.INVALID_QUANTITY);
+    }
+
+    @Test
+    void parse_negativeQuantity_throwException() {
+        String testInputFormat = " %s%s %s%s %s%s";
+        String testInput = String.format(testInputFormat,
+                CliSyntax.PREFIX_NAME.getPrefix(), ParserStubs.PAPERCUP_NAME,
+                CliSyntax.PREFIX_DESCRIPTION.getPrefix(), ParserStubs.PAPERCUP_DESCRIPTION,
+                CliSyntax.PREFIX_QUANTITY.getPrefix(), -10);
+        assertParseFailure(parser, testInput, Messages.INVALID_QUANTITY);
+    }
 }
