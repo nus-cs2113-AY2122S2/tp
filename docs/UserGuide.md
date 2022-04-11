@@ -529,10 +529,9 @@ distributed amongst all participants.
 <br>
 
 **Example**
-* An [activity has been created](#creating-an-activity-activity-create) with an `ACTIVITY_ID` of _1_ in 
-  a session with a `SESSION_ID` of _1_. It is named _Class Lunch_ with _Alice_ and _Bob_.<br>
-  Edits the activity's name, payer, overall cost, GST percentage and service charge. List of participants remains
-  unchanged.<br><br>
+* Edits the name, payer, overall cost, GST percentage and service charge of an [activity that has been created](#creating-an-activity-activity-create)
+  with an activity unique identifier of _1_ in a session with a session unique identifier of _1_, leaving the list of
+  participants unchanged. The activity is currently named _Class Lunch_ and involves _Alice_ and _Bob_.<br><br>
   `activity /edit /sid 1 /aid 1 /n Dinner /p Bob /i Alice Bob /co 30 /gst 7 /sc 10`<br><br>
   ![Activity edit command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityEditCommand.png)
   <br>
