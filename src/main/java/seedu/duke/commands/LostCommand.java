@@ -60,9 +60,7 @@ public class LostCommand extends Command {
         try {
             lostItem = itemList.getItem(itemIndex);
         } catch (IndexOutOfBoundsException e) {
-            ui.showMessages(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE);
-            ui.showDivider();
-            return;
+            throw new InvMgrException(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE);
         }
         int updatedItemQuantity = lostItem.getQuantity() - itemQuantity;
         if (updatedItemQuantity > 0) {

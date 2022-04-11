@@ -87,4 +87,20 @@ public class LostCommandTest {
         }
     }
 
+    /**
+     * Checks that InvMgrException is thrown when inventory is empty.
+     * Checks that the EMPTY_ITEM_LIST_MESSAGE is displayed.
+     * */
+    @Test
+    public void execute_indexOutOfRange_InvMgrExceptionThrown() {
+        Ui ui = new Ui();
+        LostCommand c = new LostCommand(10, 1);
+        try {
+            c.execute(itemList, ui);
+            fail(); // the test should not reach this line
+        } catch (Exception e) {
+            assertEquals(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE, e.getMessage());
+        }
+    }
+
 }

@@ -45,7 +45,7 @@ public class LostCommandParserTest {
     }
 
     /**
-     * Checks that InvMgrException is thrown when item index is out of range.
+     * Checks that InvMgrException is thrown when item index is invalid (< 0).
      * */
     @Test
     void parse_indexOutOfRange_InvMgrExceptionThrown() {
