@@ -70,4 +70,4 @@ I helped maintain the issue tracker.
 I often reviewed and approved the pull requests of other members of my team.
 
 During team meetings, I participated in the tasks at hand, whether it was brainstorming, bug-fixing, or resolving
-conflicting files. When not in meetings,
+conflicting files.
