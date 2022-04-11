@@ -78,6 +78,17 @@ Step 2: ListNurseListCommand will call on the toString function in nurseList to 
 
 ![](ListNurse.png)
 
+### Storage Component
+API: `PatientStorage.java` `DoctorStorage.java` `AppointmentStorage.java` `NurseStorage.java` `WardStorage.java`
+
+
+
+The Storage component consists of:
+
+1. `PatientStorage.java`: Reading and saving files which record all patients.
+2. `DoctorStorage.java`: Reading and saving files which record all doctors.
+3. `AppointmentStorage.java`: Reading and saving all appointments.
+4. `WardStorage.java`: Reading and saving all wards.
 ## Product scope
 Use in all hospitals in Singapore
 
