@@ -1,7 +1,7 @@
 # Developer Guide
 
 - [Acknowledgements](#acknowledgements)  
-- [Design & Implementation](#design-&-implementation)
+- [Design & Implementation](#design--implementation)
     - [Architecture](#architecture)
 - [Implemented Features](#implemented-features)
   - [Add a Project](#add-a-project)
@@ -452,7 +452,7 @@ Given below are instructions to test the app manually.
 |`changegit 1 https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when the command is valid|The Github Repo for newproject has been changed to: https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html|
 |`changegit 1`|when the url is not entered|Execution result: Invalid command format!<br>The correct format should be:<br>changegit [project_index] [website URL]|
 |`changegit 1 url`|when the url is in invalid format|Please make sure your link begins with the following: http:// or https://|
-|`changegit -1 https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when project index is a negative number|Execution result: Unsuccessful. The index is a negative number!
+|`changegit -1 https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when project index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
 |`changegit 1000000000000000000000  https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when project index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
 
 ### Opening the GitHub repo  
