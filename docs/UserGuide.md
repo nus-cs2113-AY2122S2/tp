@@ -12,7 +12,7 @@ setup and quick to use. Simplst will mainly be used to add, remove, list and vie
 * [Explanation of Key Terms or Symbols](#explanation-of-key-terms-or-symbols)
 * [Quick start](#quick-start)
 * [Features](#features)
-  * [Help Command]()
+  * [Help Command](#help-command-help)
   * [Unit Good Commands](#unit-good-commands)
     * [Adding a Unit Good](#adding-a-unit-good-add-ug)
     * [Removing a Unit Good](#removing-a-unit-good-remove-ug)
