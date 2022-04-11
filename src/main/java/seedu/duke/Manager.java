@@ -105,7 +105,9 @@ public class Manager {
             break;
         case "delete appointment":
             command = Parser.parseDeleteAppointment(parameters);
-            status = command.execute(storage.appointments);
+            command.execute(storage.appointments);
+            command.execute(storage.patients);
+            status = command.execute(storage.doctors);
             break;
         default:
             throw new UserInputErrorException("Invalid Command given!");
@@ -158,10 +160,6 @@ public class Manager {
         case "edit medicine":
             command = Parser.parseEditMedicine(parameters);
             status = command.execute(storage.medicines);
-            break;
-        case "edit appointment":
-            command = Parser.parseEditAppointment(parameters);
-            status = command.execute(storage.appointments);
             break;
         default:
             throw new UserInputErrorException("Invalid Command given!");
