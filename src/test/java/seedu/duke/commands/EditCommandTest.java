@@ -96,7 +96,7 @@ public class EditCommandTest {
         uiStub = new UiStub();
         EditCommand testAllEditCommand = new EditCommand(0,
                 Optional.of(ItemStubs.MARKER_NAME),
-                Optional.of(ItemStubs.MARKER_QUANTITY-ItemStubs.WHITEBOARD_QUANTITY),
+                Optional.of(ItemStubs.MARKER_QUANTITY - ItemStubs.WHITEBOARD_QUANTITY),
                 Optional.of(ItemStubs.MARKER_DESCRIPTION));
         testAllEditCommand.execute(EDIT_ALL_LIST_BEFORE, uiStub);
         assertEquals(EDIT_ALL_EXPECTED_LIST_AFTER, EDIT_ALL_LIST_BEFORE);
