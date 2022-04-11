@@ -8,7 +8,7 @@ optimized for use via a Command Line Interface (CLI).
 If you can type fast, AlloNUS can get your schedule, expenses,
 and contact management tasks done faster than traditional GUI apps.
 
-##Table of Contents
+## Table of Contents
 * [Quick Start](#quick-start)
 * [Features](#features)
 * [Main Menu Features](#main-menu-features)
@@ -41,9 +41,12 @@ and contact management tasks done faster than traditional GUI apps.
 
 ## Quick Start
 
-
-1. Ensure that you have Java 11 or above installed.
-1. Download the latest version of `AlloNUS` from [here](https://github.com/AY2122S2-CS2113-F10-4/tp/releases).
+1. Ensure that you have `Java 11` installed.
+2. Download the latest version of `AllOnUS` from [here](https://github.com/AY2122S2-CS2113-F10-4/tp/releases).
+3. Copy the file to an empty folder you want to use as the _home folder_
+4. Open a command window in that folder
+5. Run the command `java -jar AllOnUs.jar` to start the app
+6. Refer to the [Features](#features) below to try out some commands!
 
 ## Features 
 
