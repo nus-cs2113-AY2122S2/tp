@@ -498,6 +498,9 @@ CCA Clubs that require assistance in inventory management, especially for fast t
 | v2.0    | User                                   | List all future borrowings                      | View which item will be borrowed in the future and plan accordingly |
 | v2.0    | User                                   | List all past borrowings                        | View which item has been borrowed in the past                       |
 | v2.0    | User                                   | List all available borrowings                   | View which item is available for borrowing now                      |
+| v2.1    | User                                   | Cancel future borrowings                        | Allow others to borrow the items instead                            |
+| v2.1    | User                                   | Mark borrowed items as returned                 | Update what items are in the store                                  |
+| v2.1    | User                                   | Report items as lost                            | Update if items have been permanently lost                          |
 
 ## Non-Functional Requirements
 

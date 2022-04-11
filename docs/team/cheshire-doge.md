@@ -21,6 +21,7 @@ ClubInvMgr is a desktop CLI app for inventory management for CCA clubs. It allow
 1. Created `List Command` and its sequence diagram.
 2. Created `List Available Borrowings Command` and its sequence diagram.
 3. Created `Cancel Future Borrowings Command` and its sequence diagram.
+4. Update User Stories for v2.1
 
 ### Contributions to team-based-tasks
 1. Delivered code enhancements.
