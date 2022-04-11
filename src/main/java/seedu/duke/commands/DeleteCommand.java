@@ -32,12 +32,11 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(ItemList itemList, Ui ui) {
-        assert index != 0 : "index indicated is 0.";
-
+        assert (index > -1) : "index less than or equal to -1";
         try {
             Item removedItem = itemList.removeItem(index);
             ui.showMessages(removedItem + " has been deleted.");
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             ui.showMessages(ERROR_MESSAGE, INVALID_INDEX);
         }
     }
