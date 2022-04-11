@@ -740,6 +740,7 @@ delimiter is compulsory to identify the group you wish to edit.
 >   * The group name is **case-insensitive**.
 >* `[NAME1 NAME2 ...]` refers to a list of individuals in the group.
 >   * Each individual name is **case-insensitive**.
+
 <br>
 
 > **💡 Notes:**
@@ -758,9 +759,9 @@ delimiter is compulsory to identify the group you wish to edit.
 
 <br>
 
-Examples of usage:
+**Examples of usage:**
 * A [group has been created](#creating-a-group-group-create) with a unique identifier of _2_,
-  named _School Friends_ with _Alice_, _Bob_, _Charlie_ and _David_ involved.
+  named _School Friends_ consisting of _Alice_, _Bob_, _Charlie_ and _David_.
 
 **Example 1**
 - Edits the group name to _Project Teammates_. <br><br>
