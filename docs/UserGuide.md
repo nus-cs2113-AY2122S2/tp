@@ -319,7 +319,7 @@ Format: `edit medicine /info [batch id], [name], [dosage], [expiry date], [side 
 
 Example: `edit medicine /info A123, Paracetamol, 1000, 2023-06-11, drowsy, 20`
 
-![editMedicine](photos/editMedicine.jpg)
+![editmedicine](photos/editmedicine.jpg)
 
 
 ### Finding: `find`
@@ -423,7 +423,7 @@ Example 5: `find appointment /info doctor name, John` <br>
 Example 6: `find appointment /info date, 2022-10-15`
 
 
-![](photos/findappointment.png)
+![findAppointment](photos/findAppointment.jpg)
 
 
 ### Features involving Medicine Inventory
