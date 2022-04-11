@@ -23,6 +23,15 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
       overall experience of editing activites more user friendly and intuitive.
       Informing the user when no changes are made helps prevent user error, as editing an activity without changing anything is 
       very likely to be user error.
+    * Highlights: This was challenging as activity details are spread out across different components. This made fetching existing details from
+      the original activity (in case the user does not wish to edit them) difficult.
+      `Activity` originally did not keep track of GST and service charge values after creation, so changes had to be made to it to store that information.
+      As activity costs are recalculated and stored with GST and service charge immediately upon creation of an activity, this command
+      has to reverse these calculations to find the original costs of the activity, in case the user wishes to modify 
+      the GST/service charge values.
+      Recreating the activity was also difficult, as many methods in other classes rely on `activityId` to do things such as removing
+      `ActivityCost` objects from `Person` objects. Recreating the activity with the same `activityId` would cause bugs with these
+      methods, and so a temporary activityId must be used when recreating the activity and changed later after the original has been removed.
 * [Session View](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionViewCommand.java)
     * What it does: Views a session. Displays session details and a list of activities involved.
     * Justification: Users need a way to get a quick bird's-eye view of a session and the activities involved without 
@@ -61,7 +70,11 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
     * Set up this class to represent an exception thrown when format-related errors occur.
 
 #### Testing
-* Added JUnit tests for `ActivityEditCommand`,`ActivityEditCommandParser`, `Name`, `Person` and `ActivityCost`.
+* Added JUnit tests for [ActivityEditCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityEditCommand.java),
+  [ActivityEditCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/ActivityEditCommandParser.java),
+  [Name](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Name.java),
+  [Person](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Person.java),
+  and [ActivityCost](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/ActivityCost.java).
 * As `TextUI` mostly consists of methods that print to the interface instead of returning a value, we decided not to add JUnit tests for this 
   class.
  
@@ -70,12 +83,16 @@ Documentation contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 
 #### User Guide
 * Added documentation for `ActivityEditCommand` and `SessionViewCommand`.
+* Added documentation for [`Editing an activity`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/docs/UserGuide.md#editing-an-activity-activity-edit)
+  and [`Viewing a session`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/docs/UserGuide.md#viewing-a-session--session-view) 
 * Wrote sections aimed at introducing users to the program, such as the introduction (SplitLah), the target audience
-  (Who SplitLah is for) and the basic workflow of the program (How SplitLah works).
-* Standardised language and grammar across the guide.
+  (Who SplitLah is for) and the basic workflow of the program ([How SplitLah works](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/docs/UserGuide.md#how-splitlah-works)).
+* Standardised language, grammar and tense across the guide.
  
 #### Developer Guide
-* Added documentation for `TextUI`, `SessionViewCommand` and `ActivityEditCommand`.
+* Added documentation for [`TextUI`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/docs/DeveloperGuide.md#textui-component),
+  [`View a session`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/docs/DeveloperGuide.md#view-a-session)
+  and [`ActivityEditCommand`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/docs/DeveloperGuide.md#edit-an-activity).
 
 ### Miscellaneous Contributions
 * Recorded and narrated a demo video with slides and annotations including footage of the program in action for use
