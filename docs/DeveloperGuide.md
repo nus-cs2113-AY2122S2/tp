@@ -9,18 +9,18 @@
   - [`set` spending limit feature](#set-spending-limit-feature)
   - [`list` feature](#list-feature)
   - [`help` feature](#help-feature)
-  - [[Proposed] `find` feature](#proposed-find-feature)
+  - [`find` feature](#find-feature)
 - [Product scope](#product-scope)
   - [Target user profile](#target-user-profile)
   - [Value proposition](#value-proposition)
 - [User stories](#user-stories)
 - [Non-functional requirements](#non-functional-requirements)
 - [Glossary](#glossary)
-- [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Initial version of this codebase was created as a stripped-down version of PersonBook by Akshay Narayan and Damith C. Rajapakse.
+
 
 ## Design
 ### Architecture
@@ -79,11 +79,11 @@ the `ArrayList` of records that have been inputted by the user before.
 When command `help` is called, `helpCommand` prints all the instruction explanations and examples in order for the user 
 to know what they can input to the program.
 
-### [Proposed] `find` feature
+### `find` feature
 
 ![img_6.png](img_6.png)
 
-The proposed `find` mechanism is facilitated by `FindCommand`. `FindCommand`, extending `Command`, calls
+The `find` mechanism is facilitated by `FindCommand`. `FindCommand`, extending `Command`, calls
 `getFilteredRecords(String query)` in `RecordManager`. The method returns the `ArrayList` of all records that have been 
 filtered by the query inputted by the user.
 
@@ -130,8 +130,3 @@ regularly remind the buyer of their preset spending limit for each month.
 * *user* - A user is a person who uses the application to keep track of his expenses.
 * *system* - A system refers to Spendvelope.
 * *feedback* - Feedback refers to the response from the application to the user.
-
-
-## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
