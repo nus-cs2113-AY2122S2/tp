@@ -122,7 +122,7 @@ For Example:
 > **⚠️Warning⚠️**
 >- Input the parameters in the order shown in the guide, else the application will not be able to read your
    > input.
->- Only use ascii characters when entering commands into the application. Otherwise, your input may not be properly displayed in the command line.
+>- Only use ASCII characters when entering commands into the application. Otherwise, your input may not be properly displayed in the command line.
 
 <br/>
 
