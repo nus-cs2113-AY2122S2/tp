@@ -96,7 +96,7 @@ public class AddAvailabilityCommand extends Command {
      */
     private long checkCorrectCommaGiven(String inputAvailability) {
         long commaCounts = inputAvailability.codePoints()
-        .filter(t -> t == COMMA_INDICATE_CHARACTER)
+                .filter(t -> t == COMMA_INDICATE_CHARACTER)
                 .count();
         return commaCounts;
     }
