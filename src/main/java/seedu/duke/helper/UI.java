@@ -34,7 +34,7 @@ public class UI {
     }
 
     public static void printNewLineSeparator() {
-        System.out.println("-------------------------");
+        System.out.println("--------------------------------------------------------");
     }
 
     public void printGreeting() {
@@ -44,7 +44,7 @@ public class UI {
     }
 
     public void printLogo() {
-        String logo = "------------------------------\n"
+        String logo = "--------------------------------------------------------\n"
                 + "HALPMI";
 
         System.out.println(logo);
