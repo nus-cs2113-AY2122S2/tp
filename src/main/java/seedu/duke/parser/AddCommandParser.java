@@ -37,8 +37,6 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         if(quantity == 0) {
             throw new InvMgrException(Messages.ZERO_QUANTITY_MESSAGE);
-        } else if (quantity < 0) {
-            throw new InvMgrException(Messages.NEGATIVE_QUANTITY_MESSAGE);
         }
 
         Item item = new Item(name, quantity, description);
