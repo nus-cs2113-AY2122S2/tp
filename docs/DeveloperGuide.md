@@ -94,7 +94,7 @@ The default value is set to 'MeetingJio.txt'
 This section describes some noteworthy details on how certain features are implemented.
 
 The following sequence diagram shows how the commands generally works.
-Note that certain commands may slightly different implementation compared to the one below.
+Note that certain commands may have slightly different implementation compared to the one below.
 
 ![CommandSequenceDiagram](images/CommandSequenceDiagram.png)
 
@@ -210,7 +210,7 @@ array to 1 (BUSY).
 looks at the number of consecutive 0s to determine if the common free timeslot exceeds the minimum duration required.
 5. The free timeslots will then be printed onto the screen.
 
-## 3.4 Edit events feature
+## 3.4 Edit Events Feature
 
 The `edit` command is a command that allows users to edit a specified event.
 
@@ -225,7 +225,7 @@ Given below is the steps on how the `edit` operation works.
 4. The EditCommand will edit the specified event if the values provided in user input are valid.
 5. Eventually a confirmation message will be shown to user upon successful edit.
 
-## 3.5 Delete events
+## 3.5 Delete Events Feature
 Deletes an event from the user's specified timetable
 
 **Format:** ` delete n/NAME i/INDEX`
@@ -250,7 +250,7 @@ and perform the deletion of that event.
 everyone's timetable and delete it.
 
 
-## 3.6 Clear events 
+## 3.6 Clear Events Feature
 The `clear` command is a command that the user can clear a certain user's timetable or everyone's timetable.
 
 `clear NAME` clears the timetable for the particular user.
