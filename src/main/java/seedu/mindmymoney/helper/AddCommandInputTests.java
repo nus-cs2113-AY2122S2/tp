@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static seedu.mindmymoney.constants.Indexes.MAX_CASHBACK_AMOUNT;
+import static seedu.mindmymoney.constants.Indexes.MAX_CREDIT_CARD_LIMIT;
+import static seedu.mindmymoney.constants.Indexes.MAX_EXPENDITURE_AMOUNT;
 import static seedu.mindmymoney.constants.Indexes.MAX_STUDENT_INCOME;
 import static seedu.mindmymoney.constants.Indexes.MIN_CASHBACK_AMOUNT;
 import static seedu.mindmymoney.constants.Indexes.MIN_EXPENDITURE_AMOUNT;
@@ -169,6 +171,9 @@ public class AddCommandInputTests {
         if (inputAmountAsFloat <= MIN_EXPENDITURE_AMOUNT) {
             throw new MindMyMoneyException("Amount must be more than 0");
         }
+        if (inputAmountAsFloat > MAX_EXPENDITURE_AMOUNT){
+            throw new MindMyMoneyException("Expenditure cannot be more than $1 million!");
+        }
         assert inputAmountAsFloat > 0 : "Amount should have a positive value";
     }
 
@@ -270,7 +275,7 @@ public class AddCommandInputTests {
         }
         assert inputAmountAsDouble > 0 : "Limit amount should have a positive value";
 
-        if (inputAmountAsDouble > 40000) {
+        if (inputAmountAsDouble > MAX_CREDIT_CARD_LIMIT) {
             throw new MindMyMoneyException("Limit amount must be $40,000 or less.\n"
                 + "If you do have a credit card with more than $40,000 limit, "
                 + "do inform the MindMyMoney team through GitHub.");
