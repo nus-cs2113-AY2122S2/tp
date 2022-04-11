@@ -26,14 +26,27 @@ user's application usage history.** This will interfere with the function of the
 
 ![Architecture Design](team/architectureDesign/architectureDesign.jpg)
 
+The Architecture Diagram given above explains the high-level design of the App.
 
+Given below is the quick overview of the main components and how they interact with each other.
+
+### Main components of the architecture
+`Main` is responsible for,
+- When the app launches: It retrieves the contents of the various lists from their respective files.
+- When the user inputs a command: It receives the user input from the UI and passes it to the command parser component 
+to identify and parse the command.
+- When the app shuts downs: It closes down the various components.
+
+Besides `Main`, the application also consists of four components which are:
+- `UI`: The UI of the App.
+- `Command Parser`: Deals with identifying the various commands from the user input and parsing the user input.
+- `Command`: Executes the various commands inputted by the user.
+- `Storage`: Reads data from, and writes data to, the hard disk.
+- `Tasks`: Represents the various commands which would be executed by the command component.
 
 ## Design & implementation
 
 ## Design
-
-### Logical Component
-
 
 ### Add Housekeeper Command
 
