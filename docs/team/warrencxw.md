@@ -9,36 +9,25 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 
 #### New Features
 * [Parsing API](https://github.com/AY2122S2-CS2113T-T10-1/tp/tree/master/src/main/java/seedu/splitlah/parser)
-   * What it does: Provides a full set of methods to parse different arguments of a user input
+   * Provides a full set of methods to parse different arguments of a user input
      and perform preliminary validity checking of the user input for extraneous arguments and invalid inputs.
-   * Justification: Allows other developers to develop functional code without having to worry about input validity.
-     Centralisation of all parsing logic also helps to make debugging of any incorrect parsing logic easier.
 * [Session](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Session.java)
    * Represents a group outing that involves a list of participants and contains one or more activities.
      Also provides relevant methods for handling and processing its member attributes.
 * [Session Summary](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionSummaryCommand.java)
-   * What it does: Creates a transaction summary that helps users calculate how much each person in a session
-     must pay and to whom they should pay for all debts to be resolved.
-   * Justification: One of the key features of `SplitLah`. Serves to simplify the payment process when users split
-     bills during group outings as it minimises the number of transactions required to be made by consolidating all
-     debts to be paid.
+   * Creates a transaction summary that helps users calculate how much each person in a session
+     must pay and to whom they should pay for all debts to be resolved. One of the key features of `SplitLah`.
 * [Help command](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/HelpCommand.java)
-   * What it does: Provides users a reference of all available commands while they are using `SplitLah`.
-   * Justification: Gives users a quick way to find out the syntax of all available commands while using `SplitLah` 
-     without having to constantly refer back to the user guide.
+   * Provides users a reference of all available commands while they are using `SplitLah`.
 * [PersonCostPair](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/util/PersonCostPair.java)
-   * A utility class that supports `SessionSummaryCommand` in minimising transactions required to be
-     made by encapsulates a `Person` object and their overall cost in the session as a debt owed by or owed to an individual.
-     It also keeps track of whether a debt has been fully paid or not, assisting in the algorithm used in `SessionSummaryCommand`.
+   * A utility class that supports `SessionSummaryCommand` by encapsulating a `Person` object and their overall cost in the session,
+     and keeping track of whether a debt has been fully paid or not.
 
 #### Enhancements to existing features
  * [CommandParser interface](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/CommandParser.java)
-   * What it does: Isolates `Parser` component related dependencies from `Command` classes by shifting all input parsing
+   * Isolates `Parser` component related dependencies from `Command` classes by shifting all input parsing
      functionality to the `CommandParser` itself, allowing the `Command` class to focus on carrying out the command
      as specified by the user.
-   * Justification: To encourage other developers to separate the dependency of the `Parser` component from the `Command`
-     subclasses that they are working on. This improves the overall quality of the code of the project as testing can be
-     much more modular.
  * [ParserUtils](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/ParserUtils.java)
    * Handles all argument parsing delegated to the `Parser` component, allowing `Parser` class to
      have the sole purpose of returning an `XYZCommand` object corresponding to the given user input.
@@ -51,11 +40,10 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
    * Allow the use of real numbers up to two decimal points to support potential changes and variability in charges.
 
 #### Testing
- * Added comprehensive JUnit tests for
-   [`Parser`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/ParserTest.java),
-   [`ParserUtils`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/ParserUtilsTest.java) and 
-   [`Session`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/data/SessionTest.java) classes
  * Added JUnit tests for
+   [`Parser`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/ParserTest.java),
+   [`ParserUtils`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/ParserUtilsTest.java), 
+   [`Session`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/data/SessionTest.java),
    [`SessionSummaryCommandParser`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/SessionSummaryCommandParserTest.java) and 
    [`HelpCommandParser`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/HelpCommandParserTest.java) classes
  * Added [text-based testing](https://github.com/AY2122S2-CS2113T-T10-1/tp/tree/master/text-ui-test)
@@ -68,8 +56,7 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
  * Added documentation for 
    [`Settling all transactions for a session`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#settling-all-transactions-for-a-session-session-summary) and
    [`Listing all available commands`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-available-commands-help)
- * Added questions under [Frequently Asked Questions (FAQ)](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#faq) section
- * Maintained the [`Command Summary`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#command-summary) section of the User Guide
+ * Added questions under [FAQ](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#faq) section and maintained the [`Command Summary`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#command-summary) section
 
 #### Developer Guide
  * Added description for [`Profile`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#profile-component) component
@@ -89,8 +76,6 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 
 ### Miscellaneous Contributions
  * Spearheaded replacement of `XYZCommand#prepare` method with a [`XYZCommandParser`](https://github.com/AY2122S2-CS2113T-T10-1/tp/tree/master/src/main/java/seedu/splitlah/parser/commandparser) class
-   * Previously, `XYZCommand#prepare` (e.g. [`SessionCreateCommand#prepare`](https://github.com/AY2122S2-CS2113T-T10-1/tp/commit/5b05ce84aa13841db2383fad527184aca772fb33))
-     was used instead to process the user input and create a `XYZCommand` object.
    * Encouraged other developers to follow separation of concerns principle to improve code quality by replacing
      `XYZCommand#prepare` with `XYZCommandParser` class.
  * Reviewed and reported [bugs found](https://github.com/warrencxw/ped/issues) in another group's project ([_Spendvalope_](https://ay2122s2-cs2113-f12-1.github.io/tp/))
