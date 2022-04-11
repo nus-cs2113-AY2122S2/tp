@@ -8,11 +8,11 @@
     1. [Add an Item](#add-an-item-add)
     2. [Search for Items](#search-for-items-search)
     3. [List All Items](#list-all-items-list)
-    4. [List Current Borrowings](#list-current-borrowings-listcb)
-    5. [List Future Borrowings](#list-future-borrowings-listfb)
-    6. [List Overdue Borrowings](#list-overdue-borrowings-listob)
-    7. [List Available Borrowings](#list-available-borrowings-listab)
-    8. [Borrow an Item](#borrow-an-item-borrow)
+    4. [Borrow an Item](#borrow-an-item-borrow)
+    5. [List Current Borrowings](#list-current-borrowings-listcb)
+    6. [List Future Borrowings](#list-future-borrowings-listfb)
+    7. [List Overdue Borrowings](#list-overdue-borrowings-listob)
+    8. [List Available Borrowings](#list-available-borrowings-listab)
     9. [Get Description of Item](#get-description-of-item-desc)
     10. [Delete an Item](#delete-an-item-delete)
     11. [Edit an Item](#edit-an-item-edit)
@@ -169,12 +169,6 @@ Name of Item: JBLFlip5
 Name of Borrower: John Smith
 Borrow Duration: 2021-03-21 to 2021-03-23
 Borrow Quantity: 5
-
-> borrow i/1 s/2021-03-25 e/2021-03-21 p/John Smith
-Error: Incorrect start and end date order. Please ensure that end date >= start date.
-
-> borrow i/28 s/2021-03-21 e/2021-03-21 p/John Smith
-Sorry. This item does not exist in the current inventory.
 ```
 
 ### List Current Borrowings: `listcb`
@@ -207,11 +201,6 @@ Borrow Duration: 2021-03-19 to 2021-03-30
 Borrow Quantity: 5
 
 Name of Item: JBLFlip5
-Name of Borrower: John Smith
-Borrow Duration: 2021-03-21 to 2021-03-23
-Borrow Quantity: 1
-
-Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
 Borrow Quantity: 1
@@ -224,20 +213,6 @@ Borrow Duration: 2021-03-23 to 2021-03-30
 Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-04-24 to 2021-04-30
-```
-
-If there are no items have been borrowed from the inventory, the `listcb` command will return:
-
-```
-> listcb
-There are no items in the inventory being borrowed.
-```
-
-If the person does not exist in the borrowings, the `listcb p/BORROWER_NAME` will return:
-
-```
-> listcb p/David
-There are no items currently borrowed by David.
 ```
 
 ### List Future Borrowings: `listfb`
