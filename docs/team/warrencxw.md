@@ -111,6 +111,11 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
  * Headed the fixing of bugs found by other teams during the PE dry run
     * Set up a collaborative document for the sorting of bugs, allocation of duties and tracking of progress
  * Assisted in the drafting of script and slides for demo video v1.0 and v2.1
+ * Looked through and [reviewed](https://nus-cs2113-ay2122s2.github.io/dashboards/contents/tp-comments.html#1-chong-xu-wei-warrencxw-145-comments)
+   many of my team members' pull requests in detail
+   * [PR #213](https://github.com/AY2122S2-CS2113T-T10-1/tp/pull/213) - Clean up User Guide
+   * [PR #320](https://github.com/AY2122S2-CS2113T-T10-1/tp/pull/320) - Add TableFormatter class
+   * [PR #391](https://github.com/AY2122S2-CS2113T-T10-1/tp/pull/391) - Update user guide
 
 #### Project Management
 * Worked on pre-planning and ideation of project
