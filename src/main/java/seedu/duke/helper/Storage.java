@@ -68,11 +68,11 @@ public class Storage {
                     }
                     if (filePath.equals(PATH_MED)) {
                         outputFilePathCorrupted = "data/medicine_corrupted.txt";
-                        Validator.validateMedicine(parameters);
+                        Validator.validateMedicineStorage(parameters);
                     }
                     if (filePath.equals(PATH_APT)) {
                         outputFilePathCorrupted = "data/appointment_corrupted.txt";
-                        Validator.validateAddAppointment(parameters);
+                        Validator.validateAddAppointmentStorage(parameters);
                     }
 
                     listType.add(parameters);
