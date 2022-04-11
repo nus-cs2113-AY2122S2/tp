@@ -93,6 +93,27 @@ The user starts by typing an add command. The example used in the diagram above 
 4. The `run()` method calls on the `execute()` function in the `DeleteCommand` which will delete the item with that index from the `ItemList` using its `removeItem()` method.
 5. `DeleteCommand` will converse with `Ui` to show a message that the item has been removed. In this case, the item to add will be printed as the name of the item, followed by " has been deleted.".
 
+### Return Command
+
+![ReturnCommandSequenceDiagram](img/ReturnCommandSequenceDiagram.png)
+
+The above diagram shows the sequence diagram of Return command, which allows users to return an item that is either overdue or currently on loan.
+
+The user starts by typing a return command. The diagram above uses the example of a user who wishes to mark an item of index `1` as returned. The full return command is `return i/1`.
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. `parse` calls the `arePrefixesPresent()` function to check that the user's input contains the compulsory field, item index. This function returns `true` if the user's input syntax is correct.
+3. `parse()` uses the parsed `itemIndex` to generate a new `ReturnCommand` which is returned to the `run()` method of `InvMgr`.
+4. The `run()` method calls on the `execute()` function in `ReturnCommand`.
+5. The `execute()` function calls `checkItemListSize()` to check if the item list is empty. If it is, an exception is thrown and return cannot be performed. 
+6. Then, it calls `getItem()` to check if the item index is within range. If it is not, an exception is thrown and return cannot be performed. 
+7. Then, it obtains the item's borrow records by calling `getBorrowRecords()` from `Item`.
+8. Each borrow record is iterated over and its borrow status and return status are obtained using `getBorrowStatus()` and `getReturnStatus()` respectively.
+9. A borrow record is considered overdue if its borrow status is past and its return status is false, while a borrow record is outstanding if its borrow status is present and its return status is false.
+   If a borrow record is either overdue or outstanding, then it is marked as returned using `setReturnStatus`. The end date of the borrow record is changed to the day of return using `setEndDate()`. 
+   `ReturnCommand` then converses with `Ui` to show the successful returned message.
+10. If none of the borrow records are overdue or outstanding, then it is taken to be an invalid return request. In this scenario, `ReturnCommand` will converse with `Ui` to display the return error message.
+
 ### List Command
 ![ListCommandSequenceDiagram](img/ListCommandSequenceDiagram.png)
 

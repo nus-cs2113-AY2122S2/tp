@@ -1,0 +1,76 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+skinparam dpi 300
+skinparam guillemet false
+skinparam sequenceStereotypeFontColor red
+skinparam sequenceStereotypeFontStyle bold
+
+Participant ":InvMgr" as invmgr
+Participant "Parser" as parser <<class>>
+Participant "item:Item" as item
+Participant "inputCommand:LostCommand" as cmd
+Participant "itemList:ItemList" as itemlist
+Participant "ui:Ui" as ui
+Participant "deleteCommand:DeleteCommand" as delCommand
+
+activate invmgr
+
+-> invmgr
+invmgr -> parser:parse("lost i/1 q/10")
+activate parser
+
+parser -> parser:arePrefixesPresent(argumentMultimap: ArgumentMultimap, prefixes: Prefix...)
+activate parser
+return :boolean
+
+create cmd
+parser -> cmd:LostCommand(itemIndex: Integer, itemQuantity: Integer)
+activate cmd
+return :LostCommand
+
+return inputCommand:LostCommand
+
+invmgr -> cmd:execute(itemList: ItemList, ui: Ui)
+activate cmd
+
+cmd -> cmd:checkItemListSize()
+activate cmd
+return :boolean
+
+cmd -> itemList: getItem(itemIndex: Integer)
+activate itemList
+return lostItem: Item
+
+cmd -> itemList: getQuantity(itemQuantity: Integer)
+activate itemList
+return lostItemQuantity: Integer
+
+alt "updatedItemQuantity > 0"
+cmd -> item: setQuantity(itemToAdd: Item)
+activate item
+return
+cmd -> ui: showMessages(Messages.REPORTED_LOST_MESSAGE)
+activate ui
+return
+else "updatedItemQuantity == 0"
+create delCommand
+cmd -> delCommand:DeleteCommand(itemIndex: Integer)
+activate delCommand
+return :DeleteCommand
+cmd -> delCommand: execute(itemList: ItemList, ui: UI)
+activate delCommand
+return
+cmd -> ui: showMessages(Messages.REPORTED_LOST_AND_DELETED_MESSAGE)
+activate ui
+return
+else "updatedItemQuantity < 0"
+end
+
+cmd -> ui:showDivider()
+activate ui
+return
+
+return
+@enduml
