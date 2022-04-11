@@ -27,16 +27,6 @@ deactivate GeneralFunctions
 updateCommand -> AddCommandInputTest: testUpdateIncomeParameters()
 activate AddCommandInputTest HELPER_COLOUR
 
-AddCommandInputTest -> AddCommandInputTest: testIncomeAmount()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-AddCommandInputTest -> AddCommandInputTest: testIncomeCategory()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
 AddCommandInputTest --> updateCommand
 deactivate AddCommandInputTest
 
@@ -44,15 +34,6 @@ updateCommand -> GeneralFunctions: capitalise(inputCategory)
 activate GeneralFunctions HELPER_COLOUR
 GeneralFunctions --> updateCommand
 deactivate GeneralFunctions
-
-opt isSimilarIncome()
-updateCommand --> MMM
-note right
-An exception is thrown, warning user
-that the new Income is similar to
-old Income
-end note
-end
 
 create Income
 updateCommand -> Income: Income()

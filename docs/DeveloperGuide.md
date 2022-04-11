@@ -427,7 +427,7 @@ separate `ListCommand.listToString()` method.
 ### Delete Command
 The source code can be found in [`DeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/DeleteCommand.java)
 
-The List Command feature allows users to delete an entry in their current expenditure, credit card or income list, using their
+The List Command feature allows users to delete an entry in their current `Expenditure`, `Credit card` or `Income` list, using their
 respective flags and followed by the index of the entry to be deleted:
 - Delete an expenditure `/e [INDEX]`.
 - Delete a credit card `/cc [INDEX]`.
@@ -446,7 +446,7 @@ The sequence diagram above shows the interactions when a `DeleteCommand` is exec
 <br/>
 
 #### Delete Expenditure `/e`
-Deletes an expenditure entry specified by the user using the expenditure's index. The expenditure is deleted through the `DeleteCommand.deleteExpenditure()`
+Deletes an `Expenditure` specified by the user using the `Expenditure`'s index. The `Expenditure` is deleted through the `DeleteCommand.deleteExpenditure()`
 method, invoked when using the `/e` flag.
 
 ![delete_expenditure_sequence_diagram](images/DeleteExpenditureSequenceDiagram.png)
@@ -455,43 +455,43 @@ method, invoked when using the `/e` flag.
 The sequence diagram above shows the interactions when deleting an expenditure.
 1. After receiving the `DeleteCommand` object from `Parser`, `MMM` calls the `DeleteCommand.executeCommand()` method.
 2. `DeleteCommand.deleteExpenditure()`method is invoked as the `/e` flag is present.
-3. `expenditureList.get()` method is then invoked, which retrieves the expenditure object to be deleted.
+3. `expenditureList.get()` method is then invoked, which retrieves the `Expenditure` to be deleted.
 4. `Expenditure.getPaymentMethod()` is then used to check if the payment method was in `CASH`.
 5. For Credit Card payment methods, the amount of expenditure is deducted from `CreditCard.totalExpenditure`. 
-6. Details of the deleted expenditure is then printed out.
+6. Details of the deleted `Expenditure` is then printed out.
 7. Control is returned to `MMM`.
 
 <br/>
 
 #### Delete Credit Card `/cc`
-Deletes a credit card specified by the user using the credit card's index. The credit card is deleted through the `DeleteCommand.deleteCreditCard()`
+Deletes a `Credit Card` specified by the user using the `Credit Card`'s index. The `Credit Card` is deleted through the `DeleteCommand.deleteCreditCard()`
 method, invoked when using the `/cc` flag.
 
 ![Delete_credit_card_sequence_diagram](images/DeleteCreditCardSequenceDiagram.png)
 <br/> Fig 18 - Delete Credit Card Sequence Diagram
 
-The sequence diagram above shows the interactions when deleting a credit card.
+The sequence diagram above shows the interactions when deleting a `Credit Card`.
 1. After receiving the `DeleteCommand` object from `Parser`, `MMM` calls the `DeleteCommand.executeCommand()` method.
 2. `DeleteCommand.deleteCreditCard()`method is invoked as the `/cc` flag is present.
-3. `creditCardList.delete()` method is then invoked, which removes the specified index of Credit Card input by the user.
-4. Details of the deleted Credit Card is then printed out.
+3. `creditCardList.delete()` method is then invoked, which removes the `Credit Card` specified by the user.
+4. Details of the deleted `Credit Card` is then printed out.
 5. Control is returned to `MMM`.
 
 <br/>
 
 
 #### Delete Income `/i`
-Deletes an Income specified by the user using the Income's index. The Income is deleted through the `DeleteCommand.deleteIncome()`
+Deletes an `Income` specified by the user using the `Income`'s index. The `Income` is deleted through the `DeleteCommand.deleteIncome()`
 method, invoked when using the `/i` flag.
 
 ![Delete_income_sequence_diagram](images/DeleteIncomeSequenceDiagram.png)
 <br/> Fig 19 - Delete Income Sequence Diagram
 
-The sequence diagram above shows the interactions when deleting an Income.
+The sequence diagram above shows the interactions when deleting an `Income`.
 1. After receiving the `DeleteCommand` object from `Parser`, `MMM` calls the `DeleteCommand.executeCommand()` method.
 2. `DeleteCommand.deleteIncome()`method is invoked as the `/i` flag is present.
-3. `IncomeList.delete()` method is then invoked, which removes the specified index of Income input by the user.
-4. Details of the deleted Income is then printed out.
+3. `IncomeList.delete()` method is then invoked, which removes the `Income` specified by the user.
+4. Details of the deleted `Income` is then printed out.
 5. Control is returned to `MMM`.
 
 <br/>
@@ -499,11 +499,11 @@ The sequence diagram above shows the interactions when deleting an Income.
 
 #### Delete Command design considerations
 Aspect: To print deleted object from User's list.
-* Alternative 1 (current choice): Prints details of deleted Expenditure, Credit Card, or Income.
-    * Pros: Users can easily verify that they have correctly deleted the object intended.
+* Alternative 1 (current choice): Prints details of deleted `Expenditure`, `Credit Card`, or `Income`.
+    * Pros: Users can easily verify that they have correctly deleted the object as intended.
     * Cons: Printing extraneous lines onto the Command-Line may affect user-experience and find the output overwhelming.
 
-* Alternative 2: Quietly delete the specified Expenditure, Credit Card, or Income.
+* Alternative 2: Quietly delete the specified `Expenditure`, `Credit Card`, or `Income`.
     * Pros: Easily implemented.
     * Cons: Users are unable to verify that the correct object was deleted.
 
@@ -512,11 +512,11 @@ Aspect: To print deleted object from User's list.
 ### Update Command
 The source code can be found in [`UpdateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/UpdateCommand.java)
 
-The Add Command feature allows users to update an expenditure, credit card, or income using a single command.
+The Add Command feature allows users to update an `Expenditure`, `Credit Card`, or `Income` using a single command.
 This provides speed and ease of use by only requiring a single line of input, when making amendments to an entry in their list.
-- Update an expenditure `/e `.
+- Update an expenditure `/e`.
 - Update a credit card `/cc`.
-- Update an income `/i `.
+- Update an income `/i`.
 
 ![update_command_sequence_diagram](images/UpdateCommandSequenceDiagram.png)
 <br/> Fig 20 - Update Command Sequence Diagram
@@ -532,48 +532,48 @@ The sequence diagram above shows the interactions when an `UpdateCommand` is exe
 
 
 #### Update Expenditure `/e`
-Updates an expenditure entry specified by the user using the expenditure's index. The expenditure is updated through the `UpdateCommand.updateExpenditure()`
+Updates an `Expenditure` specified by the user using the `Expenditure`'s index. The `Expenditure` is updated through the `UpdateCommand.updateExpenditure()`
 method, invoked when using the `/e` flag.
 
 ![update_expenditure_sequence_diagram](images/UpdateExpenditureSequenceDiagram.png)
 <br/> Fig 21 - Update Expenditure Sequence Diagram
 
-The sequence diagram above shows the interactions when updating an expenditure.
+The sequence diagram above shows the interactions when updating an `Expenditure`.
 1. During the execution, `UpdateCommand.updateExpenditure()` will parse through user input to obtain the `PAYMENT_METHOD`, `CATEGORY`, `DESCRIPTION`, `AMOUNT` and `TIME` fields.
 2. Once all the fields are obtained, `UpdateCommand.updateExpenditure()` will run tests for its respective fields.
-3. The `UpdateCommand.updateExpenditure()` object formats the `CATEGORY` and `AMOUNT` fields, and the `PAYMENT_METHOD` if it is cash.
-4. `UpdateCommand.updateExpenditure()` checks if the updated expenditure is similar to the old expenditure it is replacing and throws an error if it is.
-5. If the old expenditure's `PAYMENT_METHOD` or new expenditure's `PAYMENT_METHOD` is not cash, `UpdateCommand.updateExpenditure()` invokes `UpdateCommand.updatePaymentMethod()` to update the corresponding `creditCard.totalExpenditure`.
-6. The `UpdateCommand.updateExpenditure()` object instantiates a new `Expenditure` object with the 5 fields and sets it into the ExpenditureList.
+3. The `UpdateCommand.updateExpenditure()` object formats the `CATEGORY` and `AMOUNT` fields, and the `PAYMENT_METHOD` if it is in `CASH`.
+4. `UpdateCommand.updateExpenditure()` checks if the updated `Expenditure` is identical to the old `Expenditure` it is replacing, and throws an error if it is.
+5. If the old `Expenditure`'s `PAYMENT_METHOD` or new `Expenditure`'s `PAYMENT_METHOD` is not in `CASH`, `UpdateCommand.updateExpenditure()` invokes `UpdateCommand.updatePaymentMethod()` to update the corresponding `creditCard.totalExpenditure`.
+6. The `UpdateCommand.updateExpenditure()` object instantiates a new `Expenditure` object with the 5 fields and sets it into the `ExpenditureList`.
 7. Details of the updated `Expenditure` is printed out.
 8. Control is returned to `MMM`.
 
 <br/>
 
 #### Update Credit Card `/cc`
-Updates a credit card specified by the user using the credit card's index. The credit card is updated through the `UpdateCommand.updateCreditCard()`
+Updates a `Credit Card` specified by the user using the `Credit Card`'s index. The `Credit Card` is updated through the `UpdateCommand.updateCreditCard()`
 method, invoked when using the `/cc` flag.
 
 ![Update_credit_card_sequence_diagram](images/UpdateCreditCardSequenceDiagram.png)
 <br/> Fig 22 - Update Credit Card Sequence Diagram
 
-The sequence diagram above shows the interactions when updating a credit card .
+The sequence diagram above shows the interactions when updating a `Credit Card`.
 1. During the execution, `UpdateCommand.updateCreditCard()` will parse through user input to obtain the `CREDIT_CARD_NAME`, `CATEGORY`, `CASH_BACK` and `CARD_LIMIT` fields.
-2. Once all the fields are obtained, `UpdateCommand.updateCreditCard()` will run checks prior to its insertion.
-3. The `UpdateCommand.updateCreditCard()` object instantiates a new CreditCard object with the aforementioned 3 fields and sets them into the CreditCardList, at the specified index.
+2. Once all the fields are obtained, `UpdateCommand.updateCreditCard()` will run checks for its respective fields.
+3. The `UpdateCommand.updateCreditCard()` object instantiates a new `Credit Card` object with the aforementioned 3 fields and sets them into the `CreditCardList`, at the specified index.
 5. Details of the updated `Credit Card` is printed out.
 6. Control is returned to `MMM`.
 
 <br/>
 
 #### Update Income `/i`
-Updates an Income specified by the user using the Income's index. The Income is updated through the `UpdateCommand.updateIncome()`
+Updates an `Income` specified by the user using the `Income`'s index. The `Income` is updated through the `UpdateCommand.updateIncome()`
 method, invoked when using the `/i` flag.
 
 ![Update_income_sequence_diagram](images/UpdateIncomeSequenceDiagram.png)
 <br/> Fig 23 - Update Income Sequence Diagram
 
-The sequence diagram above shows the interactions when updating an Income.
+The sequence diagram above shows the interactions when updating an `Income`.
 1. After receiving the AddCommand object from Parser, MMM calls the `UpdateCommand.executeCommand()` method.
 2. `UpdateCommand.updateIncome()` method is invoked as the `/i` flag is present. It parses through the user’s input to obtain `AMOUNT` and `CATEGORY` fields. It also runs tests on these fields to ensure the inputs are valid.
 3. An `Income` object is instantiated using the aforementioned fields and is added into the `IncomeList`.
@@ -584,7 +584,7 @@ The sequence diagram above shows the interactions when updating an Income.
 
 #### Update Command design considerations
 Aspect: To allow updating of a similar object from User's list.
-* Alternative 1 (current choice): Throws an exception and warns the user that the updated Expenditure, Credit Card, or Income is similar to the object they are replacing.
+* Alternative 1 (current choice): Throws an exception and warns the user that the updated `Expenditure`, `Credit Card`, or `Income` is similar to the object they are replacing.
     * Pros: Users can easily verify that they have made a change in the updated object.
     * Cons: Implementing this requires extraneous checks and increased coupling.
 
