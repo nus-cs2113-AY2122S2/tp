@@ -1074,7 +1074,7 @@ This section includes instructions to test SplitLah manually.
 <br>
 
 <div class="button-box">
-  <a class="back-button" href="#contents">Back to Contents</a>
+  <a class="back-button" href="#appendix-instructions-for-manual-testing">Back to Appendix: Instructions for Manual Testing</a>
 </div>
 
 <hr>
