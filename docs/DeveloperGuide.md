@@ -121,6 +121,11 @@ The parser parses the description of the command. It calls the validator class t
 
 ![ParserUML](diagrams/ParserUML.png)
 
+
+#### `HalpmiException`
+![ExceptionClassUML](diagrams/ExceptionClassUML.png)
+There are three types of HalpmiExceptions, namely, `UserInputErrorException` (usually thrown by Validator), `NotFoundException` (thrown by `find` command) and `DuplicateEntryException` (thrown when trying to add already existing data). 
+
 #### `Storage`
 
 ![StorageClassUML](diagrams/StorageClassUML.png)
