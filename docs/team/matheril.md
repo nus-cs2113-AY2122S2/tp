@@ -38,9 +38,9 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 * Message
     * Set up this class so other developers can store their hardcoded strings in it, such as error and logging messages.
 * InvalidDataException
-    * This class represents an exception thrown when data-related errors occur.
+    * Set up this class to represent an exception thrown when data-related errors occur.
 * InvalidFormatException
-    * This class represents an exception thrown when format-related errors occur.
+    * Set up this class to represent an exception thrown when format-related errors occur.
 
 #### Testing
 * Added JUnit tests for `ActivityEditCommand`,`ActivityEditCommandParser`, `Name` and `ActivityCost`.
