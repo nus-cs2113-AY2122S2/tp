@@ -28,7 +28,9 @@ complete the activities with the use of the study session.
     - Updated documentation for `clear` feature. (pull request [#152](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/152))
     - Added documentation for features `help` and `bye` (pull request [#159](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/159))
     - Minor fixes to formatting issues (pull requests [#159](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/159))
-      <br/>
+
+<div style="page-break-after: always;"></div>
+
 - **Developer Guide**:
     - Updated documentation details of the `clear` feature. (pull request [#152](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/152))
     - Added UML sequence diagram for parsing user input (pull request [#159](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/159))
