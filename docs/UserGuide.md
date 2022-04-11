@@ -7,7 +7,7 @@ to focus on their academic tasks.
 Optimised for use via a Command Line Interface (CLI),
 users who can type fast will be able to plan out their tasks in a much quicker fashion compared to traditional GUI apps.
 
-### Managing your time
+### Managing your tasks
 You can add your tasks into Sherpass and get a detailed outline of your schedule. Using this schedule, you won't
 have to worry ever again about forgetting tasks and missing deadlines!
 
@@ -62,7 +62,6 @@ it correctly and with ease. Here are some icons which we will use to convey impo
     - Show tasks (identical to the one in Task management): [`show`](#show-your-tasks-show)
     - Mark tasks as done (identical to the one in Task management):[`mark`](#mark-your-tasks-as-done-mark) 
     - Exit study session: [`leave`](#leave-the-study-session-leave)
-  - Exit program: [`bye`]()
   - Help: [`help`](#help-help)
   - Exit program: [`bye`](#exit-program-bye)
   - [Saving your tasks](#saving-your-tasks)
@@ -115,7 +114,7 @@ Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate 
 > When using the optional parameter shown in `[]`, both the`DEADLINE` and `END_TIME` to need be used together.
 
 **Examples**
-- `add write final essay /do 25/6/2022 /start 20:00 /end 22:00 /bydate 27/6/2022 /bytime 23:59`
+- `add write final essay /do 11/4/2022 /start 22:00 /end 24:00 /bydate 13/4/2022 /bytime 23:59`
 
 ![](images/addSingleTaskWithDeadline.png)
 
@@ -226,7 +225,7 @@ Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/en
 - `edit 2 write draft essay`
 
 Before edit command:
-![](images/scheduleAfterDeletingASingleTask.png)
+![](images/scheduleAfterAddingRecurringTasksOne.png)
 
 When executing edit command:
 ![](images/editSingleTask.png)
@@ -331,9 +330,7 @@ Format:
 
 **Example**
 
-![weeklyTimetablePart1](images/weeklyTimetablePart1.PNG)
-![weeklyTimetablePart2](images/weeklyTimetablePart2.PNG)
-
+![weeklyTimetable](images/weeklyTimetable.PNG)
 
 ### Display Monthly Schedule: `show month` / `show MONTH`
 If showing of your daily schedule or weekly schedule is not enough, Sherpass also allows you to track your
@@ -409,12 +406,16 @@ Format:
 **Example**
 
 Below are some sample outputs for `clear all`, which asks a confirmation message before executing the clear:
-![image](images/clear_all_confirmation.png)
-If the user inputs `y`:
-![image](images/clear_all_execute.png)
-If the user inputs `n`:
-![image](images/clear_all_no_execute.png)
 
+![image](images/clear_all_confirmation.png)
+
+If the user inputs `y`:
+
+![image](images/clear_all_execute.png)
+
+If the user inputs `n`:
+
+![image](images/clear_all_no_execute.png)
 
 ### Enter study session: `study`
 Enter the study session where you can start timers to help finish your tasks.
@@ -618,6 +619,7 @@ Displays a short guide for either all the commands, or one specified command.
 Format: `help [COMMAND_WORD]`
 
 **Example**
+
 ![image](images/help_delete.png)
 
 > 💡 **Note:** Alternatively, you can enter `help quick start` for a command summary similar to the one in this document.
@@ -629,6 +631,7 @@ Exits the program.
 Format: `bye`
 
 **Example**
+
 ![image](images/bye.png)
 
 ### Saving your tasks
