@@ -31,7 +31,7 @@ loop foreach task in affectedTasks
     currentTask -> newTask ++
     newTask --> currentTask --
     currentTask --> TaskList -- : updatedTask
-    TaskList -> newTask ++ : editTask()
+    TaskList -> newTask ++ : editTask(identifier, description, newDoStartDate, newDoEndDate, newByDate)
     newTask --> TaskList --
     TaskList -> TaskUtil ++ : checkDateTimeClash(tempTasks, updatedTask)
     TaskUtil --> TaskList --
