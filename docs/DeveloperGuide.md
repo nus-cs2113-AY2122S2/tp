@@ -1,6 +1,23 @@
 # Developer Guide
 
-## Acknowledgements
+## Table of contents
+* [Design](#design)
+* [Implementation](#implementation)
+  * [Unit Good Class](#unit-good-class)
+  * [Good Class](#good-class)
+  * [Order Class](#order-class)
+  * [Orderline Class](#orderline-class)
+  * [Warehouse Class](#warehouse-class)
+  * [Command Parser](#command-parser)
+  * [User Interface Class](#user-interface-class)
+  * [Match Keyword Class](#match-keyword-class)
+* [Product Scope](#product-scope)
+  * [Target User Profile](#target-user-profile)
+  * [Value Proposition](#value-proposition)
+  * [User Stories](#user-stories)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+* [Instructions for Manual Testing](#instructions-for-manual-testing)
 
 ## Design
 ![Architecture Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/ArchitectureDiagram.puml)
@@ -19,30 +36,36 @@ The specific details of exactly how view order command will run will be describe
 
 ## Implementation
 ### Unit Good Class
-The Unit good class keep track of the unit goods in the warehouse. A unit good is the template, holding the specific details such as SKU, name, description and [Capacity](#capacity-enumeration)
+The Unit good class keep track of the unit goods in the warehouse.
 #### Description
+Unit goods will be stored as a HashMap<String, UnitGood> in the warehouse with the key being a unique SKU as a string and the value is the actual Unit Good.
+
+A unit good is a template good, holding the specific details such as SKU, name, description and [Capacity](#capacity-enumeration).
+
 ![Unit Good Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/UnitGood.puml)
 
-Unit goods will be stored as a HashMap<String, UnitGood> in the warehouse with the key being a unique SKU as a string and the value is the actual Unit Good.
-This means that to update a Unit Good details, there is a need to first remove the Unit Good from the HashMap, then add a new instance of the Unit Good. This is to ensure that existing Unit Goods 
-will not be incorrectly overwritten
+When a Unit Good is added, Simplst will also add a Good of the same SKU with 0 quantity. This is to indicate that Simplst knows that this Unit Good is tied to the corresponding Good of the same SKU.
 
-The class diagram will be shown below.
-
+To update a Unit Good details, there is a need to first remove the Unit Good from the HashMap, then add a new instance of the Unit Good.
+This design is intentional to ensure that existing Unit Goods will not be incorrectly overwritten.
 
 ### Good Class
-A Goods class will extend the unit good class. It will contain the extra variable of quantity which is meant to show the current quantity the warehouse contains.
+A Goods class will extend the unit good class.
 #### Description
-Similar to Unit Goods, the Goods will be stored as a HashMap<String, Good> in the warehouse with the key being the SKU as a string and the value is the actual Good.
+Similar to [Unit Goods](#unit-good-class), the Goods will be stored as a LinkedHashMap<String, Good> in the warehouse with the key being the SKU as a string and the value is the actual Good.
+
+The Good Class contains the extra variable of quantity which is meant to show the current quantity the warehouse contains in its inventory now.
 
 ![Good Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Good.puml)
 
-The Goods class allows for the creation of orderline objects which has the following attributes: id, name, quantity and
-description. Each attribute can be obtained using public get methods, and the attribute quantity can be set using the public set method.
+When a good is being added into Simplst, it will first check for its corresponding UnitGood by checking if a UnitGood with the same SKU is known by Simplst.
+Simplst will then add the quantity specified to the LinkedHashMap of Goods stored in the warehouse.
 
-### Capacity Enumeration
+If the SKU is not known, this means that a UnitGood of the same SKU has to be added first.
+
+#### Capacity Enumeration
 The Capacity enum is meant as a heuristic to determine the size of a unit good and good.
-#### Description
+##### Description
 This enum will have 3 values:
 - SMALL
 - MEDIUM
@@ -52,23 +75,34 @@ The capacity SMALL will be 1 unit of size, MEDIUM will be 2 units of size and fi
 A diagram can be seen in the [Architecture Class Diagram](#design)
 
 ### Order Class
+The Order Class is used to imitate how orders will be stored in Simplst.
 #### Description
+![Order Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Order.puml)
+
+Orders will contain the Order ID which will be used to identity the order. The Order ID has to be a unique positive number.
+As seen in the class diagram above, Orders will hold a collection of [Orderlines](#orderline-class). This will be used to indicate what goods are required to fulfill the Order.
+
+To [fulfill](#fulfill-parser) an order, this would go through all the orderlines in that order and attempt to fulfill them.
+When all orderlines in the order are fulfilled, this will indicate that the order is fulfilled.
+
 ### Orderline Class
-A Orderline class will extend the Goods class. It will contain the extra variable of quantityFulfilled and isCheckedOff.
+A Orderline class will extend the Goods class.
 #### Description
 ![Orderline Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Orderline.puml)
 
-The quantity variable here will be to indicate the quantity required to fulfill the current order.
+Orderline will contain the extra variable of quantityFulfilled and isCheckedOff as compared to the [Goods Class](#good-class).
+The quantity variable will be to indicate the quantity required to fulfill the current order. This is different as compared to in the Goods Class which indicates the current quantity in the warehouse.
 The quantity fulfilled variable will be to indicate the quantity currently fulfilled for that order. When the quantity fulfilled equals to the quantity required, the variable isCheckedOff will be true.
 This is to indicate that this orderline is fulfilled in that order, and it does not require any more of the good.
 
-The diagram below shows the model component of the orderline class.
 ### Warehouse Class
-The warehouse class is created to simulate an entire warehouse
+The warehouse class is created to simulate an entire warehouse.
 #### Description
-![Warehouse Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/Warehouse.puml)
+![Warehouse Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Warehouse.puml)
 
 Most of the methods in the Warehouse Class will require users to know the SKU of the Good that they want to interact with.
+
+The find method within the Find Parser is aimed at helping users find the SKU of Good that they need.
 
 The warehouse class will contain:
 - List of orders
@@ -80,47 +114,39 @@ The warehouse class will contain:
 - LinkedHashMap of goods
   - A linked hashmap is chosen for goods to ensure that we are able to maintain the ordering of goods added while having the simplicity of accessing the necessary goods through their SKU
 
+For more information of the methods regarding the Warehouse Class, check the [UserGuide](/UserGuide.md) to see what features are available to each of the above Classes.
 ### Display Class
 Display class is used to store and display different messages to user.
 #### Description
 ![Display Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Display.puml)
-By calling different methods of Display class, Simplst can print out different messages for user
+
+By calling different methods of Display class, Simplst can print out different messages for users.
 
 ### UserInterface Class
 UserInterface class is used to take user input and pass it to the corresponding command parser.
 
 #### Description
 ![UserInterface Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/UserInterface.puml)
-After receiving user input, the first part of the command will be used to determine what is the command type of the input. 
-Then, it will pass the command to one of the command parsers. 
-After executing the commannd, user will be asked to input another command until the program is terminated.
-If the user input `bye`, no other command will be taken and the program will be terminated.  
+
+The main method in UserInterface is the run() method. This would choose what which Parser to send the user's input to based on the 1st word of the user's input.
+Below are the steps taken:
+
+1. After receiving user input, the first part of the command will be used to determine what is the command type of the input. 
+2. It will pass the command to the corresponding command parser. 
+3. After executing the commannd, user will be asked to input another command until the program is terminated.
+4. This will continue until the user inputs `bye`, no other command will be taken and the program will be terminated.
 
 ### Command Parser
 #### Description
 This is the description for the Command Parser. This is an abstract class which all other parser classes will implement
+
 ![Command Parser Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/CommandParser.puml)
 
-#### Add Parser
-##### Description
-#### Remove Parser
-##### Description
-#### View Parser
-##### Description
-#### List Parser
-##### Description
-#### Find Parser
-##### Description
-####  Help Parser
-##### Description
-#### Fulfill Parser
-##### Description
+Each parser class will use regular expressions done in the [Match Keyword Class](#match-keyword-class) to obtain a flag
+such that the program knows which operation to perform, whether it is a command related to Unit Good, Order, etc. The 
+parsers will then perform another series of us of regular expressions to obtain more specific details of the command
+such that it can properly execute the command.
 
-### User Interface Class
-#### Description
-
-### Display Class
-#### Description
 
 ### Match Keyword Class
 #### Description
@@ -154,9 +180,8 @@ String quantity = matches.get("qty");
 String description = matches.get("desc");
 ```
 
-### View Good Method
+### View Good
 #### Description
-View Good belongs as part of the Commands Class. It is used when a user would like to know more information about an inventory item has an item id linked to it in the warehouse.
 
 #### Operation
 
@@ -253,8 +278,9 @@ Target user profile: Warehouse Workers
 * is reasonably comfortable using CLI apps
 
 Target user profile: Warehouse Managers
-
-
+* has a need to update warehouse and workers on new orders
+* can type fast
+* is reasonably comfortable using CLI apps
 
 ### Value proposition
 
@@ -262,23 +288,67 @@ A cheap, user-friendly Warehouse Management System with intuitive commands to im
 
 ## User Stories
 
-| Version | As a ... | I want to ... | So that I can ...|
-|---------|----------|---------------|------------------|
-| v1.0    |Warehouse Worker|Get the total number of goods in the warehouse|its less tiring to have to count the total number of goods in the warehouse|
-| v1.0    |Warehouse Worker|View the description of goods easily|it would be easier for stocktaking|
-| v1.0    |Warehouse Worker|Add inventory items to the items list|so that I can keep track of goods entering the warehouse|
-| v1.0    |Warehouse Worker|Remove inventory items from the items list|so that I can track whenever a orderline is not in the warehouse|
-| v1.0    |Warehouse Worker|Get a list of all the inventory currently in the warehouse|so that I can see all the items we have in the warehouse|
-| <!--    |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list| -->
+| Version | As a ...          | I want to ...                                           | So that I can ...                                                                         |
+|---------|-------------------|---------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| v1.0    | Warehouse Worker  | Get the total number of goods in the warehouse          | its less tiring to have to count the total number of goods in the warehouse               |
+| v1.0    | Warehouse Worker  | View the description of goods easily                    | it would be easier for stocktaking                                                        |
+| v1.0    | Warehouse Worker  | Add Goods to the items list                             | so that I can keep track of goods entering the warehouse                                  |
+| v1.0    | Warehouse Worker  | Remove Goods from the items list                        | so that I can track whenever a Good is not in the warehouse                               |
+| v1.0    | Warehouse Worker  | Get a list of all the Goods currently in the warehouse  | so that I can see all the items we have in the warehouse                                  |
+| v2.0    | Warehouse Worker  | Find a certain Good currently in the warehouse by name  | so that I can easily find a certain Good we have in the warehouse                         |
+| v2.0    | Warehouse Worker  | Get a list of all the orders currently in the warehouse | so that I can see all the orders we have in the warehouse                                 |
+| v2.0    | Warehouse Worker  | Get a list of all the orderlines in an order            | so that I can see goods required to fulfill the order                                     |
+| v2.0    | Warehouse Manager | Add an order to the warehouse                           | so that I can inform warehouse workers on what orders the warehouse requires to fulfill   |
+| v2.0    | Warehouse Worker  | Fulfill a completed Order                               | so that I know which order does not require more goods and is completed to be shipped out |
+| v2.0    | Warehouse Worker  | View a specific order                                   | so that I can see all the details regarding a certain order in mind                       |
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+Device Requirement:
+* Must have Java 11 or higher installed (Recommended to use Java 11)
+* Supports 32-bit and 64-bit systems
+* Supports use of the Command Line Interface
+
+Application Performance:
+* Does not require internet connection; Functions offline
+* Quick and easy to launch and use
+* Responds to a command within 3 seconds
+* Provides function to save and load JSON files
+
+Application Reliability:
+* Data should be saved and stored accurately
+* Same input of a command should result in the same outcomes
+* Data storage will function normally as long as the application is not forced to close
+* Simplst should be able to hold data of up to hundreds of Unit Goods, Goods and Orders simultaneously
 
 ## Glossary
 
-* *glossary item* - Definition
+* *SKU* - Stock-Keeping Unit. It is the unique unit number for a specific warehouse item. It can contain characters and numbers (e.g WC01).
+* *[Unit Good](#unit-good-class)* - Template for creating a Good. Holds details of a certain Good.
+* *[Good](#good-class)* - Good to be stored in the warehouse
+* *[Order](#order-class)* - Information about what goods are delivered to who and where
+* *[Orderline](#orderline-class)* - The goods that needs to be delivered in that order
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Following commands from the [User Guide](/UserGuide.md) can give a rough overview of how Simplst will handle the commands.
+Here is a quick guide on example commands to try.
+
+| Action                               | Command to be keyed into the terminal                        |
+|--------------------------------------|--------------------------------------------------------------|
+| Add Unit Good                        | `add ug/ sku/SKU01 n/Metal Chair d/Made of steel size/small` |
+| Remove Unit Good                     | `remove ug/ sku/SKU01`                                       |
+| List Unit Good                       | `list ug/`                                                   |
+| Add Good quantity                    | `add g/ sku/SKU01 qty/30`                                    |
+| Remove Good quantity                 | `remove g/ sku/SKU01 qty/10`                                 |
+| List Goods (with quantity displayed) | `list g/`                                                    |
+| Viewing a Good                       | `view g/ sku/SKU01`                                          |
+| Find Good                            | `find n/chair`                                               |
+| Add Order                            | `add o/ oid/1 r/Mirana addr/Radiant Fountain`                |
+| Remove Order                         | `remove o/ oid/1`                                            |
+| List Orders                          | `list o/`                                                    |
+| View Order                           | `view o/ oid/1`                                              |
+| Fulfill Order                        | `fulfill oid/1`                                              |
+| Add Orderline                        | `add og/ oid/1 sku/SKU01 q/10`                               | 
+| Remove Orderline Quantity            | `remove og/ oid/1 sku/SKU01 q/5`                             |
+| List Orderlines                      | `list og/ oid/1`                                             |
