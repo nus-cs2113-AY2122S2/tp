@@ -46,7 +46,7 @@ Added Junit tests for DoctorList, PatientList and Appointment.
 Managed releases v1.0 - v2.1 (3 releases) on GitHub
 
 #### Enhancements to existing features:
-Handled Exceptions for `add` and `delete` (Pull request [#97](https://github.com/AY2122S2-CS2113-T11-2/tp/pull/97), [#98](https://github.com/AY2122S2-CS2113-T11-2/tp/pull/98)).
+Handled Exceptions for `add` and `delete` (Pull request [#97](https://github.com/AY2122S2-CS2113-T11-2/tp/pull/97), [#98](https://github.com/AY2122S2-CS2113-T11-2/tp/pull/98), [#140](https://github.com/AY2122S2-CS2113-T11-2/tp/pull/140)).
 
 Updated process (added exceptions) of 'add appointment': raise exception when adding
 appointment to a doctor who has another appointment at that time (Pull request [#129](https://github.com/AY2122S2-CS2113-T11-2/tp/pull/129)).
