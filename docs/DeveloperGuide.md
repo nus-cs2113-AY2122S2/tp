@@ -1619,7 +1619,9 @@ Test Scenario 2: SplitLah.jar is placed in a location where read and write permi
    Expected: An error message should be printed indicating no save file was created and changes made in the run time of the application is not saved.
 
 <br>
+
 <div class="button-box">
-  <a class="back-button" href="#contents">Back to Contents</a>
+  <a class="back-button" href="#appendix-instructions-for-manual-testing">Back to Appendix: Instructions for Manual Testing</a>
 </div>
 
+<hr>
