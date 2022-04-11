@@ -349,6 +349,6 @@ Here is a quick guide on example commands to try.
 | List Orders                          | `list o/`                                                    |
 | View Order                           | `view o/ oid/1`                                              |
 | Fulfill Order                        | `fulfill oid/1`                                              |
-| Add Orderline                        | `add og/ oid/1 sku/SKU01 q/10`                               | 
-| Remove Orderline Quantity            | `remove og/ oid/1 sku/SKU01 q/5`                             |
+| Add Orderline                        | `add og/ oid/1 sku/SKU01 qty/10`                             | 
+| Remove Orderline Quantity            | `remove og/ oid/1 sku/SKU01 qty/5`                           |
 | List Orderlines                      | `list og/ oid/1`                                             |

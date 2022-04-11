@@ -32,6 +32,8 @@ setup and quick to use. Simplst will mainly be used to add, remove, list and vie
     * [Adding an Orderline](#adding-an-orderline-add-og)
     * [Removing an Orderline by Quantity](#removing-a-quantity-of-an-orderline-remove-og)
     * [Listing Orderlines in an Order](#listing-orderlines-in-an-order-list-og)
+  * [Exiting the Program](#exiting-the-program-bye)
+  * [FAQ](#faq)
   * [Command Summary](#command-summary)
 
 ## Explanation of key terms or symbols
@@ -438,6 +440,29 @@ Expected Output
 9 of WC1 - Metal Chair needed (Not Done)
 Another command?
 ```
+
+## Exiting the Program `bye`
+In order to properly exit the program and ensure the session is saved onto a file, we use the `bye` command.
+
+Example of using the `bye` to exit the program and a successful save of the session:
+
+`bye`
+
+Expected Output
+```
+Warehouse information succesfully stored in output/WAREHOUSE.json
+State saved!
+Bye
+```
+
+## FAQ
+Q: How to use the program effectively as a new user?
+
+A: Start by [adding Unit Goods](#adding-a-unit-good-add-ug) to your Warehouse. Once satisfied with the content,
+begin [populating the available Goods](#adding-quantity-of-a-good-add-g) so that there are Goods available in the
+warehouse. As orders for Goods come in, you can begin [adding Orders](#adding-an-order-add-o) and [goods to those Orders](#adding-an-orderline-add-og)
+to simplify workflow for your Warehouse needs. Other features can be done as well including [listing available Goods](#listing-available-goods-list-g)
+to enhance usage of this program.
 
 ## Command Summary
 
