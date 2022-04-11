@@ -5,9 +5,11 @@ import seedu.duke.Packages;
 public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
+    
     public static final String PACKAGES_FORMAT = "SHOW ALL PACKAGES\n" +
                                                  "View a list of all available packages\n" +
                                                  "Usage: packages\n";
+
     public static final String INFO_FORMAT = "SHOW CHOSEN PACKAGE\n" +
                                                 "Displays the detailed information of a specific travel package from\nthe " +
                                                 "'packages' page Able to print out specific details of any package\n" +
@@ -62,8 +64,6 @@ public class HelpCommand extends Command {
                             DELETE_FORMAT + SEPARATOR +
                             RESERVATIONS_FORMAT + SEPARATOR +
                             RESERVE_FORMAT + SEPARATOR +
-                            REMOVE_FORMAT + SEPARATOR +
-                            ADD_HOTEL_FORMAT + SEPARATOR +
-                            HOTELS_FORMAT + SEPARATOR);
+                            REMOVE_FORMAT + SEPARATOR);
     }
 }
