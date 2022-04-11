@@ -127,6 +127,10 @@ public class Warehouse {
     }
 
     private Boolean addGoodToOrder(Order order, String sku, String qty) throws WrongCommandException {
+        if (sku.isBlank()) {
+            throw new WrongCommandException("add", true);
+        }
+
         if (!isSkuInInventory(sku)) {
             System.out.println("Good does not exist in the warehouse");
             System.out.println("Try adding a good first");
