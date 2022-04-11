@@ -226,11 +226,11 @@ Example of usage:
 * View Appointment list `list appointment`
 * View Nurse list `list nurse`
 * View Ward list `list ward`
-* Search Doctor `search doctor DOCTOR_NO`
-* Search Patient `search patient PATIENT_NO`
+* Search Doctor `search doctor DOCTOR_ID`
+* Search Patient `search patient PATIENT_ID`
 * Search Appointment `search appointment DATETIME`
-* Search Nurse `search nurse NURSE_NO`
-* Search Ward `search ward WARD_NO`
+* Search Nurse `search nurse NURSE_ID`
+* Search Ward `search ward WARD_ID`
 * Edit Doctor Info `edit /d DOCTOR_NO /ph PHONE` OR `edit /d DOCTOR_NO /n NAME` OR `edit /d DOCTOR_NO /e EMAIL`
 * Edit Patient Info `edit /p PATIENT_NO /ph PHONE` OR `edit /p PATIENT_NO /n NAME` OR `edit /p PATIENT_NO /e EMAIL`
 * Edit Appointment `edit /a APPOINTMENT_NO /doctor DOCTOR_NO` OR `edit /a APPOINTMENT_NO /patient PATIENT_NO` OR `edit /a APPOINTMENT_NO /time TIME`
