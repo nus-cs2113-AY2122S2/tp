@@ -4,7 +4,7 @@
 
 ![](Logo/logo.jpg)
 
-I am one of the developers of Hotel Lite, a CLI application designed for hotel owners to manage their businesses efficiently.
+I am one of the developers of Hotel Lite, a CLI application designed for hotel owners to keep track of multiple management tasks.
 This application offers functionalities for keeping track of hotel inventory,
 managing housekeeper staff records, recording customer satisfaction ratings,
 assigning housekeepers to rooms,
