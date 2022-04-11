@@ -18,7 +18,7 @@
       * [Add Expenditure](#add-expenditure-e)
       * [Add Credit Card](#add-credit-card-cc)
       * [Add Income](#add-income-i)
-      * [Design Considerations](#addCommand-design-considerations)
+      * [Design Considerations](#addcommand-design-considerations)
     * [CalculateInputCommand feature](#calculateinputcommand-feature)
     * [List Command](#list-command)
       * [List Expenditure](#list-expenditure-e)
@@ -30,6 +30,15 @@
       * [Delete Credit Card](#delete-credit-card-cc)
       * [Delete Income](#delete-income-i)
       * [Design Considerations](#delete-command-design-considerations)
+    * [Update Command](#update-command)
+      * [Update Expenditure](#update-expenditure-e)
+      * [Update Credit Card](#update-credit-card-cc)
+      * [Update Income](#update-income-i)
+      * [Update Considerations](#update-command-design-considerations)
+    * [Storage](#storage)
+      * [Loading](#loading)
+      * [Saving](#saving)
+      * [Design Considerations](#storage-design-considerations)
 * [Appendix Requirements](#appendix-requirements)
   * [Product scope](#product-scope)
   * [User Stories](#user-stories)
@@ -428,12 +437,11 @@ respective flags and followed by the index of the entry to be deleted:
 The sequence diagram above shows the interactions when a `DeleteCommand` is executed.
 1. After receiving the `DeleteCommand` object from `Parser`, `MMM` calls the `DeleteCommand.executeCommand()` method.
 2. If the expenses flag `/e` is present, it calls the `deleteExpenditure()` method.
-3. Else if the credit card flag `/cc` is present, it calls the ` deleteCreditCard()` method.
+3. Else if the credit card flag `/cc` is present, it calls the `deleteCreditCard()` method.
 4. Else if the income flag `/i` is present, it calls the `deleteIncome()` method.
 5. Else, it throws an error, which is then handled by printing an error message to the user.
 
 <br/>
-
 
 #### Delete Expenditure `/e`
 Deletes an expenditure entry specified by the user using the expenditure's index. The expenditure is deleted through the `DeleteCommand.deleteExpenditure()`
@@ -442,7 +450,7 @@ method, invoked when using the `/e` flag.
 ![delete_expenditure_sequence_diagram](images/DeleteExpenditureSequenceDiagram.png)
 <br/> Fig 17 - Delete Expenditure Sequence Diagram
 
-The sequence diagram above shows the interactions when listing expenditures.
+The sequence diagram above shows the interactions when deleting an expenditure.
 1. After receiving the `DeleteCommand` object from `Parser`, `MMM` calls the `DeleteCommand.executeCommand()` method.
 2. `DeleteCommand.deleteExpenditure()`method is invoked as the `/e` flag is present.
 3. `expenditureList.get()` method is then invoked, which retrieves the expenditure object to be deleted.
@@ -453,7 +461,6 @@ The sequence diagram above shows the interactions when listing expenditures.
 
 <br/>
 
-
 #### Delete Credit Card `/cc`
 Deletes a credit card specified by the user using the credit card's index. The credit card is deleted through the `DeleteCommand.deleteCreditCard()`
 method, invoked when using the `/cc` flag.
@@ -461,7 +468,7 @@ method, invoked when using the `/cc` flag.
 ![Delete_credit_card_sequence_diagram](images/DeleteCreditCardSequenceDiagram.png)
 <br/> Fig 18 - Delete Credit Card Sequence Diagram
 
-The sequence diagram above shows the interactions when listing credit cards.
+The sequence diagram above shows the interactions when deleting a credit card.
 1. After receiving the `DeleteCommand` object from `Parser`, `MMM` calls the `DeleteCommand.executeCommand()` method.
 2. `DeleteCommand.deleteCreditCard()`method is invoked as the `/cc` flag is present.
 3. `creditCardList.delete()` method is then invoked, which removes the specified index of Credit Card input by the user.
@@ -476,9 +483,9 @@ Deletes an Income specified by the user using the Income's index. The Income is 
 method, invoked when using the `/i` flag.
 
 ![Delete_income_sequence_diagram](images/DeleteIncomeSequenceDiagram.png)
-<br/> Fig 19 - List Income Sequence Diagram
+<br/> Fig 19 - Delete Income Sequence Diagram
 
-The sequence diagram above shows the interactions when listing credit cards.
+The sequence diagram above shows the interactions when deleting an Income.
 1. After receiving the `DeleteCommand` object from `Parser`, `MMM` calls the `DeleteCommand.executeCommand()` method.
 2. `DeleteCommand.deleteIncome()`method is invoked as the `/i` flag is present.
 3. `IncomeList.delete()` method is then invoked, which removes the specified index of Income input by the user.
@@ -500,6 +507,203 @@ Aspect: To print deleted object from User's list.
 
 <br/>
 
+### Update Command
+The source code can be found in [`UpdateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/UpdateCommand.java)
+
+The Add Command feature allows users to update an expenditure, credit card, or income using a single command.
+This provides speed and ease of use by only requiring a single line of input, when making amendments to an entry in their list.
+- Update an expenditure `/e `.
+- Update a credit card `/cc`.
+- Update an income `/i `.
+
+![update_command_sequence_diagram](images/UpdateCommandSequenceDiagram.png)
+<br/> Fig 20 - Update Command Sequence Diagram
+
+The sequence diagram above shows the interactions when an `UpdateCommand` is executed.
+1. After receiving the `UpdateCommand` object from `Parser`, `MMM` calls the `UpdateCommand.executeCommand()` method.
+2. If the expenses flag `/e` is present, it calls the `updateExpenditure()` method.
+3. Else if the credit card flag `/cc` is present, it calls the `updateCreditCard()` method.
+4. Else if the income flag `/i` is present, it calls the `updateIncome()` method.
+5. Else, it throws an error, which is then handled by printing an error message to the user.
+
+<br/>
+
+
+#### Update Expenditure `/e`
+Updates an expenditure entry specified by the user using the expenditure's index. The expenditure is updated through the `UpdateCommand.updateExpenditure()`
+method, invoked when using the `/e` flag.
+
+![update_expenditure_sequence_diagram](images/UpdateExpenditureSequenceDiagram.png)
+<br/> Fig 21 - Update Expenditure Sequence Diagram
+
+The sequence diagram above shows the interactions when updating an expenditure.
+1. During the execution, `UpdateCommand.updateExpenditure()` will parse through user input to obtain the `PAYMENT_METHOD`, `CATEGORY`, `DESCRIPTION`, `AMOUNT` and `TIME` fields.
+2. Once all the fields are obtained, `UpdateCommand.updateExpenditure()` will run tests for its respective fields.
+3. The `UpdateCommand.updateExpenditure()` object formats the `CATEGORY` and `AMOUNT` fields, and the `PAYMENT_METHOD` if it is cash.
+4. `UpdateCommand.updateExpenditure()` checks if the updated expenditure is similar to the old expenditure it is replacing and throws an error if it is.
+5. If the old expenditure's `PAYMENT_METHOD` or new expenditure's `PAYMENT_METHOD` is not cash, `UpdateCommand.updateExpenditure()` invokes `UpdateCommand.updatePaymentMethod()` to update the corresponding `creditCard.totalExpenditure`.
+6. The `UpdateCommand.updateExpenditure()` object instantiates a new `Expenditure` object with the 5 fields and sets it into the ExpenditureList.
+7. Details of the updated `Expenditure` is printed out.
+8. Control is returned to `MMM`.
+
+<br/>
+
+#### Update Credit Card `/cc`
+Updates a credit card specified by the user using the credit card's index. The credit card is updated through the `UpdateCommand.updateCreditCard()`
+method, invoked when using the `/cc` flag.
+
+![Update_credit_card_sequence_diagram](images/UpdateCreditCardSequenceDiagram.png)
+<br/> Fig 22 - Update Credit Card Sequence Diagram
+
+The sequence diagram above shows the interactions when updating a credit card .
+1. During the execution, `UpdateCommand.updateCreditCard()` will parse through user input to obtain the `CREDIT_CARD_NAME`, `CATEGORY`, `CASH_BACK` and `CARD_LIMIT` fields.
+2. Once all the fields are obtained, `UpdateCommand.updateCreditCard()` will run checks prior to its insertion.
+3. The `UpdateCommand.updateCreditCard()` object instantiates a new CreditCard object with the aforementioned 3 fields and sets them into the CreditCardList, at the specified index.
+5. Details of the updated `Credit Card` is printed out.
+6. Control is returned to `MMM`.
+
+<br/>
+
+#### Update Income `/i`
+Updates an Income specified by the user using the Income's index. The Income is updated through the `UpdateCommand.updateIncome()`
+method, invoked when using the `/i` flag.
+
+![Update_income_sequence_diagram](images/UpdateIncomeSequenceDiagram.png)
+<br/> Fig 23 - Update Income Sequence Diagram
+
+The sequence diagram above shows the interactions when updating an Income.
+1. After receiving the AddCommand object from Parser, MMM calls the `UpdateCommand.executeCommand()` method.
+2. `UpdateCommand.updateIncome()` method is invoked as the `/i` flag is present. It parses through the user’s input to obtain `AMOUNT` and `CATEGORY` fields. It also runs tests on these fields to ensure the inputs are valid.
+3. An `Income` object is instantiated using the aforementioned fields and is added into the `IncomeList`.
+4. Details of the updated `Income` is then printed out.
+5. Control is returned to `MMM`.
+
+<br/>
+
+#### Update Command design considerations
+Aspect: To allow updating of a similar object from User's list.
+* Alternative 1 (current choice): Throws an exception and warns the user that the updated Expenditure, Credit Card, or Income is similar to the object they are replacing.
+    * Pros: Users can easily verify that they have made a change in the updated object.
+    * Cons: Implementing this requires extraneous checks and increased coupling.
+
+* Alternative 2: Do not warn the user that the old object being replaced is similar to the new object.
+    * Pros: Easily implemented.
+    * Cons: Users may not be aware that the new object has no difference from the old object.
+
+<br/>
+
+### Storage
+
+Loads the user's saved information upon startup, and saves the information after every successful
+command execution.
+
+<br/>
+
+#### Loading
+
+Loads the user's saved information upon startup.
+
+![Loading_sequence_diagram](images/Loading_Sequence_Diagram.png)
+<br/>
+Fig 21 - Loading Sequence Diagram
+
+The sequence diagram above shows the interactions when loading user data.
+
+1. On startup, `MMM` creates a `Storage` object that loads and saves data to `data.txt`. The `Storage` object
+creates the file if it does not exist.
+2. `MMM` then calls `Storage.load()`, which initializes a `Scanner` that reads the data file.
+3. `Storage` invokes `User.deserializeFrom()`, which reads a serialized User over the `Scanner`.
+4. `User` calls `ExpenditureList.deserializeFrom()`, which returns an `ExpenditureList` read from the `Scanner`.
+5. `User` then does the same for `CreditCardList.deserializeFrom()` and `IncomeList.deserializeFrom()`, which
+return a `CreditCardList` and `IncomeList`, respectively.
+
+![Deserialize_list_sequence_diagram](images/DeserializeListSequenceDiagram.png)
+<br/>
+
+Fig 22 - ExpenditureList Deserialization Sequence Diagram
+
+The above sequence diagram shows the interactions when a list of 
+`MMMSerializable`s is being deserialized. Although the given diagram shows the interaction for an 
+`ExpenditureList`, the interactions for `CreditCardList` and `IncomeList` are similar.
+
+1. `ExpenditureList` calls `SerializerFunctions.convertInputToList()`, which accepts a function
+that deserializes a line of input. Here, `Expenditure.deserialize()` is passed to `convertInputToList()`.
+2. For each line in the input which corresponds to an `Expenditure`, `SerializerFunctions`
+invokes `Expenditure.deserialize()` on this line, which returns an `Expenditure`. This is repeated until
+the designated terminator is read from the `Scanner`.
+3. `Expenditure` invokes `PropertyList.deserialize()` to convert the input line into a set of key-value pairs.
+Then, it makes a series of `PropertyList.getValue()` calls to obtain the values of each individual property.
+4. Once all attributes have been processed, `Expenditure.deserialize()` returns an `Expenditure`.
+5. These expenditures are aggregated into an `ExpenditureList`, which is returned 
+to the `deserializeFrom()` call.
+
+#### Saving
+
+Saves user information after every successful
+command execution.
+
+![Saving_sequence_diagram](images/Saving_Sequence_Diagram.png)
+<br/>
+
+Fig 23 - Saving Sequence Diagram
+
+The sequence diagram above shows the interactions when saving user data.
+
+1. After every command, `MMM` invokes `Storage.save()`.
+2. `Storage` invokes `User.serialize()`.
+3. `User` calls `ExpenditureList.serialize()`, which returns a `String`, representing the serialized 
+`ExpenditureList`.
+4. `User` then does the same for `CreditCardList.deserializeFrom()` and `IncomeList.deserializeFrom()`, which
+   return `String`s representing a serialized `CreditCardList` and `IncomeList`, respectively
+5. `User` compiles all these into one `String`, and returns this to `Storage`.
+6. `Storage` writes the returned serialized `User` into the data file.
+
+![Serialize_list_sequence_diagram](images/SerializeListSequenceDiagram.png)
+<br/>
+
+Fig 24 - ExpenditureList Serialization Sequence Diagram
+
+The above sequence diagram shows the interactions when a list of
+`MMMSerializable` is being serialized. Although the given diagram shows the interaction for an
+`ExpenditureList`, the interactions for `CreditCardList` and `IncomeList` are similar.
+
+1. `ExpenditureList` calls `SerializerFunctions.addListToStringBuilder()`, passing in an `ArrayList` of 
+`Expenditure`s.
+2. For each entry in the list, `SerializerFunctions`
+   invokes `Expenditure.propetyList()` on this line, which returns an `Expenditure`. This is repeated until
+   the designated terminator is read from the `Scanner`.
+3. `Expenditure` creates a `PropertyList` to stores its properties into.
+   Then, it makes a series of `PropertyList.setValue()` calls to save each of its attributes.
+4. Once all attributes have been processed, `PropertyList.serialize()` is called, and
+this serialized `PropertyList` is returned by `Expenditure.serialize()`.
+5. These serialized expenditures are aggregated into an `String`, which is returned
+   to the `deserializeFrom()` call.
+
+#### Storage Design Considerations
+
+Aspect: When to save user data.
+* Alternative 1 (current choice): After every command.
+  * Pros: User state is still saved when program exits in ways other than a `ByeCommand`.
+  * Cons: Saving after every command may degrade performance.
+* Alternative 2: At program exit (i.e. execution of `ByeCommand`).
+  * Pros: Less overhead per command, due to not having to save.
+  * Cons: User state is not saved when program exits otherwise (e.g. due to a crash).
+
+Aspect: What format to use in saving user data.
+* Alternative 1 (current choice): Custom key-value pair format.
+  * Pros: Easy to read and modify by hand.
+  * Cons: More involved implementation.
+* Alternative 2: Java's default `java.io.Serializable` interface.
+  * Pros: Is simple to implement.
+  * Cons: Is non-human-readable, which violates the requirements of this project.
+* Alternative 3: JSON.
+  * Pros: Easy-to-read, widely established standard.
+  * Cons: Requires external libraries.
+* Alternative 4: Incremental list of changes to user data.
+  * Pros: Improved performance, due to having to save less data after every command.
+  * Cons: More difficult to modify by hand.
+
+<br />
 
 ## Appendix Requirements
 

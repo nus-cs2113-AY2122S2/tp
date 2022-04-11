@@ -2,7 +2,6 @@ package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.PrintStrings;
-import seedu.mindmymoney.constants.ValidationRegexTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
@@ -15,7 +14,9 @@ import seedu.mindmymoney.userfinancial.User;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
+import static seedu.mindmymoney.helper.TimeFunctions.isValidInputCalculateCommand;
 
 /**
  * Represents the List command.
@@ -50,7 +51,7 @@ public class ListCommand extends Command {
      * @return true if the /pm flag is present, false otherwise.
      */
     private boolean hasExpensesFlag() {
-        return listInput.equals(FLAG_OF_EXPENSES);
+        return listInput.startsWith(FLAG_OF_EXPENSES);
     }
 
     /**
@@ -99,10 +100,14 @@ public class ListCommand extends Command {
     public String outputListWithDate(int count, String listInString) throws MindMyMoneyException {
         String[] inputArray = GeneralFunctions.parseInput(listInput);
         if (!inputArray[INDEX_OF_SECOND_ITEM].equals("")) {
-            if (!isValidInput(inputArray[INDEX_OF_SECOND_ITEM])) {
-                throw new MindMyMoneyException("Date has to be in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
+            if (!isValidInputCalculateCommand(inputArray[INDEX_OF_SECOND_ITEM])) {
+                throw new MindMyMoneyException("Date has to be valid and"
+                        + " in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
             }
-            return listStringWithDate(count, listInString, inputArray);
+            if (listStringWithDate(count, listInString, inputArray).equals("")) {
+                throw new MindMyMoneyException("Date not found in the list! Do check your input");
+            }
+            return PrintStrings.LINE + listStringWithDate(count, listInString, inputArray) + PrintStrings.LINE;
         } else {
             return listString(count, listInString);
         }
@@ -135,28 +140,15 @@ public class ListCommand extends Command {
      * @return String of expenditures
      */
     public String listString(int count, String listInString) {
+        listInString += PrintStrings.LINE;
         for (Expenditure expenditure : expenditureList.expenditureListArray) {
             listInString += count + ". $" + String.format("%.2f", expenditure.getAmount()) + " was spent on " 
                 + expenditure.getDescription() + "(" + expenditure.getCategory() + ") " + "using " 
                 + expenditure.getPaymentMethod() + " [" + expenditure.getTime() + "]" + "\n";
             count++;
         }
+        listInString += PrintStrings.LINE;
         return listInString;
-    }
-
-    /**
-     * Checks if date input format is valid.
-     *
-     * @param input The string of the date input.
-     * @return true if format is valid, false otherwise.
-     */
-    public static boolean isValidInput(String input) {
-        if (input.matches(ValidationRegexTypes.VALIDATION_REGEX_D)
-                || input.matches(ValidationRegexTypes.VALIDATION_REGEX_M)
-                || input.matches(ValidationRegexTypes.VALIDATION_REGEX_Y)) {
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -169,9 +161,7 @@ public class ListCommand extends Command {
             throw new MindMyMoneyException(
                     "Your expenditure list is currently empty! Please add some expenditures to your list first");
         } else {
-            System.out.print(PrintStrings.LINE);
             System.out.print(expenditureListToString());
-            System.out.println(PrintStrings.LINE);
         }
     }
 
@@ -204,7 +194,7 @@ public class ListCommand extends Command {
         } else {
             System.out.print(PrintStrings.LINE);
             System.out.print(creditCardListToString());
-            System.out.println(PrintStrings.LINE);
+            System.out.print(PrintStrings.LINE);
         }
     }
 

@@ -1,0 +1,69 @@
+@startuml
+!include Style.puml
+
+box updateCreditCard()
+participant ":MMM" as MMM MMM_COLOUR
+participant "Command:UpdateCommand" as updateCommand COMMANDS_COLOUR
+participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
+participant ":CreditCard" as CreditCard USERFINANCIAL_COLOUR
+participant ":CreditCardList" as CreditCardList DATA_COLOUR
+
+end box
+hide footbox
+
+MMM -> updateCommand: executeCommand()
+activate updateCommand COMMANDS_COLOUR
+
+updateCommand -> updateCommand: updateExpenditure()
+activate updateCommand COMMANDS_COLOUR
+
+updateCommand -> GeneralFunctions: parseInputWithCommandFlag()
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> updateCommand
+deactivate GeneralFunctions
+
+updateCommand -> CreditCardList: get()
+activate CreditCardList DATA_COLOUR
+CreditCardList --> updateCommand
+deactivate CreditCardList
+
+opt oldCreditCard.getTotalExpenditure() > newCardLimit
+updateCommand --> MMM
+note right
+An exception is thrown, warning user
+that the new credit card limit is smaller than
+their old credit card's total expenditure
+end note
+end
+
+opt isSimilarCreditCard()
+updateCommand --> MMM
+note right
+An exception is thrown, warning user
+that the new CreditCard is similar to
+old CreditCard
+end note
+end
+
+create CreditCard
+updateCommand -> CreditCard: CreditCard()
+activate CreditCard USERFINANCIAL_COLOUR
+CreditCard --> updateCommand
+deactivate CreditCard
+
+updateCommand -> CreditCardList: set()
+activate CreditCardList DATA_COLOUR
+CreditCardList --> updateCommand
+deactivate CreditCardList
+
+updateCommand --> updateCommand
+deactivate updateCommand
+
+note left
+Details of newly updated
+expenditure is printed out
+end note
+
+updateCommand --> MMM
+deactivate updateCommand
+@enduml
