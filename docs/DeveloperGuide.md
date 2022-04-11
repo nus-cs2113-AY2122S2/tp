@@ -77,11 +77,9 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
     * Defines how a command is executed.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ### Interaction between components
@@ -91,11 +89,9 @@ The *Component Interaction Diagram* shows the inner workings of how each compone
 The diagram depicts a scenario where a user attempts to create a session.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ### SplitLah Component
@@ -107,11 +103,9 @@ When it receives an input from the user, it invokes the `Parser` and retrieves a
 to run. Upon retrieving and running the `Exit` command, the application ends the loop and terminates.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ### Manager Component
@@ -123,11 +117,9 @@ throughout the lifetime of the application while the `Storage` class helps to sa
 As for the `TextUI` class, it serves as an interface to read user inputs and to print application outputs.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ### Profile Component
@@ -158,11 +150,9 @@ and `Name` classes.
 Each of the classes in the `Profile` component also provides utility methods to manage the objects that they hold.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ### TextUI Component
@@ -174,11 +164,9 @@ It offers methods to print application output to and read user input from these 
 As TextUI handles all input and output streams, these streams can be changed without affecting the rest of the program.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ### Storage Component
@@ -207,11 +195,9 @@ All classes associated with the `Profile` component implements the `Serializable
 to write all the data stored in the `Profile` component into the save file without having to pre-process the data.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ### Parser Component
@@ -240,11 +226,9 @@ The general workflow of the `Parser` component is as follows:
 5. The created `XYZCommand` object is then returned to the `SplitLah` object to run.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ### Command Component
@@ -274,11 +258,9 @@ The general workflow of the `Command` component is as follows:
    the [lifecycle](#architecture) of an `XYZCommand` object ends.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ## Implementation
@@ -330,11 +312,9 @@ the Command component when any user input is provided to SplitLah.
    and finally back to `SplitLah` to run.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ## Session Commands
@@ -344,15 +324,13 @@ the Command component when any user input is provided to SplitLah.
 * [Remove a session](#remove-a-session)
 * [Edit a session](#edit-a-session)
 * [View a session](#view-a-session)
-* [List all sessions](#list-sessions)
+* [List all sessions](#list-all-sessions)
 * [Settle a session](#settle-a-session)
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ### Add a session
@@ -485,7 +463,7 @@ The general workflow of the `session /view` command is as follows:
 </div>
 <hr>
 
-### List sessions
+### List all sessions
 **API reference:** [`SessionListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
 
 The sequence diagram below models the interactions between various entities in SplitLah
@@ -566,7 +544,7 @@ The general workflow of the `session /summary` command is as follows:
 * [Remove an activity](#remove-an-activity)
 * [Edit an activity](#edit-an-activity)
 * [View an activity](#view-an-activity)
-* [List all activities](#list-activities)
+* [List all activities](#list-all-activities)
 
 <br>
 <div class="button-box">
@@ -607,11 +585,9 @@ The general workflow of the `activity /create` command is as follows:
 14. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully created with `TextUI#printlnMessage`.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#activity-commands">Back to Activity Commands</a>
 </div>
-
 <hr>
 
 ### Remove an activity
@@ -641,11 +617,9 @@ The general workflow of the `activity /delete` command is as follows:
 9. The `ActivityDeleteCommand` object then prints a message indicating that an activity has been successfully deleted with `TextUI#printlnMessage`.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#activity-commands">Back to Activity Commands</a>
 </div>
-
 <hr>
 
 ### Edit an activity
@@ -691,11 +665,9 @@ The general workflow of the `activity /edit` command is as follows:
 15. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully edited with `TextUi#printlnMessage`.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#activity-commands">Back to Activity Commands</a>
 </div>
-
 <hr>
 
 ### View an activity
@@ -725,14 +697,12 @@ The general workflow of the `activity /view` command is as follows:
       `Activity#toString` method and printed out using `TextUI#printlnMessageWithDivider`.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#activity-commands">Back to Activity Commands</a>
 </div>
-
 <hr>
   
-### List activities
+### List all activities
 **API reference:** [`ActivityListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityListCommand.java)
 
 The sequence diagram below models the interactions between various entities in SplitLah
@@ -757,11 +727,9 @@ The general workflow of the `activity /list` command is as follows:
 7. Finally, the method `TextUI#printlnMessageWithDivider` is called to print the message returned.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#activity-commands">Back to Activity Commands</a>
 </div>
-
 <hr>
 
 ## Group Commands
@@ -771,13 +739,12 @@ The general workflow of the `activity /list` command is as follows:
 * [Remove a group](#remove-a-group)
 * [Edit a group](#edit-a-group)
 * [View a group](#view-a-group)
-* [List all groups](#list-groups)
-<br>
+* [List all groups](#list-all-groups)
 
+<br>
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ### Add a group
@@ -803,11 +770,9 @@ The general workflow of the `group /create` command is as follows:
 8. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created with `TextUI#printlnMessage`.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#group-commands">Back to Group Commands</a>
 </div>
-
 <hr>
 
 ### Remove a group
@@ -835,11 +800,9 @@ The general workflow of the `group /delete` command is as follows:
 8. The `GroupDeleteCommand` class then prints a message indicating that a group has been successfully deleted.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#group-commands">Back to Group Commands</a>
 </div>
-
 <hr>
 
 ### Edit a group
@@ -878,11 +841,9 @@ The general workflow of the `group /edit` command is as follows:
 12. The `GroupEditCommand` class then prints a message indicating that the group has been successfully edited.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#group-commands">Back to Group Commands</a>
 </div>
-
 <hr>
 
 ### View a group
@@ -908,14 +869,12 @@ The general workflow of the `group /view` command is as follows:
      method. The `String` object is then printed out with `TextUI#printlnMessageWithDivider`.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#group-commands">Back to Group Commands</a>
 </div>
-
 <hr>
 
-### List groups
+### List all groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
 The sequence diagram for `GroupListCommand` is omitted as it bears many similarities with [`SessionListCommand`](#list-sessions).<br>
 The interactions of `GroupListCommand` with the `Profile` class is identical but the key differences lies in the objects that are used in the `Profile` class:
@@ -939,11 +898,9 @@ The general workflow of the `group /list` command is as follows:
 6. The `String` object retrieved is printed out with `TextUI#printlnMessage`.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#group-commands">Back to Group Commands</a>
 </div>
-
 <hr>
 
 ## Appendix: Requirements
@@ -960,11 +917,9 @@ calculate what transactions that they should make in order to ensure that everyo
 they engage in during the outings.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ## User Stories
@@ -990,11 +945,9 @@ they engage in during the outings.
 | v2.0    | User with a lot of friends | list groups                          | see a list of all the groups that were created                                                                         |
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ## Non-Functional Requirements
@@ -1004,11 +957,9 @@ they engage in during the outings.
 4. Ths application should be usable by a novice who has never used an application to split bills.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ## Glossary
@@ -1027,11 +978,9 @@ they engage in during the outings.
 | TextUI   | A TextUI is an user interface that the user sees on the CLI.                                                                                                                                                                                                                                                |
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ## Appendix: Instructions for Manual Testing
@@ -1049,11 +998,9 @@ This section includes instructions to test SplitLah manually.
 * [Storage Testing](#storage-testing)
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
-
 <hr>
 
 ### Launch and Shutdown
@@ -1072,11 +1019,9 @@ This section includes instructions to test SplitLah manually.
 2. A farewell message should be printed as the SplitLah terminates.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#appendix-instructions-for-manual-testing">Back to Appendix: Instructions for Manual Testing</a>
 </div>
-
 <hr>
 
 ### Session Testing
@@ -1090,11 +1035,9 @@ This section includes instructions to test SplitLah manually.
 * [Listing all Sessions](#listing-all-sessions)
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#appendix-instructions-for-manual-testing">Back to Appendix: Instructions for Manual Testing</a>
 </div>
-
 <hr>
 
 #### Creating a Session
@@ -1129,11 +1072,9 @@ it with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGu
    Expected: An error message should be printed, indicating that the specified group unique identifier cannot be found.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#session-testing">Back to Session Testing</a>
 </div>
-
 <hr>
 
 #### Deleting a Session
@@ -1151,11 +1092,9 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#session-testing">Back to Session Testing</a>
 </div>
-
 <hr>
 
 #### Editing a Session
@@ -1179,11 +1118,9 @@ it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/User
    Expected: An error message should be printed, indicating that no delimiters were found.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#session-testing">Back to Session Testing</a>
 </div>
-
 <hr>
 
 #### Settling a Session
@@ -1210,11 +1147,9 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    session unique identifier of `1` should be printed.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#session-testing">Back to Session Testing</a>
 </div>
-
 <hr>
 
 #### Viewing a Session
@@ -1240,11 +1175,9 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    Expected: The full details of the session with a session unique identifier of `1` should be printed.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#session-testing">Back to Session Testing</a>
 </div>
-
 <hr>
 
 #### Listing all Sessions
@@ -1262,11 +1195,9 @@ Test Scenario 2: At least 1 session exists in the application.
 
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#session-testing">Back to Session Testing</a>
 </div>
-
 <hr>
 
 ### Activity Testing
@@ -1279,11 +1210,9 @@ Test Scenario 2: At least 1 session exists in the application.
 * [Listing all Activities](#listing-all-activities)
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#appendix-instructions-for-manual-testing">Back to Appendix: Instructions for Manual Testing</a>
 </div>
-
 <hr>
 
 #### Creating an Activity
@@ -1314,11 +1243,9 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    Expected: An error message should be printed, indicating that a person specified was not found in the particular session.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#activity-testing">Back to Activity Testing</a>
 </div>
-
 <hr>
 
 #### Deleting an Activity
@@ -1347,11 +1274,9 @@ an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.
    Expected: An error message should be printed, indicating that the activity specified was not found in the particular session.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#activity-testing">Back to Activity Testing</a>
 </div>
-
 <hr>
 
 #### Editing an Activity
@@ -1382,11 +1307,9 @@ an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.
    Expected: A success message should be printed, indicating that the activity was edited.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#activity-testing">Back to Activity Testing</a>
 </div>
-
 <hr>
 
 #### Viewing an Activity
@@ -1422,11 +1345,9 @@ Also, only an activity with an activity unique identifier of 1 within this sessi
    Expected: The full details of the activity with unique identifier of `1` within the session of unique identifier of `1` should be printed.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#activity-testing">Back to Activity Testing</a>
 </div>
-
 <hr>
 
 #### Listing all Activities
@@ -1455,11 +1376,9 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    Expected: A table summarising the details of all existing activities in the session with session unique identifier of `1` should be printed.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#activity-testing">Back to Activity Testing</a>
 </div>
-
 <hr>
 
 ### Group Testing
@@ -1472,11 +1391,9 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 * [Listing all Groups](#listing-all-groups)
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#appendix-instructions-for-manual-testing">Back to Appendix: Instructions for Manual Testing</a>
 </div>
-
 <hr>
 
 #### Creating a Group
@@ -1499,11 +1416,9 @@ Test Scenario 2: There is a group named GroupTest1 currently stored in the appli
    Expected: An error message should be printed, indicating that a group with the same name already exists within the application.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#group-testing">Back to Group Testing</a>
 </div>
-
 <hr>
 
 #### Deleting a Group
@@ -1520,11 +1435,9 @@ Test Scenario 1: There is a group with unique identifier of 1 stored in the appl
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/gid` delimiter.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#group-testing">Back to Group Testing</a>
 </div>
-
 <hr>
 
 #### Editing a Group
@@ -1545,11 +1458,9 @@ Test Scenario 1: A group has been created with a unique identifier of 1, named G
    Expected: An error message should be printed, indicating that no delimiters were found.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#group-testing">Back to Group Testing</a>
 </div>
-
 <hr>
 
 #### Viewing a Group
@@ -1575,11 +1486,9 @@ a single group with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.
    Expected: The full details of the group with a group unique identifier of `1` should be printed.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#group-testing">Back to Group Testing</a>
 </div>
-
 <hr>
 
 #### Listing all Groups
@@ -1596,11 +1505,9 @@ Test Scenario 2: At least 1 group exists in the application.
   Expected: A table summarising the details of all existing groups should be printed.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#group-testing">Back to Group Testing</a>
 </div>
-
 <hr>
 
 
@@ -1619,9 +1526,7 @@ Test Scenario 2: SplitLah.jar is placed in a location where read and write permi
    Expected: An error message should be printed indicating no save file was created and changes made in the run time of the application is not saved.
 
 <br>
-
 <div class="button-box">
   <a class="back-button" href="#appendix-instructions-for-manual-testing">Back to Appendix: Instructions for Manual Testing</a>
 </div>
-
 <hr>
