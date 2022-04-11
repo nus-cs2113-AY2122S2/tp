@@ -112,7 +112,11 @@ public class Ui {
         System.out.println(END_OF_MESSAGE_LINE);
     }
 
-
+    /**
+     * Prints out the error message associated with the exception that is passed into the function.
+     *
+     * @param exception The exception whose error message the program wants to print out.
+     */
     public void printErrorMessage(HotelLiteManagerException exception) {
         System.out.println(exception.getErrorMessage());
     }
@@ -171,12 +175,20 @@ public class Ui {
         System.out.println(END_OF_LIST_LINE);
     }
 
+    /**
+     * Prints out an acknowledgement message saying that there were no items within the item list that matches the
+     * user specified criteria.
+     */
     public void printNoItemsFoundInListAcknowledgementMessage() {
         System.out.println(MESSAGE_HEADER);
         System.out.println("No Item matching the criteria has been found.");
         System.out.println(END_OF_MESSAGE_LINE);
     }
 
+    /**
+     * Prints out an acknowledgement message saying that there were no items within the item list that matches the
+     * user specified criteria.
+     */
     public void printHousekeeperList(HousekeeperList housekeeperList) {
         printMessage("=============== Housekeeper List ================");
         for (int i = 0; i < housekeeperList.getTotalHousekeeper(); i++) {
@@ -264,6 +276,13 @@ public class Ui {
         System.out.println(END_OF_MESSAGE_LINE);
     }
 
+    /**
+     * Prints an acknowledgement message informing the user that the item name of the item to update was successfully
+     * updated.
+     *
+     * @param oldItemName The current item name of the item to update within the item list.
+     * @param newItemName The new item name of the item to update within the item list.
+     */
     public void printUpdateItemNameAcknowledgementMessage(String oldItemName, String newItemName) {
         System.out.println(MESSAGE_HEADER);
         System.out.printf("The name of %s has been updated to %s.\n", oldItemName, newItemName);
@@ -279,9 +298,14 @@ public class Ui {
         System.out.println(END_OF_MESSAGE_LINE);
     }
 
-
-    public void printDeleteItemAcknowledgementMessage(Item updatedItem, ItemList listOfItems) {
-        String itemName = updatedItem.getName();
+    /**
+     * Prints an acknowledgement message informing the user that the item to delete has been deleted from the item list.
+     *
+     * @param itemToDelete The item object which contains the item name of the item to be deleted from the item list.
+     * @param listOfItems The item list which containing all the items.
+     */
+    public void printDeleteItemAcknowledgementMessage(Item itemToDelete, ItemList listOfItems) {
+        String itemName = itemToDelete.getName();
         itemName = itemName.toUpperCase();
         assert (!itemName.isEmpty()) : "Assertion Failed! Updated item has an empty item name.";
         System.out.println(MESSAGE_HEADER);

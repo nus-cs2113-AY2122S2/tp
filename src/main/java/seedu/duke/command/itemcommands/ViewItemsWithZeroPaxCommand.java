@@ -11,6 +11,14 @@ import seedu.duke.exceptions.InvalidViewItemsWithZeroPaxCommandException;
  * Represents a command to view all the items currently within the item list that have a pax of zero.
  */
 public class ViewItemsWithZeroPaxCommand extends Command {
+    /**
+     * Takes in the user input and checks if the formatting of the search item command within the user input is
+     * valid.
+     * Takes the user input and creates a SearchItemCommand object using it.
+     *
+     * @param userInput The user's input.
+     * @throws HotelLiteManagerException if the keyword is empty or if the string userInput contains "search item".
+     */
     public ViewItemsWithZeroPaxCommand(String userInput) throws HotelLiteManagerException {
         if (!userInput.isEmpty()) {
             throw new InvalidViewItemsWithZeroPaxCommandException();
@@ -19,7 +27,8 @@ public class ViewItemsWithZeroPaxCommand extends Command {
 
     /**
      * Prints out the item name ,pax as well as index for items within the item list that have a pax of zero.
-     *  @param listContainer The object containing the data structures necessary for viewing all the items within the
+     *
+     * @param listContainer The object containing the data structures necessary for viewing all the items within the
      *                      item list with a pax of zero. In this case, we require access to the ItemList object which
      *                      is within listContainer.
      * @param ui            The object that deals with user interface for the program.

@@ -26,10 +26,11 @@ public class DeleteItemCommand extends Command {
     /**
      * Takes in the user input and checks if the formatting of the delete item command within the user input is
      * valid.
-     * Takes the user input and creates an DeleteItemCommand object using it.
+     * If the user input is valid, the constructor would create an DeleteItemCommand object using the user input.
      *
      * @param userInput The user's input.
-     * @throws HotelLiteManagerException if the item name is empty.
+     * @throws HotelLiteManagerException if the item name is empty or if the edited user input still contains
+     *                                   the string "Delete Item".
      */
     public DeleteItemCommand(String userInput) throws HotelLiteManagerException {
         if (userInput.isEmpty()) {
@@ -56,19 +57,15 @@ public class DeleteItemCommand extends Command {
 
     /**
      * Deletes the item in the item list specified by the user.
-     * Returns an acknowledgement message to inform the user that the item has been deleted to the item list as well
+     * Returns an acknowledgement message to inform the user that the item has been deleted from the item list as well
      * as the number of items within the item list.
-     * Updates the item list saved within the file ListFolder/ItemList.txt
      *
      * @param listContainer The object containing the data structure necessary to delete items from the item
      *                      list.
      *                      In this case, we require access to the ItemList object which is within listContainer.
      * @param ui            The object that deals with user interface for the program.
-     * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
-     * @throws IOException               if we are unable to write to the file ListFolder/ItemList.txt
-     * @return
+     * @throws HotelLiteManagerException if the item that the user wants to delete does not exist in the item list.
      */
-
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         Item itemToDelete = getItem();
@@ -77,6 +74,14 @@ public class DeleteItemCommand extends Command {
         ui.printDeleteItemAcknowledgementMessage(itemToDelete, listOfItems);
     }
 
+    /**
+     * Updates the item list saved within the file ListFolder/ItemList.txt with the current item list.
+     *
+     * @param listContainer The object containing the data structure necessary to delete items from the item
+     *                      list.
+     *                      In this case, we require access to the ItemList object which is within listContainer.
+     * @throws IOException if we are unable to write to the file ListFolder/ItemList.txt
+     */
     public void writeItemListToFile(ListContainer listContainer) throws IOException {
         ItemList listOfItems = listContainer.getItemList();
         ItemListFileManager itemListFileManager = new ItemListFileManager();
