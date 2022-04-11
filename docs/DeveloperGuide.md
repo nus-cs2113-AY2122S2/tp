@@ -2,7 +2,7 @@
 
 ## Acknowledgements
 
-This guide was done referencing https://se-education.org/addressbook-level3/DeveloperGuide.html.
+This guide was done referencing [addressbook-level3](https://se-education.org/addressbook-level3/DeveloperGuide.html).
 
 # 1. Overview
 MeetingJio is a program for **finding potential time slots for team meetings based on everyone’s availability**.
