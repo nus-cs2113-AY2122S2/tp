@@ -24,6 +24,7 @@
         * [Display incomes: `list`](#display-incomes-list)
         * [Modify an income: `update`](#modify-an-income-update)
         * [Remove an income: `delete`](#remove-an-income-delete)
+        * [Calculate cashback: `calculate` [coming in v3.0]](#calculate-cashback-calculate-coming-in-v30)
     * [Exit MindMyMoney application: `bye`](#exit-mindmymoney-application-bye)
     * [Save the data](#save-the-data)
 * [FAQ](#faq)
@@ -102,12 +103,13 @@ Words starting with a `/` are flags.
 
 > **💡 Note:**
 >- Parameters and flags are space-separated. For example: `list/e` is not a valid command while `list /e` is valid.
->- All parameters are compulsory unless stated otherwise.
+>- 
 
 > **⚠️Warning⚠️**
->- All parameters are compulsory! Input the parameters in the order shown, or the application will not be able to read your
+>- All parameters are compulsory unless stated otherwise.
+>- Input the parameters in the order shown, or the application will not be able to read your
    > input.
->- ENTER RULES ON FORBIDDEN CHARACTERS HERE
+>- When entering your input, use only ascii characters. Any other input may not properly display in the command line.
 
 <br/>
 
@@ -422,6 +424,8 @@ into the account
 > **⚠️Warning⚠️**
 >- `[CREDIT_CARD_NAME]` cannot be `cash`, `CASH`, or a combination of either.
 >- `[CASHBACK]` cannot be more than 100%.
+>- `[CARD_LIMIT]` cannot be more than 40,000. Generally, students should not have a monthly income of more than 
+   > $10,000, and a monthly credit card limit of $40,000 calculated through [here](https://www.moneysmart.sg/credit-cards/credit-limit-singapore-ms).
 
 <br/>
 
@@ -666,6 +670,12 @@ I have removed Salary from your list of income(s).
 
 <br/>
 
+### Calculate cashback: `calculate` [coming in v3.0]
+
+Details coming soon...
+
+<br/>
+
 ## Exit MindMyMoney application: `bye`
 
 Shuts down the MindMyMoney application.
@@ -695,9 +705,62 @@ for you to save manually. You can view the saved contents of MindMyMoney by read
 >- To load the backup data into MindMyMoney, copy `data.txt` from the backup folder into the folder containing 
 MindMyMoney, replacing the existing copy of `data.txt`.  
 
+
+If you are experienced in using MindMyMoney, you may wish to directly edit the `data.txt` file. 
+Below is a short description of its format.
+
 > **⚠️Warning⚠️**
->- Do not modify or delete the contents of `data.txt` in your current directory. This may corrupt the data in MindMyMoney.
+>- Be careful when modifying `data.txt` to follow the correct format, since doing so can corrupt the data in MindMyMoney.
+> When in doubt, keep a backup, as stated above. If you are less experienced, you may use the `update` and `add` 
+> commands to edit the data.
 <br/>
+
+`data.txt` must contain the following six lines, in this order:
+
+```
+# BEGIN EXPENDITURES
+# END EXPENDITURES
+# BEGIN CREDIT CARDS
+# END CREDIT CARDS
+# BEGIN INCOME SOURCES
+# END INCOME SOURCES
+```
+
+Each expenditure, credit card, and income is stored in one line between their respective `BEGIN`/`END` lines.
+No line should be left blank.
+
+Each piece of data is stored as a series of `key : value` pairs, separated by spaces. Both `key` and `value`
+are enclosed in quotes. A `\"` in a key or value represents a quotation mark, while a `\\` represents a backslash.
+
+The following are the keys required for each type of data:
+
+- Expenditures contain `amount`, `description`, `paymentMethod`, `time`, and `category` keys.
+- Credit cards contain `totalExpenditure`, `monthlyCardLimit`, `nameOfCard`, and `cashback` keys.
+- Incomes contain `amount` and `category` fields.
+
+Their meanings are the same as in the `add` commands. The `totalExpenditure` key of a credit card
+contains the total amount spent using that credit card.
+
+If a key is missing, MindMyMoney will consider the save file invalid.
+
+Here is an example of a valid save file:
+
+```
+# BEGIN EXPENDITURES
+ "amount": "3.0"  "description": "Commute"  "paymentMethod": "Cash"  "time": "08/03/2022"  "category": "Transport" 
+ "amount": "1.0"  "description": "Mala"  "paymentMethod": "DBS"  "time": "30/03/2022"  "category": "Food" 
+ "amount": "1.0"  "description": "Chicken rice"  "paymentMethod": "DBS"  "time": "30/03/2022"  "category": "Food"
+ "amount": "1.0"  "description": "Katsudon"  "paymentMethod": "Cash"  "time": "07/03/2022"  "category": "Food"
+# END EXPENDITURES
+# BEGIN CREDIT CARDS
+ "totalExpenditure": "2.0"  "monthlyCardLimit": "10000.0"  "nameOfCard": "DBS"  "cashback": "1.0"
+ "totalExpenditure": "0.0"  "monthlyCardLimit": "20000.0"  "nameOfCard": "OCBC"  "cashback": "4.0"
+# END CREDIT CARDS
+# BEGIN INCOME SOURCES
+ "amount": "200"  "category": "Allowance"
+ "amount": "500"  "category": "Investment" 
+# END INCOME SOURCES
+```
 
 ## FAQ
 
