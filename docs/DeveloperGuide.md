@@ -1,12 +1,6 @@
 # Developer Guide
 
-## Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
 ## Design & implementation
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 ### Update patient information
 Step 1:Patient inform the nurse of their change in personal information. Nurse will open up the IHospital system and request to submit the change. 
@@ -86,33 +80,65 @@ Step 2: ListNurseListCommand will call on the toString function in nurseList to 
 
 ## Product scope
 Use in all hospitals in Singapore
-### Target user profile
+
+## Target user profile
 Hospital admin staff
 
-### Value proposition
+## Value proposition
 IHospital is a desktop application meant for staff in hospitals. Its main purpose is to manage patients,
-doctors, nurses, appointments and operation rooms data, and it’s optimised for use via a Command Line Interface (CLI).
+doctors, nurses, appointments and wards data, and it’s optimised for use via a Command Line Interface (CLI).
 If you can type fast, this application allows you to access relevant hospital information faster than traditional GUI applications.
 
 ## User Stories
 
-| Version | As a ... | I want to ...                                     | So that I can ...                    |
-|---------|----------|---------------------------------------------------|--------------------------------------|
-| v1.0    | user     | add a new person (doctor/patient) into the system | record their information             |
-| v1.0    | user     | delete an existing person                         | remove a person when he/she leaves   |
-| v1.0    | user     | edit the information of a person                  | update information                   |
-| v1.0    | user     | add an appointment                                | schedule an appointment for patients |
-
+| Version | As a ... | I want to ...                                     | So that I can ...                          |
+|---------|----------|---------------------------------------------------|--------------------------------------------|
+| v1.0    | user     | add a new person (doctor/patient) into the system | record information accordingly             |
+| v1.0    | user     | delete an existing person                         | remove a person when he/she leaves         |
+| v1.0    | user     | edit the information of a person                  | update information                         |
+| v1.0    | user     | add an appointment                                | schedule an appointment for patients       |
+| v1.0    | user     | search for a person/an appointment                | check details of a person/an appointment   |
+| v2.1    | user     | add a nurse into the system                       | record information accordingly             |
+| v2.1    | user     | assign some doctors/nurses/patients to a ward     | record information accordingly             |
+| v2.1    | user     | view the doctor/patient page                      | check appointments of the doctors/patients |
 
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 
-## Glossary
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-* *glossary item* - Definition
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+1. Test case for `add doctor`: `add doctor /id 222 /n Harry Potter /ph 22223333 /e theChosenOne@gmail.com /dep Defensive`
+
+Expected output: ![](AddDoctorOutput.png)
+
+2. Test case for `add patient`: `add patient /id 333 /n Draco Malfoy /ph 88888888 /e poorPotter@gmail.com /s cough /d Allergic to Harry Potter`
+
+Expected output: ![](AddPatientOutput.png)
+
+3. Test case for `add nurse`: `add nurse /id 001 /n Hermione Granger /ph 11111111 /e ministerForMagic@gmail.com /t Minister`
+
+Expected output: ![](AddNurseOutput.png)
+
+4. Test case for `add appointment`: `add appointment /t 2022-06-03T10:30:00 /d 1 /p 1`
+
+Expected output: ![](AddAppointmentOutput.png)
+
+5. Test case for `list`: `list doctor`
+
+Expected output: ![](ListDoctorOutput.png)
+
+6. Test case for `edit`: `edit /a 1 /time 2022-06-01T16:30`
+
+Expected output: ![](EditAppointmentOutput2.png)
+
+7. Test case for `search`: `search appointment 2022-06-01T16:30`
+
+Expected output: ![](SearchAppointmentOutput.png)
+
+8. Test case for `add ward`: `add ward /d 1 /p 1 /n 1 /id 233`
