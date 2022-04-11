@@ -431,8 +431,9 @@ Example 6: `find appointment /info date, 2022-10-15`
 #### Retrieving List of Expired/Run Out Medicine in the inventory
 
 To retrieve list of expired medicine or depleted medicine in your inventory, you can simply call the `update medicines` command. This command
-requires no additional parameter. **{DO NOTE THAT THIS LIST WILL BE CLEARED AND THE INFORMATION WITHIN WILL BE DESTROYED
-UPON EXIT OF THE APP}**
+requires no additional parameter. 
+> :warning: DO NOTE THAT THIS LIST WILL BE CLEARED AND THE INFORMATION WITHIN WILL BE DESTROYED
+UPON EXIT OF THE APP 
 
 Format: `update medicines`
 
@@ -461,7 +462,7 @@ Format: `dispense medicine /info [NRIC],[Medicine Name],[Quantity]`
 
 Example: `dispense medicine /info S1234567A,Paracetamol,10,Aspirin,20`
 
-You need to give at list 1 medicine to dispense.
+You need to give at least 1 medicine to dispense.
 
 ### Saving
 
@@ -473,7 +474,10 @@ data/        // Primary resource directory for HalpMi
     ├── doctor.txt   // Text file containing doctor list
     ├── patient.txt    // Text file containing patient list
     ├── medicine.txt       // Text file containing medcine list
-    └── appointment.txt    // Text file containing appointment list
+    ├── appointment.txt    // Text file containing appointment list
+    ├── doctor_date.txt       // Text file containing date of appointment for doctors
+    ├── patient_date.txt       // Text file containing date of appointment for patients
+    └── appointment_meds.txt    // Text file containing dispensed medicine list required for appointments
 
 ```
 Do note that the directory (and by extension, the files) will be created in your terminal's
@@ -489,7 +493,7 @@ If the files are corrupted, you will be prompted by HalpMi and the corrupted lin
 data/        // Corrupted files
     ├── doctor_corrupted.txt   // Text file containing doctor list
     ├── patient_corrupted.txt    // Text file containing patient list
-    ├── medicine_corrupted.txt       // Text file containing medcine list
+    ├── medicine_corrupted.txt       // Text file containing medicine list
     └── appointment_corrupted.txt    // Text file containing appointment list
 ```
 
@@ -500,7 +504,8 @@ data/        // Corrupted files
 #### Storage
 **File encryption** -> Files will be encrypted in the future. More checks for corurpted files will also be included. Current corrupted file check is a basic preliminary check.
 
------------------------------------------------
+#### Appointment
+**Assign Appointment** -> Upon adding Patient Nric and Doctor Nric, an Appointment Date would be automatically assigned based on the nearest date when the Doctor is free. Current add appointment features requires manual addition of Appointment date. 
 
 ## Command Summary
 
