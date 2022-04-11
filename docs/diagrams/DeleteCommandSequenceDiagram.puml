@@ -1,0 +1,30 @@
+@startuml
+hide footbox
+
+":Ui" -> ":DeleteCommand" ++: execute(masterTimetable)
+":DeleteCommand" -> ":MasterTimetable" ++: getByName(name)
+":MasterTimetable" --> ":DeleteCommand" -- : timetable: Timetable
+":DeleteCommand" -> ":Timetable" ++: get(index - 1)
+":Timetable" --> ":DeleteCommand" -- : event: Event
+alt event is type meeting
+":DeleteCommand" -> ":MasterTimetable" ++: deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
+":MasterTimetable" -> ":MasterTimetable" ++: deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
+":MasterTimetable" --> ":MasterTimetable" --: deleteMeetingFromAllTimetableConfirmation :String
+":MasterTimetable" --> ":DeleteCommand" ++: :String
+":DeleteCommand" --> ":Ui" --:
+
+deactivate ":MasterTimetable"
+deactivate ":MasterTimetable"
+
+else non-meeting types
+
+":DeleteCommand" -> ":Timetable" ++ : remove(index - 1)
+":Timetable" --> ":DeleteCommand" --:
+":DeleteCommand" -> ":DeleteCommand" ++ : deleteConfirmation(event: Event )
+":DeleteCommand" --> ":DeleteCommand" -- : deleteConfirmation:String
+":DeleteCommand" --> ":Ui" --:
+
+end
+destroy ":DeleteCommand"
+
+@enduml

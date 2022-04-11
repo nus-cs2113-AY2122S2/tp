@@ -1,0 +1,19 @@
+@startuml
+hide footbox
+
+":Ui" -> ":AddMeetingCommand" ++: execute(masterTimetable)
+":AddMeetingCommand" -> ":Meeting" ++ : new()
+":Meeting" --> ":AddMeetingCommand" --: meeting:Meeting
+
+":AddMeetingCommand" -> ":MasterTimetable" ++: addMeetingToEveryoneTimetable(meeting:Meeting)
+":MasterTimetable" -> ":Timetable" ++ : add(meeting:Meeting)
+":Timetable" -> ":Timetable"++: addMeetingConfirmation(meeting:Meeting)
+":Timetable" --> ":Timetable"--: addMeetingConfirmation:String
+":Timetable" --> ":MasterTimetable" --: :String
+":MasterTimetable" --> ":AddMeetingCommand" -- :
+":AddMeetingCommand" --> ":Ui" --:
+
+destroy ":AddMeetingCommand"
+
+
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+actor User
+
+User -> ":MeetingJio" ++: starts
+":MeetingJio" -> ":MeetingJio" ++:start()
+create ":StorageFile"
+":MeetingJio" -> ":StorageFile" ++: loadData(masterTimetable)
+":StorageFile" -> ":StorageFile" ++: loadData(masterTimetable)
+create ":ParserLocalData"
+loop for each row of data
+alt eventType = "L"
+":StorageFile" -> ":ParserLocalData" ++:
+":ParserLocalData" -> ":ParserLocalData" ++:prepareLoadLesson(name, data, masterTimetable).execute(masterTimetable
+create ":AddLessonCommand"
+":ParserLocalData" -> ":AddLessonCommand" ++
+":AddLessonCommand" --> ":ParserLocalData"
+deactivate ":AddLessonCommand"
+else eventType = "M"
+":StorageFile" -> ":StorageFile" ++: meetingList.add(data), hasMeeting = true
+":ParserLocalData" --> ":ParserLocalData"
+":StorageFile" --> ":StorageFile"
+deactivate ":StorageFile"
+deactivate ":ParserLocalData"
+end
+end
+deactivate ":ParserLocalData"
+destroy ":AddLessonCommand"
+alt hasMeeting = true
+":StorageFile" -> ":ParserLocalData" ++:
+loop for each row of data in meetingList
+":ParserLocalData" -> ":ParserLocalData" ++:prepareLoadMeeting(data, masterTimetable).execute(masterTimetable)
+create ":AddMeetingCommand"
+":ParserLocalData" -> ":AddMeetingCommand" ++
+":AddMeetingCommand" --> ":ParserLocalData"
+deactivate ":AddMeetingCommand"
+":ParserLocalData" --> ":ParserLocalData"
+deactivate ":ParserLocalData"
+end
+end
+destroy ":AddMeetingCommand"
+":ParserLocalData" --> ":StorageFile"
+":StorageFile" --> ":StorageFile"
+deactivate ":StorageFile"
+":StorageFile" --> ":MeetingJio"
+":MeetingJio" --> ":MeetingJio"
+deactivate ":MeetingJio"
+
+":MeetingJio" --> User
+
+@enduml

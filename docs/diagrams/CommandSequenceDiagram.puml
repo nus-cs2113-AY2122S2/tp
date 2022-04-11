@@ -1,0 +1,41 @@
+@startuml
+hide footbox
+
+actor user
+participant ":Ui" as Ui
+participant ":Parser" as Parser
+participant ":XYZCommand" as Command
+
+activate Ui
+user -> Ui : "xyz..."
+create Parser
+Ui -> Parser : Parser("xyz...")
+activate Parser
+Ui <-- Parser : parser :Parser
+deactivate Parser
+
+Ui --> Parser : parseCommand()
+activate Parser
+
+Parser -> Parser : prepareXYZ()
+activate Parser
+
+create Command
+Parser -> Command
+activate Command
+Parser <-- Command
+deactivate Command
+
+Parser --> Parser : :Command
+deactivate Parser
+Ui <-- Parser : parsedCommand :Command
+deactivate Parser
+destroy Parser
+
+Ui -> Command : execute(masterTimetable :MasterTimetable)
+activate Command
+Ui <-- Command : feedback :String
+deactivate Command
+
+destroy Command
+@enduml

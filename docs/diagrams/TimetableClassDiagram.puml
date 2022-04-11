@@ -1,0 +1,55 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+class Timetable {
+    -name: String
+    +add(event:Event)
+    +remove(index:int)
+    +size():int
+    +get(eventIndex:int):Event
+    +isDuplicate(newEvent:Event):boolean
+    +isOverlap(newEvent:Event):boolean
+    +isValid():boolean
+    -isEarlier(event1:Event,event2:Event)
+    +sort()
+    +listTimetable(constraint:int)
+    +populateBusySlots(busySlots:int[][])
+    -{static}convertTimeToFreeArrayIndex(time:int)
+    +equals(obj:Object):boolean
+}
+
+class MasterTimetable {
+    +removeByName(name:String)
+    +getByName (name:String)
+    +getByIndex(index:int)
+    +removeByIndex(index:int)
+    +addTimetable(timetable:Timetable)
+    +addLesson(lesson:Lesson,name:String)
+    +collateAll(masterTimetable:MasterTimetable,constraint:int):String
+    +getSize():int
+    +isMeetingThatClashes(meeting:Meeting):boolean
+    -isOverlappingMeeting(timetable:Timetable,meeting:Meeting):boolean
+    -isPreExistingMeeting(meeting:Meeting):boolean
+    +addMeetingToEveryoneTimetable(meeting:Meeting):String
+    -addMeetingConfirmation(meeting:Meeting):String
+    -deleteMeetingFromEveryoneTimetable(meeting:Meeting):String
+    -deleteMeetingFromAllTimetableConfirmation(meeting:Meeting):String
+    +deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
+    +deleteAllMeetings():String
+    +deleteMeetingsFromTimetable(timetable:Timetable)
+    +listBusy():int[][]
+    -isDuplicateTimetable(timetable:Timetable:boolean
+}
+
+class Event {
+
+}
+
+class Meeting {
+}
+
+"Timetable" -u- "*" "Event" : list
+"MasterTimetable" -u- "*" "Timetable" : timetables
+"MasterTimetable" -u- "*" "Meeting" : meetingList
+@enduml

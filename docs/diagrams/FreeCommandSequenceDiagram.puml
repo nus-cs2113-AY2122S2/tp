@@ -1,0 +1,16 @@
+@startuml
+hide footbox
+
+":Ui" -> ":FreeCommand" ++: execute(masterTimetable)
+":FreeCommand" -> ":MasterTimetable" ++: listBusy()
+loop for each timetable
+":MasterTimetable" -> ":Timetable" ++: populateBusySlots()
+":Timetable" --> ":MasterTimetable" --
+end
+":MasterTimetable" --> ":FreeCommand" --: busySlots
+":FreeCommand" -> ":FreeCommand"++: listFree(busySlots)
+":FreeCommand" --> ":FreeCommand"--: freeTimeSlots
+":FreeCommand" --> ":Ui" --: freeTimeSlots
+destroy ":FreeCommand"
+
+@enduml

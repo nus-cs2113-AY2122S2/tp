@@ -1,0 +1,71 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+"{abstract}\n Command" <|-up- AddLessonCommand
+"{abstract}\n Command" <|-up- AddMeetingCommand
+"{abstract}\n Command" <|-- AddUserCommand
+"{abstract}\n Command" <|-- ClearCommand
+"{abstract}\n Command" <|-- CommandResult
+"{abstract}\n Command" <|-left- DeleteCommand
+
+class AddLessonCommand {
++ {static} {final} COMMAND_WORD: String = "add_lesson"
+- {final} name : String
+- {final} title : String
+- {final} day : String
+- {final} startTime : int
+- {final} endTime : int
+- {final} mode : String
++ execute(masterTimetable : MasterTimetable) : String
+- addConfirmation(lesson : Lesson, name : String) : String
+}
+
+class AddMeetingCommand {
++ {static} {final} COMMAND_WORD: String = "add_meeting"
+- {final} title : String
+- {final} day : String
+- {final} startTime : int
+- {final} endTime : int
+- {final} mode : String
++ execute(masterTimetable : MasterTimetable) : String
+}
+
+class AddUserCommand {
++ {static} {final} COMMAND_WORD: String = "add_user"
+- {final} name : String
++ execute(masterTimetable : MasterTimetable) : String
+- addConfirmation(name : String) : String
+}
+
+class ClearCommand {
++ {static} {final} COMMAND_WORD: String = "clear"
+- {final} name : String
++ execute(masterTimetable : MasterTimetable) : String
+- clearTimetableUser(user : String, masterTimetable : MasterTimetable) : String
+- cleaALL(masterTimetable : MasterTimetable) : String
+- clearTimetable(timetable : Timetable)
++ printClearConfirmation(user : String)
++ printAllClearConfirmation(user : String)
+}
+
+class CommandResult {
++ execute(masterTimetable : MasterTimetable) : String
+- {final} feedbackToUser : String
+}
+
+class "{abstract}\n Command" {
++ {abstract} execute(masterTimetable : MasterTimetable) : String
+}
+
+class DeleteCommand {
++ {static} {final} COMMAND_WORD: String = "delete"
+- {final} index : int
+- {final} name : String
++ execute(masterTimetable : MasterTimetable) : String
+- deleteConfirmation(event : Event)
+}
+
+@enduml

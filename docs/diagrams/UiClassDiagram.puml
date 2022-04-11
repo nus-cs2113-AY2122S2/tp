@@ -1,0 +1,43 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+package "Ui Component" <<Rectangle>> {
+    class Ui
+}
+
+class MeetingJio {
+    -{static}in:Scanner
+    -{static}masterTimetable:MasterTimetable
+    +{static}main(args:String[])
+    -{static}start()
+    -{static}exit()
+}
+
+class Ui {
+    +{static}showWelcomeMessage()
+    +{static}showInitFailedMessage()
+    +{static}showHelpHint()
+    +{static}showGoodByeMessage()
+    +{static}executeCommand(userInput:String, masterTimetable:MasterTimetable, in:Scanner)
+}
+
+class "{abstract}\n Command" {
+    +execute(masterTimetable:MasterTimetable): String {abstract}
+}
+
+class Parser {
+    -command: String
+    -arguments: String
+    +parseCommand(): Command
+    -prepareAddUser(): Command
+    -prepareAddLesson(): Command
+    -prepareAddMeeting(): Command
+    -prepareEdit(): Command
+    -prepareDelete(): Command
+}
+
+MeetingJio -> Ui
+Ui -> Parser
+Ui -> "{abstract}\n Command"
+@enduml

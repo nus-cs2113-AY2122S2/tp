@@ -1,0 +1,31 @@
+@startuml
+hide footbox
+
+participant ":Ui" as Ui
+participant ":AddUserCommand" as Command
+participant ":MasterTimetable" as Master
+participant ":Timetable" as Timetable
+
+Ui -> Command : execute(masterTimetable)
+activate Command
+create Timetable
+Command -> Timetable : new Timetable(name)
+activate Timetable
+Command <-- Timetable : timetable :Timetable
+deactivate Timetable
+
+Command ->  Master : addTimetable(timetable)
+activate Master
+Command <-- Master
+deactivate Master
+
+Command -> Command : addConfirmation(name)
+activate Command
+Command --> Command : :String
+deactivate Command
+
+Ui <-- Command : :String
+deactivate Command
+destroy Command
+
+@enduml

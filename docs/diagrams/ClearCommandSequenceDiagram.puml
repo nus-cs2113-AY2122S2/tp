@@ -1,0 +1,15 @@
+@startuml
+hide footbox
+
+
+":Ui" -> ":ClearCommand" ++: execute(masterTimetable)
+":ClearCommand" -> ":ClearCommand" ++: clearAll(masterTimetable)
+":ClearCommand" -> ":MasterTimetable" ++: clearAll(masterTimetable)
+":MasterTimetable" -> ":MasterTimetable" ++: clear()
+":MasterTimetable" --> ":MasterTimetable" -- : :String
+":MasterTimetable" --> ":ClearCommand" --:
+":ClearCommand" --> ":ClearCommand" --: :String
+":ClearCommand" --> ":Ui" --: 
+destroy ":ClearCommand"
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+hide footbox
+
+":Ui" -> ":ListCommand" ++: execute(masterTimetable)
+":ListCommand" -> ":ListCommand"++: listAll(masterTimetable)
+":ListCommand" -> ":MasterTimetable" ++: collateAll()
+loop for each user
+":MasterTimetable" -> ":ListCommand" ++: listUser(user, masterTimetable)
+":ListCommand" -> ":Timetable" ++: sort()
+":Timetable" --> ":ListCommand" --
+":ListCommand" -> ":Timetable" ++: listTimetable()
+":Timetable" --> ":ListCommand" --
+":ListCommand" --> ":MasterTimetable" --
+end
+":MasterTimetable" --> ":ListCommand" --: str
+":ListCommand" --> ":ListCommand" --: str
+":ListCommand" --> ":Ui" --: str
+destroy ":ListCommand"
+@enduml

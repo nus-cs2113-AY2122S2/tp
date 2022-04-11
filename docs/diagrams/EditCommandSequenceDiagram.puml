@@ -1,0 +1,46 @@
+@startuml
+hide footbox
+
+participant ":Ui" as Ui
+participant ":EditCommand" as Command
+participant ":MasterTimetable" as Master
+participant ":Timetable" as Timetable
+
+Ui -> Command : execute(masterTimetable)
+activate Command
+
+Command ->  Master : getByName(name)
+activate Master
+Command <-- Master : timetable :Timetable
+deactivate Master
+
+Command -> Timetable : get(index)
+activate Timetable
+Command <-- Timetable : event :Event
+deactivate Timetable
+
+opt event is type meeting
+Command -> Command : editEvent(event, newValues)
+activate Command
+Command --> Command : isValidInput :Boolean
+deactivate Command
+
+alt isValidInput
+Command -> Command : editConfirmation(event)
+activate Command
+Command --> Command : :String
+deactivate Command
+
+else
+Command -> Command : editAbort(error)
+activate Command
+Command --> Command : :String
+deactivate Command
+end
+
+end
+Ui <-- Command : :String
+deactivate Command
+destroy Command
+
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+actor User
+
+User -> ":Ui" ++: "exit"
+create ":MeetingJio"
+":Ui" -> ":MeetingJio" ++: executeCommand("exit", masterTimetable)
+":MeetingJio" -> ":MeetingJio" ++: exit()
+create ":StorageFile"
+":MeetingJio" -> ":StorageFile" ++: saveData(masterTimetable)
+":StorageFile" -> ":StorageFile" ++: saveData(masterTimetable)
+":StorageFile" -> ":MasterTimetable" ++: collateAll()
+loop for each user
+":MasterTimetable" -> ":StorageFile" ++: listUser(user, masterTimetable)
+":StorageFile" -> ":Timetable" ++: sort()
+":Timetable" --> ":StorageFile" --
+":StorageFile" --> ":MasterTimetable" --
+end
+":MasterTimetable" --> ":StorageFile"
+deactivate ":MasterTimetable"
+":StorageFile" --> ":StorageFile"
+deactivate ":StorageFile"
+":StorageFile" --> ":MeetingJio" --:
+deactivate ":StorageFile"
+destroy ":StorageFile"
+":MeetingJio" --> ":MeetingJio" :
+deactivate ":MeetingJio"
+":MeetingJio" --> ":Ui" : showGoodByeMessage()
+deactivate ":MeetingJio"
+":Ui" --> User--: GoodBye Message
+
+@enduml

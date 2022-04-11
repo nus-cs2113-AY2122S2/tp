@@ -1,0 +1,31 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+class "{abstract}\n Event" {
+    -title:String
+    -day:String
+    -startTime:Integer
+    -endTime:Integer
+    -mode:String
+    +equals(obj: Object):Boolean
+    +toString():String
+    +overlaps(event: Event):Boolean
+    +getDayInInt():Integer
+}
+
+class Lesson {
+    +equals(obj: Object):Boolean
+    +toString():String
+}
+
+class Meeting {
+    +equals(obj: Object):Boolean
+    +toString():String
+}
+
+
+Lesson -up-|> "{abstract}\n Event"
+Meeting -up-|> "{abstract}\n Event"
+
+@enduml

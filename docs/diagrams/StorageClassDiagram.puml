@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+package "Storage Component" <<Rectangle>> {
+    class StorageFile
+    class ParserLocalData
+}
+
+class MeetingJio {
+- {static} masterTimetable : MasterTimetable
++ {static} main()
+- {static} start()
+- {static} exit()
+}
+
+class StorageFile {
++ {static} {final} DATA_FILE_PATH: String = "MeetingJio.txt"
++ {static} {final} NO_TIMETABLE: String = "There are no events in your timetable yet!"
++ {static} saveData(masterTimetable : MasterTimetable)
++ {static} loadData(masterTimetable : MasterTimetable)
+- {static} isExpectedIndex(data : String, expectedIndex : int) : boolean
+- {static} isName(data : String) : boolean
+- {static} isNoTimetableMessage(data : String) : boolean
+- {static} getFirstChar(data : String) : String
+}
+
+class ParserLocalData {
++ {static} {final} MEETING_SYMBOL: String = "M"
++ {static} {final} LESSON_SYMBOL: String = "L"
++ {static} prepareLoadName(name : String, masterTimetable : MasterTimetable)
++ {static} prepareLoadLesson(name : String, data : String, masterTimetable : MasterTimetable)
++ {static} prepareLoadMeeting(data : String, masterTimetable : MasterTimetable)
+- {static} splitArguments(data : String) : String[]
++ {static} getEventType(data : String) : String
++ {static} checkEventType(event : String)
+- {static} getTitle(data : String) : String
+- {static} getDay(data : String) : String
+- {static} getStartTime(data : String) : String
+- {static} getEndTime(data : String) : String
+- {static} getMode(data : String) : String
+- {static} checkHeadings(data : String)
+}
+
+
+package MeetingJio.txt <<Rectangle>> {
+}
+
+MeetingJio -right-> "1" StorageFile
+StorageFile -[dashed]right-> ParserLocalData : uses >
+StorageFile -[dashed]down-> MeetingJio.txt : accesses >
+ParserLocalData -[dashed]down-> MeetingJio.txt : converts to >
+@enduml
