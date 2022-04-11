@@ -32,7 +32,7 @@ public class Orderline extends Good {
         if (quantityFulfilled == super.getQuantity()) {
             checkOff();
         }
-}
+    }
 
     private String isDone() {
         if (isCheckedOff) {
