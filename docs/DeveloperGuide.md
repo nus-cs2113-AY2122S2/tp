@@ -873,7 +873,7 @@ Given below are instructions to test the app manually.
    4. Test case: `list /e` <br />
       Expected: A list of expenditures is displayed. For each expenditure, its
       amount, category, description, and date is displayed, as well as how it was 
-      paid for. 
+      paid for. If {DATE} is specified, a list of expenditures with the {DATE} is displayed.
    5. Prerequisite for vi: There are some expenditures whose date is in March 2022, and others which are not.
    6. Test case: `list /e 03/2022` <br />
        Expected: Only the expenses occurring in March 2022 are listed.
