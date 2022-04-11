@@ -94,15 +94,15 @@ Enter corresponding index to use the feature.
 
 #### List dish (indexed as 1)
 When using `List dish`, there is no need for input, the program will print the dish name and the index.
-> Add some dish: Chicken Rice($3.5), Mala hotpot Set A($10), Soup (Along with Chicken Rice)($0), Chilli Crab($30)
+> Add some dish: Chicken Rice($3.50), Mala hotpot Set A($10.00), Soup (Along with Chicken Rice)($0.00), Chilli Crab($30.00)
 > Enter 1 to list dishes
 ```
 Listing dishes...
 ----------------------------------------------
-1. Chicken Rice                   $3.5
-2. Mala Hotpot Set A              $10.0
-3. Soup (along With Chicken Rice) $0.0
-4. Chilli Crab                    $30.0
+1. Chicken Rice                   $3.50
+2. Mala Hotpot Set A              $10.00
+3. Soup (along With Chicken Rice) $0.00
+4. Chilli Crab                    $30.00
 ----------------------------------------------
 ```
 
@@ -117,7 +117,7 @@ Listing dishes...
   
     ```
     Listing dishes...
-    1. Some Dish                      $1.1
+    1. Some Dish                      $1.10
     ```
     
     > And you add `Some Dish` again
@@ -216,7 +216,7 @@ Enter corresponding index to use the feature.
 When using `Create an order`, the user creates a new order and adds dishes to it. The program asks for user inputs.
 > Enter `1` in `Order Menu`
 
-> Example: Add some dishes to: 2 Chicken Rice ($3.5 * 2), 1 Mala hotpot Set A($10)
+> Example: Add some dishes to: 2 Chicken Rice ($3.50 * 2), 1 Mala hotpot Set A($10.00)
 
 ```
 Creating a new order...
@@ -310,9 +310,9 @@ Enter choice: 5
 Printing receipt...
 Enter the order you want to display: 1
 This is your order. 
-Chicken Rice ---- $3.5
-Mala Hotpot Set A ---- $10.0
-Total Price: 13.5
+Chicken Rice ---- $3.50
+Mala Hotpot Set A ---- $10.00
+Total Price: 13.50
 ```
 - Notice
   - If the user input is invalid, the program issues an error.
@@ -330,12 +330,12 @@ When using `Display order list`, the user checks the order list.
 Enter choice: 6
 Printing all orders...
 Order 1:
-Chicken Rice ---- $3.5
-Mala Hotpot Set A ---- $10.0
-Total Price: 13.5
+Chicken Rice ---- $3.50
+Mala Hotpot Set A ---- $10.00
+Total Price: 13.50
 Order 2:
-Chicken Rice ---- $3.5
-Mala Hotpot Set A ---- $10.0
+Chicken Rice ---- $3.50
+Mala Hotpot Set A ---- $10.00
 Total Price: 13.5
 ```
 
@@ -370,8 +370,8 @@ When using `Print staff`, there is no need for input, the program will print the
 > Add some staff: (100, John, Waiter, 2000), (101, Anna, Chef, 2500)
 ```
 Printing staff...
-1. 100     | John            | Waiter
-2. 101     | Anna            | Chef
+1. 100     | John            | Waiter          | $2000.00
+2. 101     | Anna            | Chef            | $2500.00
 ```
 > Enter 1 to print staff
 
