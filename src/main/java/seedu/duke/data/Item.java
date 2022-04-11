@@ -19,17 +19,12 @@ public class Item {
     private int quantity;
     private String description;
     private ArrayList<BorrowRecord> borrowRecords;
-    private boolean isLost = false;
 
     public Item(String name, int quantity, String description) {
         this.name = name;
         this.quantity = quantity;
         this.description = description;
         this.borrowRecords = new ArrayList<>();
-    }
-
-    public boolean getLost() {
-        return isLost;
     }
 
     public String getDescription() {
@@ -51,14 +46,6 @@ public class Item {
     public void setName(String name) {
         Objects.requireNonNull(name, NOT_NULL_NAME);
         this.name = name;
-    }
-
-    public void setLost(boolean isLost) {
-        this.isLost = isLost;
-    }
-
-    public void markItemAsLost() {
-        this.setLost(true);
     }
 
     public void setQuantity(int quantity) {
@@ -166,9 +153,6 @@ public class Item {
     @Override
     public String toString() {
         String output = String.format("%s | %d", this.name, this.quantity);
-        if (isLost) {
-            output = output + " |[LOST]";
-        }
         return output;
     }
 
@@ -200,7 +184,6 @@ public class Item {
         int quantity = item.getQuantity();
         String description = item.getDescription();
         ArrayList<BorrowRecord> borrowRecords = item.getBorrowRecords();
-        boolean isLost = item.getLost();
         Item copiedItem = new Item(name, quantity, description);
         try {
             for (int i = 0; i < borrowRecords.size(); i++) {
@@ -210,7 +193,6 @@ public class Item {
             // suppress error, return null
             return null;
         }
-        copiedItem.setLost(isLost);
         return copiedItem;
     }
 }
