@@ -34,9 +34,7 @@ public class SearchItemCommandTest {
     }
 
     @Test
-    public void execute_NonEmptyKeyword_success() throws HotelLiteManagerException {
-        SearchItemCommand itemNameCommand = new SearchItemCommand("Toilet Paper");
-        itemNameCommand.execute(listContainer, ui);
+    public void execute_NonEmptyKeyword_success() {
         ItemList itemList = listContainer.getItemList();
         ItemList listOfMatchingItem = itemList.findItemsInList("Toilet Paper");
         Item item = listOfMatchingItem.getItem(INDEX_OF_TOILET_PAPER);
@@ -45,12 +43,12 @@ public class SearchItemCommandTest {
 
     @Test
     public void execute_EmptyKeyword_exceptionThrown() {
-        assertThrows(EmptyKeywordException.class, () -> new SearchItemCommand(""));
+        assertThrows(EmptyKeywordException.class, () -> new SearchItemCommand(" "));
     }
 
     @Test
     public void execute_ItemNameOfANonExistentItem_success() throws HotelLiteManagerException {
-        SearchItemCommand itemNameCommand = new SearchItemCommand("Table");
+        SearchItemCommand itemNameCommand = new SearchItemCommand(" Table");
         ItemList itemList = listContainer.getItemList();
         String keyword = itemNameCommand.getKeyword();
         ItemList listOfMatchingItem = itemList.findItemsInList(keyword);
@@ -59,7 +57,7 @@ public class SearchItemCommandTest {
 
     @Test
     public void execute_SearchItemCommandWithinItemNameOrPax_exceptionThrown()  {
-        assertThrows(DuplicateCommandException.class, () -> new SearchItemCommand("search item"));
+        assertThrows(DuplicateCommandException.class, () -> new SearchItemCommand(" search item"));
     }
 
 }

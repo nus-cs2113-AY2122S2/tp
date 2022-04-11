@@ -40,7 +40,6 @@ import seedu.duke.exceptions.InvalidCommandException;
  */
 
 public class CommandParser {
-
     private static final String SPACE = " ";
     private static final String BYE = "bye";
     private static final String DELETE = "delete ";
@@ -48,14 +47,14 @@ public class CommandParser {
     private static final String CHECK = "check ";
     private static final String VIEW = "view ";
     private static final String HELP = "help";
-    private static final String ADD_ITEM_COMMAND = "add item ";
+    private static final String ADD_ITEM_COMMAND = "add item";
     private static final String VIEW_ITEM_LIST_COMMAND = "view all items";
     private static final String VIEW_ITEMS_WITH_ZERO_PAX_COMMAND = "view items with zero pax";
-    private static final String DELETE_ITEM_COMMAND = "delete item ";
-    private static final String UPDATE_ITEM_PAX_COMMAND = "update item pax ";
-    private static final String UPDATE_ITEM_NAME_COMMAND = "update item name ";
+    private static final String DELETE_ITEM_COMMAND = "delete item";
+    private static final String UPDATE_ITEM_PAX_COMMAND = "update item pax";
+    private static final String UPDATE_ITEM_NAME_COMMAND = "update item name";
     private static final String ADD_HOUSEKEEPER_COMMAND = "add housekeeper ";
-    private static final String SEARCH_ITEM_COMMAND = "search item ";
+    private static final String SEARCH_ITEM_COMMAND = "search item";
     private static final String ADD_PERFORMANCE_COMMAND = "add performance ";
     private static final String VIEW_PERFORMANCES_COMMAND = "view performances";
     private static final String ADD_AVAILABILITY_COMMAND = "availability ";
