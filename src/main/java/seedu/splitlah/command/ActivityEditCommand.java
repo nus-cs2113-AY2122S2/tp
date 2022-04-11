@@ -56,6 +56,12 @@ public class ActivityEditCommand extends Command {
     private double oldServiceCharge = MISSING_SERVICECHARGE;
     private ArrayList<Person> involvedListPersonArray = null;
 
+    private boolean isGstSupplied = false;
+    private boolean isScSupplied = false;
+    private boolean isInvolvedListSupplied = false;
+    private boolean isCostListSupplied = false;
+    private boolean isPayerSupplied = false;
+
     /**
      * Initializes an ActivityEditCommand object.
      *
@@ -292,16 +298,10 @@ public class ActivityEditCommand extends Command {
     private void retrieveDetailsFromOldActivity(Activity oldActivity) throws InvalidDataException {
         oldGst = oldActivity.getGst();
         oldServiceCharge = oldActivity.getServiceCharge();
-        if (Objects.equals(activityName, MISSING_ACTIVITYNAME)) {
-            activityName = oldActivity.getActivityName();
-        }
-        if (involvedListStringArray == MISSING_INVOLVEDLIST) {
-            involvedListStringArray = getInvolvedListFromPersonList(oldActivity.getInvolvedPersonList());
-        }
+        retrieveActivityNameIfNotSupplied(oldActivity);
+        retrieveInvolvedListIfNotSupplied(oldActivity);
         involvedListPersonArray = session.getPersonListByName(involvedListStringArray);
-        if (totalCost != MISSING_TOTALCOST && costList != MISSING_COSTLIST) {
-            throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_COSTLIST_AND_COSTOVERALL_SUPPLIED);
-        }
+        checkIfBothCostAndCostListSupplied();
         if (totalCost == MISSING_TOTALCOST && costList == MISSING_COSTLIST) {
             editMode = MODE_PRESERVE;
             updateCostListFromActivity();
@@ -311,14 +311,44 @@ public class ActivityEditCommand extends Command {
         } else {
             editMode = MODE_OVERWRITE;
         }
-        if (Objects.equals(payer, MISSING_PAYER)) {
-            payer = oldActivity.getPersonPaid().getName();
+        retrievePayerIfNotSupplied(oldActivity);
+        retrieveGstIfNotSupplied(oldActivity);
+        retrieveServiceChargeIfNotSupplied(oldActivity);
+    }
+
+    private void retrieveServiceChargeIfNotSupplied(Activity oldActivity) {
+        if (serviceCharge == MISSING_SERVICECHARGE) {
+            serviceCharge = oldActivity.getServiceCharge();
         }
+    }
+
+    private void retrieveGstIfNotSupplied(Activity oldActivity) {
         if (gst == MISSING_GST) {
             gst = oldActivity.getGst();
         }
-        if (serviceCharge == MISSING_SERVICECHARGE) {
-            serviceCharge = oldActivity.getServiceCharge();
+    }
+
+    private void retrievePayerIfNotSupplied(Activity oldActivity) {
+        if (Objects.equals(payer, MISSING_PAYER)) {
+            payer = oldActivity.getPersonPaid().getName();
+        }
+    }
+
+    private void checkIfBothCostAndCostListSupplied() throws InvalidDataException {
+        if (totalCost != MISSING_TOTALCOST && costList != MISSING_COSTLIST) {
+            throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_COSTLIST_AND_COSTOVERALL_SUPPLIED);
+        }
+    }
+
+    private void retrieveInvolvedListIfNotSupplied(Activity oldActivity) {
+        if (involvedListStringArray == MISSING_INVOLVEDLIST) {
+            involvedListStringArray = getInvolvedListFromPersonList(oldActivity.getInvolvedPersonList());
+        }
+    }
+
+    private void retrieveActivityNameIfNotSupplied(Activity oldActivity) {
+        if (Objects.equals(activityName, MISSING_ACTIVITYNAME)) {
+            activityName = oldActivity.getActivityName();
         }
     }
 
@@ -346,6 +376,11 @@ public class ActivityEditCommand extends Command {
         return involvedListStringArray;
     }
 
+
+    private void checkIfNoChangesMade() {
+
+    }
+
     @Override
     public void run(Manager manager) {
         TextUI ui = manager.getUi();
@@ -355,6 +390,7 @@ public class ActivityEditCommand extends Command {
             retrieveDetailsFromOldActivity(oldActivity);
             updateCostAndCostList();
             validateCostListAndInvolvedList();
+            checkIfNoChangesMade();
             assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
             Person payerAsPerson = session.getPersonByName(payer);
             addAllActivityCost(involvedListPersonArray, payerAsPerson, DUMMY_ACTIVITYID);
