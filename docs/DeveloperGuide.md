@@ -18,7 +18,7 @@
       * [Add Expenditure](#add-expenditure-e)
       * [Add Credit Card](#add-credit-card-cc)
       * [Add Income](#add-income-i)
-      * [Design Considerations](#addCommand-design-considerations)
+      * [Design Considerations](#addcommand-design-considerations)
     * [CalculateInputCommand feature](#calculateinputcommand-feature)
     * [List Command](#list-command)
       * [List Expenditure](#list-expenditure-e)
@@ -35,6 +35,10 @@
       * [Update Credit Card](#update-credit-card-cc)
       * [Update Income](#update-income-i)
       * [Update Considerations](#update-command-design-considerations)
+    * [Storage](#storage)
+      * [Loading](#loading)
+      * [Saving](#saving)
+      * [Design Considerations](#storage-design-considerations)
 * [Appendix Requirements](#appendix-requirements)
   * [Product scope](#product-scope)
   * [User Stories](#user-stories)
@@ -457,7 +461,6 @@ The sequence diagram above shows the interactions when deleting an expenditure.
 
 <br/>
 
-
 #### Delete Credit Card `/cc`
 Deletes a credit card specified by the user using the credit card's index. The credit card is deleted through the `DeleteCommand.deleteCreditCard()`
 method, invoked when using the `/cc` flag.
@@ -588,6 +591,119 @@ Aspect: To allow updating of a similar object from User's list.
     * Cons: Users may not be aware that the new object has no difference from the old object.
 
 <br/>
+
+### Storage
+
+Loads the user's saved information upon startup, and saves the information after every successful
+command execution.
+
+<br/>
+
+#### Loading
+
+Loads the user's saved information upon startup.
+
+![Loading_sequence_diagram](images/Loading_Sequence_Diagram.png)
+<br/>
+Fig 21 - Loading Sequence Diagram
+
+The sequence diagram above shows the interactions when loading user data.
+
+1. On startup, `MMM` creates a `Storage` object that loads and saves data to `data.txt`. The `Storage` object
+creates the file if it does not exist.
+2. `MMM` then calls `Storage.load()`, which initializes a `Scanner` that reads the data file.
+3. `Storage` invokes `User.deserializeFrom()`, which reads a serialized User over the `Scanner`.
+4. `User` calls `ExpenditureList.deserializeFrom()`, which returns an `ExpenditureList` read from the `Scanner`.
+5. `User` then does the same for `CreditCardList.deserializeFrom()` and `IncomeList.deserializeFrom()`, which
+return a `CreditCardList` and `IncomeList`, respectively.
+
+![Deserialize_list_sequence_diagram](images/DeserializeListSequenceDiagram.png)
+<br/>
+
+Fig 22 - ExpenditureList Deserialization Sequence Diagram
+
+The above sequence diagram shows the interactions when a list of 
+`MMMSerializable`s is being deserialized. Although the given diagram shows the interaction for an 
+`ExpenditureList`, the interactions for `CreditCardList` and `IncomeList` are similar.
+
+1. `ExpenditureList` calls `SerializerFunctions.convertInputToList()`, which accepts a function
+that deserializes a line of input. Here, `Expenditure.deserialize()` is passed to `convertInputToList()`.
+2. For each line in the input which corresponds to an `Expenditure`, `SerializerFunctions`
+invokes `Expenditure.deserialize()` on this line, which returns an `Expenditure`. This is repeated until
+the designated terminator is read from the `Scanner`.
+3. `Expenditure` invokes `PropertyList.deserialize()` to convert the input line into a set of key-value pairs.
+Then, it makes a series of `PropertyList.getValue()` calls to obtain the values of each individual property.
+4. Once all attributes have been processed, `Expenditure.deserialize()` returns an `Expenditure`.
+5. These expenditures are aggregated into an `ExpenditureList`, which is returned 
+to the `deserializeFrom()` call.
+
+#### Saving
+
+Saves user information after every successful
+command execution.
+
+![Saving_sequence_diagram](images/Saving_Sequence_Diagram.png)
+<br/>
+
+Fig 23 - Saving Sequence Diagram
+
+The sequence diagram above shows the interactions when saving user data.
+
+1. After every command, `MMM` invokes `Storage.save()`.
+2. `Storage` invokes `User.serialize()`.
+3. `User` calls `ExpenditureList.serialize()`, which returns a `String`, representing the serialized 
+`ExpenditureList`.
+4. `User` then does the same for `CreditCardList.deserializeFrom()` and `IncomeList.deserializeFrom()`, which
+   return `String`s representing a serialized `CreditCardList` and `IncomeList`, respectively
+5. `User` compiles all these into one `String`, and returns this to `Storage`.
+6. `Storage` writes the returned serialized `User` into the data file.
+
+![Serialize_list_sequence_diagram](images/SerializeListSequenceDiagram.png)
+<br/>
+
+Fig 24 - ExpenditureList Serialization Sequence Diagram
+
+The above sequence diagram shows the interactions when a list of
+`MMMSerializable` is being serialized. Although the given diagram shows the interaction for an
+`ExpenditureList`, the interactions for `CreditCardList` and `IncomeList` are similar.
+
+1. `ExpenditureList` calls `SerializerFunctions.addListToStringBuilder()`, passing in an `ArrayList` of 
+`Expenditure`s.
+2. For each entry in the list, `SerializerFunctions`
+   invokes `Expenditure.propetyList()` on this line, which returns an `Expenditure`. This is repeated until
+   the designated terminator is read from the `Scanner`.
+3. `Expenditure` creates a `PropertyList` to stores its properties into.
+   Then, it makes a series of `PropertyList.setValue()` calls to save each of its attributes.
+4. Once all attributes have been processed, `PropertyList.serialize()` is called, and
+this serialized `PropertyList` is returned by `Expenditure.serialize()`.
+5. These serialized expenditures are aggregated into an `String`, which is returned
+   to the `deserializeFrom()` call.
+
+#### Storage Design Considerations
+
+Aspect: When to save user data.
+* Alternative 1 (current choice): After every command.
+  * Pros: User state is still saved when program exits in ways other than a `ByeCommand`.
+  * Cons: Saving after every command may degrade performance.
+* Alternative 2: At program exit (i.e. execution of `ByeCommand`).
+  * Pros: Less overhead per command, due to not having to save.
+  * Cons: User state is not saved when program exits otherwise (e.g. due to a crash).
+
+Aspect: What format to use in saving user data.
+* Alternative 1 (current choice): Custom key-value pair format.
+  * Pros: Easy to read and modify by hand.
+  * Cons: More involved implementation.
+* Alternative 2: Java's default `java.io.Serializable` interface.
+  * Pros: Is simple to implement.
+  * Cons: Is non-human-readable, which violates the requirements of this project.
+* Alternative 3: JSON.
+  * Pros: Easy-to-read, widely established standard.
+  * Cons: Requires external libraries.
+* Alternative 4: Incremental list of changes to user data.
+  * Pros: Improved performance, due to having to save less data after every command.
+  * Cons: More difficult to modify by hand.
+
+<br />
 
 ## Appendix Requirements
 
