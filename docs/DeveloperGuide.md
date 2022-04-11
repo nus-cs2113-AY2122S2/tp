@@ -25,10 +25,13 @@
   - [Non-Functional Requirements](#non-functional-requirements)
   - [Glossary](#glossary)
   - [Instruction for manual testing](#instructions-for-manual-testing)
+  
 
 ## Acknowledgements
 
 - Team member Jun Lim's individual project codebase - [GitHub](https://github.com/jltha/ip)
+
+<div style="page-break-after: always;"></div>
 
 ## Introduction
 
@@ -44,6 +47,8 @@ This developer guide aims to equip current and future developers of Sherpass wit
 and implementation of the application. This guide will also explain some design decisions that were made during
 development. 
 
+<div style="page-break-after: always;"></div>
+
 ## Architecture
 
 ![](images/ArchitectureDiagram.png)
@@ -54,6 +59,8 @@ The above diagram provides a general overview of Sherpass and its major componen
 - Storage
 - Timetable
 - Study session
+
+<div style="page-break-after: always;"></div>
 
 ### UI
 
@@ -88,6 +95,8 @@ Timetable component consists of `Timetable`, `TimetableLogic`, `TimetableParser`
 It also interacts with various other classes such as `TaskList` and `Ui` to successfully generate a timetable 
 for the user to view. Refer to its [implementation](#timetable-implementation) for more information on how
 the different classes interact with one another.
+
+<div style="page-break-after: always;"></div>
 
 ### Study session
 
@@ -156,6 +165,7 @@ of the following scenario.
 By not using offsets, the 2-day gap between task 1 and 2 is lost. Hence, the decision to use offset to preserve such
 details was chosen even though it would make implementation slightly more complicated.
 
+<div style="page-break-after: always;"></div>
 
 ### Study Session Implementation
 
@@ -191,6 +201,8 @@ The `Timer` component
 - `Countdown` and `Stopwatch` can be paused, resumed and stopped
 - `Countdown` and `Stopwatch` prints to standard output the time remaining and elapsed respectively at regular intervals
 
+<div style="page-break-after: always;"></div>
+
 #### Timer Implementation
 
 Sherpass’ implementation of the timer function in the study session is mainly through `Timer`, `Countdown` and 
@@ -203,6 +215,8 @@ timer reaches zero, which then interrupts the thread. Starting the timer as a th
 like pause and stop for the timer through `StudyCommand` and `TimerLogic`, while the thread executes in the background 
 and prints the time remaining at regular intervals. A similar process is followed in `Stopwatch`, except that the class
 keeps track of time elapsed rather than time remaining.
+
+<div style="page-break-after: always;"></div>
 
 #### Study session usage scenario
 
@@ -253,6 +267,7 @@ track of time
   - Cons: Still have to implement a way to keep track of time for our purposes of pausing a timer, since the library 
   provided by Java has no way of pausing the timer, only stopping it.
 
+<div style="page-break-after: always;"></div>
 
 ### Timetable Implementation 
 
@@ -331,7 +346,7 @@ has a method called upon by **Timetable** to print the output into the terminal 
 The overall component which accepts inputs read by **Ui** class, before assigning
 the input over to Parser to break down the input into a suitable data for command execution.
 
-
+<div style="page-break-after: always;"></div>
 
 #### Timetable usage scenario
 
@@ -382,6 +397,8 @@ the program.
   - Pros: Reduces computation time
   - Cons: Increases memory usage
 
+<div style="page-break-after: always;"></div>
+
 ### Storage Implementation
 #### Loading saved files
 
@@ -424,6 +441,8 @@ In such scenarios, the user will get to choose to create a new save file or exit
   - Pros: Might use less space (negligible)
   - Cons: Unintuitive for users to modify
 
+<div style="page-break-after: always;"></div>
+
 ## Product scope
 
 ### Target user profile
@@ -465,6 +484,8 @@ to block out pockets of time for studying, so that they can better focus during 
 countdown timer is started.
 * *Stopwatch* - Refers to a stopwatch timer, where it records time elapsed from the moment the stopwatch is started.
 
+<div style="page-break-after: always;"></div>
+
 ## Instructions for manual testing
 
 ### Task managements
@@ -480,6 +501,8 @@ countdown timer is started.
 | Valid Command when showing today timetable                                      | `show today`                                                                                                                                                                                | Timetable for today is displayed                                                                                                        |
 | Invalid Command when showing monthly timetable                                  | `show sept`                                                                                                                                                                                 | Invalid input error message. Only 3-letter abbreviation of the specific month is accepted.                                              |
 | Valid Command when displaying monthly timetable<br/>For e.g. February timetable | `show february` or `show feb`                                                                                                                                                               | February timetable is displayed.<br/>If the specific month selected is in the past, the upcoming future month will be displayed instead |
+
+<div style="page-break-after: always;"></div>
 
 ### Study Session
 

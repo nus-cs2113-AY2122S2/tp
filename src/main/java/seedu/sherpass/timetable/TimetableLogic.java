@@ -65,7 +65,7 @@ public class TimetableLogic {
         return taskFullLength;
     }
 
-    //@@author
+    //@@author jltha
     protected static long calcOffset(boolean condition) {
         if (condition) {
             return WHITE_SPACE_FRONT_OFFSET_LENGTH_ONE;
@@ -73,11 +73,13 @@ public class TimetableLogic {
         return WHITE_SPACE_FRONT_OFFSET_LENGTH_TWO;
     }
 
+    //@@author jltha
     protected static long calculateColBackWhiteSpace(long maxDescriptionLength,
                                                    String description, long offset) {
         return maxDescriptionLength - (description.length() + offset);
     }
 
+    //@@author jltha
     protected static long calcPartitionLength(long taskLength, long byDateLength,
                                               long doOnDateLength, long taskNumberLength,
                                               boolean isFullTimetable) {
