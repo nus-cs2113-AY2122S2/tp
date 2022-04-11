@@ -11,16 +11,17 @@ import static org.junit.Assert.fail;
 
 
 class StorageTest {
-    Warehouse w = new Warehouse(0);
-    Boolean status = w.restoreWarehouseState();
+    Warehouse warehouse = new Warehouse(0);
+    Boolean status = warehouse.restoreWarehouseState();
+
     @Test
-    void checkRestore(){
+    void checkRestore() {
         assertTrue(status);
     }
 
     @Test
     void checkSave() throws IOException {
-        this.status = w.saveWarehouseState();
+        this.status = warehouse.saveWarehouseState();
         assertTrue(status);
     }
 }

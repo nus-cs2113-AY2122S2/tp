@@ -5,10 +5,10 @@ import util.exceptions.ItemDoesNotExistException;
 import util.exceptions.LargeQuantityException;
 import util.exceptions.WrongCommandException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class WarehouseTest {
     Warehouse warehouse = new Warehouse(1000);
@@ -366,7 +366,6 @@ class WarehouseTest {
             warehouse.addOrderline("02", "SKU01", "10");
             assertEquals(2, warehouse.totalNumberOfOrder());
         } catch (WrongCommandException e) {
-//            fail();
             assertFalse(false);
         }
 
