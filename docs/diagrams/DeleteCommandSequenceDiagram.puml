@@ -5,7 +5,7 @@ hide footbox
 skinparam guillemet false
 skinparam sequenceStereotypeFontColor red
 skinparam sequenceStereotypeFontStyle bold
-skinparam dpi 300
+skinparam dpi 290
 
 Participant ":InvMgr" as invmgr
 Participant "InputParser" as input <<class>>
