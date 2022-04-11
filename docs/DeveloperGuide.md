@@ -324,7 +324,7 @@ Here, we will assume that **Ui** will check and obtain any user input, before se
 and then to Parser to obtain the appropriate command to execute.
 
 
-![](images/ShowScheduleForADateSDPartTwo.png)
+![](images/ShowScheduleForADateSDTwo.png)
 
 The second diagram shown above covers the next part of the interaction, which is after
 the ShowCommand is being executed in main. It shows the sequences of interactions between

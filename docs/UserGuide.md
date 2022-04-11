@@ -317,7 +317,7 @@ for Sherpass has the ability to display your schedule for the current week or th
 
 Format:
 - `show week`
-- `show next week`/ `show next week`
+- `show next week`/ `show nextweek`
 
 
 |     Parameters      | Description                                         | Accepted inputs                                                  | Optional                                      |
