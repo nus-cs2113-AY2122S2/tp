@@ -18,7 +18,7 @@ title: Developer Guide
     * [Parser Component](#parser-component)
     * [Command Component](#command-component)
 * [Implementation](#implementation)
-  * [Parsing of commands](#parsing-of-commands)
+  * [Parsing of Commands](#parsing-of-commands)
   * [Session Commands](#session-commands)
   * [Activity Commands](#activity-commands)
   * [Group Commands](#group-commands)
