@@ -15,7 +15,6 @@
 - [User Stories](#user-stories)
 - [Non-Functional Requirements](#non-functional-requirements)
 - [Instructions for manual testing](#instructions-for-manual-testing)
-- [Glossary](#glossary)
 
 ## Warning
 **Please do not touch the save files (in the `ListFolder` folder) that save the
@@ -464,11 +463,14 @@ the checked-in/checked-out status of their rooms. Thus, this application:
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
-
-## Glossary
-
-* *glossary item* - Definition
+* Most operating systems, including Windows, Linux, OS-X, and Unix, should be able to run the program.
+* Program should work with Java `11` or above installed.
+* This program can support:
+  * Maximum of `1million` item pax can be recorded into file.
+  * Maximum of `1000` customer's satisfaction in list without experiencing any slowness.
+  * Maximum of `1000` items in list without experiencing any slowness.
+  * Maximum of `1000` housekeeper's profiles in list without experiencing any slowness.
+  * Maximum of `1000` event's details in list without experiencing any slowness.
 
 ## Instructions for manual testing
 
