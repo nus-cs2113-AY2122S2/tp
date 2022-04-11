@@ -57,7 +57,7 @@ Documentation contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 * Standardised language and grammar across the guide.
  
 #### Developer Guide
-* Added documentation for `SessionViewCommand`.
+* Added documentation for `TextUI`, `SessionViewCommand` and `ActivityEditCommand`.
 
 ### Miscellaneous Contributions
 * Recorded and narrated a demo video with slides and annotations including footage of the program in action for use
