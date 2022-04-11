@@ -27,7 +27,12 @@ public class ViewAverageSatisfactionCommand extends Command {
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         SatisfactionList satisfactionList = listContainer.getSatisfactionList();
-        System.out.println("Average customer satisfaction: " + satisfactionList.calculateAverageSatisfaction());
+        double average = satisfactionList.calculateAverageSatisfaction();
+        if (Double.isNaN(average)) {
+            System.out.println("Cannot calculate average satisfaction of empty satisfaction list.");
+        } else {
+            System.out.println("Average customer satisfaction: " + average);
+        }
     }
 
 }
