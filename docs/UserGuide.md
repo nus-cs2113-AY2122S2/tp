@@ -7,7 +7,7 @@ to focus on their academic tasks.
 Optimised for use via a Command Line Interface (CLI),
 users who can type fast will be able to plan out their tasks in a much quicker fashion compared to traditional GUI apps.
 
-### Managing your time
+### Managing your tasks
 You can add your tasks into Sherpass and get a detailed outline of your schedule. Using this schedule, you won't
 have to worry ever again about forgetting tasks and missing deadlines!
 
