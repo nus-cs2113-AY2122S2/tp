@@ -32,7 +32,12 @@ public class Hotels {
     }
 
     public void addHotel(Hotel newHotel) {
-        hotels.add(newHotel);
+        if (isContainSameHotel(newHotel)) {
+            System.out.println("This Hotel already exists! Please try again.");
+        } else {
+            hotels.add(newHotel);
+            System.out.println("HOTEL ADDED");
+        }
     }
 
     public void removeHotel(int index) {
