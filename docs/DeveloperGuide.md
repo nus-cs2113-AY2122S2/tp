@@ -157,9 +157,11 @@ For example, `printDishes()`, iterates through `dishes` and calls `get(int)` met
 ![](diagrams/sequence/DishManager_addDish.png)
 
 `void setPrice(int, double)`:
+
 ![](diagrams/sequence/DishManager_setPrice.png)
 
 `void setName(int, String)` is similar:
+
 ![](diagrams/sequence/DishManager_setName.png)
 
 ### DishController
