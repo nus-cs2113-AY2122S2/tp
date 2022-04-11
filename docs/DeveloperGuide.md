@@ -258,6 +258,24 @@ Exceptions are thrown/handled for the following:
 
 1. When the user enters a command without any name or description (missing all of `n/ d/`). This is done in `SearchCommandParser`.
 
+### ListFutureBorrowings Command
+
+![ListFutureBorrowings1SequenceDiagram](img/ListFutureBorrowings1SequenceDiagram.png)
+![ListFutureBorrowings2SequenceDiagram](img/ListFutureBorrowings2SequenceDiagram.png)
+
+The above diagrams shows the sequence diagram of listing future borrowings.
+
+The user starts by typing a `listfb` command. The example used in the diagrams above is listing of future borrowings for person `Jasper`
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is first split into 2 parts, the command word and the arguments. The command word is identified to be `listfb`, and executes the code within the case. The case calls the `parse()` method in `ListFutureBorrowingsParser`.
+3. `ListFutureBorrowingsParser.parse()` uses the string argument and extracts the `BORROWER_NAME` which is optional using an `ArgumentMultimap` through the method `ArgumentTokenizer.tokenize()`.
+4. `parse()` uses the `BORROWER_NAME` to generate a new `ListFutureBorrowingsCommand` which is returned to the `run()` method.
+5. The `run()` method calls on the `execute()` function in the `ListFutureBorrowingsCommand`
+6. `execute()` first creates a list of items using the `itemList`'s `getItemArrayList()` method.
+7. The method then uses Java Streams to check if there are any relevant `BorrowRecords`. These records are stored as strings in a list called `futureRecords`
+8. Based on the size of the `futureRecords`, the `itemList` will converse with `Ui` to give the appropriate output.
+
 ### Storage
 
 #### Initialisation
