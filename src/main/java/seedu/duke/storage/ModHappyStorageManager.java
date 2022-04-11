@@ -72,7 +72,7 @@ public class ModHappyStorageManager {
      */
     public static Configuration loadConfiguration(String configurationPath) {
         File configurationDataFile = new File(configurationPath);
-        if (!configurationDataFile.exists()) {
+        if (configurationDataFile.exists()) {
             modHappyStorage = new ConfigurationStorage();
             try {
                 Configuration configuration = (Configuration) modHappyStorage.loadData(configurationPath);
