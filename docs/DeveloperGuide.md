@@ -511,12 +511,23 @@ the JAR file name
 |Add extra characters to view average satisfaction. | `view average satisfaction blah blah` | Error message to user|
 
 
+
+
+
 ---
 ### Housekeeper Related Functions
+* Prerequisite: For `HousekeeperPerformance`-related commands, the the `HousekeeperList` must contain all the housekeepers that the user wants to record performances for.
+  Assume that the `HousekeeperList` has a `Housekeeper` named `Steve` and a `Housekeeper` named `Fred`.
 
 | **Test Case** | **Command** | **Expected Result** |
 |:-------------:|:-------------|:-------------------|
-|x|x  | x|
+| Add 1 housekeeper performance for `Steve`| `add performance Steve / 3`.| Adds performance rating of `3` for housekeeper `Steve`|
+| Add 1 housekeeper performance for `Joe`, who is not in the `HousekeeperList`.| `add performance Joe / 3`| Error message to user|
+| Add 1 housekeeper performance for `Fred` with rating that is not within range of 1-5, inclusive. | `add performance Fred / -1` | Error message to user|
+| View recorded housekeeper performances | `view performances` | Lists out all housekeeper performances that user has recorded so far|
+| Add extra characters to view recorded housekeeper performances | `view performances blah blah` | Error message to user |
+
+
 ---
 ### Room Related Functions
 | **Test Case** | **Command** | **Expected Result** |
