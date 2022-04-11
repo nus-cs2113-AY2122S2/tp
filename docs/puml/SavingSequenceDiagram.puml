@@ -9,6 +9,7 @@ participant ":ExpenditureList" as ExpenditureList USERFINANCIAL_COLOUR
 participant ":CreditCardList" as CreditCardList USERFINANCIAL_COLOUR
 participant ":IncomeList" as IncomeList USERFINANCIAL_COLOUR
 end box
+hide footbox
 
 MMM -> Storage : save()
 activate Storage STORAGE_COLOUR
