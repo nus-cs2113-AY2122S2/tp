@@ -78,7 +78,7 @@ Documentation contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
   [`View a session`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/docs/DeveloperGuide.md#view-a-session)
   and [`ActivityEditCommand`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/docs/DeveloperGuide.md#edit-an-activity).
 * Fixed typos in the [SessionSummaryCommand sequence diagram](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/docs/images/developerguide/SessionSummaryCommand.drawio.png) and
-  the [GroupEditCommand sequence diagram](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/docs/images/developerguide/GroupEditCommand.drawio.png) 
+  the [GroupEditCommand sequence diagram](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/docs/images/developerguide/GroupEditCommand.drawio.png).
 
 ### Miscellaneous Contributions
 * Recorded and narrated a demo video with slides and annotations including footage of the program in action for use
