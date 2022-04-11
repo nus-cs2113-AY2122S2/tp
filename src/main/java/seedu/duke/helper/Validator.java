@@ -341,6 +341,7 @@ public class Validator {
     }
 
     public static void validateFindPatient(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 2);
         switch (parameters[0].toLowerCase()) {
         case "nric":
             validateNric(parameters[1]);
