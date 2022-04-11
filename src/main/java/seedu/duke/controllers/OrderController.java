@@ -5,13 +5,13 @@ import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.loggers.MainLogger;
 import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
-import java.text.DecimalFormat;
+import seedu.duke.entities.Order;
 
 public class OrderController extends Controller {
     private static final String[] CHOICES = {"Exit Order Menu",
-        "Create an order", "Delete an order",
-        "Get total price of an order",
-        "Get total price of all orders", "Print receipt", "Display order list", "Display dish menu"
+            "Create an order", "Delete an order",
+            "Get total price of an order",
+            "Get total price of all orders", "Print receipt", "Display order list", "Display dish menu"
     };
     private final OrderManager orderManager = OrderManager.getInstance();
     private final DishManager dishManager = DishManager.getInstance();
@@ -23,39 +23,39 @@ public class OrderController extends Controller {
     @Override
     protected boolean optionSwitcher(int choice) throws OperationTerminationException {
         switch (choice) {
-        case 0:
-            System.out.println("Exiting menu...");
-            try {
-                orderManager.saveData();
-            } catch (Exception e) {
-                System.out.println("There was an error saving Order data!\n");
-                MainLogger.logWarning(this, "Error saving Order data!");
-            }
-            return true;
-        case 1:
-            addNewOrder();
-            break;
-        case 2:
-            deleteOrder();
-            break;
-        case 3:
-            displayPrice();
-            break;
-        case 4:
-            displayAllPrice();
-            break;
-        case 5:
-            printOrder();
-            break;
-        case 6:
-            displayOrders();
-            break;
-        case 7:
-            System.out.println(dishManager.printDishes());
-            break;
-        default:
-            System.out.println("Unknown choice!");
-            break;
+            case 0:
+                System.out.println("Exiting menu...");
+                try {
+                    orderManager.saveData();
+                } catch (Exception e) {
+                    System.out.println("There was an error saving Order data!\n");
+                    MainLogger.logWarning(this, "Error saving Order data!");
+                }
+                return true;
+            case 1:
+                addNewOrder();
+                break;
+            case 2:
+                deleteOrder();
+                break;
+            case 3:
+                displayPrice();
+                break;
+            case 4:
+                displayAllPrice();
+                break;
+            case 5:
+                printOrder();
+                break;
+            case 6:
+                displayOrders();
+                break;
+            case 7:
+                System.out.println(dishManager.printDishes());
+                break;
+            default:
+                System.out.println("Unknown choice!");
+                break;
         }
         System.out.println(this);
         return false;
@@ -129,9 +129,8 @@ public class OrderController extends Controller {
         MainLogger.logInfo(this, "User is displaying the price of an order");
         System.out.println("Getting total price of an order...");
         try {
-            DecimalFormat df = new DecimalFormat("#.00");
             int userInputInt = InputParser.getInteger("Enter the order you want to get price: ") - 1;
-            System.out.println("Total value of this order: " + df.format(orderManager.getPrice(userInputInt)));
+            System.out.printf("Total value of this order: %.2f. \n", orderManager.getPrice(userInputInt));
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Please enter a valid order index.");
         }
@@ -146,8 +145,7 @@ public class OrderController extends Controller {
         if (orderManager.getOrderCount() == 0) {
             System.out.println("No order now.");
         } else {
-            DecimalFormat df = new DecimalFormat("#.00");
-            System.out.println("Total value of all orders: " + df.format(orderManager.getAllValue()));
+            System.out.printf("Total value of all orders: %.2f. \n", orderManager.getAllValue());
         }
     }
 
