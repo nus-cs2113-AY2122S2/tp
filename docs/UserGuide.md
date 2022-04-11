@@ -402,7 +402,8 @@ Example 4: `find appointment /info doctor nric, S7654321A` <br>
 Example 5: `find appointment /info doctor name, John` <br>
 Example 6: `find appointment /info date, 2022-10-15`
 
-![](photos/find%20appointment.png)
+![](photos/findappointment.png)
+
 
 ### Features involving Medicine Inventory
 
