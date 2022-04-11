@@ -46,7 +46,7 @@ setup and quick to use. Simplst will mainly be used to add, remove, list and vie
 | [Orderline](#orderline-commands)                   | An orderline is the goods required by the order.                                                                                                                                                                                                               |
 | [Fulfill](#fulfill-order-fulfill)                  | Used to check and indicate if an order is completed.                                                                                                                                                                                                           |
 | `Words in MarkUp`                                  | Used to highlight keywords used for commands and commands themselves.                                                                                                                                                                                          |
-| <img src="img.png" alt="img" style="width:50px;"/> | Used to denote features for warehouse managers.                                                                                                                                                                                                                |
+| <img src="img.png" alt="img" style="width:30px;"/> | Used to denote features for warehouse managers.                                                                                                                                                                                                                |
 | `*Optional*`                                       | Fields in MarkUp bounded by asterisks (*) are optional to be filled in, but should be replaced with a space ' ' instead.                                                                                                                                       |
 
 
@@ -266,7 +266,7 @@ An Order contains:
 * Receiver name
 * Shipping address
 
-### Adding an Order `add o/`
+### <img src="img.png" alt="img" style="width:30px;"/> Adding an Order `add o/`
 Adding a new order to be tracked in the warehouse.
 
 Format: `add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]`
@@ -284,7 +284,7 @@ Order 1 added to the warehouse
 Another command?
 ```
 
-### Removing an Order `remove o/`
+### <img src="img.png" alt="img" style="width:30px;"/> Removing an Order `remove o/`
 Removing the quantity of a Unit Good from its previous value.
 
 Format: `remove o/ oid/[ORDER_ID]`
@@ -299,7 +299,7 @@ Order 1 has been removed
 Another command?
 ```
 
-### Listing Current Orders `list o/`
+### <img src="img.png" alt="img" style="width:30px;"/> Listing Current Orders `list o/`
 Listing all orders in the warehouse. This would show the order details such as:
 * Order id
 * Receiver Name
@@ -319,7 +319,7 @@ List of orders:
 Another command?
 ```
 
-### View Order `view o/`
+### <img src="img.png" alt="img" style="width:30px;"/> View Order `view o/`
 View a specific order in the warehouse. This would show the order details such as:
 * Order id
 * Receiver Name
@@ -350,7 +350,7 @@ Could not find order with given id!
 Another command?
 ```
 
-### Fulfill Order `fulfill`
+### <img src="img.png" alt="img" style="width:30px;"/> Fulfill Order `fulfill`
 Fulfill a currently unfulfilled order in the warehouse. To fulfill an order, Simplst will check if all the orderlines relating to the order have their required quantities met.<br/>
 When all the orderlines quantities are fulfilled, the order will be considered as fulfilled.
 
