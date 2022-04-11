@@ -36,10 +36,10 @@ public class DeleteItemCommandTest {
 
     @Test
     public void execute_NonEmptyItemName_success() throws HotelLiteManagerException {
-        DeleteItemCommand itemNameCommand = new DeleteItemCommand("Toilet Paper");
+        DeleteItemCommand itemNameCommand = new DeleteItemCommand(" Toilet Paper");
         itemNameCommand.execute(listContainer, ui);
         ItemList itemList = listContainer.getItemList();
-        ItemList listOfMatchingItem = itemList.findItemsInList("Toilet Paper");
+        ItemList listOfMatchingItem = itemList.findItemsInList(" Toilet Paper");
         assertEquals(0, listOfMatchingItem.getSize());
     }
 
@@ -50,17 +50,17 @@ public class DeleteItemCommandTest {
 
     @Test
     public void execute_ItemNameOfANonExistentItem_exceptionThrown() throws HotelLiteManagerException {
-        DeleteItemCommand itemNameCommand = new DeleteItemCommand("Table");
+        DeleteItemCommand itemNameCommand = new DeleteItemCommand(" Table");
         assertThrows(ItemNotFoundException.class, () -> itemNameCommand.execute(listContainer, ui));
     }
 
     @Test
     public void execute_ItemNameWithInvalidSymbols_exceptionThrown() {
-        assertThrows(InvalidItemNameException.class, () -> new DeleteItemCommand("{1,/0"));
+        assertThrows(InvalidItemNameException.class, () -> new DeleteItemCommand(" {1,/0"));
     }
 
     @Test
     public void execute_DeleteItemCommandWithinItemNameOrPax_exceptionThrown()  {
-        assertThrows(DuplicateCommandException.class, () -> new DeleteItemCommand("delete item"));
+        assertThrows(DuplicateCommandException.class, () -> new DeleteItemCommand(" delete item"));
     }
 }

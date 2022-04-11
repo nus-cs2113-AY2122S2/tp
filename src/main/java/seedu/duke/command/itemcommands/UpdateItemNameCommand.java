@@ -3,8 +3,9 @@ package seedu.duke.command.itemcommands;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidUpdateItemNameCommandException;
-import seedu.duke.exceptions.ItemNameAlreadyInListException;
 import seedu.duke.exceptions.DuplicateItemNameException;
+import seedu.duke.exceptions.ItemNameAlreadyInListException;
+
 import seedu.duke.exceptions.DuplicateCommandException;
 
 import seedu.duke.ListContainer;
@@ -41,11 +42,10 @@ public class UpdateItemNameCommand extends Command {
      *                                   empty or the new item name is empty.
      */
     public UpdateItemNameCommand(String userInput) throws HotelLiteManagerException {
-        if (userInput.startsWith(DELIMITER)) {
-            itemLogger.log(Level.WARNING, "The item name of the item to update is empty for the Update Item Name "
-                    + "Command. Exception thrown.");
+        if (!userInput.startsWith(" ")) {
             throw new InvalidUpdateItemNameCommandException();
         }
+
         if (userInput.endsWith(DELIMITER)) {
             itemLogger.log(Level.WARNING, "The new item name of the item to update is empty for the Update Item "
                     + "Name Command. Exception thrown");
@@ -150,7 +150,7 @@ public class UpdateItemNameCommand extends Command {
      * @param listContainer The object containing the data structure necessary for updating the name of an item within
      *                      the item list.
      *                      In this case, we require access to the ItemList object which is within listContainer.
-     * @throws IOException  if we are unable to write to the file ListFolder/ItemList.txt
+     * @throws IOException if we are unable to write to the file ListFolder/ItemList.txt
      */
     public void writeItemListToFile(ListContainer listContainer) throws IOException {
         ItemList listOfItems = listContainer.getItemList();

@@ -39,7 +39,7 @@ public class UpdateItemNameCommandTest {
 
     @Test
     public void execute_NonEmptyItemNames_success() throws HotelLiteManagerException {
-        UpdateItemNameCommand itemNameCommand = new UpdateItemNameCommand("Toilet Paper / Premium Toilet Paper"
+        UpdateItemNameCommand itemNameCommand = new UpdateItemNameCommand(" Toilet Paper / Premium Toilet Paper"
         );
         itemNameCommand.execute(listContainer, ui);
         ItemList itemList = listContainer.getItemList();
@@ -49,17 +49,15 @@ public class UpdateItemNameCommandTest {
 
     @Test
     public void execute_EmptyCurrentItemName_exceptionThrown() {
-        assertThrows(InvalidUpdateItemNameCommandException.class, () -> new UpdateItemNameCommand("/ Premium "
-                + "Toilet Paper"));
-        assertThrows(InvalidUpdateItemNameCommandException.class, () -> new UpdateItemNameCommand("   / Premium "
+        assertThrows(InvalidUpdateItemNameCommandException.class, () -> new UpdateItemNameCommand(" / Premium "
                 + "Toilet Paper"));
     }
 
     @Test
     public void execute_EmptyUpdatedItemName_exceptionThrown() {
-        assertThrows(InvalidUpdateItemNameCommandException.class, () -> new UpdateItemNameCommand("Toilet "
+        assertThrows(InvalidUpdateItemNameCommandException.class, () -> new UpdateItemNameCommand(" Toilet "
                 + "Paper /"));
-        assertThrows(InvalidUpdateItemNameCommandException.class, () -> new UpdateItemNameCommand("Toilet "
+        assertThrows(InvalidUpdateItemNameCommandException.class, () -> new UpdateItemNameCommand(" Toilet "
                 + "Paper /   "));
     }
 
@@ -70,32 +68,32 @@ public class UpdateItemNameCommandTest {
 
     @Test
     public void execute_NewItemNameSameAsCurrentName_exceptionThrown() throws HotelLiteManagerException {
-        UpdateItemNameCommand updateItemNameCommand = new UpdateItemNameCommand("Toilet Paper / Toilet Paper");
+        UpdateItemNameCommand updateItemNameCommand = new UpdateItemNameCommand(" Toilet Paper / Toilet Paper");
         assertThrows(DuplicateItemNameException.class, () -> updateItemNameCommand.execute(listContainer, ui));
     }
 
     @Test
     public void execute_ItemNameWithInvalidSymbols_exceptionThrown() {
-        assertThrows(InvalidItemNameException.class, () -> new UpdateItemNameCommand("{1,/0"));
+        assertThrows(InvalidItemNameException.class, () -> new UpdateItemNameCommand(" {1,/0"));
     }
 
     @Test
     public void execute_ItemNameOfANonExistentItem_success() throws HotelLiteManagerException {
-        UpdateItemNameCommand itemNameCommand = new UpdateItemNameCommand("Table / New Table");
+        UpdateItemNameCommand itemNameCommand = new UpdateItemNameCommand(" Table / New Table");
         assertThrows(ItemNotFoundException.class, () -> itemNameCommand.execute(listContainer, ui));
     }
 
     @Test
     public void execute_NewItemNameAlreadyFoundInItemList_success() throws HotelLiteManagerException {
-        UpdateItemNameCommand itemNameCommand = new UpdateItemNameCommand("Sofa / Toilet Paper");
+        UpdateItemNameCommand itemNameCommand = new UpdateItemNameCommand(" Sofa / Toilet Paper");
         assertThrows(ItemNameAlreadyInListException.class, () -> itemNameCommand.execute(listContainer, ui));
     }
 
     @Test
     public void execute_UpdateItemNameCommandWithinItemNameOrPax_exceptionThrown() {
-        assertThrows(DuplicateCommandException.class, () -> new UpdateItemNameCommand("update item name / "
+        assertThrows(DuplicateCommandException.class, () -> new UpdateItemNameCommand(" update item name / "
                 + "Premium Toilet Roll"));
-        assertThrows(DuplicateCommandException.class, () -> new UpdateItemNameCommand("Toilet Roll / update "
+        assertThrows(DuplicateCommandException.class, () -> new UpdateItemNameCommand(" Toilet Roll / update "
                 + "item name"));
     }
 

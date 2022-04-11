@@ -2,15 +2,16 @@ package seedu.duke.command.itemcommands;
 
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.HotelLiteManagerException;
-import seedu.duke.exceptions.EmptyItemNameException;
 import seedu.duke.exceptions.EmptyItemPaxException;
+import seedu.duke.exceptions.EmptyItemNameException;
+import seedu.duke.exceptions.InvalidUpdateItemPaxCommandException;
+import seedu.duke.exceptions.InvalidItemPaxException;
+import seedu.duke.exceptions.DuplicateCommandException;
+
 import seedu.duke.itemlists.Item;
 import seedu.duke.itemlists.ItemList;
 import seedu.duke.Ui;
 import seedu.duke.ListContainer;
-import seedu.duke.exceptions.InvalidItemPaxException;
-import seedu.duke.exceptions.InvalidUpdateItemPaxCommandException;
-import seedu.duke.exceptions.DuplicateCommandException;
 
 import seedu.duke.storage.ItemListFileManager;
 
@@ -42,11 +43,10 @@ public class UpdateItemPaxCommand extends Command {
      *                                   empty.
      */
     public UpdateItemPaxCommand(String userInput) throws HotelLiteManagerException {
-        if (userInput.startsWith(DELIMITER)) {
-            itemLogger.log(Level.WARNING, "Detected an empty item name for UpdateItemCommand. "
-                    + "Exception thrown.");
-            throw new EmptyItemNameException();
+        if (!userInput.startsWith(" ")) {
+            throw new InvalidUpdateItemPaxCommandException();
         }
+
         if (userInput.endsWith(DELIMITER)) {
             itemLogger.log(Level.WARNING, "Detected an empty item Pax for UpdateItemCommand. "
                     + "Exception thrown.");
@@ -127,7 +127,6 @@ public class UpdateItemPaxCommand extends Command {
      *
      * @param ui The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
-     * @return
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {

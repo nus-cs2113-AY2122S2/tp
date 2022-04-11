@@ -8,7 +8,7 @@ import seedu.duke.exceptions.EmptyItemNameException;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.EmptyItemPaxException;
 import seedu.duke.exceptions.InvalidItemPaxException;
-import seedu.duke.exceptions.InvalidCommandException;
+import seedu.duke.exceptions.InvalidAddItemCommandException;
 import seedu.duke.exceptions.ItemAlreadyInListException;
 import seedu.duke.exceptions.DuplicateCommandException;
 
@@ -42,7 +42,7 @@ public class AddItemCommandTest {
 
     @Test
     public void execute_NonEmptyItemNameAndPax_success() throws HotelLiteManagerException, IOException {
-        AddItemCommand addItemPaxCommand = new AddItemCommand("Shampoo / 30");
+        AddItemCommand addItemPaxCommand = new AddItemCommand(" Shampoo / 30");
         addItemPaxCommand.execute(listContainer, ui);
         ItemList itemList = listContainer.getItemList();
         Item item = itemList.getItem(INDEX_OF_SHAMPOO);
@@ -52,13 +52,13 @@ public class AddItemCommandTest {
 
     @Test
     public void execute_EmptyItemPax_exceptionThrown() {
-        assertThrows(EmptyItemPaxException.class, () -> new AddItemCommand("Towels /"));
-        assertThrows(EmptyItemPaxException.class, () -> new AddItemCommand("Towels /    "));
+        assertThrows(EmptyItemPaxException.class, () -> new AddItemCommand(" Towels /"));
+        assertThrows(EmptyItemPaxException.class, () -> new AddItemCommand(" Towels /    "));
     }
 
     @Test
     public void execute_itemPaxWithTheUpperBoundaryValue_success() throws HotelLiteManagerException, IOException {
-        AddItemCommand addItemPaxCommand = new AddItemCommand("Tooth Brush / 1000000");
+        AddItemCommand addItemPaxCommand = new AddItemCommand(" Tooth Brush / 1000000");
         addItemPaxCommand.execute(listContainer, ui);
         ItemList itemList = listContainer.getItemList();
         Item item = itemList.getItem(INDEX_OF_TOOTH_BRUSH);
@@ -68,7 +68,7 @@ public class AddItemCommandTest {
 
     @Test
     public void execute_itemPaxWithTheLowerBoundaryValue_success() throws HotelLiteManagerException, IOException {
-        AddItemCommand addItemPaxCommand = new AddItemCommand("Comb / 1");
+        AddItemCommand addItemPaxCommand = new AddItemCommand(" Comb / 1");
         addItemPaxCommand.execute(listContainer, ui);
         ItemList itemList = listContainer.getItemList();
         Item item = itemList.getItem(INDEX_OF_COMB);
@@ -78,45 +78,44 @@ public class AddItemCommandTest {
 
     @Test
     public void execute_itemPaxWithNegativeValue_exceptionThrown() {
-        assertThrows(InvalidItemPaxException.class, () -> new AddItemCommand("Towels / -1"));
+        assertThrows(InvalidItemPaxException.class, () -> new AddItemCommand(" Towels / -1"));
     }
 
     @Test
     public void execute_itemPaxWithValueAboveUpperBoundary_exceptionThrown() {
-        assertThrows(InvalidItemPaxException.class, () -> new AddItemCommand("Towels / 1000001"));
+        assertThrows(InvalidItemPaxException.class, () -> new AddItemCommand(" Towels / 1000001"));
     }
 
     @Test
     public void execute_itemPaxWithValueBelowLowerBoundary_exceptionThrown() {
-        assertThrows(InvalidItemPaxException.class, () -> new AddItemCommand("Towels / 0"));
+        assertThrows(InvalidItemPaxException.class, () -> new AddItemCommand(" Towels / 0"));
     }
 
     @Test
     public void execute_nonIntegerItemPax_exceptionThrown() {
-        assertThrows(InvalidItemPaxException.class, () -> new AddItemCommand("Towels / abc"));
+        assertThrows(InvalidItemPaxException.class, () -> new AddItemCommand(" Towels / abc"));
     }
 
     @Test
     public void execute_EmptyItemName_exceptionThrown() {
-        assertThrows(EmptyItemNameException.class, () -> new AddItemCommand("/ 30"));
-        assertThrows(EmptyItemNameException.class, () -> new AddItemCommand("  / 30"));
+        assertThrows(EmptyItemNameException.class, () -> new AddItemCommand(" / 30"));
     }
 
     @Test
     public void execute_EmptyItemNameAndPax_exceptionThrown() {
-        assertThrows(InvalidCommandException.class, () -> new AddItemCommand(""));
-        assertThrows(InvalidCommandException.class, () -> new AddItemCommand(""));
+        assertThrows(InvalidAddItemCommandException.class, () -> new AddItemCommand(" "));
+        assertThrows(InvalidAddItemCommandException.class, () -> new AddItemCommand(" "));
     }
 
     @Test
     public void execute_DuplicateItem_exceptionThrown() throws HotelLiteManagerException {
-        AddItemCommand addItemPaxCommand = new AddItemCommand("Toilet Paper / 50");
+        AddItemCommand addItemPaxCommand = new AddItemCommand(" Toilet Paper / 50");
         assertThrows(ItemAlreadyInListException.class, () -> addItemPaxCommand.execute(listContainer, ui));
     }
 
     @Test
     public void execute_AddItemCommandWithinItemNameOrPax_exceptionThrown()  {
-        assertThrows(DuplicateCommandException.class, () -> new AddItemCommand("add item / 15"));
-        assertThrows(DuplicateCommandException.class, () -> new AddItemCommand("Toilet Roll / add item"));
+        assertThrows(DuplicateCommandException.class, () -> new AddItemCommand(" add item / 15"));
+        assertThrows(DuplicateCommandException.class, () -> new AddItemCommand(" Toilet Roll / add item"));
     }
 }

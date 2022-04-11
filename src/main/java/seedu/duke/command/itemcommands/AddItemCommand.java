@@ -4,7 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.EmptyItemPaxException;
 import seedu.duke.exceptions.EmptyItemNameException;
-import seedu.duke.exceptions.InvalidCommandException;
+import seedu.duke.exceptions.InvalidAddItemCommandException;
 import seedu.duke.exceptions.InvalidItemPaxException;
 import seedu.duke.exceptions.ItemAlreadyInListException;
 import seedu.duke.exceptions.DuplicateCommandException;
@@ -42,10 +42,10 @@ public class AddItemCommand extends Command {
      *                                   name is empty, or the item name and pax are both empty.
      */
     public AddItemCommand(String userInput) throws HotelLiteManagerException {
-        if (userInput.startsWith(DELIMITER)) {
-            itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
-            throw new EmptyItemNameException();
+        if (!userInput.startsWith(" ")) {
+            throw new InvalidAddItemCommandException();
         }
+
         if (userInput.endsWith(DELIMITER)) {
             itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
             throw new EmptyItemPaxException();
@@ -59,7 +59,7 @@ public class AddItemCommand extends Command {
         StringTokenizer tokens = new StringTokenizer(userInput, DELIMITER);
         if (tokens.countTokens() != NUMBER_OF_PARTS_IN_COMMAND) {
             itemLogger.log(Level.WARNING, "Invalid formatting for AddItemCommand detected. Exception thrown.");
-            throw new InvalidCommandException();
+            throw new InvalidAddItemCommandException();
         }
         String itemName = extractItemName(tokens);
         int itemPax = extractItemPax(tokens);

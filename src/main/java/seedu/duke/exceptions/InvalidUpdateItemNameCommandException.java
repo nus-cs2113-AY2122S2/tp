@@ -5,7 +5,8 @@ package seedu.duke.exceptions;
  * command.
  */
 public class InvalidUpdateItemNameCommandException extends HotelLiteManagerException {
-    private static final String ERROR_MESSAGE = "Error! Invalid Command -> Update Item Name OLD NAME / NEW NAME";
+    private static final String ERROR_MESSAGE = "Error! Invalid Update Item Name Command -> Update Item Name OLD NAME "
+            + "/ NEW NAME";
 
     @Override
     public String getErrorMessage() {

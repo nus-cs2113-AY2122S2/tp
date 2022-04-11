@@ -12,6 +12,7 @@ import seedu.duke.command.Command;
 import seedu.duke.exceptions.EmptyItemNameException;
 import seedu.duke.exceptions.EmptyItemPaxException;
 import seedu.duke.exceptions.InvalidCommandException;
+import seedu.duke.exceptions.InvalidAddItemCommandException;
 
 class DukeTest {
     @Test
@@ -41,7 +42,7 @@ class DukeTest {
 
     @Test
     public void commandParser_addCommandWithEmptyItemNameAndPax_exceptionThrown() {
-        assertThrows(InvalidCommandException.class, () -> new CommandParser().parse("Add Item "));
+        assertThrows(InvalidAddItemCommandException.class, () -> new CommandParser().parse("Add Item "));
     }
 
     @Test

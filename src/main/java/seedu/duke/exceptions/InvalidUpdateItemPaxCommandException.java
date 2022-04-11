@@ -5,7 +5,8 @@ package seedu.duke.exceptions;
  * command.
  */
 public class InvalidUpdateItemPaxCommandException extends HotelLiteManagerException {
-    private static final String ERROR_MESSAGE = "Error! Invalid Command -> Update Item Pax ITEM NAME / NEW PAX";
+    private static final String ERROR_MESSAGE = "Error! Invalid Update Item Pax Command -> Update Item Pax ITEM NAME / "
+            + "NEW PAX";
 
     @Override
     public String getErrorMessage() {

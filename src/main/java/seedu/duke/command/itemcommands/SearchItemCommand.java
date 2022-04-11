@@ -6,6 +6,7 @@ import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.EmptyKeywordException;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
+import seedu.duke.exceptions.InvalidSearchItemException;
 import seedu.duke.itemlists.ItemList;
 
 import java.util.logging.Level;
@@ -24,10 +25,15 @@ public class SearchItemCommand extends Command {
      * Takes in the user input and checks if the formatting of the search item command within the user input is
      * valid.
      * Takes the user input and creates a SearchItemCommand object using it.
+     *
      * @param userInput The user's input.
      * @throws HotelLiteManagerException if the keyword is empty or if the string userInput contains "search item".
      */
     public SearchItemCommand(String userInput) throws HotelLiteManagerException {
+        if (!userInput.startsWith(" ")) {
+            throw new InvalidSearchItemException();
+        }
+
         String keyword = userInput.trim();
         if (keyword.contains(SEARCH_ITEM_COMMAND)) {
             itemLogger.log(Level.WARNING, "Repeated search item command given.");
@@ -37,6 +43,7 @@ public class SearchItemCommand extends Command {
         if (keyword.isEmpty()) {
             throw new EmptyKeywordException();
         }
+
         setKeyword(keyword);
     }
 

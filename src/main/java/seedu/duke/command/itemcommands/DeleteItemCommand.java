@@ -3,6 +3,7 @@ package seedu.duke.command.itemcommands;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.DuplicateCommandException;
 import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.InvalidDeleteItemCommandException;
 import seedu.duke.itemlists.Item;
 import seedu.duke.exceptions.EmptyItemNameException;
 import seedu.duke.ListContainer;
@@ -35,6 +36,11 @@ public class DeleteItemCommand extends Command {
     public DeleteItemCommand(String userInput) throws HotelLiteManagerException {
         if (userInput.isEmpty()) {
             throw new EmptyItemNameException();
+        }
+
+        if (!userInput.startsWith(" ")) {
+            itemLogger.log(Level.WARNING, "Invalid formatting for AddItemCommand detected. Exception thrown.");
+            throw new InvalidDeleteItemCommandException();
         }
 
         if (userInput.contains(DELETE_ITEM_COMMAND)) {
