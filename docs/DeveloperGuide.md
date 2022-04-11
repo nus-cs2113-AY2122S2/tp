@@ -269,7 +269,7 @@ Step 2. User adds an income to *Alice*
 
 Additionally, the following Object Diagram shows what is present in the `Family` structure at this point in time.
 
-![Placeholder]()
+![FamilyObjectDiagram](images/FamilyObjectDiagram.png)
 
 Step 3. User decides to view the `parents` generation in detail
 
