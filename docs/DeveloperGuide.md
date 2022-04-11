@@ -571,13 +571,15 @@ the JAR file name
 ### Room Related Functions
 | **Test Case** | **Command** | **Expected Result** |
 |:-------------:|:-------------|:-------------------|
-|Check in room `201`| `check in 201`  | Change Status of room `201` from `Vacant` to `Occupied` |
-|Check in room `501`, which is not in the `RoomList` | `check in 501` | Error message to user|
-|Check all room of `double` type | `check category double `| Lists out all room of `double` category|
-|check all room of `president` type, which is not valid in `RoomList` | `check category president` | Error message to user |
-|check all room in level `3`| `check level 3`| Lists out all room in level `3`|
-|check all room in level `5`, which is not within the level range of 1-4| check level `5`| Error message to user|
+| Check in room `201`| `check in 201` | Change Status of room `201` from `Vacant` to `Occupied`|
+| Check in room `501`, which is not in the `RoomList` | `check in 501` | Error message to user|
+| Check all room of `double` type | `check category double `| Lists out all room of `double` category|
+| Check all room of `president` type, which is not valid in `RoomList` | `check category president` | Error message to user|
+| Check all room in level `3`| `check level 3`| Lists out all room in level `3`|
+| Check all room in level `5`, which is not within the level range of 1-4| `check level 5`| Error message to user|
+
 ---
+
 ### Item Related Functions
 | **Test Case** | **Command** | **Expected Result** |
 |:-------------:|:-------------|:-------------------|
