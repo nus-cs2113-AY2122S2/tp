@@ -34,8 +34,7 @@ import static seedu.mindmymoney.data.ExpenditureList.isEqualAmount;
 import static seedu.mindmymoney.data.ExpenditureList.isEqualTime;
 import static seedu.mindmymoney.data.IncomeList.isEqualIncomeCategory;
 import static seedu.mindmymoney.data.IncomeList.isEqualIncomeAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testUpdateExpenditureParameters;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testUpdateIncomeParameters;
+import static seedu.mindmymoney.helper.AddCommandInputTests.*;
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
@@ -213,6 +212,8 @@ public class UpdateCommand extends Command {
                     FLAG_OF_CARD_LIMIT);
             String newCardLimit = parseInputWithCommandFlag(updateInput, FLAG_OF_CARD_LIMIT,
                     FLAG_END_VALUE);
+            testCreditCardParameters(newCardName, newCashBack, newCardLimit, creditCardList);
+
             int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
 
             double newCashBackAsDouble = Double.parseDouble(newCashBack);
