@@ -125,11 +125,11 @@ How the parsing works:
 
 ### Command Component
 
-![CommandClassDiagram](img/CommandClassDiagram.png)
+![CommandClassDiagram](img/CommandClassDiagram1.png)
 
 The above diagram shows the class diagram for the `Command` component.
 
-`Command` is an abstract class that sets certain commonalities that is implemented across all types of commands - `AddCommand`, `DescCommand`, `ListCommand`, `DeleteCommand`, `HelpCommand`, `ExitCommand`. Each of these classes have to override the `Command`'s `execute()` method as each command has a different execution. For example, `AddCommand` will be focused on adding an item to an inventory list whereas `DescCommand` will be about retrieving information from the inventory list.
+`Command` is an abstract class that sets certain commonalities that is implemented across all types of commands eg. `AddCommand`, `DescCommand`, `ListCommand`, etc. Each of these command classes have to override `Command`'s `execute()` method as each command has a different execution. For example, `AddCommand` will be focused on adding an item to an inventory list whereas `DescCommand` will be about retrieving information from the inventory list.
 
 ### Storage Component
 
@@ -171,7 +171,6 @@ The user starts by typing a desc command. The example used in the diagram above 
 3. `parse()` then generates a new `DescCommand` with the index as the argument. The new `DescCommand` is returned to the `run` method.
 4. The `run()` method then calls on the `execute()` method in `DescCommand` which retrieves the specified `item` from `itemList`.
 5. With the `item` object, we are able to retrieve the item's description and pass it as a String to be printed by `ui` using `showMessages` method.
-
 
 ### Delete Command
 ![DeleteCommandSequenceDiagram](img/DeleteCommandSequenceDiagram.png)
