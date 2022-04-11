@@ -19,11 +19,11 @@ public class ViewItemsWithZeroPaxCommand extends Command {
 
     /**
      * Prints out the item name ,pax as well as index for items within the item list that have a pax of zero.
-     *
-     * @param listContainer The object containing the data structures necessary for viewing all the items within the
+     *  @param listContainer The object containing the data structures necessary for viewing all the items within the
      *                      item list with a pax of zero. In this case, we require access to the ItemList object which
      *                      is within listContainer.
      * @param ui            The object that deals with user interface for the program.
+     * @return
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) {

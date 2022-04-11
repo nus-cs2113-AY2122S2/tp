@@ -2,13 +2,9 @@ package seedu.duke.command;
 
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
-import seedu.duke.eventlists.EventList;
 import seedu.duke.exceptions.HotelLiteManagerException;
-import seedu.duke.exceptions.InvalidEventException;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class HelpCommand extends Command {
     private static final String line = "------------------------------------------\n";
@@ -61,6 +57,7 @@ public class HelpCommand extends Command {
      * Print the list of commands available to user.
      *
      * @param ui The user interface for this execution method.
+     * @return
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)

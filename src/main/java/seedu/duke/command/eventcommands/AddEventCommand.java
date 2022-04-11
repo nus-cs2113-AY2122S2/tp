@@ -86,6 +86,7 @@ public class AddEventCommand extends Command {
      * his/her availability into housekeeper list.
      *
      * @param ui The user interface for this execution method.
+     * @return
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)

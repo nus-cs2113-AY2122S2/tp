@@ -22,6 +22,7 @@ public class ViewAverageSatisfactionCommand extends Command {
      * given satisfactionList.
      *
      * @param ui The user interface for this execution method.
+     * @return
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {

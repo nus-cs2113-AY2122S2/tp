@@ -157,7 +157,6 @@ public class AddSatisfactionCommand extends Command {
         satisfactionListFileManager.save(satisfactionList);
     }
 
-
     public Satisfaction getSatisfaction() {
         return satisfaction;
     }

@@ -57,6 +57,7 @@ public class CheckRoomByCatCommand extends Command {
      * type, room number, level, status and assigned housekeeper.
      * @param listContainer The object containing the necessary data structure.
      * @param ui The object that deals with user interface for the program.
+     * @return
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) {

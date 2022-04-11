@@ -45,6 +45,7 @@ public class DeleteHousekeeperCommand extends Command {
      * @param listContainer List of information.
      * @param ui The instance of the Ui class (used for printing additional messages when a command is executed.
      * @throws HotelLiteManagerException User given is not in housekeeper list.
+     * @return
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {

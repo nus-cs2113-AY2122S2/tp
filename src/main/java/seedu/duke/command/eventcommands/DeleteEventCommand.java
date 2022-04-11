@@ -7,7 +7,6 @@ import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.eventlists.EventList;
 import seedu.duke.exceptions.InvalidDeleteEventException;
-import seedu.duke.exceptions.InvalidEventException;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -61,6 +60,7 @@ public class DeleteEventCommand extends Command {
      * his/her availability into housekeeper list.
      *
      * @param ui The user interface for this execution method.
+     * @return
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)

@@ -158,9 +158,9 @@ public class AddHousekeeperCommand extends Command {
 
     /**
      * Method to add new housekeeper profile into list and rejects any profile that has already been recorded.
-     *
-     * @param listContainer Containing the list of information
+     *  @param listContainer Containing the list of information
      * @param ui The user interface for this execution method.
+     * @return
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {

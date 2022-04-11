@@ -24,7 +24,6 @@ public class SearchItemCommand extends Command {
      * Takes in the user input and checks if the formatting of the search item command within the user input is
      * valid.
      * Takes the user input and creates a SearchItemCommand object using it.
-     *
      * @param userInput The user's input.
      * @throws HotelLiteManagerException if the keyword is empty.
      */
@@ -50,10 +49,11 @@ public class SearchItemCommand extends Command {
      * @param listContainer The object containing the data structure necessary to search for items within the item
      *                      list.
      *                      In this case, we require access to the ItemList object which is within listContainer.
+     * @throws HotelLiteManagerException if the keyword is empty.
      */
 
     @Override
-    public void execute(ListContainer listContainer, Ui ui) {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         ItemList listOfItems = listContainer.getItemList();
         String keyword = getKeyword();
         ItemList listOfMatchingItems = listOfItems.findItemsInList(keyword);
