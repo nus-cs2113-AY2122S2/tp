@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Indicates whether the delete command is to delete a credit card by looking for the /cc flag.
+     * Indicates whether the delete command is to delete a credit card by looking for the /e flag.
      *
      * @return true if the /cc flag is present, false otherwise.
      */

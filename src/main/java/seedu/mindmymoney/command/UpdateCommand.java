@@ -73,7 +73,7 @@ public class UpdateCommand extends Command {
      * @return true if the /e flag is present, false otherwise.
      */
     private boolean hasExpensesFlag() {
-        return updateInput.contains(FLAG_OF_EXPENSES);
+        return updateInput.startsWith(FLAG_OF_EXPENSES);
     }
 
     /**
@@ -82,7 +82,7 @@ public class UpdateCommand extends Command {
      * @return true if the /cc flag is present, false otherwise.
      */
     private boolean hasCreditCardFlag() {
-        return updateInput.contains(FLAG_OF_CREDIT_CARD);
+        return updateInput.startsWith(FLAG_OF_CREDIT_CARD);
     }
 
     /**
@@ -91,7 +91,7 @@ public class UpdateCommand extends Command {
      * @return true if the /i flag is present, false otherwise.
      */
     private boolean hasIncomeFlag() {
-        return updateInput.contains(FLAG_OF_INCOME);
+        return updateInput.startsWith(FLAG_OF_INCOME);
     }
 
     /**
