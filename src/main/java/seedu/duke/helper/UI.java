@@ -232,7 +232,7 @@ public class UI {
         System.out.println("Example 4: find patient /info gender, M");
         System.out.println("Example 5: find patient /info address, 15 King's Avenue");
         System.out.println("Example 6: find patient /info dob, 1999-12-31");
-        System.out.println("Example 7: find patient /info admissiondate, 2021-02-15");
+        System.out.println("Example 7: find patient /info registrationdate, 2021-02-15");
     }
 
     public static void printFindMedicineMessage() {
