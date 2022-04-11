@@ -18,7 +18,9 @@ complete the activities with the use of the study session.
 
 ### Features and enhancements implemented
 
-- Implemented the `Timer` feature in the Study Session
+- Implemented the `Timer` feature in the Study Session (Pull requests 
+[#36](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/36),
+  [#59](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/59))
 
     - **Functionality**: As the name suggests, users can start a timer of their choice (by choosing a default timer mode
   or using a custom duration timer). The 2 available modes are `Countdown`, which is a timer counting down, and
@@ -29,12 +31,11 @@ complete the activities with the use of the study session.
   be able to focus on their tasks. We gained inspiration from 
   [Pomodoro study sessions](https://examstudyexpert.com/pomodoro-study-method/).
   
-    - **Highlights**: Used threads and using their sleep function to keep track of time.
-  Although I have worked with threads before in a different programming language, there was still a learning curve when 
-  trying to use the various thread functions, since Java's implementation of threads is slightly different and has 
-  different terminologies.
+    - **Highlights**: Learned about and used Java's thread library and used their sleep function to keep track of time.
+  
 
-- Implemented `TimerLogic` class in the Study Session
+- Implemented `TimerLogic` class in the Study Session (Pull request 
+[#36](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/36))
 
   - **Functionality**: `TimerLogic` handles the logic regarding `Timer` class. It handles creation of the `Countdown`
   or `Stopwatch` object when user wants to start a timer and calling of the various methods (pause, resume, stop) on the
@@ -42,9 +43,16 @@ complete the activities with the use of the study session.
   
   - **Justification**: As part of separation of concerns, `TimerLogic` object manages the spawned timer object.
 
-  - **Highlights**: The class had to be implemented correctly to avoid any unintended behaviour of threads. The class
-  had to be refined over time due to new or changing requirements - e.g. allowing certain commands to be called whilst
+  - **Highlights**: The class had to be implemented correctly to avoid any unintended behaviour of threads. It
+  was refined over time due to new or changing requirements - e.g. allowing certain commands to be called whilst
   in the study session. Bugs from missed edge cases also led to us refining the logic of the class.
+  
+- Add JUnit tests to TimerTest (Pull request
+  [#154](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/154))
+- Fix various bugs pertaining to the timer in Study session (Pull requests
+  [#40](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/40),
+  [#93](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/93),
+  [#147](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/147))
 
 ### Contributions to documentation
 
@@ -56,7 +64,7 @@ complete the activities with the use of the study session.
 
 - **Developer Guide**:
 
-  - Added documentation for Timer implementation (Pull requests 
+  - Added documentation, including UML diagrams, for Timer implementation (Pull requests 
   [#63](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/63),
   [#85](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/85))
 

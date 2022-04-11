@@ -20,6 +20,16 @@ import static seedu.sherpass.constant.TimetableConstant.WHITE_SPACE_FRONT_OFFSET
 import static seedu.sherpass.constant.TimetableConstant.WHITE_SPACE_FRONT_OFFSET_LENGTH_TWO;
 
 public class TimetableLogic {
+    //@@author jltha
+    /**
+     * Finds the maximum length of the task content with reference to its task content type.
+     * Where task content type can be
+     * Task description, Task number, Task by_date or Task do_on date.
+     *
+     * @param filteredTasks The filtered Tasks given.
+     * @param type The task content type
+     * @return The maximum length of the task content type.
+     */
     protected static long findTaskContentLength(ArrayList<Task> filteredTasks, TaskContentType type) {
         long max = 0;
         long contentLength;
@@ -55,6 +65,7 @@ public class TimetableLogic {
         return taskFullLength;
     }
 
+    //@@author
     protected static long calcOffset(boolean condition) {
         if (condition) {
             return WHITE_SPACE_FRONT_OFFSET_LENGTH_ONE;
@@ -129,5 +140,4 @@ public class TimetableLogic {
     private static boolean isRequestedMonthBeforeCurrentMonth(Month month, Month currentMonth) {
         return month.getValue() - currentMonth.getValue() < 0;
     }
-
 }

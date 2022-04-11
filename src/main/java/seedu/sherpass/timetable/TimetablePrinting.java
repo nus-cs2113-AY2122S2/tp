@@ -16,6 +16,7 @@ import static seedu.sherpass.constant.TimetableConstant.TIMETABLE_SIZE_OFFSET_TW
 import static seedu.sherpass.constant.TimetableConstant.WHITE_SPACE_FRONT_OFFSET_LENGTH_ONE;
 
 public class TimetablePrinting {
+    //@@author jltha
     protected static void printEmptyFullTimetable(Ui ui, String day, String date, long partitionLength) {
         ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
         ui.showToUser("|  Day       |  Time         |  Mark status |  Task Description    |  To complete by  |");

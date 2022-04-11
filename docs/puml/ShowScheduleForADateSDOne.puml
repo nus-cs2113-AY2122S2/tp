@@ -1,18 +1,25 @@
 @startuml
 
-skinparam maxMessageSize 100
+skinparam maxMessageSize 85
 
 hide footbox
 
-participant User as User
+
+participant ":Ui" as Ui
 participant Main as Main
 participant "<font color=red>**<<class>>** \nParser" as Parser
 participant "<font color=red>**<<class>>** \nTimetableParser" as TimetableParser
 participant ":ShowCommand" as ShowCommand
 
-User -> Main: "show 25/5/2022"
 
+
+Main -> Ui: readCommand()
 activate Main
+
+activate Ui
+
+Ui --> Main: "Show 25/5/2022"
+deactivate Ui
 
 Main -> Parser: parseCommand("show 25/5/2022": String)
 activate Parser

@@ -9,6 +9,7 @@ complete the activities with the use of the study session.
 - [Sherpass Github](https://github.com/AY2122S2-CS2113T-T09-1/tp)
 - [Sherpass User Guide](https://ay2122s2-cs2113t-t09-1.github.io/tp/UserGuide.html)
 - [Sherpass Developer Guide](https://ay2122s2-cs2113t-t09-1.github.io/tp/DeveloperGuide.html)
+
 ### Summary of Contributions
 
 - Code contributed: [RepoSense link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=jltha&tabRepo=AY2122S2-CS2113T-T09-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
@@ -16,17 +17,18 @@ complete the activities with the use of the study session.
 
 - New Features:
 
-  - Timetable and task listing generation
+  - Timetable generation (includes parsing of user input to generate the appropriate timetable)
     - What it does: 
       1. Allows the user to view a timetable for the current day/week.
       User is also able to view the timetable for a specific date of his/her choosing.
       Timetable for the day is always shown when the user starts the application.
       2. Allows the user to view all the pending tasks/tasks that have been added
-      in a condensed version (without the timetable formatting).
+      in a condensed version.
     - Justification: This feature allows the user to view their schedule and any related tasks
     which requires their attention, allowing them to take action promptly.
     - Highlights: This feature affects existing commands (edit/delete) which requires a 
     task number in order to manipulate the task content, or remove that task.
+    - Added junit tests to ensure the feature is as bug free as possible.
     
   - Study session (Parsing user inputs and UI)
     - What it does:
@@ -50,38 +52,54 @@ complete the activities with the use of the study session.
       - java.awt.event.ActionListener;
       - java.awt.event.WindowEvent;
       - java.awt.event.WindowListener;
+    - Added crucial junit tests (for parsing of inputs) to ensure the feature is as bug free as possible.
     
 
 - Enhancements to existing features:
 
-  - Merged the code for add command, edit command, and delete command to incorporate
+  - Refactored the code for add command, edit command, and delete command to incorporate
   both adding/editing/deleting of recurring and non-recurring tasks in the codebase
+  (pull requests [#83](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/83) 
+  [#150](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/150)).
+  - Fixed the parsing of user inputs to be more accurate and flexible. 
+  Also used a new algorithm to parse the task description to allow for special characters in the description.
   (pull request [#83](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/83)).
-  - Fixed the parsing of user inputs to be more accurate and flexible 
-  (pull request [#83](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/83)).
-  - Enabled the feature of checking of date and time clashes 
+  - Implemented the feature of checking of date and time clashes when adding/editing tasks
+  (as the schedules in a timetable should not have such clashes)
   (pull requests [#83](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/83) and
   - [#137](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/137)).
-  - Clean up the code in various occasions.
-  
+  - Clean up the code in various occasions (pull requests [#41](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/41)
+    [#150](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/150) [#64](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/64)).
 
 - Project management:
     - Managed releases `v1.0` - `v2.0` (2 releases) on GitHub.
-    - Maintained issue tracker for team repo.
-    
+    - Set up the team repo in the beginning.
+    - Maintained issue tracker for team repo 
+  (Assigned issues with its own labels and closed them whenever the issue is resolved).
+    - Enabled assertions and logging for teammates to use.
 
 - Documentation
     - User Guide:
-      - Added documentation for features `study session`, `timetable` and `mark/unmark`.
-      - Did some tweaks to existing features in the document `add`, `delete`
+      - Added documentation for features `study session` 
+      (add timer Ui diagrams and explanations on it), `timetable` and `mark/unmark`. 
+      (examples: pull requests [#86](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/86), [#70](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/70))
+      - Did some tweaks to existing features in the document `add`, `delete`. Added extra pictures
+      (examples: pull requests [#161](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/161))
+      for clearer illustration of command usages.
     - Developer Guide:
-      - Added implementation details of the `timetable` feature
+      - Added implementation details of the `timetable` feature 
+      (examples: pull requests [#64](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/64)
+      [#139](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/139) [#161](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/161)).
+      - Enhanced the architecture diagram of Sherpass. (pull request [#161](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/161))
 
 
 - Community:
-    - Reviewed PRs (with non-trivial review comments) for almost all the team's PR.
+    - Reviewed PRs (with non-trivial review comments) for almost all the team's PRs. 
+    Some of the review comments given were also adopted by teammates.
+    (some examples: pull requests [#36](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/36)
+    [#37](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/37) [#59](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/59)
+    )
     - Contributed to forum discussion (forum issue [#57](https://github.com/nus-cs2113-AY2122S2/forum/issues/57))
-    - Some areas of the comments were adopted by teammates
-
+    - Reviewed a peer team during the practical exam dry run - [Link](https://github.com/jltha/ped/issues)
 
 

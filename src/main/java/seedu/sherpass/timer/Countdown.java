@@ -8,7 +8,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.time.LocalDate;
+
+import static seedu.sherpass.constant.TimerConstant.FIFTEEN_SECOND_INTERVAL;
 import static seedu.sherpass.constant.TimerConstant.NO_TIME_LEFT;
+import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
+import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE_INTERVAL;
 
 public class Countdown extends Timer  {
 
@@ -66,6 +70,7 @@ public class Countdown extends Timer  {
         try {
             Thread.sleep(1000);
             timeLeft -= 1;
+            printTime();
             updateHasTimeLeft();
             if (isTimerPaused) {
                 waitForTimerToResume();
@@ -105,6 +110,17 @@ public class Countdown extends Timer  {
         if (timeLeft <= NO_TIME_LEFT) {
             hasTimeLeft = false;
         }
+    }
+
+    public void printTime() {
+        if (timeLeft <= ONE_MINUTE && (timeLeft % FIFTEEN_SECOND_INTERVAL == 0)) {
+            ui.showToUser(convertTimeToString(timeLeft) + " are left.");
+            return;
+        }
+        if (timeLeft % ONE_MINUTE_INTERVAL == 0) {
+            ui.showToUser(convertTimeToString(timeLeft) + " are left.");
+        }
+
     }
 
     /**
