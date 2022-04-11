@@ -1,6 +1,9 @@
 # BEGIN EXPENDITURES
+ "amount": "3.5"  "description": "Nikeeee"  "paymentMethod": "Cash"  "time": "01/01/1900"  "category": "Personal" 
 # END EXPENDITURES
 # BEGIN CREDIT CARDS
 # END CREDIT CARDS
 # BEGIN INCOME SOURCES
+ "amount": "200"  "category": "              salary" 
+ "amount": "200"  "category": "Salary" 
 # END INCOME SOURCES
