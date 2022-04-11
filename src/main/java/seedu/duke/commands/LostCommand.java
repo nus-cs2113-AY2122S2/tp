@@ -83,9 +83,8 @@ public class LostCommand extends Command {
      * Returns true if a LostCommand object is the same object compared to another LostCommand object
      * or contains the same attributes as another LostCommand object.
      *
-     * @param o The other LostCommand object to compare to..
-     * @return True if this LostCommand and another LostCommand
-     * are the same object or contains the same attributes.
+     * @param o The other LostCommand object to compare to.
+     * @return True if this LostCommand and another LostCommand are the same object or contains the same attributes.
      */
     @Override
     public boolean equals(Object o) {
