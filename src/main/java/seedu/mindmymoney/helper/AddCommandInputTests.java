@@ -266,7 +266,7 @@ public class AddCommandInputTests {
         assert inputAmountAsDouble > 0 : "Limit amount should have a positive value";
 
         if (inputAmountAsDouble > 40000) {
-            throw new MindMyMoneyException("Limit amount must be less than $40,000.\n"
+            throw new MindMyMoneyException("Limit amount must be less than or equal to $40,000.\n"
                 + "If you do have a credit card with more than $40,000 limit, "
                 + "do inform the MindMyMoney team through GitHub.");
         }
