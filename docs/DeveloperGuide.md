@@ -8,6 +8,7 @@
   * [Orderline Class](#orderline-class)
   * [Warehouse Class](#warehouse-class)
   * [Command Parser](#command-parser)
+  * [Display Class](#display-class)
   * [User Interface Class](#user-interface-class)
   * [Match Keyword Class](#match-keyword-class)
 * [Implementation](#implementation)
