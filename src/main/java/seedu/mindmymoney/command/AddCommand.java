@@ -126,7 +126,7 @@ public class AddCommand extends Command {
             + "Category: " + category + "\n"
             + "Payment method: " + paymentMethod + "\n"
             + "Date: " + inputTime + "\n\n"
-            + "into the account\n");
+            + "into the account");
 
         if (!paymentMethod.equals("Cash")) {
             float balanceLeft = updateCreditCardTotalExpenditure(paymentMethod, amountFloat);
