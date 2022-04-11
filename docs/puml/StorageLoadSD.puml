@@ -3,10 +3,10 @@
 
 hide footbox
 participant Storage as "storage:Storage"
-participant File as "<<class>>\nFile"
+participant File as "<font color=red>**<<class>>**\nFile"
 participant JSONObject as ":JSONObject"
 participant JSONArray as "taskArray:JSONArray"
-participant Parser as "<<class>>\nParser"
+participant Parser as "<font color=red>**<<class>>**\nParser"
 participant Task as "newTask:Task"
 participant List as "taskList:TaskList"
 
