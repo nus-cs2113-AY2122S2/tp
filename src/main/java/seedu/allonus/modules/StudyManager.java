@@ -69,7 +69,8 @@ public class StudyManager {
     public static final String EDIT_MODULE_CHANGES_MESSAGE = "Here are the changes so far. "
             + "You can edit more module parameters or you can enter 'done' to stop editing!";
     private static final String EDIT_NO_MODULES_ERROR = "There are no modules to edit!";
-    private static final String EDIT_NO_INDEX_ERROR = "Please enter the index of the module you would like to edit";
+    private static final String EDIT_NO_INDEX_ERROR = "You have not entered the index of"
+            + " the module you would like to edit!";
     private static final String LOGGER_WRONG_EDIT_INDEX = "wrong index for edit";
     private static final String LOGGER_NO_EDIT_INDEX = "no index number specified for edit";
 
@@ -194,7 +195,6 @@ public class StudyManager {
      */
     public static void printMessageWithDivider(String message) {
         textUi.showToUser(message);
-        //System.out.println(message);
     }
 
     private void printMessage(String message) {
@@ -251,14 +251,14 @@ public class StudyManager {
                 performDelete(moduleIndex);
             }
         } catch (IndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, LOGGER_WRONG_INDEX_DELETE);
+            logger.log(Level.INFO, LOGGER_WRONG_INDEX_DELETE);
             if (modulesList.size() == 0) {
                 printMessageWithDivider(DELETE_NO_MODULES_ERROR);
             } else {
                 printListSizeErrorMessage();
             }
         } catch (NumberFormatException e) {
-            logger.log(Level.WARNING, LOGGER_NO_INDEX_DELETE);
+            logger.log(Level.INFO, LOGGER_NO_INDEX_DELETE);
             printMessageWithDivider(DELETE_NO_INDEX_ERROR);
         }
 
@@ -291,14 +291,14 @@ public class StudyManager {
                 editModuleRunner(ui, moduleIndex);
             }
         } catch (IndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, LOGGER_WRONG_EDIT_INDEX);
+            logger.log(Level.INFO, LOGGER_WRONG_EDIT_INDEX);
             if (modulesList.size() == 0) {
                 printMessageWithDivider(EDIT_NO_MODULES_ERROR);
             } else {
                 printListSizeErrorMessage();
             }
         } catch (NumberFormatException e) {
-            logger.log(Level.WARNING, LOGGER_NO_EDIT_INDEX);
+            logger.log(Level.INFO, LOGGER_NO_EDIT_INDEX);
             printMessageWithDivider(EDIT_NO_INDEX_ERROR);
         }
     }
@@ -438,7 +438,7 @@ public class StudyManager {
                 listMatches(matches);
             }
         } catch (InvalidFindInputException e) {
-            logger.log(Level.WARNING, LOGGER_NO_FIND_QUERY);
+            logger.log(Level.INFO, LOGGER_NO_FIND_QUERY);
             printMessageWithDivider(e.getMessage());
         }
     }
