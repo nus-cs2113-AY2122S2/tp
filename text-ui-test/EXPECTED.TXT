@@ -30,8 +30,8 @@ Welcome to SplitLah!
 7.  Delete an existing activity
         Syntax: activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]
 8.  Edit an existing activity
-        Syntax: activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /co [TOTAL_COST] /gst [GST_PERCENT] /sc [SERVICE_CHARGE]}
-                activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /cl [COST1 COST2...] /gst [GST_PERCENT] /sc [SERVICE_CHARGE>]}
+        Syntax: activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /co [TOTAL_COST] /gst [GST_PERCENTAGE] /sc [SERVICE_CHARGE]}
+                activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] {/n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] /cl [COST1 COST2...] /gst [GST_PERCENTAGE] /sc [SERVICE_CHARGE>]}
 9.  View an existing activity's details
         Syntax: activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]
 10. List all existing activities
