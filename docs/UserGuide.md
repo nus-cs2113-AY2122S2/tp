@@ -50,9 +50,9 @@ it correctly and with ease. Here are some icons which we will use to convey impo
     - Add tasks: [`add`](#adding-your-tasks-add)
     - Delete tasks: [`delete`](#deleting-your-tasks-delete)
     - Edit tasks: [`edit`](#editing-your-tasks-edit)
-    - Mark tasks [`mark`](#marking-your-tasksmark-task_number--unmark-task_number)
-    - Show tasks: [`show`](#generating-a-timetable-show)
-    - Clear all tasks: [`clear`](#clearing-multiple-tasks-clear-all--clear-expired--clear-done)
+    - Mark tasks: [`mark`](#marking-your-tasks-mark-task_number--unmark-task_number)
+    - Display tasks: [`show`](#generating-a-timetable-show)
+    - Clear multiple tasks: [`clear`](#clear-multiple-tasks-clear-all--clear-expired--clear-done)
   - Study session
     - Enter study session: [`study`](#enter-study-session-study)
     - Start timer: [`start`](#starting-a-default-timer-start-mode_number)     
@@ -63,6 +63,8 @@ it correctly and with ease. Here are some icons which we will use to convey impo
     - Mark tasks as done (identical to the one in Task management):[`mark`](#mark-your-tasks-as-done-mark) 
     - Exit study session: [`leave`](#leave-the-study-session-leave)
   - Exit program: [`bye`]()
+  - Help: [`help`](#help-help)
+  - Exit program: [`bye`](#exit-program-bye)
   - [Saving your tasks](#saving-your-tasks)
 - [FAQ](#faq)
 - [Glossary](#faq)
@@ -88,8 +90,8 @@ from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v1.0-Relea
 >###  ⚠️Important notes on task number format
 >- Each task added to your schedule is assigned a task number. You can see what number a task is assigned via
 >the [show command](#show-your-tasks-show).
->- The task number will update accordingly as you add/edit/delete a task (with the
-> earliest task assigned the first number, second earliest task the second number, and so on).
+>- The task number will update accordingly as you add/edit/delete a task (with the<br/>
+the earliest task assigned the first number, second-earliest task the second number, and so on).
 
 ### Adding your tasks: `add` 
 >⚠️Important note: When adding tasks, TASK_DESCRIPTION must be the first parameter provided.
@@ -219,6 +221,7 @@ Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/en
 |     DUE_DATE     | Due date for the task                               | d/M/yyyy format, must be equal to or after DUE_DATE                                 | Yes                     |
 |     DUE_TIME     | Due time for the task                               | HH:mm format, must be after END_TIME if DUE_DATE is the same as DO_DATE             | No if DUE_DATE is given |
 
+
 **Example**
 - `edit 2 write draft essay`
 
@@ -264,7 +267,7 @@ After command: `edit 4 /start 13:00 /end 15:00 /repeat`
 ![afteredit](images/afteredit.png)
 
 
-### Marking your tasks`mark TASK_NUMBER` / `unmark TASK_NUMBER`
+### Marking your tasks: `mark TASK_NUMBER` / `unmark TASK_NUMBER`
 
 - Mark the tasks that you've done in the session with `mark`.
 - You can also mark a task as undone with `unmark`.
@@ -386,40 +389,32 @@ Show pending tasks:
 ![](images/showPendingTasks.png)
 
 
-### Clearing multiple tasks: `clear all` / `clear expired` / `clear done`
-Deletes a bunch of tasks with different levels of scope, saving the trouble of deleting them one by one.
+### Clear multiple tasks: `clear all` / `clear expired` / `clear done`
+Do you find it troublesome to delete your tasks one by one? If so, fret not as Sherpass
+provides an alternative feature to delete a bunch of your tasks at one go!
 
 Format:
 - `clear all`
 - `clear expired`
 - `clear done`
 
-| Parameters  | Description                                                                   | Accepted inputs | Optional |
-|:-----------:|-------------------------------------------------------------------------------|-----------------|----------|
-|     all     | Clears all of the existing tasks                                              | N.A.            | Yes      |
-|   expired   | Clears all the tasks that have expired, i.e. tasks whose `DO_DATE` has passed | N.A.            | Yes      |
-|    done     | Clears all  tasks that have been marked as completed                          | N.A.            | Yes      |
 
-### Saving your tasks
+| Parameters  | Description                                                                   | Accepted inputs | Optional                                         |
+|:-----------:|-------------------------------------------------------------------------------|-----------------|--------------------------------------------------|
+|     all     | Clears all of the existing tasks                                              | N.A.            | No if you are intending to use this parameter    |
+|   expired   | Clears all the tasks that have expired, i.e. tasks whose `DO_DATE` has passed | N.A.            | No if you are intending to use this parameter    |
+|    done     | Clears all  tasks that have been marked as completed                          | N.A.            | No if you are intending to use this parameter    |
 
-All changes to your tasks are saved automatically into a JSON file at `[JAR FILE LOCATION]/data/Sherpass.json`.
 
-There is no need to manually save your tasks.
+**Example**
 
-> 💡 **Note:** 
-> 
->Advanced users are welcome to manually edit the save file.
+Below are some sample outputs for `clear all`, which asks a confirmation message before executing the clear:
+![image](images/clear_all_confirmation.png)
+If the user inputs `y`:
+![image](images/clear_all_execute.png)
+If the user inputs `n`:
+![image](images/clear_all_no_execute.png)
 
-The following fields are required to correctly load a task:
-
-|    Fields     | Description                                                 | Accepted inputs                                            |
-|:-------------:|-------------------------------------------------------------|------------------------------------------------------------|
-|  identifier   | Tasks with the same identifier are recurrence of each other | Any number from 1-65535                                    |
-|  description  | Description for the task                                    | Any phrases or sentences                                   |
-| do_date_start | Date and time to start working on the task                  | d/M/yyyy HH:mm (e.g `25/5/2022 16:00` for 25 May 2022 4pm) |
-|  do_date_end  | Date and time to stop working on the task                   | d/M/yyyy HH:mm, must be after DO_DATE_START                |
-|    by_date    | Deadline for the task                                       | d/M/yyyy HH:mm, must be after DO_DATE_END                  |
-|    status     | Status of the task                                          | `X` for completed, `-` for incomplete                      |
 
 ### Enter study session: `study`
 Enter the study session where you can start timers to help finish your tasks.
@@ -518,7 +513,7 @@ In the pop-up window:
 ![](images/stopWatch.png)
 
 ### Pausing a timer/stopwatch: `pause`
-Pauses a study timer/stopwatch that is currently running. Useful for when you want a quick toilet break, double check
+Pauses a study timer/stopwatch that is currently running. Useful for when you want a quick toilet break, double-check
 your tasks for the day, or mark a task as done.
 
 Format: `pause` or clicking the pause button in the pop-up window.
@@ -593,7 +588,7 @@ to show your tasks.
 
 The mark feature also supported in the study session, so that you are able to mark tasks as done after you've completed
 them in the study session.
-Simply follow the format from the [mark feature](#marking-your-tasksmark-task_number--unmark-task_number)
+Simply follow the format from the [mark feature](#marking-your-tasks-mark-task_number--unmark-task_number)
 to mark your task.
 
 > 💡 **Note:**
@@ -614,6 +609,50 @@ Format: `leave`
 **Example**
 
 ![](images/studyLeave.png)
+
+
+### Help: `help`
+
+Displays a short guide for either all the commands, or one specified command.
+
+Format: `help [COMMAND_WORD]`
+
+**Example**
+![image](images/help_delete.png)
+
+> 💡 **Note:** Alternatively, you can enter `help quick start` for a command summary similar to the one in this document.
+
+
+### Exit program: `bye`
+Exits the program.
+
+Format: `bye`
+
+**Example**
+![image](images/bye.png)
+
+### Saving your tasks
+
+All changes to your tasks are saved automatically into a JSON file at `[JAR FILE LOCATION]/data/Sherpass.json`.
+
+There is no need to manually save your tasks.
+
+> 💡 **Note:**
+>
+>Advanced users are welcome to manually edit the save file.
+
+The following fields are required to correctly load a task:
+
+|    Fields     | Description                                                 | Accepted inputs                                            |
+|:-------------:|-------------------------------------------------------------|------------------------------------------------------------|
+|  identifier   | Tasks with the same identifier are recurrence of each other | Any number from 1-65535                                    |
+|  description  | Description for the task                                    | Any phrases or sentences                                   |
+| do_date_start | Date and time to start working on the task                  | d/M/yyyy HH:mm (e.g `25/5/2022 16:00` for 25 May 2022 4pm) |
+|  do_date_end  | Date and time to stop working on the task                   | d/M/yyyy HH:mm, must be after DO_DATE_START                |
+|    by_date    | Deadline for the task                                       | d/M/yyyy HH:mm, must be after DO_DATE_END                  |
+|    status     | Status of the task                                          | `X` for completed, `-` for incomplete                      |
+
+
 
 ## FAQ
 
@@ -669,3 +708,5 @@ one of the options provided is `show all`. The `all` keyword would thus be the p
 | Stop timer/stopwatch                  | `stop`                                                                                                                                                                                                                                           |
 | Show tasks (in study session)         | `show all`                                                                                                                                                                                                                                       |
 | Leave study session                   | `leave`                                                                                                                                                                                                                                          |
+| Help                                  | `help [COMMAND_WORD]` / `help quick start`                                                                                                                                                                                                       |
+| Exit the program                      | `bye`                                                                                                                                                                                                                                            |
