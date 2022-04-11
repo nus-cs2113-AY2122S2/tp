@@ -120,6 +120,7 @@ Listing dishes...
     ```
     
     > And you add `Some Dish` again
+    
     ```
     Adding new dish...
     The name of dish: sOme diSH
