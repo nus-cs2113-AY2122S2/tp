@@ -3,8 +3,22 @@
 hide footbox
 participant Warehouse as w
 
-autonumber
 
-loop o in ja
-
+activate w
+w -> w ++ :  serializeOrders()
+loop o in orderlists
+    participant Order as o
+    activate o
+    w -> o ++ : serialize()
+    o -> o ++ : serializeOrderlines()
+    loop ol in orderlines
+        participant Orderline as ol
+        activate ol
+        o -> ol ++ : serialize()
+        ol --> o --: JSONObject
+    end
+    o --> o --: JSONArray
+    o --> w -- : JSONObject
+end
+w --> w -- : Return JSONArray
 @enduml

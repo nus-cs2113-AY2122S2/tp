@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+participant Warehouse as w
+
+
+activate w
+w -> w  :  restoreGoods()
+loop key in jo.keySet
+    participant UnitGood as ug
+    w -> ug ++: restoreUnitGood(jg)
+    ug --> w --: Boolean of status
+    alt status == false
+        w --> w  : false
+    end
+    w -> w ++: addUnitGoodToInventory(ug)
+    w --> w --: Boolean of status
+    alt status == false
+        w --> w  : false
+    end
+    w -> w ++: addQuantityOfGoodToInventory(ug.getSku(), qty)
+    w --> w -- : Boolean of status
+    alt status == false
+    w --> w  : false
+    end
+end
+w --> w -- : Return JSONArray
+@enduml

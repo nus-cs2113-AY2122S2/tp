@@ -7,7 +7,9 @@ participant LocalStorage as ls
 
 create w
 S -> w : create instance with 0  capacity
+activate w
 w --> S : return warehouse instance
+deactivate w
 S -> w ++ : restoreWarehouseState()
 w -> ls ++ : readSaveFile(fp)
 ls --> w -- : Raw savefile string
