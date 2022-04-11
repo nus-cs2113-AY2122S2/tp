@@ -126,17 +126,17 @@ This section describes each command in detail.
 * Sub-points with :information_source: indicates details that you should take note of.
 * Refer to the following table for more details on the parameters that you need to provide.
 
-| Parameter Glossary                | Description                                                                                                                                                                                                                                      |
-|:----------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `/n NAME`                         | The name of someone you would like to track.                                                                                                                                                                                                     |
-| `/g GROUP_INDEX`                  | An index that helps you to categorise the individuals being tracked.<br/> There are currently three group indexes, numbered from 1 to 3.<br/>You can find the group names from the [overview command](#show-financial-summary-codeoverviewcode). |
-| `/u USER_INDEX`                   | An index that is tagged to someone you are tracking.<br/>You can find the user index from the [listing records command](#show-all-records-by-group-codelistcode).                                                                                |
-| `/d DESCRIPTION`                  | The description (or name) of the income and expenditure you wish to track.                                                                                                                                                                       |
-| `/c CATEGORY_INDEX`               | An index that refers to a category label such as "Food and Drinks".<br/>You can find the category index from the [list categories command](#show-expenditure-categories-codelistcatcode).                                                        |
-| `/i INCOME`                       | The monetary value of the income you wish to track.                                                                                                                                                                                              |
-| `/e EXPENDITURE`                  | The monetary value of the expenditure you wish to track.                                                                                                                                                                                         |
-| `/r (INCOME / EXPENDITURE)_INDEX` | An index that refers to an income or expenditure that you have recorded previously.<br/>You can find this index from the [listing records command](#show-all-records-by-group-codelistcode).                                                     |
-| <code>/p <T&#124;(any)>           | `T` indicates that an income or expense that you are tracking in the application is recurrent on a monthly-basis while `(any)` refers to any other inputs which will indicate that it is non-recurrent.                                          |
+| Parameter Glossary                | Description                                                                                                                                                                                                                                                            |
+|:----------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/n NAME`                         | The name of someone you would like to track.                                                                                                                                                                                                                           |
+| `/g GROUP_INDEX`                  | An index that helps you to categorise the individuals being tracked.<br/> There are currently three group indexes, numbered from 1 to 3.<br/>You can find the group names from the [overview command](#show-financial-summary-codeoverviewcode).                       |
+| `/u USER_INDEX`                   | An index that is tagged to someone you are tracking.<br/>You can find the user index from the [listing records command](#show-all-records-by-group-codelistcode).                                                                                                      |
+| `/d DESCRIPTION`                  | The description (or name) of the income and expenditure you wish to track.                                                                                                                                                                                             |
+| `/c CATEGORY_INDEX`               | An index that refers to a category label such as "Food and Drinks".<br/>You can find the category index from the [list categories command](#show-expenditure-categories-codelistcatcode).                                                                              |
+| `/i INCOME`                       | The monetary value of the income you wish to track.                                                                                                                                                                                                                    |
+| `/e EXPENDITURE`                  | The monetary value of the expenditure you wish to track.                                                                                                                                                                                                               |
+| `/r (INCOME / EXPENDITURE)_INDEX` | An index that refers to an income or expenditure that you have recorded previously.<br/>You can find this index from the [listing records command](#show-all-records-by-group-codelistcode).                                                                           |
+| <code>/p <T&#124;(any)>           | `T` indicates that an income or expense that you are tracking in the application is recurrent on a monthly-basis while `(any)` refers to any other inputs which will indicate that it is non-recurrent. Non-recurrent entries will be deleted on the following month.  |
 
 ---
 
@@ -180,7 +180,7 @@ Format: `deletein /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX`
 
 > :information_source: Notes:
 > * The income indexes that are higher than the deleted one will be **decremented** after the deletion is completed.
-    >     * E.g. If index 1 is a target for deletion, index 2 and beyond will be decremented.
+>     * E.g. If index 1 is a target for deletion, index 2 and beyond will be decremented.
 
 Example of usage:
 
