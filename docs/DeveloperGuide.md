@@ -1061,7 +1061,7 @@ Also, only an activity with an activity unique identifier of 1 within this sessi
 6. Test Command: `activity /view /sid 1 /aid apple` <br>
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/aid` delimiter.
 7. Test Command: `activity /view /sid 1 /aid 1`<br>
-   Expected: The full details of the activity with unique identifier of `1` within the session of unique identifier of `1` should be printed.
+   Expected: The full details of the activity with an activity unique identifier of `1` within the session with a session unique identifier of `1` should be printed.
 
 #### Listing all Activities
 > For details on the usage of `activity /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-activities-in-a-session-activity-list).
