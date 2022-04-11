@@ -257,9 +257,27 @@ To aid in visualisation,
   3. User decides to view the `parents` generation in detail
   4. User decides to view the overall situation in the `Family`
 
-The following Sequence Diagram shows how the `Family` component handles each call by the `Command` component.  
+The following Sequence Diagrams shows how the `Family` component handles each call by the `Command` component.  
 
-![FamilySequenceDiagram](images/FamilySequenceDiagram.png)
+Step 1. User adds a Person, *Alice* to `parents`
+
+![FamilySequenceDiagram1](images/FamilySequenceDiagram1.png)
+
+Step 2. User adds an income to *Alice*
+
+![FamilySequenceDiagram2](images/FamilySequenceDiagram2.png)
+
+Additionally, the following Object Diagram shows what is present in the `Family` structure at this point in time.
+
+![Placeholder]()
+
+Step 3. User decides to view the `parents` generation in detail
+
+![FamilySequenceDiagram3](images/FamilySequenceDiagram3.png)
+
+Step 4. User decides to view the overall situation in the `Family`.
+
+![FamilySequenceDiagram4](images/FamilySequenceDiagram4.png)
 
 ### Money Component
 
