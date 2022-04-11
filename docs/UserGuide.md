@@ -13,11 +13,14 @@
     6. [List Overdue Borrowings](#list-overdue-borrowings-listob)
     7. [List Available Borrowings](#list-available-borrowings-listab)
     8. [Borrow an Item](#borrow-an-item-borrow)
-    9. [Get Description of Item](#get-description-of-item-desc)
-    10. [Delete an Item](#delete-an-item-delete)
-    11. [Edit an Item](#edit-an-item-edit)
-    12. [Cancel a future borrowing](#cancel-a-future-borrowing-cancel)
-    13. [Exit](#exit-exit)
+    9. [Return an Item](#return-an-item-return)
+    10. [Mark Item as Lost](#mark-item-as-lost-lost)
+    11. [Get Description of Item](#get-description-of-item-desc)
+    12. [Delete an Item](#delete-an-item-delete)
+    13. [Edit an Item](#edit-an-item-edit)
+    14. [Cancel a future borrowing](#cancel-a-future-borrowing-cancel)
+    15. [Help Command](#help-command-help)
+    16. [Exit](#exit-exit)
 5. [FAQ](#faq)
 6. [Command Summary][(#command-summary)]
 
@@ -175,6 +178,60 @@ Error: Incorrect start and end date order. Please ensure that end date >= start 
 
 > borrow i/28 s/2021-03-21 e/2021-03-21 p/John Smith
 Sorry. This item does not exist in the current inventory.
+```
+
+### Return an Item: `return`
+
+Return an item that is currently on loan or overdue.
+
+**Format:**
+
+`return i/ITEM_INDEX`
+
+**Arguments:**
+
+| Argument Flag | Argument Name | Accepted Values  |               Meaning                |
+|:-------------:|:-------------:|:----------------:|:------------------------------------:|
+|      i/       |  ITEM_INDEX   | Positive Integer | The index of the item to be returned |
+
+**Examples of usage:**
+```
+> return i/1 
+I've marked this item as returned.
+Name of Item: markers
+Name of Borrower: John Doe
+Borrow Duration: 2022-04-11 to 2022-04-11
+===================================================
+
+> return i/1
+There are no outstanding loans on this item. Please select a different item to return!
+===================================================
+```
+
+### Report Item as Lost: `lost`
+
+Report an item as lost. This will also delete the item from the inventory.
+
+**Format:**
+
+`lost i/ITEM_INDEX`
+
+**Arguments:**
+
+| Argument Flag | Argument Name | Accepted Values  |          Meaning           |
+|:-------------:|:-------------:|:----------------:|:--------------------------:|
+|      i/       |  ITEM_INDEX   | Positive Integer | The index of the lost item |
+
+**Examples of usage:**
+```
+> lost i/1
+markers | 10 has been deleted.
+I've marked this item as lost and deleted it from the inventory!
+===================================================
+
+> lost i/1
+Your inventory is currently empty. Please add an item first!
+===================================================
 ```
 
 ### List Current Borrowings: `listcb`
@@ -569,6 +626,71 @@ Here is a list of future borrowings for Tom:
 Name of Borrower: Tom
 Borrow Duration: 2022-05-06 to 2022-05-06
 Borrow Quantity: 4
+```
+
+### Help Command: `help`
+
+Helps the user see what functions Inventory Manager is capable of, what each function does and the input syntax for 
+<br> calling them.
+
+**Format:**
+
+`help`
+
+**Examples of usage:**
+```
+> help
+Here are my functionalities and how to call them: 
+===================================================
+Add Item:
+[Function] Adds an item to the inventory list:
+[Command Format] add [item name] [item quantity]
+===================================================
+Delete Item:
+[Function] Deletes an item from the inventory list:
+[Command Format] delete [item number]
+===================================================
+Edit Item:
+[Function] Edits the name and/or description of an item:
+[Command Format] editINDEX [n/Name] [d/Description] [q/Quantity [r/ +|-]]
+ One of n/, d/, or q/ should be present!
+===================================================
+Describe Item:
+[Function] Describes the function of an item:
+[Command Format] desc [item number]
+===================================================
+Report Lost Item:
+[Function] Marks item as lost:
+[Command Format] lost i/[item number]
+===================================================
+Borrow an Item:
+[Function] Borrows an item from the inventory list:
+[Command Format] borrow i/[item number] q/[quantity] s/[start date] e/[end date] p/[name]
+===================================================
+Return an Item: 
+[Function] Marks item as returned 
+[Command Format] return i/[item number]
+===================================================
+List Current Borrowings:
+[Function] List all borrow records that are currently being borrowed:
+[Command Format] listcb
+===================================================
+List Future Borrowings:
+[Function] List all borrow records that will be borrowed after today:
+[Command Format] listfb
+===================================================
+List Overdue Borrowings:
+[Function] List all borrow records that are overdue:
+[Command Format] listob
+===================================================
+Exit:
+[Function] Terminates the application:
+[Command Format] exit
+===================================================
+Help:
+[Function] Displays all functions of inventory manager:
+[Command Format] help
+===================================================
 ```
 
 ### Exit: `exit`
