@@ -26,10 +26,10 @@ deactivate staffmanager
 staffcontroller --> staffcontroller
 deactivate staffcontroller
 
-staffcontroller -> staffmanager: addStaff(int staffId, String name, String position, double salary)
+staffcontroller -> staffmanager: addStaff(staffId, name, position, salary)
 activate staffmanager
 
-staffmanager -> staff ** : Staff(int staffId, String name, String position, double salary)
+staffmanager -> staff ** : Staff(staffId, name, position, salary)
 activate staff
 
 @enduml
