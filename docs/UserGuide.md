@@ -129,6 +129,8 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 
 <hr>
 
+<a class="button" href="#contents">Back to Contents</a>
+
 ## Features 
 
 ## _Session Management_
