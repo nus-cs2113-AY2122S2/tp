@@ -10,9 +10,8 @@ expenditure, and set financial goals.
 ### Code Contribution
 Code Contribution can be viewed [here](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=khseah&breakdown=true).
 
-Enhancements implemented:
 1. Set up the initial structure to build our code base upon.
-   - `MindMyMoney` class as the entry point, `Ui` class, `Parser` class and `Command` abstract class.
+   - `MindMyMoney` class as the entry point, `Ui` class, `Parser` class and `Command` class.
    - Allows the team to have a common foundation to build upon and sets the architecture structure.
    
 2. Added the `Ui` class.
@@ -40,8 +39,7 @@ inflow and outflow.
 
 
 2. Streamlined content page.
-   - Shortened section headers to keep it succinct and standardized action verbs (Display, Add, Modify etc) for 
-consistency.
+   - Shortened section headers and standardized action verbs (Display, Add, Modify etc).
 
 ### DG Contribution
 1. Wrote the `Architecture overview` portion.
@@ -53,7 +51,7 @@ consistency.
 3. Wrote the `Add Income implementation` portion.
    - Added Fig 10 - Add Income Sequence Diagram.
    
-4. Wrote the `List Command` portion.
+4. Wrote the `List Command implementation` portion.
    - Added Fig 12 - List Command Sequence Diagram, Fig 13 - List Expenditure Sequence Diagram, Fig 14 - List Credit Card
 Sequence Diagram and Fig 15 - List Income Sequence Diagram
 
@@ -63,11 +61,7 @@ Sequence Diagram and Fig 15 - List Income Sequence Diagram
    - Created and assigned issues for `v1.0` based on user stories.
    - Created and closed `v1.0` Milestone.
 
-2. Enabled:
-   - Status checks to pass before merging.
-   - GitHub Pages.
-
-3. Released `v1.0` and `v2.0` JAR files.
+2. Released `v1.0` and `v2.0` JAR files.
 
 ### Miscellaneous Contribution
 PR reviews (with non-trivial comments):
