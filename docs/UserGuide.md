@@ -457,6 +457,17 @@ State saved!
 Bye
 ```
 
+## Saving Program State
+The program uses a savefile to save all information before the program exits, and loads back everything when the program first starts up. 
+
+All you have to do is ensure that the jar file and the savefile are in a specific file directory structure as shown below:
+
+tp.main.jar
+output/
+	WAREHOUSE.json
+	
+You are strongly advised against editting the savefile structure. We did not design this system to handle manual edits to the savefile.
+
 ## FAQ
 Q: How to use the program effectively as a new user?
 
