@@ -15,7 +15,8 @@ public class Simplst {
             Display.stateRestored();
         } else {
             Display.newLogin();
-            w.setTotalCapacity("1000");
+            w = new Warehouse(1000);
+//            System.out.println("New warehouse created");
         }
         ui = new UserInterface(w);
         ui.run();
