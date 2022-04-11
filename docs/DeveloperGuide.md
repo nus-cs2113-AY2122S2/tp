@@ -876,11 +876,11 @@ The general workflow of the `group /view` command is as follows:
 
 ### List all groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
-The sequence diagram for `GroupListCommand` is omitted as it bears many similarities with [`SessionListCommand`](#list-sessions).<br>
+The sequence diagram for `GroupListCommand` is omitted as it bears many similarities with [`SessionListCommand`](#list-all-sessions).<br>
 The interactions of `GroupListCommand` with the `Profile` class is identical but the key differences lies in the objects that are used in the `Profile` class:
 * `GroupListCommand` calls the method `Profile#getGroupListSummaryString` instead of `Profile#getSessionListSummaryString` which utilises the list of groups instead of the list of sessions.
 
-Please refer to the [sequence diagram](#list-sessions) of `SessionListCommand` for reference.
+Please refer to the [sequence diagram](#list-all-sessions) of `SessionListCommand` for reference.
 
 The general workflow of the `group /list` command is as follows:
 1. The user input provided is passed to `SplitLah`.
