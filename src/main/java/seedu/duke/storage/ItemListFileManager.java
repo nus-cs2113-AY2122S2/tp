@@ -69,7 +69,7 @@ public class ItemListFileManager extends FileManager {
      *
      * @throws IOException if we are unable to write to the file ListFolder/ItemList.txt
      */
-    public void writeItemListToFile(ItemList listOfItems) throws IOException {
+    public void save(ItemList listOfItems) throws IOException {
         clearFileContents();
         FileWriter fw = new FileWriter(FILE_PATH, true);
         int lastIndexOfArrayList = listOfItems.getSize() - 1;
