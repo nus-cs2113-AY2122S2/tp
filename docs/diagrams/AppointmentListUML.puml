@@ -21,6 +21,9 @@ class AppointmentList {
 +findByDoctorNric(String[]) : void
 +findByAppointmentDate(String[]) : void
 +createArrayOfFoundAppointments() : void
++hasAppointmentToday(String, String) : boolean
++dispenseMedicine(String, String) : void
++loadMedicine(String[]) : void
 }
 
 @enduml
