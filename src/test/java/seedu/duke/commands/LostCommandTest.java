@@ -31,42 +31,14 @@ public class LostCommandTest {
     }
 
     /**
-     * Asserts that itemList size is 0 after full quantity of markers is lost.
+     * Asserts that itemList size is 0 after markers are marked lost.
      * */
     @Test
     public void execute_fullQuantityLost_itemDeleted() throws InvMgrException {
         Ui ui = new Ui();
-        LostCommand c = new LostCommand(0, 3);
+        LostCommand c = new LostCommand(0);
         c.execute(itemList, ui);
         assertEquals(0, itemList.getSize());
-    }
-
-    /**
-     * Asserts that itemList size is 1 after 2 of 3 markers are reported lost.
-     * */
-    @Test
-    public void execute_partialQuantityLost_itemQuantityReduced() throws InvMgrException {
-        Ui ui = new Ui();
-        LostCommand c = new LostCommand(0, 2);
-        c.execute(itemList, ui);
-        Item lostItem = itemList.getItem(0);
-        assertEquals(1, lostItem.getQuantity());
-    }
-
-    /**
-     * Checks that InvMgrException is thrown when lost quantity exceeds item quantity.
-     * Checks that the RETURN_ERROR_MESSAGE is displayed.
-     * */
-    @Test
-    public void execute_excessiveQuantityLost_InvMgrExceptionThrown() {
-        Ui ui = new Ui();
-        LostCommand c = new LostCommand(0, 5);
-        try {
-            c.execute(itemList, ui);
-            fail(); // the test should not reach this line
-        } catch (Exception e) {
-            assertEquals(Messages.LOST_ERROR_MESSAGE, e.getMessage());
-        }
     }
 
     /**
@@ -78,7 +50,7 @@ public class LostCommandTest {
         Ui ui = new Ui();
         ArrayList<Item> emptyItemArrayList = new ArrayList<>();
         ItemList emptyItemList = new ItemList(emptyItemArrayList);
-        LostCommand c = new LostCommand(0, 1);
+        LostCommand c = new LostCommand(0);
         try {
             c.execute(emptyItemList, ui);
             fail(); // the test should not reach this line
@@ -88,13 +60,13 @@ public class LostCommandTest {
     }
 
     /**
-     * Checks that InvMgrException is thrown when inventory is empty.
-     * Checks that the EMPTY_ITEM_LIST_MESSAGE is displayed.
+     * Checks that InvMgrException is thrown when index is out of range.
+     * Checks that the ITEM_NUMER_OUT_OF_RANGE_MESSAGE is displayed.
      * */
     @Test
     public void execute_indexOutOfRange_InvMgrExceptionThrown() {
         Ui ui = new Ui();
-        LostCommand c = new LostCommand(10, 1);
+        LostCommand c = new LostCommand(10);
         try {
             c.execute(itemList, ui);
             fail(); // the test should not reach this line

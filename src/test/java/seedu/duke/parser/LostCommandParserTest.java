@@ -15,22 +15,10 @@ public class LostCommandParserTest {
      * */
     @Test
     void parse_compulsoryFieldsPresent_success() {
-        String testInputFormat = " %s%s %s%s";
-        String testInput = String.format(testInputFormat,
-                CliSyntax.PREFIX_ITEM_INDEX.getPrefix(), ParserStubs.ITEM_INDEX,
-                CliSyntax.PREFIX_QUANTITY.getPrefix(), ParserStubs.PAPERCUP_QUANTITY);
-        assertParseSuccess(parser, testInput, ParserStubs.LOST_COMMAND);
-    }
-
-    /**
-     * Checks that InvMgrException is thrown when item quantity is not specified.
-     * */
-    @Test
-    void parse_missingQuantity_InvMgrExceptionThrown() {
         String testInputFormat = " %s%s";
         String testInput = String.format(testInputFormat,
                 CliSyntax.PREFIX_ITEM_INDEX.getPrefix(), ParserStubs.ITEM_INDEX);
-        assertParseFailure(parser, testInput, Messages.INVALID_SYNTAX);
+        assertParseSuccess(parser, testInput, ParserStubs.LOST_COMMAND);
     }
 
     /**
@@ -38,9 +26,7 @@ public class LostCommandParserTest {
      * */
     @Test
     void parse_missingIndex_InvMgrExceptionThrown() {
-        String testInputFormat = " %s%s";
-        String testInput = String.format(testInputFormat,
-                CliSyntax.PREFIX_QUANTITY.getPrefix(), ParserStubs.PAPERCUP_QUANTITY);
+        String testInput = " ";
         assertParseFailure(parser, testInput, Messages.INVALID_SYNTAX);
     }
 
@@ -49,10 +35,9 @@ public class LostCommandParserTest {
      * */
     @Test
     void parse_indexOutOfRange_InvMgrExceptionThrown() {
-        String testInputFormat = " %s%s %s%s";
+        String testInputFormat = " %s%s";
         String testInput = String.format(testInputFormat,
-                CliSyntax.PREFIX_ITEM_INDEX.getPrefix(), ParserStubs.ITEM_INDEX_OUT_OF_RANGE,
-                CliSyntax.PREFIX_QUANTITY.getPrefix(), ParserStubs.PAPERCUP_QUANTITY);
+                CliSyntax.PREFIX_ITEM_INDEX.getPrefix(), ParserStubs.ITEM_INDEX_OUT_OF_RANGE);
         assertParseFailure(parser, testInput, Messages.INVALID_INDEX);
     }
 
@@ -61,10 +46,9 @@ public class LostCommandParserTest {
      * */
     @Test
     void parse_nonIntIndex_InvMgrExceptionThrown() {
-        String testInputFormat = " %s%s %s%s";
+        String testInputFormat = " %s%s";
         String testInput = String.format(testInputFormat,
-                CliSyntax.PREFIX_ITEM_INDEX.getPrefix(), ParserStubs.NON_INT_ITEM_INDEX,
-                CliSyntax.PREFIX_QUANTITY.getPrefix(), ParserStubs.PAPERCUP_QUANTITY);
+                CliSyntax.PREFIX_ITEM_INDEX.getPrefix(), ParserStubs.NON_INT_ITEM_INDEX);
         assertParseFailure(parser, testInput, Messages.INVALID_INDEX);
     }
 }

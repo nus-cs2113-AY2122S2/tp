@@ -72,9 +72,7 @@ public class ParserStubs {
             BORROW_END_DATE,
             BORROWER_NAME);
     public static final ReturnCommand RETURNCOMMAND = new ReturnCommand(Integer.parseInt(ITEM_INDEX) - 1);
-    public static final LostCommand LOST_COMMAND = new LostCommand(Integer.parseInt(ITEM_INDEX) - 1,
-            Integer.parseInt(PAPERCUP_QUANTITY));
-
+    public static final LostCommand LOST_COMMAND = new LostCommand(Integer.parseInt(ITEM_INDEX) - 1);
 
 }
 
