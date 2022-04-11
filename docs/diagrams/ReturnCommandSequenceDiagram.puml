@@ -1,0 +1,73 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+skinparam dpi 300
+skinparam guillemet false
+skinparam sequenceStereotypeFontColor red
+skinparam sequenceStereotypeFontStyle bold
+
+Participant ":InvMgr" as invmgr
+Participant "InputParser" as parser <<class>>
+Participant "ReturnCommandParser" as ReturnCommandParser <<class>>
+Participant ":ReturnCommand" as cmd
+Participant "itemList:ItemList" as list
+Participant "ui:Ui" as ui
+Participant "item:Item" as item
+Participant ":BorrowRecord" as borrowRecord
+
+activate invmgr
+
+-> invmgr
+invmgr -> parser:parse("return i/1")
+activate parser
+
+parser -> ReturnCommandParser: parse( " i/1")
+activate ReturnCommandParser
+create cmd
+ReturnCommandParser -> cmd:ReturnCommand(itemIndex: Integer)
+activate cmd
+return :ReturnCommand
+return :ReturnCommand
+return inputCommand:ReturnCommand
+
+invmgr -> cmd:execute(itemList: ItemList, ui: Ui)
+activate cmd
+
+cmd -> cmd:checkItemListSize()
+activate cmd
+cmd -> list: getSize()
+activate list
+return :Integer
+return :boolean
+
+cmd -> list: getItem(itemIndex: Integer)
+activate list
+return returnedItem: Item
+
+cmd -> item: getBorrowRecords()
+activate item
+return itemBorrowRecords: ArrayList<BorrowRecord>
+
+loop for each borrowRecord
+cmd -> borrowRecord: getBorrowStatus()
+activate borrowRecord
+return
+cmd -> borrowRecord: getReturnStatus()
+activate borrowRecord
+return
+opt ""isOverdue || isOutstanding"
+cmd -> borrowRecord: setReturnStatus(true)
+activate borrowRecord
+return
+cmd -> borrowRecord: setEndDate()
+activate borrowRecord
+return
+cmd -> ui: showMessages(Messages.RETURNED_MESSAGE)
+activate ui
+return
+end
+end
+
+return
+@enduml
