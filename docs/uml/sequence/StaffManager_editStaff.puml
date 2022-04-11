@@ -19,9 +19,8 @@ deactivate staffcontroller
 
 alt staff records empty
 staffcontroller --> user
+end
 
-else staff records not empty
-group loop [while staff with inputted ID does not exist]
 staffcontroller -> staffcontroller: checkNoStaffClash(int staffId)
 activate staffcontroller
 staffcontroller -> staffmanager: staff = findByStaffId(int staffId)
@@ -30,7 +29,6 @@ staffmanager --> staffcontroller
 deactivate staffmanager
 staffcontroller --> staffcontroller
 deactivate staffcontroller
-end
 
 staffcontroller -> staffcontroller: editStaffByField(Staff staff)
 activate staffcontroller
@@ -39,7 +37,6 @@ activate staffcontroller
 alt option 1: id
 staffcontroller -> staffcontroller: editStaffId(Staff staff)
 activate staffcontroller
-group loop [while staff with inputted ID already exists]
 staffcontroller -> staffcontroller: checkNoStaffClash(int staffId)
 activate staffcontroller
 staffcontroller -> staffmanager: findByStaffId(int staffId)
@@ -48,7 +45,6 @@ staffmanager --> staffcontroller
 deactivate staffmanager
 staffcontroller --> staffcontroller
 deactivate staffcontroller
-end
 staffcontroller -> staff: setStaffId(int staffId)
 activate staff
 deactivate staff
@@ -79,8 +75,6 @@ deactivate staff
 deactivate staffcontroller
 
 else option 0: exit
-
-end
 
 end
 @enduml

@@ -29,7 +29,7 @@ Welcome to my PPP:)
 ### Contributions to DG
   - Documented for staff functionalities.
   - Created 5 UML sequence diagrams for staff functionalities, an example of which (`printStaff`) is attached below:
-    ![](../diagrams/sqeuence/StaffManager_printStaff.png)
+    ![](../diagrams/sequence/StaffManager_printStaff.png)
   - Contributed to the overall UML class diagram attached below:
     ![](../diagrams/class/all.png)
     

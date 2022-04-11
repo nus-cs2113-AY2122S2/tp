@@ -81,15 +81,12 @@ public class StaffController extends Controller {
             return;
         }
         try {
-            while (true) {
-                int staffId = InputParser.getInteger("ID of staff: ");
-                Staff staff = staffManager.findByStaffId(staffId);
-                if (staff != null) {
-                    System.out.println("Staff found: \n" + staff);
-                    break;
-                } else {
-                    System.out.println("Staff with ID " + staffId + " not found!");
-                }
+            int staffId = InputParser.getInteger("ID of staff: ");
+            Staff staff = staffManager.findByStaffId(staffId);
+            if (staff != null) {
+                System.out.println("Staff found: \n" + staff);
+            } else {
+                System.out.println("Failed to find staff with matching ID!");
             }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -107,24 +104,16 @@ public class StaffController extends Controller {
         System.out.println("Adding new staff...");
         int staffId = 0;
         try {
-            while (true) {
-                staffId = InputParser.getInteger("ID of staff: ");
-                boolean staffNoClash = checkNoStaffClash(staffId);
-                if (staffNoClash) {
-                    break;
-                } else {
-                    System.out.println("Staff with the same ID already exists, use another ID...");
-                }
+            staffId = InputParser.getInteger("ID of staff: ");
+            boolean staffNoClash = checkNoStaffClash(staffId);
+            if (!staffNoClash) {
+                System.out.println("Staff with the same ID already exists!");
+                return;
             }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-        final String staffName = InputParser.getString("Name of staff: ");
-        final String position = InputParser.getString("Position of staff: ");
-        double salary;
-        salary = InputParser.getDouble("Salary of staff: ");
-        try {
+            final String staffName = InputParser.getString("Name of staff: ");
+            final String position = InputParser.getString("Position of staff: ");
+            double salary;
+            salary = InputParser.getDouble("Salary of staff: ");
             staffManager.addStaff(staffId, staffName, position, salary);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -146,20 +135,17 @@ public class StaffController extends Controller {
         }
         int staffId = 0;
         try {
-            while (true) {
-                staffId = InputParser.getInteger("ID of staff to delete: ");
-                boolean staffNoClash = checkNoStaffClash(staffId);
-                if (!staffNoClash) {
-                    break;
-                } else {
-                    System.out.println("Failed to find staff with matching ID, please try again...");
-                }
+            staffId = InputParser.getInteger("ID of staff to delete: ");
+            boolean staffNoClash = checkNoStaffClash(staffId);
+            if (staffNoClash) {
+                System.out.println("Failed to find staff with matching ID!");
+                return;
             }
+            staffManager.deleteByStaffId(staffId);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return;
         }
-        staffManager.deleteByStaffId(staffId);
     }
 
     /**
@@ -178,21 +164,14 @@ public class StaffController extends Controller {
         Staff staff = null;
         boolean staffNoClash;
         try {
-            while (true) {
-                staffId = InputParser.getInteger("ID of staff to edit: ");
-                staffNoClash = checkNoStaffClash(staffId);
-                if (!staffNoClash) {
-                    staff = staffManager.findByStaffId(staffId);
-                    break;
-                } else {
-                    System.out.println("Failed to find staff with matching ID, please try again...");
-                }
+            staffId = InputParser.getInteger("ID of staff to edit: ");
+            staffNoClash = checkNoStaffClash(staffId);
+            if (!staffNoClash) {
+                staff = staffManager.findByStaffId(staffId);
+            } else {
+                System.out.println("Failed to find staff with matching ID!");
+                return;
             }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-        try {
             editStaffByField(staff);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -242,16 +221,13 @@ public class StaffController extends Controller {
     private void editStaffId(Staff staff) throws OperationTerminationException, IllegalArgumentException {
         int staffId;
         boolean staffNoClash;
-        while (true) {
-            staffId = InputParser.getInteger("New ID of staff: ");
-            staffNoClash = checkNoStaffClash(staffId);
-            if (staffNoClash) {
-                staff.setStaffId(staffId);
-                System.out.println("ID successfully updated!");
-                break;
-            } else {
-                System.out.println("Staff with the same ID already exists, use another ID...");
-            }
+        staffId = InputParser.getInteger("New ID of staff: ");
+        staffNoClash = checkNoStaffClash(staffId);
+        if (staffNoClash) {
+            staff.setStaffId(staffId);
+            System.out.println("ID successfully updated!");
+        } else {
+            throw new IllegalArgumentException("Staff with the same ID already exists!");
         }
     }
 
@@ -268,12 +244,9 @@ public class StaffController extends Controller {
     }
 
     private void editStaffSalary(Staff staff) throws OperationTerminationException, IllegalArgumentException {
-        while (true) {
-            double salary = InputParser.getDouble("New salary of staff: ");
-            staff.setSalary(salary);
-            System.out.println("Salary successfully updated!");
-            break;
-        }
+        double salary = InputParser.getDouble("New salary of staff: ");
+        staff.setSalary(salary);
+        System.out.println("Salary successfully updated!");
     }
 
     /**

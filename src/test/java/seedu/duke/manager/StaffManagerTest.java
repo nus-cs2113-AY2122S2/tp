@@ -47,6 +47,7 @@ public class StaffManagerTest {
         staffManager.addStaff(4, "Darylharhar", "Chef", 5000);
         assertDoesNotThrow(() -> staffManager.findByStaffId(1));
         assertDoesNotThrow(() -> staffManager.findByStaffId(2));
+        assertEquals("1     | August          | Chef       | $5500.00", staffManager.findByStaffId(1).toString());
         assertThrows(IllegalArgumentException.class, () -> staffManager.findByStaffId(-1));
         assertThrows(IllegalArgumentException.class, () -> staffManager.findByStaffId(0));
     }
