@@ -31,25 +31,9 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 * [How SplitLah works](#how-splitlah-works)
 * [Features](#features)
   * [Session Management](#session-management)
-      * [Creating a session: `session /create`](#creating-a-session-session-create)
-      * [Deleting a session: `session /delete`](#deleting-a-session-session-delete)
-      * [Editing a session: `session /edit`](#editing-a-session-session-edit)
-      * [Viewing a session: `session /view`](#viewing-a-session--session-view)
-      * [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
   * [Activity Management](#activity-management)
-    * [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
-    * [Deleting an activity: `activity /delete`](#deleting-an-activity-activity-delete)
-    * [Editing an activity: `activity /edit`](#editing-an-activity-activity-edit)
-    * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
-    * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
   * [Transaction Management](#transaction-management)
-    * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
   * [Group Management](#group-management)
-    * [Creating a group: `group /create`](#creating-a-group-group-create)
-    * [Deleting a group: `group /delete`](#deleting-a-group-group-delete)
-    * [Editing a group: `group /edit`](#editing-a-group-group-edit)
-    * [Viewing a group: `group /view`](#viewing-a-group-group-view)
-    * [Listing all groups: `group /list`](#listing-all-groups-group-list)
   * [Miscellaneous](#miscellaneous)
     * [Listing all available commands: `help`](#listing-all-available-commands-help)
     * [Exiting the application: `exit`](#exiting-the-application-exit)
@@ -66,8 +50,8 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 - The format for each command is enclosed within a `code block`, so that they can be copied directly into SplitLah if needed.
   - Example: `help`
 - In each command: 
-  - The blocks indicated with 💡 are important things to take note of when using the command.
-  - The blocks indicated with ⚠️are warnings that you should pay attention to when using the command.
+  - The blocks indicated with 💡 are **important** things to take note of when using the command.
+  - The blocks indicated with ⚠️are **warnings** that you should pay attention to when using the command.
 
 ## Quick Notes
 - Allowed characters for values:
@@ -127,6 +111,11 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 * At the end of a session, SplitLah calculates how much each person owes and who they need to pay. This information is
   displayed in an easy-to-read summary.
 
+<br>
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
 <hr>
 
 ## Features 
@@ -135,7 +124,21 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 > A session represents a group outing that involves a list of participants and 
 > spans an arbitrary period of time containing one or more activities.
 
+### Overview
+
+* [Creating a session: `session /create`](#creating-a-session-session-create)
+* [Deleting a session: `session /delete`](#deleting-a-session-session-delete)
+* [Editing a session: `session /edit`](#editing-a-session-session-edit)
+* [Viewing a session: `session /view`](#viewing-a-session--session-view)
+* [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
+
 <br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
 
 ### Creating a session: `session /create`
 Creates a session so that you can manage your group outings. <br>
@@ -179,6 +182,11 @@ Creates a session so that you can manage your group outings. <br>
   <br>
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#session-management">Back to Session Management</a>
+</div>
+
+<hr>
 
 ### Deleting a session: `session /delete`
 Deletes an existing session so that you can remove sessions that you no longer need.<br>
@@ -204,6 +212,12 @@ Deletes an existing session so that you can remove sessions that you no longer n
   ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
   <br>
   <br>
+
+<div class="button-box">
+  <a class="back-button" href="#session-management">Back to Session Management</a>
+</div>
+
+<hr>
 
 ### Editing a session: `session /edit`
 Edits an existing session so that you can change the details of a session.<br>
@@ -262,6 +276,12 @@ Edits an existing session so that you can change the details of a session.<br>
   <br>
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#session-management">Back to Session Management</a>
+</div>
+
+<hr>
+
 ### Viewing a session : `session /view`
 Displays the details of a session so that you can review it.<br>
 
@@ -284,6 +304,12 @@ Displays the details of a session so that you can review it.<br>
   <br>     
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#session-management">Back to Session Management</a>
+</div>
+
+<hr>
+
 ### Listing all sessions: `session /list`
 Displays all existing sessions so that you can have an overview of previously created sessions. 
 However, deleted sessions are not listed.
@@ -299,12 +325,28 @@ However, deleted sessions are not listed.
   <br>
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#session-management">Back to Session Management</a>
+</div>
+
 <hr>
 
 ## _Activity Management_
 > An activity represents a single group activity and stores its name, costs and the name of the payer.
 
+### Overview
+* [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
+  * [Deleting an activity: `activity /delete`](#deleting-an-activity-activity-delete)
+  * [Editing an activity: `activity /edit`](#editing-an-activity-activity-edit)
+  * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
+  * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
+
 <br>
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
 
 ### Creating an activity: `activity /create`
 Creates an activity with the details that you specify and then assigns it to a session. <br>
@@ -373,6 +415,12 @@ There are 2 ways that you can specify the costs of an activity:
   <br>
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#activity-management">Back to Activity Management</a>
+</div>
+
+<hr>
+
 ### Deleting an activity: `activity /delete`
 Deletes an existing activity from a particular session so that you can remove activities that you no longer need.<br>
 
@@ -400,6 +448,12 @@ Deletes an existing activity from a particular session so that you can remove ac
   ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.png)
   <br>
   <br>
+
+<div class="button-box">
+  <a class="back-button" href="#activity-management">Back to Activity Management</a>
+</div>
+
+<hr>
 
 ### Editing an activity: `activity /edit`
 Edits an existing activity so that you can change the details of an activity.<br>
@@ -484,6 +538,12 @@ distributed amongst all participants.
   <br>
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#activity-management">Back to Activity Management</a>
+</div>
+
+<hr>
+
 ### Viewing an activity: `activity /view`
 Displays the details about an activity so that you can review it.<br>
 
@@ -510,6 +570,12 @@ Displays the details about an activity so that you can review it.<br>
   <br>     
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#activity-management">Back to Activity Management</a>
+</div>
+
+<hr>
+
 ### Listing all activities in a session: `activity /list`
 Displays all existing activities so that you can have an overview of previously created activities.
 However, deleted activities are not listed.
@@ -533,11 +599,15 @@ However, deleted activities are not listed.
   <br>     
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#activity-management">Back to Activity Management</a>
+</div>
+
 <hr>
 
 ## _Transaction Management_
 
-<br>
+<hr>
 
 ### Settling all transactions for a session: `session /summary`
 
@@ -570,13 +640,29 @@ must pay and to whom they should pay for all debts to be resolved.<br>
   <br>
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
 <hr>
 
 ## _Group Management_
 > A group represents one or more individuals. The sole purpose of a group is to quickly identify a group of individuals
 > without having to manually enter their details one by one when creating a session.
 
+### Overview
+* [Creating a group: `group /create`](#creating-a-group-group-create)
+* [Deleting a group: `group /delete`](#deleting-a-group-group-delete)
+* [Editing a group: `group /edit`](#editing-a-group-group-edit)
+* [Viewing a group: `group /view`](#viewing-a-group-group-view)
+* [Listing all groups: `group /list`](#listing-all-groups-group-list)
+
 <br>
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
 
 ### Creating a group: `group /create`
 Creates a new group consisting of a group of individuals. You can use this group whenever creating a new session that
@@ -606,6 +692,12 @@ involves the same group of individuals. This saves you time when entering the li
   <br>
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#group-management">Back to Group Management</a>
+</div>
+
+<hr>
+
 ### Deleting a group: `group /delete`
 Deletes an existing group so that you can remove groups that you no longer need.
 
@@ -630,6 +722,12 @@ Deletes an existing group so that you can remove groups that you no longer need.
   ![Group delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupDeleteCommand.png)
   <br>
   <br>
+
+<div class="button-box">
+  <a class="back-button" href="#group-management">Back to Group Management</a>
+</div>
+
+<hr>
 
 ### Editing a group: `group /edit`
 Edits an existing group so that you can change the details of a group.<br>
@@ -675,6 +773,12 @@ Examples of usage:
   <br>
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#group-management">Back to Group Management</a>
+</div>
+
+<hr>
+
 ### Viewing a group: `group /view`
 Displays the details about a group so that you can review it.<br>
 
@@ -697,6 +801,12 @@ Displays the details about a group so that you can review it.<br>
   <br>     
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#group-management">Back to Group Management</a>
+</div>
+
+<hr>
+
 ### Listing all groups: `group /list`
 Displays all existing groups so that you can have an overview of previously created groups.
 However, deleted groups are not listed.
@@ -712,11 +822,13 @@ However, deleted groups are not listed.
   <br>
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#group-management">Back to Group Management</a>
+</div>
+
 <hr>
 
 ## _Miscellaneous_
-
-<br>
 
 ### Listing all available commands: `help`
 Displays all available SplitLah commands and their syntax to help you use SplitLah.<br>
@@ -732,6 +844,10 @@ Quits the application.<br>
 > Format: `exit`
 
 <br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
 
 <hr>
  
@@ -752,7 +868,6 @@ has been allocated, it will not be changed nor reused.
 **A**: As of now, this functionality is not supported by SplitLah. All functionalities that SplitLah supports are documented in this user guide.
 You can find a summary of all available commands in the [Command Summary](#command-summary) below.
 Stay tuned to future updates from us!
-
 <br>
 
 <hr>
@@ -781,3 +896,8 @@ Stay tuned to future updates from us!
 | List all groups                         | Format: `group /list`                                                                                                                                                                                                                                                               |
 | List all available commands             | Format: `help`                                                                                                                                                                                                                                                                      |
 | Exit                                    | Format: `exit`                                                                                                                                                                                                                                                                      |
+
+<br>
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
