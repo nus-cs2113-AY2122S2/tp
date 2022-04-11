@@ -1,0 +1,130 @@
+@startuml
+!include style.puml
+skinparam arrowColor #BLACK
+skinparam noteTextAlignment left
+
+group **sd**  Parser Component parse and validate
+Participant "<<class>>\nParser" as Parser LOGIC_COLOR
+Participant "<<class>>\nParserUtility" as UParser LOGIC_COLOR_T1
+
+[-> Parser : parseCommandType(userInput:String)
+activate Parser
+Parser -->[ : keywordString:String
+deactivate Parser
+
+loop LOOP_COLOR for each XYZ term in command
+    note right : XYZ is a placeholder for the terms required for a command \n\
+    e.g. NAME or GROUP_INDEX for an **add** command.
+
+    [-> Parser : parseXYZ(userInput:String)
+    activate Parser
+
+    note right : XYZ in the methods are replaced accordingly \n\
+    e.g. parseName or parseGroupIndex
+
+    ' checkContainsOnlyOneDelimiter
+    Parser -> UParser : checkContainsOnlyOneDelimiter(userInput:String, DELIMITER_XYZ:String)
+    activate UParser
+    opt OPT_COLOR found no DELIMITER_XYZ
+        UParser --> Parser : :MissingDelimiterException
+        Parser -->[ : :MissingDelimiterException
+    end opt
+    opt OPT_COLOR found too many DELIMITER_XYZ
+        UParser --> Parser : :DuplicateDelimiterException
+        Parser -->[ : :DuplicateDelimiterException
+    end opt
+    UParser --> Parser
+    deactivate UParser
+
+    ' parseDelimitedTerm
+    Parser -> UParser : parseDelimitedTerm(userInput:String, DELIMITER_XYZ:String)
+    activate UParser
+    opt OPT_COLOR XYZ.isBlank()
+        UParser --> Parser : :EmptyStringException
+        Parser -->[ : :EmptyStringException
+    end opt
+    UParser --> Parser : //XYZ//:object
+    deactivate UParser
+
+    opt OPT_COLOR XYZ is NAME or DESCRIPTION
+    Parser -> UParser : warnIfNotSpacedForwardSlash(//XYZ//:object)
+    activate UParser
+    UParser --> Parser
+    deactivate UParser
+    end OPT
+
+    Parser -->[ : //XYZ//:object
+
+    note right : object is either of type String or Boolean
+    deactivate Parser
+
+    ' needs Validation
+    opt OPT_COLOR_T1 if //XYZ// needs validation checking
+        [-> Parser : getValidXYZ(//XYZ//:String, [maxValue:int])
+        note right : [maxValue:int] is only needed if //XYZ// is UserIndex, IncomeIndex or ExpenditureIndex\n[maxValue:int] for GroupIndex and CategoryIndex are constants
+        activate Parser
+
+        ' isMoney?
+        alt //XYZ// is Money
+
+            opt OPT_COLOR //XYZ// is not a double
+                Parser -->[ : :InvalidMoneyException
+            end opt
+
+            ' checkNegative
+            Parser -> UParser : checkNegativeMoney(//XYZ//:double)
+            activate UParser
+            opt OPT_COLOR //XYZ// is negative
+                UParser --> Parser : :NumberFormatException
+                Parser -->[ :InvalidMoneyException
+            end opt
+            UParser --> Parser
+            deactivate UParser
+
+            ' checkTwoDecimalPlace
+            Parser -> UParser : checkTwoDecimalPlace(//XYZ//:String)
+            activate UParser
+            opt OPT_COLOR //XYZ// is more than 2 \ndecimal places
+                UParser --> Parser : :NumberFormatException
+                Parser -->[ :InvalidMoneyException
+            end opt
+            UParser --> Parser
+            deactivate UParser
+
+            Parser -->[ : //XYZ//:Double
+
+        ' notMoney
+        else //XYZ// is not Money
+
+            opt OPT_COLOR //XYZ// is not an integer
+                Parser -->[ : :InvalidIndexException
+            end opt
+
+            ' checkTooHigh
+            Parser -> UParser : checkTooHighIndex(//XYZ//:int, maxValue:int)
+            activate UParser
+            opt OPT_COLOR //XYZ// > maxValue
+                UParser --> Parser : :IndexOutOfBoundsException
+                Parser -->[ :InvalidIndexException
+            end opt
+            UParser --> Parser
+            deactivate UParser
+
+            ' checkTooLow
+            Parser -> UParser : checkTooLowIndex(//XYZ//:int, 1:int)
+            activate UParser
+            opt OPT_COLOR //XYZ// < 1 //(MIN_INDEX)//
+                UParser --> Parser : :IndexOutOfBoundsException
+                Parser -->[ :InvalidIndexException
+            end opt
+            UParser --> Parser
+            deactivate UParser
+
+            Parser -->[ : //XYZ//:Integer
+            deactivate Parser
+        end opt
+    end opt
+end loop
+end
+@enduml
+

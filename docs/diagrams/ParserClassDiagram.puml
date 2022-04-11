@@ -1,0 +1,21 @@
+@startuml
+
+!include style.puml
+
+Package "Parser" as P {
+    Class Parser LOGIC_COLOR
+    Class ParserUtility LOGIC_COLOR_T1
+    Class Exceptions LOGIC_COLOR_T2
+}
+
+package Commands as "**Commands**\n**Component**" COMMAND_COLOR_T2 {
+}
+
+
+Commands .L.> Parser : Parses input >
+
+Parser -U.> Exceptions : <color: red><<throws>>
+Parser -L.> ParserUtility : Uses >
+ParserUtility -r.> Exceptions : <color: red><<throws>>
+
+@enduml

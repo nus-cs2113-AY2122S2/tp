@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include style.puml
+show members
+hide empty members
+
+Title: UI Component
+
+Package Global as G{
+class ":UI" as UI UI_COLOR {
+<color: white> <u>+HORI_LINE
+<color: white> <u>+WELCOME_MSG
+<color: white> <u>+EXIT_MSG
+<color: white> <u>+LOGO
+<color: white> <u>+printHoriLine()
+<color: white> <u>+printWelcomeMsg()
+<color: white> <u>+printExitMsg()
+<color: white> <u>+formatValue()
+<color: white> +printMsg()
+<color: white> +printErrorMsg()
+}
+}
+
+class ":Main" as PlanITarium #grey
+
+PlanITarium -right[LOGIC_COLOR]->"1" UI
+
+@enduml

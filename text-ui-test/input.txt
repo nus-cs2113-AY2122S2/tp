@@ -1,1 +1,75 @@
-James Gosling
+add /n Alpha /g 1
+add /n Beta /g 2
+add /n Charlie /g 3
+add /n Delta /g 1
+add /n Echo /g 2
+add /n Foxtrot /g 3
+addin /g 1 /u 1 /i 2000.20 /d CPF payout /p t
+addin /g 1 /u 2 /i 1500.75 /d CPF payout /p t
+addin /g 2 /u 1 /i 8000.97 /d Lawyer pay /p t
+addin /g 2 /u 2 /i 5000.14 /d Info sec pay /p t
+addin /g 3 /u 1 /i 10.72 /d Sell eraser in school /p f
+addin /g 3 /u 2 /i 5.16 /d Help friend massage /p f
+addin /g 1 /u  /i -e /d Crash test /p t
+addout /g 1 /u 1 /e 5000.90 /d Gambling /c 6 /p f
+addout /g 1 /u 2 /e 3000.74 /d Daily ramen /c 1 /p t
+addout /g 2 /u 1 /e 1000.66 /d Utility bills /c 3 /p t
+addout /g 2 /u 2 /e 4000.48 /d Monthly subscription to Netflix /c 6 /p t
+addout /g 3 /u 1 /e 100.10 /d Pokemon gacha /c 6 /p f
+addout /g 3 /u 2 /e 500.47 /d Back pain medicine /c 4 /p t
+addin /g 1 /u  /e -e /d Crash test /c 1 /p t
+overview
+list /g 1
+list /g 2
+list /g 3
+editin /g 1 /u 1 /r 1 /i 50
+editin /g 1 /u 2 /r 1 /i 50
+editin /g 2 /u 1 /r 1 /d edit
+editin /g 2 /u 2 /r 1 /d edit
+editin /g 3 /u 1 /r 1 /p t
+editin /g 3 /u 2 /r 1 /p t
+editin /g 1 /u 1 /r 1 /i 50
+editin /g 1 /u 1 /r 1
+editout /g 1 /u 1 /r 1 /e 50
+editout /g 1 /u 2 /r 1 /e 50
+editout /g 2 /u 1 /r 1 /d edit
+editout /g 2 /u 2 /r 1 /d edit
+editout /g 3 /u 1 /r 1 /c 6
+editout /g 3 /u 2 /r 1 /c 6
+editout /g 1 /u 1 /r 1 /e 50
+editout /g 1 /u 1 /r 1
+overview
+list /g 1
+list /g 2
+list /g 3
+deletein /g 1 /u 1 /r 1
+deletein /g 1 /u 2 /r 1
+deletein /g 2 /u 1 /r 1
+deletein /g 2 /u 2 /r 1
+deletein /g 3 /u 1 /r 1
+deletein /g 3 /u 2 /r 1
+deletein /g 1 /u 1 /r 1
+overview
+list /g 1
+list /g 2
+list /g 3
+deleteout /g 1 /u 1 /r 1
+deleteout /g 1 /u 2 /r 1
+deleteout /g 2 /u 1 /r 1
+deleteout /g 2 /u 2 /r 1
+deleteout /g 3 /u 1 /r 1
+deleteout /g 3 /u 2 /r 1
+deleteout /g 1 /u 1 /r 1
+overview
+delete /g 1 /u 2
+delete /g 1 /u 1
+delete /g 2 /u 2
+delete /g 2 /u 1
+delete /g 3 /u 2
+delete /g 3 /u 1
+delete
+delete /g 1 /u 1
+list /g 1
+list /g 2
+list /g 3
+bye

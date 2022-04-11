@@ -1,0 +1,59 @@
+'@@author tjiarong
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+show members
+hide empty members
+
+title Initial State
+
+package " " {
+    class Fam as "__family:Family__"
+    class MyGen as "__myGen:PersonList__"
+    class Alice as "__:Person__" {
+        name = "Alice"
+    }
+    class List as "__expenditureList:ExpenditureList__"
+    class List2 as "__incomeList:IncomeList__"
+    class Exp0 as "__expenditure0:Expenditure__" #LIGHTGREEN {
+        description = "Lunch"
+        category = 2
+    }
+    class Exp1 as "__expenditure1:Expenditure__" #LIGHTGREEN {
+        description = "Dinner"
+        category = 2
+    }
+    class Exp2 as "__expenditure2:Expenditure__" #LIGHTGREEN {
+        description = "Movies"
+        category = 6
+    }
+    class Exp3 as "__expenditure3:Expenditure__" #LIGHTGREEN {
+        description = "Electric Bills"
+        category = 1
+    }
+    class Inc0 as "__income0:Income__" #LIGHTGREEN {
+        description = "Bills Rebate"
+    }
+
+}
+
+Fam -down-> MyGen
+
+MyGen -> Alice
+
+Alice -down-> List
+Alice -down-> List2
+
+List  -d[#GREEN]-> Exp0
+List  -d[#GREEN]-> Exp1
+List  -d[#GREEN]-> Exp2
+List  -d[#GREEN]-> Exp3
+List2  -d[#GREEN]-> Inc0
+
+Exp0 -right[HIDDEN]> Exp1
+Exp1 -right[HIDDEN]> Exp2
+Exp2 -right[HIDDEN]> Exp3
+List2 -right[HIDDEN]->List
+
+@end

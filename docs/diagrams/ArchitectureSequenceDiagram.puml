@@ -1,0 +1,106 @@
+@startuml
+!include style.puml
+
+box
+Participant Main #grey
+end box
+box COMMAND_COLOR_T2
+Participant ":CommandFactory" as Commands COMMAND_COLOR
+Participant ":AddPerson\nCommand" as Commands2 COMMAND_COLOR_T1
+end box
+box LOGIC_COLOR_T3
+Participant ":Parser\nComponent" as Parser LOGIC_COLOR
+end box
+box #PINK
+Participant ":Family" as Family MODEL_COLOR
+Participant ":PersonList" as Family2 MODEL_COLOR_T3
+Participant ":Person" as Family3 MODEL_COLOR_T2
+end box
+box MONEY_COLOR_T3
+Participant ":MoneyList" as Money MONEY_COLOR
+box UI_COLOR_T3
+Participant ":UI" as UI UI_COLOR
+end box
+
+note over Parser : Parser component is\nan abstraction for the\n**Parser** and **ParserUtility**\nclasses
+
+[-> Main : "add /g 2\n /n Alice"
+
+activate Main
+
+Main -> UI : printHoriLine()
+activate UI
+UI --> Main
+deactivate UI
+
+Main -> Commands : getCommand(\n"add /g 2 /n\nAlice":String,\nfamily:Family)
+
+activate Commands
+Commands -> Parser : parseCommandType(\n"add /g 2 /n Alice":String)
+activate Parser
+Parser --> Commands : "add":String
+deactivate Parser
+
+
+create Commands2
+Commands -> Commands2
+activate Commands2
+Commands2 --> Commands
+deactivate Commands2
+
+Commands --> Main : :AddPerson\nCommand
+deactivate Commands
+
+Main -> Commands2 : execute()
+activate Commands2
+
+ref over Commands2, Parser
+Parser Component
+parse and validate
+end ref
+
+Commands2 -> Family : addPerson(2:int, "Alice":String)
+activate Family
+
+Family -> Family : getList(2:int)
+activate Family
+Family --> Family
+deactivate Family
+
+
+Family -> Family2 : addPerson(\n"Alice":String)
+activate Family2
+
+create Family3
+Family2 -> Family3
+activate Family3
+
+create Money
+Family3 -> Money
+activate Money
+Money --> Family3
+deactivate Money
+
+Family3 --> Family2
+deactivate Family3
+
+note over Money : MoneyList is an abstraction for the\n**IncomeList** and **ExpenditureList**\nclasses
+
+Family2 --> Family
+deactivate Family2
+
+Family --> Commands2
+deactivate Family
+
+Commands2 --> Main
+Destroy Commands2
+
+Main -> UI : printHoriLine()
+activate UI
+UI --> Main
+deactivate UI
+
+Main -->[
+
+@enduml
+

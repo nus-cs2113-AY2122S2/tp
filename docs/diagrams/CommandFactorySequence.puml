@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+Title: CommandFactory Sequence
+
+participant Main #grey
+Box " "#WHITE
+    participant ":CommandFactory" as CommandFactory COMMAND_COLOR
+    participant ":Parser" as Parser LOGIC_COLOR
+    participant ":XYZCommand" as XYZCommand COMMAND_COLOR_T1
+end Box
+
+-> Main: userInput
+activate Main
+Main -> CommandFactory: getCommand(userInput, family)
+activate CommandFactory
+CommandFactory -> Parser: parseCommandTypes(userInput)
+activate Parser
+Parser --> CommandFactory: keyword : String
+deactivate Parser
+create XYZCommand
+CommandFactory --> XYZCommand
+activate XYZCommand
+ref over Parser, XYZCommand
+Parser Component parse and validate
+end ref
+XYZCommand --> CommandFactory: :XYZCommand
+deactivate XYZCommand
+CommandFactory --> Main: :XYZCommand
+deactivate CommandFactory
+Main -> XYZCommand: execute()
+activate XYZCommand
+XYZCommand -->
+@enduml

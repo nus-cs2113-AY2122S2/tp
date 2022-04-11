@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam groupInheritance 2
+
+!include style.puml
+
+Title: Command Component
+
+Package Command as C {
+    class XYZCommand COMMAND_COLOR_T1
+    abstract class Command COMMAND_COLOR_T1
+    class CommandFactory COMMAND_COLOR
+
+}
+
+class Main #grey
+class Family MODEL_COLOR
+
+XYZCommand -down[COMMAND_COLOR_T1]-|> Command
+CommandFactory -up[COMMAND_COLOR]->"0..1" Command : Returns
+
+Main -[#grey]left->"1" CommandFactory
+ CommandFactory -[#grey]->"1" Family
+@enduml

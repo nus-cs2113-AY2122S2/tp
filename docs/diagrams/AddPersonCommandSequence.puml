@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+Title: Add Person Sequence
+
+participant Main #grey
+
+Box " "#WHITE
+    participant ":CommandFactory" as CommandFactory COMMAND_COLOR
+    participant ":Parser" as Parser LOGIC_COLOR
+    participant ":AddPersonCommand" as AddPersonCommand COMMAND_COLOR_T1
+end Box
+
+
+participant ":Family" as Family MODEL_COLOR
+
+-> Main: userInput
+activate Main
+Main -> CommandFactory: getCommand(userInput, family)
+activate CommandFactory
+CommandFactory -> Parser: parseCommandTypes(userInput)
+activate Parser
+Parser --> CommandFactory: keyword: String
+deactivate Parser
+create AddPersonCommand
+CommandFactory --> AddPersonCommand
+activate AddPersonCommand
+ref over Parser, AddPersonCommand
+Parser Component parse and validate
+end ref
+AddPersonCommand --> CommandFactory: :AddPersonCommand
+deactivate AddPersonCommand
+CommandFactory --> Main: :AddPersonCommand
+deactivate CommandFactory
+Main -> AddPersonCommand: execute()
+activate AddPersonCommand
+AddPersonCommand --> Family: addPerson(name, index)
+activate Family
+@enduml

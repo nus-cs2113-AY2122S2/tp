@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+show members
+hide empty members
+
+title After addition of Person and income
+
+package " " {
+    class Family as "__family:Family__"
+    class Parents as "__parents:PersonList__"
+    class My_Gen as "__myGen:PersonList__"
+    class Children as "__children:PersonList__"
+    class Alice as "__:Person__" {
+        name = "Alice"
+    }
+    class IncomeList as "__incomeList:IncomeList__"
+    class ExpenditureList as "__expenditureList:IncomeList__"
+    class Income as "__:Income__"
+}
+
+Family -down[#grey]-> Parents
+Family -down[#grey]-> My_Gen
+Family -down[#grey]-> Children
+
+Parents -down[#grey]-> Alice
+
+Alice -down[#grey]-> IncomeList
+Alice -down[#grey]-> ExpenditureList
+
+IncomeList -down[#grey]-> Income
+
+@enduml

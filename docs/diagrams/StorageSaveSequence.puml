@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+
+Box
+    participant ":ExitCommand" as ExitCommand COMMAND_COLOR_T1
+    participant ":Storage" as Storage STORAGE_COLOR
+    participant ":PersonList" as PersonList MODEL_COLOR_T3
+    participant PlanITarium.txt STORAGE_COLOR_T3
+end box
+
+
+-> ExitCommand: exit()
+activate ExitCommand
+ExitCommand -> Storage: saveData(:Family)
+activate Storage
+loop for all 3 family groups
+Storage -> PersonList: getPersonList()
+activate PersonList
+PersonList --> Storage: :PersonList
+deactivate PersonList
+    loop LOOP_COLOR until all person in PersonList
+        Storage -> PersonList: getSaveName()
+        activate PersonList
+        PersonList --> Storage: Name:Person
+        deactivate PersonList
+        Storage -> Storage: writeToFile()
+        activate Storage
+        Storage -> PlanITarium.txt : write(name:String)
+        activate PlanITarium.txt
+        PlanITarium.txt --> Storage
+        deactivate PlanITarium.txt
+        Storage --> Storage
+        deactivate Storage
+        Storage -> PersonList: getIncomeList()
+
+        activate PersonList
+        PersonList --> Storage: :IncomeList
+        deactivate PersonList
+
+        Storage -> Storage: writeToFile()
+        activate Storage
+        loop until all income in IncomeList
+        Storage -> PlanITarium.txt : write(income:String)
+        activate PlanITarium.txt
+        PlanITarium.txt --> Storage
+        deactivate PlanITarium.txt
+        end
+        Storage --> Storage
+        deactivate Storage
+        Storage -> PersonList: getExpenditureList()
+        activate PersonList
+        PersonList --> Storage: :ExpenditureList
+        deactivate PersonList
+        Storage -> Storage: writeToFile()
+        activate Storage
+        loop until all expenditure in ExpenditureList
+        Storage -> PlanITarium.txt : write(expenditure:String)
+        activate PlanITarium.txt
+        PlanITarium.txt --> Storage
+        deactivate PlanITarium.txt
+        end
+        Storage --> Storage
+        deactivate Storage
+    end
+end
+Storage --> ExitCommand
+deactivate Storage
+<--ExitCommand
+deactivate ExitCommand
+@enduml

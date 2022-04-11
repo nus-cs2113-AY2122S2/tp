@@ -1,0 +1,88 @@
+@startuml
+!include style.puml
+
+Box
+    participant Main #grey
+    participant ":Storage" as Storage STORAGE_COLOR
+    participant ":Family" as Family MODEL_COLOR
+    participant ":PersonList" as PersonList MODEL_COLOR_T3
+    participant ":File" as File STORAGE_COLOR_T3
+end box
+
+-> Main: initialisePlanitarium()
+activate Main
+create Storage
+Main -> Storage: Storage()
+activate Storage
+Storage --> Main: :Storage
+deactivate Storage
+Main -> Storage: loadData()
+activate Storage
+Storage -> Storage : checkFileExists
+activate Storage
+opt OPT_COLOR fileDoesNotExist
+    create File
+    Storage -> File : createNewFile()
+    activate File
+    File --> Storage
+    deactivate File
+end
+Storage --> Storage
+deactivate Storage
+create Family
+Storage -> Family: Family()
+activate Family
+create PersonList
+loop LOOP_COLOR for each group
+Family -> PersonList : PersonList()
+activate PersonList
+PersonList --> Family : :PersonList
+deactivate PersonList
+end
+Family --> Storage : :Family
+deactivate Family
+Storage -> Storage: readSaveFile()
+activate Storage
+    loop LOOP_COLOR until all lines read
+    Storage -> Storage : addCorrespondingInfo()
+    activate Storage
+        alt user
+            Storage -> Family : addPerson(groupID:int, name:String)
+            activate Family
+            Family -> PersonList: addPerson(name:String)
+            activate PersonList
+            PersonList --> Family
+            deactivate PersonList
+            Family --> Storage
+            deactivate Family
+        else MONEY_COLOR_T2 expenditure
+            Storage -> Family : addExpend(groupID:int, personID:int, \ndescription:String, amount:double, \ncategoryID:int, isPermanent:Boolean)
+            activate Family
+            Family -> PersonList : addExpend(personID:int, description:String, \namount:double, categoryID:int, \nisPermanent:Boolean)
+            activate PersonList
+            PersonList --> Family
+            deactivate PersonList
+            Family --> Storage
+            deactivate Family
+        else #GreenYellow income
+            Storage -> Family : addIncome(groupID:int, personID:int, \ndescription:String, amount:double, \nisPermanent:Boolean)
+            activate Family
+            Family -> PersonList : addIncome(personID:int, description:String, \namount:double, isPermanent:Boolean)
+            activate PersonList
+            PersonList --> Family
+            deactivate PersonList
+            Family --> Storage
+            deactivate Family
+        end
+    Storage --> Storage
+    deactivate Storage
+    end
+    Storage --> Storage
+    deactivate Storage
+
+Storage --> Main: :Family
+deactivate Storage
+<-- Main
+deactivate Main
+
+@enduml

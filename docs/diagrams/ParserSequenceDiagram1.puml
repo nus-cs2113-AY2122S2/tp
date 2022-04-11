@@ -1,0 +1,97 @@
+@startuml
+!include style.puml
+
+skinparam noteTextAlignment left
+
+Title : Execute() for command "deletein /u 1 /g 2 /r 1"
+
+box
+    Participant "<<Class>>\nParser" as Parser LOGIC_COLOR
+    Participant "<<Class>>\nParserUtility" as UParser LOGIC_COLOR_T1
+end box
+
+[-> Parser : parseCommandType(userInput:String)
+activate Parser
+Parser -->[ : "deletein":String
+deactivate Parser
+
+[-> Parser : parseUserIndex(userInput:String)
+activate Parser
+Parser -> UParser : checkContainsOnlyOneDelimiter(userInput:String, "/u")
+activate UParser
+UParser --> Parser
+deactivate UParser
+Parser -> UParser : parseDelimitedTerm(userInput:String, "/u")
+activate UParser
+UParser --> Parser : "1":String
+deactivate UParser
+Parser -->[ : "1":String
+deactivate Parser
+
+[-> Parser : parseGroupIndex(userInput:String)
+activate Parser
+Parser -> UParser : checkContainsOnlyOneDelimiter(userInput:String, "/g")
+activate UParser
+UParser --> Parser
+deactivate UParser
+Parser -> UParser : parseDelimitedTerm(userInput:String, "/g")
+activate UParser
+UParser --> Parser : "2":String
+deactivate UParser
+Parser -->[ : "2":String
+deactivate Parser
+
+[-> Parser : parseRecordIndex(userInput:String)
+activate Parser
+Parser -> UParser : checkContainsOnlyOneDelimiter(userInput:String, "/r")
+activate UParser
+UParser --> Parser
+deactivate UParser
+Parser -> UParser : parseDelimitedTerm(userInput:String, "/r")
+activate UParser
+UParser --> Parser : "1":String
+deactivate UParser
+Parser -->[ : "1":String
+deactivate Parser
+
+[-> Parser : getValidGroupIndex("2":String, maxGroupIndex:int)
+activate Parser
+Parser -> UParser : checkTooHighIndex(2:int, maxGroupIndex:int)
+activate UParser
+UParser --> Parser
+deactivate UParser
+Parser -> UParser : checkTooLowIndex(2:int, MIN_INDEX:int)
+activate UParser
+UParser --> Parser
+deactivate UParser
+Parser -->[ : 2:int
+deactivate Parser
+
+[-> Parser : getValidUserIndex("1":String, maxUserIndex:int)
+activate Parser
+Parser -> UParser : checkTooHighIndex(1:int, maxUserIndex:int)
+activate UParser
+UParser --> Parser
+deactivate UParser
+Parser -> UParser : checkTooLowIndex(1:int, MIN_INDEX:int)
+activate UParser
+UParser --> Parser
+deactivate UParser
+Parser -->[ : 1:int
+deactivate Parser
+
+[-> Parser : getValidRecordIndex("1":String, maxRecordIndex:int)
+activate Parser
+Parser -> UParser : checkTooHighIndex(1:int, maxRecordIndex:int)
+activate UParser
+UParser --> Parser
+deactivate UParser
+Parser -> UParser : checkTooLowIndex(1:int, MIN_INDEX:int)
+activate UParser
+UParser --> Parser
+deactivate UParser
+Parser -->[ : 1:int
+deactivate Parser
+
+@enduml
+
