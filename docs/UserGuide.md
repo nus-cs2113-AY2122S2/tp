@@ -869,11 +869,6 @@ Expected output:
 ============ End of the list ==============
 ```
 
-## FAQ
-
-**Q**: How do I transfer my data to another computer? 
-
-**A**: {your answer here}
 
 ## Command Summary
 
