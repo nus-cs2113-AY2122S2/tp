@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam shadowing false
+participant ":ModHappyParser" as ModHappyParser
+participant ":TagParser" as TagParser
+participant ":TagCommand" as TagCommand
+participant ":ModuleList" as ModuleList
+hide footbox
+
+note right of ModHappyParser
+Some methods are omitted from this diagram.
+end note
+
+[->ModHappyParser:parseCommand(userInput)
+activate ModHappyParser
+create TagParser
+ModHappyParser -> TagParser: TagParser()
+activate TagParser
+return
+
+ModHappyParser -> TagParser: parseCommand(arguments)
+activate TagParser
+create TagCommand
+TagParser -> TagCommand: TagCommand(tagOperation, taskIndex, taskModule, tagName)
+activate TagCommand
+return
+return
+return
+
+destroy TagParser
+
+[->TagCommand:execute(moduleList, configuration)
+activate TagCommand
+
+ref over TagCommand, ModuleList: Get Module
+
+ref over TagCommand, ModuleList: Check and Run Tag Operation
+return commandResult
+@enduml

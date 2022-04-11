@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+' @@author Kureans
+
+
+
+
+
+box #beige
+participant ":ModHappyParser" as A
+participant ":XYZParser" as B
+participant ":XYZCommand" as C
+end box
+
+note right of B: XYZParser refers to a variety \n of command-specific parsers\n(e.g. AddParser for AddCommand)
+
+
+[-> A: parseCommand(userInput)
+activate A
+A -> A: parseString(userInput)
+activate A
+return parsedCommand
+A -> A: getCommandParser(commandWord)
+activate A
+alt commandWord==XYZ_COMMAND_WORD
+create B
+A -> B: XYZParser()
+activate B
+return XYZParser
+else else
+X<-- A: throw ParseException
+end
+return XYZParser
+A -> B: parseCommand(userInput)
+activate B
+B -> B: parseString(targetModule)
+activate B
+return parsedCommand
+create C
+B->C: XYZCommand()
+activate C
+return XYZCommand
+return XYZCommand
+[<-- A: XYZCommand
+
+hide footbox
+
+@enduml

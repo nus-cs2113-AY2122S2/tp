@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam shadowing false
+participant ":TagCommand" as TagCommand
+hide footbox
+
+mainframe **sd** Check and Run Tag Operation
+
+activate TagCommand
+
+alt tagOperation == "add"
+TagCommand -> TagCommand:addTag(targetModule)
+activate TagCommand
+return result
+
+else tagOperation == del
+TagCommand -> TagCommand:removeTag(targetModule)
+activate TagCommand
+return result
+
+else else
+[<-- TagCommand: throw ParseException
+
+end
+
+@enduml

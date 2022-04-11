@@ -1,0 +1,64 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam shadowing false
+participant ":ModHappyParser" as ModHappyParser
+participant "<<class>>\n//EditParser//" as EditParser
+participant ":EditTaskParser" as EditTaskParser
+participant ":EditModuleParser" as EditModuleParser
+participant ":EditCommand" as EditCommand
+participant ":ModuleList" as ModuleList
+participant ":Module" as Module
+participant ":TaskList" as TaskList
+participant ":Task" as Task
+hide footbox
+
+note right of EditParser
+Polymorphism of EditParser.
+end note
+
+[->ModHappyParser:parseCommand(userInput)
+activate ModHappyParser
+
+ModHappyParser -> EditParser: getParser()
+activate EditParser
+alt commandType==TASK
+create EditTaskParser
+EditParser->EditTaskParser: EditTaskParser()
+activate EditTaskParser
+return EditTaskParser
+else commandType==MODULE
+create EditModuleParser
+EditParser->EditModuleParser: EditModuleParser()
+activate EditModuleParser
+return EditModuleParser
+end
+return EditParser
+ModHappyParser -> EditTaskParser: parseCommand(arguments)
+activate EditTaskParser
+create EditCommand
+EditTaskParser -> EditCommand: EditCommand(arguments)
+activate EditCommand
+return
+return
+return
+
+destroy EditTaskParser
+
+[->EditCommand:execute(moduleList, configuration)
+activate EditCommand
+ref over EditCommand, ModuleList: Get Module
+EditCommand -> EditCommand: editTaskFromModule(targetModule)
+activate EditCommand
+ref over EditCommand, TaskList: Get Task
+EditCommand -> Task: setTaskDescription(description)
+activate Task
+return
+deactivate Task
+return CommandResult(result)
+deactivate EditCommand
+
+destroy EditCommand
+
+
+@enduml

@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam shadowing false
+participant ":ModHappyParser" as ModHappyParser
+participant ":GradeParser" as GradeParser
+participant ":GradeCommand" as GradeCommand
+participant ":ModuleList" as ModuleList
+participant ":Module" as Module
+hide footbox
+
+note right of ModHappyParser
+Some methods are omitted from this diagram.
+end note
+
+[->ModHappyParser:parseCommand(userInput)
+activate ModHappyParser
+create GradeParser
+ModHappyParser -> GradeParser: GradeParser()
+activate GradeParser
+return
+
+ModHappyParser -> GradeParser: parseCommand(arguments)
+activate GradeParser
+create GradeCommand
+GradeParser -> GradeCommand: GradeCommand(moduleCode, moduleGrade)
+activate GradeCommand
+return
+return
+return
+
+destroy GradeParser
+
+[->GradeCommand:execute(moduleList, configuration)
+activate GradeCommand
+GradeCommand -> ModuleList: getModule(moduleCode)
+activate ModuleList
+return
+
+GradeCommand -> GradeCommand: addGradeToModule(m)
+activate GradeCommand
+GradeCommand -> Module: setModuleGrade(moduleGrade)
+activate Module
+return
+deactivate Module
+return CommandResult(result)
+deactivate GradeCommand
+
+destroy GradeCommand
+
+
+@enduml

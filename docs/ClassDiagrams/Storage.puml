@@ -1,0 +1,75 @@
+@startuml
+
+!define ABSTRACT &#123;abstract&#125;
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam classFontSize 12
+skinparam classAttributeFontSize 12
+hide circle
+
+'I wasn't able to find a consistent standard for bound elements, so I just picked one
+package storage {
+    class "<<interface>>\nStorage" as Storage <T extends Object> {
+        --
+        + writeData(object: T, path: String): void
+        + loadData(path: String): T
+    }
+
+    class "ABSTRACT\n JsonStorage" as JsonStorage <T extends Object> {
+       --
+       + writeData(object: T, path: String): void
+       + loadData(path: String): T ABSTRACT
+       + createTargetFile(path: String): void
+    }
+
+    class "ABSTRACT\n ListStorage" as ListStorage <ModHappyT extends Object> {
+       --
+       + loadData(path: String): ArrayList<ModHappyT> ABSTRACT
+    }
+
+    class ConfigurationStorage {
+       --
+       + loadData(path: String): Configuration
+    }
+
+    class ModuleListStorage {
+       --
+       + loadData(path: String): ArrayList<Module>
+    }
+
+    class TaskListStorage {
+       --
+       + loadData(path: String):ArrayList<Task>
+    }
+}
+
+JsonStorage ..|> Storage
+ListStorage --|> JsonStorage : <<bind>>\nT -> ArrayList<ModHappyT>
+ConfigurationStorage --|> JsonStorage : <<bind>>\nT -> Configuration
+ModuleListStorage --|> ListStorage : <<bind>>\nModHappyT -> Module
+TaskListStorage --|> ListStorage : <<bind>>\nModHappyT -> Task
+
+note top of storage
+To avoid clutter, inherited methods
+are not displayed in child classes.
+end note
+
+Class Main
+hide Main circle
+hide Main attributes
+hide Main methods
+
+Class SaveCommand
+hide SaveCommand circle
+hide SaveCommand attributes
+hide SaveCommand methods
+
+ModHappyStorageManager --> Storage
+hide ModHappyStorageManager circle
+hide ModHappyStorageManager attributes
+hide ModHappyStorageManager methods
+Main..> ModHappyStorageManager
+SaveCommand ..> ModHappyStorageManager
+
+@enduml

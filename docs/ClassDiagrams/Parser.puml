@@ -1,0 +1,60 @@
+@startuml
+
+!define ABSTRACT &#123;abstract&#125;
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam classFontSize 12
+skinparam classAttributeFontSize 12
+hide circle
+
+package parsers {
+    class "ABSTRACT\nParser" as Parser {
+        commandFormat: String
+        groupNames: HashSet<String>
+        parsedCommand: HashMap<String, String>
+        --
+        + parseString(str: String): HashMap<String, String>
+    }
+
+    class XYZParser {
+        + parseCommand(userInput: String): Command
+    }
+
+    class ModHappyParser {
+        - getCommandParser(commandWord: String): Parser
+        + parseCommand(userInput: String): Command
+    }
+}
+
+note top of XYZParser
+    XYZParser is any command-specific
+    parser (e.g. AddParser, TagParser)
+end note
+
+Parser <|-u- ModHappyParser
+XYZParser <. ModHappyParser: uses <
+ModHappyParser <-u- Main
+
+hide Main methods
+hide Main attributes
+
+Parser <|-- XYZParser
+
+class "ABSTRACT\nCommand" as Command {
+}
+hide Command methods
+hide Command attributes
+
+XYZCommand <.u. ModHappyParser: returns <
+Command <|-- XYZCommand
+
+hide XYZCommand methods
+hide XYZCommand attributes
+
+note bottom of XYZCommand
+    XYZCommand is any command
+    (e.g. AddCommand, TagCommand)
+end note
+
+@enduml

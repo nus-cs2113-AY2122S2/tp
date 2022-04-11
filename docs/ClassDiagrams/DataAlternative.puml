@@ -1,0 +1,16 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam classFontSize 12
+skinparam classAttributeFontSize 12
+hide circle
+hide attributes
+hide methods
+
+ModuleList --> "*" Module
+ModuleList --> "1" TaskList
+Module -l> "1" TaskList
+TaskList -l> "*" Task
+
+@enduml

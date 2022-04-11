@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam shadowing false
+participant ":ModHappyParser" as ModHappyParser
+participant ":NoArgumentParser" as NoArgumentParser
+participant ":GpaCommand" as GpaCommand
+hide footbox
+
+note right of ModHappyParser
+Some methods are omitted from this diagram.
+end note
+
+[->ModHappyParser:parseCommand(userInput)
+activate ModHappyParser
+create NoArgumentParser
+ModHappyParser -> NoArgumentParser: NoArgumentParser()
+activate NoArgumentParser
+return
+
+ModHappyParser -> NoArgumentParser: parseCommand(commandWord)
+activate NoArgumentParser
+create GpaCommand
+NoArgumentParser -> GpaCommand: GpaCommand()
+activate GpaCommand
+return
+return
+return
+
+destroy NoArgumentParser
+
+[->GpaCommand:execute(moduleList, configuration)
+activate GpaCommand
+
+GpaCommand -> GpaCommand: calculateGpa()
+activate GpaCommand
+deactivate GpaCommand
+
+return CommandResult(result)
+
+@enduml
