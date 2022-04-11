@@ -52,9 +52,10 @@ public class StaffManagerTest {
     }
 
     @Test
-    void printStaff_test_invalidId() {
+    void printStaff_test() {
         StaffManager.resetInstance();
         StaffManager staffManager = StaffManager.getInstance();
-        assertThrows(IllegalStateException.class, () -> staffManager.printStaff());
+        staffManager.addStaff(1, "August", "Chef", 5500);
+        assertEquals("1. 1     | August          | Chef       | 5500.00", staffManager.findByStaffId(4).getPosition());
     }
 }
