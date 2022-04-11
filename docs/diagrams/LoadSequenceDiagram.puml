@@ -20,8 +20,13 @@ create ":AddLessonCommand"
 deactivate ":AddLessonCommand"
 else eventType = "M"
 ":StorageFile" -> ":StorageFile" ++: meetingList.add(data), hasMeeting = true
+":ParserLocalData" --> ":ParserLocalData"
+":StorageFile" --> ":StorageFile"
+deactivate ":StorageFile"
+deactivate ":ParserLocalData"
 end
 end
+deactivate ":ParserLocalData"
 destroy ":AddLessonCommand"
 alt hasMeeting = true
 ":StorageFile" -> ":ParserLocalData" ++:
@@ -31,10 +36,15 @@ create ":AddMeetingCommand"
 ":ParserLocalData" -> ":AddMeetingCommand"
 ":AddMeetingCommand" --> ":ParserLocalData"
 deactivate ":AddMeetingCommand"
+":ParserLocalData" --> ":ParserLocalData"
+deactivate ":ParserLocalData"
 end
 end
 destroy ":AddMeetingCommand"
-
+":StorageFile" --> ":StorageFile"
+deactivate ":StorageFile"
 ":ParserLocalData" --> ":StorageFile"
+":MeetingJio" --> ":MeetingJio"
+deactivate ":MeetingJio"
 ":StorageFile" --> ":MeetingJio"
 @enduml
