@@ -479,20 +479,6 @@ data/        // Corrupted files
 
 -----------------------------------------------
 
-## Errors
-
-TO BE UPDATED
-
------------------------------------------------
-
-## FAQ
-
-**Question**: How do I transfer my data to another computer?
-
-**Answer**: {your answer here}
-
------------------------------------------------
-
 ## Command Summary
 
 | Action                | Format, Examples                                                                                                                                                                                                                                 |
