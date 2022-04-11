@@ -86,10 +86,10 @@ public class UnitGood {
         Object description = jo.get(UnitGoodKeys.description);
         Object capacity = jo.get(UnitGoodKeys.capacity);
         String desc = "";
-        if (sku == null || name == null || capacity == null){
+        if (sku == null || name == null || capacity == null) {
             return null;
         }
-        if(description == null){
+        if (description == null) {
             desc = "";
         } else {
             desc = description.toString();

@@ -14,7 +14,7 @@ public class FulfillParser extends CommandParser {
     protected void initExtractParams() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
-        regex = "oid/(?<oid>\\d*)";
+        regex = " oid/(?<oid>\\d*)";
         matchKeywordsMatch = new MatchKeywords(this.userInput, regex);
         this.matches = matchKeywordsMatch.getGroupValues();
     }

@@ -27,7 +27,7 @@ public class AddParser extends CommandParser {
     public void initExtractParams() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
-        regex = "(?<flag>[ugbo]{1,2})/";
+        regex = " (?<flag>[ugbo]{1,2})/";
         matchKeywordsMatch = new MatchKeywords(this.userInput, regex);
         this.matches = matchKeywordsMatch.getGroupValues();
     }
@@ -37,7 +37,7 @@ public class AddParser extends CommandParser {
     public void extractParams() throws WrongCommandException, InvalidFileException, InvalidObjectType,
             MissingFlagException, EmptyFieldException {
         if (matches.get("flag").equals("g")) {
-            String regexGood = "sku/(?<sku>.*) qty/(?<qty>.*)";
+            String regexGood = "sku/(?<sku>.*) qty/(?<qty>\\d*)";
             HashMap<String, String> regexGoodMatch = new MatchKeywords(userInput, regexGood).getGroupValues();
             try {
                 warehouse.addQuantityOfGoodToInventory(regexGoodMatch.get("sku"), regexGoodMatch.get("qty"));
@@ -66,18 +66,7 @@ public class AddParser extends CommandParser {
                     userInput, regexOrderline).getGroupValues();
             warehouse.addOrderline(regexOrderlineMatch.get("oid"),
                     regexOrderlineMatch.get("sku"), regexOrderlineMatch.get("qty"));
-        } else if (matches.get("flag").equals("bg")) {
-            // batch goods
-            String regexBatchGoods = "fp/(?<filepath>.*)";
-            HashMap<String, String> regexBatchGoodsMatch = new
-                    MatchKeywords(userInput, regexBatchGoods).getGroupValues();
-            warehouse.batchSetGoodsToInventory(regexBatchGoodsMatch.get("filepath"));
-        } else if (matches.get("flag").equals("bo")) {
-            // batch goods
-            String regexBatchGoods = "fp/(?<filepath>.*)";
-            HashMap<String, String> regexBatchGoodsMatch = new
-                    MatchKeywords(userInput, regexBatchGoods).getGroupValues();
-            warehouse.batchSetOrders(regexBatchGoodsMatch.get("filepath"));
+
         } else {
             throw new WrongCommandException("add", true);
         }

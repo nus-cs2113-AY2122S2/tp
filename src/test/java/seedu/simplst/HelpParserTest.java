@@ -24,7 +24,7 @@ public class HelpParserTest {
 
     @Test
     public void withFlag_help_isNoFlagFalse() throws MissingFlagException, EmptyFieldException {
-        String userInput = "help /o";
+        String userInput = "help o";
         HelpParser helpParser = new HelpParser(warehouse, userInput);
 
         helpParser.initExtractParams();

@@ -41,9 +41,9 @@ class OrderTest {
 
     @Test
     void getOrderlines() {
-        Orderline orderlineQuas = new Orderline(quas, 1, 3);
-        Orderline orderlineWex = new Orderline(wex, 2, 3);
-        Orderline orderlineExort = new Orderline(exort, 3, 3);
+        Orderline orderlineQuas = new Orderline(quas, 3);
+        Orderline orderlineWex = new Orderline(wex, 3);
+        Orderline orderlineExort = new Orderline(exort, 3);
         ArrayList<Orderline> orderlines = new ArrayList<>(
                 Arrays.asList(orderlineQuas, orderlineWex, orderlineExort)
         );
@@ -72,7 +72,7 @@ class OrderTest {
 
     @Test
     void getOrderline() {
-        Orderline orderlineQuas = new Orderline(quas, 1, 3);
+        Orderline orderlineQuas = new Orderline(quas, 3);
 
         //test 1 - finding SKU that exists
         try {

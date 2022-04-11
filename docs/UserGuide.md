@@ -12,6 +12,7 @@ setup and quick to use. Simplst will mainly be used to add, remove, list and vie
 * [Explanation of Key Terms or Symbols](#explanation-of-key-terms-or-symbols)
 * [Quick start](#quick-start)
 * [Features](#features)
+  * [Help Command](#help-command-help)
   * [Unit Good Commands](#unit-good-commands)
     * [Adding a Unit Good](#adding-a-unit-good-add-ug)
     * [Removing a Unit Good](#removing-a-unit-good-remove-ug)
@@ -38,18 +39,18 @@ setup and quick to use. Simplst will mainly be used to add, remove, list and vie
 
 ## Explanation of key terms or symbols
 
-| Terms or Symbols used                              | Further Explanation                                                                                                                                                                                                                                            |  
-|----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Unit Good](#unit-good-commands)                   | A template containing details of a good.                                                                                                                                                                                                                       |
-| SKU                                                | Stands for Stock-Keeping Unit. It is the unique unit number for a specific warehouse item. It can contain characters and numbers (e.g WC01).                                                                                                                   |
-| Capacity                                           | Size of the object defined as Small, Medium and Large.<br/>SMALL <br/>Medium <br/>Large                                                                                                                                                                        |
-| [Good](#good-commands)                             | A Good is the actual good that is currently in the warehouse inventory.                                                                                                                                                                                        |
-| [Order](#order-commands)                           | An order in Simplst is used to know who made the order and what goods to deliver to that shipping address.                                                                                                                                                     |
-| [Orderline](#orderline-commands)                   | An orderline is the goods required by the order.                                                                                                                                                                                                               |
-| [Fulfill](#fulfill-order-fulfill)                  | Used to check and indicate if an order is completed.                                                                                                                                                                                                           |
-| `Words in MarkUp`                                  | Used to highlight keywords used for commands and commands themselves.                                                                                                                                                                                          |
-| <img src="img.png" alt="img" style="width:30px;"/> | Used to denote features for warehouse managers.                                                                                                                                                                                                                |
-| `*Optional*`                                       | Fields in MarkUp bounded by asterisks (*) are optional to be filled in, but should be replaced with a space ' ' instead.                                                                                                                                       |
+| Terms or Symbols used                              | Further Explanation                                                                                                                          |  
+|----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| [Unit Good](#unit-good-commands)                   | A template containing details of a good.                                                                                                     |
+| SKU                                                | Stands for Stock-Keeping Unit. It is the unique unit number for a specific warehouse item. It can contain characters and numbers (e.g WC01). |
+| Capacity                                           | Size of the object defined as Small, Medium and Large.<br/>Small <br/>Medium <br/>Large                                                      |
+| [Good](#good-commands)                             | A Good is the actual good that is currently in the warehouse inventory.                                                                      |
+| [Order](#order-commands)                           | An order in Simplst is used to know who made the order and what goods to deliver to that shipping address.                                   |
+| [Orderline](#orderline-commands)                   | An orderline is the goods required by the order.                                                                                             |
+| [Fulfill](#fulfill-order-fulfill)                  | Used to check and indicate if an order is completed.                                                                                         |
+| `Words in MarkUp`                                  | Used to highlight keywords used for commands and commands themselves.                                                                        |
+| <img src="img.png" alt="img" style="width:30px;"/> | Used to denote features for warehouse managers.                                                                                              |
+| `*Optional*`                                       | Fields in MarkUp bounded by asterisks (*) are optional to be filled in, but should be replaced with a space ' ' instead.                     |
 
 
 This User Guide is meant for both warehouse workers and managers to learn how to use Simplst and the features to 
@@ -65,10 +66,10 @@ If you do not, you can download it from [here](https://www.oracle.com/java/techn
 4. Open the terminal in the folder which contains Simplst.jar and run java -jar Simplst.jar. The Startup should look like below:
 ```
 ____________________________________________________________
+New login.
 Hello from
 Simplst
 What would you like to do?
-New login. Please type the total number of goods your warehouse can hold
 ____________________________________________________________
 ```
 5. Type the commands in the terminal and press `Enter` to execute them. For example: typing help and pressing `Enter` will show you the features
@@ -76,15 +77,26 @@ ____________________________________________________________
 
 ## Features
 
+### Help Command `help`
+All the features can be viewed on the Command-Line Interface using the help command if you want to view the commands
+there instead. This is done by using the `help` command. You can also use flags to indicate which specific set of commands
+to view.
+
+Help Commands:
+* `help` - View all commands
+* `help ug` - View commands related to Unit Goods
+* `help g` - View commands related to Goods
+* `help o` - View commands related to Orders and Orderlines
+
 ### ***Unit Good Commands***
 A Unit Good is a template of a good. A unit good should be added to the warehouse to allow Simplst to know what kind goods will be added to the warehouse later.
 Unit Goods can help Simplst to estimate storage capacity in the future and other predicitive features for future versions. 
 
 A Unit Good contains:
-* unique SKU
-* name
-* description of unit good
-* capacity
+* Unique SKU
+* Name
+* Description of unit good
+* Capacity
 
 ### Adding a Unit Good `add ug/`
 Add a new unit good to the warehouse, creating a Good with quantity 0 in the process.
@@ -104,7 +116,7 @@ Adding a Unit Good with SKU being WC1, with name Wooden Chair, description as Ch
 
 Expected Output
 ```
-Unit Good with SKU: WC1 added to warehouse
+Unit Good of SKU: WC1 added to warehouse
 Another command?
 ```
 
@@ -124,7 +136,7 @@ Removing a Unit Good of SKU WC1<br/>
 
 Expected Output
 ```
-Unit Good with SKU: WC1 has been removed from warehouse
+Unit Good of SKU: WC1 has been removed from warehouse
 Another command?
 ```
 
@@ -268,7 +280,10 @@ An Order contains:
 * Receiver name
 * Shipping address
 
-### <img src="img.png" alt="img" style="width:30px;"/> Adding an Order `add o/`
+### Adding an Order `add o/`
+
+<img src="img.png" alt="img" style="width:30px;"/>
+
 Adding a new order to be tracked in the warehouse.
 
 Format: `add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]`
@@ -286,7 +301,10 @@ Order 1 added to the warehouse
 Another command?
 ```
 
-### <img src="img.png" alt="img" style="width:30px;"/> Removing an Order `remove o/`
+### Removing an Order `remove o/`
+
+<img src="img.png" alt="img" style="width:30px;"/>
+
 Removing the quantity of a Unit Good from its previous value.
 
 Format: `remove o/ oid/[ORDER_ID]`
@@ -301,7 +319,10 @@ Order 1 has been removed
 Another command?
 ```
 
-### <img src="img.png" alt="img" style="width:30px;"/> Listing Current Orders `list o/`
+### Listing Current Orders `list o/`
+
+<img src="img.png" alt="img" style="width:30px;"/>
+
 Listing all orders in the warehouse. This would show the order details such as:
 * Order id
 * Receiver Name
@@ -321,7 +342,10 @@ List of orders:
 Another command?
 ```
 
-### <img src="img.png" alt="img" style="width:30px;"/> View Order `view o/`
+### View Order `view o/`
+
+<img src="img.png" alt="img" style="width:30px;"/>
+
 View a specific order in the warehouse. This would show the order details such as:
 * Order id
 * Receiver Name
@@ -352,7 +376,10 @@ Could not find order with given id!
 Another command?
 ```
 
-### <img src="img.png" alt="img" style="width:30px;"/> Fulfill Order `fulfill`
+### Fulfill Order `fulfill`
+
+<img src="img.png" alt="img" style="width:30px;"/>
+
 Fulfill a currently unfulfilled order in the warehouse. To fulfill an order, Simplst will check if all the orderlines relating to the order have their required quantities met.<br/>
 When all the orderlines quantities are fulfilled, the order will be considered as fulfilled.
 

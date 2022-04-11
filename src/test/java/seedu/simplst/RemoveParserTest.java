@@ -27,9 +27,9 @@ public class RemoveParserTest {
         RemoveParser removeParser = new RemoveParser(warehouse, userInput);
         removeParser.initExtractParams();
         UnitGood ug = warehouse.getUnitGoodHashMap().get("WC1");
-        Good g = warehouse.getGoodList().get("WC1");
         assertNotNull(ug);
 
+        Good g = warehouse.getGoodList().get("WC1");
         removeParser.extractParams();
         assertNotNull(ug);
         assertEquals(0, g.getQuantity());
