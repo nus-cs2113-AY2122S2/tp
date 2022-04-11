@@ -633,19 +633,17 @@ The general workflow of the `group /edit` command is as follows:
 6. The details of how a group is updated are displayed in the reference diagram below.<br>
 ![Reference Frame Update Group Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateGroup.png)
 7. `GroupEditCommand#run` checks if there is an update for a new group name, or a new list of persons.
-    * If there is an update on the group name, it will check if the provided group name already exists in the list of groups.
-      * If the provided session name exists within the list of groups, an exception is thrown, an error message is printed.
-      * Else, the provided group name is returned to be used as the updated name for the group.
-
-    * If there is an update on the list of persons,`SessionEditCommand#getNewPersonList` is called to return a new list of persons to be stored.
-        * The method checks if the newly provided list of persons contains duplicated names.
-            * If duplicated names are detected, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
-            * Else, it calls `PersonList#isSuperSet` to check if the newly supplied list of persons contains all existing persons in the session.
-                * If `PersonList#isSuperSet` returns `false`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
-                * Else, a new list of persons ready to be stored in the session is returned.
-
-8. After the group is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
-9. The `GroupEditCommand` class then prints a message indicating that a group has been successfully edited.
+    *`GroupEditCommand#existingGroupWithTheSameName` method is called to check if the provided group name already exists in the list of groups.
+       * If the provided group name exists within the list of groups, an exception is thrown, an error message is printed.
+       * Else, the provided group name is returned to be used as the updated name for the group.
+    * It checks if there is update for the provided list of persons.
+       * `PersonList#hasNameDuplicates` is called to check for duplicate names within the provided list of persons.
+          * If duplicated names are detected, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+          * Else, it calls `PersonList#isSamePersonList` to check if the newly supplied list of persons is exactly the same as the old list.
+             * If `PersonList#isSamePersonList` returns `false`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+             * Else, it will return a new `PersonList` object to be stored.
+9. After the group is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
+10. The `GroupEditCommand` class then prints a message indicating that a group has been successfully edited.
 
 
 ### View a group
