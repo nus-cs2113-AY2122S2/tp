@@ -146,9 +146,11 @@ Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate 
 - `add cs2113t weekly quiz /do 21/6/2022 /start 16:00 /end 18:00 /bydate 25/6/2022 /bytime 16:00 /repeat WEEKLY`
 
 Before adding (current schedule of all tasks):
+
 ![](images/scheduleBeforeAddingRecurringTasksOne.png)
 
 When adding the task:
+
 ![](images/addRecurringTasksWithDeadline.png)
 
 After adding :
@@ -169,12 +171,15 @@ Format: `delete TASK_NUMBER`
 - `delete 2`
 
 Before delete command:
+
 ![](images/scheduleAfterAddingRecurringTasksOne.png)
 
 When executing delete command:
+
 ![](images/deleteSingleTask.png)
 
 After delete command:
+
 ![](images/scheduleAfterDeletingASingleTask.png)
 
 ### Deleting your recurring tasks
@@ -225,12 +230,15 @@ Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/en
 - `edit 2 write draft essay`
 
 Before edit command:
+
 ![](images/scheduleAfterAddingRecurringTasksOne.png)
 
 When executing edit command:
+
 ![](images/editSingleTask.png)
 
 After edit command:
+
 ![](images/scheduleAfterEditingASingleTask.png)
 
 
