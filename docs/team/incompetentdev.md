@@ -36,7 +36,7 @@ ClubInvMgr is a desktop CLI app for inventory management for CCA clubs. It allow
 3. Release v1.0.
 
 ### Review/mentoring contributions
-Team's Repo:
+Team's Repo Issue:
 1. [Issue #32](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/32)
 2. [Issue #36](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/36)
 3. [Issue #39](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/39)
@@ -44,7 +44,11 @@ Team's Repo:
 5. [Issue #44](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/44)
 6. [Issue #67](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/67)
 7. [Issue #84](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/84)
-8. [Issue #103](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/84)
+8. [Issue #103](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/103)
+9. [Issue #194](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/194)
+
+Team's Repo approved PR:
+
 
 Team CS2113-T10-3 Repo (PE-D):
 1. [Issue #144](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/144)
