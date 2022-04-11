@@ -1,12 +1,10 @@
 package seedu.simplst;
 
-import util.exceptions.NullException;
-
 /**
  * Main entry-point for the java.duke.Duke application.
  */
 public class Simplst {
-    public static void main(String[] args) throws NullException {
+    public static void main(String[] args) {
         UserInterface ui;
         Display.hello();
         Warehouse w = new Warehouse(0);
