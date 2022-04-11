@@ -15,7 +15,7 @@
   * [Deleting](#deleting-delete)
   * [Editing](#editing-edit)
   * [Finding](#finding-find)
-  * [Additional Features]()
+  * [Medicine Inventory Features](#features-involving-medicine-inventory)
   * [Saving](#saving)
     * [Saved Data](#saving)
     * [Corrupt Files](#corrupt-files)
