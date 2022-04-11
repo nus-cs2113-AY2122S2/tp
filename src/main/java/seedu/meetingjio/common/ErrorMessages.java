@@ -6,7 +6,8 @@ package seedu.meetingjio.common;
 public class ErrorMessages {
 
     // Common
-    public static final String ERROR_INIT_FAILED = "Failed to initialise MeetingJio application. Exiting...";
+    public static final String ERROR_INIT_FAILED = "Failed to initialise MeetingJio application. Exiting...\n"
+            + "Please clear or delete the local data file MeetingJio.txt before you rerun this application.";
     public static final String ERROR_INVALID_COMMAND = "Hi please input a valid command.";
     public static final String ERROR_EXCEPTION_NOT_HANDLED = "New exception found that is not handled. Logged this.";
     public static final String ERROR_EXTRA_PARAMETERS = "Hi you may have 1 or more extra parameters\n"
@@ -87,7 +88,7 @@ public class ErrorMessages {
     // Free Command
     public static final String ERROR_FREE_INPUT_INVALID = "Please specify the minimum duration for everyone to be free:"
             + " free [Duration]\n"
-            + "Duration must be a positive integer that is less than 24\n"
+            + "Duration must be a positive integer that is not more than 24\n"
             + "If there is no such constraint for the duration, just input 'free'.";
     public static final String ERROR_NO_FREE_TIMESLOT = "Sorry, there is no timeslot that fits your requirement.";
 
@@ -217,5 +218,5 @@ public class ErrorMessages {
             + "records in the MeetingJio.txt";
 
     public static final String ERROR_CONTROL_C_ALL_CLEARED = "Program was interrupted. No data was saved and "
-            + "MasterTimetable has been cleared. Please type exit gracefully next time. Thanks.";
+            + "MasterTimetable has been cleared. \nPlease type exit gracefully next time. Thanks.";
 }

@@ -8,14 +8,14 @@ based on everyone’s availability via a Command Line Interface (CLI). If you ca
 MeetingJio can get your meeting management tasks done faster than manually eyeballing your timetable.
 
 Below are my contributions to the project
-##Summary of features contributed:
+## Summary of features contributed:
 
 ### Delete feature
 - Delete specific event of either type meeting or lesson from timetable of a specific user.
 - If a meeting is deleted, then that specific event is deleted from all users.
 Otherwise, it will only be deleted for that user. 
 
-###Clear feature
+### Clear feature
 
 - Allows to clear a user and his timetable or all timetables in a glance.
 - This allows a user to be cleared or to start the program afresh.
@@ -24,7 +24,7 @@ Otherwise, it will only be deleted for that user.
 - Allows meeting to be added for to the timetable all users added in
 - This allows the team to have a copy and keep track of their timetable.
 
-##Other contributions
+## Other contributions
 ### Parser methods, JUnit and Integration testing
 - Implemented parser for prepareDelete,prepareAddMeeting
 - Added error and exception handling
@@ -46,7 +46,7 @@ View my code contributions to the project here: [Reposense report](https://nus-c
   - Keep on track with deliverables
   - Organise and facilitate regular with meetups
 
-##Tools and languages used
+## Tools and languages used
 - Java 11 - Main programming language
 - Sourcetree - Version Control
 - Intellij - IDE
