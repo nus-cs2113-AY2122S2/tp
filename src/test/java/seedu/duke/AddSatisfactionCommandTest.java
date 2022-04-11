@@ -33,7 +33,6 @@ public class AddSatisfactionCommandTest {
         ui = new Ui();
         SatisfactionList satisfactionList = listContainer.getSatisfactionList();
         satisfactionList.clearSatisfactionList();
-
     }
 
     @Test
@@ -46,6 +45,7 @@ public class AddSatisfactionCommandTest {
         assertEquals(3, satisfaction.getSatisfactionValue());
         satisfactionList.clearSatisfactionList();
     }
+
 
     @Test
     public void execute_satisfactionValueWithUpperBoundaryValue_success() throws HotelLiteManagerException,
