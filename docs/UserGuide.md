@@ -50,8 +50,8 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 - The format for each command is enclosed within a `code block`, so that they can be copied directly into SplitLah if needed.
   - Example: `help`
 - In each command: 
-  - The blocks indicated with 💡 are important things to take note of when using the command.
-  - The blocks indicated with ⚠️are warnings that you should pay attention to when using the command.
+  - The blocks indicated with 💡 are **important** things to take note of when using the command.
+  - The blocks indicated with ⚠️are **warnings** that you should pay attention to when using the command.
 
 ## Quick Notes
 - Allowed characters for values:
