@@ -26,6 +26,33 @@ View a list of all available packages
 
 Usage: `packages`
 
+### Viewing a package: `info`
+View a specified Travel Package from the list of Packages based on the package ID.
+
+Format: `info {package_id}`
+
+Example of usage:
+
+`info 2`
+
+### Show packages sorted by starting date, price or vacancies : `all` 
+View list of packages sorted by ascending date or price and descending vacancies. 
+
+Format: `all` 
+
+Example of usage:
+`all` 
+
+Sort packages by:
+1. Date (Earliest to Latest) 
+2. Number of vacancies left
+3. Price
+4. Return to main menu.
+
+`Enter 1-4` 
+
+
+
 
 ### Adding a package: `add`
 Adds a new Travel Package to the list of Packages.
@@ -35,20 +62,12 @@ Format: `add {package_name},{package_id},{startDate},{endDate},{hotel},{price},{
 * The `startDate` and `endDate` must be in the format DD/MM/YYYY.
 * The `price` can only contain numbers or decimal points.
 * `package_id` should be unique. 
-*   
+
 
 Example of usage: 
 
 `add Skiing Trip,1,23/02/2022,24/02/2022,hotelName,90.99,Singapore,20`
 
-### Viewing a package: `info`
-View a specified Travel Package from the list of Packages based on the package ID.
-
-Format: `info {package_id}`
-
-Example of usage:
-
-`info 2`
 
 ### Deleting a package: `delete`
 Delete a Travel Package from the list of Packages based on the package ID.
@@ -102,6 +121,7 @@ Example of usage:
 | help | help |
 | packages | packages |
 | info | info {package_number} |
+| all | all | 
 | add | add {package_name},{package_id},{startDate},{endDate},{hotel},{price},{country},{max_vacancies} |
 | delete | delete {package_id} |
 | reserve  | reserve {package_id},{contact_name},{contact_number},{number_pax} |

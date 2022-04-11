@@ -35,7 +35,7 @@
 |v2.0|User ready to start using the app|Make reservations based on custom input and edit them where necessary|Get familiar with inputting|
 |v2.1|Expert user|Ascertain the error in my input based on the error messages from the application|Quickly troubleshoot any mistakes that would slow down my work|
 |v2.1|Expert user|View all reservations currently under a specific travel package|Optimize that travel package according to user’s feedback|
-|v2.1|Expert user|Sort all reservations according to month|Analyze trends throughout the year|
+|v2.1|Expert user|Sort all packages according to date, price or vacancies|Give better recommendations to customers|
 
 
 ## Non-Functional Requirements
@@ -64,6 +64,7 @@
 |help|help <br/> (prints details of all commands)|
 |packages|packages <br/> (prints details of all packages)|
 |info|info {num} (num < number of available packages) <br/> e.g. info 2 |
+|all| all <br/> Will prompt user to enter 1,2,3 to print out packages sorted by date, price or vacancies. 4 to return.|
 |add|add {package_name},{ID},{startDate},{endDate},{hotel},{price},{country},{vacancies} <br/>  e.g. add Skiing Trip,1,23/2/2022,24/2/2022,hotelName,90.99,Singapore,20 <br/> adds a TravelPackage|
 |delete|delete {num} (num < number of available packages) <br/> e.g. delete 2 <br/> delete a TravelPackage|
 |reserve|reserve {package_id},{contact_name},{contact_number},{number_pax} <br/> e.g reserve 3,John,91234567,3|
