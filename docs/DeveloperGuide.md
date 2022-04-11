@@ -256,10 +256,11 @@ the Command component when any user input is provided to SplitLah.
      message is returned by the method and an `InvalidCommand` object is returned to `SplitLah`.
 3. `Parser` class creates the `XYZCommandParser` object for a `XYZCommand`. For example,
    for a _command type_ of `"session /create"`, a `SessionCreateCommandParser` object is instantiated.
-   If `Parser` class does not recognise the _command type_, an `InvalidCommand` object is created and returned immediately.
-
+   * If `Parser` class does not recognise the _command type_, an `InvalidCommand` object is created and returned immediately.
+   
+   <br><br>
    ![Reference Frame Command Parser Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefCommandParser.drawio.png)
-
+   <br><br>
 4. `Parser` class calls the `getCommand` method of `XYZCommandParser`.
 5. `XYZCommandParser` parses all _remaining arguments_ using `parseABC` methods from the `ParserUtils` class.
    (`parseABC` is a placeholder for specific methods in `ParserUtils` class, 
@@ -345,8 +346,9 @@ The general workflow of the `session /edit` command is as follows:
    session unique identifier from the list of sessions.
    * If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
    * Else, the `Session` object with the specified session unique identifier is returned.
-6. The details of how a session is updated are displayed in the reference diagram below.<br>
+6. The details of how a session is updated are displayed in the reference diagram below.<br><br>
    ![Reference Frame Update Session Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateSession.png)
+   <br><br>
 7. `SessionEditCommand#run` checks if there is an update for a new list of persons, new session or new session date.
 8. If there is an update on the list of persons, `SessionEditCommand#getNewPersonList` is called to return a new list of persons to be stored. The method checks if the newly provided list of persons contains duplicated names.
    * If duplicated names are detected, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
@@ -664,7 +666,9 @@ The general workflow of the `group /edit` command is as follows:
     * If a `Group` object with the specified group unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
     * Else, the `Group` object with the specified group unique identifier is returned.
 6. The details of how a group is updated are displayed in the reference diagram below.<br>
-![Reference Frame Update Group Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateGroup.png)
+   <br><br>
+   ![Reference Frame Update Group Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateGroup.png)
+   <br><br>
 7. `GroupEditCommand#run` checks if there is an update for a new group name, or a new list of persons.
     *`GroupEditCommand#existingGroupWithTheSameName` method is called to check if the provided group name already exists in the list of groups.
        * If the provided group name exists within the list of groups, an exception is thrown, an error message is printed.
@@ -675,8 +679,8 @@ The general workflow of the `group /edit` command is as follows:
           * Else, it calls `PersonList#isSamePersonList` to check if the newly supplied list of persons is exactly the same as the old list.
              * If `PersonList#isSamePersonList` returns `true`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
              * Else, a new `PersonList` object to be stored is created to be used as the updated list of persons.
-9. After the group is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
-10. The `GroupEditCommand` class then prints a message indicating that a group has been successfully edited.
+8. After the group is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
+9. The `GroupEditCommand` class then prints a message indicating that a group has been successfully edited.
 
 
 ### View a group
@@ -797,9 +801,9 @@ This section includes instructions to test SplitLah manually.
 * [Activity Testing](#activity-testing)
 * [Group Testing](#group-testing)
 * [Storage Testing](#storage-testing)
+<hr>
 
 ### Launch and Shutdown
-<hr>
 
 #### Initial Launch
 1. Ensure that Java 11 or above is installed.
@@ -817,7 +821,6 @@ This section includes instructions to test SplitLah manually.
 <hr>
 
 ### Session Testing
-<hr>
 
 #### Creating a Session
 > For details on the usage of `session /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create).
@@ -853,7 +856,6 @@ it with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGu
 
 #### Deleting a Session
 > For details on the usage of `session /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-session-session-delete).
-<hr>
 
 **Test Cases:**
 
@@ -865,10 +867,10 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    Expected: An error message should be printed, indicating that the specified session unique identifier cannot be found.
 3. Test Command; `session /delete /sid apple`<br>
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
+<hr>
 
 #### Editing a Session
 > For details on the usage of `session /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-session-session-edit).
-<hr>
 
 **Test Cases:**
 
@@ -886,6 +888,7 @@ it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/User
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
 6. Test Command: `session /edit /sid 1`<br>
    Expected: An error message should be printed, indicating that no delimiters were found.
+<hr>
 
 #### Settling a Session
 > For details on the usage of `session /summary` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#settling-all-transactions-for-a-session-session-summary).
@@ -894,7 +897,7 @@ it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/User
 
 Test Scenario 1: No sessions are currently stored in the application. 
 * Test Command: `session /summary /sid 1` <br>
-   Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
+  Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
 
 Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
 a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
@@ -946,11 +949,9 @@ Test Scenario 1: No sessions are currently stored in the application.
 Test Scenario 2: At least 1 session exists in the application.
 * Test Command: `session /list`<br>
   Expected: A table summarising the details of all existing sessions should be printed.
-
 <hr>
 
 ### Activity Testing
-<hr>
 
 #### Creating an Activity
 > For details on the usage of `activity /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-an-activity-activity-create).
@@ -1038,10 +1039,32 @@ Also, only an activity with an activity unique identifier of 1 within this sessi
 
 #### Listing all Activities
 > For details on the usage of `activity /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-activities-in-a-session-activity-list).
+
+**Test Cases:**
+
+Test Scenario 1: No sessions are currently stored in the application.
+* Test Command: `activity /list /sid 1` <br>
+  Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
+
+Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
+* Test Command: `acitivty /view /sid 1` <br>
+  Expected: An error message should be printed, indicating that the list of activities in the session is currently empty.
+
+Test Scenario 3: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command. At least 1 activity is stored in the session.
+1. Test Command: `activity /list`<br>
+   Expected: An error message should be printed, indicating that the `/sid` delimiter is missing from the input.
+2. Test Command: `activity /list /sid`<br>
+   Expected: An error message should be printed, indicating that an argument following the `/sid` delimiter is missing from the input.
+3. Test Command: `activity /list /sid apple`<br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
+4. Test Command: `activity /view /sid 1`<br>
+   Expected: A table summarising the details of all existing activities in the session with session unique identifier of `1` should be printed.
+
 <hr>
 
 ### Group Testing
-<hr>
 
 #### Creating a Group
 > For details on the usage of `group /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-group-group-create).
