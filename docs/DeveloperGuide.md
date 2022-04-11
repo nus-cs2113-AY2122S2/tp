@@ -759,4 +759,147 @@ Manage finances containing multiple payment methods faster than a typical mouse/
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are instructions to test the app manually.
+
+> **💡 Note:**
+>- These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
+
+### Launch and shutdown
+
+1. Initial launch
+   1. Download the jar file, and copy it into an empty folder.
+   2. Open a terminal window whose current directory is that folder, and run `java -jar MindMyMoney.jar`. <br />
+           Expected: Outputs a splash screen, with a daily finance tip.
+2. Shutdown
+   1. Enter `bye` to exit the software. <br />
+      Expected: A farewell message is printed, and the software exits gracefully.
+   
+### Adding data
+
+1. Adding expenditure paid with cash
+   1. Test case: `add /e /pm Cash /c Food /d Chicken rice /a 4.50 /t 30/03/2022` <br />
+      Expected: Expenditure added to account. Message displaying summary of new
+      expenditure is displayed.
+   2. Test case: Missing flag, or reordering of `/pm`, `/c`, `/d`, `/a`, `/t` <br />
+      Expected: Add command is rejected, with an appropriate error message.
+   3. Test case: Invalid amount or date (date in incorrect format, future date, non-positive amount, etc.) <br />
+      Expected: Add command is rejected, with an appropriate error message.
+   4. Test case: Other valid category (Transport, Utilities, Personal, Entertainment, Others) <br />
+      (Note: Category is case-insensitive)
+      Expected: Expenditure added to account. Message displaying summary of new
+      expenditure is displayed.
+   5. Test case: Invalid category <br />
+       Expected: Add command is rejected, with an appropriate error message.
+2. Adding credit card
+   1. Test case: `add /cc /n /cc DBS /cb 1.0 /cl 10000` <br />
+      Expected: Credit card added to account. Message displaying summary of new
+      credit card is displayed. 
+   2. Test case: Cashback not in range [0, 100] <br />
+      Expected: Add command is rejected, with an appropriate error message.
+   3. Test case: Credit card limit is invalid <br />
+      Expected: Add command is rejected, with an appropriate error message.
+   4. Test case: Name is the same as an already existing credit card <br />
+      Expected: Add command is rejected, with an appropriate error message.
+3. Adding income source
+   1. Test case: `add /i /a 200 /c Allowance` <br />
+      Expected: Income source added to account. Message displaying summary of new
+      income source is displayed. 
+   2. Test case: Other valid category (Salary, Investment, Others) <br />
+      Expected: Income source added to account. Message displaying summary of new
+      income source is displayed.
+   3. Test case: Invalid category  <br />
+      Expected: Add command is rejected, with an appropriate error message.
+   4. Test case: Invalid amount (not a positive integer) <br />
+      Expected: Add command is rejected, with an appropriate error message.
+4. Adding expenditure paid for with credit card
+   1. Prerequisite: A credit card named `DBS` has been added, with a credit limit of at least 10.
+   2. Test case: `add /e /pm DBS /c Personal /d Gift to friend /a 10.00 /t 01/01/2022` <br />
+      Expected: Expenditure added to account. Message displaying summary of new
+      expenditure, along with updated balance of credit card, is displayed.
+   3. Test case: Non-existent credit card <br />
+      Expected: Add command is rejected, with an appropriate error message.
+   4. Test case: Amount exceeding credit card's limit <br />
+      Expected: Add command is rejected, with an appropriate error message.
+
+### Updating data
+
+1. Updating expenditures
+   1. Prerequisite: There is at least 1 expenditure.
+   2. Test case: `update /e 1 /pm Cash /c Entertainment /d PS5 /a 899.00 /t 25/03/2022` <br />
+      Expected: First expenditure is updated accordingly, with a message summarizing
+      the new data.
+2. Updating credit cards
+   1. Prerequisite: There are at least 4 credit cards.
+   2. Test case: `update /cc 4 /n OCBC /cb 2.00 /cl 30000` <br />
+      Expected: Fourth credit card is updated accordingly, with a message summarizing
+       the new data.
+3. Updating income sources
+   1. Prerequisite: There are at least 2 income sources.
+   2. Test case: `update /i 2 /a 500 /c Investment` <br />
+      Expected: Second income source is updated accordingly, with a message summarizing
+       the new data.
+4. Update edge cases
+   1. Test case: Invalid index into list (not integer, negative, out of bounds, etc) <br />
+      Expected: Update command is rejected, with an appropriate message.
+   2. Note that all input format edge cases from `add` also apply here.
+
+### Deleting data
+
+1. Deleting expenditures
+    1. Prerequisite: There are at least 2 expenditures.
+    2. Test case: `delete /e 2` <br />
+       Expected: Second expenditure is deleted, with a message stating its description and amount.
+2. Deleting credit cards
+    1. Prerequisite: There are at least 3 credit cards.
+    2. Test case: `delete /cc 3` <br />
+       Expected: Third credit card is deleted, with a message stating its name.
+3. Deleting income sources
+    1. Prerequisite: There is at least 1 income source.
+    2. Test case: `delete /i 1` <br />
+       Expected: First income source is deleted, with a message stating its category.
+4. Delete edge cases
+    1. Test case: Invalid index into list (not integer, negative, out of bounds, etc.) <br />
+       Expected: Delete command is rejected, with an appropriate message.
+
+### Displaying summary information
+
+1. Listing information
+   1. Prerequisite for ii, iii, iv: Some expenditures, credit cards, and income sources have already been `add`ed.
+   2. Test case: `list /cc` <br />
+      Expected: A list of credit cards is shown. For each credit card, its name,
+      cashback percentage, cashback gained, card limit, and current remaining balance
+      is displayed.
+   3. Test case: `list /i` <br />
+      Expected: A list of income sources is shown. For each income source, its
+      amount and category is displayed.
+   4. Test case: `list /e` <br />
+      Expected: A list of expenditures is displayed. For each expenditure, its
+      amount, category, description, and date is displayed, as well as how it was 
+      paid for. If {DATE} is specified, a list of expenditures with the {DATE} is displayed.
+   5. Prerequisite for vi: There are some expenditures whose date is in March 2022, and others which are not.
+   6. Test case: `list /e 03/2022` <br />
+       Expected: Only the expenses occurring in March 2022 are listed.
+   7. Test case: `list` when the respective data source (expenditures, credit cards, income sources) is empty.
+      Expected: An error message telling the user to add data is displayed.
+2. Calculating summary expenses
+   1. Prerequisite: Some expenses have been added, under appropriate categories, all occurring sometime in March 2022.
+   2. Test case: `calculate /epm 03/2022` <br />
+      Expected: A breakdown of expenses in March 2022 per category is displayed.
+
+### Saving data
+
+1. Normal operations
+   1. Prerequisites: Some data has already been added into the system.
+   2. Test case: There is no `data.txt` file on startup. <br />
+      Expected: A new file is created, and operation continues as normal.
+   3. Test case: Perform `list /e`, `list /cc`, and `list /i` to view the data in the system. <br />
+      Restart the software, and perform the list commands again.
+      Expected: The two sets of list commands will have the same output.
+2. Manual editing
+   1. Prerequisites: A save file has been created, with relevant data.
+   2. Test case: A value in the save file is manually edited <br />
+         Expected: Upon restarting the program, the new value is correctly reflected.
+   3. Test case: The save file is corrupted (e.g. missing/misspelled parameters, improper
+         begin block/end block, missing quotes, improper values for parameters) <br />
+         Expected: An error message detailing the parse error is displayed, and 
+         the software proceeds to work as if the save file started as empty.
