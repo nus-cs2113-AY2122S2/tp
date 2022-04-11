@@ -174,7 +174,7 @@ public class ExpenseTracker {
      * @param index the index of the item to be deleted
      * @throws IndexOutOfBoundsException if the expense record is not found
      */
-    private static void deleteExpense(ArrayList<Expense> list, int index) throws IndexOutOfBoundsException {
+    private void deleteExpense(ArrayList<Expense> list, int index) throws IndexOutOfBoundsException {
         logger.log(Level.INFO, LOG_DELETE_INTENT);
         Expense toBeDeleted = list.get(index - EXPENSE_INDEX);
         list.remove(index - EXPENSE_INDEX);
@@ -189,7 +189,7 @@ public class ExpenseTracker {
      * @param list    list of expenses itself
      * @param expense the expense object itself to be added
      */
-    private static void addExpense(ArrayList<Expense> list, Expense expense, boolean fromCommandLine) {
+    private void addExpense(ArrayList<Expense> list, Expense expense, boolean fromCommandLine) {
         if (fromCommandLine) {
             logger.log(Level.INFO, LOG_ADD_INTENT);
         } else {
@@ -211,7 +211,7 @@ public class ExpenseTracker {
      * @param index the index of the item to be edited
      * @param ui    ui object to collect user's inputs
      */
-    private static void editExpense(ArrayList<Expense> list, int index, TextUi ui) {
+    private void editExpense(ArrayList<Expense> list, int index, TextUi ui) {
         Expense toBeEdited = list.get(index - 1);
         boolean isEdited = false;
         boolean isFieldEdited = false;
@@ -251,7 +251,7 @@ public class ExpenseTracker {
      * @param toBeEdited  the expense record object to be edited
      * @throws IndexOutOfBoundsException if new value is missing (without spaces)
      */
-    private static boolean editField(String fieldToEdit, Expense toBeEdited) throws IndexOutOfBoundsException {
+    private boolean editField(String fieldToEdit, Expense toBeEdited) throws IndexOutOfBoundsException {
         boolean isEdited = false;
         String[] newFields = fieldToEdit.split(" ", 2);
         String field = newFields[ZERO];
@@ -398,7 +398,7 @@ public class ExpenseTracker {
      *
      * @param stringToFind keyword to look for within each expense record
      */
-    private static void findExpense(String stringToFind) {
+    private void findExpense(String stringToFind) {
         boolean isFound = false;
         stringToFind = stringToFind.toLowerCase();
         int noOfItems = Expense.getNoOfItems();
@@ -437,7 +437,7 @@ public class ExpenseTracker {
      *
      * @param rawInput the user's input itself
      */
-    private static void executeRemove(String rawInput) {
+    private void executeRemove(String rawInput) {
         int index = -1;
         try {
             index = parseDeleteExpense(rawInput);
@@ -463,7 +463,7 @@ public class ExpenseTracker {
      *
      * @param rawInput the user's input itself
      */
-    private static void executeAdd(String rawInput, boolean fromCommandLine) {
+    private void executeAdd(String rawInput, boolean fromCommandLine) {
 
         try {
             String[] newExpense = parseNewExpense(rawInput);
@@ -516,7 +516,7 @@ public class ExpenseTracker {
      *
      * @param rawInput the user's input itself
      */
-    private static void executeFind(String rawInput) {
+    private void executeFind(String rawInput) {
         String stringToFind = "";
         try {
             stringToFind = parseFindExpense(rawInput);
@@ -534,7 +534,7 @@ public class ExpenseTracker {
      * @param ui       ui object to collect user's inputs
      * @param rawInput the user's input itself
      */
-    private static void executeEdit(TextUi ui, String rawInput) {
+    private void executeEdit(TextUi ui, String rawInput) {
         int index;
         int noOfItems = Expense.getNoOfItems();
         if (noOfItems == 0) {
@@ -595,7 +595,7 @@ public class ExpenseTracker {
      * @param ui ui object to collect user's inputs
      * @return mode value pertaining to either menu, study or contact manager.
      */
-    public static Mode expenseRunner(TextUi ui) {
+    public Mode expenseRunner(TextUi ui) {
         logger.setLevel(Level.SEVERE);
         expenseWelcome();
         String rawInput = ui.getUserInput();
