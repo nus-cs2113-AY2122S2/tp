@@ -225,8 +225,9 @@ public class IncomeList extends MoneyList {
      * @return true if amount have been edited, false otherwise
      */
     private boolean editIncAmount(Income item, Double amount) {
-        Double itemAmount = item.getAmount();
-        if (amount != null && itemAmount != amount) {
+        String itemAmount = String.valueOf(item.getAmount());
+        String newAmount = String.valueOf(amount);
+        if (amount != null && !itemAmount.equals(newAmount)) {
             item.setAmount(amount);
             return true;
         }
