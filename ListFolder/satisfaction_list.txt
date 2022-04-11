@@ -1,3 +1,4 @@
-fred|3
 bob|3
 joe|2
+alina|2
+steve|3

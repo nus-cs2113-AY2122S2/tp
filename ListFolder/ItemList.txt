@@ -1,2 +1,0 @@
-towel|15
-cheese|9

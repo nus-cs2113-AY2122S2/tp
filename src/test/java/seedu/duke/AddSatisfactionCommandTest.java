@@ -72,25 +72,25 @@ public class AddSatisfactionCommandTest {
     @Test
     public void commandParser_addCommandWithEmptySatisfactionCustomer_exceptionThrown() {
         assertThrows(EmptySatisfactionCustomerException.class, ()
-            -> new CommandParser().parse("add satisfaction / 4"));
+                -> new CommandParser().parse("add satisfaction / 4"));
     }
 
     @Test
     public void commandParser_addCommandWithEmptySatisfactionValue_exceptionThrown() {
         assertThrows(EmptySatisfactionValueException.class, ()
-            -> new CommandParser().parse("add satisfaction Bob / "));
+                -> new CommandParser().parse("add satisfaction Bob / "));
     }
 
     @Test
     public void commandParser_addCommandWithNoSlash_exceptionThrown() {
         assertThrows(InvalidCommandException.class, ()
-            -> new CommandParser().parse("add satisfaction Bob 5"));
+                -> new CommandParser().parse("add satisfaction Bob 5"));
     }
 
     @Test
     public void commandParser_addCommandWithNegativeSatisfactionValue_exceptionThrown() {
         assertThrows(InvalidSatisfactionValueException.class, ()
-            -> new CommandParser().parse("add satisfaction Joe / -1"));
+                -> new CommandParser().parse("add satisfaction Joe / -1"));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class AddSatisfactionCommandTest {
     @Test
     public void commandParser_addCommandWithTooManySlashes_exceptionThrown() {
         assertThrows(InvalidCommandException.class, ()
-            -> new CommandParser().parse("add satisfaction Joe / 3 / 3"));
+                -> new CommandParser().parse("add satisfaction Joe / 3 / 3"));
     }
 
     @Test
@@ -117,7 +117,5 @@ public class AddSatisfactionCommandTest {
                 -> new CommandParser().parse("add satisfaction Joe 3213 / 3"));
     }
 
-
-
-
 }
+
