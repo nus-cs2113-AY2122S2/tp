@@ -19,12 +19,8 @@ Enhancements implemented:
 1. Set up the initial structure to build our code base upon.
     - `AddCommand` class to allow users to add commands into `MindMyMoney`.
     - `CalculationInputCommand` class to allow users to calculate their expenses.
-    - `Expenditure` class to store details of user expenditure .
-    - `CreditCard` class to store details of user's credit card.
-    - `AddCommandInputTests` class containing functions to test the inputs in AddCommand.
-    - `Calculations` class containing calculation functions.
-    - `GeneralFunctions` class containing general functions.
-    - `TimeFunctions` class containing functions used to parse time information.
+    - `userfinancial` package containing `Expenditure` and `CreditCard` class.
+    - `helper` package containing helper functions used throughout the codebase.
     - Allows the team to use functions and classes essential to `MindMyMoney`.
       
 2. Added the `AddCommand` class.
@@ -34,10 +30,8 @@ Enhancements implemented:
       the add command for its validity.
       
 3. Set up the `CalculationInputCommand` class.
-    - Calculates the total amount of expenditures done by a user, according to date.
+    - Allows users to calculate the total amount of expenditures, according to date.
     - Added `Calculations` class to perform the calculations needed by `CalculationInputCommand`.
-    - Served as a basic foundation to calculation that was worked on further by teammate Jierui.
-    - Provides the user with the ability to see the total expenditure on a particular date.
       
 4. Added`Expenditure` class.
     - As a key functionality of `MindMyMoney`, users can now track their expenditures and get their total expenditure.
@@ -46,7 +40,7 @@ Enhancements implemented:
     - Being part of the value proposition of `MindMyMoney`, it allows users to track their multiple forms of payment.
       
 6. Added `GeneralFunction` class
-    - Allows the team to call frequently used functions in `MindMyMoney` from just 1 class, increases OOP.
+    - Allows the team to call frequently used functions in `MindMyMoney` from just one class, increases OOP.
     - Implemented `findItemsInList` function that aided the search for expenditure by date and by category in
       `calculateExpenditurePerMonth`.
     - Implemented `parseInputWithCommandFlag` to parse user input containing flags. This was used throughout the code
@@ -75,7 +69,6 @@ Enhancements implemented:
     - Changed the way expected output is displayed, from images to text form for better formatting.
     - Formatted the headers and the `Format` and `Expected Outcome` field.
 ### DG Contribution
-
 1. Contributed to the `Add Command` portion.
     - Added `Add Expenditure` portion
     - Added Fig 7 - AddCommand Sequence Diagram and Fig 8 - Add Expenditure Command Sequence Diagram
