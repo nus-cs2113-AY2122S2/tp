@@ -5,7 +5,6 @@ import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.loggers.MainLogger;
 import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
-import seedu.duke.entities.Order;
 
 public class OrderController extends Controller {
     private static final String[] CHOICES = {"Exit Order Menu",

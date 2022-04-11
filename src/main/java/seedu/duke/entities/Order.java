@@ -34,7 +34,7 @@ public class Order implements Serializable {
         for (Dish dish : dishes) {
             orderString += dish.toString() + "\n";
         }
-        orderString = orderString + String.format("Total Price: $%.1f", this.getTotalPrice());
+        orderString = orderString + String.format("Total Price: $%.2f", this.getTotalPrice());
         return orderString;
     }
 
