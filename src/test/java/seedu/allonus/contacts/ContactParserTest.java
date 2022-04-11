@@ -68,7 +68,7 @@ class ContactParserTest {
         Contact testContact = new Contact(new Name(""), new Faculty(""),
                 new Email(""), new Description(""));
 
-        setContactFields(testContact, bobFields);
+        setContactFields(testContact, bobFields, false);
         assertTrue(bobFields.contains("n/" + testContact.getName().toString()));
         assertTrue(bobFields.contains("f/" + testContact.getFaculty().toString()));
         assertTrue(bobFields.contains("e/" + testContact.getEmail().toString()));
@@ -81,15 +81,15 @@ class ContactParserTest {
                 new Email(""), new Description(""));
 
         assertThrows(InvalidContactField.class, () ->
-                setContactFields(testContact, getFieldStrings(invalidNameString)));
+                setContactFields(testContact, getFieldStrings(invalidNameString), false));
         assertThrows(InvalidContactField.class, () ->
-                setContactFields(testContact, getFieldStrings(invalidFacultyString)));
+                setContactFields(testContact, getFieldStrings(invalidFacultyString), false));
     }
 
     @Test
     void parseContact_validString_parsesNormally() throws InvalidContactField {
-        Contact parsedCharlie = parseContact(charlieString);
-        Contact parsedDavid = parseContact(davidString);
+        Contact parsedCharlie = parseContact(charlieString, false);
+        Contact parsedDavid = parseContact(davidString, false);
 
         assertEquals(parsedCharlie.toString(), charlie.toString());
         assertEquals(parsedDavid.toString(), david.toString());
@@ -100,7 +100,7 @@ class ContactParserTest {
 
     @Test
     void parseContact_invalidString_throwsInvalidContactField() {
-        assertThrows(InvalidContactField.class, () -> parseContact(invalidNameString));
-        assertThrows(InvalidContactField.class, () -> parseContact(invalidFacultyString));
+        assertThrows(InvalidContactField.class, () -> parseContact(invalidNameString, false));
+        assertThrows(InvalidContactField.class, () -> parseContact(invalidFacultyString, false));
     }
 }

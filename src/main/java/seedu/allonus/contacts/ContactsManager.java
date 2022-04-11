@@ -240,7 +240,7 @@ public class ContactsManager {
     private void addContact(String userInput, boolean fromCommandLine) {
         Contact contact;
         try {
-            contact = parseContact(userInput);
+            contact = parseContact(userInput, fromCommandLine);
         } catch (InvalidContactField e) {
             showToUser(e.getMessage());
             return;
@@ -315,7 +315,7 @@ public class ContactsManager {
                 showToUser(CONTACTS_EDIT_NO_FIELDS_MESSAGE);
                 return;
             }
-            setContactFields(curr, fieldStrings);
+            setContactFields(curr, fieldStrings, true);
             addHash(curr);
             assert nameHashes.size() == getContactsCount();
         } catch (InvalidContactField e) {

@@ -93,9 +93,11 @@ public class ContactParser {
      *
      * @param contact The Contact object to be updated.
      * @param fieldStrings An ArrayList of strings of fields to be updated.
+     * @param fromCommandLine Boolean to prevent the printing of reminders when loading.
      * @throws InvalidContactField If any string of a field is invalid.
      */
-    static void setContactFields(Contact contact, ArrayList<String> fieldStrings) throws InvalidContactField {
+    static void setContactFields(Contact contact, ArrayList<String> fieldStrings,
+                                 boolean fromCommandLine) throws InvalidContactField {
         for (String fieldString : fieldStrings) {
             char fieldType = fieldString.charAt(0);
             isValidFieldString(fieldString);
@@ -116,7 +118,7 @@ public class ContactParser {
                 Email email = contact.getEmail();
                 email.setField(fieldContent);
                 boolean isValidEmailFormat = email.isValidFormat();
-                if (!isValidEmailFormat) {
+                if (!isValidEmailFormat && fromCommandLine) {
                     System.out.println(CONTACTS_PARSER_INVALID_EMAIL_MESSAGE);
                 }
                 break;
@@ -136,10 +138,11 @@ public class ContactParser {
      * Parses given user input into a Contact object.
      *
      * @param userInput String of original user input.
+     * @param fromCommandLine Boolean to prevent the printing of reminders when loading.
      * @return Contact parsed from the given user input.
      * @throws InvalidContactField If user input contains invalid fields.
      */
-    static Contact parseContact(String userInput) throws InvalidContactField {
+    static Contact parseContact(String userInput, boolean fromCommandLine) throws InvalidContactField {
         Name name = new Name("");
         Faculty faculty = new Faculty("");
         Email email = new Email("");
@@ -150,7 +153,7 @@ public class ContactParser {
         if (fieldStrings.isEmpty()) {
             throw new InvalidContactField(CONTACTS_PARSER_ADD_EMPTY_FIELDS_MESSAGE);
         }
-        setContactFields(contact, fieldStrings);
+        setContactFields(contact, fieldStrings, fromCommandLine);
 
         boolean isValidName = name.isValidField();
         boolean isValidFaculty = faculty.isValidField();
