@@ -16,8 +16,8 @@ public class CancelFutureBorrowingsCommand extends Command {
     public static final String COMMAND_WORD = "cancel";
     public static final String COMMAND_NAME = "Cancel future Borrowing";
     public static final String USAGE_MESSAGE = 
-            "Cancels a future borrowing";
-    public static final String COMMAND_FORMAT = COMMAND_WORD + "[borrower name] [borrow index]";
+            "Cancels a future borrowing made by a person";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " p/[borrower name] i/[borrow index]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE
             + ":\n" + "[Command Format] " + COMMAND_FORMAT + "\n";
     private final String borrowerName;
