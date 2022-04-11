@@ -19,7 +19,7 @@ public class PatientList {
         patient.addDescription(description);
     }
 
-    public Patient getPatient(int index) {
+    public static Patient getPatient(int index) {
         return patients.get(index - 1);
     }
 

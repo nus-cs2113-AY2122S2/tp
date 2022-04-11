@@ -55,7 +55,7 @@ public class Ui {
     }
 
     public void printAddHelp() {
-        String addDoctor = "add doctor /id ID /n NAME /ph PHONE /e EMAIL" + System.lineSeparator();
+        String addDoctor = "add doctor /id ID /n NAME /ph PHONE /e EMAIL /dep DEPARTMENT" + System.lineSeparator();
         String addPatient = "add patient /id ID /n NAME /ph PHONE /e EMAIL /s SYMPTOM /d DESCRIPTIONS"
                                     + System.lineSeparator();
         String addNurse = "add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE" + System.lineSeparator();

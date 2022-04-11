@@ -14,7 +14,7 @@ public class NurseList {
         size = 0;
     }
 
-    public Nurse getNurse(int index) {
+    public static Nurse getNurse(int index) {
         return nurses.get(index - 1);
     }
 
