@@ -25,7 +25,7 @@ Spendvelope is designed to regularly remind the buyer of their preset spending l
 
 
 1. Ensure that you are running Java 11.
-2. Download the latest version of `Spendvelope` from [here](https://github.com/AY2122S2-CS2113-F12-1/tp/releases/download/V2.1/CS2113-F12-1.Spendvelope.jar).
+2. Download the latest version of `Spendvelope` from [here](https://github.com/AY2122S2-CS2113-F12-1/tp/releases/download/V2.1/Spendvelope.jar).
 Place it in an empty folder.
 3. Using Cmd Prompt, navigate to the folder where the `jar` file is stored. Run `Spendvelope` with 
 `java -jar Spendvelope.jar`.
