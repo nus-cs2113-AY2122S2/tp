@@ -102,12 +102,13 @@ Words starting with a `/` are flags.
 
 > **💡 Note:**
 >- Parameters and flags are space-separated. For example: `list/e` is not a valid command while `list /e` is valid.
->- All parameters are compulsory unless stated otherwise.
+>- 
 
 > **⚠️Warning⚠️**
->- All parameters are compulsory! Input the parameters in the order shown, or the application will not be able to read your
+>- All parameters are compulsory unless stated otherwise.
+>- Input the parameters in the order shown, or the application will not be able to read your
    > input.
->- ENTER RULES ON FORBIDDEN CHARACTERS HERE
+>- When entering your input, use only ascii characters. Any other input may not properly display in the command line.
 
 <br/>
 

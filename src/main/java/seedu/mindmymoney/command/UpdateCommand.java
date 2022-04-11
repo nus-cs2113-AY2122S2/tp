@@ -160,7 +160,7 @@ public class UpdateCommand extends Command {
                 newAmountAsFloat, inputTime);
             expenditureList.set(indexToUpdate, newExpenditure);
             System.out.println("Successfully set expenditure " + indexAsString + " to:\n"
-                + "$" + newExpenditure.getAmount() + " was spent on " + newExpenditure.getDescription()
+                + "$" + String.format("%.2f",newExpenditure.getAmount()) + " was spent on " + newExpenditure.getDescription()
                 + "(" + newExpenditure.getCategory() + ") " + "using " + newExpenditure.getPaymentMethod()
                 + " [" + newExpenditure.getTime() + "]");
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -215,10 +215,8 @@ public class UpdateCommand extends Command {
             String newCardLimit = parseInputWithCommandFlag(updateInput, FLAG_OF_CARD_LIMIT,
                 FLAG_END_VALUE).trim();
             int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
-
-            double newCashBackAsDouble = Double.parseDouble(newCashBack);
-            float newCardLimitAsFloat = Float.parseFloat(newCardLimit);
-
+            float newCashBackAsDouble = formatFloat(Float.parseFloat(newCashBack));
+            float newCardLimitAsFloat = formatFloat(Float.parseFloat(newCardLimit));
             CreditCard oldCreditCard = creditCardList.get(indexToUpdate);
             if (oldCreditCard.getTotalExpenditure() > newCardLimitAsFloat) {
                 throw new MindMyMoneyException("Current spending has already exceeded the new limit!");

@@ -148,13 +148,14 @@ public class AddCommand extends Command {
         final String cardLimit = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_LIMIT,
             FLAG_END_VALUE).trim();
         testCreditCardParameters(cardName, cashBack, cardLimit, creditCardList);
-
-        creditCardList.add(new CreditCard(cardName, Double.parseDouble(cashBack), Float.parseFloat(cardLimit)));
+        Float cashBackAsFloat = formatFloat(Float.parseFloat(cashBack));
+        Float cardLimitAsFloat = formatFloat(Float.parseFloat(cardLimit));
+        creditCardList.add(new CreditCard(cardName, cashBackAsFloat, cardLimitAsFloat));
 
         System.out.println("Successfully added: \n\n"
             + "Credit card: " + cardName + "\n"
-            + "Cash back: " + cashBack + "%\n"
-            + "Card limit: $" + cardLimit + "\n\n"
+            + "Cash back: " + String.format("%.2f",cashBackAsFloat) + "%\n"
+            + "Card limit: $" + String.format("%.2f",cardLimitAsFloat) + "\n\n"
             + "into the account");
         System.out.print(System.lineSeparator());
     }

@@ -237,7 +237,7 @@ public class AddCommandInputTests {
         if (inputAmountAsDouble < MIN_CASHBACK_AMOUNT) {
             throw new MindMyMoneyException("Cashback must be more than or equals to 0");
         } else if (inputAmountAsDouble >= MAX_CASHBACK_AMOUNT) {
-            throw new MindMyMoneyException("Cashback cannot be more than 100%!");
+            throw new MindMyMoneyException("Cashback cannot be 100% or more!");
         }
         assert inputAmountAsDouble >= MIN_CASHBACK_AMOUNT : "Cashback should have a non-negative value";
     }
@@ -266,7 +266,7 @@ public class AddCommandInputTests {
         assert inputAmountAsDouble > 0 : "Limit amount should have a positive value";
 
         if (inputAmountAsDouble > 40000) {
-            throw new MindMyMoneyException("Limit amount must be less than or equal to $40,000.\n"
+            throw new MindMyMoneyException("Limit amount must be $40,000 or less.\n"
                 + "If you do have a credit card with more than $40,000 limit, "
                 + "do inform the MindMyMoney team through GitHub.");
         }
