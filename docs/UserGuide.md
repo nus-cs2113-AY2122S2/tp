@@ -118,17 +118,17 @@ There are currently 3 recorded customer satisfactions.
 ============= End of the list =============
 ```
 
-### Calculate average satisfaction: `average satisfaction`
+### Calculate average satisfaction: `view average satisfaction`
 Calculates the mean customer satisfaction. 
 
-Format: `average satisfaction`
+Format: `view average satisfaction`
 
 Example of usage:
 
 `add satisfaction Will Smith / 3`  <br />
 `add satisfaction Bob / 5`  <br />
 `add satisfaction Chris Rock / 4`  <br />
-`average satisfaction`
+`view average satisfaction`
 
 Expected output:
 ```
