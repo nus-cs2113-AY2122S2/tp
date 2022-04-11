@@ -123,6 +123,8 @@ public class Storage {
             loadGenericData(PATH_MED, medicines);
             loadGenericData(PATH_APT, appointments);
             loadGenericData(PATH_APT_MEDS, appointments);
+            loadGenericData(PATH_PAT_DATE, patients);
+            loadGenericData(PATH_DOC_DATE, doctors);
         } catch (FileNotFoundException f) {
             UI.printParagraph("No saved data found!");
         }
@@ -227,6 +229,10 @@ public class Storage {
         try {
             FileWriter dataWrite = new FileWriter(PATH_APT_MEDS,false);
             for (Appointment appointment : appointments.getList()) {
+                String saveString = appointment.saveMedicineString();
+                if(saveString.equals("")) {
+                    continue;
+                }
                 dataWrite.write(appointment.saveMedicineString() + "\n");
             }
             dataWrite.close();
