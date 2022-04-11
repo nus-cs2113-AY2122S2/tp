@@ -629,7 +629,7 @@ The above sequence diagram shows the interactions when a list of
 1. `ExpenditureList` calls `SerializerFunctions.convertInputToList()`, which accepts a function
 that deserializes a line of input. Here, `Expenditure.deserialize()` is passed to `convertInputToList()`.
 2. For each line in the input which corresponds to an `Expenditure`, `SerializerFunctions`
-invokes `Expenditure.deserialize` on this line, which returns an `Expenditure`. This is repeated until
+invokes `Expenditure.deserialize()` on this line, which returns an `Expenditure`. This is repeated until
 the designated terminator is read from the `Scanner`.
 3. `Expenditure` invokes `PropertyList.deserialize` to convert the input line into a set of key-value pairs.
 Then, it makes a series of `PropertyList::getValue` calls to obtain the values of each individual property.
