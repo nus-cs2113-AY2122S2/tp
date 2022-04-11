@@ -77,7 +77,7 @@ public class AddCommand extends Command {
      * the balance left.
      *
      * @param cardName Name of credit card to be updated.
-     * @param amount   amount of new expenditure.
+     * @param amount amount of new expenditure.
      * @return The credit card balance left.
      * @throws MindMyMoneyException when the card is not found in user's credit card list.
      */
@@ -154,8 +154,8 @@ public class AddCommand extends Command {
 
         System.out.println("Successfully added: \n\n"
             + "Credit card: " + cardName + "\n"
-            + "Cash back: " + String.format("%.2f",cashBackAsFloat) + "%\n"
-            + "Card limit: $" + String.format("%.2f",cardLimitAsFloat) + "\n\n"
+            + "Cash back: " + String.format("%.2f", cashBackAsFloat) + "%\n"
+            + "Card limit: $" + String.format("%.2f", cardLimitAsFloat) + "\n\n"
             + "into the account");
         System.out.print(System.lineSeparator());
     }

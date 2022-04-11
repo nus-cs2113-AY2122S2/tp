@@ -160,7 +160,7 @@ public class UpdateCommand extends Command {
                 newAmountAsFloat, inputTime);
             expenditureList.set(indexToUpdate, newExpenditure);
             System.out.println("Successfully set expenditure " + indexAsString + " to:\n"
-                + "$" + String.format("%.2f",newExpenditure.getAmount()) + " was spent on " + newExpenditure.getDescription()
+                + "$" + String.format("%.2f", newExpenditure.getAmount()) + " was spent on " + newExpenditure.getDescription()
                 + "(" + newExpenditure.getCategory() + ") " + "using " + newExpenditure.getPaymentMethod()
                 + " [" + newExpenditure.getTime() + "]");
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -230,7 +230,7 @@ public class UpdateCommand extends Command {
 
             creditCardList.set(indexToUpdate, newCreditCard);
             System.out.println("Successfully set credit card " + indexAsString + " to:\n"
-                    + newCreditCard);
+                + newCreditCard);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Did you forget to input INDEX, NAME, CASHBACK or CREDIT LIMIT?");
         } catch (NumberFormatException e) {
