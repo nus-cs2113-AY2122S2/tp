@@ -41,7 +41,7 @@ public class ItemListStubs {
 
     private static ItemList generateItemList(Item... items) {
         ArrayList<Item> list = new ArrayList<>();
-        for (Item item: items) {
+        for (Item item : items) {
             list.add(Item.copyItem(item));
         }
         return new ItemList(list);
@@ -64,7 +64,7 @@ public class ItemListStubs {
 
     private static ItemList generateImmutableItemList(Item... items) {
         ArrayList<Item> list = new ArrayList<>();
-        for (Item item: items) {
+        for (Item item : items) {
             list.add(Item.copyItem(item));
         }
         return new ItemList(List.copyOf(list));
@@ -73,11 +73,12 @@ public class ItemListStubs {
     /**
      * Generates an expected list of items that would represent the result.
      * This is typically used to compare against commands that do not modify ItemList. E.g. List, Search, Desc.
+     *
      * @return
      */
     private static List<Item> generateImmutableResults(Item... items) {
         ArrayList<Item> list = new ArrayList<>();
-        for (Item item: items) {
+        for (Item item : items) {
             list.add(Item.copyItem(item));
         }
         return List.copyOf(list);
