@@ -32,6 +32,7 @@ public class CheckIfAppointmentTodayCommand extends Command {
             UserInputErrorException {
         if (appointmentList instanceof AppointmentList) {
             ((AppointmentList) appointmentList).hasAppointmentToday("P",parameterArray[0]);
+
         }
         return Status.APPOINTMENT_FOUND_SUCCESS;
     }

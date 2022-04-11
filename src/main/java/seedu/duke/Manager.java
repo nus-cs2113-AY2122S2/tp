@@ -40,6 +40,12 @@ public class Manager {
         }
     }
 
+    public void logo() {
+        String logo =  "                   " +  "╔╦╦═╦╗╔═╦══╦╗\n"
+                     + "                   " +  "║═║╩║╚╣╔╣║║║║\n"
+                     + "                   " +  "╚╩╩╩╩═╩╝╚╩╩╩╝";
+        System.out.println(logo);
+    }
 
     private Status executeAddCommand(String commandWord, String parameters) throws HalpmiException, NotFoundException,
             DuplicateEntryException {

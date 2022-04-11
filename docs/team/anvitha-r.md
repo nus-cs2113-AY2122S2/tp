@@ -10,16 +10,16 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 <br>
 
 
-| Contribution, Enhancement | Description                                                          |
-|-------------------------|----------------------------------------------------------------------|
-| Delete doctor           | Implemented the delete fuction to delete a dcotor based on the       |
-| View Doctor             | Implemented view fucntion for doctor                                 |
-| View Table Format       | Implemted a tableview format to arrange view fucntion clearly        |
-| Edit Patient record     | Implemented the edit function for patient                            |
-| Edit Doctor record      | Implemented the edit function for doctor                             |
-| Edit Find function      | Edited the find function to display accordingly                      |
-| Fix bugs                | Fixed some bugs from the pe2 dry run and made the respective changes |
-
+| Contribution, Enhancement | Description                                                                                 |
+|---------------------------|---------------------------------------------------------------------------------------------|
+| Delete doctor             | Implemented the delete fuction to delete a dcotor based on the                              |
+| View Doctor               | Implemented view fucntion for doctor                                                        |
+| View Table Format         | Implemted a tableview format to arrange view fucntion clearly                               |
+| Edit Patient record       | Implemented the edit function for patient                                                   |
+| Edit Doctor record        | Implemented the edit function for doctor                                                    |
+| Edit Find function        | Edited the find function to display accordingly                                             |
+| Appointment function      | Edited the appointment function to check for whether patient or doctor contains appointment |
+| Fix bugs                  | Fixed some bugs from the pe2 dry run and made the respective changes                        |
 
 
 ## **UG contributions:**
@@ -27,10 +27,8 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 * Edited contents in the UG for continuity purposes
 * Fixed the bugs in the UG according to the feedback from pe2 dry run 
 * Add images and screenshots to ease the readability
-* updated help commands
-* updated required sections whenever necessary 
-
-
+* Updated help commands
+* Updated required sections whenever necessary 
 
 ## **DG contributions:**
 
@@ -39,8 +37,6 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 * Structured the user stories intially 
 
 ## **Team-based tasks contributions:**
-
-
 
 * Necessary general code enhancements is by everyone
 
@@ -51,3 +47,4 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 * Release management is done by consensus by the majority
 
 * Updating user/developer docs that are not specific to a feature is by everyone when we see a change fits 
+

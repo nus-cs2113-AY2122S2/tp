@@ -34,7 +34,7 @@ public class UI {
     }
 
     public static void printNewLineSeparator() {
-        System.out.println("-------------------------");
+        System.out.println("--------------------------------------------------------");
     }
 
     public void printGreeting() {
@@ -44,7 +44,7 @@ public class UI {
     }
 
     public void printLogo() {
-        String logo = "------------------------------\n"
+        String logo = "--------------------------------------------------------\n"
                 + "HALPMI";
 
         System.out.println(logo);
@@ -371,7 +371,7 @@ public class UI {
 
     public static void printParagraph(String paragraph) {
         String[] arrayOfSentences = paragraph.split("\n");
-        System.out.println("HalpMi: " + arrayOfSentences[0]);
+        System.out.println("Duke: " + arrayOfSentences[0]);
         for (int i = 1; i < arrayOfSentences.length; i++) {
             System.out.print("        ");
             System.out.println(arrayOfSentences[i]);
