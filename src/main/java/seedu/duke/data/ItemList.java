@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ItemList {
 
-    private static List<Item> itemArrayList;
+    private List<Item> itemArrayList;
 
     public ItemList(List<Item> itemList) {
         this.itemArrayList = itemList;
@@ -24,7 +24,7 @@ public class ItemList {
         return this.itemArrayList.get(index);
     }
 
-    public static int getSize() {
+    public int getSize() {
         return itemArrayList.size();
     }
 
@@ -65,7 +65,7 @@ public class ItemList {
         if (other instanceof ItemList) {
             // cast only if other is instance of EditCommand
             toCompare = (ItemList) other;
-            return this.itemArrayList.equals(toCompare.itemArrayList);
+            return this.itemArrayList.containsAll(toCompare.itemArrayList);
         } else {
             // null, or object not EditCommand
             return false;
