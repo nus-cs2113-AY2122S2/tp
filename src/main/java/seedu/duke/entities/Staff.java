@@ -1,7 +1,5 @@
 package seedu.duke.entities;
 
-import seedu.duke.loggers.MainLogger;
-
 import java.io.Serializable;
 
 public class Staff implements Serializable {

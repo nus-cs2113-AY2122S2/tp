@@ -18,6 +18,7 @@ public final class InputParser {
     public static String getString(String msg) throws OperationTerminationException {
         System.out.print(msg);
         String line = scanner.nextLine();
+        line = line.trim();
         if (line.equals(TERMINATOR)) {
             throw new OperationTerminationException();
         }

@@ -1,6 +1,5 @@
 package seedu.duke.manager;
 
-
 import seedu.duke.entities.Staff;
 import seedu.duke.loggers.MainLogger;
 
