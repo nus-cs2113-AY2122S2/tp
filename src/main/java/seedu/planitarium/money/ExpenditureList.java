@@ -222,7 +222,7 @@ public class ExpenditureList extends MoneyList {
     /**
      * Edits the expenditure's recurring status.
      *
-     * @param item       The expenditure's object in the list
+     * @param item        The expenditure's object in the list
      * @param isPermanent The expenditure's recurring status
      * @return true if recurring status have been edited, false otherwise
      */
@@ -238,7 +238,7 @@ public class ExpenditureList extends MoneyList {
     /**
      * Edits the expenditure's description.
      *
-     * @param item       The expenditure's object in the list
+     * @param item     The expenditure's object in the list
      * @param category The expenditure's category
      * @return true if category have been edited, false otherwise
      */
@@ -253,7 +253,7 @@ public class ExpenditureList extends MoneyList {
      * Given a non-null category integer, check if new
      * category is same as old.
      *
-     * @param item       The expenditure's object in the list
+     * @param item     The expenditure's object in the list
      * @param category The expenditure's category
      * @return true if category have been edited, false otherwise
      */
@@ -269,13 +269,14 @@ public class ExpenditureList extends MoneyList {
     /**
      * Edits the expenditure's amount.
      *
-     * @param item       The expenditure's object in the list
+     * @param item   The expenditure's object in the list
      * @param amount The expenditure's amount
      * @return true if amount have been edited, false otherwise
      */
     private boolean editExpAmount(Expenditure item, Double amount) {
-        Double itemAmount = item.getAmount();
-        if (amount != null && itemAmount != amount) {
+        String itemAmount = String.valueOf(item.getAmount());
+        String newAmount = String.valueOf(amount);
+        if (amount != null && !itemAmount.equals(newAmount)) {
             item.setAmount(amount);
             return true;
         }
@@ -285,7 +286,7 @@ public class ExpenditureList extends MoneyList {
     /**
      * Edits the expenditure's description.
      *
-     * @param item       The expenditure's object in the list
+     * @param item        The expenditure's object in the list
      * @param description The expenditure's description
      * @return true if description have been edited, false otherwise
      */
