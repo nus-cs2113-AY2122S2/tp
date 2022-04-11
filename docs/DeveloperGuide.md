@@ -225,6 +225,8 @@ Local storage has two general functions:
 1. to serialize everything that needs to be saved
 2. to restore everything that was originally saved
 
+These functions are present as methods in most of the classes we want to save.
+
 The format of the savefile is JSON.
 
 We namely save four large components:
@@ -238,6 +240,29 @@ The keys of the JSON savefile are all defined in the src/java/seedu.simplst/json
 
 ### Classes and methods for local storage
 
+#### Warehouse class
+![WarehouseLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Warehouse.puml)
+
+The entry point to saving state is saveWarehouseState(), and the entry point to restoring state is
+restoreWarehouseState().
+
+#### Order class
+![OrderLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Order.puml)
+
+#### Orderline class
+![OrderlineLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Orderline.puml)
+
+#### Good class
+![GoodLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Good.puml)
+
+#### Unit Good class
+![UnitGoodLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/UnitGood.puml)
+
+#### Serialize Sequence Diagram
+![Serialize Seq Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/SerializeSequence.puml)
+
+#### Restore State Sequence Diagram
+![Restore Seq Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/RestoreStateSequence.puml)
 
 
 
