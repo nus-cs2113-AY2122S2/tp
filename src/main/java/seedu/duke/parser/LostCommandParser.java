@@ -7,6 +7,7 @@ import seedu.duke.exceptions.InvMgrException;
 import java.util.stream.Stream;
 
 import static seedu.duke.parser.CliSyntax.PREFIX_ITEM_INDEX;
+import static seedu.duke.parser.CliSyntax.PREFIX_QUANTITY;
 
 public class LostCommandParser implements Parser<LostCommand> {
 
@@ -17,14 +18,13 @@ public class LostCommandParser implements Parser<LostCommand> {
      * @throws InvMgrException if the user input does not conform the expected format.
      */
     public LostCommand parse(String args) throws InvMgrException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM_INDEX);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_ITEM_INDEX)) {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM_INDEX, PREFIX_QUANTITY);
+        if (!arePrefixesPresent(argMultimap, PREFIX_ITEM_INDEX, PREFIX_QUANTITY)) {
             throw new InvMgrException(Messages.INVALID_SYNTAX);
         }
-
         int itemIndex = ParserUtils.parseIndex(argMultimap.getValue(PREFIX_ITEM_INDEX).get()) - 1;
-        return new LostCommand(itemIndex);
+        int itemQuantity = ParserUtils.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
+        return new LostCommand(itemIndex, itemQuantity);
     }
 
     /**

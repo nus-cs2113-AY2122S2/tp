@@ -1,11 +1,13 @@
 package seedu.duke.stubs;
 
 import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.BorrowCommand;
-import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.DescCommand;
+import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.EditCommand;
 import seedu.duke.commands.SearchCommand;
+import seedu.duke.commands.BorrowCommand;
+import seedu.duke.commands.ReturnCommand;
+import seedu.duke.commands.LostCommand;
 import seedu.duke.data.Item;
 
 import java.time.LocalDate;
@@ -22,6 +24,8 @@ public class ParserStubs {
     public static final String PAPERCUP_DESCRIPTION = "25ml cups";
 
     public static final String ITEM_INDEX = "1";
+    public static final String ITEM_INDEX_OUT_OF_RANGE = "-1";
+    public static final String NON_INT_ITEM_INDEX = "abc";
 
     public static final String BORROW_START_DATE_STR = "2022-03-21";
     public static final LocalDate BORROW_START_DATE = LocalDate.parse("2022-03-21");
@@ -67,5 +71,10 @@ public class ParserStubs {
             BORROW_START_DATE,
             BORROW_END_DATE,
             BORROWER_NAME);
+    public static final ReturnCommand RETURNCOMMAND = new ReturnCommand(Integer.parseInt(ITEM_INDEX) - 1);
+    public static final LostCommand LOST_COMMAND = new LostCommand(Integer.parseInt(ITEM_INDEX) - 1,
+            Integer.parseInt(PAPERCUP_QUANTITY));
+
+
 }
 

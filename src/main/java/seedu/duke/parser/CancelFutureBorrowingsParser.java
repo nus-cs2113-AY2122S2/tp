@@ -32,6 +32,8 @@ public class CancelFutureBorrowingsParser implements Parser<CancelFutureBorrowin
         String borrowerName = argMultimap.getValue(PREFIX_BORROWER_NAME).get();
         int borrowIndex = ParserUtils.parseIndex(argMultimap.getValue(PREFIX_ITEM_INDEX).get()) - 1;
 
+        assert borrowIndex > -1 : " index must be more than 0";
+
         return new CancelFutureBorrowingsCommand(borrowerName, borrowIndex);
     }
 

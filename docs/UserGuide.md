@@ -119,11 +119,11 @@ List all items in the inventory.
 
 **Arguments:**
 
-None?
+None
 
 **Caveats:**
 
-None?
+Arguments after `list` will be ignored. i.e. `list foo` will behave the same way `list` does.
 
 **Examples of usage:**
 
@@ -326,6 +326,7 @@ List all items should have been returned but have yet to be. You can narrow down
 * `BORROWER_NAME` must not contain punctuations.
 
 **Examples of usage (Assuming today's date is ***2021-03-31***):**
+
 ```
 > listob
 Name of Item: Trolley
@@ -390,7 +391,7 @@ List all items that is available all the time between a start date and an end da
 
 * `START_DATE` and `END_DATE` must be in `YYYY-MM-DD` format.
 
-**Examples of usage (Assuming today's date is ***2021-03-31***):**
+**Examples of usage:**
 
 ```
 > listab s/2022-06-06 e/2022-06-06
@@ -550,10 +551,12 @@ Here is a list of future borrowings for Tom:
 1) Name of Item: Chalkboard
 Name of Borrower: Tom
 Borrow Duration: 2022-05-05 to 2022-05-06
+Borrow Quantity: 1
 
 2) Name of Item: pencil
 Name of Borrower: Tom
 Borrow Duration: 2022-05-06 to 2022-05-06
+Borrow Quantity: 4
 
 > cancel p/Tom i/1
 Future borrowing of Chalkboard | 1 from 2022-05-05 to 2022-05-06 by Tom has been removed

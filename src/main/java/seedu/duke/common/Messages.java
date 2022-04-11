@@ -8,10 +8,15 @@ public class Messages {
     public static final String RETURNED_MESSAGE = "I've marked this item as returned.";
     public static final String EMPTY_ITEM_LIST_MESSAGE = "Your inventory is currently empty. Please add an item first!";
     public static final String ITEM_NUMBER_OUT_OF_RANGE_MESSAGE = "Sorry, the item number is out of range. "
-            + "Please enter a different item number!";
+            + " Please enter a different item number!";
+    public static final String REPORTED_LOST_MESSAGE = "I've marked this item as lost and "
+            + "updated the inventory accordingly!";
+    public static final String REPORTED_LOST_AND_DELETED_MESSAGE = "I've marked this item as lost and "
+            + "deleted it from the inventory!";
+    public static final String LOST_ERROR_MESSAGE = "The quantity lost exceeds the item quantity!"
+            + " Please enter a different item quantity.";
     public static final String RETURN_ERROR_MESSAGE = "There are no outstanding loans on this item. "
             + "Please select a different item to return!";
-    public static final String REPORTED_LOST_MESSAGE = "I've marked this item as lost.";
     public static final String INVALID_START_END_DATE = "Error: Incorrect start and end date order. "
             + "Please ensure that end date >= start date.";
     public static final String INVALID_INSUFFICIENT_QUANTITY = "Sorry. There is insufficient quantity. "
