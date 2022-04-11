@@ -205,8 +205,9 @@ obtained from the `ListContainer` object. Then, the `satisfaction` is added to t
 
 The following sequence diagram shows what would happen if the user typed `add satisfaction bob 5`.
 
-PLEASE NOTE: This sequence diagram omits the details of some behavior and classes involved, like the `Duke` class.
-![Sequence Diagram](team/alinazheng_addsatisfactioncommand_uml/AlinaZheng_AddSatisfaction_SequenceDiagram2.0.png)
+PLEASE NOTE: This sequence diagram omits the details of some behavior and classes involved, like the `Duke` and 
+`CommandParser` classes.
+![Sequence Diagram](team/alinazheng_addsatisfactioncommand_uml/sequenceAddSatisfactionCommandFinal.drawio.png)
 
 ### Add Housekeeper feature
 
