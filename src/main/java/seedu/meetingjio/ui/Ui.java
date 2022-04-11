@@ -4,6 +4,7 @@ import seedu.meetingjio.parser.Parser;
 import seedu.meetingjio.commands.Command;
 import seedu.meetingjio.timetables.MasterTimetable;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,6 +60,8 @@ public class Ui {
                 System.out.println(feedback);
             } catch (AssertionError ae) {
                 logger.log(Level.INFO, "Assertion Error");
+            } catch (NoSuchElementException nsee) {
+                System.exit(0);
             }
             userInput = in.nextLine();
         }
