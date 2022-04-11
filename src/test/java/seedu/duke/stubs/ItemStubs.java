@@ -51,15 +51,24 @@ public class ItemStubs {
 
     /**
      * Generate an {@code Item}.
-     * @param name name of Item
-     * @param quantity quantity of Item
-     * @param description description of Item
-     * @return Item matching the given arguments
+     *
+     * @param name name of Item.
+     * @param quantity quantity of Item.
+     * @param description description of Item.
+     * @return Item matching the given arguments.
      */
     private static Item generateItem(String name, int quantity, String description) {
         return new Item(name, quantity, description);
     }
 
+    /**
+     * Adds a BorrowRecord to an Item.
+     * If an error occurs while adding, null is returned.
+     *
+     * @param item the Item to modify
+     * @param record the BorrowRecord to add.
+     * @return the {@code item} given if successful, null otherwise
+     */
     private static Item attachRecord(Item item, BorrowRecord record) {
         try {
             item.addBorrowRecord(record);

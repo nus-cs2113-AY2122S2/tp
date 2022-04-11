@@ -1,0 +1,48 @@
+@startuml
+
+hide footbox
+
+skinparam PackageBackgroundColor pink
+skinparam SequenceReferenceBackgroundColor salmon
+
+Participant ":EditCommand" as EditCommand
+Participant "itemList:ItemList" as ItemList
+Participant "ui:Ui" as Ui
+Participant "placeholderItem" as placeholderItem
+
+
+activate EditCommand
+
+    opt name is present
+        EditCommand -> placeholderItem: setName(name: String)
+        activate placeholderItem
+        return
+    end
+
+    opt quantity is present
+        ref over EditCommand
+            Calculate the final quantity
+            before setting quantity
+        end
+        EditCommand -> placeholderItem: setQuantity(quantity: Integer)
+    end
+
+    opt description is present
+        EditCommand -> placeholderItem: setDescription(description: String)
+        activate placeholderItem
+        return
+    end
+
+    EditCommand -> Ui: showMessages(message:String)
+    activate Ui
+    return
+
+    EditCommand -> ItemList: set(index, placeholderItem)
+    activate ItemList
+    return
+
+    destroy placeholderItem
+<- EditCommand
+destroy EditCommand
+
+@enduml
