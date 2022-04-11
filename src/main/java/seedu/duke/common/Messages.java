@@ -40,8 +40,8 @@ public class Messages {
             + "dates in YYYY-MM-DD format.";
 
     /** AddCommand messages. **/
-    public static final String DUPLICATE_ITEM_MESSAGE = "There is already a similar item in the list!"
-            + "Use edit command to edit the item's quantity/description instead."
+    public static final String DUPLICATE_ITEM_MESSAGE = "There is already a similar item in the list!\n"
+            + "Use edit command to edit the item's quantity/description instead.\n"
             + "Or change the name of the item to be more specific.";
 
     /** EditCommandParser messages. **/
