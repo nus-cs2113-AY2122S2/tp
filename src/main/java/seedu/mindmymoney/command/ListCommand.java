@@ -84,7 +84,7 @@ public class ListCommand extends Command {
         if (listInput.equals(FLAG_OF_EXPENSES)) {
             listInString = listString(count, listInString);
         } else {
-            listInString = outputListWithDate(count,listInString);
+            listInString = outputListWithDate(count, listInString);
         }
         assert listInString.length() != 0 : "Return string should be non-empty";
         return listInString;
@@ -92,6 +92,7 @@ public class ListCommand extends Command {
 
     /**
      * Outputs the list of expenses with date.
+     *
      * @param count To obtain the numbering when listing the expenses.
      * @param listInString String where the content of output is appended to.
      * @return String of expenditures.
@@ -102,7 +103,7 @@ public class ListCommand extends Command {
         if (!inputArray[INDEX_OF_SECOND_ITEM].equals("")) {
             if (!isValidInputCalculateCommand(inputArray[INDEX_OF_SECOND_ITEM])) {
                 throw new MindMyMoneyException("Date has to be valid and"
-                        + " in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
+                    + " in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
             }
             if (listStringWithDate(count, listInString, inputArray).equals("")) {
                 throw new MindMyMoneyException("Date not found in the list! Do check your input");
@@ -124,8 +125,8 @@ public class ListCommand extends Command {
         for (Expenditure expenditure : expenditureList.expenditureListArray) {
             if (expenditure.getTime().contains(inputArray[INDEX_OF_SECOND_ITEM])) {
                 listInString += count + ". $" + String.format("%.2f", expenditure.getAmount()) + " was spent on "
-                        + expenditure.getDescription() + "(" + expenditure.getCategory() + ") " + "using "
-                        + expenditure.getPaymentMethod() + " [" + expenditure.getTime() + "]" + "\n";
+                    + expenditure.getDescription() + "(" + expenditure.getCategory() + ") " + "using "
+                    + expenditure.getPaymentMethod() + " [" + expenditure.getTime() + "]" + "\n";
                 count++;
             }
         }
@@ -142,8 +143,8 @@ public class ListCommand extends Command {
     public String listString(int count, String listInString) {
         listInString += PrintStrings.LINE;
         for (Expenditure expenditure : expenditureList.expenditureListArray) {
-            listInString += count + ". $" + String.format("%.2f", expenditure.getAmount()) + " was spent on " 
-                + expenditure.getDescription() + "(" + expenditure.getCategory() + ") " + "using " 
+            listInString += count + ". $" + String.format("%.2f", expenditure.getAmount()) + " was spent on "
+                + expenditure.getDescription() + "(" + expenditure.getCategory() + ") " + "using "
                 + expenditure.getPaymentMethod() + " [" + expenditure.getTime() + "]" + "\n";
             count++;
         }
@@ -159,9 +160,9 @@ public class ListCommand extends Command {
     public void printExpenditureList() throws MindMyMoneyException {
         if (expenditureList.isEmpty()) {
             throw new MindMyMoneyException(
-                    "Your expenditure list is currently empty! Please add some expenditures to your list first");
+                "Your expenditure list is currently empty! Please add some expenditures to your list first");
         } else {
-            System.out.print(expenditureListToString());
+            System.out.println(expenditureListToString());
         }
     }
 
@@ -190,11 +191,11 @@ public class ListCommand extends Command {
     public void printCreditCardList() throws MindMyMoneyException {
         if (creditCardList.isEmpty()) {
             throw new MindMyMoneyException(
-                    "Your credit card list is currently empty! Please add some credit cards to your account first");
+                "Your credit card list is currently empty! Please add some credit cards to your account first");
         } else {
             System.out.print(PrintStrings.LINE);
             System.out.print(creditCardListToString());
-            System.out.print(PrintStrings.LINE);
+            System.out.println(PrintStrings.LINE);
         }
     }
 
@@ -223,7 +224,7 @@ public class ListCommand extends Command {
     public void printIncomeList() throws MindMyMoneyException {
         if (incomeList.isEmpty()) {
             throw new MindMyMoneyException("Your income list is currently empty! "
-                    + "Please add some incomes to your account first");
+                + "Please add some incomes to your account first");
         } else {
             System.out.print(PrintStrings.LINE);
             System.out.print(incomeListToString());
@@ -246,9 +247,9 @@ public class ListCommand extends Command {
             printIncomeList();
         } else {
             throw new MindMyMoneyException("Please ensure that you have entered a valid list command.\n"
-                    + "Use 'list /e' to view your current list of expenditure\n"
-                    + "Use 'list /cc' to view your current list of stored credit cards\n"
-                    + "Use list /i to view your current list of incomes");
+                + "Use 'list /e' to view your current list of expenditure\n"
+                + "Use 'list /cc' to view your current list of stored credit cards\n"
+                + "Use list /i to view your current list of incomes");
         }
     }
 }
