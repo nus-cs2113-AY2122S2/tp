@@ -15,8 +15,12 @@ public class AddParser extends CommandParser {
         super(warehouse);
     }
 
+    public AddParser(Warehouse warehouse, String userInput) {
+        super(warehouse);
+        this.userInput = userInput;
+    }
 
-    protected void initExtractParams() {
+    public void initExtractParams() {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[ugbo]{1,2})/";
@@ -59,7 +63,6 @@ public class AddParser extends CommandParser {
                     userInput, regexOrderline).getGroupValues();
             warehouse.addOrderline(regexOrderlineMatch.get("oid"),
                     regexOrderlineMatch.get("sku"), regexOrderlineMatch.get("qty"));
-
         } else if (matches.get("flag").equals("bg")) {
             // batch goods
             String regexBatchGoods = "fp/(?<filepath>.*)";

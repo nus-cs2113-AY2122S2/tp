@@ -19,8 +19,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Warehouse {
     private int totalCapacity = 0; //in terms of arbritrary_units
+
     private static ArrayList<Order> orderLists = new ArrayList<>();
+
     private HashMap<String, UnitGood> unitGoodHashMap = new HashMap<>();
+
     private LinkedHashMap<String, Good> goodList = new LinkedHashMap<>();
 
 
@@ -644,6 +647,17 @@ public class Warehouse {
         return false;
     }
 
+    public LinkedHashMap<String, Good> getGoodList() {
+        return goodList;
+    }
+
+    public HashMap<String, UnitGood> getUnitGoodHashMap() {
+        return unitGoodHashMap;
+    }
+
+    public static ArrayList<Order> getOrderLists() {
+        return orderLists;
+    }
 }
 
 
