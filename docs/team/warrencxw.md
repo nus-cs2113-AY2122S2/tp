@@ -53,12 +53,16 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
    [`Session`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/data/SessionTest.java) classes
    * Ensure that key components in `SplitLah` necessary for the operation of other components developed by other
      developers in the team are bug free and work as they are intended to.
-   * Ensure that each of these classes have at least 90% line coverage.
+   * Ensure that each of these classes have at least 90% class, method and line coverage.
  * Added JUnit tests for
    [`SessionSummaryCommandParser`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/SessionSummaryCommandParserTest.java) and 
    [`HelpCommandParser`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/HelpCommandParserTest.java) classes
    * Performed integration testing of the `Parser` component to ensure that objects of the correct subclass of
      `Command` class is produced.
+ * Added [text-based testing](https://github.com/AY2122S2-CS2113T-T10-1/tp/tree/master/text-ui-test)
+   from the command line for [`SessionSummaryCommand`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionSummaryCommand.java) class
+   * Since JUnit tests cannot test for output printed onto standard output, text-based testing has to be done for `SessionSummaryCommand`.
+   * Ensures that calculation logic works as intended.
 
 ### Documentation Contributions
 Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=warrencxw&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false)
@@ -89,6 +93,7 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
      `XYZCommand#prepare` with `XYZCommandParser` class.
  * Headed the fixing of bugs found by other teams during the PE dry run
    * Set up a collaborative document for the sorting of bugs, allocation of duties and tracking of progress
+ * Assisted in the drafting of script and slides for demo video v1.0 and v2.1.
 
 #### Project Management
 * Worked on pre-planning and ideation of project

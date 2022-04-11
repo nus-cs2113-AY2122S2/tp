@@ -63,24 +63,24 @@ public abstract class Message {
                     + "        " + ActivityDeleteCommandParser.COMMAND_FORMAT + "\n"
                     + "8.  Edit an existing activity\n"
                     + "        Syntax: " + ActivityEditCommandParser.COMMAND_FORMAT_FIRST + "\n"
-                    + "        Syntax: " + ActivityEditCommandParser.COMMAND_FORMAT_SECOND + "\n"
+                    + "                " + ActivityEditCommandParser.COMMAND_FORMAT_SECOND + "\n"
                     + "9.  View an existing activity's details\n"
                     + "        " + ActivityViewCommandParser.COMMAND_FORMAT + "\n"
-                    + "10.  List all existing activities\n"
+                    + "10. List all existing activities\n"
                     + "        " + ActivityListCommandParser.COMMAND_FORMAT + "\n"
-                    + "11.  Show the summary of an existing session\n"
+                    + "11. Show the summary of an existing session\n"
                     + "        " + SessionSummaryCommandParser.COMMAND_FORMAT + "\n"
-                    + "12.  Create a new group\n"
+                    + "12. Create a new group\n"
                     + "        " + GroupCreateCommandParser.COMMAND_FORMAT + "\n"
                     + "13. Delete an existing group\n"
                     + "        " + GroupDeleteCommandParser.COMMAND_FORMAT + "\n"
-                    + "14.  Edit an existing group\n"
+                    + "14. Edit an existing group\n"
                     + "         " + GroupEditCommandParser.COMMAND_FORMAT + "\n"
                     + "15. View an existing group's details\n"
                     + "        " + GroupViewCommandParser.COMMAND_FORMAT + "\n"
                     + "16. List all existing groups\n"
                     + "        " + GroupListCommandParser.COMMAND_FORMAT + "\n"
-                    + "17.  Show this help menu\n"
+                    + "17. Show this help menu\n"
                     + "        " + HelpCommandParser.COMMAND_FORMAT + "\n"
                     + "18. Exit the program\n"
                     + "        " + ExitCommandParser.COMMAND_FORMAT;
@@ -262,11 +262,11 @@ public abstract class Message {
     public static final String ERROR_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS =
             "The person list or group identifier delimiters are missing.";
     public static final String ASSERT_SESSIONCREATE_SESSION_NAME_NULL =
-            "Session name is empty but was not handled in prepare function.";
+            "Session name is empty but was not handled in command parser.";
     public static final String ASSERT_SESSIONCREATE_SESSION_DATE_NULL =
-            "Session data is empty but was not handled in prepare function.";
+            "Session data is empty but was not handled in command parser.";
     public static final String ASSERT_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS =
-            "The person list or group identifier delimiters are missing but was not handled in prepare function.";
+            "The person list or group identifier delimiters are missing but was not handled in command parser.";
     public static final String LOGGER_SESSIONCREATE_SESSION_ADDED =
             "A session was added into the list of sessions with Id: ";
     public static final String LOGGER_SESSIONCREATE_DUPLICATE_NAMES_IN_SESSION_LIST =
@@ -406,9 +406,9 @@ public abstract class Message {
 
     // Group Create Command
     public static final String ASSERT_GROUPCREATE_GROUP_NAME_NULL =
-            "Group name is empty but was not handled in prepare function.";
+            "Group name is empty but was not handled in command parser.";
     public static final String ASSERT_GROUPCREATE_PERSONLIST_NULL =
-            "The person list is empty but was not handled in prepare function.";
+            "The person list is empty but was not handled in command parser.";
     public static final String LOGGER_GROUPCREATE_GROUP_ADDED =
             "A group was added into the list of groups with Id: ";
     public static final String LOGGER_GROUPCREATE_DUPLICATE_NAMES_IN_GROUP_LIST =
@@ -448,6 +448,20 @@ public abstract class Message {
     // Group Edit Command
     public static final String ASSERT_GROUPEDIT_GROUP_ID_INVALID =
             "Group ID is less than or equals to zero.";
+    public static final String ERROR_GROUPEDIT_SAME_PERSON_LIST =
+            "The new person list provided is the same as the original person list"
+                + ", please rectify and try again.";
+    public static final String ERROR_GROUPEDIT_GROUP_NAME_DUPLICATE =
+             "There is already an existing group with the same name"
+                 + ", please rectify and try again.";
+    public static final String ERROR_GROUPEDIT_GROUP_NAME_NOT_NEW =
+             "The group name provided is the same as the original one,"
+                 + " please rectify and try again.";
+    public static final String ERROR_GROUPEDIT_NO_CHANGE =
+             "No changes made.";
+    public static final String ERROR_GROUPEDIT_DUPLICATE_NAME_IN_GROUP =
+             "There are duplicate names in the person list for the group you are trying to edit. "
+                 + "Please rectify and try again.";
 
     // Group Edit Command Parser
     public static final String ERROR_GROUPEDIT_NO_EDIT_DELIMITERS_FOUND =

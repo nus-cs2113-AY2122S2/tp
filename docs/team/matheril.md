@@ -28,7 +28,7 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 #### Enhanced Features
 * Separated dependency of the `Parser` class from the `Command` class by creating `ActivityEditCommandParser` and 
   `SessionViewCommandParser`.
-* Table Formatter
+* TableFormatter
     * A `TableFormatter` object creates a table that can be modified with new data at any time. When printed, it
       produces a neatly formatted and decorated table that automatically aligns its borders to the data stored within.
       Other classes can create `TableFormatter` objects, edit them and pass them to `TextUI` to be printed to the user 
@@ -37,9 +37,15 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
     * A helper class for `TableFormatter`. It represents a single row of the table.
 * Message
     * Set up this class so other developers can store their hardcoded strings in it, such as error and logging messages.
+* InvalidDataException
+    * Set up this class to represent an exception thrown when data-related errors occur.
+* InvalidFormatException
+    * Set up this class to represent an exception thrown when format-related errors occur.
 
 #### Testing
-* Added JUnit tests for `ActivityEditCommand` and `ActivityEditCommandParser`.
+* Added JUnit tests for `ActivityEditCommand`,`ActivityEditCommandParser`, `Name`, `Person` and `ActivityCost`.
+* As `TextUI` mostly consists of methods that print to the interface instead of returning a value, we decided not to add JUnit tests for this 
+  class.
  
 ### Documentation Contributions
 Documentation contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=matheril&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false)
@@ -51,7 +57,7 @@ Documentation contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 * Standardised language and grammar across the guide.
  
 #### Developer Guide
-* Added documentation for `SessionViewCommand`.
+* Added documentation for `TextUI`, `SessionViewCommand` and `ActivityEditCommand`.
 
 ### Miscellaneous Contributions
 * Recorded and narrated a demo video with slides and annotations including footage of the program in action for use

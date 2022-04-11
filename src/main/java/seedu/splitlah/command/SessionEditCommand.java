@@ -26,6 +26,7 @@ public class SessionEditCommand extends Command {
     private final String sessionName;
     private final String[] personNames;
     private final LocalDate sessionDate;
+    private LocalDate oldSessionDate;
 
     /**
      * Initializes a SessionEditCommand object.
@@ -95,12 +96,12 @@ public class SessionEditCommand extends Command {
         if (sessionName != null && !sessionName.equalsIgnoreCase(session.getSessionName())) {
             return true;
         }
-        if (sessionDate != null && !sessionDate.equals(session.getDateCreated())) {
+        if (sessionDate != null && !sessionDate.equals(oldSessionDate)) {
             return true;
         }
         if (personNames != null) {
             PersonList newPersonList = new PersonList(personNames);
-            return !session.getPersonList().isSuperset(newPersonList.getPersonList());
+            return !newPersonList.isSamePersonList(session.getPersonArrayList());
         }
         return false;
     }
@@ -126,10 +127,11 @@ public class SessionEditCommand extends Command {
                 newSessionName = getNewSessionName(session.getSessionName(), profile);
             }
             if (sessionDate != null) {
+                oldSessionDate = session.getDateCreated();
                 session.setDateCreated(sessionDate);
             }
         } catch (InvalidDataException invalidDataException) {
-            ui.printlnMessageWithDivider(invalidDataException.getMessage());
+            ui.printlnMessage(invalidDataException.getMessage());
             return;
         }
         boolean isSessionEdited = hasSessionEdited(session);
@@ -142,9 +144,9 @@ public class SessionEditCommand extends Command {
             session.setSessionName(newSessionName);
         }
         if (isSessionEdited) {
-            ui.printlnMessageWithDivider(COMMAND_SUCCESS);
+            ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + session);
         } else {
-            ui.printlnMessageWithDivider(COMMAND_NO_EDITS_MADE);
+            ui.printlnMessage(COMMAND_NO_EDITS_MADE);
         }
         manager.saveProfile();
         Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONEDIT_SESSION_EDITED);
