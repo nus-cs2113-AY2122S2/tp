@@ -1,4 +1,4 @@
-# Developer Guide
+# MindMyMoney (M<sup>3</sup>) Developer Guide
 
 ## Content Page
 * [Content Page](#content-page)
@@ -90,7 +90,7 @@ Data stored in the application is saved into text files locally on the user's de
 <br/>
 
 ### Architecture Overview
-![architecture diagram](images/ArchitectureDiagram.png)  
+![architecture diagram](images/ArchitectureDiagramFinal.png)  
 Fig 1 - Architecture Diagram for MindMyMoney
 
 The Architecture Diagram above shows the high-level design of the application. The **main components**
@@ -110,7 +110,7 @@ about the lower level details. Higher cohesion is also achieved and coupling is 
 The Sequence Diagram below shows an example of how the components interact with each other for the scenario 
 where the user issues the command `add /e /pm cash /c food /d Porridge /a 3 /t 04/04/2022` to add an expenditure.
 
-![sequence_diagram](images/ComponentsSequenceDiagram.png)
+![sequence_diagram](images/ComponentsSequenceDiagramFinal.png)
 <br/> Fig 2 - Sequence Diagram showing the Add Command
 
 <br/>
@@ -228,7 +228,7 @@ the `AddCommand.addExpenditure()` method, invoked when using the `/e` flag. Addi
 `CATEGORY`, `DESCRIPTION`, `AMOUNT` and `TIME` are also required.
 
 
-![add_expenditure_command_sequence_diagram](images/AddExpenditureSequenceDiagram.png)  
+![add_expenditure_command_sequence_diagram](images/AddExpenditureCommandSequenceDiagram.png)  
 Fig 8 - Add Expenditure Command Sequence Diagram  
 
 The sequence diagram above shows the interactions of different classes when adding an expenditure
@@ -251,7 +251,7 @@ MindMyMoney allows users to track their different credit cards. Credit cards are
 method, invoked when using the `/cc` flag. Additional parameters `CREDIT_CARD_NAME`, `CASHBACK` and `CARD_LIMIT` are also
 required.
 
-![add_credit_card_command_sequence_diagram](images/AddCreditCardSequence_Diagram.png)   
+![add_credit_card_command_sequence_diagram](images/AddCreditCardSequenceDiagram.png)
 Fig 9 - Add Credit Card Command Sequence Diagram
 
 The sequence diagram above shows the interactions of different classes when adding a credit card to the list.
@@ -309,7 +309,7 @@ The CalculateCommand can take in 3 different `[DATE]` fields:
 
 <br/>
 
-![calculate_command_sequence_diagram](images/CalculateCommandSequenceDiagram.png)
+![calculate_command_sequence_diagram](images/CalculateCommandSequenceDiagramFinal.png)
 <br/> Fig 11 - Calculate Input Command Sequence Diagram
 
 The sequence diagram above shows the interactions of different classes when calculating the expenditure.
@@ -449,7 +449,7 @@ The sequence diagram above shows the interactions when a `DeleteCommand` is exec
 Deletes an `Expenditure` specified by the user using the `Expenditure`'s index. The `Expenditure` is deleted through the `DeleteCommand.deleteExpenditure()`
 method, invoked when using the `/e` flag.
 
-![delete_expenditure_sequence_diagram](images/DeleteExpenditureSequenceDiagram.png)
+![delete_expenditure_sequence_diagram](images/DeleteExpenditureSequenceDiagramFinal.png)
 <br/> Fig 17 - Delete Expenditure Sequence Diagram
 
 The sequence diagram above shows the interactions when deleting an expenditure.
@@ -484,7 +484,7 @@ The sequence diagram above shows the interactions when deleting a `Credit Card`.
 Deletes an `Income` specified by the user using the `Income`'s index. The `Income` is deleted through the `DeleteCommand.deleteIncome()`
 method, invoked when using the `/i` flag.
 
-![Delete_income_sequence_diagram](images/DeleteIncomeSequenceDiagram.png)
+![Delete_income_sequence_diagram](images/DeleteIncomeSequenceDiagramFinal.png)
 <br/> Fig 19 - Delete Income Sequence Diagram
 
 The sequence diagram above shows the interactions when deleting an `Income`.
