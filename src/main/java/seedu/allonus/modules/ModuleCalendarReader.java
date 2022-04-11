@@ -93,7 +93,7 @@ public class ModuleCalendarReader {
             return parseIcsCalendar();
         } else {
             StudyManager.printMessageWithDivider(FILE_NOT_FOUND_MESSAGE);
-            logger.log(Level.WARNING, LOGGER_FILE_NOT_FOUND);
+            logger.log(Level.INFO, LOGGER_FILE_NOT_FOUND);
             return null;
         }
     }
