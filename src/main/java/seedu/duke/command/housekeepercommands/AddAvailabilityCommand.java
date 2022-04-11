@@ -166,6 +166,16 @@ public class AddAvailabilityCommand extends Command {
         ui.printNotedLine();
         ui.printMessage("Added " + name + " availability into records");
         ui.printBottomLine();
+    }
+
+    /**
+     * This methods update the housekeeper's availability into the housekeeper file.
+     *
+     * @param listContainer Contains the list of information.
+     * @throws IOException Write to file fails.
+     */
+    public void writeAvailabilityToFile(ListContainer listContainer) throws IOException {
+        HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         HousekeeperFileManager housekeeperFileManager = new HousekeeperFileManager();
         housekeeperFileManager.save(housekeeperList);
     }

@@ -40,6 +40,12 @@ public class Ui {
         return userInput;
     }
 
+    public void printHelp(String message) {
+        System.out.println(MESSAGE_HEADER);
+        System.out.println(message);
+        System.out.println(END_OF_MESSAGE_LINE);
+    }
+
     public void printEventAdded(Event event) {
         System.out.println(MESSAGE_HEADER);
         System.out.println("I have added the following event in your list:");
@@ -132,10 +138,6 @@ public class Ui {
                 + "was added to it.";
         System.out.printf("There are currently %d items within the item list.\n", listOfItems.getSize());
         System.out.println(END_OF_MESSAGE_LINE);
-    }
-
-    public void printItemAlreadyInTheListErrorMessage(String nameOfItemToAdd) {
-        System.out.printf("Error! %s has already been added to the item list.\n", nameOfItemToAdd);
     }
 
     /**
