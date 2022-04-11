@@ -52,7 +52,7 @@ CreditCard --> C
 deactivate CreditCard
 
 C --> C
-note left
+note right
 Details of deleted
 expenditure is printed out
 end note

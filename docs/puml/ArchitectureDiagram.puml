@@ -2,8 +2,8 @@
 !include Style.puml
 
 skinparam componentStyle rectangle
-skinparam noteBorderColor black
 skinparam ArrowColor black
+skinparam ActorBorderColor black
 
 actor User
 folder data.txt
