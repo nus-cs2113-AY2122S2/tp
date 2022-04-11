@@ -24,10 +24,13 @@
   - [Non-Functional Requirements](#non-functional-requirements)
   - [Glossary](#glossary)
   - [Instruction for manual testing](#instructions-for-manual-testing)
+  
 
 ## Acknowledgements
 
 - Team member Jun Lim's individual project codebase - [GitHub](https://github.com/jltha/ip)
+
+<div style="page-break-after: always;"></div>
 
 ## Introduction
 
@@ -36,6 +39,8 @@ Sherpass will then compile their tasks and present it to them in a timetable. Sh
 platform for them to focus on their academic tasks through the use of timers in our study sessions. Students can use
 the time to block out time to focus on their tasks. Optimised for use via a Command Line Interface (CLI),
 users who can type fast will be able to plan out their tasks in a much quicker fashion compared to traditional GUI apps.
+
+<div style="page-break-after: always;"></div>
 
 ## Architecture
 

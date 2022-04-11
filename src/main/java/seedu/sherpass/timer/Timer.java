@@ -24,6 +24,7 @@ public abstract class Timer extends Thread {
         Timer.taskList = taskList;
     }
 
+    //@@author jltha
     /**
      * Converts the time in seconds to a more readable string form.
      * @param time time
@@ -55,6 +56,7 @@ public abstract class Timer extends Thread {
         }
     }
 
+    //@@author
     /**
      * update() implements the way the class updates the time variable.
      */
