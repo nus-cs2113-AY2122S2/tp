@@ -194,7 +194,7 @@ public class IncomeList extends MoneyList {
 
     private void printEditMsg(Income item, boolean isDescEdited, boolean isAmountEdited, boolean isPermEdited) {
         if (isDescEdited || isAmountEdited || isPermEdited) {
-            System.out.println("Your Income have been edited");
+            System.out.println("Your Income has been edited");
             System.out.println(item);
             return;
         }
