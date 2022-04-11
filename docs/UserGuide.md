@@ -29,6 +29,8 @@ ClubInvMgr is a desktop CLI app for inventory management for CCA clubs, especial
 
 Do not run the program between transition of days (11.59pm to 12.01am). Save your program and exit before, and relaunch after.
 
+Do not edit the JSON data file! You may edit wrongly and lose your data.
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
