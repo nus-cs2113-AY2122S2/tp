@@ -197,9 +197,9 @@ The user starts by typing a list command.
 
 **Normal function**
 
-![EditCommand1SequenceDiagram](EditCommand1SequenceDiagram.png)
-![EditCommand2SequenceDiagram](EditCommand2SequenceDiagram.png)
-![EditCommand3SequenceDiagram](EditCommand3SequenceDiagram.png)
+![EditCommand1SequenceDiagram](img/EditCommand1SequenceDiagram.png)
+![EditCommand2SequenceDiagram](img/EditCommand2SequenceDiagram.png)
+![EditCommand3SequenceDiagram](img/EditCommand3SequenceDiagram.png)
 
 The above diagrams show the sequence diagram when editing an item.
 
@@ -229,8 +229,8 @@ Exceptions are thrown/handled for the following:
 
 **Normal function**
 
-![SearchCommand1SequenceDiagram](SearchCommand1SequenceDiagram.png)
-![SearchCommand2SequenceDiagram](SearchCommand2SequenceDiagram.png)
+![SearchCommand1SequenceDiagram](img/SearchCommand1SequenceDiagram.png)
+![SearchCommand2SequenceDiagram](img/SearchCommand2SequenceDiagram.png)
 
 The above diagrams show the sequence diagram when searching for items.
 
