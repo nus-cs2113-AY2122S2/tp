@@ -410,6 +410,8 @@ into the account
 > **⚠️Warning⚠️**
 >- `[CREDIT_CARD_NAME]` cannot be `cash`, `CASH`, or a combination of either.
 >- `[CASHBACK]` cannot be more than 100%.
+>- `[CARD_LIMIT]` cannot be more than 40,000. Generally, students should not have a monthly income of more than 
+   > $10,000, and a monthly credit card limit of $40,000 calculated through [here](https://www.moneysmart.sg/credit-cards/credit-limit-singapore-ms).
 
 <br/>
 
