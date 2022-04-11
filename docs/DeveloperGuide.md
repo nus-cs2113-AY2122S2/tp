@@ -548,7 +548,31 @@ The general workflow of the `activity /edit` command is as follows:
 15. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully edited with `TextUi#printlnMessage`.
 
 ### View an activity
+**API reference:** [`ActivityViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityViewCommand.java)
 
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `activity /view` command.
+<br>
+<br>
+![View Activity Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ActivityViewCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `activity /view` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityViewCommand` object.
+3. `ActivityViewCommand#run` method is then invoked to run the `activity /view` command.
+4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object that the activity is stored in,
+   with the specified session unique identifier from the list of sessions.
+   * If the session with the requested session unique identifier does not exist, an error message is printed out with
+     `TextUI#printlnMessage` and control is given back to `SplitLah`.
+6. After retrieving the `Session` object, `Session#getActivity` is invoked to obtain the `Activity` object with the specified
+   activity unique identifier from the list of activities.
+   1. If the activity with the requested activity unique identifier does not exist, an error message is printed out with
+     `TextUI#printlnMessage` and control is given back to `SplitLah`.
+   2. Else, a `String` object representing the details of the requested activity is retrieved using the
+      `Activity#toString` method and printed out using `TextUI#printlnMessageWithDivider`.
+    
 ### List activities
 **API reference:** [`ActivityListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityListCommand.java)
 
@@ -566,7 +590,9 @@ The general workflow of the `activity /list` command is as follows:
 4. The list of activities are stored in a `Profile` object, hence `Manager#getProfile` is called.
 5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object that the list of activities is stored in,
    with the specified session unique identifier from the list of sessions.
-6. Once the session is retrieved, `ActivityListCommand` class runs `Session#getActivityListSummaryString`.
+6. When the session is retrieved, `ActivityListCommand` class runs `Session#getActivityListSummaryString`.
+   * For the sake of brevity, the specifics of the method `Session#getActivityListSummaryString` is omitted
+     from the sequence diagram.
    1. If the activity list in the `Session` object is empty, the `Session` class returns a `String` object containing an error message.
    2. Else, a `String` object representing a table summarising the list of activities in the session is returned. 
 7. Finally, the method `TextUI#printlnMessageWithDivider` is called to print the message returned.
