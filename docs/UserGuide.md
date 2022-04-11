@@ -438,6 +438,8 @@ Format: `update medicines`
 
 Example: `update medicines`
 
+![updateMedicine](photos/updateMedicine.jpg)
+
 #### Clearing List of Expired Medicine
 
 If you choose to clear the list of expired medicine manually you can use the `clear old medicines` command. This commmand
@@ -446,6 +448,8 @@ requires no additional parameter.
 Format: `clear old medicines`
 
 Example: `clear old medicines`
+
+![clearMedicine](photos/clearMedicine.jpg)
 
 #### Dispensing Medicine to Patients who have appointments on that day
 
@@ -462,6 +466,8 @@ Format: `dispense medicine /info [NRIC],[Medicine Name],[Quantity]`
 Example: `dispense medicine /info S1234567A,Paracetamol,10,Aspirin,20`
 
 You need to give at least 1 medicine to dispense.
+
+![dispenseMedicine](photos/dispenseMedicine.jpg)
 
 ### Saving
 
