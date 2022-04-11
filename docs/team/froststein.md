@@ -1,7 +1,7 @@
-# Roy Tang - Project Portfolio Page
-
+---
+title: Roy Tang - Project Portfolio Page
+---
 ## Summary of Contributions
-
 ### Code Contributions
 Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=froststein&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 #### New Features
@@ -43,7 +43,6 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
   * Improves the readability when printing list of sessions.
 * Added custom 'Back' buttons for User Guide and Developer guide to aid with navigation and readability.
 
-
 #### Testing
 * Added command `Junit` test for 
   [SessionCreateCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/SessionCreateCommandTest.java), 
@@ -81,9 +80,6 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
 * Managed `Issue Tracker` to ensure no task is left out & all pending task are tracked.
 * Managed Milestones (`v1.0`, `v2.0`, `v2.1`) and `v2.0` release.
 * Listed out objectives to be met for each team meeting and ensured the team's progress was on schedule.
-
-#### Miscellaneous Contributions
-* Set up a Telegram channel for sending pull request messages.
-    * This is to ensure all PRs are reviewed in a timely fashion.
+* Set up a Telegram channel for sending pull request messages so that all PRs are reviewed in a timely fashion.
 * Drafted the script and slides for demo video v1.0 and v2.1.
 * Bugs found for other team during PED [Bugs found](https://github.com/froststein/ped/issues)
