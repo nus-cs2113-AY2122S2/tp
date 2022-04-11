@@ -1,7 +1,38 @@
 # Developer Guide
 
 ## Table of contents
-(tbd at the end)
+
+## Table of contents
+
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up and getting started](#setting-up-and-getting-started)
+   1. [Prerequisites](#prerequisites)
+3. [Design](#design)
+   1. [Architecture](#architecture)
+   2. [Commons Component](#commons-component)
+   3. [UI Component](#ui-component)
+   4. [Data Component](#data-component)
+   5. [Parser Components](#parser-components)
+   6. [Command Component](#command-component)
+   7. [Storage Component](#storage-component)
+4. [Implementation](#implementation)
+   1. [Add Command](#add-command)
+   2. [Description Command](#description-command)
+   3. [Help Command](#help-command)
+   4. [Delete Command](#delete-command)
+   5. [Return Command](#return-command)
+   6. [Lost Command](#lost-command)
+   7. [List Command](#list-command)
+   8. [List Available Borrowings Command](#list-available-borrowings-command)
+   9. [Cancel Future Borrowings Command](#cancel-future-borrowings-command)
+   10. [Edit Command](#edit-command)
+   11. [Search Command](#search-command)
+   12. [Borrow Command](#borrow-command)
+   13. [Storage](#storage)
+5. [Product scope](#product-scope)
+6. [User Stories](#user-stories)
+7. [Non-Functional Requirements](#non-functional-requirements)
+8. [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
@@ -461,4 +492,6 @@ CCA Clubs that require assistance in inventory management, especially for fast t
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Run the program and add sample data with `add`. Type `help` for more information.
+
+Try `edit`, `delete`, and `borrow` to play with the data. `list` and its variants to view data.
