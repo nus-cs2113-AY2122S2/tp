@@ -314,6 +314,7 @@ After data is loaded from the data file, some verification checks are performed 
 | v2.0    | user     | list tasks by tag                             | I can filter tasks I’m looking for                                          |
 | v2.0    | user     | input my grades                               | I can estimate my final GPA                                                 |
 | v2.0    | user     | estimate my GPA                               | I can gauge my performance                                                  |
+
 <br><br><br>
 
 ## 8. Non-Functional Requirements
@@ -340,8 +341,8 @@ Below are instructions to perform manual testing of the application. Please refe
 <br>
 
 ### Launch and exit
-1. Download the jar file and copy the file to an empty folder.
-2. Launch a command terminal and start the application by typing `java -jar tp.jar`.
+1. Download the JAR file and copy the file to an empty folder.
+2. Launch a command terminal and start the application by typing `java -jar FILENAME`, where `FILENAME` is the name of the JAR file (e.g. `tp.jar`).
 3. Exit the application by typing `exit`.
 
 <br>
@@ -404,7 +405,7 @@ Below are instructions to perform manual testing of the application. Please refe
 * Test Case: `edit mod CS2113T -d "Changed"` <br>
   Expected: The description of `CS2113T` is set to `Changed`.
 * Test Case: `edit mod CS2113T -t "2 hours"` <br>
-  Expected: The module remains unchanged. Error details in the message shows that the module description is missing.
+  Expected: The module remains unchanged. Error details in the message shows that `-t` is an invalid flag.
 
 <br>
 
