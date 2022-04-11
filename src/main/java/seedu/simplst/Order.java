@@ -188,8 +188,6 @@ public class Order {
         cur.setFulfilled(Boolean.parseBoolean(jo.get(OrderKeys.isFulfilled).toString()));
         JSONArray orderLinesJson = (JSONArray) jo.get(OrderKeys.orderlines);
         orderLinesJson.forEach((item) -> {
-//            System.out.println("item");
-//            System.out.println(item);
             JSONObject jol = (JSONObject) item;
             UnitGood ug = UnitGood.restoreUnitGood(jol);
             String qty = jol.get(GoodKeys.quantity).toString();

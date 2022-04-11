@@ -53,8 +53,6 @@ public class Display {
     }
 
     public static void newLogin() {
-//         System.out.println("New login. Please type the total number of goods"
-//                 + " your warehouse can hold");
         System.out.println("New login.");
     }
 
@@ -71,11 +69,11 @@ public class Display {
         System.out.println("Unit Good of SKU: " + sku + " added to warehouse");
     }
 
-    public static void orderAdded(int id){
+    public static void orderAdded(int id) {
         System.out.println("Order " + id + " is added to the warehouse");
     }
 
-    public static void orderlineAdded(String name, int qty){
+    public static void orderlineAdded(String name, int qty) {
         System.out.printf("%s is added to order. %d required to fulfill\n",
                 name, qty);
     }
@@ -100,7 +98,7 @@ public class Display {
                 id);
     }
 
-    public static void orderlineAlreadyExists(String name, int qty){
+    public static void orderlineAlreadyExists(String name, int qty) {
         System.out.printf("%s already exists in order. %d now required to fulfill\n",
                 name, qty);
     }
