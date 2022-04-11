@@ -613,7 +613,7 @@ The sequence diagram above shows the interactions when loading user data.
 creates the file if it does not exist.
 2. `MMM` then calls `Storage.load()`, which initializes a `Scanner` that reads the data file.
 3. `Storage` invokes `User.deserializeFrom()`, which reads a serialized User over the `Scanner`.
-4. `User` calls `ExpenditureList::deserializeFrom`, which returns an `ExpenditureList` read from the `Scanner`.
+4. `User` calls `ExpenditureList.deserializeFrom()`, which returns an `ExpenditureList` read from the `Scanner`.
 5. `User` then does the same for `CreditCardList::deserializeFrom` and `IncomeList::deserializeFrom`, which
 return a `CreditCardList` and `IncomeList`, respectively.
 
