@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 import static seedu.duke.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.duke.parser.CliSyntax.PREFIX_NAME;
 import static seedu.duke.parser.CliSyntax.PREFIX_QUANTITY;
-import static seedu.duke.parser.CliSyntax.PREFIX_RELATIVE;
 
 /**
  * Parses input arguments and creates a new EditCommand object.
@@ -25,16 +24,11 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_DESCRIPTION, PREFIX_RELATIVE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_DESCRIPTION);
 
         // Format violation: none of required prefixes present
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_DESCRIPTION)) {
             throw new InvMgrException(Messages.INVALID_SYNTAX);
-        }
-
-        // Format violation: relative without quantity
-        if (argMultimap.getValue(PREFIX_RELATIVE).isPresent() && !argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
-            throw new InvMgrException(Messages.INVALID_RELATIVE_WITHOUT_QUANTITY);
         }
 
         Optional<String> optionalName = argMultimap.getValue(PREFIX_NAME);
@@ -51,20 +45,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         Optional<String> optionalDescription = argMultimap.getValue(PREFIX_DESCRIPTION);
         optionalDescription = convertEmptyStringToEmptyOptional(optionalDescription);
 
-        Optional<Boolean> optionalRelativeAdd = Optional.empty();
-        Optional<String> optionalStringRelativeAdd = argMultimap.getValue(PREFIX_RELATIVE);
-        if (optionalStringRelativeAdd.isPresent() && !optionalStringQuantity.get().equals("")) {
-            optionalRelativeAdd = Optional.of(
-                    ParserUtils.parseRelative(optionalStringRelativeAdd.get()));
-        }
-
         int index = ParserUtils.parseIndex(argMultimap.getPreamble()) - 1;
 
         return new EditCommand(index,
                 optionalName,
                 optionalIntQuantity,
-                optionalDescription,
-                optionalRelativeAdd);
+                optionalDescription);
     }
 
     /**

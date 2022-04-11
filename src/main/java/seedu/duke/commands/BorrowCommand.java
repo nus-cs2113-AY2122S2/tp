@@ -17,7 +17,7 @@ public class BorrowCommand extends Command {
     public static final String USAGE_MESSAGE = "Borrows an item from the inventory list";
     public static final String COMMAND_FORMAT = COMMAND_WORD
             + " i/[item number] q/[quantity] s/[start date] e/[end date] p/[name]";
-    public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
+    public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + "\n"
             + "[Command Format] " + COMMAND_FORMAT + "\n";
 
     private final int itemIndex;

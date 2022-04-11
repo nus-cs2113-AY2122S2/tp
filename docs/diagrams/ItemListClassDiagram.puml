@@ -1,0 +1,40 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+hide empty members
+hide empty attributes
+
+class ItemList {
+ +addItem(item:Item): void
+ +removeItem(item:Item):Item
+ +addBorrowRecord(itemIndex:int, newRecord:BorrowRecord):Item
+}
+
+class Item {
+ -name:String
+ -quantity:int
+ -description:String
+ +addBorrowRecord(newRecord:BorrowRecord):Item
+ +filterRecords(name:Optional<String>, status:BorrowStatus):List<String>
+ +filterOverdueRecords(name:Optional<String>):List<String>
+}
+
+class BorrowRecord {
+ -quantity:int
+ -startDate:LocalDate
+ -endDate:LocalDate
+ -borrowerName:String
+ -isReturned:boolean
+ +isConflict(otherRecord:BorrowRecord):boolean
+}
+
+enum BorrowStatus {
+ PAST
+ PRESENT
+ FUTURE
+}
+
+ItemList --> "*" Item:itemArrayList
+Item --> "*" BorrowRecord:borrowRecords
+BorrowRecord --> "1" BorrowStatus:borrowStatus
+@enduml

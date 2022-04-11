@@ -109,9 +109,16 @@ The `UI` component
 
 ### Data Component
 
-![stuff](todo)
+![ItemListClassDiagram](img/ItemListClassDiagram.png)
 
-The above diagram todo...
+The above diagram shows the class diagram for an `ItemList`.
+
+The `ItemList` component represents an inventory list:
+- An `ItemList` contains 0 or more `Item`.
+  - Example of `Item`: JBX Speakers.
+- An `Item` contains 0 or more `BorrowRecord`.
+- A `BorrowRecord` contains only 1 `BorrowStatus`.
+  - `BorrowStatus`: Whether a borrow record is still current, or in the future or happened already in the past.
 
 ### Parser Components
 
@@ -125,11 +132,13 @@ How the parsing works:
 
 ### Command Component
 
-![CommandClassDiagram](img/CommandClassDiagram.png)
+![CommandClassDiagram1](img/CommandClassDiagram1.png)
+![CommandClassDiagram2](img/CommandClassDiagram2.png)
+![CommandClassDiagram2](img/CommandClassDiagram3.png)
 
 The above diagram shows the class diagram for the `Command` component.
 
-`Command` is an abstract class that sets certain commonalities that is implemented across all types of commands - `AddCommand`, `DescCommand`, `ListCommand`, `DeleteCommand`, `HelpCommand`, `ExitCommand`. Each of these classes have to override the `Command`'s `execute()` method as each command has a different execution. For example, `AddCommand` will be focused on adding an item to an inventory list whereas `DescCommand` will be about retrieving information from the inventory list.
+`Command` is an abstract class that sets certain commonalities that is implemented across all types of commands eg. `AddCommand`, `DescCommand`, `ListCommand`, etc. Each of these command classes have to override `Command`'s `execute()` method as each command has a different execution. For example, `AddCommand` will be focused on adding an item to an inventory list whereas `DescCommand` will be about retrieving information from the inventory list.
 
 ### Storage Component
 
@@ -145,6 +154,9 @@ The above diagram shows the class diagram for the `Storage` component.
 ## Implementation
 
 ### Add Command
+
+**Normal function**
+
 ![AddCommandSequenceDiagram](img/AddCommandSequenceDiagram.png)
 
 The above diagram shows the sequence diagram of the addition of an item.
@@ -165,14 +177,44 @@ The user starts by typing an add command. The example used in the diagram above 
 
 ### Description Command
 
+**Normal function**
+
 ![DescCommandSequenceDiagram](img/DescCommandSequenceDiagram.png)
 
 The above diagram shows the sequence diagram for retrieving the description of an item.
 
-For a user who is unaware of what an item is about, he/she can enter the command eg. `desc 2` command to extract the description for the second item in the inventory list. This command is interpreted by the `Parser` and a `DescCommand` is returned to `InvMgr`. `InvMgr` calls the execute command of `DescCommand` which retrieves the item's information from the `ItemList` and then outputs them into the `Ui` for the user to see.
+The user starts by typing a desc command. The example used in the diagram above is to retrieve the description of an item with the index `1`, based on the list when the user types the `list` command.
 
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is identified to start with the word `desc` and identifies the index given by the user ie. `1`.
+3. `parse()` then generates a new `DescCommand` with the index as the argument. The new `DescCommand` is returned to the `run` method.
+4. The `run()` method then calls on the `execute()` method in `DescCommand` which retrieves the specified `item` from `itemList`.
+5. With the `item` object, we are able to retrieve the item's description and pass it as a String to be printed by `ui` using `showMessages` method.
+
+**Error handling**
+
+Exceptions are thrown/handled for the following:
+1. When the user enters an index for an item that is not in the list (e.g. `100000` when item 100000 does not exist).
+
+### Help Command
+
+**Normal function**
+
+![HelpCommandSequenceDiagram](img/HelpCommandSequenceDiagram.png)
+
+The above diagram shows the sequence diagram for displaying the help menu. The help menu contains a list of all functions of Inventory Manager, as well as their function and syntax for calling them. 
+<br> For a user who is unfamiliar with Inventory Manager, this help menu will enable the user to utilise Inventory Manager to its full capabilities.  
+<br> The user starts by typing the `help` command. 
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. parse()` generates a new `HelpCommand` which is returned to the `run()` method of `InvMgr`.
+3. The `run()` method calls on the `execute()` function in `HelpCommand`.
+4. The `execute()` function calls `showMesages()`, taking in each Command class' help message as the argument and displaying them to the user.
 
 ### Delete Command
+
+**Normal function**
+
 ![DeleteCommandSequenceDiagram](img/DeleteCommandSequenceDiagram.png)
 
 The above diagram shows the sequence diagram of the addition of an item.
@@ -187,7 +229,72 @@ The user starts by typing a delete command. The example used in the diagram abov
 6. If the argument is an invalid index beyond the range of the inventory list, an exception will be thrown.
 7. `DeleteCommand` will converse with `Ui` to show a message that the item has been removed. In this case, the item to add will be printed as the name of the item, followed by " has been deleted.".
 
+### Return Command
+
+**Normal function**
+
+![ReturnCommandSequenceDiagram](img/ReturnCommandSequenceDiagram.png)
+
+The above diagram shows the sequence diagram of Return command, which allows users to return an item that is either overdue or currently on loan.
+
+The user starts by typing a return command. The diagram above uses the example of a user who wishes to mark an item of index `1` as returned. The full return command is `return i/1`.
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, which then calls the `parse()` method in `ReturnCommandParser`.
+2. `ReturnCommandParser` parses the user input into `itemIndex`, and returns a `ReturnCommand` object that is returned to `InputParser` and then `InvMgr`.
+3. The `run()` method calls on the `execute()` function in `ReturnCommand`.
+4. The `execute()` function calls `checkItemListSize()`, which then calls `getSize()` to check if the item list is empty. If it is, an exception is thrown and return cannot be performed. 
+5. Then, it calls `getItem()` to check if the item index is within range. If it is not, an exception is thrown and return cannot be performed. 
+6. Then, it obtains the item's borrow records by calling `getBorrowRecords()` from `Item`.
+7. Each borrow record is iterated over and its borrow status and return status are obtained using `getBorrowStatus()` and `getReturnStatus()` respectively.
+8. A borrow record is considered overdue if its borrow status is past and its return status is false, while a borrow record is outstanding if its borrow status is present and its return status is false.
+   If a borrow record is either overdue or outstanding, then it is marked as returned using `setReturnStatus`. The end date of the borrow record is changed to the day of return using `setEndDate()`. 
+   `ReturnCommand` then converses with `Ui` to show the successful returned message.
+9. If none of the borrow records are overdue or outstanding, then it is taken to be an invalid return request. In this scenario, `ReturnCommand` throws an exception.
+
+**Error handling**
+
+`ReturnCommandParser` throws/handles exceptions in the following situations:
+1. When the user enters a command without any item index (missing `i/ `). This is done in `ReturnCommandParser`.
+2. When the user enters an invalid item index (item index < 0). This is done in `ReturnCommandParser`.
+3. When the user enters an invalid item index (item index is not an integer). This is done in `ReturnCommandParser`.
+
+`ReturnCommand` throws/handles exceptions in the following situations: 
+1. When the user enters an item index that is out of range (> total number of items in inventory).
+2. When the user tries to return an item but the inventory is empty. 
+3. When there are no items that are overdue or currently on loan and hence no items are due to be returned.
+
+### Lost Command
+
+**Normal function**
+
+![LostCommandSequenceDiagram](img/LostCommandSequenceDiagram.png)
+
+The above diagram shows the sequence diagram of Lost command, which allows users to mark an item as missing and update the inventory accordingly.
+
+The user starts by typing a lost command. The diagram above uses the example of a user who wishes to mark `10` quantities of an item of index `1` as lost. The full return command is `lost i/1 q/10`.
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, which then calls the `parse()` method in `LostCommandParser`.
+2. `LostCommandParser` parses the user input into `itemIndex`, and returns a `LostCommand` object that is returned to `InputParser` and then `InvMgr`.
+3. The `run()` method calls on the `execute()` function in `LostCommand`.
+4. The `execute()` function calls `checkItemListSize()`, which then calls `getSize()` to check if the item list is empty. If it is, an exception is thrown and no items can be marked as lost.
+5. Then, it calls `getItem()` to check if the item index is within range. If it is not, an exception is thrown and lost cannot be performed.
+6. `removeItem(itemIndex: Integer)` is called to remove the item from the item list. Then, `showMessages(lostItem + "has been deleted")` is called to display a message that tells the user that the item has been deleted. 
+7. `showMessages(Messages.REPORTED_LOST_AND_DELETED` is called to tell the user that the item has been reported lost and deleted from the inventory.
+
+**Error handling**
+
+`LostCommandParser` throws/handles exceptions in the following situations:
+1. When the user enters a command without any item index (missing `i/ `). This is done in `ReturnCommandParser`.
+2. When the user enters an invalid item index (item index < 0). This is done in `ReturnCommandParser`.
+3. When the user enters an invalid item index (item index is not an integer). This is done in `ReturnCommandParser`.
+
+`LostCommand` throws/handles exceptions in the following situations:
+1. When the user enters an item index that is out of range (> total number of items in inventory).
+2. When the user tries to report an item as lost but the inventory is empty.
+
 ### List Command
+
+**Normal function**
 
 ![ListCommandSequenceDiagram](img/ListCommandSequenceDiagram.png)
 
@@ -195,31 +302,64 @@ The above diagram shows the sequence diagram of the listing of items in `itemLis
 
 The user starts by typing a list command.
 
-1. `InvMgr` calls `parse("list")` method in `Parser` class, which returns a ListCommand object.
+1. `InvMgr` calls `parse("list")` method in `InputParser` class, which returns a ListCommand object.
 2. `InvMgr` calls `execute(itemList, ui)` method in `ListCommand` object.
-3. `ListCommand` loops through every `Item` in `itemList` and prints them line by line
-   and numbers them.
+3. `ListCommand` loops through every `Item` in `itemList` and prints them line by line and numbers them.
+
+### List Available Borrowings Command
+
+**Normal function**
+
+![ListAvailableBorrowingsSequenceDiagram](img/ListAvailableBorrowingsSequenceDiagram.png)
+
+The above diagram shows the sequence diagram of listing the minimum number of items that can be borrowed between a start date and an end date
+
+The user starts by typing a `listab s/STARTDATE e/ENDDATE` command. 
+
+1. `InvMgr` calls `parse("listab s/XYZ e/ABC")` method in `InputParser` class, which then calls `parse("listab s/XYZ e/ABC")` method in `ListAvailableBorrowingsParser`.
+2. `ListAvailableBorrowingsParser` parses the user input into `startDate` and `endDate`, and returns a `ListAvailableBorrowingsCommand` object.
+3. `InvMgr` calls `execute(itemList, ui)` method in `ListAvailableBorrowingsCommand` object.
+4. `ListAvailableBorrowingsCommand` loops through each item in `itemList`, and calls the `minQuantityAvailable` method to check the minimum quantity that can be borrowed throughout `startDate` to `endDate`.
+5. If `minQuantity` is more than 0, the item is printed out with the quantity that can be borrowed.
+
+### Cancel Future Borrowings Command
+
+**Normal function**
+
+![CancelFutureBorrowingsSequenceDiagram](img/CancelFutureBorrowingsSequenceDiagram.png)
+![CancelFutureBorrowingsRef](img/CancelFutureBorrowingsRef.png)
+
+The above diagram shows the sequence diagram of cancelling future reservations of items
+
+The user starts by typing `cancel p/NAME i/INDEX` command. 
+
+1. `InvMgr` calls `parse("cancel p/ABC i/1")` method in `InputParser` class, which then calls `parse("cancel p/ABC i/1")` method in `CancelFutureBorrowingsParser`.
+2. `CancelFutureBorrowingsParser` parses the input into `name` and `index`, and returns a `CancelFutureBorrowingsCommand` object.
+3. `InvMgr` calls `execute(itemList, ui)` method in `CancelFutureBorrowingsCommand` object.
+4. `CancelFutureBorrowingsCommand` retrieves the `BorrowRecord` that is to be removed, and the `Item` that contains this `BorrowRecord`
+5. `BorrowRecord` is then removed from the `Item`'s BorrowRecord list.
+
 
 ### Edit Command
 
 **Normal function**
 
-![EditCommand1SequenceDiagram](EditCommand1SequenceDiagram.png)
-![EditCommand2SequenceDiagram](EditCommand2SequenceDiagram.png)
-![EditCommand3SequenceDiagram](EditCommand3SequenceDiagram.png)
+![EditCommand1SequenceDiagram](img/EditCommand1SequenceDiagram.png)
+![EditCommand2SequenceDiagram](img/EditCommand2SequenceDiagram.png)
+![EditCommand3SequenceDiagram](img/EditCommand3SequenceDiagram.png)
 
 The above diagrams show the sequence diagram when editing an item.
 
 The user starts by typing an `edit` command.
 
 1. `InvMgr` calls `parse(command)`. `command` is the user input, i.e. `edit 1 n/Marker q/5 d/To draw on whiteboard r/+`.
-2. `InvMgr` creates the appropriate `Command` object based on the user input. The arguments are also parsed and the needed values are stored within `EditCommand`.
+2. `InvMgr` creates the appropriate `Command` object based on the user input, which is the `EditCommand`. The arguments are also parsed and the needed values are stored within `EditCommand`.
 3. `InvMgr` calls `execute(itemList, ui)` of the `EditCommand` object.
 4. Within the `execute()` method of `EditCommand`, `EditCommand` will try to extract the `Item` at the specified index of `ItemList` (`1` in this case).
-5. Next, `EditCommand` duplicates the `Item`. It will be named as placeholderItem.
+5. Next, `EditCommand` duplicates the `Item`. It will be named as `placeholderItem`.
 6. `placeholderItem` will have its attributes set accordingly based on the presence of various arguments.
    1. Since `name` is present (`n/Marker`), `EditCommand` will change the name of `placeholderItem` to `Marker`.
-   2. Since `quantity` is present (`q/5`), `EditCommand` will change the quantity of `placeholderItem`. An intermediary calculation is needed due to the presence of the relative modifier `r/+`. Ultimately, the quantity of `placeholderItem` will be increased by 5. 
+   2. Since `quantity` is present (`q/5`), `EditCommand` will add 5 to the quantity of `placeholderItem`.
    3. Since `description` is present (`q/To draw on whiteboard`), `EditCommand` will change the description of `placeholderItem` to `To draw on whiteboard`.
 7. The `Item` at index 1 of `ItemList` will be replaced by the `placeholderItem`.
 8. `EditCommand` will print out the changes in `Item`.
@@ -236,15 +376,15 @@ Exceptions are thrown/handled for the following:
 
 **Normal function**
 
-![SearchCommand1SequenceDiagram](SearchCommand1SequenceDiagram.png)
-![SearchCommand2SequenceDiagram](SearchCommand2SequenceDiagram.png)
+![SearchCommand1SequenceDiagram](img/SearchCommand1SequenceDiagram.png)
+![SearchCommand2SequenceDiagram](img/SearchCommand2SequenceDiagram.png)
 
 The above diagrams show the sequence diagram when searching for items.
 
 The user starts by typing a `search` command.
 
 1. `InvMgr` calls `parse(command)`. `command` is the user input, i.e. `search n/Marker d/draw`.
-2. `InvMgr` creates the appropriate `Command` object based on the user input. The arguments are also parsed and the needed values are stored within `SearchCommand`.
+2. `InvMgr` creates the appropriate `Command` object based on the user input, which is the `SearchCommand`. The arguments are also parsed and the needed values are stored within `SearchCommand`.
 3. `InvMgr` calls `execute(itemList, ui)` of the `SearchCommand` object.
 4. For each `Item` in `ItemList`, `SearchCommand` will try to:
    1. Match, if given, the `name` to search in the name of `Item`.
@@ -258,7 +398,35 @@ Exceptions are thrown/handled for the following:
 
 1. When the user enters a command without any name or description (missing all of `n/ d/`). This is done in `SearchCommandParser`.
 
+### Borrow Command
+
+**Normal function**
+![BorrowCommandSequenceDiagram](img/BorrowCommandSequenceDiagram.png)
+
+The above diagrams show the sequence diagram for borrowing an item.
+
+The user starts by typing a `borrow` command. eg. `borrow i/1 q/5 s/2022-03-21 e/2022-03-25 p/John Smith`
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is identified to start with the word `borrow` and identifies the other arguments `index`, `quantity`, `startDate`, `endDate`, `borrowerName`.
+3. `parse()` then generates a new `BorrowCommand` with the identified arguments. The new `BorrowCommand` is returned to the `run` method.
+4. The `run()` method calls the `execute()` method in `BorrowCommand`.
+5. A new `BorrowRecord` is created with the borrow details recorded eg. `quantity`, `startDate`, `endDate`, `borrowerName`.
+6. To know which item this `BorrowRecord` belongs to, we use the item `index` given by the user to retrieve the `item` from `itemList`. 
+7. The retrieved `item` object calls its own addBorrowRecord() method to attach the new borrow record to the list of records the item is holding.
+8. Once successful, a message will be sent to the UI using `showMessages` method to inform the user.
+
+**Error handling**
+
+Exceptions are thrown/handled for the following:
+1. When the user enters an index for an item that is not in the list (e.g. `100000` when item 100000 does not exist).
+2. If there is insufficient quantity in the inventory to borrow to the user for the given dates.
+3. If there are any missing arguments `i/`, `q/`, `s/`, `e/`, `p/`.
+4. if borrow duration is longer than the maximum borrow duration of 7 days.
+5. If `startDate` > `endDate`. Ie. Dates need to be in non-descending order.
+
 ### ListFutureBorrowings Command
+
+**Normal function**
 
 ![ListFutureBorrowings1SequenceDiagram](img/ListFutureBorrowings1SequenceDiagram.png)
 ![ListFutureBorrowings2SequenceDiagram](img/ListFutureBorrowings2SequenceDiagram.png)
@@ -277,6 +445,8 @@ The user starts by typing a `listfb` command. The example used in the diagrams a
 8. Based on the size of the `futureRecords`, the `itemList` will converse with `Ui` to give the appropriate output.
 
 ### ListOverdueBorrowings Command
+
+**Normal function**
 
 ![ListOverdueBorrowings1SequenceDiagram](img/ListOverdueBorrowings1SequenceDiagram.png)
 ![ListOverdueBorrowings2SequenceDiagram](img/ListOverdueBorrowings2SequenceDiagram.png)

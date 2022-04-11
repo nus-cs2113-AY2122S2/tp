@@ -9,7 +9,7 @@ Participant "InputParser" as InputParser <<class>>
 Participant "inputCommand:EditCommand" as EditCommand
 
 activate InvMgr
-    InvMgr -> InputParser: parse("edit 1 n/Marker \nq/5 d/To draw on whiteboard r/+")
+    InvMgr -> InputParser: parse("edit 1 n/Marker \nq/5 d/To draw on whiteboard")
     ref over InputParser
         Parse user arguments
     end
