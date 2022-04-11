@@ -20,24 +20,8 @@ title: Developer Guide
 * [Implementation](#implementation)
   * [Parsing of commands](#parsing-of-commands)
   * [Session Commands](#session-commands)
-    * [Add a session](#add-a-session)
-    * [Remove a session](#remove-a-session)
-    * [Edit a session](#edit-a-session)
-    * [View a session](#view-a-session)
-    * [List all sessions](#list-sessions)
-    * [Settle a session](#settle-a-session)
   * [Activity Commands](#activity-commands)
-    * [Add an activity](#add-an-activity)
-    * [Remove an activity](#remove-an-activity)
-    * [Edit an activity](#edit-an-activity)
-    * [View an activity](#view-an-activity)
-    * [List all activities](#list-activities)
   * [Group Commands](#group-commands)
-    * [Add a group](#add-a-group)
-    * [Remove a group](#remove-a-group)
-    * [Edit a group](#edit-a-group)
-    * [View a group](#view-a-group)
-    * [List all groups](#list-groups)
 * [Appendix: Requirements](#appendix-requirements)
   * [Project Scope](#product-scope)
       * [Target user profile](#target-user-profile)
@@ -279,6 +263,22 @@ the Command component when any user input is provided to SplitLah.
 
 ## Session Commands
 
+### Overview
+* [Add a session](#add-a-session)
+* [Remove a session](#remove-a-session)
+* [Edit a session](#edit-a-session)
+* [View a session](#view-a-session)
+* [List all sessions](#list-sessions)
+* [Settle a session](#settle-a-session)
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
+
 ### Add a session
 **API reference:** [`SessionCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionCreateCommand.java)
 
@@ -447,7 +447,26 @@ The general workflow of the `session /summary` command is as follows:
 10. Finally, with the `TextUI` object, the method `TextUI#printlnMessageWithDivider` is called to print the message
     obtained from the `SessionSummaryCommand#processAllTransactions` method.
 
+<br>
+<div class="button-box">
+  <a class="back-button" href="#session-commands">Back to Session Commands</a>
+</div>
+<hr>
+
 ## Activity Commands
+
+### Overview
+* [Add an activity](#add-an-activity)
+* [Remove an activity](#remove-an-activity)
+* [Edit an activity](#edit-an-activity)
+* [View an activity](#view-an-activity)
+* [List all activities](#list-activities)
+
+<br>
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+<hr>
 
 ### Add an activity
 **API reference:** [`ActivityCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityCreateCommand.java)
@@ -599,7 +618,29 @@ The general workflow of the `activity /list` command is as follows:
    * Else, a `String` object representing a table summarising the list of activities in the session is returned. 
 7. Finally, the method `TextUI#printlnMessageWithDivider` is called to print the message returned.
 
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#activity-commands">Back to Activity Commands</a>
+</div>
+
+<hr>
+
 ## Group Commands
+
+### Overview
+* [Add a group](#add-a-group)
+* [Remove a group](#remove-a-group)
+* [Edit a group](#edit-a-group)
+* [View a group](#view-a-group)
+* [List all groups](#list-groups)
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
 
 ### Add a group
 **API reference:** [`GroupCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
@@ -727,6 +768,12 @@ The general workflow of the `group /list` command is as follows:
      representing the table is then returned.
 6. The `String` object retrieved is printed out with `TextUI#printlnMessage`.
 
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#group-commands">Back to Group Commands</a>
+</div>
+
 <hr>
 
 ## Appendix: Requirements
@@ -800,6 +847,12 @@ This section includes instructions to test SplitLah manually.
 * [Activity Testing](#activity-testing)
 * [Group Testing](#group-testing)
 * [Storage Testing](#storage-testing)
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
 
 <hr>
 
@@ -945,6 +998,13 @@ Test Scenario 2: At least 1 session exists in the application.
 * Test Command: `session /list`<br>
   Expected: A table summarising the details of all existing sessions should be printed.
 
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#appendix-instructions-for-manual-testing">Back to Instructions for Manual Testing</a>
+</div>
+
 <hr>
 
 ### Activity Testing
@@ -1085,6 +1145,12 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 4. Test Command: `activity /view /sid 1`<br>
    Expected: A table summarising the details of all existing activities in the session with session unique identifier of `1` should be printed.
 
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#appendix-instructions-for-manual-testing">Back to Instructions for Manual Testing</a>
+</div>
+
 <hr>
 
 ### Group Testing
@@ -1172,6 +1238,12 @@ Test Scenario 1: No groups are currently stored in the application.
 Test Scenario 2: At least 1 group exists in the application.
 * Test Command: `group /list`<br>
   Expected: A table summarising the details of all existing groups should be printed.
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#appendix-instructions-for-manual-testing">Back to Instructions for Manual Testing</a>
+</div>
 
 <hr>
 
