@@ -297,7 +297,7 @@ restoreWarehouseState().
 #### Good class
 ![GoodLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Good.puml)
 
-##### Order serialize
+##### Restore Good
 ![Restore Good Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/RestoreGood.puml)
 
 
