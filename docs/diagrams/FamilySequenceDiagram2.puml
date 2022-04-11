@@ -30,7 +30,7 @@ activate Money
 Person <-- Money
 deactivate Money
 opt OPT_COLOR Not Silent
-    Person -> UI: formatValue()
+    Person -> UI: formatValue(amount)
     activate UI
     Person <-- UI: income:String
     deactivate UI

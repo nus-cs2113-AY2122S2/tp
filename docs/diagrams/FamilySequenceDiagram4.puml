@@ -44,7 +44,7 @@ loop LOOP_COLOR For all PersonLists in Family
     end loop
     Family <-- PersonList: income:Double
     deactivate PersonList
-    Family -> UI: formatValue()
+    Family -> UI: formatValue(income)
     activate UI
     Family <-- UI: incomeString:String
     deactivate UI
@@ -62,7 +62,7 @@ loop LOOP_COLOR For all PersonLists in Family
     end loop
     Family <-- PersonList: expenditure:Double
     deactivate PersonList
-    Family -> UI: formatValue()
+    Family -> UI: formatValue(expenditure)
     activate UI
     Family <-- UI: expenditureString:String
     deactivate UI
@@ -70,7 +70,7 @@ loop LOOP_COLOR For all PersonLists in Family
     activate PersonList
     Family <-- PersonList: remain:Double
     deactivate PersonList
-    Family -> UI: formatValue()
+    Family -> UI: formatValue(remain)
     activate UI
     Family <-- UI: disposable:String
     deactivate UI
@@ -87,7 +87,7 @@ loop LOOP_COLOR For all PersonLists in Family
     Family --> Family
     deactivate Family
 end loop
-Family -> UI: formatValue()
+Family -> UI: formatValue(sum)
 activate UI
 Family <-- UI: familyDisposable:String
 deactivate UI
