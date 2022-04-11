@@ -20,7 +20,7 @@ public class Ui {
     /**
      * Displays message(s) to user.
      *
-     * @param message Message to be displayed to user
+     * @param message Message to be displayed to user.
      * */
     public void showMessages(String... message) {
         for (String m : message) {
