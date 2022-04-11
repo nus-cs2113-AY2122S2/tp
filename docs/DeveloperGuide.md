@@ -100,6 +100,8 @@ Therefore, airlines counter staff need a fast an efficient way to manage the man
 | v2.1    | Counter Staff | Remove in-flight meal reservation   | Remove in-flight meal reservations for customers                                      |
 | v2.1    | Counter Staff | Check in-flight meal reservation    | Check for a customer's specific meal reservation                                      |
 | v2.1    | Counter Staff | List all in-flight meal reservation | View all in-flight meal reservations                                                  |
+
+
 ## Non-Functional Requirements
 
 1. The program should not crash under any circumstances.
