@@ -22,7 +22,8 @@ class PatientList {
 +findByAddress(String[]) : void
 +findByDob(String[]) : void
 +findByDateAdmission(String[]) : void
-+createArrayOfFoundPatients() : void
++displayFoundPatientList() : void
++loadDate(String[]) : void
 }
 
 @enduml

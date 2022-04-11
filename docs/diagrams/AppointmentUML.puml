@@ -19,6 +19,8 @@ doctorName, appointmentDate, appointmentDetails) : void
 +getDoctorName() : String
 +getAppointmentDate() : String
 +getAppointmentDetails() : String
++saveString() : String
++saveMedicineString() : String
 }
 
 @enduml
