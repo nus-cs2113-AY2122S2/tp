@@ -4,13 +4,19 @@ import seedu.duke.common.Messages;
 import seedu.duke.exceptions.InvMgrException;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class ParserUtils {
+    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws InvMgrException if the specified index is invalid (valid integers are non-zero unsigned integer).
+     *
+     * @param oneBasedIndex the index to parse.
+     * @return an integer representing the integer value of {@code oneBasedIndex}.
+     * @throws InvMgrException if {@code oneBasedIndex} could not be parsed into a valid one-based index integer.
      */
     public static int parseIndex(String oneBasedIndex) throws InvMgrException {
         String trimmedIndex = oneBasedIndex.trim();
@@ -28,7 +34,10 @@ public class ParserUtils {
     /**
      * Parses {@code quantity} into an {@code int} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws InvMgrException if the given {@code quantity} is invalid (valid integers are non-negative integers).
+     *
+     * @param quantity the quantity to parse.
+     * @return  an integer representing the integer value of {@code quantity}.
+     * @throws InvMgrException if {@code quantity} could not be parsed into a valid non-negative integer.
      */
     public static int parseQuantity(String quantity) throws InvMgrException {
         String trimmedQuantity = quantity.trim();
@@ -44,9 +53,12 @@ public class ParserUtils {
     }
 
     /**
-     * Returns -1 if {@code relative} is "-", and 1 if {@code relative} is "+" 1.
+     * Returns false if {@code relativeAdd} is "-", and true if {@code relativeAdd} is "+".
      * The value returned represents a multiplier on the quantity, used to edit quantity relatively.
-     * @throws InvMgrException if the given {@code relative} is invalid (not either of the two options)
+     *
+     * @param relativeAdd the modifier to use.
+     * @return true for add, false for subtract.
+     * @throws InvMgrException if @{code relativeAdd} is neither "+" nor "-".
      */
     public static boolean parseRelative(String relativeAdd) throws InvMgrException {
         String trimmedRelativeAdd = relativeAdd.trim();
@@ -62,12 +74,12 @@ public class ParserUtils {
      * Return a string representation of date as LocalDate type.
      *
      * @param dateStr Date entered by the user as String type.
-     * @return Date as LocalDate type
-     * @throws InvMgrException if the given string representation of date does not follow YYYY-MM-DD
+     * @return Date as LocalDate type.
+     * @throws InvMgrException if the given string representation of date does not follow YYYY-MM-DD.
      */
     public static LocalDate parseDate(String dateStr) throws InvMgrException {
         try {
-            LocalDate date = LocalDate.parse(dateStr);
+            LocalDate date = LocalDate.parse(dateStr, DATE_FORMAT);
             return date;
         } catch (DateTimeParseException e) {
             throw new InvMgrException(Messages.INVALID_DATE_FORMAT);

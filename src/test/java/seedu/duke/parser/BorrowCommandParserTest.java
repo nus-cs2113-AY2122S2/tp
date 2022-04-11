@@ -16,9 +16,10 @@ public class BorrowCommandParserTest {
 
     @Test
     void parse_compulsoryFieldPresent_success() throws InvMgrException {
-        String testInputFormat = " %s%s %s%s %s%s %s%s";
+        String testInputFormat = " %s%s %s%s %s%s %s%s %s%s";
         String testInput = String.format(testInputFormat,
                 CliSyntax.PREFIX_ITEM_INDEX.getPrefix(), ParserStubs.ITEM_INDEX,
+                CliSyntax.PREFIX_QUANTITY.getPrefix(), ParserStubs.PAPERCUP_QUANTITY,
                 CliSyntax.PREFIX_START_DATE.getPrefix(), ParserStubs.BORROW_START_DATE_STR,
                 CliSyntax.PREFIX_END_DATE.getPrefix(), ParserStubs.BORROW_END_DATE_STR,
                 CliSyntax.PREFIX_BORROWER_NAME.getPrefix(), ParserStubs.BORROWER_NAME);
@@ -27,9 +28,10 @@ public class BorrowCommandParserTest {
 
     @Test
     void parse_start_end_wrong_order() throws InvMgrException {
-        String testInputFormat = " %s%s %s%s %s%s %s%s";
+        String testInputFormat = " %s%s %s%s %s%s %s%s %s%s";
         String testInput = String.format(testInputFormat,
                 CliSyntax.PREFIX_ITEM_INDEX.getPrefix(), ParserStubs.ITEM_INDEX,
+                CliSyntax.PREFIX_QUANTITY.getPrefix(), ParserStubs.PAPERCUP_QUANTITY,
                 CliSyntax.PREFIX_START_DATE.getPrefix(), "2022-03-10",
                 CliSyntax.PREFIX_END_DATE.getPrefix(), "2022-03-09",
                 CliSyntax.PREFIX_BORROWER_NAME.getPrefix(), ParserStubs.BORROWER_NAME);

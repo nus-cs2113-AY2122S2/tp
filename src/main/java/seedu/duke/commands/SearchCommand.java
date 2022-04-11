@@ -5,7 +5,6 @@ import seedu.duke.data.ItemList;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 /** Performs case insensitive search of an Item's name, or description, or both. */
@@ -16,9 +15,9 @@ public class SearchCommand extends Command {
     public static final String COMMAND_FORMAT = COMMAND_WORD + "/n name [/d description] | [/n name] /d description]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
             + "[Command Format] " + COMMAND_FORMAT + "\n";
-    public static final String SEARCH_RESULT_PREAMBLE = "Here are the items matching your search terms: ";
-    public static final String SEARCH_RESULT_ENTRY_FORMAT = "%d. %s";
-    public static final String FOUND_ITEM_FORMAT = "%s | %d | %s";
+
+    private static final String SEARCH_RESULT_PREAMBLE = "Here are the items matching your search terms: ";
+    private static final String SEARCH_RESULT_ENTRY_FORMAT = "%d. %s";
 
     private final Optional<String> name;
     private final Optional<String> description;
@@ -26,8 +25,9 @@ public class SearchCommand extends Command {
     /**
      * Constructs a SearchCommand.
      * One of {@code name} or {@code description} must not be null.
-     * @param name a name to search for
-     * @param description a description to search for
+     *
+     * @param name a name to search for.
+     * @param description a description to search for.
      * @throws NullPointerException if the constructor is called when both name and description are null.
      */
     public SearchCommand(Optional<String> name, Optional<String> description) {
@@ -36,31 +36,36 @@ public class SearchCommand extends Command {
         if (!name.isPresent() && !description.isPresent()) {
             throw new NullPointerException();
         }
-        results = new ArrayList<>();
+        this.results = new ArrayList<>();
     }
 
     @Override
     public void execute(ItemList itemList, Ui ui) {
-        // O(n) search for items matching name and description\
+        // O(n) search for items matching name and description
+        ui.showMessages(SEARCH_RESULT_PREAMBLE);
         for (int i = 0; i < itemList.getSize(); i++) {
             Item searchItem = itemList.getItem(i);
-            if (this.name.isPresent() && !caseInsensitiveContains(searchItem.getName(), this.name.get())) {
+            if (this.name.isPresent()
+                    && !caseInsensitiveContains(searchItem.getName(), this.name.get())) {
                 continue;
             }
-            if (this.description.isPresent() && !caseInsensitiveContains(searchItem.getDescription(),
-                    this.description.get())) {
+            if (this.description.isPresent()
+                    && !caseInsensitiveContains(searchItem.getDescription(), this.description.get())) {
                 continue;
             }
-            results.add(searchItem);
-        }
+            this.results.add(searchItem);
 
-        ui.showMessages(SEARCH_RESULT_PREAMBLE);
-        for (int i = 0; i < results.size(); i++) {
-            String printMsg = String.format(SEARCH_RESULT_ENTRY_FORMAT, i + 1, results.get(i).toDetailedString());
+            String printMsg = String.format(SEARCH_RESULT_ENTRY_FORMAT, i + 1, searchItem.toDetailedString());
             ui.showMessages(printMsg);
         }
     }
 
+    /**
+     * Check if another object is equal to this SearchCommand object.
+     *
+     * @param other the Object to compare against.
+     * @return true if equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         SearchCommand toCompare;

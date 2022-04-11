@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 import seedu.duke.data.Item;
 import seedu.duke.exceptions.InvMgrException;
+import seedu.duke.stubs.ItemStubs;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class StorageTest {
@@ -35,12 +35,9 @@ public class StorageTest {
     @Test
     void load_validJsonFile_validList() throws InvMgrException {
         ArrayList<Item> expectedItemList = new ArrayList<>();
-        Item item1 = new Item("Markers", 3, "Drawing");
-        Item item2 = new Item("Whiteboard", 1, "To draw on");
-        Item item3 = new Item("HDMI Cable", 2, "For connecting displays");
-        expectedItemList.add(item1);
-        expectedItemList.add(item2);
-        expectedItemList.add(item3);
+        expectedItemList.add(ItemStubs.ITEM_MARKER);
+        expectedItemList.add(ItemStubs.ITEM_WHITEBOARD);
+        expectedItemList.add(ItemStubs.ITEM_HDMI_CABLE);
 
         Storage testStorage = new Storage("test/data/load/validInputData.json");
         ArrayList<Item> testItemList = testStorage.load();
@@ -57,12 +54,9 @@ public class StorageTest {
     @Test
     void save_validList_validJson() throws InvMgrException {
         ArrayList<Item> itemList = new ArrayList<>();
-        Item item1 = new Item("Markers", 3, "Drawing");
-        Item item2 = new Item("Whiteboard", 1, "To draw on");
-        Item item3 = new Item("HDMI Cable", 2, "For connecting displays");
-        itemList.add(item1);
-        itemList.add(item2);
-        itemList.add(item3);
+        itemList.add(ItemStubs.ITEM_MARKER);
+        itemList.add(ItemStubs.ITEM_WHITEBOARD);
+        itemList.add(ItemStubs.ITEM_HDMI_CABLE);
 
         Storage testStorage = new Storage("test/data/save/actualData.json");
         testStorage.save(itemList);
@@ -72,12 +66,12 @@ public class StorageTest {
     }
 
     private void assertStorageEquals(Storage expectedStorage, Storage testStorage) {
-        Path testPath = testStorage.getDataPath();
         Path expectedPath = expectedStorage.getDataPath();
+        Path testPath = testStorage.getDataPath();
 
         try {
-            List<String> testString = Files.readAllLines(testPath);
             List<String> expectedString = Files.readAllLines(expectedPath);
+            List<String> testString = Files.readAllLines(testPath);
             assertEquals(expectedString, testString);
         } catch (IOException e) {
             fail(e);
@@ -97,11 +91,6 @@ public class StorageTest {
      * @param actualList the list to check against
      */
     private void assertListEquals(ArrayList<Item> expectedList, ArrayList<Item> actualList) {
-        HashSet<String> checker = new HashSet<String>();
-        for (int i = 0; i < actualList.size(); i++) {
-            checker.add(expectedList.get(i).saveString());
-            checker.add(actualList.get(i).saveString());
-        }
-        assertEquals(checker.size(), actualList.size());
+        assertEquals(true, actualList.containsAll(expectedList));
     }
 }

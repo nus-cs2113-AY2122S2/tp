@@ -25,7 +25,7 @@ public class ItemList {
     }
 
     public int getSize() {
-        return this.itemArrayList.size();
+        return itemArrayList.size();
     }
 
     public Item set(int index, Item item) {
@@ -38,10 +38,10 @@ public class ItemList {
 
     /**
      * Add a borrow record to a specific item in the itemArrayList as indicated
-     *      * by the itemIndex.
+     * by the itemIndex.
      *
      * @param itemIndex A legal item index on the itemArrayList. Zero-based indexing.
-     * @param newRecord A borrow record
+     * @param newRecord A borrow record.
      * @return The item that has been added with the new borrow record.
      */
     public Item addBorrowRecord(int itemIndex, BorrowRecord newRecord) throws InvMgrException {
@@ -49,6 +49,12 @@ public class ItemList {
         return item;
     }
 
+    /**
+     * Used to check for equality between two ItemLists.
+     *
+     * @param other the object to compare against.
+     * @return true if equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         ItemList toCompare;
@@ -59,7 +65,7 @@ public class ItemList {
         if (other instanceof ItemList) {
             // cast only if other is instance of EditCommand
             toCompare = (ItemList) other;
-            return this.itemArrayList.equals(toCompare.itemArrayList);
+            return this.itemArrayList.containsAll(toCompare.itemArrayList);
         } else {
             // null, or object not EditCommand
             return false;

@@ -26,18 +26,16 @@ public class DeleteCommand extends Command {
      * @param index index specified.
      */
     public DeleteCommand(int index) {
-        requireNonNull(index, "no index was indicated!");
         this.index = index;
     }
 
     @Override
     public void execute(ItemList itemList, Ui ui) {
-        assert index != 0 : "index indicated is 0.";
-
+        assert (index > -1) : "index less than or equal to -1";
         try {
             Item removedItem = itemList.removeItem(index);
             ui.showMessages(removedItem + " has been deleted.");
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             ui.showMessages(ERROR_MESSAGE, INVALID_INDEX);
         }
     }
