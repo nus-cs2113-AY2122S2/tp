@@ -1,4 +1,4 @@
-# Developer Guide
+# MindMyMoney (M<sup>3</sup>) Developer Guide
 
 ## Content Page
 * [Content Page](#content-page)
