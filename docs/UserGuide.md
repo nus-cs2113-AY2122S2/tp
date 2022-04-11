@@ -37,7 +37,7 @@ Do not edit the JSON data file! You may edit wrongly and lose your data.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-1. Download the latest version of `InvMgr` from [here](todo).TODO
+1. Download the latest version of `InvMgr` from [here](https://github.com/AY2122S2-CS2113-F10-2/tp/releases/tag/v2.1).
 
 ## Features
 
@@ -136,10 +136,6 @@ List all items in the inventory.
 **Format:**
 
 `list`
-
-**Arguments:**
-
-None
 
 **Caveats:**
 
@@ -497,10 +493,6 @@ Retrieve the details of a particular item of your interest from the current inve
 |:-------------:|:-------------:|:----------------:|:-------------------------:|
 |       -       |     INDEX     | Positive Integer | Index of Item in the list |
 
-**Caveats:**
-
-None.
-
 **Examples of usage:**
 
 ```
@@ -720,10 +712,6 @@ Exits the program.
 **Format:** 
 
 `exit`
-
-**Arguments:**
-
-None
 
 **Caveats:**
 
