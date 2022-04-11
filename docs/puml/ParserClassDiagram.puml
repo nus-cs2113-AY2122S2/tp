@@ -10,11 +10,11 @@ component Parser as P PARSER_COLOUR
 
 Package User {
 component User as U USERFINANCIAL_COLOUR
-component ExpenditureList USERFINANCIAL_COLOUR
+component ExpenditureList DATA_COLOUR
 component Expenditure USERFINANCIAL_COLOUR
-component CreditCardList USERFINANCIAL_COLOUR
+component CreditCardList DATA_COLOUR
 component CreditCard USERFINANCIAL_COLOUR
-component IncomeList USERFINANCIAL_COLOUR
+component IncomeList DATA_COLOUR
 component Income USERFINANCIAL_COLOUR
 }
 

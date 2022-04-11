@@ -147,7 +147,7 @@ public class AddCommand extends Command {
             FLAG_OF_CARD_LIMIT);
         final String cardLimit = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_LIMIT,
             FLAG_END_VALUE);
-        testCreditCardParameters(cardName, cashBack, cardLimit);
+        testCreditCardParameters(cardName, cashBack, cardLimit, creditCardList);
 
         creditCardList.add(new CreditCard(cardName, Double.parseDouble(cashBack), Float.parseFloat(cardLimit)));
 

@@ -1,0 +1,59 @@
+@startuml
+!include Style.puml
+
+box updateIncome()
+participant ":MMM" as MMM MMM_COLOUR
+participant "Command:UpdateCommand" as updateCommand COMMANDS_COLOUR
+participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
+participant ":AddCommandInputTest" as AddCommandInputTest HELPER_COLOUR
+participant ":Income" as Income USERFINANCIAL_COLOUR
+participant ":IncomeList" as IncomeList DATA_COLOUR
+
+end box
+hide footbox
+
+MMM -> updateCommand: executeCommand()
+activate updateCommand COMMANDS_COLOUR
+
+updateCommand -> updateCommand: updateIncome()
+activate updateCommand COMMANDS_COLOUR
+
+updateCommand -> GeneralFunctions: parseInputWithCommandFlag()
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> updateCommand
+deactivate GeneralFunctions
+
+
+updateCommand -> AddCommandInputTest: testUpdateIncomeParameters()
+activate AddCommandInputTest HELPER_COLOUR
+
+AddCommandInputTest --> updateCommand
+deactivate AddCommandInputTest
+
+updateCommand -> GeneralFunctions: capitalise(inputCategory)
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> updateCommand
+deactivate GeneralFunctions
+
+create Income
+updateCommand -> Income: Income()
+activate Income USERFINANCIAL_COLOUR
+Income --> updateCommand
+deactivate Income
+
+updateCommand -> IncomeList: set()
+activate IncomeList DATA_COLOUR
+IncomeList --> updateCommand
+deactivate IncomeList
+
+updateCommand --> updateCommand
+deactivate updateCommand
+
+note left
+Details of newly updated
+Income is printed out
+end note
+
+updateCommand --> MMM
+deactivate updateCommand
+@enduml

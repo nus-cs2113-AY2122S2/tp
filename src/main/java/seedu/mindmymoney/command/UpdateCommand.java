@@ -34,9 +34,8 @@ import static seedu.mindmymoney.data.ExpenditureList.isEqualAmount;
 import static seedu.mindmymoney.data.ExpenditureList.isEqualTime;
 import static seedu.mindmymoney.data.IncomeList.isEqualIncomeCategory;
 import static seedu.mindmymoney.data.IncomeList.isEqualIncomeAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeCategory;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureParameters;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testUpdateExpenditureParameters;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testUpdateIncomeParameters;
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
@@ -95,6 +94,33 @@ public class UpdateCommand extends Command {
     }
 
     /**
+     * Updates the total expenditure field in the credit card specified in the expenditure item, if the payment
+     * method is not Cash.
+     *
+     * @param newPaymentMethod Name of payment method to be updated.
+     * @param newExpenditureAmount Amount of new expenditure.
+     * @param expenditureIndex Index of expenditure to be updated
+     * @throws MindMyMoneyException when the payment method is not cash and is not found in user's credit card list.
+     */
+    private void updatePaymentMethod(String newPaymentMethod, float newExpenditureAmount, int expenditureIndex)
+                                        throws MindMyMoneyException {
+        Expenditure oldExpenditure = expenditureList.get(expenditureIndex);
+        String oldPaymentMethod = oldExpenditure.getPaymentMethod();
+        if (!oldPaymentMethod.equals("Cash")) {
+            CreditCard oldCreditCard = creditCardList.get(oldPaymentMethod);
+            oldCreditCard.deductExpenditure(oldExpenditure.getAmount());
+        }
+
+        if (!newPaymentMethod.equalsIgnoreCase("cash")) {
+            CreditCard newCreditCard = creditCardList.get(newPaymentMethod);
+            if (newCreditCard == null) {
+                throw new MindMyMoneyException("Please double-check your input! New payment method is not found!");
+            }
+            newCreditCard.addExpenditure(newExpenditureAmount);
+        }
+    }
+
+    /**
      * Updates an Expenditure entry in user's expenditure list.
      *
      * @throws MindMyMoneyException when an invalid command is received.
@@ -111,19 +137,23 @@ public class UpdateCommand extends Command {
             String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
             String inputTime = parseInputWithCommandFlag(updateInput, FLAG_OF_TIME, FLAG_END_VALUE);
 
-            testExpenditureParameters(newPaymentMethod, inputCategory, newDescription, newAmountAsString,
-                    inputTime, creditCardList);
+            testUpdateExpenditureParameters(indexToUpdate, newPaymentMethod, inputCategory, newDescription,
+                    newAmountAsString, inputTime, creditCardList, expenditureList);
 
-            final String newCategory = capitalise(inputCategory);
-            float newAmountAsFloat = formatFloat(Float.parseFloat(newAmountAsString));
             if (capitalise(newPaymentMethod).equals("Cash")) {
                 newPaymentMethod = capitalise(newPaymentMethod);
             }
+            final String newCategory = capitalise(inputCategory);
+            float newAmountAsFloat = formatFloat(Float.parseFloat(newAmountAsString));
+
             if (isSimilarExpenditure(indexToUpdate, newPaymentMethod, newCategory, newDescription, newAmountAsFloat,
                     inputTime)) {
                 throw new MindMyMoneyException("Expense fields to be updated is similar to the expense in the list.\n"
                         + "Please make sure the field descriptions you want to change are different.");
             }
+
+            updatePaymentMethod(newPaymentMethod, newAmountAsFloat, indexToUpdate);
+
             // Create new expenditure object to substitute in
             Expenditure newExpenditure = new Expenditure(newPaymentMethod, newCategory, newDescription,
                     newAmountAsFloat, inputTime);
@@ -200,7 +230,7 @@ public class UpdateCommand extends Command {
                     newCardLimitAsFloat);
 
             creditCardList.set(indexToUpdate, newCreditCard);
-            System.out.println("Successfully set credit card " + indexAsString + " to :\n"
+            System.out.println("Successfully set credit card " + indexAsString + " to:\n"
                     + newCreditCard);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MindMyMoneyException("Did you forget to input INDEX, NAME, CASHBACK or CREDIT LIMIT?");
@@ -244,11 +274,11 @@ public class UpdateCommand extends Command {
             String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT,
                     FLAG_OF_CATEGORY);
             int newAmountAsInt = Integer.parseInt(newAmountAsString);
-            testIncomeAmount(newAmountAsInt);
 
             String inputCategory = parseInputWithCommandFlag(updateInput, FLAG_OF_CATEGORY,
                     FLAG_END_VALUE);
-            testIncomeCategory(inputCategory);
+
+            testUpdateIncomeParameters(newAmountAsInt, inputCategory);
             String newCategory = capitalise(inputCategory);
             if (isSimilarIncome(indexToUpdate, newAmountAsInt, newCategory)) {
                 throw new MindMyMoneyException("Income fields to be updated is similar to the income in the list.\n"

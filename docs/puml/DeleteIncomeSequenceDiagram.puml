@@ -14,7 +14,7 @@ boxBorderColor black
 box deleteIncome()
 participant ":MMM" as MMM MMM_COLOUR
 participant "CommandType:DeleteCommand" as C COMMANDS_COLOUR
-participant ":IncomeList" as IL USERFINANCIAL_COLOUR
+participant ":IncomeList" as IL DATA_COLOUR
 end box
 
 activate MMM MMM_COLOUR
@@ -25,7 +25,7 @@ C -> C: deleteIncome()
 activate C COMMANDS_COLOUR
 
 C -> IL: delete()
-activate IL USERFINANCIAL_COLOUR
+activate IL DATA_COLOUR
 IL --> C
 deactivate IL
 
