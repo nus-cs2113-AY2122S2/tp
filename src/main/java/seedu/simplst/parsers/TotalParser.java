@@ -12,7 +12,13 @@ public class TotalParser extends CommandParser {
         super(warehouse);
     }
 
-    protected void init_extract_params() throws MissingFlagException, EmptyFieldException {
+    //for testing
+    public TotalParser(Warehouse warehouse, String userInput) {
+        super(warehouse);
+        this.userInput = userInput;
+    }
+
+    public void initExtractParams() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[og])/ id/(?<id>\\d*)";
@@ -20,7 +26,7 @@ public class TotalParser extends CommandParser {
         this.matches = matchKeywordsMatch.getGroupValues();
     }
 
-    protected void extract_params() throws WrongCommandException, NullException {
+    public void extractParams() throws WrongCommandException, NullException {
         if (matches.get("flag").equals("o")) {
             // get total orders with flag "o/"
             int totalOrders = warehouse.totalNumberOfOrder();
