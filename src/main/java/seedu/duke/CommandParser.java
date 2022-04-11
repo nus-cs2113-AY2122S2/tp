@@ -214,7 +214,7 @@ public class CommandParser {
         if (userInputLowerCase.equals(BYE)) {
             userCommand = new ExitCommand();
         } else if (userInputLowerCase.startsWith(HELP)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(HELP, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(HELP, "");
             userCommand = new HelpCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(ADD_AVAILABILITY_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_AVAILABILITY_COMMAND, "");
@@ -277,7 +277,7 @@ public class CommandParser {
         } else if (userInputLowerCase.equals(AVERAGE_SATISFACTION_COMMAND)) {
             userCommand = new ViewAverageSatisfactionCommand();
         } else if (userInputLowerCase.startsWith(VIEW_EVENTS)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_EVENTS, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(VIEW_EVENTS, "");
             userCommand = new ViewEventsCommand(userInputLowerCaseWithoutCommand);
         } else {
             throw new InvalidCommandException();
