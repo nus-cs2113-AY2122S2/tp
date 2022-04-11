@@ -58,23 +58,25 @@ This guide's purpose is to explain the internal workings of SplitLah, so that fu
 The *Architecture Diagram* shown above illustrates the high-level design of the SplitLah application.
 
 **Overview of components**
-* `SplitLah [Main]`
+* [`SplitLah [Main]`](#splitlah-component)
     * On app launch: Creates an instance of a `Manager` and runs the command loop.
-* `Manager`
+* [`Manager`](#manager-component)
     * On creation: Initializes the `Profile`, `TextUI` and `Storage` components.
     * On run: Loads data from `Storage`, receives user input from `TextUI` and uses `Parser` to parse user input into application.
-* `Profile`
+* [`Profile`](#profile-component)
     * Handles cached data within run time of application.
     * Manages and stores the list of `session` and `group` objects for the application
     * Stores the data cached within the application into `Storage` whenever a change is made.
-* `TextUI`
+* [`TextUI`](#textui-component)
     * Handles the reading of user input and the printing of the application's output to the user.
-* `Storage`
+* [`Storage`](#storage-component)
     * Handles storage operations of the application.
-* `Parser`
+* [`Parser`](#parser-component)
     * Handles input parsing and determines which command to run.
-* `Command`
+* [`Command`](#command-component)
     * Defines how a command is executed.
+
+<hr>
 
 ### Interaction between components
 ![Component Interaction Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ComponentInteraction.drawio.png)
@@ -82,6 +84,13 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts.
 The diagram depicts a scenario where a user attempts to create a session.
 
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
 
 ### SplitLah Component
 ![SplitLah Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SplitLahComponent.drawio.png)
@@ -91,6 +100,13 @@ application starts. After initialization, it proceeds to run a loop which prompt
 When it receives an input from the user, it invokes the `Parser` and retrieves a command corresponding to the input for SplitLah
 to run. Upon retrieving and running the `Exit` command, the application ends the loop and terminates.
 
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
 
 ### Manager Component
 ![Manager Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ManagerComponent.drawio.png)
@@ -99,6 +115,14 @@ The `Manager` class is initialized by the `SplitLah` class (the main class) when
 It stores the `Profile`, `TextUI` and `Storage` objects. The `Profile` class helps to manage all data accesses 
 throughout the lifetime of the application while the `Storage` class helps to save what the `Profile` class has captured. 
 As for the `TextUI` class, it serves as an interface to read user inputs and to print application outputs.
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
 
 ### Profile Component
 ![Profile Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/Profile%20Component.drawio.png)
@@ -127,6 +151,14 @@ and `Name` classes.
 
 Each of the classes in the `Profile` component also provides utility methods to manage the objects that they hold.
 
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
+
 ### TextUI Component
 ![TextUI Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/TextUIComponent.drawio.png)
 <br>
@@ -134,6 +166,14 @@ The `TextUI` class is initialized by the `Manager` class when the application st
 It stores a `Scanner` and `PrintStream` object supplied upon initialization to read and write to the user interface.
 It offers methods to print application output to and read user input from these objects for other classes to use.
 As TextUI handles all input and output streams, these streams can be changed without affecting the rest of the program.
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
 
 ### Storage Component
 ![Storage Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/StorageComponent.drawio.png)
@@ -160,6 +200,14 @@ For example:
 All classes associated with the `Profile` component implements the `Serializable` class. This allows the `Storage` class 
 to write all the data stored in the `Profile` component into the save file without having to pre-process the data.
 
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
+
 ### Parser Component
 ![Parser Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ParserComponent.drawio.png)
 <br>
@@ -184,6 +232,14 @@ The general workflow of the `Parser` component is as follows:
      to return a parsed value.
 4. All relevant arguments that are parsed are used to create a new `XYZCommand `object to return to the `Parser` class.
 5. The created `XYZCommand` object is then returned to the `SplitLah` object to run.
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
 
 ### Command Component
 ![Command Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/CommandComponent.drawio.png)
@@ -210,6 +266,12 @@ The general workflow of the `Command` component is as follows:
    * The inner workings of each of the `XYZCommand` classes can be seen in greater detail under the [Implementation section](#implementation).
 3. After `XYZCommand#run` completes, control is returned to `SplitLah` and
    the [lifecycle](#architecture) of an `XYZCommand` object ends.
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
 
 <hr>
 
@@ -261,6 +323,14 @@ the Command component when any user input is provided to SplitLah.
 8. Following that, the `XYZCommand` object is returned from `XYZCommandParser` to `Parser` class,
    and finally back to `SplitLah` to run.
 
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
+
 ## Session Commands
 
 ### Overview
@@ -302,6 +372,8 @@ The general workflow of the `session /create` command is as follows:
 7. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with `TextUI#printlnMessage`.
 
+<hr>
+
 ### Remove a session
 **API reference:** [`SessionDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
 
@@ -325,6 +397,8 @@ session unique identifier from the list of sessions.
 6. To remove the `Session` object from the list of sessions stored in `Profile` object, the `Profile#removeSession` method is invoked.
 7. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully deleted.
+
+<hr>
 
 ### Edit a session
 **API reference:** [`SessionEditCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionEditCommand.java)
@@ -363,6 +437,8 @@ The general workflow of the `session /edit` command is as follows:
 12. After the session is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
 13. The `SessionEditCommand` class then prints a message indicating that a session has been successfully edited.
 
+<hr>
+
 ### View a session
 **API reference:** [`SessionViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionViewCommand.java)
 
@@ -384,6 +460,8 @@ The general workflow of the `session /view` command is as follows:
      `TextUI#printlnMessage`.
    * Else, a `String` object representing the details of the requested session is retrieved using the 
      `Session#toString` method and printed out using `TextUI#printlnMessageWithDivider`.
+
+<hr>
 
 ### List sessions
 **API reference:** [`SessionListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
@@ -407,6 +485,8 @@ The general workflow of the `session /list` command is as follows:
    * Else, a `String` object representing a table summarising the list of sessions in the 
      profile is returned.
 6. Following that, the `String` object retrieved is printed out with `TextUI#printlnMessage`.
+
+<hr>
 
 ### Settle a session
 **API reference:** [`SessionSummaryCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionSummaryCommand.java)
@@ -500,6 +580,8 @@ The general workflow of the `activity /create` command is as follows:
 13. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
 14. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully created with `TextUI#printlnMessage`.
 
+<hr>
+
 ### Remove an activity
 **API reference:** [`ActivityDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityDeleteCommand.java)
 
@@ -525,6 +607,8 @@ The general workflow of the `activity /delete` command is as follows:
 7. After the activity is removed from the `Session` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
 9. The `ActivityDeleteCommand` object then prints a message indicating that an activity has been successfully deleted with `TextUI#printlnMessage`.
+
+<hr>
 
 ### Edit an activity
 **API reference:** [`ActivityEditCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityEditCommand.java)
@@ -568,6 +652,8 @@ The general workflow of the `activity /edit` command is as follows:
 14. `Manager#saveProfile` is called to save the changes to the local storage file.
 15. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully edited with `TextUi#printlnMessage`.
 
+<hr>
+
 ### View an activity
 **API reference:** [`ActivityViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityViewCommand.java)
 
@@ -593,7 +679,9 @@ The general workflow of the `activity /view` command is as follows:
      `TextUI#printlnMessage` and control is given back to `SplitLah`.
    * Else, a `String` object representing the details of the requested activity is retrieved using the
       `Activity#toString` method and printed out using `TextUI#printlnMessageWithDivider`.
-    
+
+<hr>
+  
 ### List activities
 **API reference:** [`ActivityListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityListCommand.java)
 
@@ -664,6 +752,8 @@ The general workflow of the `group /create` command is as follows:
 7. After the group is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created with `TextUI#printlnMessage`.
 
+<hr>
+
 ### Remove a group
 **API reference:** [`GroupDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupDeleteCommand.java)
 
@@ -687,6 +777,8 @@ The general workflow of the `group /delete` command is as follows:
 6. To remove the `Group` object from the list of groups stored in `Profile` object, the `Profile#removeGroup` method is invoked.
 7. After the group is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `GroupDeleteCommand` class then prints a message indicating that a group has been successfully deleted.
+
+<hr>
 
 ### Edit a group
 **API reference:** [`GroupEditCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupEditCommand.java)
@@ -723,6 +815,8 @@ The general workflow of the `group /edit` command is as follows:
 11. After the group is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
 12. The `GroupEditCommand` class then prints a message indicating that the group has been successfully edited.
 
+<hr>
+
 ### View a group
 **API reference:** [`GroupViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
 The sequence diagram for `GroupViewCommand` is omitted as it bears many similarities with [`SessionViewCommand`](#view-a-session).<br>
@@ -744,6 +838,8 @@ The general workflow of the `group /view` command is as follows:
      `TextUI#printlnMessage`.
    * Else, the `String` object representing the details of the requested group is retrieved using the `Group#toString`
      method. The `String` object is then printed out with `TextUI#printlnMessageWithDivider`.
+
+<hr>
 
 ### List groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
@@ -875,6 +971,22 @@ This section includes instructions to test SplitLah manually.
 
 ### Session Testing
 
+#### Overview
+* [Creating a Session](#creating-a-session)
+* [Deleting a Session](#deleting-a-session)
+* [Editing a Session](#editing-a-session)
+* [Settling a Session](#settling-a-session)
+* [Viewing a Session](#viewing-a-session)
+* [Listing all Sessions](#listing-all-sessions)
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
+
 #### Creating a Session
 > For details on the usage of `session /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create).
 
@@ -906,6 +1018,8 @@ it with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGu
 3. Test Command: `session /create /n SessionTest6 /gid 2 /d today`<br>
    Expected: An error message should be printed, indicating that the specified group unique identifier cannot be found.
 
+<hr>
+
 #### Deleting a Session
 > For details on the usage of `session /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-session-session-delete).
 
@@ -919,6 +1033,8 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    Expected: An error message should be printed, indicating that the specified session unique identifier cannot be found.
 3. Test Command; `session /delete /sid apple`<br>
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
+
+<hr>
 
 #### Editing a Session
 > For details on the usage of `session /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-session-session-edit).
@@ -939,6 +1055,8 @@ it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/User
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
 6. Test Command: `session /edit /sid 1`<br>
    Expected: An error message should be printed, indicating that no delimiters were found.
+
+<hr>
 
 #### Settling a Session
 > For details on the usage of `session /summary` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#settling-all-transactions-for-a-session-session-summary).
@@ -963,6 +1081,8 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    Expected: A summary indicating the transactions that have to be made to settle all debts of the session with a 
    session unique identifier of `1` should be printed.
 
+<hr>
+
 #### Viewing a Session
 > For details on the usage of `session /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-session--session-view)
 
@@ -985,6 +1105,8 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 5. Test Command: `session /view /sid 1`<br>
    Expected: The full details of the session with a session unique identifier of `1` should be printed.
 
+<hr>
+
 #### Listing all Sessions
 > For details on the usage of `session /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-sessions-session-list)
 
@@ -1002,12 +1124,27 @@ Test Scenario 2: At least 1 session exists in the application.
 <br>
 
 <div class="button-box">
-  <a class="back-button" href="#appendix-instructions-for-manual-testing">Back to Instructions for Manual Testing</a>
+  <a class="back-button" href="#session-testing">Back to Session Testing</a>
 </div>
 
 <hr>
 
 ### Activity Testing
+
+#### Overview
+* [Creating an Activity](#creating-an-activity)
+* [Deleting an Activity](#deleting-an-activity)
+* [Editing an Activity](#editing-an-activity)
+* [Viewing an Activity](#viewing-an-activity)
+* [Listing all Activities](#listing-all-activities)
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
 
 #### Creating an Activity
 > For details on the usage of `activity /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-an-activity-activity-create).
@@ -1036,6 +1173,8 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 2. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Bob Mallory /cl 5 10 /gst 7 /sc 10` <br>
    Expected: An error message should be printed, indicating that a person specified was not found in the particular session.
 
+<hr>
+
 #### Deleting an Activity
 > For details on the usage of `activity /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-an-activity-activity-delete).
 
@@ -1060,6 +1199,8 @@ an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.
    Expected: An error message should be printed, indicating that the session specified was not found.
 3. Test Command: `activity /delete /sid 1 /aid 4` <br>
    Expected: An error message should be printed, indicating that the activity specified was not found in the particular session.
+
+<hr>
 
 #### Editing an Activity
 > For details on the usage of `activity /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-an-activity-activity-edit).
@@ -1087,6 +1228,8 @@ an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.
    Expected: A success message should be printed, indicating that the activity was edited.
 4. Test Command: `activity /edit /sid 1 /aid 1 /p Bob` <br>
    Expected: A success message should be printed, indicating that the activity was edited.
+
+<hr>
 
 #### Viewing an Activity
 > For details on the usage of `activity /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-an-activity-activity-view).
@@ -1120,6 +1263,8 @@ Also, only an activity with an activity unique identifier of 1 within this sessi
 7. Test Command: `activity /view /sid 1 /aid 1`<br>
    Expected: The full details of the activity with unique identifier of `1` within the session of unique identifier of `1` should be printed.
 
+<hr>
+
 #### Listing all Activities
 > For details on the usage of `activity /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-activities-in-a-session-activity-list).
 
@@ -1148,12 +1293,27 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 <br>
 
 <div class="button-box">
-  <a class="back-button" href="#appendix-instructions-for-manual-testing">Back to Instructions for Manual Testing</a>
+  <a class="back-button" href="#activity-testing">Back to Activity Testing</a>
 </div>
 
 <hr>
 
 ### Group Testing
+
+#### Overview
+* [Creating a Group](#creating-a-group)
+* [Deleting a Group](#deleting-a-group)
+* [Editing a Group](#editing-a-group)
+* [Viewing a Group](#viewing-a-group)
+* [Listing all Groups](#listing-all-groups)
+
+<br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
+
+<hr>
 
 #### Creating a Group
 > For details on the usage of `group /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-group-group-create).
@@ -1174,6 +1334,8 @@ Test Scenario 2: There is a group named GroupTest1 currently stored in the appli
 2. Test Command: `group /create /n GroupTest1 /pl Alice Bob Charlie` <br>
    Expected: An error message should be printed, indicating that a group with the same name already exists within the application.
 
+<hr>
+
 #### Deleting a Group
 > For details on the usage of `group /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-group-group-delete).
 
@@ -1186,6 +1348,8 @@ Test Scenario 1: There is a group with unique identifier of 1 stored in the appl
    Expected: An error message should be printed, indicating that the specified group unique identifier cannot be found.
 3. Test Command; `group /delete /gid apple`<br>
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/gid` delimiter.
+
+<hr>
 
 #### Editing a Group
 > For details on the usage of `group /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-group-group-edit).
@@ -1203,6 +1367,8 @@ Test Scenario 1: A group has been created with a unique identifier of 1, named G
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/gid` delimiter.
 5. Test Command: `group /edit /gid 1`<br>
    Expected: An error message should be printed, indicating that no delimiters were found.
+
+<hr>
 
 #### Viewing a Group
 > For details on the usage of `group /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-group-group-view).
@@ -1226,6 +1392,8 @@ a single group with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.
 5. Test Command: `group /view /gid 1`<br>
    Expected: The full details of the group with a group unique identifier of `1` should be printed.
 
+<hr>
+
 #### Listing all Groups
 > For details on the usage of `group /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-groups-group-list).
 
@@ -1242,10 +1410,11 @@ Test Scenario 2: At least 1 group exists in the application.
 <br>
 
 <div class="button-box">
-  <a class="back-button" href="#appendix-instructions-for-manual-testing">Back to Instructions for Manual Testing</a>
+  <a class="back-button" href="#group-testing">Back to Group Testing</a>
 </div>
 
 <hr>
+
 
 ### Storage Testing
 
@@ -1261,4 +1430,8 @@ Test Scenario 2: splitlah.jar is placed in a location where read and write permi
 * Test: No save file was found.<br>
    Expected: An error message should be printed indicating no save file was created and changes made in the run time of the application is not saved.
 
+<br>
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
 
