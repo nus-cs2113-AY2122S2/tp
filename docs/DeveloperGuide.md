@@ -667,7 +667,7 @@ The general workflow of the `group /edit` command is as follows:
     * Else, the `Group` object with the specified group unique identifier is returned.
 6. The details of how a group is updated are displayed in the reference diagram below.<br>
    <br><br>
-   ![Reference Frame Update Group Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateGroup.png)
+   ![Reference Frame Update Group Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateGroup.drawio.png)
    <br><br>
 7. If a new group name is provided, `GroupEditCommand#existingGroupWithTheSameName` method is called to check if the provided group name already exists in the list of groups.
    * If the provided group name exists within the list of groups, the method returns `true`.
