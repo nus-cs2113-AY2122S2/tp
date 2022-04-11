@@ -48,7 +48,8 @@ public class AddSatisfactionCommandTest {
     }
 
     @Test
-    public void execute_satisfactionValueWithUpperBoundaryValue_success() throws HotelLiteManagerException, IOException {
+    public void execute_satisfactionValueWithUpperBoundaryValue_success() throws HotelLiteManagerException,
+            IOException {
         AddSatisfactionCommand addSatisfactionCommand = new AddSatisfactionCommand("Angela / 5");
         addSatisfactionCommand.execute(listContainer, ui);
         SatisfactionList satisfactionList = listContainer.getSatisfactionList();
@@ -59,7 +60,8 @@ public class AddSatisfactionCommandTest {
     }
 
     @Test
-    public void execute_satisfactionValueWithLowerBoundaryValue_success() throws HotelLiteManagerException, IOException {
+    public void execute_satisfactionValueWithLowerBoundaryValue_success() throws HotelLiteManagerException,
+            IOException {
         AddSatisfactionCommand addSatisfactionCommand = new AddSatisfactionCommand("Steve / 5");
         addSatisfactionCommand.execute(listContainer, ui);
         SatisfactionList satisfactionList = listContainer.getSatisfactionList();
@@ -72,49 +74,49 @@ public class AddSatisfactionCommandTest {
     @Test
     public void commandParser_addCommandWithEmptySatisfactionCustomer_exceptionThrown() {
         assertThrows(EmptySatisfactionCustomerException.class, ()
-                -> new CommandParser().parse("add satisfaction / 4"));
+            -> new CommandParser().parse("add satisfaction / 4"));
     }
 
     @Test
     public void commandParser_addCommandWithEmptySatisfactionValue_exceptionThrown() {
         assertThrows(EmptySatisfactionValueException.class, ()
-                -> new CommandParser().parse("add satisfaction Bob / "));
+            -> new CommandParser().parse("add satisfaction Bob / "));
     }
 
     @Test
     public void commandParser_addCommandWithNoSlash_exceptionThrown() {
         assertThrows(InvalidCommandException.class, ()
-                -> new CommandParser().parse("add satisfaction Bob 5"));
+            -> new CommandParser().parse("add satisfaction Bob 5"));
     }
 
     @Test
     public void commandParser_addCommandWithNegativeSatisfactionValue_exceptionThrown() {
         assertThrows(InvalidSatisfactionValueException.class, ()
-                -> new CommandParser().parse("add satisfaction Joe / -1"));
+            -> new CommandParser().parse("add satisfaction Joe / -1"));
     }
 
     @Test
     public void commandParser_addCommandWithTooHighSatisfactionValue_exceptionThrown() {
         assertThrows(InvalidSatisfactionValueException.class, ()
-                -> new CommandParser().parse("add satisfaction Joe / 6"));
+            -> new CommandParser().parse("add satisfaction Joe / 6"));
     }
 
     @Test
     public void commandParser_addCommandWithTooManySlashes_exceptionThrown() {
         assertThrows(InvalidCommandException.class, ()
-                -> new CommandParser().parse("add satisfaction Joe / 3 / 3"));
+            -> new CommandParser().parse("add satisfaction Joe / 3 / 3"));
     }
 
     @Test
     public void commandParser_addCommandWithDuplicateCommands_exceptionThrown() {
         assertThrows(DuplicateCommandException.class, ()
-                -> new CommandParser().parse("add satisfaction add satisfaction Joe / 3"));
+            -> new CommandParser().parse("add satisfaction add satisfaction Joe / 3"));
     }
 
     @Test
     public void commandParser_addCommandWithInvalidCustomerName_exceptionThrown() {
         assertThrows(InvalidSatisfactionCustomerNameException.class, ()
-                -> new CommandParser().parse("add satisfaction Joe 3213 / 3"));
+            -> new CommandParser().parse("add satisfaction Joe 3213 / 3"));
     }
 
 }
