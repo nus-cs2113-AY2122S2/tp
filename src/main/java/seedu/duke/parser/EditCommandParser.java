@@ -68,7 +68,6 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     *
      * Returns true if any one of the prefixes contains non-empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      * For EditCommand, at least one of PREFIX_NAME, PREFIX_QUANTITY, and PREFIX_DESCRIPTION is needed.
