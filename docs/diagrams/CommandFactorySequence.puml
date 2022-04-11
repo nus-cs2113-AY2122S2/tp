@@ -4,6 +4,8 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 
+Title: CommandFactory Sequence
+
 participant Main #grey
 Box " "#WHITE
     participant ":CommandFactory" as CommandFactory COMMAND_COLOR

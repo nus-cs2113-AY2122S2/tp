@@ -107,8 +107,9 @@ public class Person {
         LOGGER.log(Level.INFO, infoString);
         String description = incomeList.getDescription(incomeIndex);
         Double value = incomeList.getIncomeValue(incomeIndex);
+        String valueString = UI.formatValue(value);
         incomeList.remove(incomeIndex);
-        System.out.println("An income of " + value + " for " + description + " has been removed from " + name);
+        System.out.println("An income of " + valueString + " for " + description + " has been removed from " + name);
     }
 
     /**
@@ -149,8 +150,9 @@ public class Person {
         LOGGER.log(Level.INFO, infoString);
         String description = expenditureList.getDescription(expendIndex);
         Double value = expenditureList.getExpenditureValue(expendIndex);
+        String valueString = UI.formatValue(value);
         expenditureList.remove(expendIndex);
-        System.out.println("An expenditure of " + value + " for " + description
+        System.out.println("An expenditure of " + valueString + " for " + description
                 + " has been removed from " + name);
     }
 

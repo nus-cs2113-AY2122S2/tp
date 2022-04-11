@@ -51,7 +51,7 @@ The ***Architecture Diagram*** given below shows the high-level design of PlanIT
 ![ArchitectureDiagram](images/ArchitectureDiagram.png)
 
 > :information_source: **Note:** The that `.puml` files used to create diagrams in this document
-> can be found in the diagrams folder. Refer to the above [PlantUML Tutorial](#Acknowledgements)
+> can be found in the diagrams folder. Refer to the above [PlantUML Tutorial](#acknowledgements)
 > to learn how to create and edit these diagrams when necessary.
 
 **Overview of components in the Architecture**
@@ -78,7 +78,8 @@ is responsible for,
 **How the components interact with each other**
 
 The following Sequence Diagram shows a high-level view on how the components interact when the user enters the command
-`add /g 2 /n Alice`.
+`add /g 2 /n Alice`. The interactions with storage is not showcased in this section, but is detailed in the 
+[Data Archiving](#data-archiving) section. 
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
 > :information_source: **Note:** The lifeline for `AddPersonCommand` ends at the destroy marker :x:
@@ -173,6 +174,8 @@ the `XYZCommand` to obtain the desired results.
 **Class:** [`Parser.java`
 ](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/Parser.java)
 
+The Class Diagram below shows the full structure of the `Parser` component and the components it interacts with.
+
 ![ParserClassDiagram](images/ParserClassDiagram.png)
 
 The `Parser` component consists of the 
@@ -190,8 +193,8 @@ required.
 
 How the `Parser` component is used:
 
-1. When the `Commands` component receives a user input, `parseCommandType()` is called upon to parse the type of command to
-   be executed.
+1. When the `Commands` component receives a user input, `parseCommandType()` is called upon to parse the type of command 
+   to be executed.
 2. This will result in the keyword of the command to be returned as a string.
 3. When necessary, the `parseXYZ()` methods will be called upon to parse more terms for the `Commands`
    component to obtain the details required for the command execution (e.g. `parseGroupIndex("add /n Alice /g 2")`
@@ -204,7 +207,7 @@ The following Sequence Diagram shows how the classes of the `Parser` component i
 
 ![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
 
-> :information_source: **Note:** The following are the ranges of index deemed valid:
+> :information_source: **Note:** The following are the range of indexes deemed valid:
 
 | Index       | Range                                                                               |
 |-------------|-------------------------------------------------------------------------------------|
@@ -254,9 +257,27 @@ To aid in visualisation,
   3. User decides to view the `parents` generation in detail
   4. User decides to view the overall situation in the `Family`
 
-The following Sequence Diagram shows how the `Family` component handles each call by the `Command` component.  
+The following Sequence Diagrams shows how the `Family` component handles each call by the `Command` component.  
 
-![FamilySequenceDiagram](images/FamilySequenceDiagram.png)
+Step 1. User adds a Person, *Alice* to `parents`
+
+![FamilySequenceDiagram1](images/FamilySequenceDiagram1.png)
+
+Step 2. User adds an income to *Alice*
+
+![FamilySequenceDiagram2](images/FamilySequenceDiagram2.png)
+
+Additionally, the following Object Diagram shows what is present in the `Family` structure at this point in time.
+
+![FamilyObjectDiagram](images/FamilyObjectDiagram.png)
+
+Step 3. User decides to view the `parents` generation in detail
+
+![FamilySequenceDiagram3](images/FamilySequenceDiagram3.png)
+
+Step 4. User decides to view the overall situation in the `Family`.
+
+![FamilySequenceDiagram4](images/FamilySequenceDiagram4.png)
 
 ### Money Component
 
@@ -295,6 +316,8 @@ section.
 
 **Class:** [`Storage.java`
 ](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/storage/Storage.java)
+
+The Class Diagram below shows the full structure of the `Storage` component and the components it interacts with.
 
 ![StorageDiagram](images/StorageDiagram.png)
 
@@ -349,7 +372,7 @@ Following operations are implemented:
 * `Parser#getKeyword(userInput)` -- Return the keyword of the type of command
 * `XYZCommand#execute()` -- Execute the command
 
-Below is and example usage scenario and how Alice is added to the `PersonList`
+Below is and example usage scenario and how Alice is added to the `Family`
 
 Step 1. given that user input is
 
@@ -435,9 +458,7 @@ and called by `PersonList`:
 
 ### Data Archiving
 
-#### Saving and loading feature
-
-##### Implementation
+#### Implementation
 
 The saving and loading mechanism is facilitated by `Family`. It loads records of `PersonList` for each logical
 grouping inside family from a local file, process the data and adds the record to `Family` for the current session.
@@ -454,7 +475,7 @@ the following operations:
 Given below is an example scenario and how the save and load mechanism behaves at each step.
 
 Step 1. The user launches the application. A `Storage` object will be initialised with an empty `PersonList` for each
-`Family` grouping. The following sequence diagram shows how the `Storage` object is initialised
+`Family` grouping. The following sequence diagram in step 2 shows how the `Storage` object is initialised.
 
 Step 2. The program will create a new `Family` object for the session which calls `Storage#loadData()`, causing a check 
 if the local file `PlanITarium.txt` exists by calling `Storage#checkFileExists()` and creates one if it does not. The 
@@ -468,7 +489,7 @@ The following sequence diagram shows how the loading operation works:
 Step 3. The user then decides to exit the program by executing the command `bye`, `Storage#saveData` will be called. All
 data in the `Family` object will be written to the local file `PlanITarium.txt` in the format of
 `(user/operation) (Info)` which are to be read again when the program starts up. The following
-Sequence diagram shows how the saving operation will work:
+Sequence diagram shows how the saving operation works:
 
 ![StorageSaveSequence](images/StorageSaveSequence.png)
 
@@ -637,6 +658,7 @@ Upon request for input, type `bye` and press [Enter].
    Expected: No income is added. Error details shown in the error message.
 4. Other incorrect addin commands to try: `addin`, `addin /g 1 /u 1 /d Test case /i notDouble /p f`  
    Expected: Similar to previous.
+
 #### Adding a recurring income
 1. Prerequisite: Similar to previous.
 2. Testing similar to previous, but with `/p t` instead.
@@ -653,6 +675,7 @@ Upon request for input, type `bye` and press [Enter].
    Expected: No expenditure is added. Error details shown in the error message.
 4. Other incorrect addout commands to try: Similar to the case of [addin](#Adding-an-expenditure), with the inclusion of `/c`  
    Expected: Similar to previous.
+
 #### Adding a recurring expenditure
 1. Prerequisite: Similar to previous.
 2. Testing similar to previous, but with `/p t` instead.
@@ -669,6 +692,7 @@ Upon request for input, type `bye` and press [Enter].
    Expected: No income is deleted. Error details shown in the error message.
 4. Other incorrect deletein commands to try: `deletein`, `deletein /u 1 /r 1`, `deletein /g 1 /u 1 /r first`  
    Expected: Similar to previous.
+
 #### Deleting an expenditure
 1. Prerequisite: Similar to previous, but existing expenditure instead of income.
 2. Testing similar to previous, but with `deleteout` instead.
@@ -687,6 +711,7 @@ Upon request for input, type `bye` and press [Enter].
    Expected: No income is edited. Error details shown in the error message.
 5. Other incorrect editin commands to try: `editin /g 1 /u 1 /r 1`, `editin /g 1 /u 1 /r 1 /i notDouble`  
    Expected: Similar to previous.
+
 #### Editing an expenditure
 1. Prerequisite: Similar to previous, but existing expenditure instead of income.
 2. Testing similar to previous, but with `editin` instead and additional delimiter of `/c` can be added for category.
@@ -696,12 +721,29 @@ Upon request for input, type `bye` and press [Enter].
 #### Finding incomes and general expenditures
 Test case: `find /d Test`  
 Expected: All incomes and expenditures whose description contains `Test` will be printed out.
+
 #### Finding expenditures in a category
 1. Test case: `find /d Test /c 1`  
    Expected: All incomes, and expenditures in the category of `Others`, whose description contains `Test` will be
    printed out.
 2. Test case: `find /d Test /c 7`  
    Expected: No entries are printed. Error details shown in the error message.
+
+### Moving to the next month
+
+1. Prerequisite: Launch the program and add valid person such as `add /n Alice /g 1` and
+   a valid income such as `addin /g 1 /u 1 /d Donations /i 6000 /p f`.
+2. Execute the command `bye` to save the data to `PlanITarium.txt`.
+3. Open the save file `PlanITarium.txt` in directory `data` and manually edit the income record
+   added above.
+4. To demonstrate, an example entry should look like this `i Donations /d 6000.0 /d false /d 2022-04-11`.
+5. Test case: Change the month to an earlier month. The simulated record should look like this
+   `i Donations /d 6000.0 /d false /d 2022-01-11`.  
+   Expected: Upon starting up the program again and running any command which iterates through the lists such as `overview`,
+   the entry is automatically deleted.
+6. Test case: Change the year to an earlier year. The simulated record should look like this
+   `i Donations /d 6000.0 /d false /d 2020-04-11`.  
+   Expected: Similar to previous.
 
 ### Loading data
 

@@ -32,13 +32,13 @@ public class PlanITarium {
         while (true) {
             try {
                 String userInput = in.nextLine();
+                UI.printHoriLine();
                 command = commandFactory.getCommand(userInput, family);
                 logger.log(Level.INFO, "Next line has been read");
-                UI.printHoriLine();
                 command.execute();
                 UI.printHoriLine();
             } catch (Exception e) {
-                ui.printMsg(e.toString());
+                ui.printErrorMsg(e.toString());
             }
         }
     }

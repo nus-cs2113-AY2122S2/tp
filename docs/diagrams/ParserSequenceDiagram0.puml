@@ -4,8 +4,8 @@ skinparam arrowColor #BLACK
 skinparam noteTextAlignment left
 
 group **sd**  Parser Component parse and validate
-Participant "<<Class>>\nParser" as Parser LOGIC_COLOR
-Participant "<<Class>>\nParserUtility" as UParser LOGIC_COLOR_T1
+Participant "<<class>>\nParser" as Parser LOGIC_COLOR
+Participant "<<class>>\nParserUtility" as UParser LOGIC_COLOR_T1
 
 [-> Parser : parseCommandType(userInput:String)
 activate Parser
@@ -28,7 +28,8 @@ loop LOOP_COLOR for each XYZ term in command
     opt OPT_COLOR found no DELIMITER_XYZ
         UParser --> Parser : :MissingDelimiterException
         Parser -->[ : :MissingDelimiterException
-    else found too many DELIMITER_XYZ
+    end opt
+    opt OPT_COLOR found too many DELIMITER_XYZ
         UParser --> Parser : :DuplicateDelimiterException
         Parser -->[ : :DuplicateDelimiterException
     end opt
@@ -53,12 +54,14 @@ loop LOOP_COLOR for each XYZ term in command
     end OPT
 
     Parser -->[ : //XYZ//:object
+
+    note right : object is either of type String or Boolean
     deactivate Parser
 
     ' needs Validation
     opt OPT_COLOR_T1 if //XYZ// needs validation checking
         [-> Parser : getValidXYZ(//XYZ//:String, [maxValue:int])
-        note right : [maxValue:int] is only needed if //XYZ// is not Money
+        note right : [maxValue:int] is only needed if //XYZ// is UserIndex, IncomeIndex or ExpenditureIndex\n[maxValue:int] for GroupIndex and CategoryIndex are constants
         activate Parser
 
         ' isMoney?
@@ -78,7 +81,17 @@ loop LOOP_COLOR for each XYZ term in command
             UParser --> Parser
             deactivate UParser
 
-            Parser -->[ : //XYZ//:double
+            ' checkTwoDecimalPlace
+            Parser -> UParser : checkTwoDecimalPlace(//XYZ//:String)
+            activate UParser
+            opt OPT_COLOR //XYZ// is more than 2 \ndecimal places
+                UParser --> Parser : :NumberFormatException
+                Parser -->[ :InvalidMoneyException
+            end opt
+            UParser --> Parser
+            deactivate UParser
+
+            Parser -->[ : //XYZ//:Double
 
         ' notMoney
         else //XYZ// is not Money
@@ -107,7 +120,7 @@ loop LOOP_COLOR for each XYZ term in command
             UParser --> Parser
             deactivate UParser
 
-            Parser -->[ : //XYZ//:int
+            Parser -->[ : //XYZ//:Integer
             deactivate Parser
         end opt
     end opt

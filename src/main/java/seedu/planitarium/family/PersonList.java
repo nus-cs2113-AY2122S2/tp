@@ -105,7 +105,7 @@ public class PersonList {
     public Double getRemain() {
         LOGGER.log(Level.INFO, Constants.GET_REMAIN_CALL_MESSAGE);
         Double sum = 0.0;
-        for (Person person: getPersonList()) {
+        for (Person person: personList) {
             sum += person.getDisposable();
         }
         return sum;
@@ -114,7 +114,7 @@ public class PersonList {
     public Double getTotalIncome() {
         LOGGER.log(Level.INFO, Constants.GET_TOTAL_INCOME_CALL_MESSAGE);
         Double sum = 0.0;
-        for (Person person: getPersonList()) {
+        for (Person person: personList) {
             sum += person.getTotalIncome();
         }
         return sum;
@@ -123,7 +123,7 @@ public class PersonList {
     public Double getTotalExpenditure() {
         LOGGER.log(Level.INFO, Constants.GET_TOTAL_EXPEND_CALL_MESSAGE);
         Double sum = 0.0;
-        for (Person person: getPersonList()) {
+        for (Person person: personList) {
             sum += person.getTotalExpenditure();
         }
         return sum;
