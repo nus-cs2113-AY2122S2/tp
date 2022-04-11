@@ -23,8 +23,8 @@
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
-* Reference for User Guide [UG](https://se-education.org/addressbook-level3/UserGuide.html)
-* Reference for Developer Guide [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+* Reference for User Guide from AB-3 [UG](https://se-education.org/addressbook-level3/UserGuide.html)
+* Reference for Developer Guide from AB-3 [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 * Guide for [PlantUML Diagrams](https://se-education.org/guides/tutorials/plantUml.html)
 
 ## Design
