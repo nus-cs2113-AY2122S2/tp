@@ -50,12 +50,4 @@ public class StaffManagerTest {
         assertThrows(IllegalArgumentException.class, () -> staffManager.findByStaffId(-1));
         assertThrows(IllegalArgumentException.class, () -> staffManager.findByStaffId(0));
     }
-
-    @Test
-    void printStaff_test() {
-        StaffManager.resetInstance();
-        StaffManager staffManager = StaffManager.getInstance();
-        staffManager.addStaff(1, "August", "Chef", 5500);
-        assertEquals("1. 1     | August          | Chef       | 5500.00", staffManager.findByStaffId(4).getPosition());
-    }
 }
