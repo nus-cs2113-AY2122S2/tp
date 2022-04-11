@@ -14,8 +14,8 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
    - [add todo to a project](#add-todo-to-a-project-todo)
    - [mark todo as done](#mark-todo-as-done-mark)
    - [set the deadline to a project](#set-the-deadline-to-a-project-projdeadline)
-   - [change the GitHub repo of a project](#change-the-GitHub-repo-of-a-project)
-   - [open the GitHub repo of a project](#open-the-GitHub-repo-of-a-project)
+   - [change the GitHub repo of a project](#change-the-GitHub-repo-of-a-project-changegit)
+   - [open the GitHub repo of a project](#open-the-GitHub-repo-of-a-project-opengit)
    - [set the deadline to a todo](#set-the-deadline-to-a-todo-tododeadline)
    - [add language to a project](#add-language-to-a-project-addlanguage)
    - [list languages of a project](#list-languages-of-a-project-listlanguages)
@@ -148,7 +148,7 @@ projdeadline 1 2022-04-03
 Deadline added to project1: 2022-04-03
 ```
 ---
-### Change the GitHub repo of a project
+### Change the GitHub repo of a project: `changegit`
 Changes the GitHub repository link for your project
 
 Format: `changegit [project_index] [github_URL]`
@@ -167,7 +167,7 @@ The Github Repo for project1 has been changed to: http://github.com/project1
 ```
 
 ---
-### Open the GitHub repo of a project
+### Open the GitHub repo of a project: `opengit`
 Opens the GitHub repository in your default browser
 
 Format: `opengit [project_index]`
