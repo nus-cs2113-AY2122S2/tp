@@ -678,7 +678,7 @@ Upon request for input, type `bye` and press [Enter].
    the first person of `Parents`.
 3. Test case: `addout /g 1 /u 1 /d Food /e 50 /c 7 /p f`  
    Expected: No expenditure is added. Error details shown in the error message.
-4. Other incorrect addout commands to try: Similar to the case of [addin](#Adding-an-expenditure), with the inclusion of `/c`  
+4. Other incorrect addout commands to try: Similar to the case of [addin](#adding-incomes), with the inclusion of `/c`  
    Expected: Similar to previous.
 
 #### Adding a recurring expenditure
