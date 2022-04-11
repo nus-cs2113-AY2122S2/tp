@@ -6,7 +6,6 @@ import seedu.mindmymoney.constants.IncomeCategoryTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.CreditCard;
-import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

@@ -60,7 +60,7 @@ public class AddCommand extends Command {
      * @return true if the /e flag is present, false otherwise.
      */
     private boolean hasExpenditureFlag() {
-        return addInput.contains(FLAG_OF_EXPENSES);
+        return addInput.startsWith(FLAG_OF_EXPENSES);
     }
 
     /**
@@ -69,7 +69,7 @@ public class AddCommand extends Command {
      * @return true if the credit card flag is present, false otherwise.
      */
     private boolean hasCreditCardFlag() {
-        return addInput.contains(FLAG_OF_CREDIT_CARD);
+        return addInput.startsWith(FLAG_OF_CREDIT_CARD);
     }
 
     /**
@@ -96,7 +96,7 @@ public class AddCommand extends Command {
      * @return true if the /i flag is present, false otherwise.
      */
     private boolean hasIncomeFlag() {
-        return addInput.contains(FLAG_OF_INCOME);
+        return addInput.startsWith(FLAG_OF_INCOME);
     }
 
     /**
