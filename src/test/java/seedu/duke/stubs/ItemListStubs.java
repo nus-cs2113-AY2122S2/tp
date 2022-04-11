@@ -14,7 +14,23 @@ import static seedu.duke.stubs.ItemStubs.ITEM_WHITEBOARD;
 
 public class ItemListStubs {
 
-    // ItemList Stubs for use in ListCurrentBorrowingsCommand
+    // ItemList Stubs for use in EditCommand
+    public static final ItemList EDIT_NEGATIVE_QUANTITY_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_10);
+    public static final ItemList EDIT_NAME_LIST_BEFORE = generateItemList(ITEM_PENCIL);
+    public static final ItemList EDIT_NAME_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_MARKER);
+    public static final ItemList EDIT_ABSQUANTITY_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_10);
+    public static final ItemList EDIT_ABSQUANTITY_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_PAPER_A4_15);
+    public static final ItemList EDIT_RELQUANTITY_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_15);
+    public static final ItemList EDIT_RELQUANTITY_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_PAPER_A4_10);
+    public static final ItemList EDIT_DESC_LIST_BEFORE = generateItemList(ITEM_PAPER_A4_10);
+    public static final ItemList EDIT_DESC_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_PAPER_A5_10);
+    public static final ItemList EDIT_ALL_LIST_BEFORE = generateItemList(ITEM_MARKER);
+    public static final ItemList EDIT_ALL_EXPECTED_LIST_AFTER = generateImmutableItemList(ITEM_WHITEBOARD);
+    public static final ItemList EDIT_NAME_LIST_WITH_BORROWRECORDS_BEFORE = generateItemList(ITEM_DVI_CABLE);
+    public static final ItemList EDIT_NAME_LIST_WITH_BORROWRECORDS_AFTER = generateImmutableItemList(ITEM_HDMI_CABLE);
+
+    // ItemList Stubs for use in ListCurrentBorrowingsCommand, ListFutureBorrowingsCommand
+    // and ListOverdueBorrowingsCommand
     public static final ItemList TEST_ITEM_LIST = generateItemList(ITEM_MARKER, ITEM_PENCIL, ITEM_WHITEBOARD);
     public static final ItemList TEST_ITEM_LIST_WITH_RECORDS = generateItemListWithRecords(TEST_ITEM_LIST);
 
@@ -29,11 +45,11 @@ public class ItemListStubs {
     private static ItemList generateItemListWithRecords(ItemList itemList) {
         try {
             itemList.addBorrowRecord(0, BorrowRecordStubs.PRESENTRECORD_A);
-            itemList.addBorrowRecord(0, BorrowRecordStubs.PRESENTRECORD_B);
+            itemList.addBorrowRecord(1, BorrowRecordStubs.PRESENTRECORD_B);
             itemList.addBorrowRecord(1, BorrowRecordStubs.PASTRECORD_A);
-            itemList.addBorrowRecord(1, BorrowRecordStubs.PASTRECORD_B);
+            itemList.addBorrowRecord(2, BorrowRecordStubs.PASTRECORD_B);
             itemList.addBorrowRecord(2, BorrowRecordStubs.FUTURERECORD_A);
-            itemList.addBorrowRecord(2, BorrowRecordStubs.FUTURERECORD_B);
+            itemList.addBorrowRecord(0, BorrowRecordStubs.FUTURERECORD_B);
             return itemList;
         } catch (InvMgrException e) {
             System.out.println(e);
