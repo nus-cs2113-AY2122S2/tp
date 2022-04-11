@@ -66,10 +66,10 @@ If you do not, you can download it from [here](https://www.oracle.com/java/techn
 4. Open the terminal in the folder which contains Simplst.jar and run java -jar Simplst.jar. The Startup should look like below:
 ```
 ____________________________________________________________
+New login.
 Hello from
 Simplst
 What would you like to do?
-New login. Please type the total number of goods your warehouse can hold
 ____________________________________________________________
 ```
 5. Type the commands in the terminal and press `Enter` to execute them. For example: typing help and pressing `Enter` will show you the features
@@ -116,7 +116,7 @@ Adding a Unit Good with SKU being WC1, with name Wooden Chair, description as Ch
 
 Expected Output
 ```
-Unit Good with SKU: WC1 added to warehouse
+Unit Good of SKU: WC1 added to warehouse
 Another command?
 ```
 
@@ -136,7 +136,7 @@ Removing a Unit Good of SKU WC1<br/>
 
 Expected Output
 ```
-Unit Good with SKU: WC1 has been removed from warehouse
+Unit Good of SKU: WC1 has been removed from warehouse
 Another command?
 ```
 
@@ -280,7 +280,10 @@ An Order contains:
 * Receiver name
 * Shipping address
 
-### <img src="img.png" alt="img" style="width:30px;"/> Adding an Order `add o/`
+### Adding an Order `add o/`
+
+<img src="img.png" alt="img" style="width:30px;"/>
+
 Adding a new order to be tracked in the warehouse.
 
 Format: `add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]`
@@ -298,7 +301,10 @@ Order 1 added to the warehouse
 Another command?
 ```
 
-### <img src="img.png" alt="img" style="width:30px;"/> Removing an Order `remove o/`
+### Removing an Order `remove o/`
+
+<img src="img.png" alt="img" style="width:30px;"/>
+
 Removing the quantity of a Unit Good from its previous value.
 
 Format: `remove o/ oid/[ORDER_ID]`
@@ -313,7 +319,10 @@ Order 1 has been removed
 Another command?
 ```
 
-### <img src="img.png" alt="img" style="width:30px;"/> Listing Current Orders `list o/`
+### Listing Current Orders `list o/`
+
+<img src="img.png" alt="img" style="width:30px;"/>
+
 Listing all orders in the warehouse. This would show the order details such as:
 * Order id
 * Receiver Name
@@ -333,7 +342,10 @@ List of orders:
 Another command?
 ```
 
-### <img src="img.png" alt="img" style="width:30px;"/> View Order `view o/`
+### View Order `view o/`
+
+<img src="img.png" alt="img" style="width:30px;"/>
+
 View a specific order in the warehouse. This would show the order details such as:
 * Order id
 * Receiver Name
@@ -364,7 +376,10 @@ Could not find order with given id!
 Another command?
 ```
 
-### <img src="img.png" alt="img" style="width:30px;"/> Fulfill Order `fulfill`
+### Fulfill Order `fulfill`
+
+<img src="img.png" alt="img" style="width:30px;"/>
+
 Fulfill a currently unfulfilled order in the warehouse. To fulfill an order, Simplst will check if all the orderlines relating to the order have their required quantities met.<br/>
 When all the orderlines quantities are fulfilled, the order will be considered as fulfilled.
 
