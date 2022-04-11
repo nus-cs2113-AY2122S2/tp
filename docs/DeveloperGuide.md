@@ -295,7 +295,7 @@ The general workflow of the `session /create` command is as follows:
 3. `SessionCreateCommand#run` method is then invoked to run the `session /create` command.
 4. Once the command runs, `SessionCreateCommand#run` method checks if there is an existing session with the same session name.
    * If an existing session with the specified session name is found, a message indicating that another session with the same name exists is printed using `TextUI#printlnMessage`
-     and control is returned to `Splitlah`.
+     and control is returned to `SplitLah`.
 5. The `SessionCreateCommand` class creates a new `Session` object using the session name, session date, and person list.
 6. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
    which is used to call the `Profile#addSession` method in order to store the new `Session` object.
@@ -630,6 +630,8 @@ The sequence diagram for `GroupDeleteCommand` is omitted as it bears many simila
 The interactions of `GroupDeleteCommand` with `Profile` and `Storage` classes are identical but the key differences lie in the arguments being parsed:
 * `GroupViewCommand` parses the **group unique identifier** instead of the **session unique identifier**.
 * It then removes the `Group` object from the list of groups managed by the `Profile` class corresponding to the **group unique identifier**.
+
+Please refer to the [sequence diagram](#remove-a-session) of `SessionDeleteCommand` for reference.
 
 The general workflow of the `group /delete` command is as follows:
 1. The user input provided is passed to `SplitLah`.
