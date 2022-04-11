@@ -171,10 +171,10 @@ It offers the functions of `DishManager` to user and get input from user.
 The index and corresponding function can be found at `DishController.CHOICES`:
 
 - `void listDishes()` -- print all dishes and their menu index in current menu.
-- `void changeName()` -- get dish index and change the name of corresponding dish
-- `void changePrice()` -- get dish index and change the price of corresponding dish
-- `void deleteDish()` -- get dish index and delete corresponding dish
-- `void addDish()` -- get new dish name and price then create a dish
+- `void changeName()` -- get dish index and change the name of corresponding dish.
+- `void changePrice()` -- get dish index and change the price of corresponding dish.
+- `void deleteDish()` -- get dish index and delete corresponding dish.
+- `void addDish()` -- get new dish name and price then create a dish.
 - `getDishManager()` -- get the list in `dishManager`, this is for `OrderManager` since it might need menu information.
 
 ## Order Management
@@ -195,9 +195,11 @@ For example, `addDishToOrder(Dish dish, int orderIdx)`, iterates through `orders
 ![](diagrams/sequence/OrderManager_addDishToOrder.png)
 
 `deleteOrder(int)` calls `getOrderCount()`:
+
 ![](diagrams/sequence/OrderManager_deleteOrder.png)
 
 Both methods `getOrderPrice(int)` and `getAllOrderValue()` call `getTotalPrice()`:
+
 ![](diagrams/sequence/OrderManager_displayAllOrderPrice.png)
 
 ## Staff Management
