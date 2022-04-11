@@ -123,15 +123,15 @@ None
 
 **Caveats:**
 
-Arguments after `list` will be ignored. i.e. `list foo` will behave the same way `list` does.
+* Arguments after `list` will be ignored. i.e. `list foo` will behave the same way `list` does.
 
 **Examples of usage:**
 
 ```
 > list
-Name | Quantity	|
-VGA Cable | 1 
-HDMI Cable | 2
+Here are the items in your list:
+1.VGA Cable | 1 
+2.HDMI Cable | 2
 ```
 
 ### Borrow an Item: `borrow`
@@ -390,6 +390,7 @@ List all items that is available all the time between a start date and an end da
 **Caveats:**
 
 * `START_DATE` and `END_DATE` must be in `YYYY-MM-DD` format.
+* `START_DATE` cannot be after `END_DATE`.
 
 **Examples of usage:**
 
@@ -541,7 +542,7 @@ Cancels future borrowing made by a specific person. It is only possible to cance
 
 **Caveats:**
 
-None?
+* `INDEX` must be based of `listfb p/BORROWER_NAME`.
 
 **Examples of usage:**
 
@@ -566,6 +567,7 @@ Here is a list of future borrowings for Tom:
 1) Name of Item: pencil
 Name of Borrower: Tom
 Borrow Duration: 2022-05-06 to 2022-05-06
+Borrow Quantity: 4
 ```
 
 ### Exit: `exit`
