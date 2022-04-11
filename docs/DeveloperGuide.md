@@ -670,7 +670,7 @@ The above sequence diagram shows the interactions when a list of
 1. `ExpenditureList` calls `SerializerFunctions.addListToStringBuilder()`, passing in an `ArrayList` of 
 `Expenditure`s.
 2. For each entry in the list, `SerializerFunctions`
-   invokes `Expenditure.propetyList` on this line, which returns an `Expenditure`. This is repeated until
+   invokes `Expenditure.propetyList()` on this line, which returns an `Expenditure`. This is repeated until
    the designated terminator is read from the `Scanner`.
 3. `Expenditure` creates a `PropertyList` to stores its properties into.
    Then, it makes a series of `PropertyList::setValue` calls to save each of its attributes.
