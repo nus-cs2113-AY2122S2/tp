@@ -88,16 +88,6 @@ public class PersonList implements Serializable {
     }
 
     /**
-     * Removes a Person object from the ArrayList object of Person objects if it exist,
-     * otherwise Person object is not removed.
-     *
-     * @param person A Person object to be removed.
-     */
-    public void removePerson(Person person) {
-        personList.remove(person);
-    }
-
-    /**
      * Returns the ArrayList object of Person objects.
      *
      * @return An ArrayList object of Person objects.
