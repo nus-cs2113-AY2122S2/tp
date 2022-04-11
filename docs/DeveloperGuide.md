@@ -348,8 +348,6 @@ than using GUI.
 - Ensure Java 11 is installed and configured on your device
 - Open a command prompt or terminal and run the command `java -jar MeetingJio.jar`
 
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 ### Running Commands
 
 - Input `help` to get an overview of the list of accepted commands
