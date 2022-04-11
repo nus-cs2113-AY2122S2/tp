@@ -21,7 +21,7 @@ public class ReturnCommand extends Command {
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n"
             + "[Function] "
             + USAGE_MESSAGE
-            + ":\n"
+            + "\n"
             + "[Command Format] "
             + COMMAND_FORMAT
             + "\n";
@@ -82,7 +82,6 @@ public class ReturnCommand extends Command {
                 ui.showMessages("Name of Item: " + returnedItem.getName(),
                         "Name of Borrower: " + record.getBorrowerName(),
                         "Borrow Duration: " + record.getBorrowDuration());
-                ui.showDivider();
                 isValidReturnRequest = true;
                 break;
             }

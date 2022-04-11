@@ -20,7 +20,7 @@ public class LostCommand extends Command {
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n"
             + "[Function] "
             + USAGE_MESSAGE
-            + ":\n"
+            + "\n"
             + "[Command Format] "
             + COMMAND_FORMAT
             + "\n";
