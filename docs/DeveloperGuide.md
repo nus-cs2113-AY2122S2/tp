@@ -151,12 +151,14 @@ The above diagram shows the sequence diagram of the addition of an item.
 
 The user starts by typing an add command. The example used in the diagram above is the addition of an item with the name `Paper Cup`, quantity of `25` and description of `100ml paper cups`. The full command is `add n/Paper Cup q/25 d/100ml paper cups`.
 
-1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
-2. Within `parse()`, the string is identified to start with the word `add`, and executes the code within the case. The case attempts to create an item using the string by self-invoking `createItem()`.
-3. `createItem()` extracts the relevant arguments from the input string and generates a new `Item` which is returned to the `parse()` case block.
-4. `parse()` uses the `Item` to generate a new `AddCommand` which is returned to the `run()` method.
-5. The `run()` method calls on the `execute()` function in the `AddCommand` which will add the generated item to the `ItemList` using its `addItem()` method.
-6. `AddCommand` will converse with `Ui` to show a message that the item has been added. In this case, the item to add will be printed as the name of the item, followed by " has been added!".
+1. The `run()` method within `InvMgr` calls the method `parse()` in the `AddCommandParser` class, providing the entire string of input entered by the user.
+2. The`parse()` attempts to create an `Item` using the string by extracting the `NAME`, `QUANTITY`, and `DESCRIPTION` using an `Argument Multimap`.
+3. `parse()` uses the `Item` to generate a new `AddCommand` which is returned to the `run()` method.
+4. The `run()` method calls on the `execute()` function in the `AddCommand`
+5. `execute()` first creates a list of items using the `itemList`'s `getItemArrayList()` method.
+6. The method then uses Java Streams to check if there are any items in the list that match the name of the item to be added.
+7. If there is no item with matching name, the item will be added, and `AddCommand` will converse with `Ui` to show a message that the item has been added. In this case, the item to add will be printed as the name of the item, followed by " has been added!".
+8. If there is in fact an item with matching name, `AddCommand` will not add the item to the item list, and will converse with `Ui` to show `DUPLICATE_ITEM_MESSAGE` from `common/Messages`, "There is already a similar item in the list! Use edit command to edit the item's quantity/description instead. Or change the name of the item to be more specific."
 
 ### Description Command
 

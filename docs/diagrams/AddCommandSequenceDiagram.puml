@@ -5,9 +5,10 @@ hide footbox
 skinparam guillemet false
 skinparam sequenceStereotypeFontColor red
 skinparam sequenceStereotypeFontStyle bold
+skinparam dpi 300
 
 Participant ":InvMgr" as invmgr
-Participant "Parser" as parser <<class>>
+Participant "AddCommandParser" as parser <<class>>
 Participant "item:Item" as item
 Participant "inputCommand:AddCommand" as cmd
 Participant "itemList:ItemList" as itemlist
@@ -19,15 +20,10 @@ activate invmgr
 invmgr -> parser:parse("add n/Paper Cup q/25 d/100ml paper cups")
 activate parser
 
-parser -> parser:createItem("add n/Paper Cup q/25 d/100ml paper cups")
-activate parser
-
 create item
 parser -> item:Item("Paper Cup", 25, "100ml paper cups")
 activate item
 return :Item
-
-return
 
 create cmd
 parser -> cmd:AddCommand(itemToAdd: Item)
@@ -39,13 +35,28 @@ return inputCommand:AddCommand
 invmgr -> cmd:execute(itemList: ItemList, ui: Ui)
 activate cmd
 
-cmd -> itemlist:addItem(itemToAdd: Item)
+cmd -> itemlist:getItemArrayList()
 activate itemlist
+return List<Item>: items
+
+cmd -> cmd:checkItemInList("Paper Cup", List<Item>: items)
+activate cmd
+
 return
 
-cmd -> ui:showMessages(itemToAdd + " has been added!")
-activate ui
-return
+alt isNotInList
+    cmd -> itemlist:addItem(itemToAdd: Item)
+    activate itemlist
+    return
+
+    cmd -> ui:showMessages(itemToAdd + " has been added!")
+    activate ui
+    return
+else else
+    cmd -> ui:showMessages(DUPLICATE_ITEM_MESSAGE)
+    activate ui
+    return
+end
 
 return
 @enduml
