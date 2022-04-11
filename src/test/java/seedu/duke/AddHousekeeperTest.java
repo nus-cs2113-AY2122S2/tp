@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import seedu.duke.command.Command;
 import seedu.duke.command.housekeepercommands.AddHousekeeperCommand;
+import seedu.duke.command.housekeepercommands.AddHousekeeperPerformanceCommand;
 import seedu.duke.command.housekeepercommands.DeleteHousekeeperCommand;
 import seedu.duke.exceptions.InvalidUserException;
 import seedu.duke.exceptions.HotelLiteManagerException;
@@ -17,6 +18,8 @@ import seedu.duke.exceptions.InvalidAgeException;
 import seedu.duke.exceptions.OverAgeException;
 import seedu.duke.housekeeperlists.Housekeeper;
 import seedu.duke.housekeeperlists.HousekeeperList;
+import seedu.duke.housekeeperperformancelists.HousekeeperPerformance;
+import seedu.duke.housekeeperperformancelists.HousekeeperPerformanceList;
 
 
 import java.io.IOException;
@@ -26,16 +29,23 @@ public class AddHousekeeperTest {
     private ListContainer listContainer;
     private Ui ui = new Ui();
     private static final int INDEX_OF_JON = 2;
+    private static final int INDEX_OF_JAMES = 0;
+    private static final int INDEX_OF_SALLY = 0;
 
     @BeforeEach
     public void pretestingSetUp() throws HotelLiteManagerException, IOException {
         listContainer = new ListContainer();
         ui = new Ui();
+
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
+        housekeeperList.clearHousekeeperList();
         Housekeeper housekeeperJame = new Housekeeper("James", 22);
         housekeeperList.addHousekeeperInList(housekeeperJame);
         Housekeeper housekeeperSally = new Housekeeper("Sally", 30);
         housekeeperList.addHousekeeperInList(housekeeperSally);
+
+        HousekeeperPerformanceList housekeeperPerformanceList = listContainer.getHousekeeperPerformanceList();
+        housekeeperPerformanceList.clearHousekeeperPerformanceList();
     }
 
     @Test
@@ -46,6 +56,32 @@ public class AddHousekeeperTest {
         Housekeeper housekeeper = housekeeperList.getHousekeeper(INDEX_OF_JON);
         assertEquals("jon", housekeeper.getName());
         assertEquals(30, housekeeper.getAge());
+    }
+
+    @Test
+    public void execute_addHousekeeperPerformanceLowerBoundaryRating_success()
+            throws HotelLiteManagerException, IOException {
+        AddHousekeeperPerformanceCommand addHousekeeperPerformanceCommand
+                = new AddHousekeeperPerformanceCommand("James / 1");
+        addHousekeeperPerformanceCommand.execute(listContainer, ui);
+        HousekeeperPerformanceList housekeeperPerformanceList = listContainer.getHousekeeperPerformanceList();
+        HousekeeperPerformance housekeeperPerformance = housekeeperPerformanceList.getPerformance(INDEX_OF_JAMES);
+        assertEquals("James", housekeeperPerformance.getName());
+        assertEquals(1, housekeeperPerformance.getRating());
+        housekeeperPerformanceList.clearHousekeeperPerformanceList();
+    }
+
+    @Test
+    public void execute_addHousekeeperPerformanceUpperBoundaryRating_success()
+            throws HotelLiteManagerException, IOException {
+        AddHousekeeperPerformanceCommand addHousekeeperPerformanceCommand
+                = new AddHousekeeperPerformanceCommand("Sally / 5");
+        addHousekeeperPerformanceCommand.execute(listContainer, ui);
+        HousekeeperPerformanceList housekeeperPerformanceList = listContainer.getHousekeeperPerformanceList();
+        HousekeeperPerformance housekeeperPerformance = housekeeperPerformanceList.getPerformance(INDEX_OF_SALLY);
+        assertEquals("Sally", housekeeperPerformance.getName());
+        assertEquals(5, housekeeperPerformance.getRating());
+        housekeeperPerformanceList.clearHousekeeperPerformanceList();
     }
 
     @Test

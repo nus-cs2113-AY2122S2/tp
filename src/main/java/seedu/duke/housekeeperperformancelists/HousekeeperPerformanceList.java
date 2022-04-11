@@ -90,4 +90,8 @@ public class HousekeeperPerformanceList {
             }
         });
     }
+
+    public void clearHousekeeperPerformanceList() {
+        housekeeperPerformanceList.clear();
+    }
 }
