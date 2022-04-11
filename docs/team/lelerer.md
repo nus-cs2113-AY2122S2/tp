@@ -16,18 +16,23 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 
 #### New Features
 * [Group Create](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
-    * Allows users to create groups in the application.
+    * What it does: Allows users to create groups in the application.
+    * Justification: This feature allows users to record the details of a group.
 * [Group Delete](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupDeleteCommand.java)
-    * Allows users to delete groups in the application.
+    * what it does: Allows users to delete groups in the application.
+    * Justification: This feature allows users to remove unnecessary groups that were previously created.
 * [Group Edit](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupEditCommand.java)
-    * Allows users to edit previously created groups.
+    * what it does: Allows users to edit previously created groups.
+    * Justification: This features allows users to amend mistakes previously made when creating a group. 
+    * Highlights: This was challenging as the edits made had to be crossed check with existing groups within the application.
 * [Activity List](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityListCommand.java)
-    * Allows users to view all previously created activities within a session.
+    * What it does: Allows users to view all previously created activities within a session.
+    * Justification: This features allows users to see a list of all the existing activities that are stored in a session.
 * [Activity View](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityViewCommand.java)
-    * Allows users to view all previously created activities with a session.
+    * What it does: Allows users to view all previously created activities within a session.
+    * Justification: This features allows users to see the full details of a particular activity.
 * [Group](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Group.java)
     * Represents a group that involves a list of participants.
-
 
 #### Enhancements to existing features:
 * Separated dependency of parser class from command class by creating Command Parser classes for certain features.
