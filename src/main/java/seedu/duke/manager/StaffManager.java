@@ -81,7 +81,8 @@ public class StaffManager extends Manager {
      *
      * @throws IllegalArgumentException If salary is zero or negative.
      */
-    public void addStaff(int staffId, String staffName, String position, double salary) throws IllegalArgumentException {
+    public void addStaff(int staffId, String staffName, String position, double salary)
+            throws IllegalArgumentException {
         Staff staff = new Staff(staffId, staffName, position, salary);
         staffs.add(staff);
         MainLogger.logInfo(this, "Successful addition of staff");

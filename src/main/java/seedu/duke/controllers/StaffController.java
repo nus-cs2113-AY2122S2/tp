@@ -81,7 +81,7 @@ public class StaffController extends Controller {
             return;
         }
         try {
-            while(true) {
+            while (true) {
                 int staffId = InputParser.getInteger("ID of staff: ");
                 Staff staff = staffManager.findByStaffId(staffId);
                 if (staff != null) {
@@ -107,7 +107,7 @@ public class StaffController extends Controller {
         System.out.println("Adding new staff...");
         int staffId = 0;
         try {
-            while(true) {
+            while (true) {
                 staffId = InputParser.getInteger("ID of staff: ");
                 boolean staffNoClash = checkNoStaffClash(staffId);
                 if (staffNoClash) {
@@ -146,7 +146,7 @@ public class StaffController extends Controller {
         }
         int staffId = 0;
         try {
-            while(true) {
+            while (true) {
                 staffId = InputParser.getInteger("ID of staff to delete: ");
                 boolean staffNoClash = checkNoStaffClash(staffId);
                 if (!staffNoClash) {
@@ -201,13 +201,13 @@ public class StaffController extends Controller {
     }
 
     /**
-     * Edit Staff's field
+     * Edit selected Staff's field.
      *
      * @param staff Staff to be edited.
      * @throws OperationTerminationException When user inputs terminator.
      * @throws IllegalArgumentException When ID or salary is zero or negative.
      */
-    private void editStaffByField(Staff staff) throws OperationTerminationException, IllegalArgumentException{
+    private void editStaffByField(Staff staff) throws OperationTerminationException, IllegalArgumentException {
         int choice;
         int staffId;
         boolean staffNoClash;
