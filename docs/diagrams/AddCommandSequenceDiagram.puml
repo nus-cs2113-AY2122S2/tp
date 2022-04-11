@@ -14,7 +14,7 @@ activate Parser
 Ui <-- Parser : parser :Parser
 deactivate Parser
 
-Ui --> Parser : parseCommand()
+Ui -> Parser : parseCommand()
 activate Parser
 
 Parser -> Parser : prepareAdd()
