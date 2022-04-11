@@ -8,7 +8,7 @@ via a Command Line Interface (CLI) for warehouse management workers and managers
 ### Summary of Contributions
 Given below are my contributions to the project.
 
-Code contributed: RepoSense [link](https://github.com/AY2122S2-CS2113T-T09-4/tp/tree/master)
+Code contributed: RepoSense [link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=nnythingy&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 New Feature:
     Match Keyword Class #11
