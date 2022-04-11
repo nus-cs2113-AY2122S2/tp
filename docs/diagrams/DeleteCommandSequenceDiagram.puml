@@ -5,9 +5,12 @@ hide footbox
 skinparam guillemet false
 skinparam sequenceStereotypeFontColor red
 skinparam sequenceStereotypeFontStyle bold
+skinparam dpi 300
 
 Participant ":InvMgr" as invmgr
-Participant "Parser" as parser <<class>>
+Participant "InputParser" as input <<class>>
+Participant "DeleteCommandParser" as parser <<class>>
+Participant "ParserUtils" as utils <<class>>
 Participant "inputCommand:DeleteCommand" as cmd
 Participant "itemList:ItemList" as itemlist
 Participant "ui:Ui" as ui
@@ -15,12 +18,22 @@ Participant "ui:Ui" as ui
 activate invmgr
 
 -> invmgr
-invmgr -> parser:parse("delete 1")
+invmgr -> input:parse("delete 1")
+activate input
+
+input -> parser:parse("1")
 activate parser
+
+parser -> utils:parseIndex("1")
+activate utils
+
+return deleteIndex: Integer
 
 create cmd
 parser -> cmd:DeleteCommand(deleteIndex: Integer)
 activate cmd
+return :DeleteCommand
+
 return :DeleteCommand
 
 return inputCommand:DeleteCommand
@@ -28,7 +41,7 @@ return inputCommand:DeleteCommand
 invmgr -> cmd:execute(itemList:ItemList, ui:Ui)
 activate cmd
 
-cmd -> itemlist:removeItem(deleteIndex: Integer))
+cmd -> itemlist:removeItem(deleteIndex: Integer)
 activate itemlist
 return removedItem:Item
 

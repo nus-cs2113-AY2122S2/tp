@@ -151,14 +151,17 @@ The above diagram shows the sequence diagram of the addition of an item.
 
 The user starts by typing an add command. The example used in the diagram above is the addition of an item with the name `Paper Cup`, quantity of `25` and description of `100ml paper cups`. The full command is `add n/Paper Cup q/25 d/100ml paper cups`.
 
-1. The `run()` method within `InvMgr` calls the method `parse()` in the `AddCommandParser` class, providing the entire string of input entered by the user.
-2. The`parse()` attempts to create an `Item` using the string by extracting the `NAME`, `QUANTITY`, and `DESCRIPTION` using an `Argument Multimap`.
-3. `parse()` uses the `Item` to generate a new `AddCommand` which is returned to the `run()` method.
-4. The `run()` method calls on the `execute()` function in the `AddCommand`
-5. `execute()` first creates a list of items using the `itemList`'s `getItemArrayList()` method.
-6. The method then uses Java Streams to check if there are any items in the list that match the name of the item to be added.
-7. If there is no item with matching name, the item will be added, and `AddCommand` will converse with `Ui` to show a message that the item has been added. In this case, the item to add will be printed as the name of the item, followed by " has been added!".
-8. If there is in fact an item with matching name, `AddCommand` will not add the item to the item list, and will converse with `Ui` to show `DUPLICATE_ITEM_MESSAGE` from `common/Messages`, "There is already a similar item in the list! Use edit command to edit the item's quantity/description instead. Or change the name of the item to be more specific."
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is first split into 2 parts, the command word and the arguments. The command word is identified to be `add`, and executes the code within the case. The case calls the `parse()` method in `AddCommandParser`.
+3. `AddCommandParser.parse()` uses the string argument and extracts the `NAME`, `QUANTITY`, and `DESCRIPTION` using to an `ArgumentMultimap` using `ArgumentTokenizer.tokenize()`.
+4. The `QUANTITY` is then checked using `ParserUtils.parseQuantity()` to see if it is a positive non-zero integer.
+5. If the `QUANTITY` is valid, an `Item` is created using the extracted arguments.
+6. `parse()` uses the `Item` to generate a new `AddCommand` which is returned to the `run()` method.
+7. The `run()` method calls on the `execute()` function in the `AddCommand`
+8. `execute()` first creates a list of items using the `itemList`'s `getItemArrayList()` method.
+9. The method then uses Java Streams to check if there are any items in the list that match the name of the item to be added.
+10. If there is no item with matching name, the item will be added through `ItemList`'s `addItem()` method, and `AddCommand` will converse with `Ui` to show a message that the item has been added. In this case, the item to add will be printed as the name of the item, followed by " has been added!".
+11. If there is in fact an item with matching name, `AddCommand` will not add the item to the item list, and will converse with `Ui` to show `DUPLICATE_ITEM_MESSAGE` from `common/Messages`, "There is already a similar item in the list! Use edit command to edit the item's quantity/description instead. Or change the name of the item to be more specific."
 
 ### Description Command
 
@@ -174,13 +177,15 @@ For a user who is unaware of what an item is about, he/she can enter the command
 
 The above diagram shows the sequence diagram of the addition of an item.
 
-The user starts by typing an add command. The example used in the diagram above is the addition of an item with the index `1`, based on the list when the user types the `list` command.
+The user starts by typing a delete command. The example used in the diagram above is the deletion of an item with the index `1`, based on the list when the user types the `list` command.
 
-1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
-2. Within `parse()`, the string is identified to start with the word `delete`, and executes the code within the case. The case finds the index of the item by splitting the string and indexing it.
-3. `parse()` generates a new `AddCommand` using the index which is returned to the `run()` method.
-4. The `run()` method calls on the `execute()` function in the `DeleteCommand` which will delete the item with that index from the `ItemList` using its `removeItem()` method.
-5. `DeleteCommand` will converse with `Ui` to show a message that the item has been removed. In this case, the item to add will be printed as the name of the item, followed by " has been deleted.".
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `InputParser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is first split into 2 parts, the command word and the arguments. The command word is identified to be `delete`, and executes the code within the case. The case calls the `parse()` method in `DeleteCommandParser`.
+3. Within `DeleteCommandParser.parse()`, the argument is a number that is taken through a check to see if the number is a positive integer. This is done so by calling `ParserUtils.parseIndex()`.
+4. If the argument is valid, `parse()` generates a new `DeleteCommand` using the index which is returned to the `run()` method.
+5. The `run()` method calls on the `execute()` function in the `DeleteCommand` which will delete the item with that index from the `ItemList` using its `removeItem()` method.
+6. If the argument is an invalid index beyond the range of the inventory list, an exception will be thrown.
+7. `DeleteCommand` will converse with `Ui` to show a message that the item has been removed. In this case, the item to add will be printed as the name of the item, followed by " has been deleted.".
 
 ### List Command
 
