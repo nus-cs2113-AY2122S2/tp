@@ -9,8 +9,8 @@ skinparam sequenceStereotypeFontStyle bold
 
 Participant ":InvMgr" as invmgr
 Participant "Parser" as parser <<class>>
-Participant "inputCommand:AddCommand" as cmd
-Participant "itemList:ItemList" as itemlist
+Participant "inputCommand:ReturnCommand" as cmd
+Participant "itemList:ItemList" as list
 Participant "ui:Ui" as ui
 Participant "item:Item" as item
 Participant ":BorrowRecord" as borrowRecord
@@ -20,10 +20,6 @@ activate invmgr
 -> invmgr
 invmgr -> parser:parse("return i/1")
 activate parser
-
-parser -> parser:arePrefixesPresent(argumentMultimap: ArgumentMultimap, prefixes: Prefix...)
-activate parser
-return :boolean
 
 create cmd
 parser -> cmd:ReturnCommand(itemIndex: Integer)
@@ -37,10 +33,13 @@ activate cmd
 
 cmd -> cmd:checkItemListSize()
 activate cmd
+cmd -> list: getSize()
+activate list
+return :Integer
 return :boolean
 
-cmd -> itemList: getItem(itemIndex: Integer)
-activate itemList
+cmd -> list: getItem(itemIndex: Integer)
+activate list
 return returnedItem: Item
 
 cmd -> item: getBorrowRecords()
@@ -66,11 +65,6 @@ activate ui
 return
 end
 end
-opt "!isValidReturnRequest"
-cmd -> ui: showMessages(Messages.RETURN_ERROR_MESSAGE)
-end
-
-
 
 return
 @enduml

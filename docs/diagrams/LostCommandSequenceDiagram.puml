@@ -9,11 +9,9 @@ skinparam sequenceStereotypeFontStyle bold
 
 Participant ":InvMgr" as invmgr
 Participant "Parser" as parser <<class>>
-Participant "item:Item" as item
 Participant "inputCommand:LostCommand" as cmd
-Participant "itemList:ItemList" as itemlist
+Participant "itemList:ItemList" as list
 Participant "ui:Ui" as ui
-Participant "deleteCommand:DeleteCommand" as delCommand
 
 activate invmgr
 
@@ -21,12 +19,8 @@ activate invmgr
 invmgr -> parser:parse("lost i/1 q/10")
 activate parser
 
-parser -> parser:arePrefixesPresent(argumentMultimap: ArgumentMultimap, prefixes: Prefix...)
-activate parser
-return :boolean
-
 create cmd
-parser -> cmd:LostCommand(itemIndex: Integer, itemQuantity: Integer)
+parser -> cmd:LostCommand(itemIndex: Integer)
 activate cmd
 return :LostCommand
 
@@ -37,14 +31,17 @@ activate cmd
 
 cmd -> cmd:checkItemListSize()
 activate cmd
+cmd -> list: getSize()
+activate list
+return :Integer
 return :boolean
 
-cmd -> itemList: getItem(itemIndex: Integer)
-activate itemList
+cmd -> list: getItem(itemIndex: Integer)
+activate list
 return lostItem: Item
 
-cmd -> itemList: removeItem(itemIndex: Integer)
-activate itemList
+cmd -> list: removeItem(itemIndex: Integer)
+activate list
 return
 
 cmd -> ui: showMessages(lostItem + "has been deleted.")
