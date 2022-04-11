@@ -82,6 +82,7 @@ Some additional points to take note of:
   each of them as separate entries via indexing.
 
 <div style="page-break-after: always;"></div>
+
 ## Features
 
 This section describes each command in detail.
@@ -363,6 +364,7 @@ Format: `overview`
 ---
 
 <div style="page-break-after: always;"></div>
+
 ### Show all records by group: `list`
 
 > Shows a list of incomes and expenditures for each person in a given group.
@@ -419,6 +421,8 @@ Find records with category:
 
   ![find-command-screenshot](images/FindWithCat.png)
 
+<div style="page-break-after: always;"></div>
+
 Find records without category:
 
 * Find all the records which descriptions include _candies_.
@@ -439,8 +443,6 @@ Format: `bye`
 
 ---
 
-<div style="page-break-after: always;"></div>
-
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
@@ -450,6 +452,8 @@ transfer the data by transferring the text file to another computer and put it i
 in the new computer. When the application starts up, it will automatically load the saved data in the text file. Do note
 that the application running in the new computer should be the same version as the application in your previous
 computer.
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
