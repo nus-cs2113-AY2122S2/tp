@@ -89,9 +89,9 @@ changes.
    - GitHub Pages.
    - Assertions in Gradle.
 
-5. Closed `v1.0` Milestone.
+4. Closed `v1.0` Milestone.
 
-7. Released `v1.0` and `v2.0` JAR files.
+5. Released `v1.0` and `v2.0` JAR files.
 
 ### Miscellaneous Contribution
 PR reviews (with non-trivial comments):
