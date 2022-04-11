@@ -27,6 +27,8 @@ stopwatch to keep track of how long you've been studying for, if you're unsure o
 After your study session, you will be prompted to mark the tasks you've completed as done. If you're still not done with
 certain tasks, feel free to start another productive session!
 
+<div style="page-break-after: always;"></div>
+
 ### User Guide Target Audience
 New and inexperienced users who want to use Sherpass, as well as non-users who want to know more about what Sherpass
 can do.
@@ -42,6 +44,7 @@ it correctly and with ease. Here are some icons which we will use to convey impo
 > **⚠️Important Notes / Warnings️**
 >- **Essential** information you should take note of to be able to use the application correctly. 
 
+<div style="page-break-after: always;"></div>
 
 ## Table of Content
 - [Quick Start](#quick-start)
@@ -68,6 +71,8 @@ it correctly and with ease. Here are some icons which we will use to convey impo
 - [FAQ](#faq)
 - [Glossary](#faq)
 - [Command Summary](#command-summary)
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -172,9 +177,11 @@ Before delete command:
 ![](images/scheduleAfterAddingRecurringTasksOne.png)
 
 When executing delete command:
+
 ![](images/deleteSingleTask.png)
 
 After delete command:
+
 ![](images/scheduleAfterDeletingASingleTask.png)
 
 ### Deleting your recurring tasks
@@ -652,7 +659,7 @@ The following fields are required to correctly load a task:
 |    status     | Status of the task                                          | `X` for completed, `-` for incomplete                      |
 
 
-
+<div style="page-break-after: always;"></div>
 ## FAQ
 
 **Q**: My save file is corrupted, how do I resolve this?
@@ -676,6 +683,7 @@ For example, in the [`show`](#show-your-tasks-show) command,
 one of the options provided is `show all`. The `all` keyword would thus be the parameter.
 * *Extraneous* - Something that is unnecessary or irrelevant.
 
+<div style="page-break-after: always;"></div>
 ## Command Summary
 
 | Action                                | Format, Examples                                                                                                                                                                                                                                 |
