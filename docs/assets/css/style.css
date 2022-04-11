@@ -1,7 +1,6 @@
 ---
-@import "{{ site.theme }}";
 ---
-
+@import "{{ site.theme }}";
 
 a.button {
     background-color: #155a95;
