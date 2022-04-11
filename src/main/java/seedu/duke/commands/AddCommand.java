@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.duke.common.Messages.DUPLICATE_ITEM_MESSAGE;
 
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
@@ -49,9 +50,7 @@ public class AddCommand extends Command {
             itemList.addItem(itemToAdd);
             ui.showMessages(itemToAdd + " has been added!");
         } else {
-            ui.showMessages("There is already a similar item in the list!",
-                    "Use edit command to edit the item's quantity/description instead.",
-                    "Or change the name of the item to be more specific.");
+            ui.showMessages(DUPLICATE_ITEM_MESSAGE);
         }
     }
 

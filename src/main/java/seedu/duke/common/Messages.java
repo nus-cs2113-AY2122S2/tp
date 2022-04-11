@@ -39,6 +39,11 @@ public class Messages {
     public static final String INVALID_DATE_FORMAT = "Error: Incorrect date format. Please enter "
             + "dates in YYYY-MM-DD format.";
 
+    /** AddCommand messages. **/
+    public static final String DUPLICATE_ITEM_MESSAGE = "There is already a similar item in the list!"
+            + "Use edit command to edit the item's quantity/description instead."
+            + "Or change the name of the item to be more specific.";
+
     /** EditCommandParser messages. **/
     public static final String INVALID_RELATIVE_MESSAGE = "The relative multiplier you entered was invalid! "
             + "Only '+' and '-' is allowed.\n";
