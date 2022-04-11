@@ -10,7 +10,6 @@ import util.exceptions.InvalidFileException;
 import util.exceptions.InvalidObjectType;
 import util.exceptions.ItemDoesNotExistException;
 import util.exceptions.LargeQuantityException;
-import util.exceptions.UnitTestException;
 import util.exceptions.WrongCommandException;
 
 import java.io.IOException;
@@ -131,7 +130,7 @@ public class Warehouse {
         if (!isSkuInInventory(sku)) {
             System.out.println("Good does not exist in the warehouse");
             System.out.println("Try adding a good first");
-            throw new WrongCommandException("add", true);
+            return false;
         }
 
         Orderline ol =  order.addOrderline(getUnitGoodBySku(sku), qty);

@@ -6,7 +6,6 @@ package seedu.simplst;
 public class Simplst {
     public static void main(String[] args) throws NullException, IOException {
         UserInterface ui;
-        Display.hello();
         Warehouse w = new Warehouse(0);
         Boolean status = w.restoreWarehouseState();
         if (status) {
@@ -16,6 +15,7 @@ public class Simplst {
             Display.newLogin();
             w = new Warehouse(1000);
         }
+        Display.hello();
         ui = new UserInterface(w);
         ui.run();
         status = w.saveWarehouseState();
