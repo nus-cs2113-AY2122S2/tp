@@ -14,6 +14,7 @@ public class PatientList extends List {
 
     private ArrayList<Patient> patients = new ArrayList<>();
     private ArrayList<Patient> returnedFinderArray = new ArrayList<>();
+    ArrayList<String> patientDateList = new ArrayList<>();
 
     public Patient getPatient(String nric) {
         for (Patient patient : patients) {
@@ -66,7 +67,7 @@ public class PatientList extends List {
             throw new UserInputErrorException("Patient doesn't exist please try again!");
         }
         CommandLineTable patientTable = new CommandLineTable();
-        patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
+        patientTable.setShowVerticalLines(true);
         patientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
                 "DateRegistration");
         patientTable.addRow(patient.getPatientNric(), patient.getPatientName(),
@@ -81,7 +82,7 @@ public class PatientList extends List {
     //view all patients
     public void view() throws UserInputErrorException {
         CommandLineTable patientTable = new CommandLineTable();
-        patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
+        patientTable.setShowVerticalLines(true);
         patientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
                 "DateRegistration");
         if (patients.size() == 0) {
@@ -95,6 +96,32 @@ public class PatientList extends List {
                     patient.getDateOfAdmission());
         }
         patientTable.print();
+    }
+
+    public void addAppointmentDate(String nric, String date) {
+        for (Patient patient : patients) {
+            if (patient.getPatientNric().equals(nric)) {
+                patient.addAppointmentDate(date);
+                break;
+            }
+        }
+    }
+
+    public boolean hasPatientDate(String nric, String date) throws DuplicateEntryException {
+        for (Patient patient : patients) {
+            if (patient.getNric().equals(nric)) {
+                patientDateList = patient.appointmentDate();
+                for (String datePatient : patientDateList) {
+                    if (datePatient.equals(date)) {
+                        //throw new DuplicateEntryException("Patient already has appointment");
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            }
+        }
+        throw new DuplicateEntryException("Patient not found");
     }
 
     public void remove(String nric) throws NotFoundException {
@@ -226,5 +253,15 @@ public class PatientList extends List {
         }
     }
 
+    public void loadDate(String[] parameters) {
+        String patientNric = parameters[0];
+        for (Patient a : patients) {
+            if (a.getNric().equals(patientNric)) {
+                for (int i = 1; i < parameters.length; i ++) {
+                    a.addAppointmentDate(parameters[i]);
+                }
+            }
+        }
+    }
 }
 

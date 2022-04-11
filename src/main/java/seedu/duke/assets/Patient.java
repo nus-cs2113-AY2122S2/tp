@@ -1,7 +1,10 @@
 package seedu.duke.assets;
 
+import java.util.ArrayList;
+
 public class Patient extends Person {
     String dateAdmission;
+    protected ArrayList<String> appointmentDate = new ArrayList<>();
 
     public Patient(String nric, String fullName, int age, char gender, String address, String dob,
                    String dateAdmission) {
@@ -52,8 +55,29 @@ public class Patient extends Person {
     }
 
 
+
+    public void addAppointmentDate(String date) {
+        appointmentDate.add(date);
+    }
+
     public String saveString() {
         return nric + "," + fullName + "," + age + "," + gender + "," + address
                 + "," +  dob + "," + dateAdmission;
+    }
+
+    public ArrayList<String> appointmentDate() {
+        return appointmentDate;
+    }
+
+    public String saveDateString() {
+        String returnString = "";
+        for (int i = 0; i < appointmentDate.size(); i++) {
+            if (i != 0) {
+                returnString += "," + appointmentDate.get(i);
+            } else {
+                returnString += nric + "," + appointmentDate.get(i);
+            }
+        }
+        return returnString;
     }
 }

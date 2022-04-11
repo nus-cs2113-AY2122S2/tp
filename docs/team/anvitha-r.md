@@ -50,4 +50,4 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 
 * Release management is done by consensus by the majority
 
-* Updating user/developer docs that are not specific to a feature is by everyone when we see a change fits
+* Updating user/developer docs that are not specific to a feature is by everyone when we see a change fits 

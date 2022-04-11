@@ -29,6 +29,8 @@ public class Storage {
     static final String PATH_MED = "data/medicine.txt";
     static final String PATH_APT = "data/appointment.txt";
     static final String PATH_APT_MEDS = "data/appointment_meds.txt";
+    static final String PATH_DOC_DATE = "data/doctor_date.txt";
+    static final String PATH_PAT_DATE = "data/patient_date.txt";
     public DoctorList doctors = new DoctorList();
     public PatientList patients = new PatientList();
     public MedicineList medicines = new MedicineList();
@@ -51,6 +53,10 @@ public class Storage {
                 if (filePath.equals(PATH_APT_MEDS)) {
                     outputFilePathCorrupted = "data/appointment_meds_corrupted.txt";
                     appointments.loadMedicine(parameters);
+                } else if (filePath.equals(PATH_DOC_DATE)) {
+                    doctors.loadDate(parameters);
+                } else if (filePath.equals(PATH_PAT_DATE)) {
+                    patients.loadDate(parameters);
                 } else {
                     if (filePath.equals(PATH_DOC)) {
                         outputFilePathCorrupted = "data/doctor_corrupted.txt";
@@ -68,6 +74,7 @@ public class Storage {
                         outputFilePathCorrupted = "data/appointment_corrupted.txt";
                         Validator.validateAddAppointment(parameters);
                     }
+
                     listType.add(parameters);
                 }
 
@@ -122,7 +129,6 @@ public class Storage {
 
     }
 
-    //todo : clean up save file
     private void saveMedicineData() {
         File medicineFile = new File(PATH_MED);
         if (!medicineFile.exists()) {
@@ -165,6 +171,27 @@ public class Storage {
         }
     }
 
+    private void saveDoctorData() {
+        File patientFile = new File(PATH_DOC);
+        if (!patientFile.exists()) {
+            try {
+                patientFile.createNewFile();
+            } catch (IOException ioException) {
+                UI.printParagraph("doctor.txt cannot be created");
+                return;
+            }
+        }
+        try {
+            FileWriter dataWrite = new FileWriter(PATH_DOC,false);
+            for (Doctor d : doctors.getList()) {
+                dataWrite.write(d.saveString() + "\n");
+            }
+            dataWrite.close();
+        } catch (IOException e) {
+            UI.printParagraph("Unable to save data...");
+        }
+    }
+
     private void saveAppointmentData() {
         File appointmentFile = new File(PATH_APT);
         if (!appointmentFile.exists()) {
@@ -185,6 +212,7 @@ public class Storage {
             UI.printParagraph("Unable to save data...");
         }
     }
+
 
     private void saveAppointmentMedData() {
         File appointmentMedFile = new File(PATH_APT_MEDS);
@@ -207,20 +235,49 @@ public class Storage {
         }
     }
 
-    private void saveDoctorData() {
-        File doctorFile = new File(PATH_DOC);
+    private void saveDoctorDateData() {
+        File doctorFile = new File(PATH_DOC_DATE);
         if (!doctorFile.exists()) {
             try {
                 doctorFile.createNewFile();
             } catch (IOException ioException) {
-                UI.printParagraph("doctor.txt cannot be created");
+                UI.printParagraph("doctorDate.txt cannot be created");
                 return;
             }
         }
         try {
-            FileWriter dataWrite = new FileWriter(PATH_DOC,false);
+            FileWriter dataWrite = new FileWriter(PATH_DOC_DATE,false);
             for (Doctor d : doctors.getList()) {
-                dataWrite.write(d.saveString() + "\n");
+                String saveString = d.saveDateString();
+                if(saveString.equals("")) {
+                    continue;
+                }
+                dataWrite.write(d.saveDateString() + "\n");
+            }
+            dataWrite.close();
+        } catch (IOException e) {
+            UI.printParagraph("Unable to save data...");
+        }
+    }
+
+    private void savePatientDateData() {
+        File appointmentMedFile = new File(PATH_PAT_DATE);
+        if (!appointmentMedFile.exists()) {
+            try {
+                appointmentMedFile.createNewFile();
+            } catch (IOException ioException) {
+                UI.printParagraph("PatientDate.txt cannot be created");
+                return;
+            }
+        }
+        try {
+            FileWriter dataWrite = new FileWriter(PATH_PAT_DATE,false);
+            for (Patient p : patients.getList()) {
+                String saveString = p.saveDateString();
+                if(saveString.equals("")) {
+                    continue;
+                }
+                dataWrite.write(p.saveDateString() + "\n");
             }
             dataWrite.close();
         } catch (IOException e) {
@@ -240,5 +297,7 @@ public class Storage {
         saveMedicineData();
         saveAppointmentData();
         saveAppointmentMedData();
+        savePatientDateData();
+        saveDoctorDateData();
     }
 }

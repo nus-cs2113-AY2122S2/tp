@@ -67,7 +67,10 @@ public class Manager {
             checkIfDoctorExists.execute(storage.doctors);
 
             command = Parser.parseAddAppointment(parameters);
-            status = command.execute(storage.appointments);
+            command.execute(storage.appointments);
+
+            command.execute(storage.patients);
+            status = command.execute(storage.doctors);
             break;
         default:
             throw new UserInputErrorException("Invalid Command given!");

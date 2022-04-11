@@ -5,7 +5,6 @@ import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.CommandLineTable;
 import seedu.duke.helper.UI;
-import seedu.duke.helper.finder.AppointmentFinder;
 import seedu.duke.helper.finder.DoctorFinder;
 
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ public class DoctorList extends List {
 
     private ArrayList<Doctor> doctors = new ArrayList<>();
     private ArrayList<Doctor> returnedFinderArray = new ArrayList<>();
+
 
     public Doctor getDoctor(String nric) {
         for (Doctor doctor : doctors) {
@@ -58,36 +58,54 @@ public class DoctorList extends List {
         CommandLineTable doctorTable = new CommandLineTable();
         doctorTable.setShowVerticalLines(true);
         doctorTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
-                "Specialization", "Appointment details");
+                "Specialization");
         doctorTable.addRow(doctor.getNric(), doctor.getFullName(), String.valueOf(doctor.getAge()),
                 doctor.getAddress(), String.valueOf(doctor.getGender()), doctor.getDob(),
-                doctor.getSpecialization(), doctor.appointmentDate);
+                doctor.getSpecialization());
         doctorTable.print();
     }
-
-    public Boolean findDoctorDate(ArrayList<Doctor> doctors, String date) throws DuplicateEntryException {
-        ArrayList<Doctor> doctorArrayList = new ArrayList<>();
+    public void addAppointmentDate(String nric, String date) {
         for (Doctor doctor : doctors) {
-            if (doctor.getAppointmentDate().equals(date)) {
-                return true;
+            if (doctor.getNric().equals(nric)) {
+                doctor.addAppointmentDate(date);
+                break;
             }
         }
-            throw new DuplicateEntryException("Doctor has an appointment on the given date, please choose another date");
+    }
+
+
+    public boolean hasDoctorDate(String nric, String date) throws DuplicateEntryException {
+        ArrayList<String> doctorDateList = new ArrayList<>();
+        for (Doctor doctor : doctors) {
+            if (doctor.getNric().equals(nric)) {
+                doctorDateList = doctor.appointmentDateDoctor();
+                for (String dateDoctor : doctorDateList) {
+                    if (dateDoctor.equals(date)) {
+                        //throw new DuplicateEntryException("Doctor has an appointment on the given date, please choose another date");
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            }
         }
+        throw new DuplicateEntryException("Doctor not found");
+    }
+
 
     //view all doctor
     public void view() throws UserInputErrorException {
         CommandLineTable doctorTable = new CommandLineTable();
         doctorTable.setShowVerticalLines(true);
         doctorTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
-                "Specialization", "Appointment details");
+                "Specialization");
         if (doctors.size() == 0) {
             throw new UserInputErrorException("Doctor list is empty, please add doctor");
         }
         for (Doctor doctor : doctors) {
             doctorTable.addRow(doctor.getNric(), doctor.getFullName(), String.valueOf(doctor.getAge()),
                     doctor.getAddress(), String.valueOf(doctor.getGender()), doctor.getDob(),
-                    doctor.getSpecialization(), doctor.appointmentDate());
+                    doctor.getSpecialization());
         }
         doctorTable.print();
     }
@@ -225,6 +243,16 @@ public class DoctorList extends List {
         }
     }
 
+    public void loadDate(String[] parameters) {
+        String doctorNric = parameters[0];
+        for (Doctor a : doctors) {
+            if (a.getNric().equals(doctorNric)) {
+                for (int i = 1; i < parameters.length; i ++) {
+                    a.addAppointmentDate(parameters[i]);
+                }
+            }
+        }
+    }
 
 }
 
