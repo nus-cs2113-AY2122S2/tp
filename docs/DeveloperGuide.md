@@ -1511,7 +1511,6 @@ Test Scenario 2: At least 1 group exists in the application.
 </div>
 <hr>
 
-
 ### Storage Testing
 
 **Test Cases:**
