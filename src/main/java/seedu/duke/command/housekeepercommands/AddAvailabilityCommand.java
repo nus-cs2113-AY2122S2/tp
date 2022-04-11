@@ -23,6 +23,7 @@ public class AddAvailabilityCommand extends Command {
     private String availability;
     private static final String AVAILABILITY_INDICATE = "/";
     private static final char AVAILABILITY_INDICATE_CHARACTER = '/';
+    private static final char COMMA_INDICATE_CHARACTER = ',';
     private static final int MONDAY_INDICATE = 1;
     private static final int SUNDAY_INDICATE = 7;
     private static final int CONTAIN_ONE_SLASH_ONLY = 1;
@@ -61,8 +62,16 @@ public class AddAvailabilityCommand extends Command {
      */
     private String checkValidAvailability(String inputAvailability) throws HotelLiteManagerException {
         String availability = checkValidExtract(inputAvailability);
+        long commaCounts = checkCorrectCommaGiven(inputAvailability);
         try {
             String[] splitDays = availability.split(",");
+            long expectedLength = splitDays.length - 1;
+            if (commaCounts != expectedLength) {
+                throw  new InvalidDayException();
+            }
+            if (splitDays.length == 0) {
+                throw new InvalidDayException();
+            }
             for (String day : splitDays) {
                 String trimDay = day.trim();
                 String validDay = checkLengthInput(trimDay);
@@ -77,6 +86,19 @@ public class AddAvailabilityCommand extends Command {
             throw new InvalidDayException();
         }
         return availability;
+    }
+
+    /**
+     * Return the counts of commas.
+     *
+     * @param inputAvailability Availability given by user.
+     * @return total counts of comma.
+     */
+    private long checkCorrectCommaGiven(String inputAvailability) {
+        long commaCounts = inputAvailability.codePoints()
+                .filter(t -> t == COMMA_INDICATE_CHARACTER)
+                .count();
+        return commaCounts;
     }
 
     /**

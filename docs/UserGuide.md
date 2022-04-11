@@ -214,7 +214,7 @@ Example of usage:
 
 `availability jane / 1,3,5,7,3`
 
-`availability susan / 1,3,5,`
+`availability susan / 1,3,5`
 
 Expected output:
 ```
@@ -236,7 +236,7 @@ Example of usage:
 add housekeeper susan / 46
 add housekeeper jane / 33
 add housekeeper sally / 33
-availability sally / 1,7,
+availability sally / 1,7
 view recorded housekeepers
 ```
 
@@ -316,7 +316,7 @@ Format:
 Example of usage:
 ```
 add housekeeper sally / 33
-availability sally / 1,7,
+availability sally / 1,7
 get available on 1
 ```
 Expected output:
