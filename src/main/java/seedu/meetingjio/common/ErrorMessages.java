@@ -215,4 +215,7 @@ public class ErrorMessages {
 
     public static final String ERROR_DUPLICATE_USER_LOAD_NAME = " this user has duplicate "
             + "records in the MeetingJio.txt";
+
+    public static final String ERROR_CONTROL_C_ALL_CLEARED = "Program was interrupted. No data was saved and "
+            + "MasterTimetable has been cleared. Please type exit gracefully next time. Thanks.";
 }

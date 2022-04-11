@@ -9,11 +9,7 @@ MeetingJio is a program for **finding potential time slots for team meetings bas
 
 # 2. Design
 
-## 2.1 Architecture
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
-## 2.2 UI Component
+## 2.1 UI Component
 ![UiClassDiagram1](images/UiClassDiagram.png)
 
 The Ui class is initialised by MeetingJio, and it handles:
@@ -22,7 +18,7 @@ The Ui class is initialised by MeetingJio, and it handles:
 
 The Parser and Command classes will also be called by Ui class in the process of handling the user's input.
 
-## 2.3 Commands Component
+## 2.2 Commands Component
 
 ![CommandClassDiagram1](images/CommandClassDiagram1.png)
 ![CommandClassDiagram2](images/CommandClassDiagram2.png)
@@ -44,7 +40,7 @@ The commands component consists of a `commands` package. Inside the package are 
 - `ListCommand`
 3. Lastly, `CommandResult` class returns corresponding feedbacks to the user.
 
-## 2.4 Parser Component
+## 2.3 Parser Component
 
 ![ParserClassDiagram2](images/ParserClassDiagram.png)
 
@@ -58,7 +54,7 @@ The `parser` package includes:
 3. `ParserHelperMethods`
    - Contain helper methods to check if the values of the parameters are valid.
 
-## 2.5 Timetables Component
+## 2.4 Timetables Component
 
 ![TimetableClassDiagram](images/TimetableClassDiagram.png)
 
@@ -69,7 +65,7 @@ The `timetables` package includes
 2. `MasterTimetable`
    - To invoke operations on the master list of all user's timetable.
    
-## 2.6 Event Component
+## 2.5 Event Component
 ![EventClassDiagram](images/EventClassDiagram.png)
 
 The above class diagram illustrates the classes within the `events` package.
@@ -80,7 +76,7 @@ The `event` package includes:
    - `Lesson`
    - `Meeting`
 
-## 2.7 Storage Component
+## 2.6 Storage Component
 ![StorageClassDiagram](images/StorageClassDiagram.png)
 The storage component uses the `StorageFile` and `ParserLocalData` classes.
 - `StorageFile` class consists of the two main functions, `saveData` and `loadData`.
@@ -229,7 +225,7 @@ Given below is the steps on how the `edit` operation works.
 4. The EditCommand will edit the specified event if the values provided in user input are valid.
 5. Eventually a confirmation message will be shown to user upon successful edit.
 
-## 3.5 Delete events `delete`
+## 3.5 Delete events
 Deletes an event from the user's specified timetable
 
 **Format:** ` delete n/NAME i/INDEX`
@@ -254,7 +250,7 @@ and perform the deletion of that event.
 everyone's timetable and delete it.
 
 
-## 3.6 Clear events `clear`
+## 3.6 Clear events 
 The `clear` command is a command that the user can clear a certain user's timetable or everyone's timetable.
 
 `clear NAME` clears the timetable for the particular user.
@@ -262,6 +258,7 @@ The `clear` command is a command that the user can clear a certain user's timeta
 `clear all` clears the timetable for all users.
 
 ![ClearCommandSequenceDiagram](images/ClearCommandSequenceDiagram.png)
+
 The above diagram shows the sequence diagram when a `clear all` command is executed.
 1. User inputs clear with appropriate parameters which is passed to the UI.
 2. Ui subsequently executes the command on the `masterTimetable` for the whole application,
