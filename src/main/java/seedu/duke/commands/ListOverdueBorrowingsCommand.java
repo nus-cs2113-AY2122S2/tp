@@ -18,6 +18,12 @@ public class ListOverdueBorrowingsCommand extends Command {
         this.name = name;
     }
 
+    /**
+     * This method first checks if there are any borrow records at all (for the person if it is specified in input).
+     * If there are, the method will loop through the items to print out the items and their respective borrow records.
+     * @param itemList ItemList containing all items in the current inventory
+     * @param ui User Interface for reading inputs and/or printing outputs
+     */
     public void execute(ItemList itemList, Ui ui) {
         List<Item> items = itemList.getItemArrayList();
         List<String> overdueRecords =
