@@ -30,7 +30,12 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 
 
 #### Enhancements to existing features:
-
+* Separated dependency of parser class from command class by creating Command Parser classes for certain features.
+  * These include [GroupCreateCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/GroupCreateCommandParser.java),
+    [GroupDeleteCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/GroupDeleteCommandParser.java),
+    [GroupEditCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/GroupEditCommandParser.java),
+    [ActivityViewCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/ActivityViewCommandParser.java) and 
+    [ActivityListCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/ActivityListCommandParser.java) classes.
 
 #### Testing
 * Added command `Junit` test for
@@ -54,8 +59,3 @@ Documentation Contribution:
 * Added the explanation for [`Add a group`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#add-a-group),
   [`Remove a group`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#remove-a-group) and
   [`Edit a group`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#edit-a-gorup) sections of the Developer Guide.
-
-#### Project Management
-
-
-#### Miscellaneous Contributions
