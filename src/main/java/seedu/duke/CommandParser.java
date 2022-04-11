@@ -124,7 +124,7 @@ public class CommandParser {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(DELETE_PROFILE, "");
             userCommand = new DeleteHousekeeperCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(DELETE_EVENT)) {
-            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_EVENT, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replaceFirst(DELETE_EVENT, "");
             userCommand = new DeleteEventCommand(userInputLowerCaseWithoutCommand);
         } else {
             throw new InvalidCommandException();
