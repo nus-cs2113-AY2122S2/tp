@@ -227,4 +227,86 @@ class ActivityEditCommandTest {
         double newCost = editedActivity.getTotalCost();
         assertTrue(newCost - (20 * 1.07 * 1.1) < 0.001);
     }
+
+    /**
+     * Checks if the activity is not edited when the same activity name is supplied.
+     *
+     * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
+     */
+    @Test
+    public void run_editWithSameName_activityIsNotEdited() throws InvalidDataException {
+        String userInput = "activity /edit /sid 1 /aid 1 /n Lunch";
+        Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityEditCommand.class, command.getClass());
+        command.run(manager);
+        Activity editedActivity = manager.getProfile().getSession(1).getActivity(1);
+        assertEquals("Lunch", editedActivity.getActivityName());
+    }
+
+    /**
+     * Checks if the activity is not edited when the same payer name is supplied.
+     *
+     * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
+     */
+    @Test
+    public void run_editWithSamePayer_activityIsNotEdited() throws InvalidDataException {
+        String userInput = "activity /edit /sid 1 /aid 1 /p alice";
+        Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityEditCommand.class, command.getClass());
+        command.run(manager);
+        Activity editedActivity = manager.getProfile().getSession(1).getActivity(1);
+        assertEquals("Alice", editedActivity.getPersonPaid().getName());
+    }
+
+    /**
+     * Checks if the activity is not edited when the same list of participants is supplied.
+     *
+     * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
+     */
+    @Test
+    public void run_editWithSameInvolvedList_activityIsNotEdited() throws InvalidDataException {
+        String userInput = "activity /edit /sid 1 /aid 1 /i Alice Bob Charlie /co 15";
+        Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityEditCommand.class, command.getClass());
+        command.run(manager);
+        Activity editedActivity = manager.getProfile().getSession(1).getActivity(1);
+        assertEquals("Alice", editedActivity.getInvolvedPersonList().get(0).getName());
+        assertEquals("Bob", editedActivity.getInvolvedPersonList().get(1).getName());
+        assertEquals("Charlie", editedActivity.getInvolvedPersonList().get(2).getName());
+    }
+
+    /**
+     * Checks if the activity is not edited when the same total cost is supplied.
+     *
+     * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
+     */
+    @Test
+    public void run_editWithSameTotalCost_activityIsNotEdited() throws InvalidDataException {
+        String userInput = "activity /edit /sid 1 /aid 1 /co 15";
+        Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityEditCommand.class, command.getClass());
+        command.run(manager);
+        Activity editedActivity = manager.getProfile().getSession(1).getActivity(1);
+        assertEquals(15, editedActivity.getTotalCost());
+    }
+
+    /**
+     * Checks if the activity is not edited when the same cost list is supplied.
+     *
+     * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
+     */
+    @Test
+    public void run_editWithSameCostList_activityIsNotEdited() throws InvalidDataException {
+        String activityTwoArgs = "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /cl 10 20 30";
+        Command createActivityTwo = Parser.getCommand(activityTwoArgs);
+        createActivityTwo.run(manager);
+        String userInput = "activity /edit /sid 1 /aid 2 /cl 10 20 30";
+        Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityEditCommand.class, command.getClass());
+        command.run(manager);
+        Activity editedActivity = manager.getProfile().getSession(1).getActivity(1);
+        assertEquals(10, editedActivity.getInvolvedPersonList().get(0).getActivityCostOwed(2));
+        assertEquals(20, editedActivity.getInvolvedPersonList().get(1).getActivityCostOwed(2));
+        assertEquals(30, editedActivity.getInvolvedPersonList().get(2).getActivityCostOwed(2));
+    }
 }
