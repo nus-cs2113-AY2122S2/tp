@@ -77,7 +77,7 @@ public class AddCommand extends Command {
      * the balance left.
      *
      * @param cardName Name of credit card to be updated.
-     * @param amount   amount of new expenditure.
+     * @param amount amount of new expenditure.
      * @return The credit card balance left.
      * @throws MindMyMoneyException when the card is not found in user's credit card list.
      */
@@ -105,11 +105,11 @@ public class AddCommand extends Command {
      * @throws MindMyMoneyException when inputs are invalid or flags are missing.
      */
     public void addExpenditure() throws MindMyMoneyException {
-        String paymentMethod = parseInputWithCommandFlag(addInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY);
-        String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
-        String description = parseInputWithCommandFlag(addInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
-        String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
-        String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
+        String paymentMethod = parseInputWithCommandFlag(addInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY).trim();
+        String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION).trim();
+        String description = parseInputWithCommandFlag(addInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT).trim();
+        String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME).trim();
+        String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE).trim();
         testExpenditureParameters(paymentMethod, inputCategory, description, amountAsString, inputTime, creditCardList);
 
         if (capitalise(paymentMethod).equals("Cash")) {
@@ -142,19 +142,20 @@ public class AddCommand extends Command {
      */
     public void addCreditCard() throws MindMyMoneyException {
         final String cardName = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_NAME,
-            FLAG_OF_CASHBACK);
+            FLAG_OF_CASHBACK).trim();
         final String cashBack = parseInputWithCommandFlag(addInput, FLAG_OF_CASHBACK,
-            FLAG_OF_CARD_LIMIT);
+            FLAG_OF_CARD_LIMIT).trim();
         final String cardLimit = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_LIMIT,
-            FLAG_END_VALUE);
+            FLAG_END_VALUE).trim();
         testCreditCardParameters(cardName, cashBack, cardLimit, creditCardList);
-
-        creditCardList.add(new CreditCard(cardName, Double.parseDouble(cashBack), Float.parseFloat(cardLimit)));
+        Float cashBackAsFloat = formatFloat(Float.parseFloat(cashBack));
+        Float cardLimitAsFloat = formatFloat(Float.parseFloat(cardLimit));
+        creditCardList.add(new CreditCard(cardName, cashBackAsFloat, cardLimitAsFloat));
 
         System.out.println("Successfully added: \n\n"
             + "Credit card: " + cardName + "\n"
-            + "Cash back: " + cashBack + "%\n"
-            + "Card limit: $" + cardLimit + "\n\n"
+            + "Cash back: " + String.format("%.2f", cashBackAsFloat) + "%\n"
+            + "Card limit: $" + String.format("%.2f", cardLimitAsFloat) + "\n\n"
             + "into the account");
         System.out.print(System.lineSeparator());
     }
@@ -165,11 +166,11 @@ public class AddCommand extends Command {
      * @throws MindMyMoneyException when the input amount is not a number.
      */
     public void addIncome() throws MindMyMoneyException {
-        String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_CATEGORY);
+        String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_CATEGORY).trim();
 
         try {
             int amountAsInt = Integer.parseInt(amountAsString);
-            String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_END_VALUE);
+            String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_END_VALUE).trim();
             testIncomeParameters(amountAsInt, inputCategory);
             String category = capitalise(inputCategory);
 

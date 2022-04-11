@@ -17,7 +17,7 @@ participant "commandType:AddCommand" as C COMMANDS_COLOUR
 participant ":GeneralFunctions" as GF HELPER_COLOUR
 participant ":AddCommandInputTests" as IT HELPER_COLOUR
 participant ":Income" as I USERFINANCIAL_COLOUR
-participant ":IncomeList" as IL USERFINANCIAL_COLOUR
+participant ":IncomeList" as IL DATA_COLOUR
 end box
 
 MMM -> C: executeCommand()
@@ -34,16 +34,6 @@ deactivate GF
 C -> IT: testIncomeParameters()
 activate IT HELPER_COLOUR
 
-IT -> IT: testIncomeAmount()
-activate IT HELPER_COLOUR
-IT --> IT
-deactivate IT HELPER_COLOUR
-
-IT -> IT: testIncomeCategory()
-activate IT HELPER_COLOUR
-IT --> IT
-deactivate IT HELPER_COLOUR
-
 IT --> C
 deactivate IT
 
@@ -55,7 +45,7 @@ I --> C
 deactivate
 
 C -> IL: add()
-activate IL USERFINANCIAL_COLOUR
+activate IL DATA_COLOUR
 IL --> C
 deactivate
 

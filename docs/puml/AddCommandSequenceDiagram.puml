@@ -1,11 +1,25 @@
 @startuml
 !include Style.puml
 
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
 box AddCommand
 participant ":MMM" as MMM MMM_COLOUR
 participant "Command:AddCommand" as AddCommand COMMANDS_COLOUR
 end box
 hide footbox
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
 
 MMM -> AddCommand: executeCommand()
 activate AddCommand COMMANDS_COLOUR
@@ -40,5 +54,5 @@ note right
 An exception containing warning messages is thrown
 end note
 end
-
+@enduml
 @enduml

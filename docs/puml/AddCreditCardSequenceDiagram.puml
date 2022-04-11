@@ -1,6 +1,13 @@
 @startuml
 !include Style.puml
 
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
 box addCreditCard()
 participant ":MMM" as MMM MMM_COLOUR
 participant "AddCommand:Command" as AddCommand COMMANDS_COLOUR
@@ -23,23 +30,7 @@ GeneralFunctions --> AddCommand
 deactivate GeneralFunctions
 
 AddCommand -> AddCommandInputTest: testCreditCardParameters()
-
 activate AddCommandInputTest HELPER_COLOUR
-
-AddCommandInputTest -> AddCommandInputTest: testsCardName()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-AddCommandInputTest -> AddCommandInputTest: testCashBack()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-AddCommandInputTest -> AddCommandInputTest: testCardLimit()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
 
 AddCommandInputTest --> AddCommand
 deactivate AddCommandInputTest

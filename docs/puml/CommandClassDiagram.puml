@@ -25,14 +25,14 @@ component MMM MMM_COLOUR
 
 MMM .r.> parser
 
-parser ...> "\n0..1" command: "creates >"
+parser ...> "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t0..1" command: "creates >"
 
-command <|-- addCommand
+command <|-left- addCommand
 command <|-- byeCommand
 command <|-- deleteCommand
 command <|-- calculateInputCommand
-command <|-- helpCommand
-command <|-- listCommand
-command <|-- updateCommand
+command <|-up- helpCommand
+command <|-up- listCommand
+command <|-right- updateCommand
 
 @enduml

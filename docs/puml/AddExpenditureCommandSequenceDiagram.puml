@@ -1,6 +1,13 @@
 @startuml
 !include Style.puml
 
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
 box addExpenditure()
 participant ":MMM" as MMM MMM_COLOUR
 participant "Command:AddCommand" as AddCommand COMMANDS_COLOUR
@@ -27,37 +34,6 @@ deactivate GeneralFunctions
 
 AddCommand -> AddCommandInputTest: testExpenditureParameters()
 activate AddCommandInputTest HELPER_COLOUR
-
-AddCommandInputTest -> AddCommandInputTest: testsPaymentMethod()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-AddCommandInputTest -> AddCommandInputTest: testExpenditureCategory()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-AddCommandInputTest -> AddCommandInputTest: testDescription()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-AddCommandInputTest -> AddCommandInputTest: testExpenditureAmount()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-AddCommandInputTest -> AddCommandInputTest: checkValidDate()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
-AddCommandInputTest -> AddCommandInputTest: checkAfterCurrentDate()
-activate AddCommandInputTest HELPER_COLOUR
-AddCommandInputTest --> AddCommandInputTest
-deactivate AddCommandInputTest
-
 
 AddCommandInputTest --> AddCommand
 deactivate AddCommandInputTest
