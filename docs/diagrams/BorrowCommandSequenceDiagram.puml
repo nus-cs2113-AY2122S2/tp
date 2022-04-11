@@ -1,0 +1,50 @@
+@startuml
+hide footbox
+skinparam sequenceStereotypeFontColor red
+
+Participant ":InvMgr" as InvMgr
+Participant "Parser" as Parser <<class>>
+Participant "inputCommand:BorrowCommand" as BorrowCommand
+Participant "BorrowRecord" as BorrowRecord
+Participant "itemList:ItemList" as ItemList
+Participant "Item" as Item
+Participant "ui:Ui" as Ui
+
+InvMgr -> InvMgr: run
+activate InvMgr
+    InvMgr -> Parser: parse(userCommand:String)
+    activate Parser
+        create BorrowCommand
+        Parser -> BorrowCommand: BorrowCommand()
+        activate BorrowCommand
+            return
+
+        return inputCommand: BorrowCommand
+
+    InvMgr -> BorrowCommand: execute(itemList:ItemList, ui:Ui)
+    activate BorrowCommand
+        create BorrowRecord
+        BorrowCommand -> BorrowRecord: BorrowRecord()
+        activate BorrowRecord
+            return newRecord:BorrowRecord
+
+        BorrowCommand -> ItemList: getItem(index:int)
+        activate ItemList
+            return item:Item
+
+        BorrowCommand -> Item:item
+        activate Item
+            Item -> Item:addBorrowRecord(newRecord)
+            activate Item
+                return
+            return item:Item
+
+        BorrowCommand -> Ui: showMessages(message:String)
+        activate Ui
+            return
+
+        return
+
+deactivate InvMgr
+
+@enduml
