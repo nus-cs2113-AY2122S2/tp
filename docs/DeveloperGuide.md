@@ -154,6 +154,9 @@ The above diagram shows the class diagram for the `Storage` component.
 ## Implementation
 
 ### Add Command
+
+**Normal function**
+
 ![AddCommandSequenceDiagram](img/AddCommandSequenceDiagram.png)
 
 The above diagram shows the sequence diagram of the addition of an item.
@@ -180,6 +183,11 @@ The user starts by typing a desc command. The example used in the diagram above 
 3. `parse()` then generates a new `DescCommand` with the index as the argument. The new `DescCommand` is returned to the `run` method.
 4. The `run()` method then calls on the `execute()` method in `DescCommand` which retrieves the specified `item` from `itemList`.
 5. With the `item` object, we are able to retrieve the item's description and pass it as a String to be printed by `ui` using `showMessages` method.
+
+**Error handling**
+
+Exceptions are thrown/handled for the following:
+1. When the user enters an index for an item that is not in the list (e.g. `100000` when item 100000 does not exist).
 
 ### Delete Command
 ![DeleteCommandSequenceDiagram](img/DeleteCommandSequenceDiagram.png)
