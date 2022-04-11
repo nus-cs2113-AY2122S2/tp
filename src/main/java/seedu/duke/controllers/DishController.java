@@ -80,7 +80,7 @@ public class DishController extends Controller {
         }
         String name = InputParser.getString("The new name of dish: ");
         if (name.isEmpty()) {
-            System.out.println("Please make sure the name is not empty and price is non-negative");
+            System.out.println("Please make sure the name is not empty");
             return;
         }
         if (dishManager.checkNameExistence(name)) {
