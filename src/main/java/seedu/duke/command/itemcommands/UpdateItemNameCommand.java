@@ -36,8 +36,9 @@ public class UpdateItemNameCommand extends Command {
      * Extracts out from the user input the current name of the item to update as well as its new name.
      *
      * @param userInput The user's input.
-     * @throws HotelLiteManagerException if the formatting of the update item name command is invalid, the current item
-     *                                   name is empty or the new item name is empty.
+     * @throws HotelLiteManagerException if the edited user input still contains the string "update item name", the
+     *                                   formatting of the update item name command is invalid, the current item name is
+     *                                   empty or the new item name is empty.
      */
     public UpdateItemNameCommand(String userInput) throws HotelLiteManagerException {
         if (userInput.startsWith(DELIMITER)) {
@@ -87,7 +88,7 @@ public class UpdateItemNameCommand extends Command {
     }
 
     /**
-     * Returns the new item name for the item that is to be updated (newItemName) which is extracted from the user
+     * Returns the new item name for the item to be updated (newItemName) which is extracted from the user
      * input.
      *
      * @param tokens String tokens of the user input.
@@ -114,18 +115,15 @@ public class UpdateItemNameCommand extends Command {
     }
 
     /**
-     * Updates the item name of the item within the item list whose name matches the old item name to the new item name.
+     * Updates the item name of the item within the item list whose name matches the old item name.
      * Returns an acknowledgement message to inform the user that the name of the updated item has been changed from
      * the old item name to the new item name.
-     * Updates the item list saved within the file ListFolder/ItemList.txt
      *
      * @param listContainer The object containing the data structure necessary for updating the name of an item within
      *                      the item list.
      *                      In this case, we require access to the ItemList object which is within listContainer.
      * @param ui            The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
-     * @throws IOException               if we are unable to write to the file ListFolder/ItemList.txt
-     * @return
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
@@ -146,6 +144,14 @@ public class UpdateItemNameCommand extends Command {
         ui.printUpdateItemNameAcknowledgementMessage(oldItemName, newItemName);
     }
 
+    /**
+     * Updates the item list saved within the file ListFolder/ItemList.txt.
+     *
+     * @param listContainer The object containing the data structure necessary for updating the name of an item within
+     *                      the item list.
+     *                      In this case, we require access to the ItemList object which is within listContainer.
+     * @throws IOException  if we are unable to write to the file ListFolder/ItemList.txt
+     */
     public void writeItemListToFile(ListContainer listContainer) throws IOException {
         ItemList listOfItems = listContainer.getItemList();
         ItemListFileManager itemListFileManager = new ItemListFileManager();

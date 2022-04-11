@@ -59,6 +59,14 @@ public class Item {
         this.pax = pax;
     }
 
+    /**
+     * Checks if the itemName contains only alphabetical characters, digits, whitespaces or apostrophe in accordance to
+     * the restrictions mentioned in the user guide.
+     *
+     * @param itemName The itemName within the command inputted by the user.
+     * @return true if the itemName did not violate any one of the restrictions mentioned above.false if the item name
+     *     violates any one of the restrictions.
+     */
     private boolean checkIfItemNameFormatValid(String itemName) {
         boolean isItemNameFormatValid = false;
         if (itemName.matches("^([a-z]|[A-Z]|[0-9]|\\s|')+$")) {

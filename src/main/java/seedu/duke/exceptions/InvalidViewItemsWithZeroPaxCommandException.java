@@ -1,7 +1,5 @@
 package seedu.duke.exceptions;
 
-import seedu.duke.exceptions.HotelLiteManagerException;
-
 /**
  * Represents an exception which would be thrown when the user enters an invalid format for the view items with zero pax
  * command.

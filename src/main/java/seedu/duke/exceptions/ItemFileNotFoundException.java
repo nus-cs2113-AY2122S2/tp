@@ -1,7 +1,5 @@
 package seedu.duke.exceptions;
 
-import seedu.duke.exceptions.HotelLiteManagerException;
-
 /**
  * Represents an exception which would be thrown if the item file ItemList.txt is not found.
  */
