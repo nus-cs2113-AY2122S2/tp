@@ -62,7 +62,6 @@ it correctly and with ease. Here are some icons which we will use to convey impo
     - Show tasks (identical to the one in Task management): [`show`](#show-your-tasks-show)
     - Mark tasks as done (identical to the one in Task management):[`mark`](#mark-your-tasks-as-done-mark) 
     - Exit study session: [`leave`](#leave-the-study-session-leave)
-  - Exit program: [`bye`]()
   - Help: [`help`](#help-help)
   - Exit program: [`bye`](#exit-program-bye)
   - [Saving your tasks](#saving-your-tasks)
@@ -331,9 +330,7 @@ Format:
 
 **Example**
 
-![weeklyTimetablePart1](images/weeklyTimetablePart1.PNG)
-![weeklyTimetablePart2](images/weeklyTimetablePart2.PNG)
-
+![weeklyTimetable](images/weeklyTimetable.PNG)
 
 ### Display Monthly Schedule: `show month` / `show MONTH`
 If showing of your daily schedule or weekly schedule is not enough, Sherpass also allows you to track your
@@ -618,6 +615,7 @@ Displays a short guide for either all the commands, or one specified command.
 Format: `help [COMMAND_WORD]`
 
 **Example**
+
 ![image](images/help_delete.png)
 
 > 💡 **Note:** Alternatively, you can enter `help quick start` for a command summary similar to the one in this document.
@@ -629,6 +627,7 @@ Exits the program.
 Format: `bye`
 
 **Example**
+
 ![image](images/bye.png)
 
 ### Saving your tasks
