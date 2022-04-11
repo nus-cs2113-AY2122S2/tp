@@ -14,11 +14,13 @@
     7. [List Available Borrowings](#list-available-borrowings-listab)
     8. [Borrow an Item](#borrow-an-item-borrow)
     9. [Return an Item](#return-an-item-return)
-    10. [Get Description of Item](#get-description-of-item-desc)
-    11. [Delete an Item](#delete-an-item-delete)
-    12. [Edit an Item](#edit-an-item-edit)
-    13. [Cancel a future borrowing](#cancel-a-future-borrowing-cancel)
-    14. [Exit](#exit-exit)
+    10. [Mark Item as Lost](#mark-item-as-lost-lost)
+    11. [Get Description of Item](#get-description-of-item-desc)
+    12. [Delete an Item](#delete-an-item-delete)
+    13. [Edit an Item](#edit-an-item-edit)
+    14. [Cancel a future borrowing](#cancel-a-future-borrowing-cancel)
+    15. [Help Command](#help-command-help)
+    16. [Exit](#exit-exit)
 5. [FAQ](#faq)
 6. [Command Summary][(#command-summary)]
 
@@ -625,7 +627,7 @@ Borrow Duration: 2022-05-06 to 2022-05-06
 
 ### Help Command: `help`
 
-Helps the user see what features Inventory Manager is capable of, what each feature does and the input syntax for 
+Helps the user see what functions Inventory Manager is capable of, what each function does and the input syntax for 
 <br> calling them.
 
 **Format:**
