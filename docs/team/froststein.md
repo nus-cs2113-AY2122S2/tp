@@ -45,6 +45,8 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 * Integration of [`TableFormatter`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/ui/TableFormatter.java) class to
   [`Profile`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Profile.java) class
   * Improves the readability when printing list of sessions.
+* Added custom 'Back' buttons for User Guide and Developer guide to aid with navigation and readability.
+
 
 #### Testing
 * Added command `Junit` test for 
@@ -77,6 +79,10 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
   [`Remove a session`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#remove-a-session) and
   [`Edit a session`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#edit-a-session) sections of the Developer Guide.
 * Added user stories section.
+* Added Manual Testing Section
+  * Session: `Creating a session`, `Deleting a Session` and `Editing a Session`.
+  * Group: `Creating a group`, `Deleting a group`, `Editing a group` and `Viewing a group`.
+  * Storage
 
 #### Project Management
 * Setup Organization & Team Repository.
