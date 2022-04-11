@@ -1,4 +1,6 @@
-# Tan Ivan - Project Portfolio Page
+---
+title: Tan Ivan - Project Portfolio Page
+---
 
 ## Summary of Contributions
 
