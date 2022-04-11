@@ -87,7 +87,7 @@ public class ListCommandTest {
      * list all when the Master Timetable is empty.
      */
     @Test
-    public void listCommand_emptyMasterTimetable() {
+    public void listCommand_emptyMasterTimetable_throwException() {
         ListCommand listCommand = new ListCommand("all", 0);
         assertEquals(ERROR_EMPTY_MASTER_TIMETABLE, listCommand.execute(masterTimetable));
     }
@@ -97,7 +97,7 @@ public class ListCommandTest {
      * list without any input.
      */
     @Test
-    public void listCommand_noValue() {
+    public void listCommand_noValue_throwException() {
         ListCommand listCommand = new ListCommand("", 0);
         assertEquals(ERROR_UNSPECIFIED_LIST, listCommand.execute(masterTimetable));
     }
@@ -107,7 +107,7 @@ public class ListCommandTest {
      * to list the timetable of a user that does not exist.
      */
     @Test
-    public void listCommand_noUser() {
+    public void listCommand_noUser_throwException() {
         ListCommand listCommand = new ListCommand("John", 0);
         assertEquals(ERROR_INVALID_USER, listCommand.execute(masterTimetable));
     }

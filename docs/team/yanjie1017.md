@@ -75,7 +75,20 @@ MeetingJio can get your meeting management tasks done faster than manually eyeba
   - Formatted the User Guide.
 
 **Developer Guide**
-- To be done
+- Add User Feature
+  - Wrote the add user section in the Developer Guide.
+  - Drew the sequence diagram for add user operations.
+- Add Lesson Feature
+  - Wrote the add lesson section in the Developer Guide.
+  - Drew the sequence diagram for add lesson operations.
+- Edit Lesson Feature
+  - Wrote the edit lesson section in the Developer Guide.
+  - Drew the sequence diagram for edit lesson operations.
+- Parser Component
+  - Wrote the parser component section in the Developer Guide.
+  - Drew the class diagram of parser component.
+- Others
+  - Added the user stories.
 
 
 ## Other roles
