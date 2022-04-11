@@ -10,7 +10,7 @@ Thank you to all professors and student teachers who have helped us along the wa
 
 Here is a quick overview of the design of the application:
 
-![](diagrams/class/all.png)
+![](diagrams/class/overview.png)
 
 Note that the diagram does not include all entities, controllers, and managers
 present in the programme. It is only meant to give a quick overview of the project structure.
@@ -254,6 +254,8 @@ As such, this application provides many functionalities to do so. The possibilit
 | v2.0    | staff    | store the application data  | save data across different uses   |
 | v2.0    | staff    | mark the deleted dish in order  | keep the order up to date   |
 
+## Class diagram
+![](diagrams/class/all.png)
 
 ## Non-Functional Requirements
 
