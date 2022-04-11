@@ -1,6 +1,13 @@
 @startuml
 !include Style.puml
 
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
 box addCreditCard()
 participant ":MMM" as MMM MMM_COLOUR
 participant "AddCommand:Command" as AddCommand COMMANDS_COLOUR
