@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+skinparam guillemet false
+skinparam sequenceStereotypeFontColor red
+skinparam sequenceStereotypeFontStyle bold
+skinparam dpi 260
+
+Participant ":InvMgr" as invmgr
+Participant "InputParser" as input <<class>>
+Participant "ListOverdueBorrowingsParser" as parser <<class>>
+Participant "ArgumentTokenizer" as arg <<class>>
+Participant "inputCommand:ListOverdueBorrowingsCommand" as cmd
+Participant "itemList:ItemList" as itemlist
+Participant "ui:Ui" as ui
+
+activate invmgr
+
+-> invmgr
+invmgr -> input:parse("listob p/Jasper")
+activate input
+
+input -> parser:parse("p/Jasper")
+activate parser
+
+parser -> arg:tokenize("p/Jasper", PREFIX_BORROWER_NAME)
+activate arg
+return argMultimap: ArgumentMultimap
+
+create cmd
+parser -> cmd:ListOverdueBorrowingsCommand(name: Optional<String>)
+activate cmd
+return :ListOverdueBorrowingsCommand
+
+return :ListOverdueBorrowingsCommand
+
+return inputCommand:ListOverdueBorrowingsCommand
+
+invmgr -> cmd:execute(itemList: ItemList, ui: Ui)
+activate cmd
+
+cmd -> itemlist:getItemArrayList()
+activate itemlist
+return List<Item>: items
+
+ref over cmd, ui: converse with Ui based on overdueRecords: List<String>
+
+return
+@enduml

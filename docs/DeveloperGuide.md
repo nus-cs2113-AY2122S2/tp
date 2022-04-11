@@ -276,6 +276,24 @@ The user starts by typing a `listfb` command. The example used in the diagrams a
 7. The method then uses Java Streams to check if there are any relevant `BorrowRecords`. These records are stored as strings in a list called `futureRecords`
 8. Based on the size of the `futureRecords`, the `itemList` will converse with `Ui` to give the appropriate output.
 
+### ListOverdueBorrowings Command
+
+![ListOverdueBorrowings1SequenceDiagram](img/ListOverdueBorrowings1SequenceDiagram.png)
+![ListOverdueBorrowings2SequenceDiagram](img/ListOverdueBorrowings2SequenceDiagram.png)
+
+The above diagrams shows the sequence diagram of listing overdue borrowings.
+
+The user starts by typing a `listfb` command. The example used in the diagrams above is listing of overdue borrowings for person `Jasper`
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is first split into 2 parts, the command word and the arguments. The command word is identified to be `listfb`, and executes the code within the case. The case calls the `parse()` method in `ListOverdueBorrowingsParser`.
+3. `ListOverdueBorrowingsParser.parse()` uses the string argument and extracts the `BORROWER_NAME` which is optional using an `ArgumentMultimap` through the method `ArgumentTokenizer.tokenize()`.
+4. `parse()` uses the `BORROWER_NAME` to generate a new `ListOverdueBorrowingsCommand` which is returned to the `run()` method.
+5. The `run()` method calls on the `execute()` function in the `ListOverdueBorrowingsCommand`
+6. `execute()` first creates a list of items using the `itemList`'s `getItemArrayList()` method.
+7. The method then uses Java Streams to check if there are any relevant `BorrowRecords`. These records are stored as strings in a list called `overdueRecords`
+8. Based on the size of the `overdueRecords`, the `itemList` will converse with `Ui` to give the appropriate output.
+
 ### Storage
 
 #### Initialisation
