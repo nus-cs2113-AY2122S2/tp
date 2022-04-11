@@ -10,7 +10,7 @@ MeetingJio can get your meeting management tasks done faster than manually eyeba
 
 ## Summary of Contributions
 
-###Code Contributed
+##Code Contributed
 
 **MeetingJio Interface**
 - Designed the logo for MeetingJio.
@@ -31,7 +31,7 @@ back into the lists.
 **JUnit Testing for ParserLocalDataTest**
 - Wrote the code to ensure that it informs on the specified error in the MeetingJio.txt.
 
-###Enhancements Implemented
+##Enhancements Implemented
 
 **Parser for Local Data**
 - Users can edit the data from the data file. The new data will be parsed and added into the lists
@@ -39,7 +39,7 @@ when the application starts.
 - Extended the exception handling if the data edited by the user was not in the correct format.
 Specified error will be shown to the user so that he can correct it.
 
-###Contributions to UG
+##Contributions to UG
 
 **Help Command**
 - Wrote the help command section in the User Guide.
@@ -47,7 +47,7 @@ Specified error will be shown to the user so that he can correct it.
 **Exit Command**
 - Wrote the exit command section in the User Guide.
 
-###Contributions to DG
+##Contributions to DG
 
 **Data Saving Feature**
 - Wrote the Data Saving Feature section in the Developer Guide.
@@ -57,7 +57,7 @@ Specified error will be shown to the user so that he can correct it.
 - Wrote the Loading Data Feature section in the Developer Guide.
 - Designed the Sequence Diagram for the feature.
 
-###Contributions to team-based tasks
+##Contributions to team-based tasks
 
 - In charge of defining, assigning, and tracking project tasks.
 
