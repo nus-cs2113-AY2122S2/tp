@@ -131,7 +131,9 @@ public class Item {
      * Returns a list of OVERDUE borrow records filtered by borrower's name (if present)
      * and borrow status.
      *
-     * OVERDUE records are records that have the PAST BorrowStatus and have not been returned.
+     * <p>
+     *     OVERDUE records are records that have the PAST BorrowStatus and have not been returned.
+     * </p>
      *
      * @param name Either an empty Optional instance or
      *             an Optional instance containing a String name in it.
