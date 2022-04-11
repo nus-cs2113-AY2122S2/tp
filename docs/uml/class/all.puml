@@ -157,4 +157,13 @@ Managers.OrderManager "1\norderManager" <--* Controllers.OrderController
 Managers.OrderManager ..> Managers.DishManager
 Entities.Order ..> Entities.Dish
 
+class InputParser {
++{static}TERMINATOR : String = "-"
+-{static}scanner : Scanner
++{static}getString(msg : String) : String
++{static}getInteger(msg : String) : int
++{static}getDouble(msg : String) : double
+}
+Controllers.Controller ..> InputParser
+
 @enduml

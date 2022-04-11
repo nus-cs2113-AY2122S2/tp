@@ -1,0 +1,33 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class Manager {
+-{static}DATABASE_DIRECTORY : String
+-file : String
+#Manager(file : String)
+-ensureDatabaseDirectoryExists() : void
+#load() : Object
+#save(o : Object) : void
+#{abstract}loadData() : void
++{abstract}saveData() : void
+}
+
+class InputParser {
++{static}TERMINATOR : String = "-"
+-{static}scanner : Scanner
++{static}getString(msg : String) : String
++{static}getInteger(msg : String) : int
++{static}getDouble(msg : String) : double
+}
+
+abstract class Controller {
+#choices : String[]
++Controller(choices : String[])
++takeControl() : void
+#getChoice() : int
+#{abstract}optionSwitcher() : bool
+}
+
+Controller ..> InputParser
+
+@enduml
