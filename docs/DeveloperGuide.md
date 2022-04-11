@@ -722,6 +722,22 @@ Expected: All incomes and expenditures whose description contains `Test` will be
 2. Test case: `find /d Test /c 7`  
    Expected: No entries are printed. Error details shown in the error message.
 
+### Moving to the next month
+
+1. Prerequisite: Launch the program and add valid person such as `add /n Alice /g 1` and
+   a valid income such as `addin /g 1 /u 1 /d Donations /i 6000 /p f`.
+2. Execute the command `bye` to save the data to `PlanITarium.txt`.
+3. Open the save file `PlanITarium.txt` in directory `data` and manually edit the income record
+   added above.
+4. To demonstrate, an example entry should look like this `i Donations /d 6000.0 /d false /d 2022-04-11`.
+5. Test case: Change the month to an earlier month. The simulated record should look like this
+   `i Donations /d 6000.0 /d false /d 2022-01-11`.  
+   Expected: Upon starting up the program again and running any command which iterates through the lists such as `overview`,
+   the entry is automatically deleted.
+6. Test case: Change the year to an earlier year. The simulated record should look like this
+   `i Donations /d 6000.0 /d false /d 2020-04-11`.  
+   Expected: Similar to previous.
+
 ### Loading data
 
 #### Dealing with missing data file
