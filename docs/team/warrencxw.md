@@ -15,20 +15,28 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 
 #### New Features
 * [Parsing API](https://github.com/AY2122S2-CS2113T-T10-1/tp/tree/master/src/main/java/seedu/splitlah/parser)
-   * Provides a full set of methods to parse different arguments of a user input.
-   * Performs preliminary validity checking of user input for extraneous arguments and invalid commands.
+   * What it does: Provides a full set of methods to parse different arguments of a user input
+     and perform preliminary validity checking of the user input for extraneous arguments and invalid inputs.
+   * Justification: Allows other developers to develop functional code without having to worry about input validity.
+     Centralisation of all parsing logic also helps to make debugging of any incorrect parsing logic easier.
 * [Session](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Session.java)
    * Represents a group outing that involves a list of participants and contains one or more activities.
+     Also provides relevant methods for handling and processing its member attributes.
 * [Session Summary](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionSummaryCommand.java)
-   * Creates a transaction summary that helps users calculate how much each person in a session
+   * What it does: Creates a transaction summary that helps users calculate how much each person in a session
      must pay and to whom they should pay for all debts to be resolved.
-   * Minimises the number of transactions required to be made.
-   * One of the key features of `SplitLah`.
+   * Justification: One of the key features of `SplitLah`. Serves to simplify the payment process when users split
+     bills during group outings as it minimises the number of transactions required to be made by consolidating all
+     debts to be paid.
 * [Help command](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/HelpCommand.java)
-   * Provides users a reference of all available commands while they are using `SplitLah`.
+   * What it does: Provides users a reference of all available commands while they are using `SplitLah`.
+   * Justification: Gives users a quick way to find out the syntax of all available commands while using `SplitLah` 
+     without having to constantly refer back to the user guide.
 * [PersonCostPair](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/util/PersonCostPair.java)
-   * A utility class that supports `SessionSummaryCommand` in minimising transactions required to be made.
-   * Encapsulates a `Person` object and their overall cost in the session as a debt owed by or owed to an individual.
+   * What it does: It is a utility class that supports `SessionSummaryCommand` in minimising transactions required to be
+     made by encapsulates a `Person` object and their overall cost in the session as a debt owed by or owed to an individual.
+   * Justification: Enables `SessionSummaryCommand` to sort all debts in the session without losing the ability to
+     refer to the `Person` object that bears the debt.
 
 #### Enhancements to existing features
  * [CommandParser interface](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/CommandParser.java)
