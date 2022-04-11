@@ -1,12 +1,14 @@
 package seedu.duke.data;
 
-import java.util.ArrayList;
+import seedu.duke.exceptions.InvMgrException;
+
+import java.util.List;
 
 public class ItemList {
 
-    private ArrayList<Item> itemArrayList;
+    private static List<Item> itemArrayList;
 
-    public ItemList(ArrayList<Item> itemList) {
+    public ItemList(List<Item> itemList) {
         this.itemArrayList = itemList;
     }
 
@@ -22,11 +24,45 @@ public class ItemList {
         return this.itemArrayList.get(index);
     }
 
-    public int getSize() {
-        return this.itemArrayList.size();
+    public static int getSize() {
+        return itemArrayList.size();
     }
 
-    public ArrayList<Item> getItemArrayList() {
+    public Item set(int index, Item item) {
+        return itemArrayList.set(index, item);
+    }
+
+    public List<Item> getItemArrayList() {
         return itemArrayList;
+    }
+
+    /**
+     * Add a borrow record to a specific item in the itemArrayList as indicated
+     * by the itemIndex.
+     *
+     * @param itemIndex A legal item index on the itemArrayList. Zero-based indexing.
+     * @param newRecord A borrow record
+     * @return The item that has been added with the new borrow record.
+     */
+    public Item addBorrowRecord(int itemIndex, BorrowRecord newRecord) throws InvMgrException {
+        Item item = this.itemArrayList.get(itemIndex).addBorrowRecord(newRecord);
+        return item;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        ItemList toCompare;
+        if (other == this) {
+            // return if same object
+            return true;
+        }
+        if (other instanceof ItemList) {
+            // cast only if other is instance of EditCommand
+            toCompare = (ItemList) other;
+            return this.itemArrayList.equals(toCompare.itemArrayList);
+        } else {
+            // null, or object not EditCommand
+            return false;
+        }
     }
 }

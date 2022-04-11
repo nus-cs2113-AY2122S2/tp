@@ -7,67 +7,61 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 import seedu.duke.data.Item;
 import seedu.duke.exceptions.InvMgrException;
+import seedu.duke.stubs.ItemStubs;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 public class StorageTest {
     private static final String TEST_DATA_FILE_DELETE_ERR = "Could not clean up the generated test data file!";
 
     @Test
-    void loadData_emptyFile_loadEmptyList() throws InvMgrException {
+    void load_emptyFile_loadEmptyList() throws InvMgrException {
         Storage testStorage = new Storage("test/data/load/empty.json");
-        ArrayList<Item> testItemList = testStorage.loadData();
-        ArrayList<Item> expectedItemList = new ArrayList<Item>();
+        ArrayList<Item> testItemList = testStorage.load();
+        ArrayList<Item> expectedItemList = new ArrayList<>();
         assertEquals(expectedItemList, testItemList);
     }
 
     @Test
-    void loadData_invalidJsonFile_throwException() throws InvMgrException {
+    void load_invalidJsonFile_throwException() throws InvMgrException {
         Storage testStorage = new Storage("test/data/load/invalidData.json");
-        assertThrows(InvMgrException.class, () -> testStorage.loadData());
+        assertThrows(InvMgrException.class, () -> testStorage.load());
     }
 
     @Test
-    void loadData_validJsonFile_validList() throws InvMgrException {
+    void load_validJsonFile_validList() throws InvMgrException {
         ArrayList<Item> expectedItemList = new ArrayList<>();
-        Item item1 = new Item("Markers", 3, "Drawing");
-        Item item2 = new Item("Whiteboard", 1, "To draw on");
-        Item item3 = new Item("HDMI Cable", 2, "For connecting displays");
-        expectedItemList.add(item1);
-        expectedItemList.add(item2);
-        expectedItemList.add(item3);
+        expectedItemList.add(ItemStubs.ITEM_MARKER);
+        expectedItemList.add(ItemStubs.ITEM_WHITEBOARD);
+        expectedItemList.add(ItemStubs.ITEM_HDMI_CABLE);
 
         Storage testStorage = new Storage("test/data/load/validInputData.json");
-        ArrayList<Item> testItemList = testStorage.loadData();
+        ArrayList<Item> testItemList = testStorage.load();
 
         assertListEquals(expectedItemList, testItemList);
     }
 
     @Test
-    void writeData_nullList_throwException() throws InvMgrException {
-        Storage testStorage = new Storage("test/data/read/actualData.json");
-        assertThrows(NullPointerException.class, () -> testStorage.writeData(null));
+    void save_nullList_throwException() throws InvMgrException {
+        Storage testStorage = new Storage("test/data/save/actualData.json");
+        assertThrows(NullPointerException.class, () -> testStorage.save(null));
     }
 
     @Test
-    void writeData_validList_validJson() throws InvMgrException {
+    void save_validList_validJson() throws InvMgrException {
         ArrayList<Item> itemList = new ArrayList<>();
-        Item item1 = new Item("Markers", 3, "Drawing");
-        Item item2 = new Item("Whiteboard", 1, "To draw on");
-        Item item3 = new Item("HDMI Cable", 2, "For connecting displays");
-        itemList.add(item1);
-        itemList.add(item2);
-        itemList.add(item3);
+        itemList.add(ItemStubs.ITEM_MARKER);
+        itemList.add(ItemStubs.ITEM_WHITEBOARD);
+        itemList.add(ItemStubs.ITEM_HDMI_CABLE);
 
-        Storage testStorage = new Storage("test/data/read/actualData.json");
-        testStorage.writeData(itemList);
+        Storage testStorage = new Storage("test/data/save/actualData.json");
+        testStorage.save(itemList);
 
-        Storage expectedStorage = new Storage("test/data/read/expectedData.json");
+        Storage expectedStorage = new Storage("test/data/save/expectedData.json");
         assertStorageEquals(expectedStorage, testStorage);
     }
 
@@ -97,11 +91,6 @@ public class StorageTest {
      * @param actualList the list to check against
      */
     private void assertListEquals(ArrayList<Item> expectedList, ArrayList<Item> actualList) {
-        HashSet<String> checker = new HashSet<String>();
-        for (int i = 0; i < actualList.size(); i++) {
-            checker.add(expectedList.get(i).saveString());
-            checker.add(actualList.get(i).saveString());
-        }
-        assertEquals(checker.size(), actualList.size());
+        assertEquals(true, actualList.containsAll(expectedList));
     }
 }

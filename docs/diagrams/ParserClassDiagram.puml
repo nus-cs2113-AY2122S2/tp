@@ -1,0 +1,41 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+package "Parser Component" <<Rectangle>> {
+    class Parser
+}
+
+Command <.left. Parser: creates
+Parser <-left- InvMgr
+
+class InvMgr {
++ InvMgr(filePath: String)
+- Storage storage
+- ItemList itemList
+- Ui ui
+__
++run()
++main()
+}
+
+class Parser {
+__
++ parse(userCommand: String): Command
+- createItem(userCommand: String): Item
+- getName(itemString: String[]): String
+- getQuantity(itemString: String[]): int
+- getDesc(itemString: String[]): String
+- isNum(number: String): boolean
+}
+
+abstract class Command {
+- boolean isExit
+__
++ Command()
++ isExit(): boolean
++ {abstract} execute(itemList: ItemList, ui: Ui)
+}
+
+@enduml

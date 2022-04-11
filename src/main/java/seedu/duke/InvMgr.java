@@ -4,7 +4,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.exceptions.InvMgrException;
-import seedu.duke.parser.Parser;
+import seedu.duke.parser.InputParser;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 import seedu.duke.common.Messages;
@@ -26,7 +26,7 @@ public class InvMgr {
         ui = new Ui();
         try {
             storage = new Storage(filePath);
-            itemList = new ItemList(storage.loadData());
+            itemList = new ItemList(storage.load());
         } catch (InvMgrException e) {
             ui.showMessages(Messages.ERROR_MESSAGE);
             itemList = new ItemList(new ArrayList<Item>());
@@ -42,15 +42,15 @@ public class InvMgr {
         while (!isExit) {
             try {
                 String command = ui.getRawUserInput();
-                Command inputCommand = Parser.parse(command);
+                Command inputCommand = InputParser.parse(command);
                 inputCommand.execute(itemList, ui);
+                ui.showDivider();
                 isExit = inputCommand.isExit();
-                storage.writeData(itemList.getItemArrayList());
+                storage.save(itemList.getItemArrayList());
             } catch (InvMgrException e) {
                 ui.showError(e);
             }
         }
-        assert false : "Execution should never reach this point!";
     }
 
     /**

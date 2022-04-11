@@ -1,0 +1,30 @@
+@startuml
+
+hide footbox
+skinparam SequenceReferenceBackgroundColor pink
+
+participant ":InvMgr" as InvMgr
+participant "storage:Storage" as Storage
+participant "gson:Gson" as Gson
+
+activate InvMgr
+    InvMgr -> Storage : save(itemList: ArrayList<Item>)
+    activate Storage
+
+        create Gson
+        Storage -> Gson : Gson()
+        activate Gson
+        return
+
+        Storage -> Gson : toJson(itemList)
+        activate Gson
+        return serializedItems: String
+
+        ref over Storage
+            Write serializedItems: String
+            into dataFile
+        end ref
+
+    return
+
+@enduml

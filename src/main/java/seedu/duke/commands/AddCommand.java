@@ -32,4 +32,11 @@ public class AddCommand extends Command {
         itemList.addItem(itemToAdd);
         ui.showMessages(itemToAdd + " has been added!");
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddCommand // instanceof handles nulls
+                && itemToAdd.equals(((AddCommand) other).itemToAdd));
+    }
 }

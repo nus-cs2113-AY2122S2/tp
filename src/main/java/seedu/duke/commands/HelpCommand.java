@@ -19,10 +19,12 @@ public class HelpCommand extends Command {
 
     @Override
     public void execute(ItemList itemList, Ui ui) {
-        System.out.println(Messages.COMMAND_MENU_MESSAGE + Messages.DIVIDER
+        ui.showMessages(Messages.COMMAND_MENU_MESSAGE + Messages.DIVIDER
                 + AddCommand.HELP_MESSAGE + Messages.DIVIDER
                 + DeleteCommand.HELP_MESSAGE + Messages.DIVIDER
                 + DescCommand.HELP_MESSAGE + Messages.DIVIDER
+                + LostCommand.HELP_MESSAGE + Messages.DIVIDER
+                + BorrowCommand.HELP_MESSAGE + Messages.DIVIDER
                 + ExitCommand.HELP_MESSAGE + Messages.DIVIDER
                 + HelpCommand.HELP_MESSAGE + Messages.DIVIDER);
     }
