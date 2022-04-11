@@ -354,7 +354,7 @@ Following operations are implemented:
 * `Parser#getKeyword(userInput)` -- Return the keyword of the type of command
 * `XYZCommand#execute()` -- Execute the command
 
-Below is and example usage scenario and how Alice is added to the `PersonList`
+Below is and example usage scenario and how Alice is added to the `Family`
 
 Step 1. given that user input is
 
