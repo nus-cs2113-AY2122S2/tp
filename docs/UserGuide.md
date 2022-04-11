@@ -157,6 +157,7 @@ Borrow the item that you want for the duration between the start date and end da
 * `ITEM_INDEX` should be within one of the index for ItemList.
 * `QUANTITY` should be >= 0.
 * The `START_DATE` and `END_DATE` must be in YYYY-MM-DD format.
+* Each item can only be borrowed for a maximum of 7 days.
 * `END_DATE` must be either the same as `START_DATE` or a later date.
 * Borrower will borrow at `START_DATE` 00:01 HRS and return at `END_DATE` 2359 HRS.
 
@@ -166,7 +167,7 @@ Borrow the item that you want for the duration between the start date and end da
 You have successfully borrowed the following item:
 Name of Item: JBLFlip5
 Name of Borrower: John Smith
-Borrow Duration: 2021-03-21 to 2021-03-23
+Borrow Duration: 2022-03-21 to 2022-03-25
 Borrow Quantity: 5
 ```
 
@@ -178,7 +179,7 @@ List all items that are currently being borrowed. You can narrow down the list b
 
 `listcb`: List all items that are currently being borrowed.  
 
-`listcb p/BORROWER_NAME`: List all items that are currently being borrowed by BORROWER_NAME
+`listcb p/BORROWER_NAME`: List all items that are currently being borrowed by BORROWER_NAME.
 
 **Arguments:**
 
@@ -186,31 +187,33 @@ List all items that are currently being borrowed. You can narrow down the list b
 |:-------------:|:-------------:|:---------------:|:------------------------------:|
 |      p/       | BORROWER_NAME |     String      | Name of borrower to search for |
 
-**Caveats:**
+**Caveats:**  
+None  
 
-
-**Examples of usage:**
+**Examples of usage: (Assuming today's date is ***2021-03-18***)**
 
 ```
 > listcb
 Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Duration: 2021-03-17 to 2021-03-20
 Borrow Quantity: 5
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
-Borrow Duration: 2021-03-29 to 2021-04-01
+Borrow Duration: 2021-03-16 to 2021-03-20
 Borrow Quantity: 1
 
 > listcb p/Sally
 Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 2021-03-23 to 2021-03-30
+Borrow Duration: 2021-03-17 to 2021-03-20
+Borrow Quantity: 1
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
-Borrow Duration: 2021-04-24 to 2021-04-30
+Borrow Duration: 2021-03-17 to 2021-03-19
+Borrow Quantity: 1
 ```
 
 ### List Future Borrowings: `listfb`
@@ -229,8 +232,8 @@ List all items that will be borrowed in the future. You can narrow down the list
 |:-------------:|:-------------:|:---------------:|:------------------------------:|
 |      p/       | BORROWER_NAME |     String      | Name of borrower to search for |
 
-**Caveats:**
-
+**Caveats:**  
+None
 
 **Examples of usage (Assuming today's date is ***2021-03-18***):**
 ```
@@ -262,7 +265,7 @@ There are no future borrowings.
 > listfb p/Sally
 Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Duration: 2021-03-19 to 2021-03-21
 Borrow Quantity: 5
 
 Name of Item: JBLFlip5
@@ -293,8 +296,8 @@ List all items should have been returned but have yet to be. You can narrow down
 |:-------------:|:-------------:|:---------------:|:------------------------------:|
 |      p/       | BORROWER_NAME |     String      | Name of borrower to search for |
 
-**Caveats:**
-
+**Caveats:**  
+None
 
 **Examples of usage (Assuming today's date is ***2021-03-31***):**
 
@@ -302,7 +305,7 @@ List all items should have been returned but have yet to be. You can narrow down
 > listob
 Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Duration: 2021-03-25 to 2021-03-30
 Borrow Quantity: 5
 
 Name of Item: JBLFlip5
@@ -312,7 +315,7 @@ Borrow Quantity: 1
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
-Borrow Duration: 2021-03-29 to 2021-04-01
+Borrow Duration: 2021-03-24 to 2021-03-26
 Borrow Quantity: 1
 ```
 
@@ -327,12 +330,12 @@ There are no overdue borrowings.
 > listob p/Sally
 Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Duration: 2021-03-25 to 2021-03-30
 Borrow Quantity: 5
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
-Borrow Duration: 2021-03-29 to 2021-04-01
+Borrow Duration: 2021-03-24 to 2021-03-26
 Borrow Quantity: 1
 ```
 
