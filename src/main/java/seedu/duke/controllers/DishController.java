@@ -137,7 +137,7 @@ public class DishController extends Controller {
             System.out.println("Ooops, this dish already exists in your menu");
             return;
         }
-        double price = InputParser.getDouble("The price (will be rounded into 1 decimal place) of dish: ");
+        double price = InputParser.getDouble("The price (will be rounded into 2 decimal place) of dish: ");
         if (price < 0) {
             System.out.println("Please make sure the price is not negative");
             return;
