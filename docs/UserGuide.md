@@ -607,9 +607,6 @@ However, deleted activities are not listed.
 
 ## _Transaction Management_
 
-### Overview
-* [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
-
 <hr>
 
 ### Settling all transactions for a session: `session /summary`
