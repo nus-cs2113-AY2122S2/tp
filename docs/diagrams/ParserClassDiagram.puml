@@ -15,26 +15,26 @@ class Parser {
 }
 
 class ParserArguments {
-#{static} splitArgumentsAll(String): String[]
-#{static} splitArgumentsNameIndex(String): String[]
-#{static} splitArgumentsWithoutName(String): String[]
-#{static} getAttributesMap(String): Map<String, String>
-#{static} getArgumentsFromInput(String): String
-#{static} getCommandFromInput(String): String
--{static} splitAndCheckArguments(String): String[]
--{static} splitArgumentsWithHeadings(String): String[]
--{static} isHeadings(String, String[]): int
--{static} checkNumOfParams(String, String[]): void
--{static} isStringContainsHeading(String[], String): Boolean
--{static} isStringContainsInvalidHeading(String, String[]): Boolean
+#{static} splitArgumentsAll (String) : String[]
+#{static} splitArgumentsNameIndex (String) : String[]
+#{static} splitArgumentsWithoutName (String) : String[]
+#{static} getAttributesMap (String) : Map<String, String>
+#{static} getArgumentsFromInput (String) : String
+#{static} getCommandFromInput (String) : String
+-{static} splitAndCheckArguments (String) : String[]
+-{static} splitArgumentsWithHeadings (String) : String[]
+-{static} isHeadings (String, String[]) : int
+-{static} checkNumOfParams (String, String[]) : void
+-{static} isStringContainsHeading (String[], String) : Boolean
+-{static} isStringContainsInvalidHeading (String, String[]) : Boolean
 }
 
 class ParserHelperMethods {
-+{static} checkTime(int, int): void
-+{static} checkNonNullValues(String[]): void
-+{static} checkMode(String): void
-+{static} checkDay(String): void
-+{static} checkName(String): void
++{static} checkTime (int, int) : void
++{static} checkNonNullValues (String[]) : void
++{static} checkMode (String) : void
++{static} checkDay (String) : void
++{static} checkName (String) : void
 }
 
 Parser ..> ParserHelperMethods
