@@ -49,43 +49,31 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void clearCommandNoValue() {
+    public void clearCommand_noValue_throwException() {
         ClearCommand clearCommand = new ClearCommand("");
         assertEquals(ERROR_UNSPECIFIED_LIST_CLEAR, clearCommand.execute(masterTimetable));
     }
 
     @Test
-    public void clearCommandClearAllEmpty() {
+    public void clearCommand_clearAllEmpty_throwException() {
         ClearCommand clearCommand = new ClearCommand("all");
         assertEquals(successClearAll,  clearCommand.execute(masterTimetable));
     }
 
     @Test
-    public void clearCommandUserNotSpecified() {
+    public void clearCommand_userNotSpecified_throwException() {
         ClearCommand clearCommand = new ClearCommand("clear");
         assertEquals(ERROR_TIMETABLE_NOT_FOUND_TO_DELETE,  clearCommand.execute(masterTimetable));
     }
 
     @Test
-    public void clearCommandUnknownUser() {
+    public void clearCommand_unknownUser_throwException() {
         ClearCommand clearCommand = new ClearCommand("ibrahim");
         assertEquals(ERROR_TIMETABLE_NOT_FOUND_TO_DELETE,  clearCommand.execute(masterTimetable));
     }
 
-    //     @Test
-    //     public void clearCommandOnUserWorksProperlyAndList() {
-    //         addCommand.execute(masterTimetable);
-    //         addCommandSameUser.execute(masterTimetable);
-    //         addCommandDifferentUser.execute(masterTimetable);
-    //         ClearCommand clearCommand = new ClearCommand("john");
-    //         assertEquals(successClearJohn,  clearCommand.execute(masterTimetable));
-    //         ListCommand listCommand = new ListCommand("all");
-    //         assertEquals(listSuccessPostClearJohn, listCommand.execute(masterTimetable));
-
-    //     }
-
     @Test
-    public void clearCommandClearAllWorksProperlyAndList() {
+    public void clearCommand_clearAllWorksProperlyAndList() {
         addCommand.execute(masterTimetable);
         addCommandSameUser.execute(masterTimetable);
         addCommandDifferentUser.execute(masterTimetable);
@@ -96,7 +84,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void clearCommandTestNullPointerExceptionPointerThrown() {
+    public void clearCommand_testNullPointer_throwException() {
         addCommand.execute(masterTimetable);
         addCommandSameUser.execute(masterTimetable);
         addCommandDifferentUser.execute(masterTimetable);
