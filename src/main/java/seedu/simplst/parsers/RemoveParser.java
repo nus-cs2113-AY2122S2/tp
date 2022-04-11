@@ -13,8 +13,13 @@ public class RemoveParser extends CommandParser {
         super(warehouse);
     }
 
+    public RemoveParser(Warehouse warehouse, String userInput) {
+        super(warehouse);
+        this.userInput = userInput;
+    }
+
     @Override
-    protected void initExtractParams() throws MissingFlagException, EmptyFieldException {
+    public void initExtractParams() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[uog]{1,2})/";
@@ -23,7 +28,7 @@ public class RemoveParser extends CommandParser {
     }
 
     @Override
-    protected void extractParams() throws WrongCommandException, MissingFlagException, EmptyFieldException {
+    public void extractParams() throws WrongCommandException, MissingFlagException, EmptyFieldException {
         if (matches.get("flag").equals("o")) {
             String regexOrder = "oid/(?<oid>\\d)";
             HashMap<String, String> regexOrderMatch = new
