@@ -43,7 +43,7 @@ public class ItemList {
      *
      * @param nameOfItemToAdd Name of the item that the user wants to add into the item list.
      * @return true if there is no items within the item list which has the same name as that passed into the function.
-     * Otherwise, it returns false.
+     *      Otherwise, it returns false.
      */
     public boolean checkForItemDuplicates(String nameOfItemToAdd) {
         boolean isItemAlreadyInTheList = false;

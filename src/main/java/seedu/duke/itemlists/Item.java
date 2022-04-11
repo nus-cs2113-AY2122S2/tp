@@ -65,7 +65,7 @@ public class Item {
      *
      * @param itemName The itemName within the command inputted by the user.
      * @return true if the itemName did not violate any one of the restrictions mentioned above.false if the item name
-     * violates any one of the restrictions.
+     *     violates any one of the restrictions.
      */
     private boolean checkIfItemNameFormatValid(String itemName) {
         boolean isItemNameFormatValid = false;

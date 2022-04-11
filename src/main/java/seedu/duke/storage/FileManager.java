@@ -16,7 +16,7 @@ public abstract class FileManager {
      *
      * @param filePath The path of the file containing the list to update or read from.
      * @return a File object which allows us to manipulate the file specified by the file path inputted into the
-     * function.
+     *     function.
      * @throws HotelLiteManagerException if the folder that the file is stored in does not exist and we are unable to
      *                                   create it or if the file specified by the file path does not exist and we are
      *                                   unable to create it.
