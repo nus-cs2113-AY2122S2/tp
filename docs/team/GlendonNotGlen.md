@@ -1,4 +1,4 @@
-# Seah Kit Han - Project Portfolio Page
+# Ng Zhao Zhi Glendon - Project Portfolio Page
 
 ## Overview
 `MindMyMoney` (M<sup>3</sup>) is a desktop app for managing your personal finances, optimized for use via a Command Line
