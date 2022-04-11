@@ -1,17 +1,19 @@
 @startuml
 
+
 hide footbox
 
-participant Ui as ":Ui"
-participant Main as "<font color=red>**<<class>>** \nMain"
-participant Parser as "<font color=red>**<<class>>** \nParser"
-participant TimetableParser as "<font color=red>**<<class>>** \nTimetableParser"
-participant ShowCommand as ":ShowCommand"
+participant ":Ui" as Ui
+participant Main as Main
+participant "<font color=red>**<<class>>** \nParser" as Parser
+participant "<font color=red>**<<class>>** \nTimetableParser" as TimetableParser
+participant ":ShowCommand" as ShowCommand
 
 Main -> Ui: readCommand()
 activate Main
 
 activate Ui
+
 Ui --> Main: "Show 25/5/2022"
 deactivate Ui
 
@@ -19,14 +21,20 @@ Main -> Parser: parseCommand("show 25/5/2022": String)
 activate Parser
 
 Parser -> TimetableParser: prepareShow({"show", "25/5/2022"}:String[])
-activate TimetableParser
 
+activate TimetableParser
 TimetableParser -> TimetableParser: parseShowCommandOptions("25/5/2022": String)
+
 activate TimetableParser
 
-TimetableParser -> ShowCommand **: new ShowCommand("25/5/2022": LocalDate, null)
+create ShowCommand
+TimetableParser -> ShowCommand: new ShowCommand("25/5/2022": LocalDate, null)
+
 activate ShowCommand
+
 ShowCommand --> TimetableParser: :ShowCommand
+deactivate ShowCommand
+
 TimetableParser --> TimetableParser: :ShowCommand
 deactivate TimetableParser
 
