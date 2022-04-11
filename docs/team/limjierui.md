@@ -67,4 +67,4 @@ PR reviews (with non-trivial comments):
 [#34](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/34), [#69](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/69),
 [#77](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/77), [#90](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/90),
 [#213](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/213) <br>
-High number of bugs found (16) during PE-Dry testing for `AY2122S2-CS2113-F10-1` can be viewed [here](https://github.com/limjierui/ped/issues).
+High number of [bugs found](https://github.com/limjierui/ped/issues) (16) during PE-Dry testing for `AY2122S2-CS2113-F10-1`.
