@@ -37,10 +37,10 @@ Team's Repo:
 2. [Issue #87](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/87)
 3. [Issue #116](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/116)
 4. [Issue #128](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/128)
-5. [Issue #165](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/164)
-6. [Issue #165](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/164)
-7. [Issue #203](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/203)
-8. [PR #85](https://github.com/AY2122S2-CS2113-F10-2/tp/pull/85)
+5. [Issue #164](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/164)
+6. [Issue #203](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/203)
+7. [PR #85](https://github.com/AY2122S2-CS2113-F10-2/tp/pull/85)
+8. [PR #165](https://github.com/AY2122S2-CS2113-F10-2/tp/pull/165)
  
 Team CS2113-T11-1 Repo:
 1. [Issue #319](https://github.com/AY2122S2-CS2113-T11-1/tp/issues/319)
