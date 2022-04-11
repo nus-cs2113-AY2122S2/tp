@@ -8,6 +8,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.housekeepercommands.AddHousekeeperPerformanceCommand;
 import seedu.duke.exceptions.EmptyHousekeeperPerformanceNameException;
 import seedu.duke.exceptions.InvalidHousekeeperPerformanceRatingException;
+import seedu.duke.exceptions.EmptyHousekeeperPerformanceRatingException;
 import seedu.duke.exceptions.InvalidHousekeeperPerformanceNameException;
 import seedu.duke.exceptions.InvalidCommandException;
 import seedu.duke.exceptions.DuplicateCommandException;
@@ -38,7 +39,7 @@ public class AddHousekeeperPerformanceCommandTest {
 
     @Test
     public void commandParser_addCommandWithEmptyHousekeeperPerformanceRating_exceptionThrown() {
-        assertThrows(InvalidHousekeeperPerformanceRatingException.class, ()
+        assertThrows(EmptyHousekeeperPerformanceRatingException.class, ()
             -> new CommandParser().parse("add performance Bob / "));
     }
 

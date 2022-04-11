@@ -110,6 +110,9 @@ public class AddHousekeeperPerformanceCommand extends Command {
         int ratingValue;
         try {
             ratingString = splitInput[1].trim();
+            if (ratingString.isEmpty()) {
+                throw new EmptyHousekeeperPerformanceRatingException();
+            }
             ratingValue = Integer.parseInt(ratingString);
         } catch (NumberFormatException e) {
             throw new InvalidHousekeeperPerformanceRatingException();
