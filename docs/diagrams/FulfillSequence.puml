@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+Actor User as user
+Participant ":UI" as ui
+Participant ":Fulfill Parser" as fulfillParser
+
+user -> ui ++ : "fulfill oid/1"
+
+ui -> fulfillParser : parse()
+activate fulfillParser
+create MatchKeyword
+fulfillParser -> MatchKeyword ++
+ref over MatchKeyword : "Keyword Matching"
+fulfillParser -> MatchKeyword : getGroupValues()
+MatchKeyword --> fulfillParser : matchesHashMap
+deactivate MatchKeyword
+fulfillParser -> Warehouse ++ : fulfillOrder()
+Warehouse -> Warehouse ++ : findOrder()
+Warehouse --> Warehouse -- : Order
+Warehouse -> Order ++ : getFulfilled()
+Order --> Warehouse : isFulfilled
+alt isFulfilled == false
+    Warehouse -> Order : getOrderlines()
+    Order --> Warehouse : orderlines
+        loop orderline in orderlines
+            Warehouse -> Warehouse ++ : fulfillOrderline()
+            Warehouse -> Orderline ++ : getQuantity()
+            Orderline --> Warehouse : orderline.quantity
+            Warehouse -> Good ++ : getQuantity()
+            Good --> Warehouse : good.quantity
+            alt orderline.quantity < good.quantity
+                Warehouse -> Orderline : setQuantityFulfilled()
+                Orderline -> Orderline : checkOff()
+                Warehouse -> Good : removeQuantity()
+            end
+        end
+    Warehouse -> Warehouse : checkOrderComplete()
+    alt checkOrderComplete() == true
+        Warehouse --> user -- : "Order completed"
+    else checkOrderComplete == false
+        Warehouse --> user -- : "Order not completed"
+    end
+end
+ui --> user : "Another command?"
+deactivate Warehouse
+@enduml

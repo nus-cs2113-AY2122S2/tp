@@ -13,6 +13,7 @@ import util.exceptions.LargeQuantityException;
 import util.exceptions.UnitTestException;
 import util.exceptions.WrongCommandException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -133,7 +134,11 @@ public class Warehouse {
             throw new WrongCommandException("add", true);
         }
 
-        return order.addOrderline(getUnitGoodBySku(sku), qty);
+        Orderline ol =  order.addOrderline(getUnitGoodBySku(sku), qty);
+        if (ol == null){
+            return false;
+        }
+        return true;
     }
 
     public boolean hasUnitGood(String sku) {
@@ -599,7 +604,6 @@ public class Warehouse {
     }
 
 
-
     /**
      * Getting the capacity left in the warehouse.
      *
@@ -645,6 +649,8 @@ public class Warehouse {
                     + " than input capacity");
         } catch (NumberFormatException numberFormatException) {
             System.out.println("Please set the Warehouse capacity again.");
+        } catch (NullPointerException e){
+            System.out.println("Warehouse capacity can't be null");
         }
         return false;
     }
@@ -663,12 +669,16 @@ public class Warehouse {
 
 
     // Related to saving state outside program
-    public Boolean saveWarehouseState() {
+    public Boolean saveWarehouseState() throws IOException {
         String fp = LocalStorage.WAREHOUSE_PATH;
         // Create JSON Obj
         JSONObject state = this.serialize();
         // Save to file
-        LocalStorage.writeSaveFile(LocalStorage.json2str(state), fp);
+        Boolean status = LocalStorage.writeSaveFile(LocalStorage.json2str(state), fp);
+        if (!status) {
+            Display.warehouseStateNotSaved();
+            return false;
+        }
         Display.warehouseStateSaved(fp);
         return true;
     }
@@ -688,9 +698,12 @@ public class Warehouse {
 
     private Boolean restoreOrders(JSONArray ja) {
         Boolean status = true;
-        for (Object o: ja) {
+        for (Object o : ja) {
             JSONObject jo = (JSONObject) o;
             Order restoredOrder = Order.restoreOrder(jo);
+            if (restoredOrder == null){
+                return false;
+            }
             status = this.addOrder(restoredOrder);
             if (!status) {
                 return false;
@@ -714,30 +727,39 @@ public class Warehouse {
 
     private Boolean restoreGoods(JSONObject jo) {
         Boolean status = true;
-        for (Object ko: jo.keySet()) {
-            String sku = ko.toString();
-            //System.out.println("sku: "+ sku);
-            JSONObject jg = (JSONObject) jo.get(ko);
-            UnitGood ug = UnitGood.restoreUnitGood((JSONObject) jg);
-            //Good curGood = Good.restoreGood((JSONObject) jg);
-            status = this.addUnitGoodToInventory(ug);
-            if (!status) {
-                return false;
-            }
-            //String qty = String.valueOf(curGood.getQuantity());
-            String qty = ((JSONObject)jg).get(GoodKeys.quantity).toString();
-            try {
-                status = this.addQuantityOfGoodToInventory(ug.getSku(),qty);
+        try {
+            for (Object ko : jo.keySet()) {
+                String sku = ko.toString();
+                JSONObject jg = (JSONObject) jo.get(ko);
+                UnitGood ug = UnitGood.restoreUnitGood(jg);
+                if (ug==null){
+                    return false;
+                }
+                status = this.addUnitGoodToInventory(ug);
+
                 if (!status) {
                     return false;
                 }
-            } catch (WrongCommandException e) {
-                e.printStackTrace();
-                return false;
-            } catch (ItemDoesNotExistException e) {
-                e.printStackTrace();
-                return false;
+                Object qtyO = (jg).get(GoodKeys.quantity);
+                if (qtyO == null){
+                    return false;
+                }
+                String qty = qtyO.toString();
+                try {
+                    status = this.addQuantityOfGoodToInventory(ug.getSku(), qty);
+                    if (!status) {
+                        return false;
+                    }
+                } catch (WrongCommandException e) {
+                    e.printStackTrace();
+                    return false;
+                } catch (ItemDoesNotExistException e) {
+                    e.printStackTrace();
+                    return false;
+                }
             }
+        } catch (NullPointerException e) {
+            return false;
         }
         return true;
     }
@@ -784,25 +806,36 @@ public class Warehouse {
         if (saveStr == null) {
             return false;
         }
-        //System.out.println(saveStr);
+      
         // PARSE
         try {
             JSONObject jsonWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
-            System.out.println("Parse success");
             boolean status = false;
-            //addUnitGoodToInventory
-            //Float totalCapacity = Float.parseFloat();
-            status = this.setTotalCapacity(jsonWarehouse.get(WarehouseKeys.totalCapacity).toString());
+            Object capO = jsonWarehouse.get(WarehouseKeys.totalCapacity);
+            if (capO == null){
+                return false;
+            }
+            status = this.setTotalCapacity(capO.toString());
             if (!status) {
                 return false;
             }
-            JSONArray sol = (JSONArray) jsonWarehouse.get(WarehouseKeys.orderLists);
+            Object olO = jsonWarehouse.get(WarehouseKeys.orderLists);
+            if (olO == null){
+                return false;
+            }
+            JSONArray sol = (JSONArray) olO ;
             status = this.restoreOrders(sol);
             if (!status) {
                 return false;
             }
-
-            JSONObject sgl = (JSONObject) jsonWarehouse.get(WarehouseKeys.goodList);
+            Object glO = jsonWarehouse.get(WarehouseKeys.goodList);
+            if (glO == null){
+                return false;
+            }
+            JSONObject sgl = (JSONObject) glO;
+            if (sgl == null){
+                return false;
+            }
             status = this.restoreGoods(sgl);
             if (!status) {
                 return false;
