@@ -282,6 +282,7 @@ Device Requirement:
 * Must have Java 11 or higher installed (Recommended to use Java 11)
 * Supports 32-bit and 64-bit systems
 * Supports use of the Command Line Interface
+* Supports use on ***mainstream OS*** requirements as long as the above requirements are met
 
 Application Performance:
 * Does not require internet connection; Functions offline
@@ -302,6 +303,7 @@ Application Reliability:
 * *[Good](#good-class)* - Good to be stored in the warehouse
 * *[Order](#order-class)* - Information about what goods are delivered to who and where
 * *[Orderline](#orderline-class)* - The goods that needs to be delivered in that order
+* Mainstream OS - Windows, Linux, Unix, OS-X
 
 ## Instructions for manual testing
 
@@ -323,6 +325,6 @@ Here is a quick guide on example commands to try.
 | List Orders                          | `list o/`                                                    |
 | View Order                           | `view o/ oid/1`                                              |
 | Fulfill Order                        | `fulfill oid/1`                                              |
-| Add Orderline                        | `add og/ oid/1 sku/SKU01 q/10`                               | 
-| Remove Orderline Quantity            | `remove og/ oid/1 sku/SKU01 q/5`                             |
+| Add Orderline                        | `add og/ oid/1 sku/SKU01 qty/10`                             | 
+| Remove Orderline Quantity            | `remove og/ oid/1 sku/SKU01 qty/5`                           |
 | List Orderlines                      | `list og/ oid/1`                                             |

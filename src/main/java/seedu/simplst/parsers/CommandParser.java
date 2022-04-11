@@ -18,11 +18,10 @@ public abstract class CommandParser {
         this.warehouse = warehouse;
     }
 
-
-    protected abstract void init_extract_params() throws WrongCommandException, MissingFlagException,
+    protected abstract void initExtractParams() throws WrongCommandException, MissingFlagException,
             EmptyFieldException;
 
-    protected abstract void extract_params() throws
+    protected abstract void extractParams() throws
             WrongCommandException, NullException, InvalidFileException, InvalidObjectType, MissingFlagException,
             EmptyFieldException;
     //    protected abstract void validate_params();   // They need implement their own validate commands
@@ -31,11 +30,15 @@ public abstract class CommandParser {
             WrongCommandException, NullException, InvalidFileException, InvalidObjectType, MissingFlagException,
             EmptyFieldException {
         this.userInput = userInput;
-        this.init_extract_params();
+        this.initExtractParams();
         try {
-            this.extract_params();
+            this.extractParams();
         } catch (InvalidObjectType e1) {
             return;
         }
     }
+
+
+
+
 }

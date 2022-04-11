@@ -21,8 +21,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Warehouse {
     private int totalCapacity = 0; //in terms of arbritrary_units
+
     private ArrayList<Order> orderLists = new ArrayList<>();
     private HashMap<String, UnitGood> unitGoodHashMap = new HashMap<>();
+
     private LinkedHashMap<String, Good> goodList = new LinkedHashMap<>();
 
     public Warehouse(Integer capacity) {
@@ -647,6 +649,18 @@ public class Warehouse {
         return false;
     }
 
+    public LinkedHashMap<String, Good> getGoodList() {
+        return goodList;
+    }
+
+    public HashMap<String, UnitGood> getUnitGoodHashMap() {
+        return unitGoodHashMap;
+    }
+
+    public ArrayList<Order> getOrderLists() {
+        return orderLists;
+    }
+
 
     // Related to saving state outside program
     public Boolean saveWarehouseState() {
@@ -702,7 +716,7 @@ public class Warehouse {
         Boolean status = true;
         for (Object ko: jo.keySet()) {
             String sku = ko.toString();
-//            System.out.println("sku: "+ sku);
+//          System.out.println("sku: "+ sku);
             JSONObject jg = (JSONObject) jo.get(ko);
             UnitGood ug = UnitGood.restoreUnitGood((JSONObject) jg);
             //Good curGood = Good.restoreGood((JSONObject) jg);
@@ -730,9 +744,9 @@ public class Warehouse {
 
     private JSONObject serializeUnitGoods() {
         JSONObject jo = new JSONObject();
-//        System.out.println("Unit Good Hash Map");
+//      System.out.println("Unit Good Hash Map");
         unitGoodHashMap.forEach((sku, ug) -> {
-//            System.out.println("SKU: " + sku);
+//          System.out.println("SKU: " + sku);
             jo.put(sku, ug.serialize());
         });
         return jo;
@@ -770,7 +784,7 @@ public class Warehouse {
         if (saveStr == null) {
             return false;
         }
-//        System.out.println(saveStr);
+//      System.out.println(saveStr);
         // PARSE
         try {
             JSONObject jsonWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
