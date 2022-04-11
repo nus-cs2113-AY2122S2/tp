@@ -1,7 +1,10 @@
 package seedu.duke.assets;
 
+import java.util.ArrayList;
+
 public class Doctor extends Person {
     private String specialization;
+    public ArrayList<String> appointmentDate = new ArrayList<>();
 
     public Doctor(String nric, String fullName, int age, char gender, String address,
                   String dob, String specialization) {
@@ -12,6 +15,7 @@ public class Doctor extends Person {
     public String getSpecialization() {
         return specialization;
     }
+
 
     // @override toString()
 
@@ -30,6 +34,11 @@ public class Doctor extends Person {
                 + "," + dob + "," + specialization;
     }
 
+
+    public void addAppointmentDate(String date) {
+        appointmentDate.add(date);
+    }
+
     @Override
     public String toString() {
         return "Nric='" + getNric() + '\''
@@ -41,4 +50,19 @@ public class Doctor extends Person {
                 + ", Specialization='" + getSpecialization() + '\'';
     }
 
+    public ArrayList<String> appointmentDateDoctor() {
+        return appointmentDate;
+    }
+
+    public String saveDateString() {
+        String returnString = "";
+        for (int i = 0; i < appointmentDate.size(); i++) {
+            if (i != 0) {
+                returnString += "," + appointmentDate.get(i);
+            } else {
+                returnString += nric + "," + appointmentDate.get(i);
+            }
+        }
+        return returnString;
+    }
 }

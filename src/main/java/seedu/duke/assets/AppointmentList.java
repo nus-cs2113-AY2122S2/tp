@@ -5,20 +5,26 @@ import seedu.duke.exception.NotFoundException;
 import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.helper.CommandLineTable;
 import seedu.duke.helper.IdGenerator;
+import seedu.duke.helper.Storage;
 import seedu.duke.helper.UI;
 import seedu.duke.helper.finder.AppointmentFinder;
 import seedu.duke.helper.finder.DoctorFinder;
 import seedu.duke.helper.finder.PatientFinder;
 
+
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AppointmentList extends List {
-    protected ArrayList<Appointment> appointments = new ArrayList<>();
+    protected static ArrayList<Appointment> appointments = new ArrayList<>();
     private ArrayList<Appointment> returnedFinderArray = new ArrayList<>();
+
     private PatientList referencePatientList;
     private DoctorList referenceDoctorList;
     private final String title = "Table of appointments";
+
+
 
     public AppointmentList(PatientList patientList, DoctorList doctorList) {
         this.referencePatientList = patientList;
@@ -34,9 +40,14 @@ public class AppointmentList extends List {
         return null;
     }
 
+
     public ArrayList<Appointment> getList() {
+
+
         return appointments;
     }
+
+
 
     @Override
     public void add(String[] addAppointmentParameters) throws DuplicateEntryException {
@@ -44,21 +55,25 @@ public class AppointmentList extends List {
         String patientNric = addAppointmentParameters[0];
         PatientFinder patientFinder = new PatientFinder();
         ArrayList<Patient> foundPatient = patientFinder.findPatientByNric(referencePatientList.getList(), patientNric);
+
         if (foundPatient == null) {
             throw new DuplicateEntryException("Patient NRIC corrupted");
         }
-        String patientName = foundPatient.get(0).getPatientName();
+
+        if (foundPatient == null) {
+            throw new DuplicateEntryException("Patient Nric corrupted");
+        }
+
 
         String doctorNric = addAppointmentParameters[1];
         DoctorFinder doctorFinder = new DoctorFinder();
         ArrayList<Doctor> foundDoctor = doctorFinder.findDoctorByNric(referenceDoctorList.getList(), doctorNric);
+
         if (foundDoctor == null) {
             throw new DuplicateEntryException("Doctor NRIC corrupted");
         }
-        String doctorName = foundDoctor.get(0).getFullName();
 
         String appointmentDate = addAppointmentParameters[2];
-        String appointmentDetails = addAppointmentParameters[3];
         String id = IdGenerator.createAppointmentId(patientNric, doctorNric, appointmentDate);
 
         for (Appointment appointment : appointments) {
@@ -68,11 +83,28 @@ public class AppointmentList extends List {
             }
         }
 
+
+        if (referencePatientList.hasPatientDate(patientNric, appointmentDate)) {
+            throw new DuplicateEntryException("Patient already has an appointment on this date,"
+                    + " choose another appointment date ");
+        }
+        if (referenceDoctorList.hasDoctorDate(doctorNric, appointmentDate)) {
+            throw new DuplicateEntryException("Doctor already has an appointment on this date,"
+                    + " choose another appointment date ");
+        }
+
+        String patientName = foundPatient.get(0).getPatientName();
+        String doctorName = foundDoctor.get(0).getFullName();
+        String appointmentDetails = addAppointmentParameters[3];
         Appointment newAppointment = new Appointment(id, patientNric, patientName, doctorNric, doctorName,
                 appointmentDate, appointmentDetails);
         appointments.add(newAppointment);
         assert appointments.size() == numberOfAppointmentsBefore + 1;
+
     }
+
+
+
 
     @Override
     public void remove(String appointmentId) throws NotFoundException {
@@ -106,13 +138,18 @@ public class AppointmentList extends List {
 
     @Override
     public void view() throws UserInputErrorException {
+
+
         CommandLineTable appointmentTable = new CommandLineTable(title);
+
         appointmentTable.setShowVerticalLines(true);
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
         if (appointments.size() == 0) {
             throw new UserInputErrorException("Appointment list is empty, please add appointment");
         }
+
+
         for (Appointment appointment : appointments) {
             appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
                     appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
@@ -212,6 +249,7 @@ public class AppointmentList extends List {
         }
     }
 
+
     public boolean hasAppointmentToday(String type, String nric) throws NotFoundException, UserInputErrorException {
         ArrayList<Appointment> foundAppointments;
         switch (type) {
@@ -258,7 +296,6 @@ public class AppointmentList extends List {
                 for (int i = 1; i < parameters.length; i += 2) {
                     a.addMedicine(parameters[i], parameters[i + 1]);
                 }
-                break;
             }
         }
     }

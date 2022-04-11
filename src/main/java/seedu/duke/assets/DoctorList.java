@@ -16,6 +16,7 @@ public class DoctorList extends List {
     private ArrayList<Doctor> returnedFinderArray = new ArrayList<>();
     private final String title = "Table of doctors";
 
+
     public Doctor getDoctor(String nric) {
         for (Doctor doctor : doctors) {
             if (doctor.getNric().equals(nric)) {
@@ -24,6 +25,7 @@ public class DoctorList extends List {
         }
         return null;
     }
+
 
     public Doctor search(String nric) {
         for (Doctor doctor : doctors) {
@@ -48,22 +50,6 @@ public class DoctorList extends List {
         doctors.add(newDoctor);
     }
 
-    //view particular doctor
-    public void view(String nric) throws UserInputErrorException {
-        Doctor doctor = getDoctor(nric);
-        if (doctor == null) {
-            throw new UserInputErrorException("Doctor doesn't exist please try again!");
-        }
-        CommandLineTable doctorTable = new CommandLineTable(title);
-        doctorTable.setShowVerticalLines(true);
-        doctorTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
-                "Specialization");
-        doctorTable.addRow(doctor.getNric(), doctor.getFullName(), String.valueOf(doctor.getAge()),
-                doctor.getAddress(), String.valueOf(doctor.getGender()), doctor.getDob(),
-                doctor.getSpecialization());
-        doctorTable.print();
-    }
-
     //view all doctor
     public void view() throws UserInputErrorException {
         CommandLineTable doctorTable = new CommandLineTable(title);
@@ -80,6 +66,52 @@ public class DoctorList extends List {
         }
         doctorTable.print();
     }
+
+    //view particular doctor
+    public void view(String nric) throws UserInputErrorException {
+        Doctor doctor = getDoctor(nric);
+        if (doctor == null) {
+            throw new UserInputErrorException("Doctor doesn't exist please try again!");
+        }
+        CommandLineTable doctorTable = new CommandLineTable(title);
+        doctorTable.setShowVerticalLines(true);
+        doctorTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
+                "Specialization");
+        doctorTable.addRow(doctor.getNric(), doctor.getFullName(), String.valueOf(doctor.getAge()),
+                doctor.getAddress(), String.valueOf(doctor.getGender()), doctor.getDob(),
+                doctor.getSpecialization());
+        doctorTable.print();
+    }
+
+    public void addAppointmentDate(String nric, String date) {
+        for (Doctor doctor : doctors) {
+            if (doctor.getNric().equals(nric)) {
+                doctor.addAppointmentDate(date);
+                break;
+            }
+        }
+    }
+
+
+    public boolean hasDoctorDate(String nric, String date) throws DuplicateEntryException {
+        ArrayList<String> doctorDateList = new ArrayList<>();
+        for (Doctor doctor : doctors) {
+            if (doctor.getNric().equals(nric)) {
+                doctorDateList = doctor.appointmentDateDoctor();
+                for (String dateDoctor : doctorDateList) {
+                    if (dateDoctor.equals(date)) {
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            }
+        }
+        throw new DuplicateEntryException("Doctor not found");
+    }
+
+
+
 
     public void edit(String[] parameterArray) throws NotFoundException {
         if (search(parameterArray[0]) != null) {
@@ -211,6 +243,17 @@ public class DoctorList extends List {
                         returnedFinderArray.get(i).getSpecialization());
             }
             findPatientTable.print();
+        }
+    }
+
+    public void loadDate(String[] parameters) {
+        String doctorNric = parameters[0];
+        for (Doctor a : doctors) {
+            if (a.getNric().equals(doctorNric)) {
+                for (int i = 1; i < parameters.length; i++) {
+                    a.addAppointmentDate(parameters[i]);
+                }
+            }
         }
     }
 
