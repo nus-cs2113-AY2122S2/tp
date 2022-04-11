@@ -229,7 +229,7 @@ the `AddCommand.addExpenditure()` method, invoked when using the `/e` flag. Addi
 `CATEGORY`, `DESCRIPTION`, `AMOUNT` and `TIME` are also required.
 
 
-![add_expenditure_command_sequence_diagram](images/AddExpenditureCommandSequenceDiagram.png)  
+![add_expenditure_command_sequence_diagram](images/AddExpenditureSequenceDiagram.png)  
 Fig 8 - Add Expenditure Command Sequence Diagram  
 
 The sequence diagram above shows the interactions of different classes when adding an expenditure
