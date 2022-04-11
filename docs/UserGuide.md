@@ -42,7 +42,7 @@ for you and your family. It allows you to:
 * [Category Summary](#category-summary)
 
 > :information_source: Notes:
-> * This User Guide is only meant to be read at the [github page](https://ay2122s2-cs2113t-t10-2.github.io/tp/UserGuide.html).
+> * This User Guide is not meant to be read on the GitHub markdown file.
 
 ## Quick Start
 
