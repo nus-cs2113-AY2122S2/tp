@@ -2,7 +2,7 @@ package seedu.mindmymoney.userfinancial;
 
 
 import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.helper.PropertyList;
+import seedu.mindmymoney.data.PropertyList;
 import seedu.mindmymoney.helper.ValidatorFunctions;
 
 import static seedu.mindmymoney.constants.CalculationConversion.FLOAT_TO_PERCENTAGE;
