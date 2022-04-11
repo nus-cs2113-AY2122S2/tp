@@ -22,6 +22,7 @@ public class AddCommand extends Command {
 
     /**
      * Creates an AddCommand to add the specified {@code Item}.
+     *
      * @param itemToAdd The specified item.
      */
     public AddCommand(Item itemToAdd) {
@@ -32,8 +33,9 @@ public class AddCommand extends Command {
     /**
      * This method adds an item to the itemList only if there are no similar items existing in the inventory.
      * If there is a similar item, output will tell user to edit the existing item instead.
+     *
      * @param itemList ItemList containing all items in the current inventory
-     * @param ui User Interface for reading inputs and/or printing outputs
+     * @param ui       User Interface for reading inputs and/or printing outputs
      */
     @Override
     public void execute(ItemList itemList, Ui ui) {
@@ -43,7 +45,7 @@ public class AddCommand extends Command {
         boolean isNotInList = checkItemInList(itemToAdd.getName(), items);
 
         // Add the item if there is no such item in the list, else do not add
-        if(isNotInList){
+        if (isNotInList) {
             itemList.addItem(itemToAdd);
             ui.showMessages(itemToAdd + " has been added!");
         } else {
@@ -55,19 +57,20 @@ public class AddCommand extends Command {
 
     /**
      * Checks if there is another item in the list with the same name as the item to be added.
-     * @param name name of the item to be added.
+     *
+     * @param name  name of the item to be added.
      * @param items list of items in the itemList.
      * @return boolean value of whether there is a similar item, or not.
      */
     private boolean checkItemInList(String name, List<Item> items) {
         Item matchedItem =
                 items.stream()
-                     // Filter to items where there is a match (case insensitive)
-                     .filter(item -> item.getName().equalsIgnoreCase(name))
-                     .findAny()
-                     .orElse(null);
+                        // Filter to items where there is a match (case insensitive)
+                        .filter(item -> item.getName().equalsIgnoreCase(name))
+                        .findAny()
+                        .orElse(null);
 
-        if(matchedItem != null) {
+        if (matchedItem != null) {
             return false;
         }
 
@@ -76,6 +79,7 @@ public class AddCommand extends Command {
 
     /**
      * This method is used for testing in matching AddCommand's created.
+     *
      * @param other The object to be compared, typically a command object.
      * @return boolean value of whether the commands are both the same AddCommand or not.
      */

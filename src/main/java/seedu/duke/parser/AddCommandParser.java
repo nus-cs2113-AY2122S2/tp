@@ -20,8 +20,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * Checks if the quantity is non-zero and non-negative before creating the command.
+     *
      * @throws InvMgrException if the user input does not conform the expected format, or if the quantity indicated is
-     * zero/negative.
+     *                         zero/negative.
      */
     public AddCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap =
@@ -35,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         int quantity = ParserUtils.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
         String description = argMultimap.getValue(PREFIX_DESCRIPTION).get();
 
-        if(quantity == 0) {
+        if (quantity == 0) {
             throw new InvMgrException(Messages.ZERO_QUANTITY_MESSAGE);
         }
 
