@@ -21,8 +21,10 @@ w --> S : Boolean if successfully set
 deactivate w
 
 alt status == false
-
+destroy w
+create w
 S -> w
+activate w
 w --> S
 end
 

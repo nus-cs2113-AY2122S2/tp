@@ -1,11 +1,11 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+hide footbox
 
 participant Simplst as S
 participant Warehouse as w
 participant LocalStorage as ls
 
-create w
 S -> w
 activate w
 w -> w ++ : saveWarehouseState()
