@@ -15,8 +15,9 @@ public class SearchCommand extends Command {
     public static final String COMMAND_FORMAT = COMMAND_WORD + "/n name [/d description] | [/n name] /d description]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
             + "[Command Format] " + COMMAND_FORMAT + "\n";
-    public static final String SEARCH_RESULT_PREAMBLE = "Here are the items matching your search terms: ";
-    public static final String SEARCH_RESULT_ENTRY_FORMAT = "%d. %s";
+
+    private static final String SEARCH_RESULT_PREAMBLE = "Here are the items matching your search terms: ";
+    private static final String SEARCH_RESULT_ENTRY_FORMAT = "%d. %s";
 
     private final Optional<String> name;
     private final Optional<String> description;
@@ -24,8 +25,9 @@ public class SearchCommand extends Command {
     /**
      * Constructs a SearchCommand.
      * One of {@code name} or {@code description} must not be null.
-     * @param name a name to search for
-     * @param description a description to search for
+     *
+     * @param name a name to search for.
+     * @param description a description to search for.
      * @throws NullPointerException if the constructor is called when both name and description are null.
      */
     public SearchCommand(Optional<String> name, Optional<String> description) {
@@ -58,6 +60,12 @@ public class SearchCommand extends Command {
         }
     }
 
+    /**
+     * Check if another object is equal to this SearchCommand object.
+     *
+     * @param other the Object to compare against.
+     * @return true if equal, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         SearchCommand toCompare;

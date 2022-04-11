@@ -14,7 +14,8 @@ public class LostCommandParser implements Parser<LostCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the LostCommand
      * and returns a LostCommand object for execution.
-     * @throws InvMgrException if the user input does not conform the expected format
+     *
+     * @throws InvMgrException if the user input does not conform the expected format.
      */
     public LostCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ITEM_INDEX, PREFIX_QUANTITY);

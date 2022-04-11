@@ -25,7 +25,8 @@ public class BorrowCommandParser implements Parser<BorrowCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the BorrowCommand
      * and returns a BorrowCommand object for execution.
-     * @throws InvMgrException if the user input does not conform the expected format
+     *
+     * @throws InvMgrException if the user input does not conform the expected format.
      */
     public BorrowCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap =

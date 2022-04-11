@@ -18,8 +18,8 @@ public class CancelFutureBorrowingsParser implements Parser<CancelFutureBorrowin
      * Parses the given {@code String} of arguments in the context of the 
      * CancelFutureBorrowingsCommand and returns an CancelFutureBorrowingsCommand 
      * object for execution.
-     * 
-     * @throws InvMgrException if the user input does not conform the expected format
+     *
+     * @throws InvMgrException if the user input does not conform the expected format.
      */
     public CancelFutureBorrowingsCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap = 

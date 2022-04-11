@@ -66,12 +66,12 @@ public class StorageTest {
     }
 
     private void assertStorageEquals(Storage expectedStorage, Storage testStorage) {
-        Path testPath = testStorage.getDataPath();
         Path expectedPath = expectedStorage.getDataPath();
+        Path testPath = testStorage.getDataPath();
 
         try {
-            List<String> testString = Files.readAllLines(testPath);
             List<String> expectedString = Files.readAllLines(expectedPath);
+            List<String> testString = Files.readAllLines(testPath);
             assertEquals(expectedString, testString);
         } catch (IOException e) {
             fail(e);
