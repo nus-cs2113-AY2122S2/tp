@@ -4,6 +4,7 @@ import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
+import seedu.mindmymoney.helper.ValidatorFunctions;
 
 import java.util.Scanner;
 
@@ -78,6 +79,9 @@ public class User {
         savedUser.setExpenditureListArray(ExpenditureList.deserializeFrom(scanner));
         savedUser.setCreditCardListArray(CreditCardList.deserializeFrom(scanner));
         savedUser.setIncomeListArray(IncomeList.deserializeFrom(scanner));
+
+        ValidatorFunctions.validateCreditCardNames(savedUser.creditCardListArray);
+        ValidatorFunctions.validatePaymentMethods(savedUser.expenditureListArray, savedUser.creditCardListArray);
 
         return savedUser;
     }

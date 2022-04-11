@@ -1,6 +1,6 @@
 # Dan Baterisna - Project Portfolio Page
 
-##Overview
+## Overview
 `MindMyMoney` (M<sup>3</sup>) is a desktop app for managing your personal finances, optimized for use via a Command Line
 Interface (CLI). You can use it to track your expenditures across multiple payment methods, calculate monthly
 expenditure, and set financial goals.
@@ -27,11 +27,13 @@ Enhancements implemented:
 5. Implemented `SerializerFunctions`.
     - Abstracts out common functionality needed by de/serializers, improving DRY and SLAP.
     - Implements `addListToStringBuilder` and `convertInputToList` methods.
-6. Added JUnit tests.
+6. Implemented `ValidatorFunctions`.
+    - Abstracts out common functionality used to check that the content of the save file is valid.
+7. Added JUnit tests.
     - Added JUnit tests for `UpdateCommand`, `Storage`, `Expenditure`, and `PropertyList`.
     - Updated `UpdateCommand` and `Expenditure` tests during transition to v2.0.
     - Ensures that the code is bug free, and helps in regression testing future iterations.
-7. Miscellaneous
+8. Miscellaneous
     - Wrote JavaDoc comments for classes and methods created.
     - Fixed bugs raised during PE-D.
     - Updated command formats shown by `help` command during transition to v2.1.

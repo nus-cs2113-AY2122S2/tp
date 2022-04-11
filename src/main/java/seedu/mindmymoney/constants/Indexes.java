@@ -17,4 +17,6 @@ public class Indexes {
     public static final int MIN_EXPENDITURE_AMOUNT = 0;
     public static final int MIN_CASHBACK_AMOUNT = 0;
     public static final int MAX_CASHBACK_AMOUNT = 100;
+    public static final int MAX_EXPENDITURE_AMOUNT = 1000000;
+    public static final int MAX_CREDIT_CARD_LIMIT = 40000;
 }

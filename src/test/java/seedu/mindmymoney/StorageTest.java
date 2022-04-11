@@ -42,10 +42,10 @@ public class StorageTest {
         savedUser.setIncomeListArray(new IncomeList());
 
         ExpenditureList expenditureList = new ExpenditureList();
-        expenditureList.add(new Expenditure("cash", "Food",
-                "test", 1, "Mar 2022"));
-        expenditureList.add(new Expenditure("cash", "Food",
-                "Make tests", 999, "Mar 2022"));
+        expenditureList.add(new Expenditure("Cash", "Food",
+                "test", 1, "05/03/2022"));
+        expenditureList.add(new Expenditure("Cash", "Food",
+                "Make tests", 999, "05/03/2022"));
 
         savedUser.setExpenditureListArray(expenditureList);
 
