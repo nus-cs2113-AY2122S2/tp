@@ -1,6 +1,9 @@
 package seedu.duke.helper.command;
 
+import seedu.duke.assets.AppointmentList;
 import seedu.duke.assets.List;
+import seedu.duke.assets.PatientList;
+import seedu.duke.assets.DoctorList;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.UserInputErrorException;
 import seedu.duke.status.Status;
@@ -27,7 +30,13 @@ public class AddAppointmentCommand extends Command {
      */
     @Override
     public Status execute(List appointmentList) throws DuplicateEntryException, UserInputErrorException {
-        appointmentList.add(parameterArray);
+        if (appointmentList instanceof AppointmentList) {
+            appointmentList.add(parameterArray);
+        } else if (appointmentList instanceof PatientList) {
+            ((PatientList) appointmentList).addAppointmentDate(parameterArray[0], parameterArray[2]);
+        } else if (appointmentList instanceof DoctorList) {
+            ((DoctorList) appointmentList).addAppointmentDate(parameterArray[1], parameterArray[2]);
+        }
         return Status.ADD_APPOINTMENT_SUCCESS;
     }
 }

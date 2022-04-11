@@ -76,6 +76,8 @@ If you are not ready to handle the intricacies of the Command Prompt, you can us
 to launch HALPMI as well. However do note that you will have to change the PATH name included on the bat file to the PATH name
 at which Halpmi.jar is located.
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.14.49 AM.png)
+
 -----------------------------------------------
 
 ## Features
@@ -102,6 +104,8 @@ Format: `add doctor /info [nric], [name], [age], [gender], [address], [DOB], [Sp
 
 Example: `add doctor /info S7654321A, John Doe, 22, M, 10 Baker Street, 1999-12-31, Urinology`
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.15.38 AM.png)
+
 #### ADD PATIENT
 
 To add a new patient into your application you can use the `add patient` command when prompted by HALPMI for your input.
@@ -120,6 +124,8 @@ Format: `add patient /info [nric], [name], [age], [gender], [address], [DOB], [D
 
 Example: `add patient /info S1234567A, John Doe, 22, M, 10 Baker Street, 1999-12-31, 2021-02-15`
 
+![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_hs7ymv/Screenshot 2022-04-11 at 4.16.18 AM.png)
+
 #### ADD MEDICINE
 
 To add a new medicine into your application you can use the `add medicine` command when prompted by HALPMI for your input.
@@ -137,6 +143,8 @@ Format: `add medicine /info [batch id], [name], [dosage], [expiry date], [side e
 
 Example: `add medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`
 
+![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_FaOeNF/Screenshot 2022-04-11 at 4.17.09 AM.png)
+
 #### ADD APPOINTMENT
 
 To add a new appointment into your application you can use the `add appointment` command when prompted by HALPMI for your input.
@@ -152,6 +160,8 @@ Format: `add appointment /info [patient nric], [doctor nric], [appointment date]
 
 Example: `add appointment /info S1234567A, S7654321A, 2022-10-15, Regular knee checkup`
 
+![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_iZfaSb/Screenshot 2022-04-11 at 4.17.38 AM.png)
+
 ### Viewing: `view`
 Allows user to view existing records of doctors, patients, medicine or appointment.
 
@@ -164,6 +174,8 @@ Format: `view doctor`
 
 Examples: `view doctor`
 
+![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_2erWOk/Screenshot 2022-04-11 at 4.18.30 AM.png)
+
 #### VIEW PATIENT
 
 To view the records of all patients in the application, you can simply call `view patient` without any additional
@@ -172,6 +184,8 @@ parameters.
 Format: `view patient`
 
 Example: `view patient`
+
+![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_VHDNrB/Screenshot 2022-04-11 at 4.19.04 AM.png)
 
 #### VIEW MEDICINE
 
@@ -182,6 +196,8 @@ Format: `view medicine`
 
 Example: `view medicine`
 
+![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_nSOnp6/Screenshot 2022-04-11 at 4.20.06 AM.png)
+
 #### VIEW APPOINTMENT
 
 To view the records of all appointments in the application, you can simply call `view appointment` without any
@@ -190,6 +206,10 @@ additional parameters.
 Format: `view appointment`
 
 Example: `view appointment`
+
+![](../../Desktop/Screenshot 2022-04-11 at 4.20.39 AM.png)
+
+
 
 ### Deleting: `delete`
 Allows user to delete existing records of doctors, patients, medicine or appointment. Do note that all delete commands
@@ -204,6 +224,8 @@ Format: `delete doctor /info [nric]`
 
 Example: `delete doctor /info S7654321A`
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.30.41 AM.png)
+
 #### DELETE PATIENT
 
 To delete an existing patient in the application, you can use the `delete patient` command. This command requires an
@@ -213,6 +235,8 @@ Format: `delete patient /info [nric]`
 
 Example: `delete patient /info S1234567A`
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.32.59 AM.png)
+
 #### DELETE MEDICINE
 
 To delete an existing medicine in the application, you can use the `delete medicine` command. This command requires an
@@ -220,7 +244,9 @@ additional parameter which is the batch id of the medicine.
 
 Format: `delete medicine /info [batch id]`
 
-Example: `delete medicine /info S123`
+Example: `delete medicine /info A123`
+
+![](../../Desktop/Screenshot 2022-04-11 at 4.34.21 AM.png)
 
 #### DELETE APPOINTMENT
 
@@ -230,6 +256,8 @@ This command requires an additional parameter which is the appointment id of the
 Format: `delete appointment /info [appointment id]`
 
 Example: `delete appointment /info 12356710156543`
+
+![](../../Desktop/Screenshot 2022-04-11 at 4.35.07 AM.png)
 
 ### Editing: `edit`
 Allows user to edit existing records of doctors, patients, medicine or appointment. Do note that successful edit
@@ -250,7 +278,9 @@ You will have to follow the formatting given below when calling the command.
 
 Format: `edit doctor /info [nric], [name], [age], [gender], [address], [DOB], [Specialisation]`
 
-Example: `edit doctor /info S7654321A, John Doe, 22, M, 10 Baker Street, 1999-12-31, Urinology`
+Example: `edit doctor /info S7654321A, John Doe, 22, M, 12 Baker Street, 1999-12-31, Urinology Department`
+
+![](../../Desktop/Screenshot 2022-04-11 at 4.48.35 AM.png)
 
 #### EDIT PATIENT
 
@@ -268,7 +298,9 @@ You will have to follow the formatting given below when calling the command.
 
 Format: `edit patient /info [nric], [name], [age], [gender], [address], [DOB], [DOA]`
 
-Example: `edit patient /info S1234567A, John Doe, 22, M, 10 Baker Street, 1999-12-31, 2021-02-15`
+Example: `edit patient /info S1234567A, Jammie Doe, 22, F, 14 Baker Street, 1999-12-31, 2021-02-15`
+
+![](../../Desktop/Screenshot 2022-04-11 at 4.40.03 AM.png)
 
 #### EDIT MEDICINE
 
@@ -285,7 +317,9 @@ You will have to follow the formatting given below when calling the command.
 
 Format: `edit medicine /info [batch id], [name], [dosage], [expiry date], [side effects], [quantity]`
 
-Example: `edit medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`
+Example: `edit medicine /info A123, Paracetamol, 1000, 2023-06-11, drowsy, 20`
+
+![](../../Desktop/Screenshot 2022-04-11 at 4.45.26 AM.png)
 
 #### EDIT APPOINTMENT
 
@@ -304,8 +338,9 @@ You will have to follow the formatting given below when calling the command.
 Format: `edit appointment /info [appointment id], [patient nric], [patient name], [doctor nric], [doctor name],
 [appointment date], [appointment details]`
 
-Example: `edit appointment /info 12356710156543, S1234567A, Doe, S7654321A, John, 2022-10-15, Regular knee checkup`
+Example: `edit appointment /info 12356710156543, S1234567A, Jamie, S7654321A, John, 2022-10-15, Knee checkup followup`
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.51.38 AM.png)
 
 ### Finding: `find`
 Allows user to find existing records of doctors, patients and medicine.
@@ -333,6 +368,7 @@ Example 5: `find doctor /info address, 10 BAKER STREET` <br>
 Example 6: `find doctor /info dob, 1999-12-31` <br>
 Example 7: `find doctor /info specialization, Urinology`
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.53.07 AM.png)
 
 #### FIND PATIENT
 
@@ -358,6 +394,8 @@ Example 5: `find patient /info address, 10 BAKER STREET` <br>
 Example 6: `find patient /info dob, 1999-12-31` <br>
 Example 7: `find patient /info registrationdate, 2021-02-15` <br>
 
+![](../../Desktop/Screenshot 2022-04-11 at 4.54.23 AM.png)
+
 #### FIND MEDICINE
 
 To find an existing medicine in the application, you can use the `find medicine` command. This command requires an
@@ -378,6 +416,8 @@ Example 3: `find medicine /info dosage, 500` <br>
 Example 4: `find medicine /info expiry, 2023-06-11` <br>
 Example 5: `find medicine /info sideeffects, DROWSY` <br>
 Example 6: `find medicine /info quantity, 10`
+
+![](../../Desktop/Screenshot 2022-04-11 at 4.55.31 AM.png)
 
 #### FIND APPOINTMENT
 
@@ -401,6 +441,7 @@ Example 3: `find appointment /info patient name, Doe` <br>
 Example 4: `find appointment /info doctor nric, S7654321A` <br>
 Example 5: `find appointment /info doctor name, John` <br>
 Example 6: `find appointment /info date, 2022-10-15`
+
 
 ![](photos/findappointment.png)
 
@@ -453,7 +494,7 @@ data/        // Primary resource directory for HalpMi
     ├── patient.txt    // Text file containing patient list
     ├── medicine.txt       // Text file containing medcine list
     └── appointment.txt    // Text file containing appointment list
-    
+
 ```
 Do note that the directory (and by extension, the files) will be created in your terminal's
 **current working directory**. Thus, it is highly recommended for you to create a new directory
@@ -489,14 +530,14 @@ data/        // Corrupted files
 | `add patient`         | `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g. `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                         |
 | `add medicine`        | `add medicine /info [batch id], [name], [dosage], [expiry date], [side effects], [quantity]`<br />e.g. `add medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`                                                                       |
 | `add appointment`     | `add appointment /info [patient nric], [doctor nric], [appointment date], [appointment details]`<br />e.g. `add appointment /info S1234567A, S7654321A, 2022-10-15, Regular knee checkup`                                                        |
-| `view doctor`         | `view doctor` or `view doctor /info [parameter], [keyword to find]`<br />e.g. `view doctor /info name, Jimmy`                                                                                                                                         |
-| `view patient`        | `view patient` or `view patient /info [parameter], [keyword to find]`<br />e.g. `view patient /info name, Steven`                                                                                                                                     |
-| `view medicine`       | `view medicine` or `view medicine /info info [parameter], [keyword to find]`<br />e.g. `view medicine /info name, Paracetamol`                                                                                                                        |
-| `view appointment`    | `view appointment` or `view appointment /info [parameter], [keyword to find]`<br />e.g. `view appointment /info id, 12356701017647`                                                                                                                   |
+| `view doctor`         | `view doctor`<br />e.g. `view doctor`                                                                                                                                         |
+| `view patient`        | `view patient`<br />e.g. `view patient`                                                                                                                                     |
+| `view medicine`       | `view medicine`<br />e.g. `view medicine`                                                                                                                        |
+| `view appointment`    | `view appointment` or `view appointment /info [parameter], [keyword to find]`<br />e.g. `view appointment /info id, 12356710156543`                                                                                                                   |
 | `delete doctor`       | `delete doctor /info [nric]`<br />e.g. `delete doctor /info S1234567A`                                                                                                                                                                           |
 | `delete patient`      | `delete patient /info [nric]`<br />e.g. `delete patient /info S1234567A`                                                                                                                                                                         |
 | `delete medicine`     | `delete medicine /info [batch id]`<br />e.g. `delete medicine /info S234`                                                                                                                                                                        |
-| `delete appointment`  | `delete appointment /info [appointment id]`<br />e.g. `delete appointment /info 12356701017647`                                                                                                                                                  |
+| `delete appointment`  | `delete appointment /info [appointment id]`<br />e.g. `delete appointment /info 12356710156543`                                                                                                                                                  |
 | `find doctor`         | `find doctor /info [parameter], [keyword to find]`<br />e.g.`find doctor /info name, Jimmy`<br />parameter must be one of the seven (name, nric, age, gender, address, dob or specialization)                                                    |
 | `find patient`        | `find patient /info [parameter], [keyword to find]`<br />e.g.`find patient /info name, Steven Oz`<br />parameter must be one of the seven (name, nric, age, gender, address, dob or registrationdate)                                               |
 | `find medicine`       | `find medicine /info [parameter], [keyword to find]`<br />e.g.`find medicine /info name, Paracetamol`<br />e.g.parameter must be one of the six (name, id, dosage, expiry, sideeffects, quantity)                                                |

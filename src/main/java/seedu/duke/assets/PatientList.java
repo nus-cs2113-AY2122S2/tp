@@ -14,7 +14,9 @@ public class PatientList extends List {
 
     private ArrayList<Patient> patients = new ArrayList<>();
     private ArrayList<Patient> returnedFinderArray = new ArrayList<>();
+    ArrayList<String> patientDateList = new ArrayList<>();
     private final String title = "Table of patients";
+
 
     public Patient getPatient(String nric) {
         for (Patient patient : patients) {
@@ -66,10 +68,12 @@ public class PatientList extends List {
         if (patient == null) {
             throw new UserInputErrorException("Patient doesn't exist please try again!");
         }
+
         CommandLineTable patientTable = new CommandLineTable(title);
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
         patientTable.setHeaders("Nric", "Full Name", "Age", "Address", "Gender", "Dob",
                 "Registration Date");
+
         patientTable.addRow(patient.getPatientNric(), patient.getPatientName(),
                 String.valueOf(patient.getPatientAge()),
                 patient.getPatientAddress(), String.valueOf(patient.getPatientGender()),
@@ -81,10 +85,12 @@ public class PatientList extends List {
 
     //view all patients
     public void view() throws UserInputErrorException {
+
         CommandLineTable patientTable = new CommandLineTable(title);
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
         patientTable.setHeaders("Nric", "Full Name", "Age", "Address", "Gender", "Dob",
                 "Registration Date");
+
         if (patients.size() == 0) {
             throw new UserInputErrorException("Patient list is empty, please add patient");
         }
@@ -96,6 +102,31 @@ public class PatientList extends List {
                     patient.getDateOfAdmission());
         }
         patientTable.print();
+    }
+
+    public void addAppointmentDate(String nric, String date) {
+        for (Patient patient : patients) {
+            if (patient.getPatientNric().equals(nric)) {
+                patient.addAppointmentDate(date);
+                break;
+            }
+        }
+    }
+
+    public boolean hasPatientDate(String nric, String date) throws DuplicateEntryException {
+        for (Patient patient : patients) {
+            if (patient.getNric().equals(nric)) {
+                patientDateList = patient.appointmentDate();
+                for (String datePatient : patientDateList) {
+                    if (datePatient.equals(date)) {
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            }
+        }
+        throw new DuplicateEntryException("Patient not found");
     }
 
     public void remove(String nric) throws NotFoundException {
@@ -227,5 +258,15 @@ public class PatientList extends List {
         }
     }
 
+    public void loadDate(String[] parameters) {
+        String patientNric = parameters[0];
+        for (Patient a : patients) {
+            if (a.getNric().equals(patientNric)) {
+                for (int i = 1; i < parameters.length; i++) {
+                    a.addAppointmentDate(parameters[i]);
+                }
+            }
+        }
+    }
 }
 
