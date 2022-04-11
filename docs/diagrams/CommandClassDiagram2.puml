@@ -8,12 +8,7 @@ Command <|-up- EditCommand
 Command <|-up- ExitCommand
 Command <|-- FreeCommand
 Command <|-- HelpCommand
-Command -right-|> CommandResult : creates
 Command <|-left- ListCommand
-
-class CommandResult {
-+ execute(masterTimetable : MasterTimetable) : String
-}
 
 abstract class Command {
 + execute(masterTimetable : MasterTimetable) : String
