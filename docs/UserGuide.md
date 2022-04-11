@@ -897,6 +897,7 @@ Stay tuned to future updates from us!
 | List all available commands             | Format: `help`                                                                                                                                                                                                                                                                      |
 | Exit                                    | Format: `exit`                                                                                                                                                                                                                                                                      |
 
+<br>
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
