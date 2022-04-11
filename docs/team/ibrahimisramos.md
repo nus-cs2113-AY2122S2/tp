@@ -19,6 +19,7 @@ Otherwise, it will only be deleted for that user.
 
 - Allows to clear a user and his timetable or all timetables in a glance.
 - This allows a user to be cleared or to start the program afresh.
+
 ### Add meeting feature
 - Allows meeting to be added for to the timetable all users added in
 - This allows the team to have a copy and keep track of their timetable.

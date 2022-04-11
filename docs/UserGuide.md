@@ -412,7 +412,7 @@ for the first name **will be ignored**.
 e.g. if I want to have a meeting from 11pm - 3am, create one for today 2300 - 2359 and another from 0000 - 0300 
 for the next day. We will fix this in the next version.
 - Should the user type CTRL-C, then all the existing data in the datafile and in the program will be cleared.
-  We will fix this in the next version.
+  We will fix this in the next version. 
 
 ## Command summary
 
