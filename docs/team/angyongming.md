@@ -52,3 +52,12 @@ ParserHelperMethods
 - Wrote the Developer Guide's section on Free Command
 - Designed the UML diagram for the `free` command
 
+**Others**
+- Wrote Appendix C 
+- Wrote Appendix D
+- Designed Class diagram for Ui Component
+- Designed Class diagram for Events Component
+
+### Contributions to Team-Based Tasks
+
+- In charge of documentation and enforcing code quality.
