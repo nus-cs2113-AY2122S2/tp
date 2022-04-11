@@ -106,7 +106,7 @@ How the Command class works:
 
 ![ValidatorClassUML](diagrams/ValidatorClassUML.png)
 
-The validator has a series of methods to ensure that the parameters entered are correct.  It throws a `HalpmiException` if the parameters
+The validator has a series of methods to ensure that the parameters entered are correct.  It throws a `HalpmiException` if the parameters and/or number of parameters
 entered are invalid.
 For example, validateAddPatient validates the parameter of `add patient` command, ensuring each parameter is in correct
 format. Please refer to the below sequence diagram for a clearer understanding.
@@ -118,10 +118,16 @@ format. Please refer to the below sequence diagram for a clearer understanding.
 
 ![ParserClassUML](diagrams/ParserClassUML.png)
 
-The parser parses the description of the command. It first checks the number of parameters entered is correct and
-calls the validator class to validate the parameters, and then returns a command if the validation is successful.
+The parser parses the description of the command. It calls the validator class to validate the parameters, and then returns a command if the validation is successful.
 
 ![ParserUML](diagrams/ParserUML.png)
+
+
+#### `HalpmiException`
+![ExceptionClassUML](diagrams/ExceptionClassUML.png)
+There are three types of HalpmiExceptions, namely, `UserInputErrorException` (usually thrown by Validator), `NotFoundException` (thrown by `find` command) and `DuplicateEntryException` (thrown when trying to add already existing data). 
+
+The exception message will be printed out by the `Ui` class somewhere in the program. 
 
 #### `Storage`
 
@@ -134,6 +140,8 @@ into their respective lists. The Storage class has 5 save methods that save the 
 in the CSV format. The Directory of these text files is found in the DIR String variable, the PATH for each of the 4 text files
 can be found in the PATH_MED, PATH_PAT, PATH_DOC, PATH_APP, PATH_APT_MEDS String variables respectively.
 
+#### Corrupted files
+A preliminary check for corrupted files will be done when HalpMi starts. The validator function will be invoked to ensure the the input lines are correct. Else, the corrupted files will be moved into another separate text file named `[datatype]_corrupted.txt`.
 ### Asset classes
 
 #### `Appointment`

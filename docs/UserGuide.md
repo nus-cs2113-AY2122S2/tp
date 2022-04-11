@@ -79,6 +79,7 @@ at which Halpmi.jar is located.
 -----------------------------------------------
 
 ## Features
+> :warning: Please take note that all the parameters for all the commands will be auto-capitalised. However, if you are confused, please just use it according to the example given below.
 
 ### Adding: `add`
 Adds a new entry into the app. This entry can be either a doctor, patient, medicine or appointment.
@@ -106,7 +107,7 @@ Example: `add doctor /info S7654321A, John Doe, 22, M, 10 Baker Street, 1999-12-
 To add a new patient into your application you can use the `add patient` command when prompted by HALPMI for your input.
 To add a patient there are some parameters that you would have to provide:
 1. NRIC
-2. Name
+2. Name 
 3. Age
 4. Gender
 5. Address
@@ -127,7 +128,7 @@ To add a medicine there are some parameters that you would have to provide:
 1. Medicine Name
 2. Dosage
 3. Expiry Date
-4. Side Effects
+4. Side Effects (any string)
 5. Quantity
 
 You will have to follow the formatting given below when calling the command.
@@ -450,6 +451,7 @@ data/        // Primary resource directory for HalpMi
     ├── patient.txt    // Text file containing patient list
     ├── medicine.txt       // Text file containing medcine list
     └── appointment.txt    // Text file containing appointment list
+    
 ```
 Do note that the directory (and by extension, the files) will be created in your terminal's
 **current working directory**. Thus, it is highly recommended for you to create a new directory
@@ -459,14 +461,21 @@ When you launch HalpMi in subsequent sessions, please ensure that you run it fro
 that you did when starting HalpMi for the first time.
 
 #### Corrupt Files
-
-TO BE UPDATED
+If the files are corrupted, you will be prompted by HalpMi and the corrupted lines will be moved into a separate text file, with the following name.
+```
+data/        // Corrupted files
+    ├── doctor_corrupted.txt   // Text file containing doctor list
+    ├── patient_corrupted.txt    // Text file containing patient list
+    ├── medicine_corrupted.txt       // Text file containing medcine list
+    └── appointment_corrupted.txt    // Text file containing appointment list
+```
 
 -----------------------------------------------
 
 ## Future Versions
 
-TO BE UPDATED
+#### Storage
+**File encryption** -> Files will be encrypted in the future. More checks for corurpted files will also be included. Current corrupted file check is a basic preliminary check.
 
 -----------------------------------------------
 

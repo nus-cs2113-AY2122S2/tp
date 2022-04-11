@@ -1,21 +1,21 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 !include style.puml
-autonumber
+
 
 box   LOGIC_COLOR_T1
 participant ":Parser" as Parser LOGIC_COLOR_T2
 participant ":Validator" as Validator LOGIC_COLOR_T2
-participant ":Command" as Command LOGIC_COLOR_T2
 
-Parser -> Parser: minCheckParameters
-Parser -> Validator: validate[CommandName]
+
+
+Parser -> Validator: validateMedicine
 alt LOGIC_COLOR_T2
 Validator -> Parser
 else LOGIC_COLOR_T2
-Validator -> Parser : HalpmiException
+Validator -> Parser : UserInputErrorException
 end
-Parser -> Command: Command()
+<--Parser : AddMedicineCommand
 end box
 
 
