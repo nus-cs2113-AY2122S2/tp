@@ -1,6 +1,7 @@
 # Developer Guide
 
 ## Design & implementation
+![](arch.jpg)
 
 ### Update patient information
 Step 1:Patient inform the nurse of their change in personal information. Nurse will open up the IHospital system and request to submit the change. 
@@ -151,5 +152,3 @@ Expected output: ![](EditAppointmentOutput2.png)
 7. Test case for `search`: `search appointment 2022-06-01T16:30`
 
 Expected output: ![](SearchAppointmentOutput.png)
-
-8. Test case for `add ward`: `add ward /d 1 /p 1 /n 1 /id 233`
