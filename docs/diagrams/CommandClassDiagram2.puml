@@ -4,19 +4,21 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-Command <|-up- EditCommand
-Command <|-up- ExitCommand
-Command <|-- FreeCommand
-Command <|-- HelpCommand
-Command <|-left- ListCommand
+"{abstract}\n Command" <|-up- EditCommand
+"{abstract}\n Command" <|-up- ExitCommand
+"{abstract}\n Command" <|-- FreeCommand
+"{abstract}\n Command" <|-- HelpCommand
+"{abstract}\n Command" <|-left- ListCommand
 
-abstract class Command {
-+ execute(masterTimetable : MasterTimetable) : String
+class "{abstract}\n Command" {
++ {abstract} execute(masterTimetable : MasterTimetable) : String
 }
 
 class EditCommand {
 + {static} {final} COMMAND_WORD: String = "edit"
 - {final} newValues: Map<String, String>
+- {final} name: String
+- {final} index: int
 + execute(masterTimetable : MasterTimetable) : String
 - editEvent(event : Event, eventInfo : Map<String, String>) : Boolean
 - editAttribute (event : Event, attribute : String, value : String)
@@ -33,6 +35,7 @@ class ExitCommand {
 
 class FreeCommand {
 + {static} {final} COMMAND_WORD: String = "free"
+- {final} time: String
 + execute(masterTimetable : MasterTimetable) : String
 + listFree(busySlots : int[][], duration : int) : String
 - truncateString(freeSlotsString : String) : String
