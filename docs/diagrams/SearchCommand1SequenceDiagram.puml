@@ -1,0 +1,33 @@
+@startuml
+
+skinparam sequenceStereotypeFontColor red
+skinparam SequenceReferenceBackgroundColor pink
+hide footbox
+
+Participant ":InvMgr" as InvMgr
+Participant "InputParser" as InputParser <<class>>
+Participant "inputCommand:SearchCommand" as SearchCommand
+
+activate InvMgr
+    InvMgr -> InputParser: parse("search n/Marker d/draw")
+    ref over InputParser
+        Parse user arguments
+    end
+    activate InputParser
+        create SearchCommand
+        InputParser -> SearchCommand:
+        activate SearchCommand
+        return
+    return inputCommand: Command
+
+    InvMgr -> SearchCommand: execute(itemList:ItemList, ui:Ui)
+    activate SearchCommand
+    return
+
+    InvMgr -> Storage: save(itemList: ArrayList)
+    activate Storage
+    return
+
+deactivate InvMgr
+
+@enduml
