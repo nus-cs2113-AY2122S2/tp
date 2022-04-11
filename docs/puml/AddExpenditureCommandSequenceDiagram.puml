@@ -10,7 +10,7 @@ boxBorderColor black
 
 box addExpenditure()
 participant ":MMM" as MMM MMM_COLOUR
-participant "Command:AddCommand" as AddCommand COMMANDS_COLOUR
+participant "CommandType:AddCommand" as AddCommand COMMANDS_COLOUR
 participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
 participant ":AddCommandInputTest" as AddCommandInputTest HELPER_COLOUR
 participant ":Expenditure" as Expenditure USERFINANCIAL_COLOUR

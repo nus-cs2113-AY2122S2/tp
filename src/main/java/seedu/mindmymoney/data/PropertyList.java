@@ -1,4 +1,4 @@
-package seedu.mindmymoney.helper;
+package seedu.mindmymoney.data;
 
 import seedu.mindmymoney.MindMyMoneyException;
 

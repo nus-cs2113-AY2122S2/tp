@@ -139,7 +139,7 @@ public class HelpCommand extends Command {
             throw new MindMyMoneyException("Please ensure that you have entered a valid help command.\n"
                     + "Type \"help /e\" to view the list of supported expenditure commands\n"
                     + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
-                    + "Type \"help /i\" to view the list of supported income commands\n");
+                    + "Type \"help /i\" to view the list of supported income commands");
         }
     }
 }

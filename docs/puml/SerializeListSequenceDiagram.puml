@@ -1,31 +1,38 @@
 @startuml
 !include Style.puml
 
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
 box Serialize List
-participant ":ExpenditureList" as ExpenditureList USERFINANCIAL_COLOUR
-participant ":SerializerFunctions" as SerializerFunctions STORAGE_COLOUR
+participant ":ExpenditureList" as ExpenditureList DATA_COLOUR
+participant ":SerializerFunctions" as SerializerFunctions HELPER_COLOUR
 participant ":Expenditure" as Expenditure USERFINANCIAL_COLOUR
-participant ":PropertyList" as PropertyList STORAGE_COLOUR
+participant ":PropertyList" as PropertyList DATA_COLOUR
 end box
 hide footbox
 
 [-> ExpenditureList : serialize()
-activate ExpenditureList USERFINANCIAL_COLOUR
+activate ExpenditureList DATA_COLOUR
 ExpenditureList -> SerializerFunctions : addListToStringBuilder()
-activate SerializerFunctions STORAGE_COLOUR
+activate SerializerFunctions HELPER_COLOUR
 loop for each element in list
     SerializerFunctions -> Expenditure : serialize()
     activate Expenditure USERFINANCIAL_COLOUR
 
     Expenditure -> PropertyList ** : PropertyList()
-    activate PropertyList STORAGE_COLOUR
+    activate PropertyList DATA_COLOUR
     deactivate PropertyList
     PropertyList --> Expenditure --
     Expenditure -> PropertyList : setValue()
-    activate PropertyList STORAGE_COLOUR
+    activate PropertyList DATA_COLOUR
     PropertyList --> Expenditure --
     Expenditure -> PropertyList : serialize()
-    activate PropertyList STORAGE_COLOUR
+    activate PropertyList DATA_COLOUR
     PropertyList --> Expenditure --
 
     Expenditure --> SerializerFunctions --

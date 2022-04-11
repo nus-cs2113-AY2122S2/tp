@@ -10,7 +10,7 @@ boxBorderColor black
 
 box AddCommand
 participant ":MMM" as MMM MMM_COLOUR
-participant "Command:AddCommand" as AddCommand COMMANDS_COLOUR
+participant "CommandType:AddCommand" as AddCommand COMMANDS_COLOUR
 end box
 hide footbox
 
