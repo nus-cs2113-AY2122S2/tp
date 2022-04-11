@@ -88,7 +88,7 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 2. Download the latest .jar version of SplitLah from [here](https://github.com/AY2122S2-CS2113T-T10-1/tp/releases)
 3. Copy the file to the folder you wish to use as a home folder for SplitLah.
 4. Open a terminal and set the working directory to the home folder.
-5. Start SplitLah by executing `java -jar splitlah.jar` in the terminal.
+5. Start SplitLah by executing `java -jar SplitLah.jar` in the terminal.
 6. Type in a command and press Enter to execute it.
 7. Refer to [Features](#features) for a more in-depth explanation of all commands available.
 
@@ -856,7 +856,7 @@ Quits the application.<br>
 **Q**: Is data saved to the disk upon exit?
 
 **A**: SplitLah 2.0 creates a save file in a folder named `data` that is created in the same directory as
-`splitlah.jar`. Changes are saved whenever a `create`, `delete` or `edit` command is run.
+`SplitLah.jar`. Changes are saved whenever a `create`, `delete` or `edit` command is run.
 
 **Q**: How do session, activity and group unique identifiers work?
 
