@@ -673,7 +673,7 @@ The above sequence diagram shows the interactions when a list of
    invokes `Expenditure.propetyList()` on this line, which returns an `Expenditure`. This is repeated until
    the designated terminator is read from the `Scanner`.
 3. `Expenditure` creates a `PropertyList` to stores its properties into.
-   Then, it makes a series of `PropertyList::setValue` calls to save each of its attributes.
+   Then, it makes a series of `PropertyList.setValue()` calls to save each of its attributes.
 4. Once all attributes have been processed, `PropertyList::serialize` is called, and
 this serialized `PropertyList` is returned by `Expenditure::serialize`.
 5. These serialized expenditures are aggregated into an `String`, which is returned
