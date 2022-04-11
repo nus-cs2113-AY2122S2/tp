@@ -53,6 +53,12 @@ loop keep taking in user inputs for Expense module
         deactivate ExpenseParser
         end opt
 
+        opt is Date field
+        opt Year is negative
+        ExpenseParser --> ExpenseTracker : :ExpenseInvalidYearException
+        end opt
+        end opt
+
         opt Result is empty
         ExpenseParser --> ExpenseTracker : :ExpenseEmptyFieldException
 

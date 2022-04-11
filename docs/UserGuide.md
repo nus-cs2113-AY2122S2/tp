@@ -180,6 +180,8 @@ Adds a new expense to the list of expenses. The keyword `add` is used followed b
 amount, category and remarks of a given expense, using the delimiters of `d/` , `a/`,  `c/` and `r/`
 respectively.
 - The DATE field must be in the format of YYYY-MM-DD. All other formats would not be accepted.
+- It is intended for expense records to allow DATE values to be set in the future for users to plan their expenses 
+ahead.
 - The AMOUNT field must be a valid number (integer/float) and must be non-negative.
 - '/' must not be the last character of a given field, even with trailing spaces.
 - The usage of '/' as a free text must be enclosed with white spaces, even as the first character.
@@ -279,6 +281,8 @@ Format:
 
 `category movie`
 
+`done`
+
 **Expected Outcome:**
 ```
 ---------------------------------------------------
@@ -307,6 +311,9 @@ Looks for a specific expense record by using a user-specified keyword.
 - Only the `<CATEGORY>`, `<DATE>` and `<REMARKS>` fields will be considered when looking for an expense record.
 - The keyword is case-insensitive.
 - Partial matches on the keyword are also returned.
+- The actual index of the record(s) found is also included in the results. This helps to facilitate any 
+deletion or editing of the resulting record(s) which also requires the index of the record(s).
+- The keyword to be searched for cannot be all white-spaces.
 
 Format:
 `find KEYWORD`
@@ -322,8 +329,9 @@ Format:
 **Expected outcome:**
 ```
 ---------------------------------------------------
-Here are the matching expense records:
-2022-03-22 | $9.50 | Movie | Fast and Furious
+Here are the matching expense record(s):
+ 4. 2022-03-22 | $9.50 | Movie | Fast and Furious
+
 ---------------------------------------------------
 ```
 
