@@ -194,6 +194,9 @@ public class Validator {
     private static boolean validateQuantity(String quantity) throws UserInputErrorException {
         try {
             int quantityInt = Integer.parseInt(quantity);
+            if (quantityInt <= 0) {
+                throw new UserInputErrorException("Invalid medicine quantity");
+            }
             return quantityInt > 0;
         } catch (NumberFormatException numberFormatException) {
             throw new UserInputErrorException("Invalid Medicine Quantity");
