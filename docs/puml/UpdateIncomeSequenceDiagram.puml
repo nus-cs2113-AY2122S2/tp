@@ -1,6 +1,13 @@
 @startuml
 !include Style.puml
 
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
 box updateIncome()
 participant ":MMM" as MMM MMM_COLOUR
 participant "Command:UpdateCommand" as updateCommand COMMANDS_COLOUR

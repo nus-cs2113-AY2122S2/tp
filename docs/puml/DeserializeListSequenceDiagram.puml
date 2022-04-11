@@ -1,6 +1,13 @@
 @startuml
 !include Style.puml
 
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
 box Deserialize List
 participant ":ExpenditureList" as ExpenditureList USERFINANCIAL_COLOUR
 participant ":SerializerFunctions" as SerializerFunctions STORAGE_COLOUR
