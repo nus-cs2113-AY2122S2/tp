@@ -41,14 +41,12 @@ and contact management tasks done faster than traditional GUI apps.
 
 ## Quick Start
 
-{Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `AlloNUS` from [here](https://github.com/AY2122S2-CS2113-F10-4/tp/releases).
+1. Download the latest version of `AlloNUS` from [here](https://github.com/AY2122S2-CS2113-F10-4/tp/releases).
 
 ## Features 
 
-{Give detailed description of each feature}
 
 ### Main Menu Features
 #### Navigating from menu to section of interest: `goto`
@@ -331,7 +329,7 @@ Here are the matching expense records:
 ```
 
 ### Study Manager Features
-
+If you are not already in Study Manager, please enter `goto Study_Manager` to access these features.
 #### Adding a module: `add`
 Adds a new module to the list of modules.
 
@@ -341,19 +339,35 @@ Format: `add m/<MODULE_CODE> c/<CATEGORY> d/<DAY> t/<TIME>`
 |----------------------|--------------------------------------| --------------------------------------|
 | ```<MODULE_CODE> ``` | Code for the module                  | Accepted inputs are alphanumeric parameters |
 | ```<CATEGORY> ```    | Category of the module| Accepts shorthand notations `lec`,`tut`,`lab` and `exam` |
-| ```<DAY> ```         | Class day of the week for the module<br><br>OR<br><br>Date of a one-off event like exam or a non recurring class| Accepted inputs are valid days of the week <br> E.g. `thursday` or `Thursday`<br><br>OR<br><br>Alternatively a valid date of type DD-MM-YYYY can be specified<br>E.g. `12-12-2022`   |
-| ```<TIME> ```        | Class timeslot for the module |  Accepted inputs are timeslots with a start and end time of the form `HH:MM am/pm - HH:MM am/pm`  <br>E.g. `2:00 pm - 4:00 pm` |
+| ```<DAY> ```         | Class day of the week for the module<br><br>OR<br><br>Date of a one-off event like exam or a non recurring class| Accepted inputs are valid days of the week <br> E.g. `thursday` or `Thursday`<br><br>OR<br><br>Alternatively a **valid date** of type DD-MM-YYYY can be specified<br>E.g. `12-12-2022`   |
+| ```<TIME> ```        | Class timeslot for the module |  Accepted inputs are **valid timeslots** with a start and end time of the form `HH:MM am/pm - HH:MM am/pm`  <br>E.g. `2:00 pm - 4:00 pm` |
+
+
+Rules for date and time:
+* A **valid date** for `<DAY>` parameter is one that follows the required format DD-MM-YYYY
+  and has a valid number of days (01 to 31) and number of months (01 to 12).
+  * Dates like `30-02-2022` will still be accepted in our current version as we have planned further date verification
+    in our next iteration.
+* A **valid timeslot** is one that
+  * Is of the form `HH:MM am/pm - HH:MM am/pm` .
+  * Has a start time that is earlier than end time.
+  * Has a start time that is not equal to end time.
+  * Timeslots are not meant to extend into the next day to be consistent with the single day or date inputs.
+    * You may create two module entries to represent such a scenario.
+
 
 Example of usage:
 
-    add m/CS2113 c/lec d/Friday t/4:00 pm-6:00 pm
-    add m/CG2271 c/tut d/Thursday t/3:00 pm-4:00 pm
-    add m/CS2113 c/exam d/10-04-2021 t/10:00 am-12:00 pm
+    add m/CS2113 c/lec d/Friday t/4:00 pm - 6:00 pm
+    add m/CG2271 c/tut d/Thursday t/3:00 pm - 4:00 pm
+    add m/CS2113 c/exam d/10-04-2021 t/10:00 am - 12:00 pm
 
 Expected outcome:
 
+    ---------------------------------------------------
     Okay, I have added a new module to the schedule
     [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm
+    ---------------------------------------------------
 
 A new module has been added to the schedule with the specified module code, category, day and time.
 
@@ -368,7 +382,9 @@ Example of usage:
 
 Expected outcome:
 
+    ---------------------------------------------------
     Here are the modules in your schedule:
+    ---------------------------------------------------
     1: [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm
     2: [Module] CS3244 Tutorial: Monday, 1:00 pm-2:00 pm
 
@@ -388,8 +404,10 @@ Example of usage:
 
 Expected outcome:
 
+    ---------------------------------------------------
     Noted I have removed this module from your schedule:
     [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm
+    ---------------------------------------------------
 
 #### Editing a module: `edit`
 Edits an existing module in the schedule. The user can specify a module parameter to edit individually. 
@@ -412,8 +430,12 @@ Format: `edit <index>`
 | ```<index> ``` | Index of the module to be edited | Accepts valid index number from list of modules |
 | ```<MODULE_CODE> ``` | New code for the module                  | Accepted inputs are alphanumeric parameters |
 | ```<CATEGORY> ```    | New category of the module               | Accepts shorthand notations `lec`,`tut`,`lab` and `exam` |
-| ```<DAY> ```         | New class day of the week for the module | Accepted inputs are valid days of the week <br> E.g. `thursday` or `Thursday`<br><br>OR<br><br>Alternatively a valid date of type DD-MM-YYYY can be specified<br>E.g. `12-12-2022`   |
-| ```<TIME> ```        | New class timing for the module          | Accepted inputs are timeslots with a start and end time of the form `HH:MM am/pm - HH:MM am/pm`  <br>E.g. `2:00 pm - 4:00 pm` |
+| ```<DAY> ```         | New class day of the week for the module | Accepted inputs are valid days of the week <br> E.g. `thursday` or `Thursday`<br><br>OR<br><br>Alternatively a **valid date** of type DD-MM-YYYY can be specified<br>E.g. `12-12-2022`   |
+| ```<TIME> ```        | New class timing for the module          | Accepted inputs are **valid timeslots** with a start and end time of the form `HH:MM am/pm - HH:MM am/pm`  <br>E.g. `2:00 pm - 4:00 pm` |
+
+Note:
+* Rules for **valid timeslots** and **valid date** for edit function are the same as those under
+[Adding a module](#adding-a-module-add)
 
 Example of usage:
 
@@ -424,16 +446,25 @@ Example of usage:
 Expected outcome:
 
     edit 1
+    ---------------------------------------------------
     Here is the module that you have chosen to edit:
     [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm
     Choose the part that you would like to edit:
+    ---------------------------------------------------
     m/CS3244
+    ---------------------------------------------------
     Here are the changes so far. You can edit more module parameters or you can enter 'done' to stop editing!
     [Module] CS3244 Lecture: Friday, 4:00 pm-6:00 pm
+    ---------------------------------------------------
     done
+    ---------------------------------------------------
     Your Module was successfully edited! Here are the changes:
     [Module] CS3244 Lecture: Friday, 4:00 pm-6:00 pm
+    ---------------------------------------------------
+    ---------------------------------------------------
     Exiting the edit mode
+    ---------------------------------------------------
+
 
 The existing module has been edited to change the module code from CS2113 to CS3244.
 
@@ -455,19 +486,28 @@ Example of usage:
 Expected outcome:
 
     list
+    ---------------------------------------------------
     Here are the modules in your schedule:
-    1: [Module] CS2113 Lecture: Thursday, 2:00 pm-4:00 pm
+    ---------------------------------------------------
+    1: [Module] CS2113 Lecture: Friday, 2:00 pm-4:00 pm
     2: [Module] EE4204 Lecture: Wednesday, 2:00 pm-4:00 pm
     find CS
+    ---------------------------------------------------
     Here are the matching modules in your list:
-    1: [Module] CS2113 Lecture: Thursday, 2:00 pm-4:00 pm
+    ---------------------------------------------------
+    1: [Module] CS2113 Lecture: Friday, 2:00 pm-4:00 pm
     find Wednesday
+    ---------------------------------------------------
     Here are the matching modules in your list:
+    ---------------------------------------------------
     1: [Module] EE4204 Lecture: Wednesday, 2:00 pm-4:00 pm
     find 2:00 pm
+    ---------------------------------------------------
     Here are the matching modules in your list:
-    1: [Module] CS2113 Lecture: Thursday, 2:00 pm-4:00 pm
+    ---------------------------------------------------
+    1: [Module] CS2113 Lecture: Friday, 2:00 pm-4:00 pm
     2: [Module] EE4204 Lecture: Wednesday, 2:00 pm-4:00 pm
+
 
 #### Reading from .ics file: `read ics`
 Creates a list of your modules by reading from .ics calendar file that can be downloaded from nusmods.com.
@@ -492,11 +532,15 @@ Example of usage:
 Expected outcome:
 
     read ics
+    ---------------------------------------------------
     Please enter the name of your .ics file from nusmods:
+    ---------------------------------------------------
     nusmods_calendar.ics
+    ---------------------------------------------------
     
     I have found these modules from your ics file:
-
+    
+    ---------------------------------------------------
     1: [Module] EG2401A Lecture: Wednesday, 6:00 pm-8:00 pm
     2: [Module] EG2401A Tutorial: Friday, 9:00 am-10:00 am
     3: [Module] CS2113 Lecture: Friday, 4:00 pm-6:00 pm
@@ -513,11 +557,15 @@ Expected outcome:
     14: [Module] EE4204 Lecture: Monday, 10:00 am-12:00 pm
     15: [Module] EE4204 Tutorial: Wednesday, 1:00 pm-2:00 pm
     16: [Module] EE4204 Exam: 29-04-2022, 9:00 am-11:00 am
+    ---------------------------------------------------
     
     I have added these to your existing schedule!
+    ---------------------------------------------------
+    ---------------------------------------------------
     Exiting read ics mode
+    ---------------------------------------------------
 
-The .ics file from nusmods.com has been parsed to get the relevant module details and has automatically added them to your module list.
+The .ics file from [nusmods](https://nusmods.com/) has been parsed to get the relevant module details and has automatically added them to your module list.
 You can now perform all other StudyManager functions on this list as per normal.
 
 ### Contacts Tracker Features
@@ -661,9 +709,9 @@ the program and this load and save feature.
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: After you exit the program, your application data will be automatically stored in a text file locally called 
-"allonusData.txt". 
-You can transfer your data to another computer by copying this text file and placing
+**A**: After you exit the program, your application data will be automatically stored in a folder called "Data", which contains
+text file locally called "allonusData.txt". 
+You can transfer your data to another computer by copying this folder and placing
 it in the same directory as the application in the new computer. 
 When the application runs, it will automatically load the saved data in the text file. 
 Please ensure the version of both applications are the same.
