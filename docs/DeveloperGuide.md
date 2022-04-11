@@ -314,6 +314,7 @@ After data is loaded from the data file, some verification checks are performed 
 | v2.0    | user     | list tasks by tag                             | I can filter tasks I’m looking for                                          |
 | v2.0    | user     | input my grades                               | I can estimate my final GPA                                                 |
 | v2.0    | user     | estimate my GPA                               | I can gauge my performance                                                  |
+
 <br><br><br>
 
 ## 8. Non-Functional Requirements
