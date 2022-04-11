@@ -37,9 +37,9 @@ public class AddItemCommand extends Command {
      * Extracts out the item name and item pax from the user input and creates an AddItemCommand object.
      *
      * @param userInput The user's input.
-     * @throws HotelLiteManagerException if the formatting of the add item command is invalid, the item pax is
-     *                                   empty or invalid, the item name is empty, or the item name and pax are both
-     *                                   empty.
+     * @throws HotelLiteManagerException if the edited user input still contains the string "add item", the formatting
+     *                                   of the add item command is invalid, the item pax is empty or invalid, the item
+     *                                   name is empty, or the item name and pax are both empty.
      */
     public AddItemCommand(String userInput) throws HotelLiteManagerException {
         if (userInput.startsWith(DELIMITER)) {
@@ -87,14 +87,14 @@ public class AddItemCommand extends Command {
     /**
      * Returns the item pax extracted from the user input.
      *
-     * @param token A string token containing the user input after the delimiter.
+     * @param tokens String tokens containing the user input after the delimiter.
      * @return The item pax within the user input.
      * @throws HotelLiteManagerException if item pax is empty or invalid.
      */
 
-    private int extractItemPax(StringTokenizer token) throws HotelLiteManagerException {
+    private int extractItemPax(StringTokenizer tokens) throws HotelLiteManagerException {
         int itemPax;
-        String itemPaxStringVersion = token.nextToken();
+        String itemPaxStringVersion = tokens.nextToken();
         itemPaxStringVersion = itemPaxStringVersion.trim();
         if (itemPaxStringVersion.isEmpty()) {
             itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
@@ -118,13 +118,11 @@ public class AddItemCommand extends Command {
      * named item within the AddItemPaxCommand object.
      * Returns an acknowledgement message to inform the user that the item has been added to the item list as well
      * as the number of items within the item list.
-     * Updates the item list saved within the file ListFolder/ItemList.txt
      *
      * @param listContainer The object containing the data structure necessary for adding an item into the item list.
      *                      In this case, we require access to the ItemList object which is within listContainer.
      * @param ui            The object that deals with user interface for the program.
-     * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
-     * @throws IOException               if we are unable to write to the file ListFolder/ItemList.txt
+     * @throws HotelLiteManagerException if the item name within the item object already exists in the item list.
      */
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         ItemList listOfItems = listContainer.getItemList();
@@ -140,6 +138,13 @@ public class AddItemCommand extends Command {
         ui.printAddItemAcknowledgementMessage(listOfItems);
     }
 
+    /**
+     * Updates the item list saved within the file ListFolder/ItemList.txt with the current item list.
+     *
+     * @param listContainer The object containing the data structure necessary for adding an item into the item list.
+     *                      In this case, we require access to the ItemList object which is within listContainer.
+     * @throws IOException if we are unable to write to the file ListFolder/ItemList.txt
+     */
     public void writeItemListToFile(ListContainer listContainer) throws IOException {
         ItemList listOfItems = listContainer.getItemList();
         ItemListFileManager itemListFileManager = new ItemListFileManager();

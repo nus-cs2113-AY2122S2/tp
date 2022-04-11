@@ -29,12 +29,6 @@ public class ItemList {
         this.listOfItems = listOfItems;
     }
 
-    /**
-     * Adds a new item to the item list. If there exists an item within the item list that has the same name as the item
-     * the user wants to add, the item would not be added into the item list.
-     *
-     * @param item The item that the user wants to add into the item list.
-     */
     public void addItemToList(Item item) {
         listOfItems.add(item);
     }
@@ -44,11 +38,12 @@ public class ItemList {
     }
 
     /**
-     * Checks if there is another item within the item list which has the same name as the name passed
+     * Checks if there is another item within the item list which has the same name as the item name passed
      * into the function.
      *
      * @param nameOfItemToAdd Name of the item that the user wants to add into the item list.
-     * @return true if there is no items within the item list which has the same name as that passed into the function
+     * @return true if there is no items within the item list which has the same name as that passed into the function.
+     * Otherwise, it returns false.
      */
     public boolean checkForItemDuplicates(String nameOfItemToAdd) {
         boolean isItemAlreadyInTheList = false;
@@ -86,7 +81,9 @@ public class ItemList {
      *
      * @param item The item within the inventory that the user wants to update. The item object contains the item name
      *             and the new pax.
-     * @throws ItemNotFoundException if the item name within the item object does not exist in the item list.
+     * @throws ItemNotFoundException if there does not exist an item in the item list whose item name matches the item
+     *                               name in the item object passed into the function or if the new item pax of the item
+     *                               to update is the same as its current item pax.
      */
     public void updateItemPaxInList(Item item) throws HotelLiteManagerException {
         String nameOfItemToUpdate = item.getName();
@@ -117,7 +114,7 @@ public class ItemList {
     }
 
     /**
-     * Deletes the item within the item list which has the item name specified by the user.
+     * Deletes the item within the item list whose item name matches the item name specified by the user.
      *
      * @param item The item within the inventory that the user wants to delete. The item object contains the item name
      *             of the item to delete.

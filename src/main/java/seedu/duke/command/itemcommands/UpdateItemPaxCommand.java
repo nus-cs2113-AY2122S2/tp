@@ -36,7 +36,8 @@ public class UpdateItemPaxCommand extends Command {
      * Extracts out the item name and item pax from the user input and creates an UpdateItemPaxCommand object.
      *
      * @param userInput The user's input.
-     * @throws HotelLiteManagerException if the formatting of the update item pax command is invalid, the item pax is
+     * @throws HotelLiteManagerException if the keyword is empty, the string userInput contains "update item pax",
+     *                                   the formatting of the update item pax command is invalid, the item pax is
      *                                   empty or invalid, the item name is empty, or the item name and pax are both
      *                                   empty.
      */
@@ -135,6 +136,14 @@ public class UpdateItemPaxCommand extends Command {
         ui.printUpdateItemPaxAcknowledgementMessage(item);
     }
 
+    /**
+     * Updates the item list saved within the file ListFolder/ItemList.txt.
+     *
+     * @param listContainer The object containing the data structure necessary for updating the name of an item within
+     *                      the item list.
+     *                      In this case, we require access to the ItemList object which is within listContainer.
+     * @throws IOException if we are unable to write to the file ListFolder/ItemList.txt
+     */
     public void writeItemListToFile(ListContainer listContainer) throws IOException {
         ItemList listOfItems = listContainer.getItemList();
         ItemListFileManager itemListFileManager = new ItemListFileManager();

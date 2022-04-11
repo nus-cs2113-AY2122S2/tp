@@ -18,9 +18,13 @@ import seedu.duke.exceptions.HotelLiteManagerException;
 
 public class Duke {
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Updates the list saved within the respective files based on the type of command the user has inputted.
+     *
+     * @param command       The command object that was constructed by the command parser based on the command the user
+     *                      inputted.
+     * @param listContainer The object containing the lists to update depending on the command inputted by the user.
+     * @throws IOException if we are unable to write to the respective file found within the ListFolder directory.
      */
-
     private void writeListsToFile(Command command, ListContainer listContainer) throws IOException {
         if (command instanceof AddItemCommand || command instanceof UpdateItemPaxCommand || command
                 instanceof UpdateItemNameCommand || command instanceof UpdateItemNameCommand || command
@@ -54,7 +58,16 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Updates the item list saved within the file ListFolder/ItemList.txt with the current item list.
+     *
+     * @param command       The command object that was constructed by the command parser based on the command the user
+     *                      inputted.
+     * @param listContainer The object containing the data structure necessary to update the ItemList stored within
+     *                      the ListFolder/ItemList.txt file.
+     *                      In this case, we require access to the ItemList object which is within listContainer.
+     * @throws IOException if we are unable to write to the file ListFolder/ItemList.txt
+     */
     private void writeItemListsToFile(Command command, ListContainer listContainer) throws IOException {
         if (command instanceof AddItemCommand) {
             AddItemCommand addItemCommand = (AddItemCommand) command;
@@ -78,6 +91,9 @@ public class Duke {
         }
     }
 
+    /**
+     * The primary method that the duke program executes.
+     */
     private void run() {
         Ui ui = new Ui();
         ui.printGreeting();
@@ -109,6 +125,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main entry-point for the java.duke.Duke application.
+     */
     public static void main(String[] args) {
         LogManager.getLogManager().reset();
         new Duke().run();

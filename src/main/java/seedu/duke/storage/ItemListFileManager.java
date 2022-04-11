@@ -16,6 +16,16 @@ import java.util.Scanner;
 public class ItemListFileManager extends FileManager {
     private static final String FILE_PATH = "ListFolder/ItemList.txt";
 
+    /**
+     * Returns the Item List which contains the contents stored within the file ListFolder/ItemList.txt
+     *
+     * @return the Item List containing the contents stored within the file ListFolder/ItemList.txt
+     * @throws HotelLiteManagerException if the folder that the file is stored in does not exist and we are unable to
+     *                                   create it, if the file specified by the file path does not exist and we are
+     *                                   unable to create it or if the item pax of an item stored within the
+     *                                   ListFolder/ItemList.txt file is not an integer.
+     */
+
     public ItemList load() throws HotelLiteManagerException {
         ItemList listOfItems = new ItemList();
         Item item;
@@ -44,11 +54,21 @@ public class ItemListFileManager extends FileManager {
         return listOfItems;
     }
 
+    /**
+     * Deletes all the content currently stored within the file ListFolder/ItemList.txt
+     *
+     * @throws IOException if we are unable to write to the file ListFolder/ItemList.txt
+     */
     private void clearFileContents() throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH);
         fw.close();
     }
 
+    /**
+     * Update the contents stored within the file ListFolder/ItemList.txt with the current content of the item list.
+     *
+     * @throws IOException if we are unable to write to the file ListFolder/ItemList.txt
+     */
     public void writeItemListToFile(ItemList listOfItems) throws IOException {
         clearFileContents();
         FileWriter fw = new FileWriter(FILE_PATH, true);

@@ -10,14 +10,4 @@
 Hi, I am Hotel Lite, and I will do the managing for you.
 What shall we start with today?
 (You may type 'help' to get a full list of commands.)
-Error! Invalid Command.
-=============== Item List =================
-No item found within the item list.
-============ End of the list ==============
-Error! Invalid Command -> Availability NAME / 1,2
-Error! Invalid Command -> Availability NAME / 1,2
-================ Noted! ===================
-No Item matching the criteria has been found.
-===========================================
-Error! Invalid Command.
 see u again!
