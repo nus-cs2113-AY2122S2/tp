@@ -22,6 +22,7 @@ import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 
 public class TimetableTest {
 
+    //@@author jltha
     @Test
     void prepareTimetable_TodayDate_expectEmptyTimetable() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();

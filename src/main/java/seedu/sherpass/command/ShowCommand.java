@@ -29,7 +29,7 @@ public class ShowCommand extends Command {
     private String selection;
 
     /**
-     * Creates and object of ShowCommand type.
+     * Creates an object of ShowCommand type.
      * It represents the specific type of show command given by the user.
      *
      * @param dayInput The show a timetable of the specific date given.

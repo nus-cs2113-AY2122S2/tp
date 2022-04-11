@@ -1,0 +1,49 @@
+@startuml
+skinparam maxMessageSize 150
+
+hide footbox
+
+participant "<font color=red>**<<class>>** \nTimetable" as Timetable
+participant "<font color=red>**<<class>>** \nTimetablePrinting" as TimetablePrinting
+participant ":Ui" as Ui
+
+Timetable -> TimetablePrinting: printFullTimetable(day: String, date: String, filteredTasks: ArrayList<Task>, ui: Ui, taskLength: long, doOnDateLength: long, partitionLength: long)
+activate Timetable
+
+
+activate TimetablePrinting
+
+loop until every row in timetable is printed
+
+opt row number >= 2 and array index >= filteredTasks.size()
+TimetablePrinting -> Ui: getRepeatedCharacters(character: String, number: long)
+activate Ui
+Ui --> TimetablePrinting: colFour: String
+deactivate Ui
+
+TimetablePrinting -> Ui: getRepeatedCharacters(character: String, number: long)
+activate Ui
+Ui --> TimetablePrinting: colFive: String
+deactivate Ui
+
+end
+
+TimetablePrinting -> TimetablePrinting: printRow(colOne: String, colTwo: String, colThree: String, colFour: String, colFive: String, taskLength: long, doOnDateLength: long, i: int, ui: Ui)
+activate TimetablePrinting
+
+TimetablePrinting -> Ui: showToUser(message: String...)
+activate Ui
+
+Ui --> TimetablePrinting
+deactivate Ui
+TimetablePrinting --> TimetablePrinting
+deactivate TimetablePrinting
+
+end
+
+TimetablePrinting --> Timetable
+deactivate TimetablePrinting
+
+deactivate Timetable
+
+@enduml
