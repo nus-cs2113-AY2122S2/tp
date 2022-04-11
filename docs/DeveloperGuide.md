@@ -128,17 +128,9 @@ The user starts by typing a lost command. The diagram above uses the example of 
 4. The `run()` method calls on the `execute()` function in `LostCommand`.
 5. The `execute()` function calls `checkItemListSize()` to check if the item list is empty. If it is, an exception is thrown and no items can be marked as lost.
 6. Then, it calls `getItem()` to check if the item index is within range. If it is not, an exception is thrown and lost cannot be performed.
-7. Then, it calls `getQuantity()` to get the lost item's current quantity as reflected in the inventory.
-8. `updatedItemQuantity` refers to `lostItemQuantity - itemQuantity`. 3 scenarios can occur: 
-   1. `updatedItemQuantity > 0` This describes the scenario where a partial quantity of an item has been lost. 
-      `setQuantity()` is called to change the item's quantity in the inventory to `updatedItemQuantity`. 
-       Then, `showMessages(Messages.REPORTED_LOST_MESSAGE)` is called to display a message that tells the user that the item has been successfully reported lost and that the inventory has been updated.
-   2. `updatedItemQuantity == 0` This describes the scenario where all quantities of an item have been lost. In this scenario, the item should be deleted from the inventory.
-      `removeItem(itemIndex: Integer)` is called to remove the item from the item list.
-       Then, `showMessages()` is called to display a message that tells the user that the item has been deleted and that it has successfully been reported as lost.
-   3. `updatedItemQuantity < 0` This describes the scenario where the quantity of item lost is impossible since it exceeds the quantity of item in the inventory. This is an invalid lost command that will throw an exception.
-9. Finally, `showDivider()` is called to display a dividing line.
-
+7. `removeItem(itemIndex: Integer)` is called to remove the item from the item list. Then, `showMessages(lostItem + "has been deleted")` is called to display a message that tells the user that the item has been deleted. 
+8. `showMessages(Messages.REPORTED_LOST_AND_DELETED` is called to tell the user that the item has been reported lost and deleted from the inventory.
+ 
 ### List Command
 ![ListCommandSequenceDiagram](img/ListCommandSequenceDiagram.png)
 

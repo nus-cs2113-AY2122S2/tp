@@ -43,31 +43,14 @@ cmd -> itemList: getItem(itemIndex: Integer)
 activate itemList
 return lostItem: Item
 
-cmd -> itemList: getQuantity(itemQuantity: Integer)
-activate itemList
-return lostItemQuantity: Integer
-
-alt "updatedItemQuantity > 0"
-cmd -> item: setQuantity(updatedItemQuantity: Integer)
-activate item
-return
-cmd -> ui: showMessages(Messages.REPORTED_LOST_MESSAGE)
-activate ui
-return
-else "updatedItemQuantity == 0"
 cmd -> itemList: removeItem(itemIndex: Integer)
 activate itemList
 return
+
 cmd -> ui: showMessages(lostItem + "has been deleted.")
 activate ui
 return
 cmd -> ui: showMessages(Messages.REPORTED_LOST_AND_DELETED_MESSAGE)
-activate ui
-return
-else "updatedItemQuantity < 0"
-end
-
-cmd -> ui:showDivider()
 activate ui
 return
 
