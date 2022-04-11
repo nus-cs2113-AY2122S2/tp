@@ -14,8 +14,7 @@ import java.nio.file.Paths;
  * Storage class that handles save file IO for task list.
  */
 public class LocalStorage {
-    private static final String OUT_DIR = "output";    // Honestly create a config file or smth
-    private static final String SAVE_PATH = String.format("%s/%s", OUT_DIR, "STORAGE.json");
+    private static final String OUT_DIR = "output";
     public static final String WAREHOUSE_PATH = String.format("%s/%s", OUT_DIR, "WAREHOUSE.json");
 
     /**
@@ -23,21 +22,6 @@ public class LocalStorage {
      *
      * @return saveStr the JSON string from save file
      */
-    public String readSaveFile() {
-        String saveStr = "";
-        try {
-            FileReader fr = new FileReader(SAVE_PATH);
-            int i;
-            while ((i = fr.read()) != -1) {
-                saveStr += ((char) i);
-            }
-            fr.close();
-        } catch (IOException e) {
-            System.err.println("Failed to open save file! " + e.getMessage() + "\n");
-        }
-        return saveStr;
-    }
-
     public static String readSaveFile(String filePath) {
         String saveStr = "";
         try {
@@ -57,30 +41,10 @@ public class LocalStorage {
     /**
      * Opens and writes serialised string versino of tasklist to file at SAVE_PATH.
      */
-    public void writeSaveFile(String storeStr) {
-        Path dir = Paths.get(OUT_DIR);
-        //        File f = new File(OUT_DIR);
-        if (!Files.exists(dir)) {   //createTempDirectory
-            try {
-                Files.createDirectory(Path.of(OUT_DIR));
-            } catch (IOException e) {
-                System.err.println("Failed to create directory!" + e.getMessage());
-            }
-        }
-        //        String filePath = String.format("%s/%s", OUT_DIR, "SAVE.json");
-        try {
-            FileWriter fw = new FileWriter(SAVE_PATH);
-            fw.write(storeStr);
-            fw.close();
-        } catch (IOException e) {
-            System.err.println("Failed to write to save file!" + e.getMessage());
-        }
 
-    }
-
-    public static Boolean writeSaveFile(String storeStr, String filePath) throws IOException {
+    public static Boolean writeSaveFile(String storeStr, String filePath) {
         Path dir = Paths.get(filePath).toAbsolutePath().normalize().getParent();
-        if (!Files.exists(dir)) {   //createTempDirectory
+        if (!Files.exists(dir)) {
             try {
                 Files.createDirectory(dir);
                 System.out.printf("Output Directory created at %s!\n", dir.toString());
@@ -98,10 +62,6 @@ public class LocalStorage {
             return false;
         }
         return true;
-    }
-
-    public static String json2str(JSONObject jo) {
-        return jo.toString();
     }
 
 }

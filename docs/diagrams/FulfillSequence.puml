@@ -6,6 +6,8 @@ Actor User as user
 Participant ":UI" as ui
 Participant ":Fulfill Parser" as fulfillParser
 
+activate Warehouse
+
 user -> ui ++ : "fulfill oid/1"
 
 ui -> fulfillParser : parse()
@@ -44,5 +46,4 @@ alt isFulfilled == false
     end
 end
 ui --> user : "Another command?"
-deactivate Warehouse
 @enduml

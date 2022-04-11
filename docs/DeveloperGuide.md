@@ -1,6 +1,7 @@
 # Developer Guide
 
 ## Table of contents
+* [Acknowledgements](#acknowledgements)
 * [Design](#design)
   * [Unit Good Class](#unit-good-class)
   * [Good Class](#good-class)
@@ -8,6 +9,7 @@
   * [Orderline Class](#orderline-class)
   * [Warehouse Class](#warehouse-class)
   * [Command Parser](#command-parser)
+  * [Display Class](#display-class)
   * [User Interface Class](#user-interface-class)
   * [Match Keyword Class](#match-keyword-class)
 * [Implementation](#implementation)
@@ -20,6 +22,11 @@
   * [Non-Functional Requirements](#non-functional-requirements)
   * [Glossary](#glossary)
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
+
+## Acknowledgements
+* Reference for User Guide from AB-3 [UG](https://se-education.org/addressbook-level3/UserGuide.html)
+* Reference for Developer Guide from AB-3 [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+* Guide for [PlantUML Diagrams](https://se-education.org/guides/tutorials/plantUml.html)
 
 ## Design
 ![Architecture Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/ArchitectureDiagram.puml)
@@ -217,6 +224,55 @@ After going through all the orderlines, the order will only be fulfilled if all 
 Fulfill can be called on any order which is not fulfilled, or partially fulfilled.
 A step by step description of how the fulfill feature can be seen below
 
+
+## Local Storage
+
+Local storage has two general functions:
+
+1. to serialize everything that needs to be saved
+2. to restore everything that was originally saved
+
+These functions are present as methods in most of the classes we want to save.
+
+The format of the savefile is JSON.
+
+We namely save four large components:
+
+1. Unit Goods Hash Map
+2. Goods List
+3. Order List
+4. Total Capacity
+
+The keys of the JSON savefile are all defined in the src/java/seedu.simplst/jsonkeyconstants
+
+### Classes and methods for local storage
+
+#### Warehouse class
+![WarehouseLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Warehouse.puml)
+
+The entry point to saving state is saveWarehouseState(), and the entry point to restoring state is
+restoreWarehouseState().
+
+#### Order class
+![OrderLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Order.puml)
+
+#### Orderline class
+![OrderlineLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Orderline.puml)
+
+#### Good class
+![GoodLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Good.puml)
+
+#### Unit Good class
+![UnitGoodLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/UnitGood.puml)
+
+#### Serialize Sequence Diagram
+![Serialize Seq Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/SerializeSequence.puml)
+
+#### Restore State Sequence Diagram
+![Restore Seq Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/RestoreStateSequence.puml)
+
+
+
 #### Operation
 
 ![Fulfill Order Sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/FulfillSequence.puml)
@@ -283,6 +339,7 @@ Device Requirement:
 * Supports 32-bit and 64-bit systems
 * Supports use of the Command Line Interface
 * Supports use on ***mainstream OS*** requirements as long as the above requirements are met
+* Directory where jar file is run in has read and write permissions.
 
 Application Performance:
 * Does not require internet connection; Functions offline
