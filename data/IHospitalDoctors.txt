@@ -1,15 +1,8 @@
-2
+1
 1. Doctor:
 222
 Harry Potter
 22223333
 theChosenOne@gmail.com
 Defensive
--1
-2. Doctor:
-2224
-Harry Potter
-22223333
-theChosenOne@gmail.com
-Defensive
--1
+5

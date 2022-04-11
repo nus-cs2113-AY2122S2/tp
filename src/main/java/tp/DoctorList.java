@@ -14,7 +14,7 @@ public class DoctorList {
         size = 0;
     }
 
-    public Doctor getDoctor(int index) {
+    public static Doctor getDoctor(int index) {
         return doctors.get(index - 1);
     }
 

@@ -39,9 +39,7 @@ public class AddWardCommand extends Command {
             if (docs <= 0 || docs > doctorList.getSize()) {
                 throw new IHospitalException("The doctor does not exist.\n");
             } else if (doctorList.getDoctor(docs).getWardNumber() != -1) {
-                throw new IHospitalException("The doctor" + docs + "already assigned to a ward\n");
-            } else {
-                doctorList.getDoctor(docs).setWardNumber(wardNumber);
+                throw new IHospitalException("The doctor " + docs + " already assigned to a ward\n");
             }
         }
 
@@ -57,10 +55,14 @@ public class AddWardCommand extends Command {
                 throw new IHospitalException("The nurse does not exist.\n");
                 //@@author DolphXty
             } else if (nurseList.getNurse(nurs).getWardNumber() != -1) {
-                throw new IHospitalException("The nurse" + nurs + "already assigned to a ward\n");
+                throw new IHospitalException("The nurse " + nurs + " already assigned to a ward\n");
             } else {
                 nurseList.getNurse(nurs).setWardNumber(wardNumber);
             }
+        }
+
+        for (int docs : docIndexes) {
+            doctorList.getDoctor(docs).setWardNumber(wardNumber);
         }
 
         wardList.addWard(docIndexes, patientIndexes, nurseIndexes,wardNumber);

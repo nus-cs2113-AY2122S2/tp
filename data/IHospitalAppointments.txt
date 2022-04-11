@@ -1,5 +1,9 @@
-1
+2
 1. Appointment:
 * DOCTOR [222] || Name: Harry Potter || Contact No.: 22223333 || Email: theChosenOne@gmail.com || Department: Defensive || Ward: -1
 * PATIENT [333] || Name: Draco Malfoy || Contact No.: 88888888 || Email: poorPotter@gmail.com || Symptom: cough || Description: Allergic to Harry Potter
-2007-12-03T10:15:30
+2022-06-01T16:30
+2. Appointment:
+* DOCTOR [222] || Name: Harry Potter || Contact No.: 12341234 || Email: 123489@gmail.com || Department: Defensive || Ward: 10
+* PATIENT [333] || Name: Mike || Contact No.: 88888888 || Email: poorPotter@gmail.com || Symptom: cough || Description: Allergic to Harry Potter
+2022-06-03T10:30

@@ -28,11 +28,6 @@ public class WardList {
         countWard++;
     }
 
-    public void addWard(Ward ward) {
-        wards.add(ward);
-        countWard++;
-    }
-
     /**
      * Deletes a ward from the list.
      *
@@ -44,23 +39,6 @@ public class WardList {
         countWard -= 1;
         return cur;
     }
-
-    /**
-     * Get the list of doctor of a given ward.
-     *
-     * @param num Num of the ward.
-     * @return Doctor list of the given ward.
-     */
-    public String[]  getDoctorListOfWardById(int num) {
-        String[] str = new String[10];
-        for (Ward ward : wards) {
-            if (ward.getNumber() == num) {
-                str = ward.getDoctors();
-            }
-        }
-        return str;
-    }
-
 
     public Ward searchWard(int num) {
         for (int i = 0; i < wards.size(); i++) {
