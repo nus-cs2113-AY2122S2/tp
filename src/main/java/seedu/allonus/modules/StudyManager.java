@@ -69,7 +69,8 @@ public class StudyManager {
     public static final String EDIT_MODULE_CHANGES_MESSAGE = "Here are the changes so far. "
             + "You can edit more module parameters or you can enter 'done' to stop editing!";
     private static final String EDIT_NO_MODULES_ERROR = "There are no modules to edit!";
-    private static final String EDIT_NO_INDEX_ERROR = "Please enter the index of the module you would like to edit";
+    private static final String EDIT_NO_INDEX_ERROR = "You have not entered the index of"
+            + " the module you would like to edit!";
     private static final String LOGGER_WRONG_EDIT_INDEX = "wrong index for edit";
     private static final String LOGGER_NO_EDIT_INDEX = "no index number specified for edit";
 
@@ -194,7 +195,6 @@ public class StudyManager {
      */
     public static void printMessageWithDivider(String message) {
         textUi.showToUser(message);
-        //System.out.println(message);
     }
 
     private void printMessage(String message) {
