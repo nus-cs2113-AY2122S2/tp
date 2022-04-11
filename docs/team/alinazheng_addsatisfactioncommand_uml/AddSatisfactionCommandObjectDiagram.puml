@@ -1,0 +1,33 @@
+@startuml
+object Duke
+
+object ListContainer
+ListContainer : name = "listContainer"
+Duke ..> ListContainer
+
+object CommandParser
+CommandParser : name = "commandParser"
+Duke ..> CommandParser
+
+object Command
+Command : name = "command"
+Duke ..> Command
+
+object AddSatisfactionCommand
+AddSatisfactionCommand : name = "userCommand"
+AddSatisfactionCommand --|> Command
+
+CommandParser ..> AddSatisfactionCommand
+
+object Satisfaction
+Satisfaction : name = "satisfaction"
+AddSatisfactionCommand --> Satisfaction
+
+object SatisfactionList
+SatisfactionList : name = "satisfactionList"
+ListContainer --> SatisfactionList
+SatisfactionList ..> Satisfaction
+@enduml
+
+
+
