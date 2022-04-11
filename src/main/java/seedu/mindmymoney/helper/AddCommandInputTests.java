@@ -264,6 +264,13 @@ public class AddCommandInputTests {
             throw new MindMyMoneyException("Limit amount must be more than 0");
         }
         assert inputAmountAsDouble > 0 : "Limit amount should have a positive value";
+
+        if (inputAmountAsDouble > 50000) {
+            throw new MindMyMoneyException("Limit amount must be less than $50,000.\n"
+                + "If you do have a credit card with more than $50,000 limit, "
+                + "do inform the MindMyMoney team through GitHub.");
+        }
+
     }
 
     /**
@@ -301,7 +308,7 @@ public class AddCommandInputTests {
     public static void testUpdateExpenditureParameters(int indexToUpdate, String newPaymentMethod, String inputCategory,
                                                        String description, String amountAsString, String inputTime,
                                                        CreditCardList creditCardList, ExpenditureList expenditureList)
-                                                        throws MindMyMoneyException {
+        throws MindMyMoneyException {
         testPaymentMethod(newPaymentMethod, creditCardList);
         testExpenditureCategory(inputCategory);
         testDescription(description);
@@ -312,9 +319,9 @@ public class AddCommandInputTests {
         //Test updated expenditure amount
         String oldPaymentMethod = getOldPaymentMethod(indexToUpdate, expenditureList);
         if (isSamePaymentMethod(oldPaymentMethod, newPaymentMethod)
-                && !newPaymentMethod.equalsIgnoreCase("cash")) {
+            && !newPaymentMethod.equalsIgnoreCase("cash")) {
             testSameCreditCardExpenditure(indexToUpdate, amountAsString, expenditureList, creditCardList,
-                    newPaymentMethod);
+                newPaymentMethod);
         } else {
             testExpenditureAmount(amountAsString, newPaymentMethod, creditCardList);
         }
@@ -331,7 +338,7 @@ public class AddCommandInputTests {
     private static void testSameCreditCardExpenditure(int indexToUpdate, String inputAmount,
                                                       ExpenditureList expenditureList, CreditCardList creditCardList,
                                                       String paymentMethod)
-                                                        throws MindMyMoneyException {
+        throws MindMyMoneyException {
 
         float inputAmountAsFloat;
         if (inputAmount == null) {
@@ -346,7 +353,7 @@ public class AddCommandInputTests {
         CreditCard creditCard = creditCardList.get(paymentMethod);
         float oldExpenditureAmount = expenditureList.get(indexToUpdate).getAmount();
         float newTotalExpenditure = creditCard.getTotalExpenditure() - oldExpenditureAmount
-                + inputAmountAsFloat;
+            + inputAmountAsFloat;
         boolean isOverLimit = creditCard.getMonthlyCardLimit() < newTotalExpenditure;
 
         if (isOverLimit) {
