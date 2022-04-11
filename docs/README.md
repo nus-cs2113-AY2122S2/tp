@@ -18,3 +18,10 @@ Useful links:
 * [User Guide](UserGuide.md)
 * [Developer Guide](DeveloperGuide.md)
 * [About Us](AboutUs.md)
+
+Project Portfolio Pages:
+* [Franke Tang](./team/FTang21.md)
+* [John McMonigle](./team/johnmcmonigle.md)
+* [Yiying Wang](./team/nineves.md)
+* [Yu Ling](./team/yulingtan.md)
+* [Yaxin Wan](./team/yaxinjoy.md)
