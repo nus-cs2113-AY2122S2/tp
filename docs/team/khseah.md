@@ -12,26 +12,17 @@ Code Contribution can be viewed [here](https://nus-cs2113-ay2122s2.github.io/tp-
 
 Enhancements implemented:
 1. Set up the initial structure to build our code base upon.
-   - `MindMyMoney` class as the entry point into our program.
-   - `Ui` class to print welcome message and read user's input.
-   - `Parser` class to make sense of user's input.
-   - `Command` abstract class for Commands to inherit from.
+   - `MindMyMoney` class as the entry point, `Ui` class, `Parser` class and `Command` abstract class.
    - Allows the team to have a common foundation to build upon and sets the architecture structure.
-   - Crucial to get the design right as it affects the way future features are implemented.
    
 2. Added the `Ui` class.
-   - Prints welcome message and reads user's input.
    - Implemented the `>` prompt to help the user differentiate between their input and the program's output.
-   - Sourced for 49 financial tips, of which 1 would be randomly chosen to be printed on startup.
-   - Financial tips can educate the user and make the startup page more interactive.
+   - Sourced for 49 financial tips, of which 1 would be printed on startup, making it more interactive.
    
 3. Set up the `HelpCommand` class.
-   - Prints a list of supported commands formats for reference.
-   - Outlined the initial design for the help page.
    - Provides the user a convenient way to view command formats should they forget.
    
 4. Added Add, Delete, Update and List functionalities for `Income`.
-   - Users are now able to track their sources of income.
    - As a Personal Finance app, it is imperative that income can be tracked, so that users can monitor their income
 inflow and outflow.
    - Affected existing Add, Delete, Update and List commands as these commands were also used for `Expenditure` and
@@ -39,7 +30,6 @@ inflow and outflow.
    
 5. Added the `User` class.
    - Abstracts out `ExpenditureList`, `CreditCardList` and `IncomeList` classes into 1 class, increasing OOP.
-   - Improves the code as instead of passing 3 lists into the method, only the `User` class is needed.
    - Affected a majority of existing code as previous methods had the 3 lists as parameters, and required significant 
 changes.
    
@@ -55,43 +45,34 @@ changes.
 
 
 2. Streamlined content page.
-   - Shortened section headers to keep it succinct.
-   - Standardized action verbs (Display, Add, Modify etc) for consistency.
+   - Shortened section headers to keep it succinct and standardized action verbs (Display, Add, Modify etc) for 
+consistency.
 
 ### DG Contribution
 1. Wrote the `Architecture overview` portion.
-   - Added Fig 1 - Architecture Diagram.
-   - Added Fig 2 - Sequence Diagram.
+   - Added Fig 1 - Architecture Diagram and Fig 2 - Sequence Diagram.
    
 2. Wrote the `Ui` and `Parser Component overview` portion.
-   - Added Fig 3 - Ui Class Diagram.
-   - Added Fig 4 - Parser Class Diagram.
+   - Added Fig 3 - Ui Class Diagram and Fig 4 - Parser Class Diagram.
 
 3. Wrote the `Add Income implementation` portion.
    - Added Fig 10 - Add Income Sequence Diagram.
    
 4. Wrote the `List Command` portion.
-   - Added Fig 12 - List Command Sequence Diagram.
-   - Added Fig 13 - List Expenditure Sequence Diagram.
-   - Added Fig 14 - List Credit Card Sequence Diagram.
-   - Added Fig 15 - List Income Sequence Diagram.
+   - Added Fig 12 - List Command Sequence Diagram, Fig 13 - List Expenditure Sequence Diagram, Fig 14 - List Credit Card
+Sequence Diagram and Fig 15 - List Income Sequence Diagram
 
 ### Team-Based tasks Contribution
-1. Created and added members into `developers` team on GitHub.
-
-2. Set up Issue Tracker.
+1. Set up Issue Tracker.
    - Added `Issue type`, `Priority` and `Severity` labels.
    - Created and assigned issues for `v1.0` based on user stories.
-   - Created `v1.0` Milestone.
-   
-3. Enabled:
+   - Created and closed `v1.0` Milestone.
+
+2. Enabled:
    - Status checks to pass before merging.
    - GitHub Pages.
-   - Assertions in Gradle.
 
-4. Closed `v1.0` Milestone.
-
-5. Released `v1.0` and `v2.0` JAR files.
+3. Released `v1.0` and `v2.0` JAR files.
 
 ### Miscellaneous Contribution
 PR reviews (with non-trivial comments):
