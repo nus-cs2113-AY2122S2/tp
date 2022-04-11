@@ -19,7 +19,7 @@ Enhancements implemented:
 1. Set up the initial structure to build our code base upon.
     - `AddCommand` class to allow users to add commands into `MindMyMoney`.
     - `CalculationInputCommand` class to allow users to calculate their expenses.
-    - `userfinancial` package containing `Expenditure` and `CreditCard` class.
+    - `userfinancial` package containing `Expenditure` and `CreditCard` classes.
     - `helper` package containing helper functions used throughout the codebase.
     - Allows the team to use functions and classes essential to `MindMyMoney`.
       
@@ -28,6 +28,8 @@ Enhancements implemented:
       added.
     - Added its relevant `AddCommandInputTests` that serves as input validation and checks the input of each field in
       the add command for its validity.
+    - This command was challenging as it has many fields that needed to be validated and formatted. It also interacts 
+    with other commands in the codebase which made it more complicated.
       
 3. Set up the `CalculationInputCommand` class.
     - Allows users to calculate the total amount of expenditures, according to date.
@@ -50,7 +52,7 @@ Enhancements implemented:
 7. Added JUnit tests
     - Added JUnit tests to `AddCommand`, `ListCommand`, `UpdateCommand`, `CalculateInputCommand`,
       `GeneralFunctions`, `HelpCommand`, `DeleteCommand`,  `Parser`, `ByeCommand`, `MindMyMoney`, `Ui`.
-    - Increased the test coverage for these classes to 88% classes and 87% lines covered
+    - Increased the test coverage for these classes to 88% classes and 87% lines covered.
     - Implemented functions to allow capturing of terminal output, used throughout other JUnit tests.
       
 8. Miscellaneous
@@ -68,13 +70,14 @@ Enhancements implemented:
     - Wrote the introduction, using the user guide and quick start.
     - Changed the way expected output is displayed, from images to text form for better formatting.
     - Formatted the headers and the `Format` and `Expected Outcome` field.
+
 ### DG Contribution
 1. Contributed to the `Add Command` portion.
     - Added `Add Expenditure` portion
-    - Added Fig 7 - AddCommand Sequence Diagram and Fig 8 - Add Expenditure Command Sequence Diagram
+    - Added the initial Fig 7 - AddCommand Sequence Diagram and Fig 8 - Add Expenditure Command Sequence Diagram
       
 2. Wrote the `Introduction` and `Appendix Requirements`.
-    - Added Product Scope, Non-Functional Requirements, Glossary
+    - Added Product Scope, Non-Functional Requirements, Glossary.
     - Added the purpose, acknowledgements and using the developer guide.
 
 ### Team-Based tasks Contribution
@@ -83,6 +86,7 @@ Enhancements implemented:
     - Created and assigned issues for `v2.0` based on user stories.
     - Created and closed `v2.0` Milestone.
     - Opened `v2.1` Milestone.
+
 ### Miscellaneous Contribution
 
 PR reviews (with non-trivial comments):
