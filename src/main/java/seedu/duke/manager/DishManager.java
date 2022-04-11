@@ -34,6 +34,9 @@ public class DishManager extends Manager {
         return singleton;
     }
 
+    /**
+     * This is for testing.
+     */
     public static void resetInstance() {
         singleton = null;
     }
@@ -96,7 +99,8 @@ public class DishManager extends Manager {
     public void deleteDish(int menuIndex) throws IndexOutOfBoundsException {
         int listIndex = menuIndex - 1;
         throwIfIndexNotValid(listIndex);
-        dishes.remove(listIndex);
+        Dish deleted = dishes.remove(listIndex);
+        deleted.setName(deleted.getName() + " (deleted in menu)");
     }
 
     /**
