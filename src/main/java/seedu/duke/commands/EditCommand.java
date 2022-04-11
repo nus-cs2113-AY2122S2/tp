@@ -30,16 +30,14 @@ public class EditCommand extends Command {
     private final Optional<String> name;
     private final Optional<Integer> quantity;
     private final Optional<String> description;
-    private final Optional<Boolean> relativeAdd;
 
     public EditCommand(int index,
             Optional<String> name, Optional<Integer> quantity,
-            Optional<String> description, Optional<Boolean> relativeAdd) {
+            Optional<String> description) {
         this.index = index;
         this.name = name;
         this.quantity = quantity;
         this.description = description;
-        this.relativeAdd = relativeAdd;
     }
 
     @Override
@@ -56,19 +54,16 @@ public class EditCommand extends Command {
             placeholderItem.setName(this.name.get());
         }
 
-        if (this.quantity.isPresent() && this.relativeAdd.isPresent()) {
-            int currentQuantity = placeholderItem.getQuantity();
-            int multiplier = this.relativeAdd.get() ? 1 : -1;
+        if (this.quantity.isPresent()) {
             try {
-                int newQuantity = Math.addExact(currentQuantity, multiplier * this.quantity.get());
+                int currentQuantity = targetedItem.getQuantity();;
+                int newQuantity = Math.addExact(currentQuantity, this.quantity.get());
                 placeholderItem.setQuantity(newQuantity);
             } catch (IllegalArgumentException e) {
                 throw new InvMgrException(Messages.NEGATIVE_QUANTITY_MESSAGE, e);
             } catch (ArithmeticException e) {
                 throw new InvMgrException(Messages.OVERFLOW_QUANTITY_MESSAGE, e);
             }
-        } else if (this.quantity.isPresent() && !this.relativeAdd.isPresent()) {
-            placeholderItem.setQuantity(quantity.get());
         }
 
         if (this.description.isPresent()) {
@@ -77,7 +72,6 @@ public class EditCommand extends Command {
         ui.showMessages(String.format(EDIT_RESULT_FORMAT, this.index + 1, targetedItem.toDetailedString(),
                 placeholderItem.toDetailedString()));
         itemList.set(index, placeholderItem);
-
     }
 
     /**
@@ -99,8 +93,7 @@ public class EditCommand extends Command {
             return (this.index == toCompare.index)
                     && (this.name.equals(toCompare.name))
                     && (this.quantity.equals(toCompare.quantity))
-                    && (this.description.equals(toCompare.description))
-                    && (this.relativeAdd.equals(toCompare.relativeAdd));
+                    && (this.description.equals(toCompare.description));
         } else {
             // null, or object not EditCommand
             return false;
