@@ -262,11 +262,11 @@ public abstract class Message {
     public static final String ERROR_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS =
             "The person list or group identifier delimiters are missing.";
     public static final String ASSERT_SESSIONCREATE_SESSION_NAME_NULL =
-            "Session name is empty but was not handled in prepare function.";
+            "Session name is empty but was not handled in command parser.";
     public static final String ASSERT_SESSIONCREATE_SESSION_DATE_NULL =
-            "Session data is empty but was not handled in prepare function.";
+            "Session data is empty but was not handled in command parser.";
     public static final String ASSERT_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS =
-            "The person list or group identifier delimiters are missing but was not handled in prepare function.";
+            "The person list or group identifier delimiters are missing but was not handled in command parser.";
     public static final String LOGGER_SESSIONCREATE_SESSION_ADDED =
             "A session was added into the list of sessions with Id: ";
     public static final String LOGGER_SESSIONCREATE_DUPLICATE_NAMES_IN_SESSION_LIST =
@@ -406,9 +406,9 @@ public abstract class Message {
 
     // Group Create Command
     public static final String ASSERT_GROUPCREATE_GROUP_NAME_NULL =
-            "Group name is empty but was not handled in prepare function.";
+            "Group name is empty but was not handled in command parser.";
     public static final String ASSERT_GROUPCREATE_PERSONLIST_NULL =
-            "The person list is empty but was not handled in prepare function.";
+            "The person list is empty but was not handled in command parser.";
     public static final String LOGGER_GROUPCREATE_GROUP_ADDED =
             "A group was added into the list of groups with Id: ";
     public static final String LOGGER_GROUPCREATE_DUPLICATE_NAMES_IN_GROUP_LIST =
