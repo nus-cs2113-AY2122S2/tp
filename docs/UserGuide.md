@@ -161,7 +161,7 @@ Creates a session so that you can manage your group outings. <br>
 >* The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >   * Example: `Alice Tan` is not allowed.
 > 
-> **⚠️Warnings:**
+> **⚠️ Warning:**
 >* If you include a name of an individual in `[NAME1 NAME2 ...]` who already exists in the group specified by
    `[GROUP_ID]`, only one instance of this individual is stored in the session.
 >   * Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
@@ -200,7 +200,7 @@ Deletes an existing session so that you can remove sessions that you no longer n
 > **💡 Note:**
 >* A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
 > 
-> **⚠️Warning:**
+> **⚠️ Warning:**
 >* This action is irreversible. The session is deleted immediately after entering this command.
 >* Additionally, all activities in the deleted session are deleted immediately as well.
 
@@ -255,7 +255,7 @@ Edits an existing session so that you can change the details of a session.<br>
 >     a valid edit command would be: <br>
 >     `session /edit /sid 1 /pl Alice Bob Charlie Mike`.
 > 
-> **⚠️Warning:**
+> **⚠️ Warning:**
 >* This action is irreversible. The session is edited immediately after entering this command.
 
 <br>
@@ -437,7 +437,7 @@ Deletes an existing activity from a particular session so that you can remove ac
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity in that session can be removed.
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be removed.
 >
-> **⚠️Warning:**
+> **⚠️ Warning:**
 >- This action is irreversible. The activity is deleted immediately after entering this command.
 
 <br>
@@ -523,7 +523,7 @@ distributed amongst all participants.
    with a maximum of 3 digits before and 2 after the decimal point, if any.
 >* All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
 >
-> **⚠️Warnings:**
+> **⚠️ Warning:**
 >* This action is irreversible. The activity is edited immediately after entering this command.
 
 <br>
@@ -709,7 +709,7 @@ Deletes an existing group so that you can remove groups that you no longer need.
 > **💡 Note:**
 >- A group with a unique identifier of `[GROUP_ID]` has to exist before it can be removed.
 >
-> **⚠️Warning:**
+> **⚠️ Warning:**
 > - This action is irreversible. The group is deleted immediately after entering this command.
 
 <br>
@@ -750,7 +750,7 @@ Edits an existing group so that you can change the details of a group.<br>
 >   - If a session has been created with the group that you are editing,
 >     editing the group **does not modify** the _list of participants_ in the session.
 >
-> **⚠️Warning:**
+> **⚠️ Warning:**
 > - This action is irreversible. The group is edited immediately after entering this command.
 
 <br>
