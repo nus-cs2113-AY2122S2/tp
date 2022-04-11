@@ -8,7 +8,8 @@ hide footbox
 ":AddMeetingCommand" -> ":MasterTimetable" ++: addMeetingToEveryoneTimetable(meeting:Meeting)
 ":MasterTimetable" -> ":Timetable" ++ : add(meeting:Meeting)
 ":Timetable" -> ":Timetable"++: addMeetingConfirmation(meeting:Meeting)
-":Timetable" --> ":MasterTimetable" --: addMeetingConfirmation:String
+":Timetable" --> ":Timetable"--: addMeetingConfirmation:String
+":Timetable" --> ":MasterTimetable" --: :String
 ":MasterTimetable" --> ":AddMeetingCommand" -- :
 ":AddMeetingCommand" --> ":Ui" --:
 

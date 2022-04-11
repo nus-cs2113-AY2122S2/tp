@@ -9,14 +9,16 @@ hide footbox
 alt event is type meeting
 ":DeleteCommand" -> ":MasterTimetable" ++: deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
 ":MasterTimetable" -> ":MasterTimetable" ++: deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
-":MasterTimetable" -> ":DeleteCommand" ++: deleteMeetingFromAllTimetableConfirmation :String
+":MasterTimetable" --> ":MasterTimetable" --: deleteMeetingFromAllTimetableConfirmation :String
+":MasterTimetable" --> ":DeleteCommand" ++: :String
 ":DeleteCommand" --> ":Ui" --:
-
+deactivate
 else non-meeting types
 
 ":DeleteCommand" -> ":Timetable" ++ : remove(index - 1)
 ":Timetable" --> ":DeleteCommand" --:
 ":DeleteCommand" -> ":DeleteCommand" ++ : deleteConfirmation(event: Event )
+":DeleteCommand" --> ":DeleteCommand" -- : deleteConfirmation:String
 ":DeleteCommand" --> ":Ui" --:
 
 end
