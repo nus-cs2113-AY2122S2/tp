@@ -31,11 +31,6 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 * [How SplitLah works](#how-splitlah-works)
 * [Features](#features)
   * [Session Management](#session-management)
-      * [Creating a session: `session /create`](#creating-a-session-session-create)
-      * [Deleting a session: `session /delete`](#deleting-a-session-session-delete)
-      * [Editing a session: `session /edit`](#editing-a-session-session-edit)
-      * [Viewing a session: `session /view`](#viewing-a-session--session-view)
-      * [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
   * [Activity Management](#activity-management)
     * [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
     * [Deleting an activity: `activity /delete`](#deleting-an-activity-activity-delete)
@@ -128,8 +123,9 @@ If you can type fast, SplitLah can manage your outings faster than applications 
   displayed in an easy-to-read summary.
 
 <hr>
-
-<a class="button" href="#contents">Back to Contents</a>
+<div class="button-box">
+  <a class="btn" href="#contents">Back to Contents</a>
+</div>
 
 ## Features 
 
@@ -137,7 +133,18 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 > A session represents a group outing that involves a list of participants and 
 > spans an arbitrary period of time containing one or more activities.
 
-<br>
+### Overview
+
+* [Creating a session: `session /create`](#creating-a-session-session-create)
+* [Deleting a session: `session /delete`](#deleting-a-session-session-delete)
+* [Editing a session: `session /edit`](#editing-a-session-session-edit)
+* [Viewing a session: `session /view`](#viewing-a-session--session-view)
+* [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
+
+
+<div class="button-box">
+  <a class="btn" href="#contents">Back to Contents</a>
+</div>
 
 ### Creating a session: `session /create`
 Creates a session so that you can manage your group outings. <br>
@@ -181,6 +188,10 @@ Creates a session so that you can manage your group outings. <br>
   <br>
   <br>
 
+<div class="button-box">
+  <a class="btn" href="#session-management">Back to Session Management</a>
+</div>
+
 
 ### Deleting a session: `session /delete`
 Deletes an existing session so that you can remove sessions that you no longer need.<br>
@@ -206,6 +217,10 @@ Deletes an existing session so that you can remove sessions that you no longer n
   ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
   <br>
   <br>
+
+<div class="button-box">
+  <a class="btn" href="#session-management">Back to Session Management</a>
+</div>
 
 ### Editing a session: `session /edit`
 Edits an existing session so that you can change the details of a session.<br>
@@ -264,6 +279,10 @@ Edits an existing session so that you can change the details of a session.<br>
   <br>
   <br>
 
+<div class="button-box">
+  <a class="btn" href="#session-management">Back to Session Management</a>
+</div>
+
 ### Viewing a session : `session /view`
 Displays the details of a session so that you can review it.<br>
 
@@ -302,6 +321,10 @@ However, deleted sessions are not listed.
   <br>
 
 <hr>
+
+<div class="button-box">
+  <a class="btn" href="#session-management">Back to Session Management</a>
+</div>
 
 ## _Activity Management_
 > An activity represents a single group activity and stores its name, costs and the name of the payer.
