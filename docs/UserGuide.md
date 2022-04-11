@@ -371,7 +371,7 @@ There are 2 ways that you can specify the costs of an activity:
 >    * Each individual name is **case-insensitive**.
 >* `[TOTAL_COST]` refers to the total cost of the activity.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
->    * Example: `/i Alice Bob /cl 10 20` means that _Alice's_ portion cost $10 while _Bob's_ portion cost $20.
+>    * Example: `/i Alice Bob /cl 10 20` means that _Alice's_ portion cost _$10_ while _Bob's_ portion cost _$20_.
 >* `[GST_PERCENTAGE]` refers to the additional percentage GST that may be charged during the activity.
 >* `[SERVICE_CHARGE]` refers to the additional percentage service charge that may be charged during the activity.
 
@@ -390,8 +390,8 @@ There are 2 ways that you can specify the costs of an activity:
 >* The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that range from 0 to 100,
 >  with a maximum of 3 digits before and 2 after the decimal point, if any.
 >* If the payer is also involved in the activity, the payer's name has to be included in the list of participants
->   * Example: _Alice_ paid for a movie which she watched with _Bob_ in a session with a session unique identifier of 1,
->    costing a total of $20. The correct command format is: <br>
+>   * Example: _Alice_ paid for a movie which she watched with _Bob_ in a session with a session unique identifier of _1_,
+>    costing a total of _$20_. The correct command format is: <br>
 >    `activity /create /sid 1 /n movie /p Alice /i Alice Bob /co 20`
 >* All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
 
@@ -622,10 +622,10 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 >* A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
 >* All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
 >* SplitLah simplifies transactions to minimise the number of transactions you have to make.
->   * Example: In the same session, _Alice_ paid for _Bob_'s lunch which costs $10 and _Bob_ paid for _Charlie_'s
->     movie ticket which costs $10. 
->   * Instead of having _Bob_ pay _Alice_ $10 and _Charlie_ pay _Bob_ $10, SplitLah simplifies this
->     so _Charlie_ just has to pay $10 directly to _Alice_, settling all debts in a single transaction.
+>   * Example: In the same session, _Alice_ paid for _Bob_'s lunch which costs _$10_ and _Bob_ paid for _Charlie_'s
+>     movie ticket which costs _$10_. 
+>   * Instead of having _Bob_ pay _Alice_ _$10_ and _Charlie_ pay _Bob_ _$10_, SplitLah simplifies this
+>     so _Charlie_ just has to pay _$10_ directly to _Alice_, settling all debts in a single transaction.
 
 <br>
 
