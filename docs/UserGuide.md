@@ -29,7 +29,7 @@ and contact management tasks done faster than traditional GUI apps.
   * [Editing a module](#editing-a-module-edit)
   * [Finding a module](#finding-a-module-find)
   * [Reading from .ics file](#reading-from-ics-file-read-ics)
-* [Contacts Tracker Features](#contacts-tracker-features)
+* [Contacts Manager Features](#contacts-manager-features)
   * [Adding a contact](#adding-a-contact-add)
   * [List out contacts](#list-all-contacts-list)
   * [Deleting a contact](#deleting-a-contact-rm)
@@ -520,26 +520,33 @@ Expected outcome:
 The .ics file from nusmods.com has been parsed to get the relevant module details and has automatically added them to your module list.
 You can now perform all other StudyManager functions on this list as per normal.
 
-### Contacts Tracker Features
+### Contacts Manager Features
+The Contacts Manager allows the user to keep track of the people they know.
+Each contact should contain these fields: name, faculty, email, and description.
+No fields should be left blank. Users may enter any non-space symbol as a placeholder
+should they not have the relevant information for a particular field.
+
+**Note on contact fields**:
+* Two contacts cannot have the same name (case-insensitive)
+* Emails not in the form of `xxx@xxx.xxx` will give an invalid email reminder,
+  but will still be allowed
+* Users may enter anything as input to the faculty and description fields
 
 #### Adding a contact: `add`
 Adds a new contact to the list of contacts.
 
 Format: `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION`
 
-* Use the delimiters `n/`, `f/`, `e/`, `d/` to indicate the contact's name, 
+* Use the delimiters ` n/`, ` f/`, ` e/`, ` d/` to indicate the contact's name, 
 faculty, email, and description respectively; delimiters should be preceded by space
 * You may indicate the fields in any order
-* Two contacts cannot have the same name (case-insensitive)
-* Emails not in the form of `xxx@xxx.xxx` will give an invalid email reminder,
-  but will still be allowed
 * The content of the field should immediately follow the delimiter, e.g.
   * `n/Name` is a valid way of indicating a field
   * `n/ Name` is not valid, and will be treated as an empty field
 * Input between the `add` command and the first delimiter will be ignored, e.g.
   * In the command `add whatever input n/NAME f/FACULTY e/EMAIL d/DESCRIPTION`,
   the `whatever input` portion will be ignored
-* A field should only be provided once
+* Each field should only be provided once
 * All fields must be provided
 
 Example of usage:
@@ -549,9 +556,11 @@ Example of usage:
 Expected outcome:
 
 ```
+---------------------------------------------------
 Got it. I've added this contact:
   Name: Jane Doe, Faculty: SoC, Email: e0334987@u.nus.edu, Description: group mate for CS4215
 Now you have N contacts in the list.
+---------------------------------------------------
 ```
 Where `N` depends on the length of the current contacts list.
 
@@ -567,10 +576,12 @@ Example of usage:
 Expected outcome:
 
 ```
+---------------------------------------------------
 Here are the contacts in your list:
  1. Name: Jane Doe, Faculty: SoC, Email: e0334987@u.nus.edu, Description: group mate for CS4215
  2. Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
 
+---------------------------------------------------
 ```
 
 #### Deleting a contact: `rm`
@@ -591,9 +602,11 @@ Example of usage:
 Expected outcome:
 
 ```
+---------------------------------------------------
 Noted. I've removed this contact:
   Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
 Now you have N contacts in the list.
+---------------------------------------------------
 ```
 Where `N` depends on the length of the current contacts list.
 
@@ -608,10 +621,9 @@ Format: `edit INDEX [n/NAME] [f/FACULTY] [e/EMAIL] [d/DESCRIPTION]`
   * However, you must edit at least one field at a time
   * This means that the Contacts Manager will prompt you for a field 
   if you only enter `edit INDEX` without any fields supplied
-  * A field should only be provided once
-* The same rules apply regarding the format delimiters (from the `add` command)
-* Two contacts cannot have the same name (case-insensitive)
-* A name can be updated with itself unchanged, or with a different case, e.g.
+  * Each field should only be provided once
+* The same rules apply regarding the format of delimiters (from the `add` command)
+* A name can be updated with itself, or with a different case, e.g.
   * For a contact with name `Sample`, you may edit the contact name to be
   `n/Sample`, `n/sample`, `n/SAMPLE`, etc.
   * A reminder will be given in these edits, but they are still allowed
@@ -624,8 +636,10 @@ Example of usage:
 Expected outcome:
 
 ```
+---------------------------------------------------
 Okay, I've updated the information of this contact:
   Name: Jane Not Doe, Faculty: FASS, Email: e0334987@u.nus.edu, Description: group mate for CS4215
+---------------------------------------------------
 ```
 
 #### Finding a contact: `find`
@@ -645,8 +659,11 @@ Example of usage:
 Expected outcome:
 
 ```
+---------------------------------------------------
 Here are the matching contacts in your list:
  1. Name: Jane Not Doe, Faculty: FASS, Email: e0334987@u.nus.edu, Description: group mate for CS4215
+
+---------------------------------------------------
 ```
 
 ### Load and Save

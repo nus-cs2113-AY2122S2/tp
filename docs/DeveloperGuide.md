@@ -386,7 +386,9 @@ an `InvalidContactField` exception
 **API:** `ContactParser.java`
 
 The Sequence Diagram below illustrates interactions between classes of objects
-for the static `setContactFields(contact, fieldStrings)` API call.
+for the static `setContactFields(contact, fieldStrings)` API call. Note that
+the portions of this API call related to load, save, and showing messages to users
+are abstracted away and left out in this sequence diagram.
 
 This API call is used both for adding a new contact, and for 
 editing existing contacts. When adding a new contact, an empty `Contact` object
@@ -401,6 +403,36 @@ Field object from `contact`, and then uses the polymorphic `setField()`
 call to update the value of the corresponding field of `contact`.
 
 ![](images/ContactSetFieldsSequenceSubdiagram.png)
+
+**Decisions made about data validation in parsing**: 
+* We generally have loose data validation checks for all `Contact` fields.
+This is to give users the flexibility to enter placeholders or additional 
+information as they see fit, instead of preventing them from entering more 
+customized information if we prevent entering certain symbols.
+* Name: 
+  * We opted to not check for anything but duplicated names in our
+  data validation for the name field. 
+  * This is case-insensitive. 
+  * However, in the case of editing an existing contact, we allow users to update
+  a name even if the new name is the same as the old name, if both are converted
+  to lowercase. This is in case users want to edit a name from `jane` to `Jane`,
+  as an example.
+* Email:
+  * We check for the email format of `XXX@XXX.XXX`, where `X` can be any
+  character.
+  * However, even for emails that do not follow this format, we allow users
+  to enter them as valid fields. This is in case users want to enter a placeholder
+  when they don't know someone's email, or if they want to enter multiple emails, etc.
+* Faculty:
+  * We considered limiting faculty fields to only NUS faculty names, or check
+  that only alphabetical characters are entered. 
+  * However, our target user (an NUS student) may also have friends outside of NUS,
+  or, certain NUS faculty names include non-alphabetic characters (e.g. Duke-NUS, 
+  FoS/SoC DDP).
+  * Therefore, we ultimately did not implement any data validation checks for this field.
+* Description: 
+  * The same rationales apply. We do not have data validation checks in place
+  to give our users a larger degree of freedom.
 
 ### Load and Store
 
