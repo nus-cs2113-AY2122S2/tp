@@ -186,7 +186,7 @@ public class Order {
 
     private JSONArray serializeOrderlines() {
         JSONArray ja = new JSONArray();
-        for (Orderline ol : orderlines) {
+        for (Orderline ol : this.orderlines) {
             ja.add(ol.serialize());
         }
         return ja;
@@ -202,7 +202,7 @@ public class Order {
         if (jaol == null) {
             return null;
         }
-        jo.put(OrderKeys.orderlines, this.orderlines);
+        jo.put(OrderKeys.orderlines, jaol);
         return jo;
     }
 
@@ -219,6 +219,8 @@ public class Order {
         cur.setFulfilled(Boolean.parseBoolean(jo.get(OrderKeys.isFulfilled).toString()));
         JSONArray orderLinesJson = (JSONArray) jo.get(OrderKeys.orderlines);
         orderLinesJson.forEach((item) -> {
+//            System.out.println("item");
+//            System.out.println(item);
             JSONObject jol = (JSONObject) item;
             UnitGood ug = UnitGood.restoreUnitGood(jol);
             String qty = jol.get(GoodKeys.quantity).toString();

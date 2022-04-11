@@ -103,11 +103,15 @@ public class Warehouse {
 
     }
 
-    public void addOrderline(String oid, String sku, String qty) throws WrongCommandException {
+    public Boolean addOrderline(String oid, String sku, String qty) throws WrongCommandException {
+        Boolean status = true;
         try {
             int id = Integer.parseInt(oid);
             Order order = findOrder(id);
-            addGoodToOrder(order, sku, qty);
+            status = addGoodToOrder(order, sku, qty);
+            if(!status){
+                return false;
+            }
             System.out.printf("%s of %s is added to order number %d\n",
                     qty, sku, order.getId());
         } catch (NumberFormatException e) {
@@ -117,16 +121,17 @@ public class Warehouse {
             System.out.println("Try adding an order first");
             throw new WrongCommandException("add", true);
         }
+        return true;
     }
 
-    private void addGoodToOrder(Order order, String sku, String qty) throws WrongCommandException {
+    private Boolean addGoodToOrder(Order order, String sku, String qty) throws WrongCommandException {
         if (!isSkuInInventory(sku)) {
             System.out.println("Good does not exist in the warehouse");
             System.out.println("Try adding a good first");
             throw new WrongCommandException("add", true);
         }
 
-        order.addOrderline(getUnitGoodBySku(sku), qty);
+        return order.addOrderline(getUnitGoodBySku(sku), qty);
     }
 
     public boolean hasUnitGood(String sku) {
@@ -547,7 +552,7 @@ public class Warehouse {
 
             Order order = new Order(id, recv, addr);
             orderLists.add(order);
-            System.out.printf("Order %d added to the warehouse\n", id);
+            Display.orderAdded(id);
         } catch (NumberFormatException e) {
             System.out.println("oid must be a positive number");
             throw new WrongCommandException("add", true);
@@ -668,7 +673,8 @@ public class Warehouse {
         Boolean status = true;
         for (Object o: ja){
             JSONObject jo = (JSONObject) o;
-            status = this.addOrder(Order.restoreOrder(jo));
+            Order restoredOrder = Order.restoreOrder(jo);
+            status = this.addOrder(restoredOrder);
             if (!status){
                 return false;
             }
@@ -693,7 +699,7 @@ public class Warehouse {
         Boolean status = true;
         for (Object ko: jo.keySet()){
             String sku = ko.toString();
-            System.out.println("sku: "+ sku);
+//            System.out.println("sku: "+ sku);
             JSONObject jg = (JSONObject) jo.get(ko);
             UnitGood ug = UnitGood.restoreUnitGood((JSONObject) jg);
             //Good curGood = Good.restoreGood((JSONObject) jg);
@@ -721,9 +727,9 @@ public class Warehouse {
 
     private JSONObject serializeUnitGoods() {
         JSONObject jo = new JSONObject();
-        System.out.println("Unit Good Hash Map");
+//        System.out.println("Unit Good Hash Map");
         unitGoodHashMap.forEach((sku, ug) -> {
-            System.out.println("SKU: " + sku);
+//            System.out.println("SKU: " + sku);
             jo.put(sku, ug.serialize());
         });
         return jo;
@@ -761,6 +767,7 @@ public class Warehouse {
         if (saveStr == null) {
             return false;
         }
+//        System.out.println(saveStr);
         // PARSE
         try {
             JSONObject jWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
@@ -784,9 +791,6 @@ public class Warehouse {
                 return false;
             }
 
-            //JSONObject ughm = (JSONObject) jWarehouse.get(WarehouseKeys.unitGoodHashMap);
-
-
         } catch (ParseException e) {
             Display.jsonParseException(fp);
             return false;
@@ -795,8 +799,6 @@ public class Warehouse {
             Display.jsonParseException(fp);
             return false;
         }
-
-
         return true;
     }
 

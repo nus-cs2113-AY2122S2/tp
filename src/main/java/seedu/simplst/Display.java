@@ -72,7 +72,7 @@ public class Display {
     }
 
     public static void orderAdded(int id){
-        System.out.println("Order " + id + " is added");
+        System.out.println("Order " + id + " is added to the warehouse");
     }
 
     public static void orderlineAdded(String name, int qty){
