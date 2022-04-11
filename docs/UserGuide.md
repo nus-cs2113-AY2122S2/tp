@@ -660,17 +660,17 @@ Edits an existing group so that you can change the details of a group.<br>
 <br>
 
 Examples of usage:
-* A [group has been created](#creating-a-group-group-create) with a unique identifier of _1_,
-  named _Uni Friends_ with _Alice_, _Bob_, _Charlie_ and _David_ involved.
+* A [group has been created](#creating-a-group-group-create) with a unique identifier of _2_,
+  named _School Friends_ with _Alice_, _Bob_, _Charlie_ and _David_ involved.
 
 **Example 1**
 - Edits the group name to _Project Teammates_. <br><br>
-  `group /edit /gid 1 /n Project Teammates` <br><br>
+  `group /edit /gid 2 /n Project Teammates` <br><br>
   ![Group Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupEditCommand[1].png)
 
 **Example 2**
 - Edits the group to exclude _David_. <br><br>
-  `group /edit /gid 1 /pl Alice Bob Charlie` <br><br>
+  `group /edit /gid 2 /pl Alice Bob Charlie` <br><br>
   ![Group Edit command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupEditCommand[2].png)
   <br>
   <br>
@@ -691,8 +691,8 @@ Displays the details about a group so that you can review it.<br>
 <br>
 
 **Example**:
-- Views a group with a unique identifier of _1_.<br><br>
-  `group /view /gid 1` <br><br>
+- Views a group with a unique identifier of _2_.<br><br>
+  `group /view /gid 2` <br><br>
   ![Group view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupViewCommand.png)
   <br>     
   <br>
