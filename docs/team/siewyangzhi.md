@@ -66,9 +66,10 @@ Given below are my contributions to the project.
     * Added documentation for the item related features `add item` , `update item pax`, `update item name`, `delete item`, `view all items`, `view items with zero pax`, `search item KEYWORD`
     * Added these item related features into the content page as well as the command summary page.
   * Developer Guide:
-    * Added the design as well as the implementation of the `Add Item` feature.
+    * Added the Item Related Commands section within the Implementation section of the developer guide.
+    * Added the Instructions for manual testing for item related commands.
+    * Added the explanations of each component for the architecture diagram.
     
-
 * **Community**:
   * Reported bugs and suggestions for other teams in the class: [#132](https://github.com/AY2122S2-CS2113T-T10-4/tp/issues/132),
 [#130](https://github.com/AY2122S2-CS2113T-T10-4/tp/issues/130),  [#127](https://github.com/AY2122S2-CS2113T-T10-4/tp/issues/127),

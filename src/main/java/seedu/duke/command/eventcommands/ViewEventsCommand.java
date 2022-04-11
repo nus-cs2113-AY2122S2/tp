@@ -6,6 +6,7 @@ import seedu.duke.command.Command;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.eventlists.EventList;
+import seedu.duke.exceptions.InvalidViewEventException;
 import seedu.duke.exceptions.InvalidRoomNumberException;
 
 import java.io.IOException;
@@ -16,6 +17,9 @@ public class ViewEventsCommand extends Command {
     private static Logger logger = Logger.getLogger("log: View events present in the list of events.");
 
     public ViewEventsCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
+        if (!commandStringWithoutCommand.equals("")) {
+            throw new InvalidViewEventException();
+        }
         logger.log(Level.INFO, "View events command parsed");
     }
 
