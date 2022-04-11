@@ -405,7 +405,7 @@ Below are instructions to perform manual testing of the application. Please refe
 * Test Case: `edit mod CS2113T -d "Changed"` <br>
   Expected: The description of `CS2113T` is set to `Changed`.
 * Test Case: `edit mod CS2113T -t "2 hours"` <br>
-  Expected: The module remains unchanged. Error details in the message shows that the module description is missing.
+  Expected: The module remains unchanged. Error details in the message shows that `-t` is an invalid flag.
 
 <br>
 
