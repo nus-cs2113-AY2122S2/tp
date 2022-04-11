@@ -212,7 +212,7 @@ public class DeleteCommand extends Command {
             throw new MindMyMoneyException("You are missing a flag in your command\n"
                     + "Type \"help /e\" to view the list of supported expenditure commands\n"
                     + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
-                    + "Type \"help /i\" to view the list of supported income commands\n");
+                    + "Type \"help /i\" to view the list of supported income commands");
         }
     }
 }
