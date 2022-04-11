@@ -74,7 +74,7 @@ public class DishController extends Controller {
         MainLogger.logInfo(this, "User is changing the name of dish");
         System.out.println("Changing name...");
         int index = InputParser.getInteger("The index of dish: ");
-        if (index < 0 || index >= dishManager.getNumOfDishes()) {
+        if (index <= 0 || index > dishManager.getNumOfDishes()) {
             System.out.println("Please make sure the index is valid");
             return;
         }
