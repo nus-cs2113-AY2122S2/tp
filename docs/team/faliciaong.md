@@ -19,7 +19,7 @@ Given below are my contribution to the projects:
 
 * __New Feature__: Implement the ability to add/update availability of housekeeper.
     * What it does: Allow user to add/update availability of housekeeper.
-    * Justification: This feature will allow user to update the available days of housekeeper, which would be useful
+    * Justification: This feature will allow user to update the available days of the housekeeper, which would be useful
       to keep track of how many housekeepers is available any day in the week.
     * Highlights: 
       * User is able to easily and efficiently type out the available days in the week of the housekeeper by
@@ -101,7 +101,7 @@ Given below are my contribution to the projects:
 * __Enhancements to existing features__:
     * Added logging into the code such that I am able to record the events that has occurred
     * Implemented assertion in code to test assumptions on program such as testing the age and day range
-    * Implement Regular Expression (REGEX) to ensure naming of the housekeeper does not accept symbols and number
+    * Implement Regular Expression (REGEX) to ensure naming of the housekeeper does not accept symbols and numbers
     * Implement commands to be case-insensitive
 
 
