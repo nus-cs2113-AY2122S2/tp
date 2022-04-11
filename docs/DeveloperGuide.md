@@ -115,25 +115,6 @@ Step 8: To update the current `housekeeperList` into housekeeper file, `writeHou
 it calls `save` method from `HousekeeperFileManager` to reload housekeeper's information into the housekeeper file.
 
 
-
-Below is the partial class diagram detailing the design of the Add Item Command Class as well as its interactions with 
-the various other classes required to execute the Add Item Command.
-
-PLEASE NOTE: This class diagram omits the details of some classes involved, like the Duke, CommandParser and Command class
-![alt text](team/SiewYangZhi_addItemCommand/AddItemCommandClassDiagram.png)
-
-
-
-
-
-### Delete Item Command
-
-
-
-
-
-## Implementation
-
 ### Assign a housekeeper to a room
 The assignment of housekeeper to a room is facilitated by `AssignHousekeeperCommand`. This command objects uses `AssignmentMap`, which keeps a `HashMap`, to help us map a `Room` object to a `Housekeeper` object. 
 
