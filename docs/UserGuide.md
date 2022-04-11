@@ -81,9 +81,9 @@ Format: `add ward /d NO /p NO /n NO /id NO`
 
 Example of usage:
 
-`add ward /d 1 /p 4 /n 1 /id 5`
+`add ward /d 1 /p 1 /n 1 /id 5`
 
-`add ward /d 1,2 /p 4,5 /n 1,3 /id 10`
+`add ward /d 1,2 /p 1,2 /n 1,3 /id 10`
 
 
 ### Sorting appointment list: 'sort'
@@ -113,19 +113,19 @@ Expected Output (for `list doctor`):
 ![](ListDoctorOutput.png)
 
 ### Searching an entity: `search`
-Searches existing doctors/patients/nurses/wards with their numbers in the list.
+Searches existing doctors/patients/nurses/wards with their IDs.
 
-Format: `search ROLE NO`
+Format: `search ROLE ID`
 
 Example of usage:
 
-`search doctor 1`
+`search doctor 123`
 
-`search patient 3`
+`search patient 343`
 
-`search nurse 2`
+`search nurse 200`
 
-`search ward 4`
+`search ward 40`
 
 ### Searching an appointment: `search`
 Searches existing appointments with appointment time.
