@@ -28,7 +28,7 @@ public class CheckInCommand extends Command {
      *
      * @param listContainer The object containing the necessary data structure.
      * @param ui            The object that deals with user interface for the program.
-     * @throws InvalidRoomNumberException if the room number is not in the room list.
+     * @throws HotelLiteManagerException if the room number is not in the room list.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
@@ -46,7 +46,7 @@ public class CheckInCommand extends Command {
                 }
                 room.checkIn();
                 ui.printTableHeader();
-                System.out.println(room.toString()
+                System.out.println(room
                         + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
                 );
                 roomList.save();

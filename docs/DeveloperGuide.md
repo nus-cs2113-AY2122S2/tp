@@ -68,26 +68,22 @@ Step 8: To update the current `housekeeperList` into housekeeper file, `save` me
 would be called.
 
 
-### Add Item Command
-The objective of the AddItemCommand is to allow the user to add a new item to the list of items found within the inventory. It takes in the user input and spilt it up into two parts which are the name of the item to be added and its pax. These two information would then be used to create an Item Object and the Item Object would be saved into a list of items.
 
-Below is the partial class diagram detailing the design of the Add Item Command Class as well as its interactions with the various other classes required to execute the Add Item Command.
+Below is the partial class diagram detailing the design of the Add Item Command Class as well as its interactions with 
+the various other classes required to execute the Add Item Command.
+
+PLEASE NOTE: This class diagram omits the details of some classes involved, like the Duke, CommandParser and Command class
 ![alt text](team/SiewYangZhi_addItemCommand/AddItemCommandClassDiagram.png)
-Step 1: When the user enters the command `Add Item Toilet Roll / 15`, the `Duke` class would pass the user input to the `Command Parser` Class.
 
-Step 2: The `Command Parser` Class would run the `parse` method and create an `AddItemCommand` object containing an `Item` object which is made up of the name of the item to add as well as its pax which are found within the user input.
 
-Step 3: The `AddItemCommand` class would be passed back to the `Duke` class.
 
-Step 4: The `execute` method of the `AddItemCommand` class would be run and the `ItemList` Object would be extracted from the `List Container` object and the `AddItemCommand` object would pass its Item object to the `ItemList` Object's `addItemToList` method.
 
-Step 5: The `addItemToList` method would then call the `checkForItemDuplicates` method to check if there are any items within the item list with the same name as the item we are about to add.
 
-Step 6:I f there are is an item with a matching name found, we would then call the `UI` object and execute the `UI`'s `printItemAlreadyInTheListErrorMessage` method which would print a message informing the user that the item the user wants to add is already found within the item list and hence nothing would be added. Step 7 and 8 are skipped.
+### Delete Item Command
 
-Step 7: If there are no items with a matching name found, we would add the `Item` object to its ArrayList of `Item` objects called listOfItems. The `AddItemCommand` then call the `UI` and execute the `UI`'s `printAddItemAcknowledgementMessage` method which would print an acknowledgement message to the user informing him that the item has been added into the item list.
 
-Step 8: The `ItemListFileManager` object would be called and we would pass the item list to its `writeItemListToFile` method to write the updated item list into the file ListFolder/ItemList.txt.
+
+
 
 ## Implementation
 
@@ -271,31 +267,52 @@ Step 6: It will then proceed to print noted message to inform user that the dele
 
 Step 7: Changes in the list will be updated to file by calling `HousekeeperFileManager#save()` method.
 
-![Sequence](team/falicia_deleteHousekeeperCommand/sequenceDeleteHousekeeperv2.jpg)
+![Sequence](team/falicia_deleteHousekeeperCommand/sequenceDeleteHousekeeperv3.jpg)
 
+### Item Related Commands
+This section showcases how the various item related commands such as Add, Search Item Commands are implemented.
 
-### Add Item Command
-The add item to a list of items in the invetory mechanism is facilated by 'AddItemCommand'. It extends 'Command' and implements the following operations:
-- `AddItemCommand#extractItemName` - Extracts the name of the item to add from the user input.
-- `AddItemCommand#extractPax` - Extracts the pax of the item to add from the user input.
-- `AddItemCommand#setItem` - Saves the item to the AddItemCommand object.
-- `AddItemCommand#getItem` - Extracts the item saved within the AddItemCommand object.
-- `AddItemCommand#execute` - Adds the item into the list of items.
+#### Add Item, Delete Item, Update Item Pax, Update Item Name Command
+The Add Item, Delete Item, Update Item Pax, Update Item Name Commands have similiar class and sequence diagrams with the exception of some differing methods for each  command.
+
+Below is the class diagram showcasing how the class interact with each other when executing the Add Item Command.
+![alt text](team/SiewYangZhi_addItemCommand/AddItemCommandClassDiagram.png)
+:information_source: **Note:** : This class diagram omits the details of some classes involved, like the Duke, CommandParser and Command class
+
+Below is the sequence diagram which illustrates the process when an `Add Item` Command `Add Item Toilet Roll` is executed.
 
 ![alt text](team/SiewYangZhi_addItemCommand/AddItemCommandSequenceDiagram.png)
-The sequence diagram above showcases an example usage scenario of the Add Item Command and how the Add Item mechanisms behaves at each step:
 
-Step 1: The user enters the `Add Item Toilet Roll / 15` command to add a new item which is `Toilet Roll` that has a pax of `15` into the inventory. `CommandParser#parse` is called and the user input `Add Item Toilet Roll / 15` is passed to it.
+Step 1: The user enters the `Add Item Toilet Roll / 15` command to add a new item which is `Toilet Roll` that has a pax of `15` into the item list. The `parse` method of `CommandParser` is called and the user input `Add Item Toilet Roll / 15` is passed to it.
 
-Step 2: `CommandParser#parse` would identify the user input as an Add Item Command by searching for the keyword `Add Item` within the user input. It would then remove `Add Item` from the user input causing the user input to be just `Toilet Roll / 15`. `CommandParser#parse` would then call the constructor of `AddItemCommand` and pass it `Toilet Roll / 15`.  
+Step 2: The `parse` method would identify the user input as an Add Item Command by searching for the keyword `Add Item` within the user input. It would then remove `Add Item` from the user input causing the user input to be just `Toilet Roll / 15`. The `parse` method would then call the constructor of `AddItemCommand` and pass it `Toilet Roll / 15`.
 
-Step 3:  An `AddItemCommand` object would be created. The constructor of `AddItemCommand` would call `AddItemCommand#extractItemPax` and `AddItemCommand#extractItemName` respectively to extract out `15` and `Toilet Roll`. The constructor of `AddItemCommand` would then call the constructor of `Item` which would create an `Item` object containing `Toilet Roll` and `15`. The `Item` object would then be returned to the constructor of `AddItemCommand`. The `Item` object would be saved to the `AddItemCommand` object using `AddItemCommand#setItem`. The `AddItemCommand` object would be passed back to `CommandParser#parse`.   
+Step 3:  An `AddItemCommand` object would be created. The constructor of `AddItemCommand` would call the `extractItemPax` and `extractItemName` method of `AddItemCommand` to extract out `15` and `Toilet Roll` from the user input respectively. The constructor of `Item` would then be called and it would create an `Item` object containing `Toilet Roll` and `15`.
 
-Step 4: `CommandParser#parse` would then call `AddItemCommand#execute` which would call `AddItemCommand#getItem` to extract out the item currently saved within the `AddItemCommand` object.  
+Step 4: The `Item` object would then be returned to the constructor of `AddItemCommand`. The `Item` object would be saved to the `AddItemCommand` object using the `setItem` method of `AddItemCommand`. The `AddItemCommand` object would be passed back to the `parse` method of `CommandParser`.
 
-Step 5: `AddItemCommand#execute` would then call `ItemList#addItemToList` and pass it the item object.This results in the `Item` object being added into the `ItemList`.
+Step 5: The `parse` method would then call the `execute` method of `AddItemCommand` which would call the `getItem` method of `AddItemCommand` to extract out the `item` object currently saved within the `AddItemCommand` object.
 
-Step 6: `AddItemCommand#execute` would then call `Ui#printAddItemAcknowledgementMessage` which would print out an acknowledgement message informing the user that the item has been succesfully added into the item list.
+Step 6: The `getName` method of `item` would be called and it would extract the item name of the `item` object.
+
+Step 7: The `checkForItemDuplicates` method would then be called and it would check if there are any items within the item list with the same name as the item we are about to add.
+
+Step 8: If there are is an item with a matching name found, we would then throw an `ItemAlreadyInListException` and the `ItemAlreadyInListException` would be thrown to the Duke class whereby the `printErrorMessage` method of the `UI` class would be called and the exception `ItemAlreadyInListException` would be passed to it.
+
+Step 9: The `printErrorMessage` method would then print out  a message informing the user that the item to add is already found within the item list. Steps 10 to would then be skipped.
+
+Step 10: If there are no items with a matching name found, we would then add the `Item` object to the ArrayList of `Item` objects called listOfItems. The  `printAddItemAcknowledgementMessage` method of `UI` would be executed. It would then print an acknowledgement message to the user informing him that the item has been added into the item list.
+
+:information_source: **Note:** As the Add Item, Delete Item, Update Item Pax or Update Item Name Commands have similair class and sequence diagrams, we only require a few changes to be able to use the above class and sequence diagrams to represent the Delete Item, Update Item Pax or Update Item Name Commands. The changes would be mentioned below.
+
+#### Search Item, View All Items, View Items With Zero Pax Commands
+
+
+
+
+
+
+
 
 ### check room information by level
 
@@ -305,19 +322,20 @@ The checking room information by level mechanism is facilitated `CheckRoomByLeve
 
 
 Given below is an example usage scenario of how `CheckRoomByLevelCommand` behaves at each step.
+Step 1: The user enters the `check level 2` command to check all room information at level 2. 
 
-Step 1: User launches the application for the first time. The status of all room will be vacant
-
-Step 2: User give a command `check level 2`. The `CommandParser` runs phase which will return a new `CheckRoomByLevelCommand`.
+Step 2: The `CommandParser` runs phase which will return a new `CheckRoomByLevelCommand`,
 and it will parse the parameter after replace command `check level` to ``.
 
 Step 3: The `CheckRoomByLevelCommand` will now contain `2`.
 
 Step 4: The `execute` method will call `isValidLevel(int level, RoomList roomList)` method to check if the level number is valid.
 
-Step 5: The `excute` method will then call `printRoom(int level, RoomList roomList)` method to print room information at target level.
+Step 5: The `excute` method will then call `ui.printTableHeader` method to print room table header.
 
-![sequence diagram](team/xunyi_checkroombylevelcommand_uml/checkRoomByLevel_Squence.png)
+Step 6. In the `CheckRoomByLevelCommand`, it will iterate for roomList and print information of all room at level 2.
+
+![sequence diagram](team/xunyi_checkroombylevelcommand_uml/XunyiZeng_checkRoomByLevel_Sequence.png)
 
 ## Product scope
 ### Target user profile
