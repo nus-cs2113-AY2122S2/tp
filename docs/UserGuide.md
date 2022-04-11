@@ -480,7 +480,7 @@ Lists all your credit cards.
 ````
 > list /cc
 -----------------------------------------------
-1. Name: dbs [Cashback: 2.00%] [Cashback gained: $0.00] [Card limit: $1000.00]
+1. Name: dbs [Cashback: 2.00%] [Cashback gained: $0.00] [Card limit: $1000.00] [Balance left: $1000.00]
 -----------------------------------------------
 ````
 
@@ -497,7 +497,7 @@ Use the `list /cc` command to view the current indexes of your credit cards.
     * Enter `1` if you want to update the first credit card in your list.
 * `[NEW_NAME]` refers to the name your Credit Card will be updated to.
     * Use abbreviations for ease of adding expenditures to this credit card. For example:
-      storing `DBS Live Fresh Credit Card` as `DBS LV`.
+      storing `DBS Live Fresh Credit Card` as `DBS LF`.
 * `[NEW_CASHBACK]` refers to the updated amount of cash back received when spending on the credit card.
     * Enter the amount of cashback in percentage.
     * For example: a credit card with `2% cashback` can be represented as `/cb 2`.
@@ -513,12 +513,12 @@ of $500.
 ````
 > list /cc
 -----------------------------------------------
-1. Name: dbs [Cashback: 2.00%] [Cashback gained: $0.00] [Card limit: $1000.00]
+1. Name: dbs [Cashback: 2.00%] [Cashback gained: $0.00] [Card limit: $1000.00] [Balance left: $1000.00]
 -----------------------------------------------
 
 > update /cc 1 /n OCBC /cb 1.5 /cl 500
 Successfully set credit card 1 to :
-Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Card balance: $500.00]
+Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Balance left: $500.00]
 ````
 
 > **💡 Note:**
