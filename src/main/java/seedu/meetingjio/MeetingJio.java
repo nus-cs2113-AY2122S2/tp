@@ -7,6 +7,7 @@ import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.storage.StorageFile;
 import seedu.meetingjio.ui.Ui;
 
+import static seedu.meetingjio.common.ErrorMessages.ERROR_CONTROL_C_ALL_CLEARED;
 import static seedu.meetingjio.common.Messages.MESSAGE_DIVIDER;
 
 /**
@@ -29,7 +30,7 @@ public class MeetingJio {
             String userInput = in.nextLine().trim();
             Ui.executeCommand(userInput, masterTimetable, in);
         } catch (NoSuchElementException nsee) {
-            Ui.executeCommand("exit", masterTimetable, in);
+            System.out.println(ERROR_CONTROL_C_ALL_CLEARED);
         }
         exit();
     }
