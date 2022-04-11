@@ -651,6 +651,7 @@ Upon request for input, type `bye` and press [Enter].
    Expected: No income is added. Error details shown in the error message.
 4. Other incorrect addin commands to try: `addin`, `addin /g 1 /u 1 /d Test case /i notDouble /p f`  
    Expected: Similar to previous.
+
 #### Adding a recurring income
 1. Prerequisite: Similar to previous.
 2. Testing similar to previous, but with `/p t` instead.
@@ -667,6 +668,7 @@ Upon request for input, type `bye` and press [Enter].
    Expected: No expenditure is added. Error details shown in the error message.
 4. Other incorrect addout commands to try: Similar to the case of [addin](#Adding-an-expenditure), with the inclusion of `/c`  
    Expected: Similar to previous.
+
 #### Adding a recurring expenditure
 1. Prerequisite: Similar to previous.
 2. Testing similar to previous, but with `/p t` instead.
@@ -683,6 +685,7 @@ Upon request for input, type `bye` and press [Enter].
    Expected: No income is deleted. Error details shown in the error message.
 4. Other incorrect deletein commands to try: `deletein`, `deletein /u 1 /r 1`, `deletein /g 1 /u 1 /r first`  
    Expected: Similar to previous.
+
 #### Deleting an expenditure
 1. Prerequisite: Similar to previous, but existing expenditure instead of income.
 2. Testing similar to previous, but with `deleteout` instead.
@@ -701,6 +704,7 @@ Upon request for input, type `bye` and press [Enter].
    Expected: No income is edited. Error details shown in the error message.
 5. Other incorrect editin commands to try: `editin /g 1 /u 1 /r 1`, `editin /g 1 /u 1 /r 1 /i notDouble`  
    Expected: Similar to previous.
+
 #### Editing an expenditure
 1. Prerequisite: Similar to previous, but existing expenditure instead of income.
 2. Testing similar to previous, but with `editin` instead and additional delimiter of `/c` can be added for category.
@@ -710,6 +714,7 @@ Upon request for input, type `bye` and press [Enter].
 #### Finding incomes and general expenditures
 Test case: `find /d Test`  
 Expected: All incomes and expenditures whose description contains `Test` will be printed out.
+
 #### Finding expenditures in a category
 1. Test case: `find /d Test /c 1`  
    Expected: All incomes, and expenditures in the category of `Others`, whose description contains `Test` will be
