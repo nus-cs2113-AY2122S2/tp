@@ -27,6 +27,7 @@
         * [Calculate cashback: `calculate` [coming in v3.0]](#calculate-cashback-calculate-coming-in-v30)
     * [Exit MindMyMoney application: `bye`](#exit-mindmymoney-application-bye)
     * [Save the data](#save-the-data)
+      * [Editing the Save File](#editing-the-save-file)
 * [FAQ](#faq)
 * [Command summary (Expenditure)](#command-summary-expenditure)
 * [Command summary (Credit Card)](#command-summary-credit-card)
