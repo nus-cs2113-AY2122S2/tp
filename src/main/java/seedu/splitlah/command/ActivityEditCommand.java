@@ -12,6 +12,7 @@ import seedu.splitlah.data.Person;
 import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 
@@ -39,6 +40,8 @@ public class ActivityEditCommand extends Command {
     private static final int MODE_PRESERVE = 1;
     private static final double PERCENT = 0.01;
     private static final double DEFAULT_MULTIPLIER_1 = 1;
+    private static final int PARAMETER_SUPPLIED_AND_NECESSARY = 0;
+    private static final int PARAMETER_UNNECESSARY = -1;
 
     private int activityId = MISSING_ACTIVITYID;
     private int sessionId = MISSING_SESSIONID;
@@ -56,11 +59,12 @@ public class ActivityEditCommand extends Command {
     private double oldServiceCharge = MISSING_SERVICECHARGE;
     private ArrayList<Person> involvedListPersonArray = null;
 
-    private boolean isGstSupplied = false;
-    private boolean isScSupplied = false;
+    private boolean isActivityNameSupplied = false;
     private boolean isInvolvedListSupplied = false;
     private boolean isCostListSupplied = false;
     private boolean isPayerSupplied = false;
+    private boolean isGstSupplied = false;
+    private boolean isScSupplied = false;
 
     /**
      * Initializes an ActivityEditCommand object.
@@ -305,11 +309,14 @@ public class ActivityEditCommand extends Command {
         if (totalCost == MISSING_TOTALCOST && costList == MISSING_COSTLIST) {
             editMode = MODE_PRESERVE;
             updateCostListFromActivity();
+            isCostListSupplied = false;
         } else if (totalCost != MISSING_TOTALCOST) {
             editMode = MODE_OVERWRITE;
             updateCostListFromUserInput();
+            isCostListSupplied = true;
         } else {
             editMode = MODE_OVERWRITE;
+            isCostListSupplied = true;
         }
         retrievePayerIfNotSupplied(oldActivity);
         retrieveGstIfNotSupplied(oldActivity);
@@ -319,18 +326,24 @@ public class ActivityEditCommand extends Command {
     private void retrieveServiceChargeIfNotSupplied(Activity oldActivity) {
         if (serviceCharge == MISSING_SERVICECHARGE) {
             serviceCharge = oldActivity.getServiceCharge();
+        } else {
+            isScSupplied = true;
         }
     }
 
     private void retrieveGstIfNotSupplied(Activity oldActivity) {
         if (gst == MISSING_GST) {
             gst = oldActivity.getGst();
+        } else {
+            isGstSupplied = true;
         }
     }
 
     private void retrievePayerIfNotSupplied(Activity oldActivity) {
         if (Objects.equals(payer, MISSING_PAYER)) {
             payer = oldActivity.getPersonPaid().getName();
+        } else {
+            isPayerSupplied = true;
         }
     }
 
@@ -343,12 +356,16 @@ public class ActivityEditCommand extends Command {
     private void retrieveInvolvedListIfNotSupplied(Activity oldActivity) {
         if (involvedListStringArray == MISSING_INVOLVEDLIST) {
             involvedListStringArray = getInvolvedListFromPersonList(oldActivity.getInvolvedPersonList());
+        } else {
+            isInvolvedListSupplied = true;
         }
     }
 
     private void retrieveActivityNameIfNotSupplied(Activity oldActivity) {
         if (Objects.equals(activityName, MISSING_ACTIVITYNAME)) {
             activityName = oldActivity.getActivityName();
+        } else {
+            isActivityNameSupplied = true;
         }
     }
 
@@ -376,9 +393,98 @@ public class ActivityEditCommand extends Command {
         return involvedListStringArray;
     }
 
+    private void checkIfNoChangesMade(Activity oldActivity) throws InvalidDataException, InvalidFormatException {
+        boolean isActivityNameUnnecessary = checkIfActivityNameIsUnnecessary(oldActivity);
+        boolean isInvolvedListUnnecessary = checkIfInvolvedListIsUnnecessary(oldActivity);
+        boolean isCostListUnnecessary = checkIfCostListIsUnnecessary(oldActivity);
+        boolean isPayerUnnecessary = checkIfPayerIsUnnecessary(oldActivity);
+        boolean isGstUnnecessary = checkIfGstIsUnnecessary(oldActivity);
+        boolean isScUnnecessary = checkIfScIsUnnecessary(oldActivity);
 
-    private void checkIfNoChangesMade() {
+        if (isActivityNameUnnecessary
+                && isInvolvedListUnnecessary
+                && isCostListUnnecessary
+                && isPayerUnnecessary
+                && isGstUnnecessary
+                && isScUnnecessary) {
+            throw new InvalidDataException(Message.ERROR_ACTIVITYEDIT_NO_CHANGE_TO_ACTIVITY);
+        }
+    }
 
+    private boolean checkIfScIsUnnecessary(Activity oldActivity) {
+        if (!isScSupplied) {
+            return true;
+        }
+        return serviceCharge == oldActivity.getServiceCharge();
+    }
+
+    private boolean checkIfGstIsUnnecessary(Activity oldActivity) {
+        if (!isGstSupplied) {
+            return true;
+        }
+        return gst == oldActivity.getGst();
+    }
+
+    private boolean checkIfPayerIsUnnecessary(Activity oldActivity) {
+        if (!isPayerSupplied) {
+            return true;
+        }
+        Person newPayer = Person.createPersonFromString(payer);
+        assert newPayer != null;
+        return newPayer.equals(oldActivity.getPersonPaid());
+    }
+
+    private boolean checkIfCostListIsUnnecessary(Activity oldActivity) throws InvalidDataException {
+        if (!isCostListSupplied) {
+            return true;
+        }
+        double[] oldCostList = new double[oldActivity.getInvolvedPersonList().size()];
+        fillCostList(oldCostList, oldActivity);
+        if (costList.length != oldCostList.length) {
+            return false;
+        }
+        for (int i = 0; i < costList.length; ++i) {
+            if (costList[i] != oldCostList[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Fills a cost list with the costs from an Activity object.
+     * @param oldCostList A double array object representing the cost list to be filled.
+     * @param oldActivity An Activity object representing the activity to retrieve costs from.
+     * @throws InvalidDataException If a nonexistent unique activity identifier is used when retrieving costs.
+     */
+    private void fillCostList(double[] oldCostList, Activity oldActivity) throws InvalidDataException {
+        ArrayList<Person> oldInvolvedPersonList = oldActivity.getInvolvedPersonList();
+        for (int i = 0; i < oldInvolvedPersonList.size(); ++i) {
+            oldCostList[i] = oldInvolvedPersonList.get(i).getActivityCostOwed(activityId);
+        }
+    }
+
+    private boolean checkIfInvolvedListIsUnnecessary(Activity oldActivity) {
+        if (!isInvolvedListSupplied) {
+            return true;
+        }
+        ArrayList<Person> oldInvolvedList = oldActivity.getInvolvedPersonList();
+        if (oldInvolvedList.size() != involvedListPersonArray.size()) {
+            return false;
+        }
+        for (int i = 0; i < involvedListPersonArray.size(); ++i) {
+            if (!(oldInvolvedList.get(i).equals(involvedListPersonArray.get(i)))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkIfActivityNameIsUnnecessary(Activity oldActivity) {
+        if (!isActivityNameSupplied) {
+            return true;
+        }
+        return Objects.equals(activityName, oldActivity.getActivityName());
     }
 
     @Override
@@ -390,7 +496,7 @@ public class ActivityEditCommand extends Command {
             retrieveDetailsFromOldActivity(oldActivity);
             updateCostAndCostList();
             validateCostListAndInvolvedList();
-            checkIfNoChangesMade();
+            checkIfNoChangesMade(oldActivity);
             assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
             Person payerAsPerson = session.getPersonByName(payer);
             addAllActivityCost(involvedListPersonArray, payerAsPerson, DUMMY_ACTIVITYID);
