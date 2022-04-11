@@ -7,15 +7,31 @@
   - [Introduction](#introduction-1)
   - [Usage](#usage)
     - [List dish](#list-dish-indexed-as-1)
-    - [Add dish](#add-dish)
-    - []()
-- [Dish Management](#dish-management)
-- [Dish Management](#dish-management)
+    - [Add dish](#add-dish-indexed-as-2)
+    - [Delete dish](#delete-dish-indexed-as-3)
+    - [Change the price of a dish](#change-the-price-of-a-dish-indexed-as-4)
+    - [Change the name of a dish](#change-the-name-of-a-dish-indexed-as-4)
+- [Order Management](#order-management)
+  - [Introduction](#introduction-2)
+  - [Usage](#usage-1)
+    - [Create a new order](#create-a-new-order-indexed-as-1)
+    - [Delete an Order](#delete-an-order-indexed-as-2)
+    - [Get total price of an order](#get-total-price-of-an-order-indexed-as-3)
+    - [Get total price of all orders](#get-total-price-of-all-orders-indexed-as-4)
+    - [Print receipt](#print-receipt-indexed-as-5)
+    - [Display order list](#display-order-list-indexed-as-6)
+    - [Display dish menu](#display-dish-menu-indexed-as-7)
+- [Staff Management](#staff-management)
+  - [Introduction](#introduction-3)
+  - [Usage](#usage-2)
+    - [Print staff](#print-staff-indexed-as-1)
+    - [Find staff](#find-staff-indexed-as-2)
+    - [Add staff](#add-staff-indexed-as-3)
+    - [Delete staff](#delete-staff-indexed-as-4)
+    - [Edit staff](#edit-staff-indexed-as-5)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
 
-- [Product Scope](#product-scope)
-- [User Stories](#user-stories)
-- [Class Diagram](#class-diagram)
-- [Non-functional Requirements](#non-functional-requirements)
 ## Introduction
 
 Restaurant-Information-Programme (R.I.P.) is a command line programme for restaurant owners to keep track of menus, staff information, and order management.
@@ -128,6 +144,47 @@ The price (will be rounded into 1 decimal place) of dish:
 
 - Notice
   - `Name` of the dish cannot be empty, and `price` of the dish cannot be negative and will be rounded to 10 cents. (`price` being 0 means this dish is free to serve).
+
+#### Delete dish (indexed as 3)
+When using `Delete dish`, the program pops up an input panel
+```
+Deleting dish...
+The index of dish: 
+```
+> You delete `Some dish`, the index is 1.
+```
+Deleting dish...
+The index of dish: 1
+```
+
+- Notice
+  - If the index is not valid:
+    ```
+    Deleting dish...
+    The index of dish: 100
+    Please make sure the index is valid
+    ```
+    
+#### Change the price of a dish (indexed as 4)
+When using `Delete dish`, the program pops up an input panel
+```
+Changing price...
+The index of dish: 1
+The new price (will be rounded into 1 decimal place) of dish:
+```
+> Enter a valid price
+
+- Notice
+  - If the index or price is not valid:
+    ```
+    Please make sure the price is not negative
+    ```
+    ```
+    Please make sure the index is valid
+    ```
+    
+#### Change the name of a dish (indexed as 4)
+Similar to `Change the price of a dish`
 
 ## Order Management
 
