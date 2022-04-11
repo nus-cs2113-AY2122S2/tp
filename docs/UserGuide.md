@@ -114,7 +114,7 @@ Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate 
 > When using the optional parameter shown in `[]`, both the`DEADLINE` and `END_TIME` to need be used together.
 
 **Examples**
-- `add write final essay /do 25/6/2022 /start 20:00 /end 22:00 /bydate 27/6/2022 /bytime 23:59`
+- `add write final essay /do 11/4/2022 /start 22:00 /end 24:00 /bydate 13/4/2022 /bytime 23:59`
 
 ![](images/addSingleTaskWithDeadline.png)
 
@@ -225,7 +225,7 @@ Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/en
 - `edit 2 write draft essay`
 
 Before edit command:
-![](images/scheduleAfterDeletingASingleTask.png)
+![](images/scheduleAfterAddingRecurringTasksOne.png)
 
 When executing edit command:
 ![](images/editSingleTask.png)
@@ -406,12 +406,16 @@ Format:
 **Example**
 
 Below are some sample outputs for `clear all`, which asks a confirmation message before executing the clear:
-![image](images/clear_all_confirmation.png)
-If the user inputs `y`:
-![image](images/clear_all_execute.png)
-If the user inputs `n`:
-![image](images/clear_all_no_execute.png)
 
+![image](images/clear_all_confirmation.png)
+
+If the user inputs `y`:
+
+![image](images/clear_all_execute.png)
+
+If the user inputs `n`:
+
+![image](images/clear_all_no_execute.png)
 
 ### Enter study session: `study`
 Enter the study session where you can start timers to help finish your tasks.
