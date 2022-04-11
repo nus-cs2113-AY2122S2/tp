@@ -80,7 +80,7 @@ public class DishController extends Controller {
         }
         String name = InputParser.getString("The new name of dish: ");
         if (name.isEmpty()) {
-            System.out.println("Please make sure the name is not empty and price is non-negative");
+            System.out.println("Please make sure the name is not empty");
             return;
         }
         if (dishManager.checkNameExistence(name)) {
@@ -102,7 +102,7 @@ public class DishController extends Controller {
             System.out.println("Please make sure the index is valid");
             return;
         }
-        double newPrice = InputParser.getDouble("The new price (will be rounded into 1 decimal place) of dish: ");
+        double newPrice = InputParser.getDouble("The new price (will be rounded into 2 decimal place) of dish: ");
         if (newPrice < 0) {
             System.out.println("Please make sure the price is not negative");
             return;
@@ -137,7 +137,7 @@ public class DishController extends Controller {
             System.out.println("Ooops, this dish already exists in your menu");
             return;
         }
-        double price = InputParser.getDouble("The price (will be rounded into 1 decimal place) of dish: ");
+        double price = InputParser.getDouble("The price (will be rounded into 2 decimal place) of dish: ");
         if (price < 0) {
             System.out.println("Please make sure the price is not negative");
             return;
