@@ -125,6 +125,17 @@ public class Display {
         System.out.println("The following " + obj + " has trouble serializing."); // perhaps reattempt reserializing?
     }
 
+    public static void tryCommandAgain() {
+        System.out.println("Please enter the command again.");
+    }
+
+    public static void inputAllFlags() {
+        System.out.println("Missing flag in input. Please key in all the flags required in the command.");
+    }
+
+    public static void fillCompulsoryFields() {
+        System.out.println("Non-optional fields are empty. Please fill in all compulsory fields.");
+    }
 
     // Command related
 
@@ -195,14 +206,9 @@ public class Display {
         helpOrder();
     }
 
-    public static void tryCommandAgain() {
-        System.out.println("Please enter the command again.");
-    }
-
     public static void jsonParseException(String fp) {
         System.out.println("File: " + fp + " is not a valid json file.");
     }
-
 
     public static void numberFormatException() {
         System.out.println("Number formatting invalid");

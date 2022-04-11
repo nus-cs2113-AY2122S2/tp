@@ -88,7 +88,7 @@ public class Warehouse {
         try {
             int quantity = Integer.parseInt(qty);
             goodList.get(sku).addQuantity(quantity);
-            System.out.printf("%d Good of SKU: %s added to warehouse\n",
+            System.out.printf("%d of Good with SKU: %s added to warehouse\n",
                     quantity, sku);
         } catch (NumberFormatException e1) {
             // quantity was not a number
@@ -183,7 +183,7 @@ public class Warehouse {
                 if (idToBeViewed.equals(order.getId())) {
                     System.out.println("Viewing order with order ID " + order.getId());
                     System.out.println("Receiver: " + order.getReceiver());
-                    System.out.println("Shipping address:" + order.getShippingAddress());
+                    System.out.println("Shipping address: " + order.getShippingAddress());
                     System.out.println("Items in the order:");
                     listOrderlines(String.valueOf(order.getId()));
                     return;
@@ -225,10 +225,8 @@ public class Warehouse {
             return;
         }
         System.out.println("List of orders:");
-        int counter = 0;
         for (Order order : orderLists) {
-            System.out.println("\t" + (counter + 1) + ": " + order);
-            counter++;
+            System.out.println("\t" + order);
         }
     }
 
@@ -270,7 +268,7 @@ public class Warehouse {
         System.out.println("List of available goods with its quantity:");
         for (Map.Entry<String, Good> availableGoodsEntry : availableGoods.entrySet()) {
             Good good = availableGoodsEntry.getValue();
-            System.out.println(good);
+            System.out.println("\t" + good);
         }
     }
 
@@ -285,7 +283,7 @@ public class Warehouse {
         System.out.println("List of unit goods (in no order):");
         for (Map.Entry<String, UnitGood> unitGoodEntry : unitGoodHashMap.entrySet()) {
             UnitGood unitGood = unitGoodEntry.getValue();
-            System.out.println(unitGood);
+            System.out.println("\t" + unitGood);
         }
     }
 
@@ -423,6 +421,7 @@ public class Warehouse {
         }
         unitGoodHashMap.remove(sku);
         goodList.remove(sku);
+        System.out.println("Unit Good with SKU: " + sku + " has been removed from warehouse");
     }
 
     /**
@@ -450,6 +449,7 @@ public class Warehouse {
         }
         int qtyNum = Integer.parseInt(qty);
         goodList.get(sku).removeQuantity(qtyNum);
+        System.out.println(qtyNum + " of Good with SKU: " + sku + " has been removed from warehouse");
     }
 
     /**
@@ -466,7 +466,7 @@ public class Warehouse {
         try {
             int orderId = Integer.parseInt(oid);
             orderLists.remove(findOrder(orderId));
-            System.out.println("Order " + oid + " has been removed.");
+            System.out.println("Order " + oid + " has been removed");
         } catch (ItemDoesNotExistException e1) {
             System.out.println("The order you are trying to remove are not on the current list. "
                     + "Please try another id.");

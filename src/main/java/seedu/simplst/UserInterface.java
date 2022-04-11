@@ -8,10 +8,12 @@ import seedu.simplst.parsers.RemoveParser;
 import seedu.simplst.parsers.TotalParser;
 import seedu.simplst.parsers.ViewParser;
 import seedu.simplst.parsers.FulfillParser;
+import util.exceptions.WrongCommandException;
+import util.exceptions.NullException;
 import util.exceptions.InvalidFileException;
 import util.exceptions.InvalidObjectType;
-import util.exceptions.NullException;
-import util.exceptions.WrongCommandException;
+import util.exceptions.MissingFlagException;
+import util.exceptions.EmptyFieldException;
 
 import java.util.Scanner;
 
@@ -60,37 +62,37 @@ public class UserInterface {
             try {
                 String command = userInput.split(" ")[0];
                 switch (command) {
-                    case "view":
-                        //using flags here to distinguish between different views????
-                        viewParser.parse(userInput);
-                        break;
-                    case "find":
-                        findParser.parse(userInput);
-                        break;
-                    case "list":
-                        listParser.parse(userInput);
-                        break;
-                    case "add":
-                        addParser.parse(userInput);
-                        break;
-                    case "remove":
-                        removeParser.parse(userInput);
-                        break;
-                    case "total":
-                        totalParser.parse(userInput);
-                        break;
-                    case "fulfill":
-                        fulfillParser.parse(userInput);
-                        break;
-                    case "help":
-                        helpParser.parse(userInput);
-                        break;
-                    case "storage-capacity":
-                        warehouse.getPercentOccupied();
-                        break;
-                    default:
-                        //error exception here
-                        throw new WrongCommandException("", false);
+                case "view":
+                    //using flags here to distinguish between different views
+                    viewParser.parse(userInput);
+                    break;
+                case "find":
+                    findParser.parse(userInput);
+                    break;
+                case "list":
+                    listParser.parse(userInput);
+                    break;
+                case "add":
+                    addParser.parse(userInput);
+                    break;
+                case "remove":
+                    removeParser.parse(userInput);
+                    break;
+                case "total":
+                    totalParser.parse(userInput);
+                    break;
+                case "fulfill":
+                    fulfillParser.parse(userInput);
+                    break;
+                case "help":
+                    helpParser.parse(userInput);
+                    break;
+                case "storage-capacity":
+                    warehouse.getPercentOccupied();
+                    break;
+                default:
+                    //error exception here
+                    throw new WrongCommandException("", false);
                 }
             } catch (WrongCommandException wrongCommandException) {
                 if (wrongCommandException.isCommand()) {
@@ -107,6 +109,10 @@ public class UserInterface {
                 e.printStackTrace();
             } catch (InvalidObjectType e) {
                 Display.tryCommandAgain();
+            } catch (MissingFlagException e) {
+                Display.inputAllFlags();
+            } catch (EmptyFieldException e) {
+                Display.fillCompulsoryFields();
             }
             System.out.println("Another command?");
             userInput = input.nextLine();
