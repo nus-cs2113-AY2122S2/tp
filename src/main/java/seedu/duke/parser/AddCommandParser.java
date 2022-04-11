@@ -19,7 +19,9 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
-     * @throws InvMgrException if the user input does not conform the expected format
+     * Checks if the quantity is non-zero and non-negative before creating the command.
+     * @throws InvMgrException if the user input does not conform the expected format, or if the quantity indicated is
+     * zero/negative.
      */
     public AddCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap =
