@@ -119,7 +119,7 @@ To add a patient there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `add patient /info [nric], [name], [age], [gender], [address], [DOB], [DOA]`
+Format: `add patient /info [nric], [name], [age], [gender], [address], [DOB], [DOR]`
 
 Example: `add patient /info S1234567A, John Doe, 22, M, 10 Baker Street, 1999-12-31, 2021-02-15`
 
@@ -294,7 +294,7 @@ To edit a patient there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `edit patient /info [nric], [name], [age], [gender], [address], [DOB], [DOA]`
+Format: `edit patient /info [nric], [name], [age], [gender], [address], [DOB], [DOR]`
 
 Example: `edit patient /info S1234567A, Jammie Doe, 22, F, 14 Baker Street, 1999-12-31, 2021-02-15`
 
@@ -515,7 +515,7 @@ data/        // Corrupted files
 | Action                | Format, Examples                                                                                                                                                                                                                                 |
 |-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `add doctor`          | `add doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`<br />e.g. `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`                                                                 |
-| `add patient`         | `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g. `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                         |
+| `add patient`         | `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOR]`<br />e.g. `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                         |
 | `add medicine`        | `add medicine /info [batch id], [name], [dosage], [expiry date], [side effects], [quantity]`<br />e.g. `add medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`                                                                       |
 | `add appointment`     | `add appointment /info [patient nric], [doctor nric], [appointment date], [appointment details]`<br />e.g. `add appointment /info S1234567A, S7654321A, 2022-10-15, Regular knee checkup`                                                        |
 | `view doctor`         | `view doctor`<br />e.g. `view doctor`                                                                                                                                         |
@@ -531,11 +531,10 @@ data/        // Corrupted files
 | `find medicine`       | `find medicine /info [parameter], [keyword to find]`<br />e.g.`find medicine /info name, Paracetamol`<br />e.g.parameter must be one of the six (name, id, dosage, expiry, sideeffects, quantity)                                                |
 | `find appointment`    | `find appointment /info [parameter], [keyword to find]`<br />e.g.`find appointment /info id, 12356701017647` <br />e.g.parameter must be one of the six (appointment id, patient nric, patient name, doctor nric, doctor name, appointment date) |
 | `edit doctor`         | `edit doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`<br />e.g.`edit doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`                                                                |
-| `edit patient`        | `edit patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g.`edit patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                        |
+| `edit patient`        | `edit patient /info [nric],[name],[age],[gender],[address],[DOB],[DOR]`<br />e.g.`edit patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`                                                                        |
 | `edit medicine`       | `edit medicine /info [batch id],[name],[dosage],[expiry date],[side effects],[quantity]`<br />e.g.`edit medicine /info A123,Paracetamol, 500, 2023-06-11, drowsy, 10`                                                                            |
 | `update medicines`    | `update medicines` <br />e.g `update medicines`                                                                                                                                                                                                  |
 | `clear old medicines` | `clear old medicines` <br />e.g `clear old medicines`                                                                                                                                                                                            |
 | `dispense medicine`   | `dispense medicine /info [NRIC],[Medicine Name],[Quantity]`<br/>e.g `dispense medicine /info S1234567A,Paracetamol,10,Aspirin,20`                                                                                                                |
 | `help`                | view the help function for all the commands required                                                                                                                                                                                             |
 | `bye`                 | exit the programme                                                                                                                                                                                                                               |
-
