@@ -12,18 +12,34 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 
 #### New Features
 * [Activity Cost](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/ActivityCost.java)
-    * This class encapsulates the cost paid and owed for a specific activity by a person.
+    * What it does: Encapsulates the cost paid and owed for a specific activity by a person.
+    * Justification: Allows costs to be tracked per person across multiple activities.
 * [Activity Edit](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityEditCommand.java)
-    * Allows users to edit an activity, only having to specify the details they wish to change.
+    * What it does: Edits an activity, only requiring the user to specify the details they wish to edit. Details not specified
+      are left unchanged from the original activity. If the user input does not result in any real changes to the activity (e.g. changing
+      the activity name to the same name as before), this command informs the user that nothing has been changed. 
+    * Justification: Saves users the effort of having to delete and recreate an activity with incorrect or outdated details. 
+      Editing an activity preserves the unique activity identifier whereas deleting and recreating the activity does not. This makes the
+      overall experience of editing activites more user friendly and intuitive.
+      Informing the user when no changes are made helps prevent user error, as editing an activity without changing anything is 
+      very likely to be user error.
 * [Session View](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionViewCommand.java)
-    * Allows users to view a session. Displays session details and a list of the activities involved.
+    * What it does: Views a session. Displays session details and a list of activities involved.
+    * Justification: Users need a way to get a quick bird's-eye view of a session and the activities involved without 
+      overloading the user with detailed information on every activity.
 * [Text UI](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/ui/TextUI.java)
-    * Acts as a user interface, and offers methods to other classes to print to and read from the user interface.
+    * What it does: Acts as a user interface and has methods that print and read from the user interface.
+    * Justification: Abstracts the interface away from the different components in SplitLah, allowing developers to code
+      each component independently of the interface. Changes can be made to the interface without affecting other components.
 * [Person](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Person.java)
-    * This class represents a person. It encapsulates its `Name` and a list of `ActivityCost`s associated with it.
+    * What it does: Represents a person. It encapsulates its `Name` and a list of `ActivityCost`s associated with it.
+    * Justification: People need to be tracked individually and separately from activities to keep track of their costs owed
+      and paid. 
 * [Name](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Name.java)
-    * This class represents a name. It sanitises the name used to instantiate it by stripping whitespace from it, and 
-      includes a method that checks if the name is valid (contains only alphabetical characters).
+    * What it does: Represents a name. It sanitises the name used to instantiate it by stripping whitespace from it, and
+      checks if the name is valid (contains only alphabetical characters).
+    * Justification: Can be used by other developers to validate names in a manner that is standardized across all components
+      that also make use of the `Name` class.
      
 #### Enhanced Features
 * Separated dependency of parser class from command class by creating Command Parser classes for certain features.
