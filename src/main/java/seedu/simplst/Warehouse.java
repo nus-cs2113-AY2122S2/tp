@@ -730,7 +730,6 @@ public class Warehouse {
         try {
             for (Object ko : jo.keySet()) {
                 String sku = ko.toString();
-//            System.out.println("sku: "+ sku);
                 JSONObject jg = (JSONObject) jo.get(ko);
                 UnitGood ug = UnitGood.restoreUnitGood(jg);
                 if (ug==null){
@@ -806,7 +805,6 @@ public class Warehouse {
         if (saveStr == null) {
             return false;
         }
-//      System.out.println(saveStr);
         // PARSE
         try {
             JSONObject jsonWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
