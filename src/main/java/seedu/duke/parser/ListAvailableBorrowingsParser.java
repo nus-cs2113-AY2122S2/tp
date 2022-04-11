@@ -3,6 +3,7 @@ package seedu.duke.parser;
 import seedu.duke.commands.ListAvailableBorrowingsCommand;
 import seedu.duke.common.Messages;
 import seedu.duke.exceptions.InvMgrException;
+import seedu.duke.common.Messages;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
@@ -14,8 +15,6 @@ import static seedu.duke.parser.CliSyntax.PREFIX_END_DATE;
  * Parses input arguments and creates a new ListAvailableBorrowingsCommand object.
  */
 public class ListAvailableBorrowingsParser implements Parser<ListAvailableBorrowingsCommand> {
-    
-    public static final String INVALID_DATE_ORDER = "Input start date has to be before end date";
 
     /**
      * Parses the given {@code String} of arguments in the context of the 
@@ -38,7 +37,7 @@ public class ListAvailableBorrowingsParser implements Parser<ListAvailableBorrow
         assert endDate.isAfter(startDate) : "Start date must be before end date";
 
         if (startDate.isAfter(endDate)) {
-            throw new InvMgrException(INVALID_DATE_ORDER);
+            throw new InvMgrException(Messages.INVALID_START_END_DATE);
         }
         return new ListAvailableBorrowingsCommand(startDate, endDate);
     }
