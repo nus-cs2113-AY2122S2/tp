@@ -13,7 +13,9 @@ import java.util.logging.Logger;
 
 public class CsProjPlanner {
 
-    private static Logger logger = Logger.getLogger("CSProjPlanner");
+    private static String loggerName = "CSProjPlanner";
+
+    private static Logger logger = Logger.getLogger(loggerName);
 
     private static ProjectList projectList = new ProjectList();
     private static CommandHandler commandHandler = new CommandHandler();
@@ -21,10 +23,10 @@ public class CsProjPlanner {
     /**
      * Main entry-point for the CSProjPlanner application.
      */
+
     public static void main(String[] args) {
         //read data from hard disk
         projectList = Storage.read();
-
         logger.log(Level.INFO, "going to receive user input");
         String input;
         Scanner in = new Scanner(System.in);
