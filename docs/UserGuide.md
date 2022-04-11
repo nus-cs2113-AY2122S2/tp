@@ -1,4 +1,4 @@
-# MindMyMoney (M<sup>3</sup>) User Guide
+# MindMyMoney User Guide
 
 ## Content Page
 
@@ -19,13 +19,13 @@
         * [Display credit cards: `list` ](#display-credit-cards-list)
         * [Modify a credit card: `update`](#modify-a-credit-card-update)
         * [Remove a credit card: `delete`](#remove-a-credit-card-delete)
+        * [Calculate cashback: `calculate` [coming in v3.0]](#calculate-cashback-calculate-coming-in-v30)
     * [Income](#income)
         * [Display help page for incomes: `help`](#display-help-page-for-incomes-help)
         * [Add an income: `add`](#add-an-income-add)
         * [Display incomes: `list`](#display-incomes-list)
         * [Modify an income: `update`](#modify-an-income-update)
         * [Remove an income: `delete`](#remove-an-income-delete)
-        * [Calculate cashback: `calculate` [coming in v3.0]](#calculate-cashback-calculate-coming-in-v30)
     * [Exit MindMyMoney application: `bye`](#exit-mindmymoney-application-bye)
     * [Save the data](#save-the-data)
       * [Editing the Save File](#editing-the-save-file)
@@ -40,7 +40,7 @@
 
 `MindMyMoney` (M<sup>3</sup>) is a desktop application for managing your personal finances, optimized for use via a
 Command Line Interface (CLI). You can use it to track your expenditures across multiple payment methods, calculate
-monthly expenditure, and set financial goals. If you are a student looking to manage your personal finances, this
+monthly expenditure, and track your income. If you are a student looking to manage your personal finances, this
 application is for you!
 
 ### Using the User Guide
@@ -200,14 +200,9 @@ into the account
 
 > **⚠️Warning⚠️**
 >- `[CATEGORY]`: Any input that is not `Food`, `Transport`, `Utilities`, `Personal`, `Entertainment` or `Others` will be rejected.
->- `[DATE]`:
->
-
-- Input dates not in the format of `dd/mm/yyyy` will be rejected.
-
-> - Input dates later than the current date will be rejected.
-    >
-- Illogical input dates will be rejected.
+>- `[DATE]` not in the format of `dd/mm/yyyy` will be rejected.
+>- Input dates later than the current date will be rejected.
+>- Illogical input dates will be rejected.
 
 <br/>
 
@@ -261,10 +256,9 @@ Lists all your expenditures in 30 March 2022.
 > **💡 Note:**
 >- `list /e` will show you all expenditures stored in the list.
 
-> **⚠️Warning⚠️**
->- `{DATE}`: 
->  - Input dates not in the format of `dd/mm/yyyy`, `mm/yyyy` or `yyyy` will be rejected.
->  - Before entering the command, an expenditure with the same input date must exist in the expenditure list.
+> **⚠️Warning⚠️** 
+>- `{DATE}` not in the format of `dd/mm/yyyy`, `mm/yyyy` or `yyyy` will be rejected.
+>- Before entering the command, an expenditure with the same input date must exist in the expenditure list.
 
 <br/>
 
@@ -293,7 +287,7 @@ Use the `list /e` command to view the indexes of your expenditures.
 #### Expected Outcome:
 
 For example: `update /e 1 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022`.  <br/>
-Updates the first expenditure in your list to a $5.0 expenditure on food item 'chicken rice' that was paid in cash on 12
+Updates the first expenditure in your list to a $5.00 expenditure on food item 'chicken rice' that was paid in cash on 12
 March 2022.
 
 ````
@@ -307,7 +301,7 @@ March 2022.
 
 > update /e 4 /pm cash /c Food /d chicken rice /a 5 /t 12/03/2022
 Successfully set expenditure 4 to:
-$5.0 was spent on chicken rice(Food) using Cash [12/03/2022]
+$5.00 was spent on chicken rice(Food) using Cash [12/03/2022]
 ````
 
 > **💡 Note:**
@@ -320,9 +314,8 @@ $5.0 was spent on chicken rice(Food) using Cash [12/03/2022]
 
 > **⚠️Warning⚠️**
 > - `[NEW_CATEGORY]`: Any input not in the accepted list of categories will be rejected.
-> - `[NEW_DATE]`
->  - Input dates not in the format of `dd/mm/yyyy` will be rejected.
->  - Input dates later than the current date will be rejected.
+> - `[NEW_DATE]` not in the format of `dd/mm/yyyy` will be rejected.
+> - Input dates later than the current date will be rejected.
 
 <br/>
 
@@ -364,11 +357,11 @@ I have removed Nike Shoes of $300.00 from the account
 
 Shows the total expenditure breakdown for a specified day, month or year in a horizontal bar chart. <br>
 
-##### Format: `calculate /epm [DATE]`
+#### Format: `calculate /epm [DATE]`
 
-* `[DATE]` can be of the format `dd/mm/yyyy`, `mm/yyyy` or `yyyy`, depending on the duration you specify.
+* `[DATE]` can be of the format `dd/mm/yyyy`, `mm/yyyy` or `yyyy`, depending on the duration you are interested in.
 
-##### Expected Outcome:
+#### Expected Outcome:
 
 For example: `calculate /epm 03/2022`  <br/>
 Shows your total expenditure in March 2022 and breakdown of expenses.
@@ -423,7 +416,8 @@ Shows the help page for credit card related commands.
 
 ### Add a credit card: `add`
 
-Adds a credit card into your credit card list. Only **one** credit card can be added per command.  <br>
+Adds a credit card into your credit card list. Only **one** credit card can be added per command. You can then use
+this credit card as a payment method when [adding an expenditure](#add-an-expenditure-add). <br>
 
 #### Format: `add /cc /n [CREDIT_CARD_NAME] /cb [CASHBACK] /cl [CARD_LIMIT]`
 
@@ -461,8 +455,8 @@ into the account
 > - You are not allowed to add 2 credit cards with the same in `[CREDIT_CARD_NAME]`. Instead, you can abbreviate the cards differently.
 >  - For example: If you have two DBS credit cards, you can enter the `[CREDIT_CARD_NAME]` of the first card to be `DBS_one` and the other as `DBS_two`.
 >- `[CASHBACK]` cannot be more than 100%.
->- `[CARD_LIMIT]` cannot be more than 40,000. Generally, students should not have a monthly income of more than
-   > $10,000, and hence a monthly credit card limit of $40,000 calculated through [here](https://www.moneysmart.sg/credit-cards/credit-limit-singapore-ms).
+>- `[CARD_LIMIT]` cannot be more than $40,000. Generally, students should not have a monthly income of more than
+> $10,000, and hence a monthly credit card limit of $40,000 calculated through [here](https://www.moneysmart.sg/credit-cards/credit-limit-singapore-ms).
 
 <br/>
 
@@ -480,7 +474,7 @@ Lists all your credit cards.
 ````
 > list /cc
 -----------------------------------------------
-1. Name: dbs [Cashback: 2.00%] [Cashback gained: $0.00] [Card limit: $1000.00]
+1. Name: dbs [Cashback: 2.00%] [Cashback gained: $0.00] [Card limit: $1000.00] [Balance left: $1000.00]
 -----------------------------------------------
 ````
 
@@ -497,7 +491,7 @@ Use the `list /cc` command to view the current indexes of your credit cards.
     * Enter `1` if you want to update the first credit card in your list.
 * `[NEW_NAME]` refers to the name your Credit Card will be updated to.
     * Use abbreviations for ease of adding expenditures to this credit card. For example:
-      storing `DBS Live Fresh Credit Card` as `DBS LV`.
+      storing `DBS Live Fresh Credit Card` as `DBS LF`.
 * `[NEW_CASHBACK]` refers to the updated amount of cash back received when spending on the credit card.
     * Enter the amount of cashback in percentage.
     * For example: a credit card with `2% cashback` can be represented as `/cb 2`.
@@ -513,11 +507,11 @@ of $500.
 ````
 > list /cc
 -----------------------------------------------
-1. Name: dbs [Cashback: 2.00%] [Cashback gained: $0.00] [Card limit: $1000.00]
+1. Name: dbs [Cashback: 2.00%] [Cashback gained: $0.00] [Card limit: $1000.00] [Balance left: $1000.00]
 -----------------------------------------------
 
 > update /cc 1 /n OCBC /cb 1.5 /cl 500
-Successfully set credit card 1 to :
+Successfully set credit card 1 to:
 Name: OCBC [Cashback: 1.50%] [Cashback gained: $0.00] [Card limit: $500.00] [Card balance: $500.00]
 ````
 
@@ -565,6 +559,12 @@ I have removed OCBC from your list of credit card(s).
 > **💡 Note:**
 >- Only enter `[INDEX]` that exist in your list. For example: if you have 4 credit cards in your list, specify `[INDEX]` to be a number from 1 to 4.
 >- Do not use `delete /cc` when your credit card list is empty.
+
+<br/>
+
+### Calculate cashback: `calculate` [coming in v3.0]
+
+Details coming soon...
 
 <br/>
 
@@ -725,12 +725,6 @@ I have removed Salary from your list of income(s).
 
 <br/>
 
-### Calculate cashback: `calculate` [coming in v3.0]
-
-Details coming soon...
-
-<br/>
-
 ## Exit MindMyMoney application: `bye`
 
 Shuts down the MindMyMoney application.
@@ -818,6 +812,8 @@ Here is an example of a valid save file:
  "amount": "500"  "category": "Investment" 
 # END INCOME SOURCES
 ```
+
+<br/>
 
 ## FAQ
 

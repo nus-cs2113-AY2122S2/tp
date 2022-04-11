@@ -1,4 +1,4 @@
-# MindMyMoney (M<sup>3</sup>)
+# MindMyMoney
 
 MindMyMoney (M<sup>3</sup>) was proposed for users with multiple payment methods who wish to track their expenditures. Conducting
 anecdotal interviews, we realized users face difficulty tracking their expenditures across different payment platforms 
