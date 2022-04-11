@@ -8,7 +8,6 @@ import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.eventlists.EventList;
 import seedu.duke.exceptions.InvalidRoomNumberException;
-import seedu.duke.exceptions.InvalidHousekeeperProfileException;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -18,9 +17,6 @@ public class ViewEventsCommand extends Command {
     private static Logger logger = Logger.getLogger("log: View events present in the list of events.");
 
     public ViewEventsCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
-        if (!commandStringWithoutCommand.isEmpty()) {
-            throw new InvalidAvailabilityException();
-        }
         logger.log(Level.INFO, "View events command parsed");
     }
 
@@ -33,7 +29,7 @@ public class ViewEventsCommand extends Command {
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)
-            throws InvalidRoomNumberException, InvalidHousekeeperProfileException, IOException {
+            throws InvalidRoomNumberException, IOException {
         final EventList eventList = listContainer.getEventList();
         ui.printAllEvents(eventList.getEventList());
         logger.log(Level.INFO, "log: all events displayed");
