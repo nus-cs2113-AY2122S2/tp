@@ -25,7 +25,7 @@ public class Storage {
     private static final String DEFAULT_PATH = "data/inventoryData.json";
 
     private final String filePath;
-    private static Path dataPath;
+    private final Path dataPath;
 
     public Storage(String filePath) throws InvMgrException {
         this.filePath = filePath;
