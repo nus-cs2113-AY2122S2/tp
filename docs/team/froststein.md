@@ -6,27 +6,22 @@ title: Roy Tang - Project Portfolio Page
 Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=froststein&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 #### New Features
 * [Session Create](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionCreateCommand.java)
-  * What it does: Allows users to create sessions in the application.
-  * Justification: This feature allows users to record the details of their outing and keep track of the expenditure of each activity.
+  * What it does: Allows users to create sessions in the application. This feature allows users to record the details of their outing and keep track of the expenditure of each activity.
 * [Session Delete](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
-  * What it does: Allows users to delete sessions in the application.
-  * Justification: This feature allows users to remove unnecessary sessions that were previously created.
+  * What it does: Allows users to delete sessions in the application. This feature allows users to remove unnecessary sessions that were previously created.
 * [Session Edit](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionEditCommand.java) 
-  * What it does: Allows users to edit previously created sessions.
-  * Justification: This features allows users to amend a mistake previously made when creating a session.
+  * What it does: Allows users to edit previously created sessions. This features allows users to amend a mistake previously made when creating a session.
   * Highlights: This was challenging as the edits made had to be crossed check with existing sessions within the application.
                 In addition, the supplied person list for the edit had to contain the existing persons in the session.
 * [Session List](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
-  * What it does: Allows users to view all previously created sessions.
-  * Justification: This features allows users to see a list of all the outings that were recorded.
+  * What it does: Allows users to view all previously created sessions. This features allows users to see a list of all the outings that were recorded.
 * [Manager](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Manager.java)
   * Contains an instance of `Profile`, `Storage` and `TextUI` to support commands within SplitLah.
 * [Profile](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Profile.java)
   * The `Profile` class serves as a container and holds a list of all `Session` and `Group` objects created by the user.
   * It also keeps track of and issues new _unique identifiers_ for the creation of `Session`, `Activity` and `Group` objects.
 * [Storage](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/storage/Storage.java)
-  * What it does: Allows storing of data that was created during the runtime of the application.
-  * Justification: This feature was implemented so that data entered by the user during the lifetime of the application would be stored.
+  * What it does: Allows storing of data that was created during the runtime of the application. This feature was implemented so that data entered by the user during the lifetime of the application would be stored.
   * Highlights: As our team found it troublesome to catch all the corner cases if we were to create a csv file. 
                 We used the `Serializable` class in `java` to help us simplify file storage.
 
@@ -36,24 +31,20 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
     [SessionDeleteCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/SessionDeleteCommandParser.java), 
     [SessionEditCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/SessionEditCommandParser.java) and
     [SessionListCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/SessionListCommandParser.java) classes.
-* [PersonList](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/PersonList.java)
-  * Implemented a wrapper class for storing a list of Person objects.
+* [PersonList](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/PersonList.java). Implemented a wrapper class for storing a list of Person objects.
 * Integration of [`TableFormatter`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/ui/TableFormatter.java) class to
-  [`Profile`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Profile.java) class
-  * Improves the readability when printing list of sessions.
+  [`Profile`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Profile.java) class so that it improves the readability when printing list of sessions.
 * Added custom 'Back' buttons for User Guide and Developer guide to aid with navigation and readability.
 
 #### Testing
-* Added command `Junit` test for 
+* Added `Junit` test for 
   [SessionCreateCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/SessionCreateCommandTest.java), 
-[SessionDeleteCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/SessionDeleteCommandTest.java) and 
-[SessionEditCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/SessionEditCommandTest.java).
-* Added command parser `Junit` test for
+  [SessionDeleteCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/SessionDeleteCommandTest.java), 
+  [SessionEditCommand](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/command/SessionEditCommandTest.java),
   [SessionCreateCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/SessionCreateCommandParserTest.java),
-  [SessionDeleteCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/SessionDeleteCommandParserTest.java) and
-  [SessionEditCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/SessionEditCommandParserTest.java).
-* Added data `Junit` test for 
-  [Profile](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/data/Profile.java)
+  [SessionDeleteCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/SessionDeleteCommandParserTest.java),
+  [SessionEditCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/parser/commandparser/SessionEditCommandParserTest.java) and
+  [Profile](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/test/java/seedu/splitlah/data/Profile.java).
 
 ### Documentation Contributions
 Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=froststein&tabRepo=AY2122S2-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false)
