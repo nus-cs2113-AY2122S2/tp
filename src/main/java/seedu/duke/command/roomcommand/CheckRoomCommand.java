@@ -49,6 +49,7 @@ public class CheckRoomCommand extends Command {
                 System.out.println(room.toString()
                         + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
                 );
+                return;
             }
         }
         throw new InvalidRoomNumberException();
