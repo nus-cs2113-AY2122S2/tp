@@ -30,7 +30,7 @@ public class RemoveParser extends CommandParser {
     @Override
     public void extractParams() throws WrongCommandException, MissingFlagException, EmptyFieldException {
         if (matches.get("flag").equals("o")) {
-            String regexOrder = "oid/(?<oid>\\d)";
+            String regexOrder = "oid/(?<oid>\\d*)";
             HashMap<String, String> regexOrderMatch = new
                     MatchKeywords(userInput, regexOrder).getGroupValues();
             warehouse.removeOrder(regexOrderMatch.get("oid"));
