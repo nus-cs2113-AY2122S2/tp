@@ -101,7 +101,7 @@ The basic flow of the structure:
 The command to add a project is one example of this structure:
 
 #### Add a Project
-![image info](./UmlDiagrams/addProjectNew.png)
+![image info](./UmlDiagrams/AddProjectNew.png)
 
 **Step1.** After recieving the necessary method call, the `CommandHandler` class will self-call executeCommand with both the list of projects as well as a constructor call to AddProjectCommandParser (and a call to the parse method of AddProjectCommandParser) as its parameters
 
@@ -120,7 +120,7 @@ The command to add a project is one example of this structure:
 Deleting a project will follow nearly the exact same structure; the only difference is that the corresponding Parser and Command objects will be used (`DeleteProjectCommandParser` and `DeleteProjectCommand`)
 
 #### Delete a Project
-![image info](./UmlDiagrams/deleteProjectNew.png)
+![image info](./UmlDiagrams/DeleteProjectNew.png)
 
 **Step1.** After recieving the necessary method call, the `CommandHandler` class will self-call executeCommand with both the list of projects as well as a constructor call to DeleteProjectCommandParser (and a call to the parse method of DeleteProjectCommandParser) as its parameters
 
@@ -224,7 +224,7 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 
 #### Change the GitHub Link of a Project
-![image info](./UmlDiagrams/ChangeGit.jpg)
+![image info](./UmlDiagrams/ChangeGit.png)
 
 **Step 1.** When `CommandHandler` receives a user input starting with string “changegit”, it will create a `ChangeGitHubLinkCommandParser` object and call its `parse()` function to parse the user input
 
@@ -242,7 +242,7 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 
 #### Open the GitHub Link of a Project
-![image info](./UmlDiagrams/ChangeGit.jpg)
+![image info](./UmlDiagrams/OpenGit.png)
 
 **Step 1.** When `CommandHandler` receives a user input starting with string “opengit”, it will create a `OpenGitCommandParser` object and call its `parse()` function to parse the user input
 
