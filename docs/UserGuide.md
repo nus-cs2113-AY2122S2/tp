@@ -562,6 +562,12 @@ I have removed OCBC from your list of credit card(s).
 
 <br/>
 
+### Calculate cashback: `calculate` [coming in v3.0]
+
+Details coming soon...
+
+<br/>
+
 ## Income
 
 Income refers to the various sources of income you might have.
@@ -716,12 +722,6 @@ I have removed Salary from your list of income(s).
 > **💡 Note:**
 >- Only enter `[INDEX]` that exist in your list. For example: if you have 4 incomes in your income list, specify `[INDEX]` to be a number from 1 to 4.
 >- Do not use `delete /i` when your income list is empty.
-
-<br/>
-
-### Calculate cashback: `calculate` [coming in v3.0]
-
-Details coming soon...
 
 <br/>
 
