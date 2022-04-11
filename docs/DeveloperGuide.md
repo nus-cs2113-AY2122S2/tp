@@ -1,8 +1,6 @@
 # Developer Guide
 - [Architecture](#architecture)
 - [Design and Implementation](#design-and-implementation)
-  - [Design](#design)
-  - [Implementation](#implementation)
     - [Assign a housekeeper to a room](#assign-a-housekeeper-to-a-room)
     - [Adding a customer's satisfaction rating](#adding-a-customers-satisfaction-rating)
     - [Add Housekeeper feature](#add-housekeeper-feature)
@@ -45,10 +43,6 @@ Besides `Main`, the application also consists of four components which are:
 - `Tasks`: Represents the various commands which would be executed by the command component.
 
 ## Design & implementation
-
-## Design
-
-## Implementation
 
 ### Assign a housekeeper to a room
 The assignment of housekeeper to a room is facilitated by `AssignHousekeeperCommand`. This command objects uses `AssignmentMap`, which keeps a `HashMap`, to help us map a `Room` object to a `Housekeeper` object. 
