@@ -18,6 +18,8 @@ for you and your family. It allows you to:
 * **Family members** who wish to track the financial status for their family.
 * **Experienced Typists** who are comfortable operating the application on a terminal.
 
+<div style="page-break-after: always;"></div>
+
 ## Table of Contents
 
 * [Quick Start](#quick-start)
@@ -53,6 +55,8 @@ for you and your family. It allows you to:
 5. Type your commands into the terminal and press [Enter] to execute it.
 6. Refer to [Features](#features) below for details on each command.
 
+<div style="page-break-after: always;"></div>
+
 ## Quick Notes
 
 The following table describes the **formats** used in this User Guide.
@@ -76,6 +80,8 @@ Some additional points to take note of:
 * Commas should be removed from monetary values provided. E.g. `10,000` will not be a valid input.
 * You may provide duplicate entries such as when you have two family members with the same name. PlanITarium will track
   each of them as separate entries via indexing.
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -137,6 +143,8 @@ Example of usage:
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Delete a person: `delete`
 
 > Deletes a person from your family group.
@@ -160,6 +168,8 @@ Example of usage:
 
   ![delete-command-screenshot](images/DeletePerson.png)
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Add an income: `addin`
 
@@ -189,6 +199,8 @@ Example of usage:
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Delete an income: `deletein`
 
 > Deletes an entry from your list of tracked incomes.
@@ -214,6 +226,8 @@ Example of usage:
   ![deletein-command-screenshot](images/DeleteIncome.png)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Edit an income: `editin`
 
@@ -243,6 +257,8 @@ Example of usage:
   ![editin-command-screenshot](images/EditIncome.png)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Add an expenditure: `addout`
 
@@ -274,6 +290,8 @@ Example of usage:
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Delete an expenditure: `deleteout`
 
 > Deletes an entry from your list of tracked expenditure.
@@ -299,6 +317,8 @@ Example of usage:
   ![deleteout-command-screenshot](images/DeleteExpend.png)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Edit an expenditure: `editout`
 
@@ -330,6 +350,8 @@ Example of usage:
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Show financial summary: `overview`
 
 > Shows a summary of the total income, expenditure and disposable income of each group.
@@ -339,6 +361,8 @@ Format: `overview`
 ![list-command-screenshot](images/Overview.png)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Show all records by group: `list`
 
@@ -368,6 +392,8 @@ Format: `listcat`
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Searching for details: `find`
 
 > Search for a string as provided by you throughout all your income and expenditure.
@@ -393,6 +419,8 @@ Find records with category:
 * _Result_: The result of the search is returned and printed to the screen.
 
   ![find-command-screenshot](images/FindWithCat.png)
+
+<div style="page-break-after: always;"></div>
 
 Find records without category:
 
@@ -424,7 +452,7 @@ in the new computer. When the application starts up, it will automatically load 
 that the application running in the new computer should be the same version as the application in your previous
 computer.
 
-<br/>
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
