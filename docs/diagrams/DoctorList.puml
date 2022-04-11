@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+skinparam classAttributeIconSize 0
+class DoctorList {
+-doctors : Arraylist<Doctor> = null
+-returnedFinderArray : Arraylist<Doctor> = null
++getDoctor(String) : Doctor
++search()(String) : Doctor
++add(String[]) : void
++view() : void
++view(String) : void
++edit(String[]) : void
++getSize() : int
++remove(String) : void
++toString() : String
++getList() : Arraylist<doctor>
++findByNric(String[]) : void
++findByName(String[]) : void
++findByAge(String[]) : void
++findByGender(String[]) : void
++findByAddress(String[]) : void
++findByDob(String[]) : void
++findBySpecialization(String[]) : void
++displayFoundDoctorList() : void
++loadDate(String[]) : void
+}
+
+@enduml

@@ -1,0 +1,43 @@
+@startuml
+actor User
+User -> Manager : Type in command
+activate Manager
+
+Manager -> UI : readCommand()
+activate UI
+UI --> Manager
+deactivate UI
+
+Manager -> UI : readParameters()
+activate UI
+UI --> Manager
+deactivate UI
+
+Manager -> Parser : parseViewAppointment(parameters)
+activate Parser
+alt parameters is null
+    Parser --> Manager : ViewAppointmentCommand(null)
+else "else"
+    Parser --> Manager : FindAppointmentCommand(parameters)
+end
+deactivate Parser
+Manager -> Command : execute(storage.appointments)
+activate Command
+alt ViewAppointmentCommand
+    Command -> Appointment : viewAllAppointments()
+    activate Appointment
+    Appointment --> Command
+    deactivate Appointment
+else FindAppointmentCommand
+    Command -> Appointment : viewAppointmentsByCriteria(parameters)
+    activate Appointment
+    Appointment --> Command
+    deactivate Appointment
+end
+Command -> Status : Status()
+activate Status
+Status --> Command
+deactivate Status
+Command -> Manager : Status
+deactivate Command
+@enduml

@@ -1,9 +1,10 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+HalpMi: No saved data found!
+------------------------------
+HALPMI
+-------------------------
+HalpMi: Welcome! This is the Hospital Management System.
+        Please type in your input
 
-What is your name?
-Hello James Gosling
+You: HalpMi: Invalid Command given!
+
+You: Terminated

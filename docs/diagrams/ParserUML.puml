@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+
+box   LOGIC_COLOR_T1
+participant ":Parser" as Parser LOGIC_COLOR_T2
+participant ":Validator" as Validator LOGIC_COLOR_T2
+
+
+
+Parser -> Validator: validateMedicine
+alt LOGIC_COLOR_T2
+Validator -> Parser
+else LOGIC_COLOR_T2
+Validator -> Parser : UserInputErrorException
+end
+<--Parser : AddMedicineCommand
+end box
+
+
+@enduml

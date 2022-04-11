@@ -1,0 +1,38 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+abstract List
+class PatientList
+class DoctorList
+class MedicineList
+class AppointmentList
+
+List <|-- PatientList
+List <|-- DoctorList
+List <|-- MedicineList
+List <|-- AppointmentList
+
+class Storage {
+    String DIR
+    String PATH_DOC
+    String PATH_PAT
+    String PATH_MED
+    String PATH_APP
+    String PATH_APT_MEDS
+    + Storage()
+    + saveData()
+    + loadData()
+    - loadGenericData(filePath: String, listType : List)
+    - saveCorruptedData(filePath: String, stringArray : ArrayList)
+    - saveMedicineData()
+    - savePatientData()
+    - saveDoctorData()
+    - saveAppointmentData()
+}
+
+Storage --> "1" PatientList
+Storage --> "1" AppointmentList
+Storage --> "1" DoctorList
+Storage --> "1" MedicineList
+
+@enduml

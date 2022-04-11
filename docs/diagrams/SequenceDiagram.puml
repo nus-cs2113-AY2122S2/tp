@@ -1,0 +1,113 @@
+@startuml
+actor User as User #blue
+
+
+User -> Duke : Launches App
+activate Duke #white
+
+Duke -> Manager : Manager()
+activate Manager #yellow
+
+Manager -> UI: UI()
+activate UI #green
+UI --> Manager
+deactivate UI
+
+Manager -> Storage : Storage()
+activate Storage #green
+collections Assets as Assets
+Storage -> Assets: Initialise Asset Objects
+activate Assets #grey
+Assets --> Storage
+deactivate Assets
+
+
+Storage -> Storage : loadData()
+activate Storage #green
+Storage -> Assets: add()
+activate Assets #grey
+Assets --> Storage
+deactivate Assets
+Storage --> Storage:
+deactivate Storage
+Storage --> Manager:
+deactivate Storage
+
+deactivate Manager
+
+Duke -> Manager: runLoop()
+activate Manager #yellow
+loop until bye command
+    Manager -> UI: readCommand()
+    activate UI #green
+    UI -> User: Reads User Input
+    User --> UI: command
+    UI --> Manager: UserInput
+    deactivate UI
+    Manager -> UI: readParameters()
+    activate UI #green
+    UI -> User: Reads User Input
+    User --> UI: parameters
+    UI --> Manager: UserInput
+    deactivate UI
+    Manager -> Parser: parseCommand()
+    activate Parser #green
+    Parser -> Validator: validateParameters()
+    activate Validator #green
+    Validator --> Parser
+    deactivate Validator
+    opt Parameters are Valid
+        Parser -> Command: command()
+        activate Command #green
+        Command --> Parser
+        deactivate Command
+        Parser --> Manager: :Command
+    end
+    deactivate Parser
+    Manager -> Command: execute()
+    activate Command #green
+    Command -> Storage: Access Assets
+    activate Storage #green
+    Storage -> Assets : edit Assets
+    activate Assets #grey
+    Assets --> Storage
+    deactivate Assets
+    Storage --> Command
+    deactivate Storage
+    Command -> Status: Status()
+    activate Status
+    Status --> Command
+    deactivate Status
+    Command --> Manager: :Status
+    deactivate Command
+    Manager -> UI: print(:Status)
+    activate UI #green
+    UI -> Status : Get the Status
+    activate Status
+    Status --> UI
+    deactivate Status
+    UI --> Manager
+    deactivate UI
+    destroy Status
+    destroy Command
+    Manager -> Storage: saveData()
+    activate Storage #green
+    Storage -> Assets: Retrieve Data from Asset Objects
+    activate Assets #grey
+    Assets --> Storage: Data in CSV format
+    deactivate Assets
+    Storage --> Manager
+    deactivate Storage
+end
+Manager --> Duke
+deactivate Manager
+destroy Assets
+destroy Storage
+destroy UI
+destroy Parser
+destroy Validator
+destroy Manager
+deactivate Duke
+destroy Duke
+
+@enduml

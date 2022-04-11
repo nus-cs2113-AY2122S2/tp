@@ -1,0 +1,73 @@
+@startuml
+actor User as User #blue
+activate Manager
+Manager -> UI : readCommand()
+activate UI
+UI -> User : Reads in Command
+User --> UI : "dispense medicine"
+UI --> Manager : "dispense medicine"
+deactivate UI
+
+Manager -> UI : readParameters()
+activate UI
+UI -> User : Reads in Command
+User --> UI : "S1234567A,Paracetamol,10"
+UI --> Manager : "S1234567A,Paracetamol,10"
+deactivate UI
+
+Manager -> Manager : executeCommand("dispense medicine","S1234567A,Paracetamol,10")
+activate Manager #blue
+Manager -> Manager : executeOtherCommands("dispense medicine","S1234567A,Paracetamol,10")
+activate Manager #orange
+Manager -> Parser: parseDispenseMedicine("S1234567A,Paracetamol,10")
+activate Parser
+Parser -> Validator: validateDispenseMedicine({"S1234567A","Paracetamol","10"}
+activate Validator
+Validator --> Parser
+deactivate Validator
+Parser -> DispenseMedicineCommand : command({"S1234567A","Paracetamol","10"})
+activate DispenseMedicineCommand
+DispenseMedicineCommand --> Parser
+deactivate DispenseMedicineCommand
+Parser --> Manager : :DispenseMedicineCommand
+deactivate Parser
+Manager -> Parser : parseCheckForPatientAppointment("S1234567A,Paracetamol,10")
+activate Parser
+Parser -> CheckIfAppointmentTodayCommand: command({"S1234567A","Paracetamol","10"})
+activate CheckIfAppointmentTodayCommand
+CheckIfAppointmentTodayCommand --> Parser
+deactivate CheckIfAppointmentTodayCommand
+Parser --> Manager : :CheckIfAppointmentTodayCommand
+deactivate Parser
+Manager -> CheckIfAppointmentTodayCommand : execute(AppointmentList)
+activate CheckIfAppointmentTodayCommand
+CheckIfAppointmentTodayCommand --> Manager: Status.APPOINTMENT_FOUND_SUCCESS
+deactivate CheckIfAppointmentTodayCommand
+destroy CheckIfAppointmentTodayCommand
+Manager -> Parser: parseCheckMedicineStock("S1234567A,Paracetamol,10")
+activate Parser
+Parser -> CheckForMedicineStockCommand : command({"S1234567A","Paracetamol","10"})
+activate CheckForMedicineStockCommand
+CheckForMedicineStockCommand --> Parser
+deactivate CheckForMedicineStockCommand
+Parser --> Manager: :CheckForMedicineStockCommand
+deactivate Parser
+Manager -> CheckForMedicineStockCommand: execute(MedicineList)
+activate CheckForMedicineStockCommand
+CheckForMedicineStockCommand --> Manager : Status.MEDICINE_STOCK_FOUND_SUCCESS
+deactivate CheckForMedicineStockCommand
+destroy CheckForMedicineStockCommand
+Manager -> DispenseMedicineCommand: execute(MedicineList)
+activate DispenseMedicineCommand
+DispenseMedicineCommand --> Manager : Status.DISPENSE_SUCCESS
+deactivate DispenseMedicineCommand
+destroy DispenseMedicineCommand
+Manager --> Manager: Status.DISPENSE_SUCCESS
+deactivate Manager
+Manager --> Manager: Status.DISPENSE_SUCCESS
+deactivate Manager
+
+
+
+
+@enduml

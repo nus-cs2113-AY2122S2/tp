@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+abstract class Command {
+    +parameterArray: String[]
+    +Command(parameterArray: String[])
+    +{abstract} execute(list: List) : Status
+}
+
+Command <|-- AppointmentCommand
+class AppointmentCommand {
+    +parameterArray: String[]
+    +AppointmentCommand(parameterArray: String[])
+    +execute(appointmentList: List) : Status
+}
+
+Command <|--- DoctorCommand
+class DoctorCommand {
+    +parameterArray: String[]
+    +DoctorCommand(parameterArray: String[])
+    +execute(doctorList: List) : Status
+}
+
+Command <|--- PatientCommand
+class PatientCommand {
+    +parameterArray: String[]
+    +PatientCommand(parameterArray: String[])
+    +execute(patientList: List) : Status
+}
+
+Command <|-- MedicineCommand
+class MedicineCommand {
+    +parameterArray: String[]
+    +MedicineCommand(parameterArray: String[])
+    +execute(medicineList: List) : Status
+}
+
+@enduml

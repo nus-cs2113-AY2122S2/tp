@@ -1,0 +1,13 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+class Doctor {
+-specialization : String
++Doctor(nric,  fullName,age,  gender,  address, dob, specialization) : void
++getSpecialization() : String
++edit(fullName, age, address, gender, dob, specialization) : void
++saveString() : String
++toString() : String
+}
+
+@enduml

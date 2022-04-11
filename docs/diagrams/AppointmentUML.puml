@@ -1,0 +1,26 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+class Appointment {
+#appointmentId : String
+#patientNric : String
+#patientName : String
+#doctorNric : String
+#doctorName : String
+#appointmentDate : String
+#appointmentDetails : String
++Appointment(appointmentId, patientNric, patientName, doctorNric,
+doctorName, appointmentDate, appointmentDetails) : void
++toString() : String
++getAppointmentId() : String
++getPatientNric() : String
++getPatientName() : String
++getDoctorNric() : String
++getDoctorName() : String
++getAppointmentDate() : String
++getAppointmentDetails() : String
++saveString() : String
++saveMedicineString() : String
+}
+
+@enduml

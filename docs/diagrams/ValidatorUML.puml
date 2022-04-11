@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+
+box   LOGIC_COLOR_T1
+participant ":Validator" as Validator LOGIC_COLOR_T2
+
+
+[-> Validator : validateMedicine(parameters)
+activate Validator
+Validator -> Validator : minParameterCheck(parameters, 6)
+activate Validator
+deactivate  Validator
+Validator -> Validator : validateMedicineName(parameters[1])
+activate Validator
+deactivate  Validator
+Validator -> Validator : validateDosage(parameters[2])
+activate Validator
+deactivate  Validator
+Validator -> Validator : validateExpiry(parameters[3])
+activate Validator
+deactivate  Validator
+Validator -> Validator : validateQuantity(parameters[5])
+activate Validator
+deactivate  Validator
+
+alt LOGIC_COLOR_T2
+<-- Validator:
+else LOGIC_COLOR_T2
+<-- Validator: UserInputErrorException
+end
+
+
+
+@enduml
+
