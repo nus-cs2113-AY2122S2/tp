@@ -360,8 +360,34 @@ Step 6. In the `CheckRoomByLevelCommand`, it will iterate for roomList and print
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|Hotel Manager|Add the items inside the Inventory|record the items that are in the inventory|
+|v1.0|Hotel Manager|Update the items details inside the inventory|ensure the information of items in the inventory are up to date|
+|v1.0|Hotel Manager|View the items inside the inventory along with its paxs|know what are the items currently in the inventory|
+|v1.0|Hotel Manager|View the items inside the inventory with a pax of 0|quickly identify the items that need to be replenish|
+|v1.0|Hotel Manager|Add housekeeper profile|save a record of current housekeepers|
+|v1.0|Hotel Manager|Add housekeeper availabilities|record the availability of the housekeepers|
+|v1.0|Hotel Manager|View housekeeper availabilities|quickly allocate the shift times to each housekeepers|
+|v1.0|Hotel Manager|Assign housekeeper to a room|keep a record of which housekeeper is currently assigned to which room|
+|v1.0|Hotel Manager|View where the housekeeper is assigned to|ensure that there is a maximum of 2 housekeepers assigned to each floor|
+|v1.0|Hotel Manager|Update room vacancy status|keep a record of which rooms are currently occupied |
+|v1.0|Hotel Manager|View room vacancy status|identify how many rooms are vacant per floor inorder to determine how many housekeeper will be assigned to each floor|
+|v1.0|Hotel Manager|View number of vacant rooms per category|quickly determine if the type of room a guest wants is available|
+|v1.0|Hotel Manager|View housekeeper profile|know who are the current housekeepers as well as the total number of housekeepers to prevent over-hiring|
+|v1.0|Hotel Manager|Add housekeeper performance|save a record of each housekeepers performance|
+|v1.0|Hotel Manager|Add housekeeper performance|save a record of each housekeepers performance|
+|v1.0|Hotel Manager|View housekeeper performance|know who are the under-performing employees |
+|v1.0|Hotel Manager|Add each customer satisfaction|record the average satisfaction level of the customers|
+|v1.0|Hotel Manager|View overall customer satisfaction|ensure that the customers are satisfied and improve hotel's service accordingly|
+|v2.0|Hotel Manager|Add events happening |keep track of events happening in the hotel|
+|v2.0|Hotel Manager|View the list of all events|know which events are happening where|
+|v2.0|Hotel Manager|Delete an event| update the list of events as circumstances change|
+|v2.0|Hotel Manager|Update every housekeeper age when a new year begins|easily determine which housekeeper is over the age limit and have an updated age list of the housekeeper|
+|v2.0|Hotel Manager|Delete housekeeper's profile from list|keep track of active Housekeepers|
+|v2.0|Hotel Manager|Reset the availability of housekeeper| re-enter every housekeeper's available at the start of each week|
+|v2.0|Hotel Manager|View housekeepers available from Monday to Sunday|determine which days have no available housekeeper|
+|v2.0|Hotel Manager|Search for the items inside the item list using a keyword|quickly find the items I want in the item list quickly and easily without having to scroll through the entire item list|
+|v2.0|Hotel Manager|View overall customer satisfaction|ensure that the customers are satisfied and improve hotel's service accordingly|
+|v2.0|Hotel Manager|View housekeeper performance| know who are the under-performing employees|
 
 ## Non-Functional Requirements
 
