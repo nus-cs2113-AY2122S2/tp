@@ -39,7 +39,6 @@ public class Warehouse {
      * @param name        The name of the unit good
      * @param description Short description of the unit good
      * @param capacity    Represents the size of the good using arbitrary units
-     * @throws UnitTestException Exception when entering an invalid capacity
      */
     public void addUnitGoodToInventory(String sku, String name, String description, String capacity) {
         UnitGood unitGood = new UnitGood(sku, name, description, capacity);
@@ -481,6 +480,9 @@ public class Warehouse {
         try {
             int orderID = Integer.parseInt(oid);
             Order order = findOrder(orderID);
+            if (order.getFulfilled()) {
+                System.out.println("Order has already been fulfilled, unable to edit order.");
+            }
             order.removeOrderlineByQty(sku, qty);
 
         } catch (NumberFormatException e) {
@@ -787,21 +789,21 @@ public class Warehouse {
 //        System.out.println(saveStr);
         // PARSE
         try {
-            JSONObject jWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
+            JSONObject jsonWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
             boolean status = false;
             //addUnitGoodToInventory
             //Float totalCapacity = Float.parseFloat();
-            status = this.setTotalCapacity(jWarehouse.get(WarehouseKeys.totalCapacity).toString());
+            status = this.setTotalCapacity(jsonWarehouse.get(WarehouseKeys.totalCapacity).toString());
             if (!status) {
                 return false;
             }
-            JSONArray sol = (JSONArray) jWarehouse.get(WarehouseKeys.orderLists);
+            JSONArray sol = (JSONArray) jsonWarehouse.get(WarehouseKeys.orderLists);
             status = this.restoreOrders(sol);
             if (!status) {
                 return false;
             }
 
-            JSONObject sgl = (JSONObject) jWarehouse.get(WarehouseKeys.goodList);
+            JSONObject sgl = (JSONObject) jsonWarehouse.get(WarehouseKeys.goodList);
             status = this.restoreGoods(sgl);
             if (!status) {
                 return false;
@@ -817,7 +819,6 @@ public class Warehouse {
         }
         return true;
     }
-
 }
 
 
