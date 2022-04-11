@@ -37,8 +37,6 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 
 * Helped maintain issue trackers for our Github
 
-* Helped remind our group of possible gaps in our product
-
 * Updating user/developer docs that are not specific to a feature and see a change fits it
 
 * Regularly code reviews teammates' codes for merging into our master
