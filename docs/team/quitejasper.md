@@ -15,7 +15,7 @@ The target users of this application are executive committee members of student 
 7. [Review/Mentoring Contributions](https://github.com/quitejasper/tp/blob/master/docs/team/quitejasper.md#7-reviewmentoring-contributions-)
 
 ### 1. Code Contributed
-Click <a href="https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=quitejasper&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=quitejasper&tabRepo=AY2122S2-CS2113-F10-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false">here to view the code that I contributed.
+Click [here to view the code that I contributed](https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=quitejasper&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=quitejasper&tabRepo=AY2122S2-CS2113-F10-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 ### 2. Features Implemented
 - Add Command 
