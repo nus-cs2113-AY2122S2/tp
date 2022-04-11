@@ -83,6 +83,7 @@ Given below are my contribution to the projects:
 * __Contribution to DG__:
     * Consolidate all user stories into DG.
     * Created content page in DG.
+    * Created diagram for architecture design. 
     * Formatting for manual testing and housekeeper related testing.
     * Stating some Non-Functional requirements.
     * Create a Sequence Diagram and Class Diagram for
