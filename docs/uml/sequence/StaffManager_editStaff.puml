@@ -32,7 +32,13 @@ staffcontroller --> staffcontroller
 deactivate staffcontroller
 end
 
+staffcontroller -> staffcontroller: editStaffByField(Staff staff)
+activate staffcontroller
+
+
 alt option 1: id
+staffcontroller -> staffcontroller: editStaffId(Staff staff)
+activate staffcontroller
 group loop [while staff with inputted ID already exists]
 staffcontroller -> staffcontroller: checkNoStaffClash(int staffId)
 activate staffcontroller
@@ -46,24 +52,35 @@ end
 staffcontroller -> staff: setStaffId(int staffId)
 activate staff
 deactivate staff
+deactivate staffcontroller
 
 else option 2: name
+staffcontroller -> staffcontroller: editStaffName(Staff staff)
+activate staffcontroller
 staffcontroller -> staff: setStaffName(String staffName)
 activate staff
 deactivate staff
+deactivate staffcontroller
 
 else option 3: position
+staffcontroller -> staffcontroller: editStaffPosition(Staff staff)
+activate staffcontroller
 staffcontroller -> staff: setPosition(String position)
 activate staff
 deactivate staff
+deactivate staffcontroller
 
 else option 4: salary
-group loop [while salary is negative or zero]
+staffcontroller -> staffcontroller: editStaffSalary(Staff staff)
+activate staffcontroller
 staffcontroller -> staff: setSalary(double salary)
 activate staff
-end
+deactivate staff
+deactivate staffcontroller
 
 else option 0: exit
+
+end
 
 end
 @enduml
