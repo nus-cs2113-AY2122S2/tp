@@ -113,6 +113,15 @@ public class PatientList extends List {
         }
     }
 
+    public void removeAppointmentDate(String nric, String date) {
+        for (Patient patient : patients) {
+            if (patient.getPatientNric().equals(nric)) {
+                patient.removeAppointmentDate(date);
+                break;
+            }
+        }
+    }
+
     public boolean hasPatientDate(String nric, String date) throws DuplicateEntryException {
         for (Patient patient : patients) {
             if (patient.getNric().equals(nric)) {

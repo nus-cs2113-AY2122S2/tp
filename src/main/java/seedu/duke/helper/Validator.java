@@ -213,6 +213,15 @@ public class Validator {
         validateExpiry(parameters[3]);
         validateQuantity(parameters[5]);
     }
+
+    public static void validateMedicineStorage(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 6);
+        assert parameters.length == 6 : "Validate failed to check parameter length";
+        validateMedicineName(parameters[1]);
+        validateDosage(parameters[2]);
+        validateDate(parameters[3],"none");
+        validateQuantity(parameters[5]);
+    }
     
     // Validate appointment
     
@@ -255,6 +264,13 @@ public class Validator {
         validateNric(parameters[0]);
         validateNric(parameters[1]);
         validateDate(parameters[2], "appointment");
+    }
+
+    public static void validateAddAppointmentStorage(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 4);
+        validateNric(parameters[0]);
+        validateNric(parameters[1]);
+        validateDate(parameters[2], "none");
     }
 
     public static void validateEditAppointment(String[] parameters) throws UserInputErrorException {
@@ -341,6 +357,7 @@ public class Validator {
     }
 
     public static void validateFindPatient(String[] parameters) throws UserInputErrorException {
+        minParameterCheck(parameters, 2);
         switch (parameters[0].toLowerCase()) {
         case "nric":
             validateNric(parameters[1]);
