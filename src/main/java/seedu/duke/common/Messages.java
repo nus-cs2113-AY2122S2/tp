@@ -19,6 +19,8 @@ public class Messages {
             + "conjunction with a quantity!";
     public static final String INVALID_DATE_FORMAT = "Error: Incorrect date format. Please enter "
             + "dates in YYYY-MM-DD format.";
+    public static final String ZERO_QUANTITY_MESSAGE = "Sorry, quantity indicated is zero!"
+            + "Your command has been terminated; no changes were made.";
     public static final String NEGATIVE_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "
             + "would be negative! "
             + "Your command has been terminated; no changes were made.";

@@ -33,6 +33,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         int quantity = ParserUtils.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
         String description = argMultimap.getValue(PREFIX_DESCRIPTION).get();
 
+        if(quantity == 0) {
+            throw new InvMgrException(Messages.ZERO_QUANTITY_MESSAGE);
+        } else if (quantity < 0) {
+            throw new InvMgrException(Messages.NEGATIVE_QUANTITY_MESSAGE);
+        }
+
         Item item = new Item(name, quantity, description);
 
         return new AddCommand(item);
