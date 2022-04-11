@@ -852,6 +852,7 @@ it with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGu
    The list of persons for the session includes Alice, Bob, Charlie and also David.
 3. Test Command: `session /create /n SessionTest6 /gid 2 /d today`<br>
    Expected: An error message should be printed, indicating that the specified group unique identifier cannot be found.
+
 <hr>
 
 #### Deleting a Session
@@ -867,6 +868,7 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    Expected: An error message should be printed, indicating that the specified session unique identifier cannot be found.
 3. Test Command; `session /delete /sid apple`<br>
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
+
 <hr>
 
 #### Editing a Session
@@ -888,6 +890,7 @@ it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/User
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
 6. Test Command: `session /edit /sid 1`<br>
    Expected: An error message should be printed, indicating that no delimiters were found.
+
 <hr>
 
 #### Settling a Session
@@ -912,6 +915,7 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 5. Test Command: `session /summary /sid 1`<br>
    Expected: A summary indicating the transactions that have to be made to settle all debts of the session with a 
    session unique identifier of `1` should be printed.
+
 <hr>
 
 #### Viewing a Session
@@ -935,6 +939,7 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    Expected: An error message should be printed, indicating that a session with the specified session unique identifier was not found.
 5. Test Command: `session /view /sid 1`<br>
    Expected: The full details of the session with a session unique identifier of `1` should be printed.
+
 <hr>
 
 #### Listing all Sessions
@@ -949,6 +954,7 @@ Test Scenario 1: No sessions are currently stored in the application.
 Test Scenario 2: At least 1 session exists in the application.
 * Test Command: `session /list`<br>
   Expected: A table summarising the details of all existing sessions should be printed.
+
 <hr>
 
 ### Activity Testing
@@ -1103,7 +1109,6 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 
 #### Creating a Group
 > For details on the usage of `group /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-group-group-create).
-<hr>
 
 **Test Cases:**
 
@@ -1121,9 +1126,10 @@ Test Scenario 2: There is a group named GroupTest1 currently stored in the appli
 2. Test Command: `group /create /n GroupTest1 /pl Alice Bob Charlie` <br>
    Expected: An error message should be printed, indicating that a group with the same name already exists within the application.
 
+<hr>
+
 #### Deleting a Group
 > For details on the usage of `group /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-group-group-delete).
-<hr>
 
 **Test Cases:**
 
@@ -1135,9 +1141,10 @@ Test Scenario 1: There is a group with unique identifier of 1 stored in the appl
 3. Test Command; `group /delete /gid apple`<br>
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/gid` delimiter.
 
+<hr>
+
 #### Editing a Group
 > For details on the usage of `group /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-group-group-edit).
-<hr>
 
 **Test Cases:**
 
@@ -1152,6 +1159,8 @@ Test Scenario 1: A group has been created with a unique identifier of 1, named G
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/gid` delimiter.
 5. Test Command: `group /edit /gid 1`<br>
    Expected: An error message should be printed, indicating that no delimiters were found.
+
+<hr>
 
 #### Viewing a Group
 > For details on the usage of `group /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-group-group-view).
@@ -1193,7 +1202,6 @@ Test Scenario 2: At least 1 group exists in the application.
 <hr>
 
 ### Storage Testing
-<hr>
 
 **Test Cases:**
 
