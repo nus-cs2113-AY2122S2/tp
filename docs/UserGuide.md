@@ -76,7 +76,8 @@ If you are not ready to handle the intricacies of the Command Prompt, you can us
 to launch HALPMI as well. However do note that you will have to change the PATH name included on the bat file to the PATH name
 at which Halpmi.jar is located.
 
-![](../../Desktop/Screenshot 2022-04-11 at 4.14.49 AM.png)
+![startHalpmi](photos/startHalpmi.jpg)
+    
 
 -----------------------------------------------
 
@@ -104,7 +105,7 @@ Format: `add doctor /info [nric], [name], [age], [gender], [address], [DOB], [Sp
 
 Example: `add doctor /info S7654321A, John Doe, 22, M, 10 Baker Street, 1999-12-31, Urinology`
 
-![](../../Desktop/Screenshot 2022-04-11 at 4.15.38 AM.png)
+![addDoctor](photos/addDoctor.jpg)
 
 #### ADD PATIENT
 
@@ -116,7 +117,7 @@ To add a patient there are some parameters that you would have to provide:
 4. Gender
 5. Address
 6. Date Of Birth (DOB)
-7. Date Of Admission (DOA)
+7. Date Of Registration (DOR)
 
 You will have to follow the formatting given below when calling the command.
 
@@ -124,7 +125,7 @@ Format: `add patient /info [nric], [name], [age], [gender], [address], [DOB], [D
 
 Example: `add patient /info S1234567A, John Doe, 22, M, 10 Baker Street, 1999-12-31, 2021-02-15`
 
-![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_hs7ymv/Screenshot 2022-04-11 at 4.16.18 AM.png)
+![addPatient](photos/addPatient.jpg)
 
 #### ADD MEDICINE
 
@@ -143,7 +144,7 @@ Format: `add medicine /info [batch id], [name], [dosage], [expiry date], [side e
 
 Example: `add medicine /info A123, Paracetamol, 500, 2023-06-11, drowsy, 10`
 
-![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_FaOeNF/Screenshot 2022-04-11 at 4.17.09 AM.png)
+![addMedicine](photos/addMedicine.jpg)
 
 #### ADD APPOINTMENT
 
@@ -160,7 +161,7 @@ Format: `add appointment /info [patient nric], [doctor nric], [appointment date]
 
 Example: `add appointment /info S1234567A, S7654321A, 2022-10-15, Regular knee checkup`
 
-![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_iZfaSb/Screenshot 2022-04-11 at 4.17.38 AM.png)
+![addAppointment](photos/addAppointment.jpg)
 
 ### Viewing: `view`
 Allows user to view existing records of doctors, patients, medicine or appointment.
@@ -174,7 +175,7 @@ Format: `view doctor`
 
 Examples: `view doctor`
 
-![](../../../../var/folders/rp/vr60xv8j3yg7lhxrfhmbj8c00000gn/T/TemporaryItems/NSIRD_screencaptureui_2erWOk/Screenshot 2022-04-11 at 4.18.30 AM.png)
+
 
 #### VIEW PATIENT
 
@@ -278,7 +279,7 @@ You will have to follow the formatting given below when calling the command.
 
 Format: `edit doctor /info [nric], [name], [age], [gender], [address], [DOB], [Specialisation]`
 
-Example: `edit doctor /info S7654321A, John Doe, 22, M, 12 Baker Street, 1999-12-31, Urinology Department`
+Example: `edit doctor /info S7654321A, John Doe, 22, M, 12 Baker Street, 1999-12-31, Urinology`
 
 ![](../../Desktop/Screenshot 2022-04-11 at 4.48.35 AM.png)
 
@@ -292,7 +293,7 @@ To edit a patient there are some parameters that you would have to provide:
 4. Gender
 5. Address
 6. Date Of Birth (DOB)
-7. Date Of Admission (DOA)
+7. Date Of Registration (DOR)
 
 You will have to follow the formatting given below when calling the command.
 
