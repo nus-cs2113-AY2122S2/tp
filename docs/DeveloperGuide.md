@@ -5,9 +5,18 @@
 - [Introduction](#introduction)
 - [Architecture](#architecture)
 - [Design & Implementation](#design--implementation)
-  - [Study Session Implementation](#study-session-implementation)
+  - [Task Implementation](#task-implementation)
+    - [Editing Tasks](#editing-tasks)
+  - [Study Session Implementation](#study-session-implementation) 
+    - [Timer Implementation](#timer-implementation)
+    - [Study session usage scenario](#study-session-usage-scenario)
+    - [Design considerations for Timer](#design-considerations-for-timer-class)
   - [Timetable Implementation](#timetable-implementation)
+    - [Timetable usage scenario](#timetable-usage-scenario)
+    - [Design considerations for generating timetable](#design-considerations-for-generating-the-timetable)
   - [Storage Implementation](#storage-implementation)
+    - [Loading saved files](#loading-saved-files)
+    - [Design considerations for format of save file](#design-considerations-for-the-format-of-the-save-file)
 - [Product Scope](#product-scope)
   - [Target user profile](#target-user-profile)
   - [Value proposition](#value-proposition)
@@ -90,7 +99,8 @@ operate on.
 
 ![classdiagram](images/TaskClass.png)
 
-#### Editing tasks
+#### Editing Tasks
+
 The edit command is handled by the `EditCommand` class, and it allows users to edit 1 or more occurrences of a task.
 
 If the edit command contains the `/repeat` option, the specified task
@@ -165,7 +175,7 @@ The `TimerLogic` component
 
 The `Timer` component
 
-![TimerClassDiagram](images/TimerClassDiagram.png)
+![](images/TimerClassDiagram.png)
 
 - Consists of abstract `Timer` class, `Countdown` class and `Stopwatch` class as depicted in the class diagram above
 - `Timer` inherits from Java's `Thread` class
@@ -174,7 +184,7 @@ The `Timer` component
 - `Countdown` and `Stopwatch` can be paused, resumed and stopped
 - `Countdown` and `Stopwatch` prints to standard output the time remaining and elapsed respectively at regular intervals
 
-#### Timer implementation
+#### Timer Implementation
 
 Sherpass’ implementation of the timer function in the study session is mainly through `Timer`, `Countdown` and 
 `Stopwatch` class. Depending on the type of timer selected by the user, either `Countdown` or `Stopwatch` will be
@@ -200,12 +210,11 @@ user is in the study session. `TimerParser` parses user inputs (commands) relate
 
 Sequence diagram for `StudyCommand` for receiving input from `Ui`:
 
-![TimerInputSD](https://user-images.githubusercontent.com/69501969/162566570-9b9219dd-858e-409b-b655-0b06d71e5e7d.png)
+![](images/TimerInputSD.png)
 
 Sequence diagram for `Timer` when user starts and stops a timer:
 
-![TimerClassSD](https://user-images.githubusercontent.com/69501969/162565061-146f1c9d-3e69-4c75-8d49-2eb5e5ccab17.png)
-
+![](images/TimerClassSD.png)
 
 The diagram above depicts the process when user calls start and stop (in step 2 and 3 below). All the methods
 called by Timer are in parallel with other commands, since `Timer` is in a separate thread. For simplicity’s
@@ -237,7 +246,7 @@ track of time
   provided by Java has no way of pausing the timer, only stopping it.
 
 
-### Timetable implementation 
+### Timetable Implementation 
 
 The **TimeTable** component prints the daily, weekly and monthly schedule that the user wishes to see. 
 
@@ -316,7 +325,7 @@ the input over to Parser to break down the input into a suitable data for comman
 
 
 
-### Timetable usage scenario
+#### Timetable usage scenario
 
 Below is the overall sequence, represented by three sequence diagrams, showing what happens 
 as the user enters a command to see the schedule (timetable) for 25th May 2022:
