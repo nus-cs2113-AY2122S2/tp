@@ -11,7 +11,8 @@ alt event is type meeting
 ":MasterTimetable" -> ":MasterTimetable" ++: deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
 ":MasterTimetable" -> ":DeleteCommand" ++: deleteMeetingFromAllTimetableConfirmation :String
 ":DeleteCommand" --> ":Ui" --:
-
+deactivate ":MasterTimetable"
+deactivate ":MasterTimetable"
 else non-meeting types
 
 ":DeleteCommand" -> ":Timetable" ++ : remove(index - 1)
