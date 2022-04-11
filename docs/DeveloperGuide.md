@@ -977,12 +977,6 @@ they engage in during the outings.
 | Storage  | A Storage is in charge of saving and reading to and from the save file respectively.                                                                                                                                                                                                                        |
 | TextUI   | A TextUI is an user interface that the user sees on the CLI.                                                                                                                                                                                                                                                |
 
-<br>
-
-| Terms    | Definition                                                                                           |
-|----------|------------------------------------------------------------------------------------------------------|
-| Activity | An activity represents a single group activity and stores its name, costs and the name of the payer. |
-
 
 <br>
 <div class="button-box">
