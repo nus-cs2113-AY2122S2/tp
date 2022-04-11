@@ -169,6 +169,9 @@ public class Validator {
     private static boolean validateDosage(String dosage) throws UserInputErrorException {
         try {
             int dosageInt = Integer.parseInt(dosage);
+            if (dosageInt <= 0) {
+                throw new UserInputErrorException("Invalid medicine dosage");
+            }
             return dosageInt > 0;
         } catch (NumberFormatException numberFormatException) {
             throw new UserInputErrorException("Invalid Medicine dosage");
