@@ -533,8 +533,10 @@ public class ActivityEditCommand extends Command {
      * Checks if the list of participants is unnecessary when editing the activity.
      *
      * @param oldActivity An Activity object representing the old activity to be compared against.
-     * @return true if the list of participants was not supplied by the user, or if it is identical to the old list of participants.
-     *         false if the list of participants was supplied by the user and is different from the old list of participants.
+     * @return true if the list of participants was not supplied by the user, or if it is identical to the old list of
+     *              participants.
+     *         false if the list of participants was supplied by the user and is different from the old list of
+     *              participants.
      */
     private boolean checkIfInvolvedListIsUnnecessary(Activity oldActivity) {
         if (!isInvolvedListSupplied) {
