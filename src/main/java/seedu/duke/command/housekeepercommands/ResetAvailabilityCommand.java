@@ -24,9 +24,11 @@ public class ResetAvailabilityCommand extends Command {
 
     /**
      * Call method to reset every housekeeper availability to null and print out the new list for verification.
-     *  @param listContainer List of information.
-     * @param ui            The instance of the Ui class (used for printing additional messages when a command is
-     * @return
+     *
+     * @param listContainer The object containing the lists to update depending on the command inputted by the user.
+     * @param ui            The instance of the Ui class used for printing additional messages when a command is
+     *                      executed.
+     * @throws IOException Write to file has failed.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws IOException {
@@ -39,7 +41,7 @@ public class ResetAvailabilityCommand extends Command {
      * After all housekeeper's availability has been reset, this method will update the file and resets
      * every housekeeper availability.
      *
-     * @param listContainer List of information.
+     * @param listContainer The object containing the lists to update depending on the command inputted by the user.
      * @throws IOException Failed to write to file.
      */
     public void writeHousekeeperToFile(ListContainer listContainer) throws IOException {

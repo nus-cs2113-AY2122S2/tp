@@ -5,7 +5,6 @@ import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidAvailabilityException;
 import seedu.duke.exceptions.InvalidDayException;
 import seedu.duke.Ui;
-import seedu.duke.exceptions.UserDoesNotExistException;
 import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.command.Command;
 import seedu.duke.storage.HousekeeperFileManager;
@@ -16,7 +15,8 @@ import java.util.logging.Logger;
 
 /**
  * Identifies the name and availability of the housekeeper and update availability into the
- * housekeeper list.
+ * housekeeper list. An AddAvailabilityCommand object consists of the name of the housekeeper in list together with
+ * their availabilities given. This can be used for updating or adding availabilities.
  */
 public class AddAvailabilityCommand extends Command {
     private String name;
@@ -57,10 +57,9 @@ public class AddAvailabilityCommand extends Command {
      *
      * @param inputAvailability Availability given by the user.
      * @return A valid availability.
-     * @throws InvalidDayException When the given availability is not integer and between 1 and 7.
+     * @throws HotelLiteManagerException When the given availability is not integer and between 1 and 7.
      */
-    private String checkValidAvailability(String inputAvailability) throws InvalidDayException,
-            InvalidAvailabilityException {
+    private String checkValidAvailability(String inputAvailability) throws HotelLiteManagerException {
         String availability = checkValidExtract(inputAvailability);
         try {
             String[] splitDays = availability.split(",");
@@ -86,9 +85,9 @@ public class AddAvailabilityCommand extends Command {
      *
      * @param day Number used to indicate the day in the week.
      * @return Valid day.
-     * @throws InvalidDayException When the day given has length more than1. Eg (12,2DF)
+     * @throws HotelLiteManagerException When the day given has length more than1. Eg (12,2DF)
      */
-    private String checkLengthInput(String day) throws InvalidDayException {
+    private String checkLengthInput(String day) throws HotelLiteManagerException {
         String trimmedDay = day.trim();
         if (trimmedDay.length() > 1) {
             logger.log(Level.WARNING, "Length given was more than 1.");
@@ -103,9 +102,9 @@ public class AddAvailabilityCommand extends Command {
      *
      * @param inputGiven Either the name or availability given by user.
      * @return Either the valid Name or Availability.
-     * @throws InvalidAvailabilityException When input given is empty.
+     * @throws HotelLiteManagerException When input given is empty.
      */
-    private String checkValidExtract(String inputGiven) throws InvalidAvailabilityException {
+    private String checkValidExtract(String inputGiven) throws HotelLiteManagerException {
         if (inputGiven.isEmpty()) {
             throw new InvalidAvailabilityException();
         }
@@ -157,11 +156,13 @@ public class AddAvailabilityCommand extends Command {
      * Get the Name of the housekeeper and verify that housekeeper is in records. If in records, add
      * his/her availability into housekeeper list.
      *
-     * @param ui The user interface for this execution method.
-     * @return
+     * @param listContainer The object containing the lists to update depending on the command inputted by the user.
+     * @param ui            The user interface for this execution method.
+     * @throws HotelLiteManagerException If user does not exist in the records.
+     * @throws IOException Write to file has failed.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws UserDoesNotExistException, IOException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.addAvailabilityInList(name, availability);
         ui.printNotedLine();
@@ -172,8 +173,8 @@ public class AddAvailabilityCommand extends Command {
     /**
      * This methods update the housekeeper's availability into the housekeeper file.
      *
-     * @param listContainer Contains the list of information.
-     * @throws IOException Write to file fails.
+     * @param listContainer The object containing the lists to update depending on the command inputted by the user.
+     * @throws IOException Write to file has failed.
      */
     public void writeAvailabilityToFile(ListContainer listContainer) throws IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();

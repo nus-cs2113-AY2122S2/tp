@@ -19,11 +19,11 @@ public class ViewHousekeeperListCommand extends Command {
     /**
      * Printing the list of housekeeper name, age and availability.
      *
+     * @param listContainer The object containing the lists to update depending on the command inputted by the user.
      * @param ui The user interface for this execution method.
-     * @return
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         ui.printHousekeeperList(housekeeperList);
     }

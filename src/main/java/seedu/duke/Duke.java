@@ -54,6 +54,15 @@ public class Duke {
         }
     }
 
+    /**
+     * Updates the list saved within the respective files based on the type of housekeeper related
+     * commands given by the user.
+     *
+     * @param command       The command object that was constructed by the command parser based on the command the user
+     *                      inputted.
+     * @param listContainer The object containing the lists to update depending on the command inputted by the user.
+     * @throws IOException if we are unable to write to the respective file found within the ListFolder directory.
+     */
     private void writeHousekeeperListsToFile(Command command, ListContainer listContainer) throws IOException {
         if (command instanceof AddHousekeeperCommand) {
             AddHousekeeperCommand addHousekeeperCommand = (AddHousekeeperCommand) command;

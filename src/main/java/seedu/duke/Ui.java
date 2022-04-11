@@ -125,6 +125,12 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Uses toString method from the housekeeper class to print the name, age and available of the housekeeper to be
+     * added into the list.
+     *
+     * @param housekeeper Housekeeper to be added into list.
+     */
     public void printHousekeeperNoted(Housekeeper housekeeper) {
         System.out.println(MESSAGE_HEADER);
         System.out.println(housekeeper);
@@ -186,8 +192,9 @@ public class Ui {
     }
 
     /**
-     * Prints out an acknowledgement message saying that there were no items within the item list that matches the
-     * user specified criteria.
+     * This method prints the name, age and availability of each housekeeper in the list.
+     *
+     * @param housekeeperList Contains the list of housekeeper's profiles.
      */
     public void printHousekeeperList(HousekeeperList housekeeperList) {
         printMessage("=============== Housekeeper List ================");
@@ -197,11 +204,25 @@ public class Ui {
         printMessage("=============== End of the list =================");
     }
 
+
+    /**
+     * This method notifies user that every housekeeper availability has been rested and prints the list of housekeeper
+     * with their name, age and availability. The availability column seen should now be 'N/A'.
+     *
+     * @param housekeeperList Contains the list of housekeeper's profiles.
+     */
     public void printHousekeeperListReset(HousekeeperList housekeeperList) {
         printMessage("Housekeeper's availability has been reset!");
         printHousekeeperList(housekeeperList);
     }
 
+    /**
+     * Given the day interested from the user, this method will print the list of housekeeper available on the
+     * day of interest.
+     *
+     * @param housekeeperPrintList Contains the list of housekeeper's profiles.
+     * @param dayInteger           The Day user is interested to know which housekeepers are available.
+     */
     public void printFoundHousekeeperList(ArrayList<Housekeeper> housekeeperPrintList, int dayInteger) {
         String day = getDayInString(dayInteger);
 
@@ -217,6 +238,12 @@ public class Ui {
         printMessage("========= End of the list =========");
     }
 
+    /**
+     * Converts the day from integer to their string equivalent. For example, 1 represents Monday.
+     *
+     * @param dayInteger Day given in integer.
+     * @return The actual name of the day in string.
+     */
     private String getDayInString(int dayInteger) {
         String day;
         switch (dayInteger) {
@@ -247,6 +274,13 @@ public class Ui {
         return day;
     }
 
+    /**
+     * Prints the list of housekeepers who exceed age limit after user given the command to indicate a new year
+     * has started. It will also notifies user if none of the housekeeper's age has exceeded the age limit.
+     *
+     * @param housekeeperPrintList Consist the list of housekeeper whose age has exceed the age limit which is 61 and
+     *                             above.
+     */
     public void printOverAgeList(ArrayList<Housekeeper> housekeeperPrintList) {
         printMessage("======== Age Limit Exceed List ========");
         if (housekeeperPrintList.isEmpty()) {
@@ -302,7 +336,7 @@ public class Ui {
      * Prints an acknowledgement message informing the user that the item to delete has been deleted from the item list.
      *
      * @param itemToDelete The item object which contains the item name of the item to be deleted from the item list.
-     * @param listOfItems The item list which containing all the items.
+     * @param listOfItems  The item list which containing all the items.
      */
     public void printDeleteItemAcknowledgementMessage(Item itemToDelete, ItemList listOfItems) {
         String itemName = itemToDelete.getName();
@@ -340,6 +374,13 @@ public class Ui {
         System.out.println("===========================================");
     }
 
+    /**
+     * This method print the confirmation that the housekeeper has been delete as well as the total pax of
+     * housekeeper currently working in the hotel.
+     *
+     * @param housekeeperList Contains the list of housekeeper's profiles.
+     * @param name            Name of housekeeper to be deleted.
+     */
     public void printNotifiedDeletionOfHousekeeper(HousekeeperList housekeeperList, String name) {
         printNotedLine();
         printMessage("Deleted " + name + " from the list of profile");
