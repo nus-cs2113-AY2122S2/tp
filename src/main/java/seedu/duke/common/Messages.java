@@ -38,7 +38,7 @@ public class Messages {
     public static final String REPORTED_LOST_AND_DELETED_MESSAGE = "I've marked this item as lost and "
             + "deleted it from the inventory!";
     public static final String LOST_ERROR_MESSAGE = "The quantity lost exceeds the item quantity!"
-            + "Please enter a different item quantity.";
+            + " Please enter a different item quantity.";
     public static final String RETURN_ERROR_MESSAGE = "There are no outstanding loans on this item. "
             + "Please select a different item to return!";
     public static final String INVALID_START_END_DATE = "Error: Incorrect start and end date order. "

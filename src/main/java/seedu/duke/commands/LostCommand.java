@@ -80,4 +80,24 @@ public class LostCommand extends Command {
         ui.showDivider();
     }
 
+    /**
+     * Returns true if a LostCommand object is the same object compared to another LostCommand object
+     * or contains the same attributes as another LostCommand object.
+     *
+     * @param o The other LostCommand object to compare to.
+     * @return True if this LostCommand and another LostCommand
+     *     are the same object or contains the same attributes.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LostCommand that = (LostCommand) o;
+        return itemIndex == that.itemIndex && itemQuantity == that.itemQuantity;
+    }
+
 }
