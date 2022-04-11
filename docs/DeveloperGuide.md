@@ -394,7 +394,8 @@ Given below are instructions to test the app manually.
 |`deleteproject non-exist-projects`|when the target project does not exist|There is no such project named non-exist-projects.|
 |`deleteproject newproject`|successful operation|newproject deleted.|  
 
-### Print all projects  
+### Print all projects    
+
 | Command |Test case| Expected Output |  
 |-----------|----------|----------|
 |`listprojects`| when there are projects in the project list)| * The output will list all projects.|
@@ -440,6 +441,7 @@ Given below are instructions to test the app manually.
 
 
 ### Changing the GitHub repo
+
 * Prerequisites: List all projects using command `listprojects`.  
 
 | Command |Test case| Expected Output |  
@@ -459,7 +461,8 @@ Given below are instructions to test the app manually.
 |`opengit proj`|when target project does not exist|Sorry! There was no project with that name.|
 |`opengit non-exist-projects`|when command is valid|* The repo will be opened.|  
 
-### Setting todo's deadline
+### Setting todo's deadline. 
+
 * Prerequisites: view projects using command `view`.  
 
 | Command |Test case| Expected Output |  
@@ -490,7 +493,8 @@ Given below are instructions to test the app manually.
 |`addlanguage -1 java`|when the target project index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
 |`addlanguage 1000000000000000000000 java`|when target index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
 
-### Listing languages of a project
+### Listing languages of a project. 
+
 | Command |Test case| Expected Output |  
 |-----------|----------|----------|
 |`listlanguages`|when command is invalid|Execution result: Invalid command format!<br>The correct format should be:<br>listlanguages [project_name]|
