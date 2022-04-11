@@ -14,13 +14,21 @@ ClubInvMgr is a desktop CLI app for inventory management for CCA clubs. It allow
 4. Implemented `EditCommand` to edit the fields of `Item`s (name, quantity, description)
 5. Implemented `SearchCommand` to do case insensitive search of `Item`s based on their names and description.
 6. Reorganised some code (e.g. Stubs for testing, refactored some magic strings)
+7. Wrote JUnit tests: `StorageTest`, `EditCommandTest`, `SearchCommandTest`, `EditCommandParserTest`, `SearchCommandParserTest`.
+8. Developed some utilities for JUnit testing.
 
 ### Contributions to the User Guide
-1. Wrote the user guide for `edit`, `search`.
+1. Wrote the UG for `edit`, `search`.
 2. Generated Table of Contents
+3. Streamlined format for UG
 
 ### Contributions to the Developer Guide
-1. Created `Storage` sequence diagrams.
+1. Created architecture diagram
+2. Created class diagrams for the Storage component
+3. Created `Storage` sequence diagrams for implementation.
+4. Created `EditCommand` sequence diagrams for implementation.
+5. Created `SearchCommand` sequence diagrams for implementation.
+6. Streamlined format for DG.
 
 ### Contributions to team-based-tasks
 1. General code enhancements.
@@ -29,9 +37,14 @@ ClubInvMgr is a desktop CLI app for inventory management for CCA clubs. It allow
 
 ### Review/mentoring contributions
 Team's Repo:
-1. [Issue #36](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/36)
-2. [Issue #39](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/39)
-3. [Issue #44](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/44)
+1. [Issue #32](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/32)
+2. [Issue #36](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/36)
+3. [Issue #39](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/39)
+4. [Issue #42](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/42)
+5. [Issue #44](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/44)
+6. [Issue #67](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/67)
+7. [Issue #84](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/84)
+8. [Issue #103](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/84)
 
 Team CS2113-T10-3 Repo (PE-D):
 1. [Issue #144](https://github.com/AY2122S2-CS2113T-T10-3/tp/issues/144)
