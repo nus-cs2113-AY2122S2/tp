@@ -8,7 +8,6 @@ import util.exceptions.EmptyFieldException;
 import util.exceptions.InvalidFileException;
 import util.exceptions.InvalidObjectType;
 import util.exceptions.ItemDoesNotExistException;
-import util.exceptions.UnitTestException;
 
 import java.util.HashMap;
 
@@ -42,12 +41,6 @@ public class AddParser extends CommandParser {
             warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
                         regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));
 
-            regexUnitGoodMatch = new
-                    MatchKeywords(userInput, regexUnitGood).getGroupValues();
-
-            warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
-                    regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));
-
         } else if (matches.get("flag").equals("o")) {
             // adding the base details for order
             String regexOrder = "oid/(?<oid>\\d*) r/(?<recv>.*) addr/(?<addr>.*)";
@@ -55,6 +48,7 @@ public class AddParser extends CommandParser {
                     userInput, regexOrder).getGroupValues();
             warehouse.addOrder(regexOrderMatch.get("oid"),
                     regexOrderMatch.get("recv"), regexOrderMatch.get("addr"));
+
         } else if (matches.get("flag").equals("og")) {
             // adding a good for that order
             String regexOrderline = "oid/(?<oid>\\d*) sku/(?<sku>.*) qty/(?<qty>\\d*)";

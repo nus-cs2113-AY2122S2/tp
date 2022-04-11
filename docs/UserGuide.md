@@ -400,7 +400,7 @@ Format: `add og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_NEEDED_FOR_ORDER]`
 
 Example of adding an orderline to order ID 1 for 10 Wooden Chairs:<br/>
 
-`add og/ oid/1 sku/WC1 q/10`
+`add og/ oid/1 sku/WC1 qty/10`
 
 Expected Output
 ```
@@ -416,7 +416,7 @@ Format: `remove og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_TO_REMOVE]`
 
 Example of removing 1 Wooden Chair orderline from order ID 1:<br/>
 
-`remove og/ oid/1 sku/WC1 q/1`
+`remove og/ oid/1 sku/WC1 qty/1`
 
 Expected Output
 ```

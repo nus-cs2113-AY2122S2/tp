@@ -24,6 +24,7 @@ public class Warehouse {
     private ArrayList<Order> orderLists = new ArrayList<>();
     private HashMap<String, UnitGood> unitGoodHashMap = new HashMap<>();
     private LinkedHashMap<String, Good> goodList = new LinkedHashMap<>();
+
     public Warehouse(Integer capacity) {
         this.totalCapacity = capacity;
     }
@@ -37,7 +38,6 @@ public class Warehouse {
      * @param name        The name of the unit good
      * @param description Short description of the unit good
      * @param capacity    Represents the size of the good using arbitrary units
-     * @throws UnitTestException Exception when entering an invalid capacity
      */
     public void addUnitGoodToInventory(String sku, String name, String description, String capacity) {
         UnitGood unitGood = new UnitGood(sku, name, description, capacity);
@@ -109,7 +109,7 @@ public class Warehouse {
             int id = Integer.parseInt(oid);
             Order order = findOrder(id);
             status = addGoodToOrder(order, sku, qty);
-            if(!status){
+            if (!status) {
                 return false;
             }
             System.out.printf("%s of %s is added to order number %d\n",
@@ -671,11 +671,11 @@ public class Warehouse {
 
     private Boolean restoreOrders(JSONArray ja) {
         Boolean status = true;
-        for (Object o: ja){
+        for (Object o: ja) {
             JSONObject jo = (JSONObject) o;
             Order restoredOrder = Order.restoreOrder(jo);
             status = this.addOrder(restoredOrder);
-            if (!status){
+            if (!status) {
                 return false;
             }
         }
@@ -697,21 +697,21 @@ public class Warehouse {
 
     private Boolean restoreGoods(JSONObject jo) {
         Boolean status = true;
-        for (Object ko: jo.keySet()){
+        for (Object ko: jo.keySet()) {
             String sku = ko.toString();
 //            System.out.println("sku: "+ sku);
             JSONObject jg = (JSONObject) jo.get(ko);
             UnitGood ug = UnitGood.restoreUnitGood((JSONObject) jg);
             //Good curGood = Good.restoreGood((JSONObject) jg);
             status = this.addUnitGoodToInventory(ug);
-            if (!status){
+            if (!status) {
                 return false;
             }
 //            String qty = String.valueOf(curGood.getQuantity());
             String qty = ((JSONObject)jg).get(GoodKeys.quantity).toString();
             try {
                 status = this.addQuantityOfGoodToInventory(ug.getSku(),qty);
-                if (!status){
+                if (!status) {
                     return false;
                 }
             } catch (WrongCommandException e) {

@@ -40,9 +40,9 @@ Similar to Unit Goods, the Goods will be stored as a HashMap<String, Good> in th
 The Goods class allows for the creation of orderline objects which has the following attributes: id, name, quantity and
 description. Each attribute can be obtained using public get methods, and the attribute quantity can be set using the public set method.
 
-### Capacity Enumeration
+#### Capacity Enumeration
 The Capacity enum is meant as a heuristic to determine the size of a unit good and good.
-#### Description
+##### Description
 This enum will have 3 values:
 - SMALL
 - MEDIUM
@@ -66,7 +66,7 @@ The diagram below shows the model component of the orderline class.
 ### Warehouse Class
 The warehouse class is created to simulate an entire warehouse
 #### Description
-![Warehouse Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/Warehouse.puml)
+![Warehouse Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Warehouse.puml)
 
 Most of the methods in the Warehouse Class will require users to know the SKU of the Good that they want to interact with.
 
@@ -91,6 +91,7 @@ UserInterface class is used to take user input and pass it to the corresponding 
 
 #### Description
 ![UserInterface Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/UserInterface.puml)
+
 After receiving user input, the first part of the command will be used to determine what is the command type of the input. 
 Then, it will pass the command to one of the command parsers. 
 After executing the commannd, user will be asked to input another command until the program is terminated.
@@ -101,26 +102,11 @@ If the user input `bye`, no other command will be taken and the program will be 
 This is the description for the Command Parser. This is an abstract class which all other parser classes will implement
 ![Command Parser Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/CommandParser.puml)
 
-#### Add Parser
-##### Description
-#### Remove Parser
-##### Description
-#### View Parser
-##### Description
-#### List Parser
-##### Description
-#### Find Parser
-##### Description
-####  Help Parser
-##### Description
-#### Fulfill Parser
-##### Description
+Each parser class will use regular expressions done in the [Match Keyword Class](#Match-Keyword-Class) to obtain a flag
+such that the program knows which operation to perform, whether it is a command related to Unit Good, Order, etc. The 
+parsers will then perform another series of us of regular expressions to obtain more specific details of the command
+such that it can properly execute the command.
 
-### User Interface Class
-#### Description
-
-### Display Class
-#### Description
 
 ### Match Keyword Class
 #### Description
@@ -273,7 +259,21 @@ A cheap, user-friendly Warehouse Management System with intuitive commands to im
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+Device Requirement:
+* Must have Java 11 or higher installed (Recommended to use Java 11)
+* Supports 32-bit and 64-bit systems
+* Supports use of the Command Line Interface
+
+Application Performance:
+* Does not require internet connection; Functions offline
+* Quick and easy to launch and use
+* Responds to a command within 2 seconds
+* Provides function to save and load JSON files
+
+Application Reliability:
+* Data should be saved and stored accurately
+* Same input of a command should result in the same outcomes
+* Data storage will function normally as long as the application is not forced to close
 
 ## Glossary
 

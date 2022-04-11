@@ -16,7 +16,6 @@ public class Simplst {
         } else {
             Display.newLogin();
             w = new Warehouse(1000);
-//            System.out.println("New warehouse created");
         }
         ui = new UserInterface(w);
         ui.run();
