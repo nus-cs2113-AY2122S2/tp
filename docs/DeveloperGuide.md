@@ -340,8 +340,8 @@ of how the user's input is being parsed into data that is recognised by the prog
 Here, we will assume that **Ui** will check and obtain any user input, before sending it to Main
 and then to Parser to obtain the appropriate command to execute.
 
-
 ![](images/ShowScheduleForADateSDTwo.png)
+
 
 The second diagram shown above covers the next part of the interaction, which is after
 the ShowCommand is being executed in main. It shows the sequences of interactions between
