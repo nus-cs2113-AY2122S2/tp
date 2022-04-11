@@ -40,7 +40,7 @@ public class GroupEditCommand extends Command {
     public boolean existingGroupWithTheSameName(ArrayList<Group> groupList, String newName, int groupId) {
         boolean hasDuplicate = false;
         for (Group group: groupList) {
-            if (newName.equals(group.getGroupName()) && (group.getGroupId() != groupId)) {
+            if (newName.equalsIgnoreCase(group.getGroupName()) && (group.getGroupId() != groupId)) {
                 hasDuplicate = true;
             }
         }
@@ -71,9 +71,11 @@ public class GroupEditCommand extends Command {
         if (groupName != null) {
             boolean duplicateName = existingGroupWithTheSameName(
                 manager.getProfile().getGroupList(), groupName, groupId);
-            if (duplicateName && !groupName.equalsIgnoreCase(group.getGroupName())) {
+            if (duplicateName) {
                 ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_DUPLICATE);
-            } else if (!groupName.equalsIgnoreCase(group.getGroupName())){
+                ui.printlnMessageWithDivider(COMMAND_NO_EDITS_MADE);
+                return;
+            } else if (!groupName.equalsIgnoreCase(group.getGroupName())) {
                 editedGroupName = true;
             }
         }
