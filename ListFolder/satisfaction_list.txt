@@ -1,1 +1,3 @@
 fred|3
+bob|3
+joe|2
