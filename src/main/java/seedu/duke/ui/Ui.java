@@ -11,7 +11,7 @@ import seedu.duke.exceptions.InvMgrException;
  * */
 public class Ui {
 
-    private final Scanner scanner;
+    private Scanner scanner;
 
     public Ui() {
         scanner = new Scanner(System.in);
@@ -24,6 +24,7 @@ public class Ui {
      * */
     public void showMessages(String... message) {
         for (String m : message) {
+            assert m != null : "Messages should not be a null message!";
             System.out.println(m);
         }
     }

@@ -1,0 +1,34 @@
+@startuml
+
+hide footbox
+
+skinparam PackageBackgroundColor pink
+skinparam SequenceReferenceBackgroundColor salmon
+
+Participant ":SearchCommand" as SearchCommand
+Participant "itemList:ItemList" as ItemList
+Participant "ui:Ui" as Ui
+
+-> SearchCommand: execute(itemList:ItemList, ui:Ui)
+activate SearchCommand
+
+    SearchCommand -> Ui: showMessages(message:String)
+    activate Ui
+    return
+
+    loop for each Item in ItemList
+        SearchCommand -> ItemList: getItem(index: int)
+        activate ItemList
+        return item: Item
+
+        opt name and/or description matches
+            ref over SearchCommand
+                Prepare the Item to be printed
+            end
+            SearchCommand -> Ui: showMessages(message: String)
+            activate Ui
+            return
+        end
+    end
+return
+@enduml

@@ -5,7 +5,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 public class ExitCommand extends Command {
-    public static final String COMMAND_WORD = "bye";
+    public static final String COMMAND_WORD = "exit";
     public static final String COMMAND_NAME = "Exit";
     public static final String USAGE_MESSAGE = "Terminates the application";
     public static final String COMMAND_FORMAT = COMMAND_WORD;

@@ -1,0 +1,34 @@
+@startuml
+
+hide footbox
+skinparam guillemet false
+skinparam sequenceStereotypeFontColor red
+skinparam sequenceStereotypeFontStyle bold
+
+participant ":InvMgr" as InvMgr
+participant "ui:Ui" as Ui
+participant ":Parser" as Parser <<class>>
+participant ":Command" as Command
+participant "storage:Storage" as Storage
+
+activate InvMgr
+    loop until ExitCommand
+        InvMgr -> Ui: getRawUserInput()
+        activate Ui
+        return command: String
+
+        InvMgr -> Parser: parse(command)
+        activate Parser
+        return inputCommand: Command
+
+        InvMgr -> Command: execute(itemList, ui)
+        activate Command
+        return
+
+        InvMgr -> Storage: save(itemList: ItemList)
+        activate Storage
+        return
+    end
+deactivate InvMgr
+
+@enduml
