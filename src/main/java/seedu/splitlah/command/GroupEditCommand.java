@@ -17,6 +17,7 @@ import java.util.logging.Level;
  * @author Tianle
  */
 public class GroupEditCommand extends Command {
+    private static final String COMMAND_NO_EDITS_MADE = "No changes made.";
     private static final String COMMAND_SUCCESS = "The group was edited successfully.";
     private final String groupName;
     private final String[] involvedList;
@@ -70,11 +71,9 @@ public class GroupEditCommand extends Command {
         if (groupName != null) {
             boolean duplicateName = existingGroupWithTheSameName(
                 manager.getProfile().getGroupList(), groupName, groupId);
-            if (groupName.equals(group.getGroupName())) {
-                //ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_NOT_NEW);
-            } else if (duplicateName) {
+            if (duplicateName && !groupName.equalsIgnoreCase(group.getGroupName())) {
                 ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_DUPLICATE);
-            } else {
+            } else if (!groupName.equalsIgnoreCase(group.getGroupName())){
                 editedGroupName = true;
             }
         }
@@ -84,7 +83,7 @@ public class GroupEditCommand extends Command {
             if (hasDuplicates) {
                 ui.printlnMessage(Message.ERROR_GROUPEDIT_DUPLICATE_NAME_IN_GROUP);
                 Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITGROUP);
-                ui.printlnMessageWithDivider(Message.ERROR_GROUPEDIT_NO_CHANGE);
+                ui.printlnMessageWithDivider(COMMAND_NO_EDITS_MADE);
                 return;
             }
 
@@ -97,7 +96,7 @@ public class GroupEditCommand extends Command {
             }
         }
 
-        if (groupName != null && groupName.equals(group.getGroupName()) && !editedPersonList) {
+        if (groupName != null && groupName.equalsIgnoreCase(group.getGroupName()) && !editedPersonList) {
             ui.printlnMessage(Message.ERROR_GROUPEDIT_GROUP_NAME_NOT_NEW);
         }
 
@@ -113,7 +112,7 @@ public class GroupEditCommand extends Command {
         if (isGroupEdited) {
             ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + group);
         } else {
-            ui.printlnMessageWithDivider(Message.ERROR_GROUPEDIT_NO_CHANGE);
+            ui.printlnMessageWithDivider(COMMAND_NO_EDITS_MADE);
             return;
         }
         manager.saveProfile();
