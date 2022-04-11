@@ -196,6 +196,7 @@ into the account
 >- `[CATEGORY]` and `[PAYMENT_METHOD]` are **case-insensitive**.
 >- Your credit card has to be [added](#add-a-credit-card-add) first before entering the name of the credit card as `[PAYMENT_METHOD]`.
 >- `[AMOUNT]` only accepts numbers with 2 decimal places. Any additional decimals will be rounded off or ignored.
+>- Maximum `[AMOUNT]` allowed for user is 1000000 ($1 million). 
 
 
 > **⚠️Warning⚠️**
