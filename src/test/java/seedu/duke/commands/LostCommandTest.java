@@ -61,7 +61,7 @@ public class LostCommandTest {
 
     /**
      * Checks that InvMgrException is thrown when index is out of range.
-     * Checks that the ITEM_NUMER_OUT_OF_RANGE_MESSAGE is displayed.
+     * Checks that the ITEM_NUMBER_OUT_OF_RANGE_MESSAGE is displayed.
      * */
     @Test
     public void execute_indexOutOfRange_InvMgrExceptionThrown() {
