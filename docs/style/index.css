@@ -1,0 +1,12 @@
+---
+@import "{{ site.theme }}";
+---
+
+
+a.button {
+    background-color: #155a95;
+    color: white;
+    padding: 5px 8px 5px 8px;
+    border-radius: 30px;
+    text-align: center;
+}
