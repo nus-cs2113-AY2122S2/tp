@@ -640,8 +640,8 @@ The general workflow of the `group /edit` command is as follows:
        * `PersonList#hasNameDuplicates` is called to check for duplicate names within the provided list of persons.
           * If duplicated names are detected, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
           * Else, it calls `PersonList#isSamePersonList` to check if the newly supplied list of persons is exactly the same as the old list.
-             * If `PersonList#isSamePersonList` returns `false`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
-             * Else, it will return a new `PersonList` object to be stored.
+             * If `PersonList#isSamePersonList` returns `true`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+             * Else, a new `PersonList` object to be stored is created to be used as the updated list of persons.
 9. After the group is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
 10. The `GroupEditCommand` class then prints a message indicating that a group has been successfully edited.
 
