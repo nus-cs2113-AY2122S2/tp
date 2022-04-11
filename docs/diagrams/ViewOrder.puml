@@ -27,6 +27,8 @@ Warehouse -> Warehouse : listOrderlines()
 activate Warehouse
 Warehouse -> Order : getOrderlines()
 Order --> Warehouse : orderlines
+Warehouse --> ui : "Viewing Order with OID 1..."
+ui --> user : "Another command?"
 deactivate Warehouse
 
 @enduml

@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+hide empty member
+
+class Display {
+    +hello()
+    +inventoryGoodQtyRemoved(Float qty, String goodName) : void
+    +orderlineCheckedOff(String unitGoodName, String orderId) : void
+    +displayStorageCapacity(Float percentageCapacity) : void
+    +warehouseStateSaved(String filepath) : void
+    +nonExistentGood() : void
+    +qtyRemoveMoreThanExists() : void
+    +goodDontExistException() : void
+    +serializeException(String obj) : void
+    +helpUnitGood() : void
+    +helpGood() : void
+    +helpOrder() : void
+    +help() : void
+    +tryCommandAgain() : void
+}
+
+@enduml
