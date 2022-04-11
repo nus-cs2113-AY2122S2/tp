@@ -48,7 +48,7 @@ public class ReturnCommand extends Command {
     }
 
     /**
-     * Updates a current borrow record of item in ItemList.itemArrayList as returned
+     * Updates a current borrow record of item in ItemList.itemArrayList as returned.
      *
      * @param itemList Manages the user's task list.
      * @param ui Displays messages to the user.

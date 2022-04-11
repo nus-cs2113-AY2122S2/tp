@@ -43,8 +43,8 @@ public class LostCommand extends Command {
     }
 
     /**
-     * Marks an item in ItemList.itemArrayList as list
-     * Updates the lost status in the user's item list file in the user's hard disk
+     * Marks an item in ItemList.itemArrayList as lost.
+     * Updates the lost status in the user's item list file in the user's hard disk.
      *
      * @param itemList Manages the user's task list.
      * @param ui Displays messages to the user.
