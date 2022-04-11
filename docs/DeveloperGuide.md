@@ -17,6 +17,10 @@
 - [Instructions for manual testing](#instructions-for-manual-testing)
 - [Glossary](#glossary)
 
+## Warning
+**Please do not touch the save files (in the `ListFolder` folder) that save the
+user's application usage history.** This will interfere with the function of the program.
+
 
 ## Architecture
 <p align="center">
@@ -417,8 +421,13 @@ Step 6. In the `CheckRoomByLevelCommand`, it will iterate for roomList and print
 {Describe the target user profile}
 
 ### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
+Hotels can be difficult to manage, as hotel managers must keep track of their employees, their inventory, and
+the checked-in/checked-out status of their rooms. Thus, this application:
+* Allows hotel managers to view and record inventory.
+* Allows hotel managers to view and record the status of rooms (whether they've been checked into or checked out of).
+* Allows hotel managers to manage the information of their housekeeping staff, including their available hours
+  and performance ratings.
+* Allows hotel managers to view and record customer satisfaction ratings to gauge their hotel's performance.
 
 ## User Stories
 
