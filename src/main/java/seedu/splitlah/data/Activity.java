@@ -22,7 +22,6 @@ public class Activity implements Serializable, Comparable<Activity> {
     private double gst;
     private double serviceCharge;
 
-    private static final String SUMMARY_STRING_SEPARATOR = " | ";
     private static final int ZERO_INDEXING_OFFSET = 1;
     private static final String[] INVOLVED_PERSON_LIST_COLS = { "#", "Name", "Cost Owed" };
 

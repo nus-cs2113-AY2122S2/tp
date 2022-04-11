@@ -17,13 +17,19 @@ Code contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 * [Activity](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/Activity.java)
   * This feature was implemented so that details about an activity can be stored in an object.
 * [Activity Create](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityCreateCommand.java)
-  * Allows users to create activities in the application.
+  * What it does: Allows users to create activities in the application.
+  * Justification: This feature allows users to record the details of each activity within a particular outing and keep track of the expenditure.
+  * Highlights: This was slightly challenging because of the number of arguments and delimiters that has to be properly handled before actually creating an activity.
+                Furthermore, there are optional arguments to consider.
 * [Activity Delete](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityDeleteCommand.java)
-  * Allows users to delete activities in the application.
+  * What it does: Allows users to delete activities in the application.
+  * Justification: This feature allows users to remove unnecessary activities that were previously created.
 * [Group View](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
-  * Allows users to view a specific group that was created.
+  * What it does: Allows users to edit previously created sessions.
+  * Justification: This features allows users to see the full details of a particular group, including the names of the people in the group.
 * [Group List](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
-  * Allows users to view all previously created groups.
+  * What it does: Allows users to edit previously created sessions.
+  * Justification: This features allows users to see a list of all the groups that were created.
 
 #### Enhanced Features
 * Separated dependency of parser class from command class by creating Command Parser classes for certain features.
@@ -56,6 +62,7 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
   [`View a group`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#view-a-group) and
   [`List all groups`](https://ay2122s2-cs2113t-t10-1.github.io/tp/DeveloperGuide.html#list-groups) sections of the Developer Guide.
 * Assisted in ensuring that diagrams were correct and followed the logic of the application.
+* Made a round of edits to the Developer Guide to complete certain areas that are not yet completed. [#485](https://github.com/AY2122S2-CS2113T-T10-1/tp/pull/485/files)
 
 ### Miscellaneous Contributions
 * Updated Issues to ensure that the team is on track.
