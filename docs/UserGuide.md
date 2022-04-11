@@ -65,6 +65,8 @@ Delete a project from your current list of projects
 Format: `deleteproject [project_name]`
 *The `project_name` must be a match for a current project already in your list of projects
 
+*Note: deleteproject does not use project_index. This is to ensure you are much less likely to mistype and delete the wrong project. It's easier to type the wrong index than the wrong project name.
+
 #### Example of usage
 ```
 deleteproject project1
@@ -159,15 +161,20 @@ Format: `changegit [project_index] [github_URL]`
 changegit 1 http://github.com/project1
 ```
 
+#### Example of output
+```
+The Github Repo for project1 has been changed to: http://github.com/project1
+```
+
 ---
 ### Open the GitHub repo of a project
 Opens the GitHub repository in your default browser
 
-Format: `opengit [project_name]`
+Format: `opengit [project_index]`
 
 #### Example of usage
 ```
-opengit project1
+opengit 1
 ```
 
 ---
@@ -193,11 +200,11 @@ Deadline added to Complete Diagrams: 2022-05-22
 ### View details of a project: `view`
 View details of a project: Name, deadline, todos
 
-Format: `view [project_name]`
+Format: `view [project_index]`
 
 #### Example of usage
 ```
-view cs2113
+view 1
 ```
 
 #### Example of output
@@ -227,11 +234,11 @@ java language added.
 ---
 ### List languages of a project: `listlanguages`
 Lists languages of a project  
-Format: `listlanguages [project_title]`
+Format: `listlanguages [project_index]`
 
 #### Example of usage
 ```
-listlanguages cs2113
+listlanguages 1
 ```  
 
 #### Example of output
@@ -266,18 +273,19 @@ Please note that the file name should not be changed.
 
 ## Command Summary
 
-| Action              | Format                                   |
-|---------------------|------------------------------------------|
-| add project         | `addproject [project_name]`              |
-| delete project      | `deleteproject [project_name]`           |
-| view all project(s) | `listproject`, `listprojects`            |
-| add todo            | `todo [project_index] [description]`     |
-| mark todo as done   | `mark [project_index] [todo_index]`      |
-| add project deadline| `projdeadline [project_index] [deadline]`|
-| change GitHub       | `changegit [project_index] [github_URL]` |
-| open GitHub         | `opengit [project_name]`                 |
-| add todo deadline   | `tododeadline [project_index] [todo_index] [deadline]`|
-| view a project      | `view [project_name]`                    |
-| addlanguage	      | `addlanguage [project_index] [language]` |
-| listlanguages	      | `listlanguages`                          |
-| Exit                | `exit`                                   |
+| Action              | Format                                                 |
+|---------------------|--------------------------------------------------------|
+| add project         | `addproject [project_name]`                            |
+| delete project      | `deleteproject [project_name]`                         |
+| view all project(s) | `listproject`, `listprojects`                          |
+| add todo            | `todo [project_index] [description]`                   |
+| mark todo as done   | `mark [project_index] [todo_index]`                    |
+| add project deadline| `projdeadline [project_index] [deadline]`              |
+| change GitHub       | `changegit [project_index] [github_URL]`               |
+| open GitHub         | `opengit [project_index]`                              |
+| add todo deadline   | `tododeadline [project_index] [todo_index] [deadline]` |
+| view a project      | `view [project_index]`                                 |
+| addlanguage	      | `addlanguage [project_index] [language]`               |
+| listlanguages	      | `listlanguages [project_index]`                        |
+| help                | `help`                                                 |
+| Exit                | `exit`                                                 |

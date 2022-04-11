@@ -31,6 +31,6 @@ tododeadline 1 1 2022-03-16
 changegit 1 https://github.com/AY2122S2-CS2113-F10-1/tp
 addlanguage 1 java
 addlanguage 1 python
-view proj1
+view 1
 exit
 

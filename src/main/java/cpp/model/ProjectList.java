@@ -28,7 +28,8 @@ public class ProjectList {
      */
     public void addProject(String title) {
         int index = findProjectIndex(title);
-        if (index == Constants.PROJECT_NOT_FOUND) { //this is a new project
+        //this is a new project
+        if (index == Constants.PROJECT_NOT_FOUND) {
             projectList.add(new Project(title));
             System.out.println(title + " added.");
         } else {
@@ -128,11 +129,11 @@ public class ProjectList {
      * @param githubLink New GitHub repo link for the project
      */
     public void addGithubLink(int index, String githubLink) {
-        assert (githubLink != null && !githubLink.equals("")) : "Cannot add a Github link.";
+        assert (githubLink != null) : "Cannot add a GitHub link.";
         if (index != Constants.PROJECT_NOT_FOUND) {
             Project project = projectList.get(index - 1);
             try {
-                if ((!githubLink.startsWith("http://") && !githubLink.startsWith("https://"))) {
+                if ((!githubLink.startsWith(Constants.HTTP) && !githubLink.startsWith(Constants.HTTPS))) {
                     throw new URISyntaxException(githubLink, "invalid format");
                 }
                 project.setGitHubLink(githubLink);
