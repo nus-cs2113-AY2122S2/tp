@@ -5,7 +5,12 @@ import java.util.logging.LogManager;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.customercommands.AddSatisfactionCommand;
-import seedu.duke.command.housekeepercommands.*;
+import seedu.duke.command.housekeepercommands.AddAvailabilityCommand;
+import seedu.duke.command.housekeepercommands.AddHousekeeperCommand;
+import seedu.duke.command.housekeepercommands.AgeIncreaseCommand;
+import seedu.duke.command.housekeepercommands.ResetAvailabilityCommand;
+import seedu.duke.command.housekeepercommands.DeleteHousekeeperCommand;
+import seedu.duke.command.housekeepercommands.AddHousekeeperPerformanceCommand;
 import seedu.duke.command.itemcommands.AddItemCommand;
 import seedu.duke.command.itemcommands.DeleteItemCommand;
 import seedu.duke.command.itemcommands.UpdateItemNameCommand;
