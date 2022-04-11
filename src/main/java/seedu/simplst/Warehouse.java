@@ -712,6 +712,7 @@ public class Warehouse {
                     return false;
                 }
                 status = this.addUnitGoodToInventory(ug);
+
                 if (!status) {
                     return false;
                 }
@@ -741,9 +742,9 @@ public class Warehouse {
 
     private JSONObject serializeUnitGoods() {
         JSONObject jo = new JSONObject();
-//      System.out.println("Unit Good Hash Map");
+        //System.out.println("Unit Good Hash Map");
         unitGoodHashMap.forEach((sku, ug) -> {
-//          System.out.println("SKU: " + sku);
+            //System.out.println("SKU: " + sku);
             jo.put(sku, ug.serialize());
         });
         return jo;
@@ -781,6 +782,7 @@ public class Warehouse {
         if (saveStr == null) {
             return false;
         }
+      
         // PARSE
         try {
             JSONObject jsonWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);

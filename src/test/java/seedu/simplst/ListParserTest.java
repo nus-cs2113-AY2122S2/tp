@@ -3,7 +3,11 @@ package seedu.simplst;
 import org.junit.jupiter.api.Test;
 import seedu.simplst.parsers.AddParser;
 import seedu.simplst.parsers.ListParser;
-import util.exceptions.*;
+import util.exceptions.EmptyFieldException;
+import util.exceptions.MissingFlagException;
+import util.exceptions.InvalidObjectType;
+import util.exceptions.WrongCommandException;
+import util.exceptions.InvalidFileException;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;

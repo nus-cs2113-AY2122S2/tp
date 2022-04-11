@@ -3,7 +3,11 @@ package seedu.simplst;
 import org.junit.jupiter.api.Test;
 import seedu.simplst.parsers.AddParser;
 import seedu.simplst.parsers.RemoveParser;
-import util.exceptions.*;
+import util.exceptions.MissingFlagException;
+import util.exceptions.EmptyFieldException;
+import util.exceptions.InvalidFileException;
+import util.exceptions.InvalidObjectType;
+import util.exceptions.WrongCommandException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -11,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class RemoveParserTest {
     Warehouse warehouse = new Warehouse(1000);
     //assertNull after removing for goods and ug respectively
+
     @Test
     public void removeUnitGood_addAndRemoveUG_notNull() throws MissingFlagException, EmptyFieldException,
             WrongCommandException, InvalidFileException, InvalidObjectType {
