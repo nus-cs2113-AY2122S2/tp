@@ -167,9 +167,6 @@ public class AddCommand extends Command {
      */
     public void addIncome() throws MindMyMoneyException {
         String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_CATEGORY).trim();
-        if (amountAsString.length() > 6) {
-            throw new MindMyMoneyException("Amount too high!");
-        }
 
         try {
             int amountAsInt = Integer.parseInt(amountAsString);
@@ -185,7 +182,7 @@ public class AddCommand extends Command {
                 + "into the account");
             System.out.println(System.lineSeparator());
         } catch (NumberFormatException e) {
-            throw new MindMyMoneyException("Income must be a whole number!");
+            throw new MindMyMoneyException("Income must be a whole number or your income is too high!");
         }
     }
 
