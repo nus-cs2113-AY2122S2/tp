@@ -100,8 +100,8 @@ If you can type fast, SplitLah can manage your outings faster than applications 
     * `Alice`, `Bob`, `Charlie`
   * Paid for by:
     * `Alice`
-* A session represents a period of time and stores one or more activities, as well as a list of participants. Each
-  activity could have a different payer.
+* A session represents a group outing that that spans a period of time and stores activities,
+  as well as a list of participants. Each activity can have a different payer.
   * Example: `Bob's birthday`
   * Consisting of the following participants:
     * `Alice`, `Bob`, `Charlie`
@@ -122,7 +122,7 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 
 ## _Session Management_
 > A session represents a group outing that involves a list of participants and 
-> spans an arbitrary period of time containing one or more activities.
+> spans an arbitrary period of time containing activities.
 
 ### Overview
 
