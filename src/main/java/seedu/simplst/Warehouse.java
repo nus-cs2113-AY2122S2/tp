@@ -132,7 +132,11 @@ public class Warehouse {
             throw new WrongCommandException("add", true);
         }
 
-        return order.addOrderline(getUnitGoodBySku(sku), qty);
+        Orderline ol =  order.addOrderline(getUnitGoodBySku(sku), qty);
+        if (ol == null){
+            return false;
+        }
+        return true;
     }
 
     public boolean hasUnitGood(String sku) {
@@ -643,6 +647,8 @@ public class Warehouse {
                     + " than input capacity");
         } catch (NumberFormatException numberFormatException) {
             System.out.println("Please set the Warehouse capacity again.");
+        } catch (NullPointerException e){
+            System.out.println("Warehouse capacity can't be null");
         }
         return false;
     }
@@ -791,19 +797,31 @@ public class Warehouse {
         try {
             JSONObject jsonWarehouse = (JSONObject) JSONValue.parseWithException(saveStr);
             boolean status = false;
-            //addUnitGoodToInventory
-            //Float totalCapacity = Float.parseFloat();
-            status = this.setTotalCapacity(jsonWarehouse.get(WarehouseKeys.totalCapacity).toString());
+            Object capO = jsonWarehouse.get(WarehouseKeys.totalCapacity);
+            if (capO == null){
+                return false;
+            }
+            status = this.setTotalCapacity(capO.toString());
             if (!status) {
                 return false;
             }
-            JSONArray sol = (JSONArray) jsonWarehouse.get(WarehouseKeys.orderLists);
+            Object olO = jsonWarehouse.get(WarehouseKeys.orderLists);
+            if (olO == null){
+                return false;
+            }
+            JSONArray sol = (JSONArray) olO ;
             status = this.restoreOrders(sol);
             if (!status) {
                 return false;
             }
-
-            JSONObject sgl = (JSONObject) jsonWarehouse.get(WarehouseKeys.goodList);
+            Object glO = jsonWarehouse.get(WarehouseKeys.goodList);
+            if (glO == null){
+                return false;
+            }
+            JSONObject sgl = (JSONObject) glO;
+            if (sgl == null){
+                return false;
+            }
             status = this.restoreGoods(sgl);
             if (!status) {
                 return false;

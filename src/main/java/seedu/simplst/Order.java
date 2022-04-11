@@ -4,6 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import seedu.simplst.jsonkeyconstants.GoodKeys;
 import seedu.simplst.jsonkeyconstants.OrderKeys;
+import seedu.simplst.jsonkeyconstants.OrderlinesKeys;
 import seedu.simplst.jsonkeyconstants.UnitGoodKeys;
 import util.exceptions.ItemDoesNotExistException;
 import util.exceptions.LargeQuantityException;
@@ -49,18 +50,19 @@ public class Order {
         return null;
     }
 
-    public Boolean addOrderline(UnitGood unitGood, String qty)
+    public Orderline addOrderline(UnitGood unitGood, String qty)
             throws WrongCommandException {
+        Orderline orderline = null;
         try {
             int quantity = Integer.parseInt(qty);
             if (hasGood(unitGood.getSku())) {
-                Orderline orderline = getOrderline(unitGood.getSku());
+                orderline = getOrderline(unitGood.getSku());
                 assert orderline != null;
                 orderline.setQuantity(quantity);
                 Display.orderlineAlreadyExists(orderline.getName(), orderline.getQuantity());
-                return false;
+                return null;
             }
-            Orderline orderline = new Orderline(unitGood,
+            orderline = new Orderline(unitGood,
                     orderlines.size() + 1, quantity);
             orderlines.add(orderline);
             Display.orderlineAdded(orderline.getName(), orderline.getQuantity());
@@ -68,7 +70,7 @@ public class Order {
             System.out.println("Quantity must be positive number");
             throw new WrongCommandException("add", true);
         }
-        return true;
+        return orderline;
     }
 
     public void removeOrderlineByQty(String sku, String qty)
@@ -209,12 +211,23 @@ public class Order {
                 return null;
             }
             Object qtyO = jol.get(GoodKeys.quantity);
-            if (qtyO == null){
+            Object qfO = jol.get(OrderlinesKeys.quantityFulfilled);
+            Object ifO = jol.get(OrderlinesKeys.isCheckedOff);
+            if (qtyO == null || qfO == null || ifO == null){
                 return null;
             }
             String qty = qtyO.toString();
             try {
-                cur.addOrderline(ug, qty);
+                Orderline ol = cur.addOrderline(ug, qty);
+                if (ol == null){
+                    return null;
+                }
+                Boolean isCheckOff = Boolean.parseBoolean(ifO.toString());
+                if (isCheckOff){
+                    ol.checkOff();
+                }
+                Integer qtyF = Integer.parseInt(qfO.toString());
+                ol.setQuantityFulfilled(qtyF);
             } catch (WrongCommandException e) {
                 e.printStackTrace();
             }
