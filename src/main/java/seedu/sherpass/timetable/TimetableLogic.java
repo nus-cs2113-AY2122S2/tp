@@ -87,6 +87,7 @@ public class TimetableLogic {
         return PARTITION_SPACE_OFFSET_LENGTH_TWO + taskLength + byDateLength + doOnDateLength + taskNumberLength;
     }
 
+    //@@author jltha
     /**
      * Returns the LocalDate object with its day set to Monday.
      *
@@ -123,6 +124,7 @@ public class TimetableLogic {
 
 
 
+    //@@author
     protected static LocalDate getFirstDayOfMonth(Month month) {
         Month currentMonth = LocalDate.now().getMonth();
 

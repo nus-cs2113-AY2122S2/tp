@@ -54,6 +54,21 @@ public class Timetable {
     }
 
     /**
+     * Generates a condensed timetable for the month according to the month input.
+     * Applies only to future months, i.e. not for the months which have passed.
+     *
+     * @param month The month input.
+     * @param taskList  Representation of an array of tasks.
+     * @param ui        The user interface which interacts with the user.
+     */
+    public static void showScheduleByMonth(Month month, TaskList taskList, Ui ui) {
+        LocalDate firstDayOfMonth = TimetableLogic.getFirstDayOfMonth(month);
+        ArrayList<Task> monthlySchedule = taskList.getFilteredTasksByMonth(firstDayOfMonth);
+        prepareCondensedTimetable(monthlySchedule, ui);
+    }
+
+    //@@author jltha
+    /**
      * Generates a condensed timetable format of all the pending tasks.
      *
      * @param taskList Representation of an array of tasks.
@@ -110,20 +125,6 @@ public class Timetable {
         }
     }
 
-
-    /**
-     * Generates a condensed timetable for the month according to the month input.
-     * Applies only to future months, i.e. not for the months which have passed.
-     *
-     * @param month The month input.
-     * @param taskList  Representation of an array of tasks.
-     * @param ui        The user interface which interacts with the user.
-     */
-    public static void showScheduleByMonth(Month month, TaskList taskList, Ui ui) {
-        LocalDate firstDayOfMonth = TimetableLogic.getFirstDayOfMonth(month);
-        ArrayList<Task> monthlySchedule = taskList.getFilteredTasksByMonth(firstDayOfMonth);
-        prepareCondensedTimetable(monthlySchedule, ui);
-    }
 
     /**
      * Prepares a full timetable and prints the timetable in the terminal.

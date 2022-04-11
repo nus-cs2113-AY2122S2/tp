@@ -122,10 +122,12 @@ public class TaskUtil {
         }
     }
 
+    //@@author jltha
     private static boolean isOnSameDay(LocalDateTime firstDate, LocalDateTime secondDate) {
         return firstDate.toLocalDate().equals(secondDate.toLocalDate());
     }
 
+    //@@author jltha
     private static boolean isEndTimeAfterCurrentStartTime(Task currentTask, LocalDateTime doOnStartDateTime,
                                                           LocalDateTime doOnEndDateTime) {
         return doOnEndDateTime.isAfter(currentTask.getDoOnStartDateTime())
@@ -133,6 +135,7 @@ public class TaskUtil {
                 || doOnStartDateTime.equals(currentTask.getDoOnStartDateTime()));
     }
 
+    //@@author jltha
     private static boolean isStartTimeBeforeCurrentEndTime(Task currentTask, LocalDateTime doOnStartDateTime,
                                                            LocalDateTime doOnEndDateTime) {
         return doOnStartDateTime.isBefore(currentTask.getDoOnEndDateTime())
@@ -140,24 +143,28 @@ public class TaskUtil {
                 || doOnEndDateTime.equals(currentTask.getDoOnEndDateTime()));
     }
 
+    //@@author jltha
     private static boolean isStartAndEndTimeWithinCurrentTime(Task currentTask, LocalDateTime doOnStartDateTime,
                                                               LocalDateTime doOnEndDateTime) {
         return doOnStartDateTime.isAfter(currentTask.getDoOnStartDateTime())
                 && doOnEndDateTime.isBefore(currentTask.getDoOnEndDateTime());
     }
 
+    //@@author jltha
     private static boolean isStartAndEndTimeContainCurrentTime(Task currentTask, LocalDateTime doOnStartDateTime,
                                                                LocalDateTime doOnEndDateTime) {
         return currentTask.getDoOnStartDateTime().isAfter(doOnStartDateTime)
                 && currentTask.getDoOnEndDateTime().isBefore(doOnEndDateTime);
     }
 
+    //@@author jltha
     private static boolean isStartAndEndTimeEqualsCurrentTime(Task currentTask, LocalDateTime doOnStartDateTime,
                                                               LocalDateTime doOnEndDateTime) {
         return doOnStartDateTime.isEqual(currentTask.getDoOnStartDateTime())
                 && doOnEndDateTime.equals(currentTask.getDoOnEndDateTime());
     }
 
+    //@@author jltha
     private static boolean hasTimeClash(Task currentTask, LocalDateTime doOnStartDateTime,
                                         LocalDateTime doOnEndDateTime) {
         return isStartAndEndTimeEqualsCurrentTime(currentTask, doOnStartDateTime, doOnEndDateTime)
@@ -167,11 +174,13 @@ public class TaskUtil {
                 || isStartAndEndTimeContainCurrentTime(currentTask, doOnStartDateTime, doOnEndDateTime);
     }
 
+    //@@author jltha
     private static boolean isStartTimeClashWithEndTime(Task taskToCheck) {
         return taskToCheck.getDoOnStartDateTime().isAfter(taskToCheck.getDoOnEndDateTime())
                 || taskToCheck.getDoOnStartDateTime().equals(taskToCheck.getDoOnEndDateTime());
     }
 
+    //@@author jltha
     private static boolean isByDateBeforeDoOnDate(Task taskToCheck) {
         if (taskToCheck.getByDateTime() == null) {
             return false;

@@ -21,7 +21,7 @@ complete the activities with the use of the study session.
       current Month, and any specific Month. 
 
 #### Enhancements implemented: 
-- **Refactor Parser Class**
+- Refactor Parser Class
   - Pull Request [#73](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/73)
   - Most of the features implemented will go through the Parser Class such as `Task`, `Timer`,
     `Storage`, `Timetable` and `Main`.  
@@ -34,7 +34,7 @@ complete the activities with the use of the study session.
     User Input. The decoded input will be then pass to its relevant Parser Class such as TaskParser for further 
     computation.
   
-- **Refactor Timetable Class**
+- Refactor Timetable Class
   - Pull Request [#77](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/77)
   - Original `Timetable` class is responsible for a lot of things such as, ensuring proper printing of timetable schedule, 
     computation of Timetable Class. 
@@ -43,7 +43,7 @@ complete the activities with the use of the study session.
   - `TimetablePrinting` will be responsible for the proper formatting of Timetable schedule.
   - `Timetable` will be responsible for the type of method available for the user.
 
-- **J-UNIT test**
+- J-UNIT test
   - Timetable Class
     - Pull Request [#61](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/61)
     - Wrote test cases for timetable class. 
@@ -52,14 +52,14 @@ complete the activities with the use of the study session.
     - Wrote test cases for timetableParser Class.
 
 #### Contribution to Documentation
-  - **User Guide**
+  - User Guide
     - Add User Guide for `delete recurring` task
     - Add User Guide for `Timetable`
       - All the display method for Timetable such as show,
         today, tomorrow, any date, current week, next week, current Month, any Month.
     - Update User Guide for `edit command` and `add command` to reflect the latest command syntax.
 
-  - **Documentation Guide**
+  - Documentation Guide
     - Documentation related to showing of monthly Timetable schedule.  
   
 #### Contribution to team-based tasks
