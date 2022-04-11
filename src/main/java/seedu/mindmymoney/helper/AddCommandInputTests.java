@@ -171,7 +171,7 @@ public class AddCommandInputTests {
         if (inputAmountAsFloat <= MIN_EXPENDITURE_AMOUNT) {
             throw new MindMyMoneyException("Amount must be more than 0");
         }
-        if (inputAmountAsFloat > MAX_EXPENDITURE_AMOUNT){
+        if (inputAmountAsFloat > MAX_EXPENDITURE_AMOUNT) {
             throw new MindMyMoneyException("Expenditure cannot be more than $1 million!");
         }
         assert inputAmountAsFloat > 0 : "Amount should have a positive value";
