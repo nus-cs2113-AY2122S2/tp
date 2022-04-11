@@ -372,7 +372,7 @@ public class UI {
 
     public static void printParagraph(String paragraph) {
         String[] arrayOfSentences = paragraph.split("\n");
-        System.out.println("HalpMi: " + arrayOfSentences[0]);
+        System.out.println("Duke: " + arrayOfSentences[0]);
         for (int i = 1; i < arrayOfSentences.length; i++) {
             System.out.print("        ");
             System.out.println(arrayOfSentences[i]);

@@ -1,9 +1,9 @@
 package seedu.duke;
 
-public class HalpMi {
+public class Duke {
 
     /**
-     * Main entry-point for the java.duke.HalpMi application.
+     * Main entry-point for the java.Duke.Duke application.
      */
     public static void main(String[] args) {
         assert true : "dummy assertion set to pass";
