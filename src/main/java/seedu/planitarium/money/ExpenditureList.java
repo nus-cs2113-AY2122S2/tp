@@ -212,7 +212,7 @@ public class ExpenditureList extends MoneyList {
     private void printEditMsg(Expenditure item, boolean isDescEdited, boolean isAmountEdited,
                               boolean isCatEdited, boolean isPermEdited) {
         if (isDescEdited || isAmountEdited || isCatEdited || isPermEdited) {
-            System.out.println("Your Expenditure have been edited");
+            System.out.println("Your Expenditure has been edited");
             System.out.println(item);
             return;
         }
