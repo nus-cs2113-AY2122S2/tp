@@ -51,8 +51,10 @@ public class ListFutureBorrowingsCommand extends Command {
             ui.showMessages("Here is a list of future borrowings: ");
         }
 
+        int counter = 1;
         for (String record: futureRecords) {
-            ui.showMessages(record);
+            ui.showMessages(counter + ") " + record);
+            counter++;
         }
     }
 

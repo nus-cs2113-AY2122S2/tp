@@ -50,8 +50,10 @@ public class ListCurrentBorrowingsCommand extends Command {
             ui.showMessages("Here is a list of current borrowings: ");
         }
 
+        int counter = 1;
         for (String record: currentRecords) {
-            ui.showMessages(record);
+            ui.showMessages(counter + ") " + record);
+            counter++;
         }
 
     }
