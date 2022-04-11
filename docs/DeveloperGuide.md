@@ -45,7 +45,7 @@ title: Developer Guide
   * [User stories](#user-stories)
   * [Non-functional requirements](#non-functional-requirements)
   * [Glossary](#glossary)
-* [Appendix: Instructions for Manual Testing](#instructions-for-manual-testing)
+* [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
 
 ## Acknowledgements
 We would like to acknowledge [Address Book (Level-3)](https://github.com/se-edu/addressbook-level3) for providing much
@@ -249,17 +249,18 @@ the Command component when any user input is provided to SplitLah.
    With the two methods `Parser#getCommandType` and `Parser#getRemainingArguments`,
    `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` is parsed separately as
    `session /create` and `/n Class Outing /d 15-03-2022 /pl Alice Bob`.
-   1. If the _command type_ is invalid, the method `Parser#getCommandType` returns null to `Parser` class.
-      As a result, an `InvalidCommand` object is created and returned to `SplitLah`.
-   2. Else, `Parser` class validates the _command type_ and the _remaining arguments_ with
-      `Parser#checkIfCommandIsValid`. If either the _command type_ or the _remaining arguments_ are invalid, an error
-      message is returned by the method and an `InvalidCommand` object is returned to `SplitLah`.
+   * If the _command type_ is invalid, the method `Parser#getCommandType` returns null to `Parser` class.
+     As a result, an `InvalidCommand` object is created and returned to `SplitLah`.
+   * Else, `Parser` class validates the _command type_ and the _remaining arguments_ with
+     `Parser#checkIfCommandIsValid`. If either the _command type_ or the _remaining arguments_ are invalid, an error
+     message is returned by the method and an `InvalidCommand` object is returned to `SplitLah`.
 3. `Parser` class creates the `XYZCommandParser` object for a `XYZCommand`. For example,
    for a _command type_ of `"session /create"`, a `SessionCreateCommandParser` object is instantiated.
-   If `Parser` class does not recognise the _command type_, an `InvalidCommand` object is created and returned immediately.
-
+   * If `Parser` class does not recognise the _command type_, an `InvalidCommand` object is created and returned immediately.
+   
+   <br><br>
    ![Reference Frame Command Parser Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefCommandParser.drawio.png)
-
+   <br><br>
 4. `Parser` class calls the `getCommand` method of `XYZCommandParser`.
 5. `XYZCommandParser` parses all _remaining arguments_ using `parseABC` methods from the `ParserUtils` class.
    (`parseABC` is a placeholder for specific methods in `ParserUtils` class, 
@@ -291,14 +292,15 @@ when the user invokes the `session /create` command.
 The general workflow of the `session /create` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionCreateCommand` object.
-3. `SessionCreateCommand#run` method is invoked to run the `session /create` command.
+3. `SessionCreateCommand#run` method is then invoked to run the `session /create` command.
 4. Once the command runs, `SessionCreateCommand#run` method checks if there is an existing session with the same session name.
-5. If an existing session with the specified session name is found, a message indicating that another session with the same name exists is printed using `TextUI#printlnMessage`.
-6. The `SessionCreateCommand` class creates a new `Session` object using the session name, session date, and person list.
-7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
+   * If an existing session with the specified session name is found, a message indicating that another session with the same name exists is printed using `TextUI#printlnMessage`
+     and control is returned to `SplitLah`.
+5. The `SessionCreateCommand` class creates a new `Session` object using the session name, session date, and person list.
+6. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
    which is used to call the `Profile#addSession` method in order to store the new `Session` object.
-8. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with `TextUI#printlnMessage`.
+7. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+8. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with `TextUI#printlnMessage`.
 
 ### Remove a session
 **API reference:** [`SessionDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
@@ -313,12 +315,12 @@ when the user invokes the `session /delete` command.
 The general workflow of the `session /delete` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionDeleteCommand` object.
-3. The `SessionDeleteCommand#run` method is invoked to run the `session /delete` command.
+3. The `SessionDeleteCommand#run` method is then invoked to run the `session /delete` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
    before the list of sessions can be retrieved.
 5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object with the specified 
 session unique identifier from the list of sessions.
-   * If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
+   * If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`. 
    * Else, the `Session` object with the specified session unique identifier is returned.
 6. To remove the `Session` object from the list of sessions stored in `Profile` object, the `Profile#removeSession` method is invoked.
 7. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
@@ -337,30 +339,29 @@ when the user invokes the `session /edit` command.
 The general workflow of the `session /edit` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionEditCommand` object.
-3. The `SessionEditCommand#run` method is invoked to run the `session /edit` command.
+3. The `SessionEditCommand#run` method is then invoked to run the `session /edit` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
    before the list of sessions can be retrieved.
 5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object with the specified
    session unique identifier from the list of sessions.
    * If a `Session` object with the specified session unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
    * Else, the `Session` object with the specified session unique identifier is returned.
-6. The details of how a session is updated are displayed in the reference diagram below.<br>
+6. The details of how a session is updated are displayed in the reference diagram below.<br><br>
    ![Reference Frame Update Session Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateSession.png)
+   <br><br>
 7. `SessionEditCommand#run` checks if there is an update for a new list of persons, new session or new session date.
-   * If there is an update on the list of persons, `SessionEditCommand#getNewPersonList` is called to return a new list of persons to be stored. 
-     * The method checks if the newly provided list of persons contains duplicated names.
-       * If duplicated names are detected, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
-       * Else, it calls `PersonList#isSuperSet` to check if the newly supplied list of persons contains all existing persons in the session.
-         * If `PersonList#isSuperSet` returns `false`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
-         * Else, a new list of persons ready to be stored in the session is returned.
-   * If there is an update on the session name, `SessionEditCommand#getNewSessionName` is called to return the new session name.
-     * The method checks if the provided session name already exists in the list of sessions.
-       * If the provided session name exists within the list of sessions, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
-       * Else, the provided session name is returned to be used as the updated name for the session
-   * If there is an update on the session date, `Session#setDateCreated` is called to set the new session date.
-   * After which, the necessary setter methods are called to update the session name and the list of persons for the session that is being edited.
-8. After the session is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
-9. The `SessionEditCommand` class then prints a message indicating that a session has been successfully edited.
+8. If there is an update on the list of persons, `SessionEditCommand#getNewPersonList` is called to return a new list of persons to be stored. The method checks if the newly provided list of persons contains duplicated names.
+   * If duplicated names are detected, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+   * Else, it calls `PersonList#isSuperSet` to check if the newly supplied list of persons contains all existing persons in the session.
+     * If `PersonList#isSuperSet` returns `false`, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+     * Else, a new list of persons ready to be stored in the session is returned.
+9. If there is an update on the session name, `SessionEditCommand#getNewSessionName` is called to return the new session name. The method checks if the specified session name already exists in the list of sessions.
+   * If the specified session name exists within the list of sessions, an exception is thrown, an error message is printed and control is returned to `SplitLah`.
+   * Else, the specified session name is returned to be used as the updated name for the session
+10. If there is an update on the session date, `Session#setDateCreated` is called to set the new session date.
+11. After which, the necessary setter methods are called to update the session name and the list of persons for the session that is being edited.
+12. After the session is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
+13. The `SessionEditCommand` class then prints a message indicating that a session has been successfully edited.
 
 ### View a session
 **API reference:** [`SessionViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionViewCommand.java)
@@ -375,14 +376,14 @@ when the user invokes the `session /view` command.
 The general workflow of the `session /view` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionViewCommand` object.
-3. `SessionViewCommand#run` method is invoked to run the `session /view` command.
+3. `SessionViewCommand#run` method is then invoked to run the `session /view` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
-5. The `SessionViewCommand` object then runs the `Profile#getSession` method to retrieve the session represented
-   by the session unique identifier provided.
-   1. If the session with the requested session unique identifier does not exist, an error message is printed out with 
-      `TextUI#printlnMessage`.
-   2. Else, a `String` object representing the details of the requested session is retrieved using the 
-      `Session#toString` method and printed out using `TextUI#printlnMessageWithDivider`.
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object with the specified
+   session unique identifier from the list of sessions.
+   * If the session with the requested session unique identifier does not exist, an error message is printed out with 
+     `TextUI#printlnMessage`.
+   * Else, a `String` object representing the details of the requested session is retrieved using the 
+     `Session#toString` method and printed out using `TextUI#printlnMessageWithDivider`.
 
 ### List sessions
 **API reference:** [`SessionListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
@@ -397,14 +398,14 @@ when the user invokes the `session /list` command.
 The general workflow of the `session /list` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionListCommand` object.
-3. `SessionListCommand#run` method is invoked to run the `session /list` command.
+3. `SessionListCommand#run` method is then invoked to run the `session /list` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called which returns a `Profile`
    object.
-5. Once the profile is retrieved, `SessionListCommand` runs the `Profile#getSessionListSummaryString` method.
-   1. If the session list in the profile is empty, the `Profile` class returns a `String` object containing an error 
-      message.
-   2. Else, a `String` object representing a table summarising the list of sessions in the 
-      profile is returned.
+5. Once the `Profile` object is returned, `SessionListCommand` runs the `Profile#getSessionListSummaryString` method.
+   * If the session list in the `Profile` object is empty, the `Profile` class returns a `String` object containing an error 
+     message.
+   * Else, a `String` object representing a table summarising the list of sessions in the 
+     profile is returned.
 6. Following that, the `String` object retrieved is printed out with `TextUI#printlnMessage`.
 
 ### Settle a session
@@ -420,14 +421,14 @@ when the user invokes the `session /summary` command
 The general workflow of the `session /summary` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionSummaryCommand` object.
-3. `SessionSummaryCommand#run` method is invoked to run the `session /summary` command.
+3. `SessionSummaryCommand#run` method is then invoked to run the `session /summary` command.
 4. The `Profile` object that stores all sessions is obtained with the `Manager#getProfile` method.
 5. The `TextUI` object that handles all reading and printing operations with the user interface
    is obtained with the `Manager#getUi` method.
-6. From the `Profile` object obtained, the `Profile#getSession` method is invoked with the session unique identifier
-   parsed from the user input to obtain the `Session` object that we want to settle all transactions for.
+6. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object that we want to settle all transactions for,
+   with the specified session unique identifier from the list of sessions.
 7. The `Session#getPersonList` method is called to retrieve an `ArrayList<Person>` object containing all persons 
-  participating in the session.
+   participating in the session.
 8. With the list of participants, an `ArrayList<PersonCostPair>` object is obtained with the
    `SessionSummaryCommand#getPersonCostPairList` method.
    * This method first calculates all costs borne by each person in the list of participants, 
@@ -438,11 +439,11 @@ The general workflow of the `session /summary` command is as follows:
      to be collected between all persons. Each of such matches is referred to as a transaction.
      The matching process is repeated until no more transactions can be made,
      i.e. all debts are paid and all debts are collected.
+   * For the sake of brevity, the specifics of the method `SessionSumamryCommand#processAllTransactions` is omitted
+     from the sequence diagram.
    * If no transactions are required to be made, a message explaining that no transactions are required to be made
      is returned.
    * Else, a `String` object containing information regarding all transactions that have to be made is returned.
-   * For the sake of brevity, the specifics of the method `SessionSumamryCommand#processAllTransactions` is omitted
-     from the sequence diagram.
 10. Finally, with the `TextUI` object, the method `TextUI#printlnMessageWithDivider` is called to print the message
     obtained from the `SessionSummaryCommand#processAllTransactions` method.
 
@@ -463,14 +464,15 @@ The general workflow of the `activity /create` command is as follows:
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityCreateCommand` object.
 3. `ActivityCreateCommand#run` method is then invoked to run the `activity /create` command.
 4. Once the command runs, `ActivityCreateCommand#run` method checks if there are duplicate names in the involved list. 
-   - If there are duplicate names in the involved list, a message indicating that there are duplicates is printed using `TextUI#printlnMessage`
+   * If there are duplicate names in the involved list, a message indicating that there are duplicates is printed using `TextUI#printlnMessage`
      and control is given back to `SplitLah`.
 5. The `ActivityCreateCommand` object updates the cost and cost list by invoking the `ActivityCreateCommand#updateCostAndCostList` method.
 6. The`ActivityCreateCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
-7. Then, `Profile#getSession` method is called to retrieve the `Session` object which the activity that the user wishes to delete is stored in.
-    - If the session does not exist, a message indicating that there is no such session is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
-    - Else, the `Session` object that the activity is stored in is returned.
-    - This process is omitted in the sequence diagram for the sake of brevity.
+7. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object that the activity is stored in,
+   with the specified session unique identifier from the list of sessions.
+   * This process is omitted in the sequence diagram for the sake of brevity.
+   * If the session does not exist, a message indicating that there is no such session is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
+   * Else, the `Session` object that the activity is stored in is returned.
 8. Other getter methods are then called to obtain the necessary parameters used to instantiate an Activity object. These getter methods are omitted in the sequence diagram.
 9. The `ActivityCreateCommand` object then adds the respective costs to each `Person` object involved in the activity using the `ActivityCreateCommand#addAllActivityCost` method.
 10. Using the updated details as parameters, the `ActivityCreateCommand` object instantiates an `Activity` object to represent the new activity.
@@ -493,16 +495,17 @@ The general workflow of the `activity /delete` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityDeleteCommand` object.
 3. `ActivityDeleteCommand#run` method is then invoked to run the `activity /delete` command.
-4. Once the command runs, `ActivityDeleteCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
-5. The `Profile#getSession` method is called to retrieve the `Session` object which the activity that the user wishes to delete is stored in.
-    - If the session does not exist, a message indicating that there is no such session is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
-    - Else, the `Session` object that the activity is stored in is returned.
-6. Once the `Session` object is retrieved, the `Session#removeActivity()` method is invoked to remove the `Activity` object from the list of activities stored.
-   - If the activity does not exist, a message indicating that there is no such activity is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
-   - Else, the `Activity` object is removed from the list of activities.
-8. After the activity is removed from the `Session` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-9. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
-10. The `ActivityDeleteCommand` object then prints a message indicating that an activity has been successfully deleted with `TextUI#printlnMessage`.
+4. When the command runs, `ActivityDeleteCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object that the activity is stored in,
+   with the specified session unique identifier from the list of sessions.
+   * If the session does not exist, a message indicating that there is no such session is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
+   * Else, the `Session` object that the activity is stored in is returned.
+6. Upon retrieving the `Session` object, the `Session#removeActivity` method is invoked to remove the `Activity` object from the list of activities stored.
+   * If the activity does not exist, a message indicating that there is no such activity is printed using `TextUI#printlnMessage` and control is given back to `SplitLah`.
+   * Else, the `Activity` object is removed from the list of activities.
+7. After the activity is removed from the `Session` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+8. The `Manager` object then runs `Storage#saveProfileToFile` to save the updated profile to the local storage file.
+9. The `ActivityDeleteCommand` object then prints a message indicating that an activity has been successfully deleted with `TextUI#printlnMessage`.
 
 ### Edit an activity
 **API reference:** [`ActivityEditCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityEditCommand.java)
@@ -522,14 +525,15 @@ The general workflow of the `activity /edit` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input using methods in the `Parser` class to obtain an `ActivityEditCommand` object.
 3. `ActivityEditCommand#run` method is then invoked to run the `activity /edit` command.
-4. Once the command runs, `ActivityEditCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
-5. The `Profile#getSession` method is called to retrieve the `Session` object which the activity that the user wishes to edit is stored in.
-    - If the session does not exist, a message indicating that there is no such session is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
-    - Else, the `Session` object that the activity is stored in is returned.
+4. When the command runs, `ActivityEditCommand#run` method invokes the `Manager#getProfile` method to retrieve the `Profile` object which stores the list of sessions.
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object that the activity is stored in,
+   with the specified session unique identifier from the list of sessions.
+   * If the session does not exist, a message indicating that there is no such session is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
+   * Else, the `Session` object that the activity is stored in is returned.
 6. `Session#getActivity` is called on the `activityId` provided by the user to fetch the `Activity` object representing
    the activity to be edited. 
-    - If the activity does not exist, a message indicating that there is no such activity is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
-    - Else, the `Activity` object to be edited is returned and stored temporarily as `oldActivity`.
+   * If the activity does not exist, a message indicating that there is no such activity is printed using `TextUi#printlnMessage` and control is given back to `SplitLah`.
+   * Else, the `Activity` object to be edited is returned and stored temporarily as `oldActivity`.
 7. `ActivityEditCommand#retrieveDetailsFromOldActivity` is called on `oldActivity` to retrieve existing activity details
    for delimiters not supplied by the user. This allows `ActivityEditCommand` to reuse existing details for details the user
    does not wish to edit.
@@ -539,7 +543,7 @@ The general workflow of the `activity /edit` command is as follows:
    the old activity, an `InvalidDataException` is thrown and a message is printed using `TextUI#printlnMessage` to inform the 
    user that no changes were made to the activity.
 10. `ActivityEditCommand#addAllActivityCost` is called to add the respective costs to each `Person` object involved in the activity.
-      - A dummy activity unique identifier that cannot be used by any other activity is when adding these costs.
+    * A dummy activity unique identifier that cannot be used by any other activity is when adding these costs.
 11. `Session#removeActivity()` method is invoked to remove `oldActivity` from the list of activities stored.
 12. A new `Activity` object is created using the new activity details and stored as `newActivity`.
 13. `Session#addActivity` is called to add `newActivity` to the session.
@@ -549,7 +553,31 @@ The general workflow of the `activity /edit` command is as follows:
 16. The `ActivityCreateCommand` object then prints a message indicating that an activity has been successfully edited with `TextUi#printlnMessage`.
 
 ### View an activity
+**API reference:** [`ActivityViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityViewCommand.java)
 
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `activity /view` command.
+<br>
+<br>
+![View Activity Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ActivityViewCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `activity /view` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityViewCommand` object.
+3. `ActivityViewCommand#run` method is then invoked to run the `activity /view` command.
+4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object that the activity is stored in,
+   with the specified session unique identifier from the list of sessions.
+   * If the session with the requested session unique identifier does not exist, an error message is printed out with
+     `TextUI#printlnMessage` and control is given back to `SplitLah`.
+6. After retrieving the `Session` object, `Session#getActivity` is invoked to obtain the `Activity` object with the specified
+   activity unique identifier from the list of activities.
+   * If the activity with the requested activity unique identifier does not exist, an error message is printed out with
+     `TextUI#printlnMessage` and control is given back to `SplitLah`.
+   * Else, a `String` object representing the details of the requested activity is retrieved using the
+      `Activity#toString` method and printed out using `TextUI#printlnMessageWithDivider`.
+    
 ### List activities
 **API reference:** [`ActivityListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityListCommand.java)
 
@@ -565,10 +593,13 @@ The general workflow of the `activity /list` command is as follows:
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `ActivityListCommand` object.
 3. `ActivityListCommand#run` method is then invoked to run the `activity /list` command.
 4. The list of activities are stored in a `Profile` object, hence `Manager#getProfile` is called.
-5. To retrieve the session containing the activity list from the `Profile` object, `Profile#getSession` is executed, returning a session containing all the activities to be listed.
-6. Once the session is retrieved, `ActivityListCommand` class runs `Session#getActivityListSummaryString`.
-   1. If the activity list in the session is empty, the Session class returns a `String` object containing an error message.
-   2. If it's not empty, a `String` object representing a table summarising the list of activities in the session is returned. 
+5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the `Session` object that the list of activities is stored in,
+   with the specified session unique identifier from the list of sessions.
+6. When the session is retrieved, `ActivityListCommand` class runs `Session#getActivityListSummaryString`.
+   * For the sake of brevity, the specifics of the method `Session#getActivityListSummaryString` is omitted
+     from the sequence diagram.
+   * If the activity list in the `Session` object is empty, the `Session` class returns a `String` object containing an error message.
+   * Else, a `String` object representing a table summarising the list of activities in the session is returned. 
 7. Finally, the method `TextUI#printlnMessageWithDivider` is called to print the message returned.
 
 ## Group Commands
@@ -582,38 +613,77 @@ The interactions of `GroupCreateCommand` with `Profile` and `Storage` classes ar
 
 Please refer to the [sequence diagram](#add-a-session) of `SessionCreateCommand` for reference.
 
-The sequence diagram below models the interactions between various entities in SplitLah
-when the user invokes the `group /create` command.
-<br>
-<br>
-![Create Group Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupCreateCommand.drawio.png)
-<br>
-<br>
 The general workflow of the `group /create` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
-3. A `GroupCreateCommand#run` method is then invoked to run the `group /create` command.
-4. Once the command starts to run, `GroupCreateCommand` class checks if there are duplicates in the name list.
-5. If there are duplicates, a message indicating that name list contains duplicates is printed using `TextUI#printlnMessage`. 
-6. If there are no duplicates, `GroupCreateCommand` class converts each of the names into a `Person` object.
-7. `GroupCreateCommand` class then checks if there is an existing group with the same group name. 
-8. If existing groups with the group name are found, a message indicating that another group with the same name is printed using `TextUI#printlnMessage`.
-9. `GroupCreateCommand` class create a new `Group` object using the group name, name list, and group unique identifier. 
-10. The list of `Group` objects are managed by a `Profile` object, hence `Manager#getProfile#addGroup` is called to store the new `Group` object in the `Profile` object.
-11. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created.
+3. `GroupCreateCommand#run` method is then invoked to run the `group /create` command.
+4. Once the command runs, `GroupCreateCommand#run` method checks if there is an existing group with the same group name.
+   * If an existing group with the specified group name is found, a message indicating that another group with the same name exists is printed using `TextUI#printlnMessage`
+     and control is returned to `SplitLah`.
+5. The `GroupCreateCommand` class creates a new `Group` object using the group name and person list.
+6. The list of `Group` objects are managed by a `Profile` object, hence `Manager#getProfile` is called to obtain the `Profile` object,
+   which is used to call the `Profile#addGroup` method in order to store the new `Group` object.
+7. After the group is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+8. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created with `TextUI#printlnMessage`.
 
 ### Remove a group
 **API reference:** [`GroupDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupDeleteCommand.java)
 
-The sequence diagram below models the interactions between various entities in SplitLah
-when the user invokes the `group /delete` command.
-<br>
-<br>
-![Delete Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupDeleteCommand.drawio.png)
-<br>
-<br>
+The sequence diagram for `GroupDeleteCommand` is omitted as it bears many similarities with [`SessionDeleteCommand`](#remove-a-session).<br>
+The interactions of `GroupDeleteCommand` with `Profile` and `Storage` classes are identical but the key differences lie in the arguments being parsed:
+* `GroupViewCommand` parses the **group unique identifier** instead of the **session unique identifier**.
+* It then removes the `Group` object from the list of groups managed by the `Profile` class corresponding to the **group unique identifier**.
+
+Please refer to the [sequence diagram](#remove-a-session) of `SessionDeleteCommand` for reference.
+
+The general workflow of the `group /delete` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupDeleteCommand` object.
+3. The `GroupDeleteCommand#run` method is then invoked to run the `group /delete` command.
+4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile` is called
+   before the list of groups can be retrieved.
+5. Once the `Profile` object is returned, `Profile#getGroup` is called to retrieve the `Group` object with the specified
+   group unique identifier from the list of groups.
+   * If a `Group` object with the specified group unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
+   * Else, the `Group` object with the specified group unique identifier is returned.
+6. To remove the `Group` object from the list of groups stored in `Profile` object, the `Profile#removeGroup` method is invoked.
+7. After the group is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+8. The `GroupDeleteCommand` class then prints a message indicating that a group has been successfully deleted.
 
 ### Edit a group
+**API reference:** [`GroupEditCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupEditCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `group /edit` command.
+<br>
+<br>
+![Edit Group Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupEditCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `group /edit` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupEditCommand` object.
+3. The `GroupEditCommand#run` method is invoked to run the `group /edit` command.
+4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile` is called
+   before the list of groups can be retrieved.
+5. Once the `Profile` object is returned, `Profile#getGroup` is called to retrieve the `Group` object with the specified
+   group unique identifier from the list of groups.
+    * If a `Group` object with the specified group unique identifier cannot be found, it prints the error message and returns control to `SplitLah`.
+    * Else, the `Group` object with the specified group unique identifier is returned.
+6. The details of how a group is updated are displayed in the reference diagram below.<br>
+   <br><br>
+   ![Reference Frame Update Group Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefUpdateGroup.drawio.png)
+   <br><br>
+7. If a new group name is provided, `GroupEditCommand#existingGroupWithTheSameName` method is called to check if the provided group name already exists in the list of groups.
+   * If the provided group name exists within the list of groups, the method returns `true`. An error message is then printed and control is returned to `SplitLah`.
+   * Else, the method returns `false`.
+8. If a new list of persons is provided, `PersonList#hasNameDuplicates` is called to check for duplicate names within the provided list of persons.
+   * If duplicated names are detected, the method returns `true`. An error message is printed and control is returned to `SplitLah`.
+   * Else, the method returns `false`. A new `PersonList` object to be stored is created to be used as the updated list of persons.
+9. Where a valid new group name is provided, `Group#setGroupName` method is called to update the group name.
+10. Where a valid new person list is provided, `Group#setPersonList` is called to update the new person list.
+11. After the group is edited, `Manager#saveProfile` is called to save the changes to the local storage file.
+12. The `GroupEditCommand` class then prints a message indicating that the group has been successfully edited.
 
 ### View a group
 **API reference:** [`GroupViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
@@ -632,10 +702,10 @@ The general workflow of the `group /view` command is as follows:
    the list of groups can be retrieved.
 5. The `GroupViewCommand` object runs the `Profile#getGroup` method to retrieve the group represented by the
    group unique identifier provided.
-   1. If the group with requested group unique identifier does not exist, an error message is printed out with
-      `TextUI#printlnMessage`.
-   2. Else, the `String` object representing the details of the requested group is retrieved using the `Group#toString`
-      method. The `String` object is then printed out with `TextUI#printlnMessageWithDivider`.
+   * If the group with requested group unique identifier does not exist, an error message is printed out with
+     `TextUI#printlnMessage`.
+   * Else, the `String` object representing the details of the requested group is retrieved using the `Group#toString`
+     method. The `String` object is then printed out with `TextUI#printlnMessageWithDivider`.
 
 ### List groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
@@ -653,11 +723,11 @@ The general workflow of the `group /list` command is as follows:
    before the list of groups can be retrieved.
 5. The `GroupListCommand` object runs the `Profile#getGroupListSummaryString` method to retrieve a `String` object
    representing the summaries of the groups stored.
-   1. If there are no groups stored in the `Profile` object, a `String` object representing an empty list of groups is
-      returned.
-   2. Else, the `Profile` objects instantiates a new `TableFormatter` object and loops through the list of groups,
-      calling `TableFormatter#addRow` for each group to create a table with the summary of each group. A `String` object
-      representing the table is then returned.
+   * If there are no groups stored in the `Profile` object, a `String` object representing an empty list of groups is
+     returned.
+   * Else, the `Profile` objects instantiates a new `TableFormatter` object and loops through the list of groups,
+     calling `TableFormatter#addRow` for each group to create a table with the summary of each group. A `String` object
+     representing the table is then returned.
 6. The `String` object retrieved is printed out with `TextUI#printlnMessage`.
 
 <hr>
@@ -677,25 +747,25 @@ they engage in during the outings.
 
 ## User Stories
 
-| Version | As a ...                   | I want to ...                        | So that I can ...                                                                  |
-|---------|----------------------------|--------------------------------------|------------------------------------------------------------------------------------|
-| v1.0    | New user                   | see usage instructions               | refer to them when I forget how to use the application                             |
-| v1.0    | Budget conscious user      | create sessions                      | record the transactions of the outing                                              |
-| v1.0    | Returning User             | delete sessions                      | remove unnecessary sessions                                                        |
-| v1.0    | Budget conscious user      | create activities                    | able to track the expenditure for each activity                                    |
-| v1.0    | Returning User             | delete activities                    | remove unnecessary activities                                                      |
-| v1.0    | Returning user             | view an existing activity            | view the cost breakdown of who paid and who was involved in the activity           |
-| v1.0    | Budget conscious user      | list all existing sessions           | view all sessions previously created                                               |
-| v1.0    | Budget conscious user      | list all activities in a session     | view all the activities that happened in the session                               |
-| v1.0    | Budget conscious user      | settle all transactions of a session | see a summary of who needs to pay what amount to who for the entire session        |
-| v2.0    | Careless User              | edit sessions                        | amend a mistake previously made when creating a session                            |
-| v2.0    | Returning user             | view an existing session             | view the full details of a session previously created                              |
-| v2.0    | Careless User              | edit activities                      | amend a mistake previously made when creating an activity                          |
-| v2.0    | User with a lot of friends | create groups                        | I can create sessions with groups instead of listing the person names out manually |
-| v2.0    | Returning User             | delete groups                        | remove unnecessary groups                                                          |
-| v2.0    | Careless User              | edit groups                          | amend a mistake previously made when creating a groups                             |
-| v2.0    | Returning User             | view groups                          | view the full details of a group previously created                                |
-| v2.0    | User with a lot of friends | list groups                          | view all groups previously created                                                 |
+| Version | As a ...                   | I want to ...                        | So that I can ...                                                                                                      |
+|---------|----------------------------|--------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| v1.0    | New user                   | view a list of instructions          | refer to them when I forget how to use the application                                                                 |
+| v1.0    | Budget conscious user      | create sessions                      | record the details of my outing and keep track of the expenditure of each activity                                     |
+| v1.0    | Returning user             | delete sessions                      | remove unnecessary sessions                                                                                            |
+| v1.0    | Budget conscious user      | list all existing sessions           | see a list of all the outings that were recorded                                                                       |
+| v1.0    | Budget conscious user      | create activities                    | record the details and the expenditure of the activities in a particular outing                                        |
+| v1.0    | Returning user             | delete activities                    | remove unnecessary activities                                                                                          |
+| v1.0    | Returning user             | view existing activities             | see the full details of a particular activity, including the cost breakdown of the activity                            |
+| v1.0    | Budget conscious user      | list all activities in a session     | see a list of all the activities that were recorded during a particular outing                                         |
+| v1.0    | Budget conscious user      | settle all transactions of a session | see a summary of all the transactions that are needed to be made amongst those who went for a particular outing        |
+| v2.0    | Returning user             | view existing sessions               | see the full details of a particular outing, including a list of activities for the outing                             |
+| v2.0    | Careless user              | edit sessions                        | amend a mistake previously made when recording an outing                                                               |
+| v2.0    | Careless user              | edit activities                      | amend a mistake previously made when recording an activity                                                             |
+| v2.0    | User with a lot of friends | create groups                        | easily record outings using groups instead of listing out all the names of the people who went for the outing manually |
+| v2.0    | Returning user             | delete groups                        | remove unnecessary groups                                                                                              |
+| v2.0    | Careless user              | edit groups                          | amend a mistake previously made when creating a group                                                                  |
+| v2.0    | Returning user             | view existing groups                 | see the full details of a particular group, including the names of the people in the group                             |
+| v2.0    | User with a lot of friends | list groups                          | see a list of all the groups that were created                                                                         |
 
 ## Non-Functional Requirements
 1. The application should be able to work on any operating systems with `Java 11` installed.
@@ -704,18 +774,19 @@ they engage in during the outings.
 4. Ths application should be usable by a novice who has never used an application to split bills.
 
 ## Glossary
+
 | Terms    | Definition                                                                                                                                                                                                                                                                                                  |
 |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Manager  | A Manager manages and stores 3 different objects, namely the `Profile`, `TextUI` and `Storage` objects.                                                                                                                                                                                                     |
-| Profile  | A Profile is responsible for all data management and accesses within the lifetime of the application. It serves as a container and holds a list of all `Session` and `Group` objects and keeps track of the unique identifiers to be issued upon the creation of `Session`, `Activity` and `Group` objects. |
-| TextUI   | A TextUI is an user interface that the user sees on the CLI.                                                                                                                                                                                                                                                |
-| Storage  | A Storage is in charge of saving and reading to and from the save file respectively.                                                                                                                                                                                                                        |
-| Parser   | A Parser is responsible for making sense of the user inputs and processing them as commands for the application to run.                                                                                                                                                                                     |
-| Command  | A Command is an object that performs a task that corresponds to the user input.                                                                                                                                                                                                                             |
-| Session  | A session represents a group outing that involves a list of participants and spans an arbitrary period of time containing one or more activities.                                                                                                                                                           |
 | Activity | An activity represents a single group activity and stores its name, costs and the name of the payer.                                                                                                                                                                                                        |
-| Group    | A group represents one or more individuals. The sole purpose of a group is to quickly identify a group of individuals without having to manually enter their details one by one when creating a session.                                                                                                    |
 | API      | An Application Programming Interface (API) specifies the interface through which other programs can interact with a software component.                                                                                                                                                                     |
+| Command  | A Command is an object that performs a task that corresponds to the user input.                                                                                                                                                                                                                             |
+| Group    | A group represents one or more individuals. The sole purpose of a group is to quickly identify a group of individuals without having to manually enter their details one by one when creating a session.                                                                                                    |                                                                                                                                                                |
+| Manager  | A Manager manages and stores 3 different objects, namely the `Profile`, `TextUI` and `Storage` objects.                                                                                                                                                                                                     |
+| Parser   | A Parser is responsible for making sense of the user inputs and processing them as commands for the application to run.                                                                                                                                                                                     |
+| Profile  | A Profile is responsible for all data management and accesses within the lifetime of the application. It serves as a container and holds a list of all `Session` and `Group` objects and keeps track of the unique identifiers to be issued upon the creation of `Session`, `Activity` and `Group` objects. |
+| Session  | A session represents a group outing that involves a list of participants and spans an arbitrary period of time containing one or more activities.                                                                                                                                                           |
+| Storage  | A Storage is in charge of saving and reading to and from the save file respectively.                                                                                                                                                                                                                        |
+| TextUI   | A TextUI is an user interface that the user sees on the CLI.                                                                                                                                                                                                                                                |
 
 <hr>
 
@@ -733,8 +804,9 @@ This section includes instructions to test SplitLah manually.
 * [Group Testing](#group-testing)
 * [Storage Testing](#storage-testing)
 
-### Launch and Shutdown
 <hr>
+
+### Launch and Shutdown
 
 #### Initial Launch
 1. Ensure that Java 11 or above is installed.
@@ -752,14 +824,13 @@ This section includes instructions to test SplitLah manually.
 <hr>
 
 ### Session Testing
-<hr>
 
 #### Creating a Session
 > For details on the usage of `session /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create).
 
 **Test Cases:**
 
-Test Scenario 1: No sessions are currently stored in the application. <br>
+Test Scenario 1: No sessions are currently stored in the application.
 1. Test Command: `session /create /n SessionTest1 /pl Alice Bob /d 10-04-2022` <br>
    Expected: A success message should be printed, indicating the details of the session as provided in the command.
 2. Test Command: `session /create /n SessionTest2 /pl Alice Bob /d today`<br>
@@ -767,13 +838,15 @@ Test Scenario 1: No sessions are currently stored in the application. <br>
 3. Test Command: `session /create /n SessionTest3 /pl Alice Alice /d today` <br>
    Expected: An error message should be printed, indicating that there are duplicates in the list of persons provided.
 
-Test Scenario 2: There is a session named SessionTest1 currently stored in the application. <br>
+Test Scenario 2: Only a single session with a session unique identifier of `1`, named `SessionTest1`, exists in the application after creating
+it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
 1. Test Command: `session /create /n SessionTest3 /pl Alice Bob /d today` <br>
    Expected: A success message should be printed, indicating the details of the session as provided in the command.
 2. Test Command: `session /create /n SessionTest1 /pl Alice Bob /d 10-04-2022` <br>
    Expected: An error message should be printed, indicating that a session with the same name already exists within the application.
 
-Test Scenario 3: There is a group with unique identifier of 1 named GroupTest1 with Alice, Bob and Charlie stored in the application. There are no other groups stored apart from GroupTest1.<br>
+Test Scenario 3: Only a single group with a group unique identifier of `1`, named `GroupTest1` with `Alice`, `Bob` and `Charlie` exists in the application after creating
+it with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-group-group-create) command.
 1. Test Command: `session /create /n SessionTest4 /gid 1 /d today`<br>
    Expected: A success message should be printed, indicating the details of the session as provided in the command. 
              The list of persons for the session would include the persons found in the group.
@@ -782,13 +855,14 @@ Test Scenario 3: There is a group with unique identifier of 1 named GroupTest1 w
    The list of persons for the session includes Alice, Bob, Charlie and also David.
 3. Test Command: `session /create /n SessionTest6 /gid 2 /d today`<br>
    Expected: An error message should be printed, indicating that the specified group unique identifier cannot be found.
-<hr>
 
 #### Deleting a Session
 > For details on the usage of `session /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-session-session-delete).
-<hr>
 
-Test Scenario 1: There is a session with unique identifier of 1 stored in the application. <br>
+**Test Cases:**
+
+Test Scenario 1: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
 1. Test Command: `session /delete /sid 1`<br>
    Expected: A success message should be printed, indicating that the session has been deleted.
 2. Test Command: `session /delete /sid 2`<br>
@@ -798,9 +872,11 @@ Test Scenario 1: There is a session with unique identifier of 1 stored in the ap
 
 #### Editing a Session
 > For details on the usage of `session /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-session-session-edit).
-<hr>
 
-Test Scenario 1: A session has been created with a unique identifier of 1, named SessionTest1 with Alice and Bob involved on 10-04-2022.
+**Test Cases:**
+
+Test Scenario 1: Only a single session with a session unique identifier of `1`, named `SessionTest1` with `Alice` and `Bob` involved on `10-04-2022`, exists in the application after creating
+it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
 1. Test Command: `session /edit /sid 1 /n SessionTest1`<br>
    Expected: A message should be printed, indicating that no edits were made.
 2. Test Command: `session /edit /sid 1 /n SessionTest10`<br>
@@ -821,7 +897,7 @@ Test Scenario 1: A session has been created with a unique identifier of 1, named
 
 Test Scenario 1: No sessions are currently stored in the application. 
 * Test Command: `session /summary /sid 1` <br>
-   Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
+  Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
 
 Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
 a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
@@ -836,7 +912,6 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 5. Test Command: `session /summary /sid 1`<br>
    Expected: A summary indicating the transactions that have to be made to settle all debts of the session with a 
    session unique identifier of `1` should be printed.
-<hr>
 
 #### Viewing a Session
 > For details on the usage of `session /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-session--session-view)
@@ -859,7 +934,6 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    Expected: An error message should be printed, indicating that a session with the specified session unique identifier was not found.
 5. Test Command: `session /view /sid 1`<br>
    Expected: The full details of the session with a session unique identifier of `1` should be printed.
-<hr>
 
 #### Listing all Sessions
 > For details on the usage of `session /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-sessions-session-list)
@@ -877,36 +951,153 @@ Test Scenario 2: At least 1 session exists in the application.
 <hr>
 
 ### Activity Testing
-<hr>
 
 #### Creating an Activity
 > For details on the usage of `activity /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-an-activity-activity-create).
-<hr>
+
+**Test Cases:**
+
+Test Scenario 1: No sessions are currently stored in the application.
+* Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Alice Bob /co 20` <br>
+  Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
+
+Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
+1. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Alice Bob /co 20` <br>
+   Expected: A success message should be printed, along with the details of the activity as provided in the command. Each person's cost owed is $10.
+2. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Alice Bob /cl 5 10` <br>
+   Expected: A success message should be printed, along with the details of the activity as provided in the command. PersonOne's cost owed is $5 while PersonTwo's cost owed is $10.
+3. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Alice Bob /co 20 /gst 7 /sc 10` <br>
+   Expected: A success message should be printed, along with the details of the activity as provided in the command. Each person's cost should have been multiplied by 1.177.
+4. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Alice Bob /cl 5 10 /gst 7 /sc 10` <br>
+   Expected: A success message should be printed, along with the details of the activity as provided in the command. Each person's cost should have been multiplied by 1.177.
+
+Test Scenario 3: Only a single session with a session unique identifier of `1`, consisting of only `Alice` and `Bob`, exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
+1. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Mallory /i Alice Bob /co 20 /gst 7 /sc 10` <br>
+   Expected: An error message should be printed, indicating that a person specified was not found in the particular session.
+2. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Bob Mallory /cl 5 10 /gst 7 /sc 10` <br>
+   Expected: An error message should be printed, indicating that a person specified was not found in the particular session.
 
 #### Deleting an Activity
 > For details on the usage of `activity /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-an-activity-activity-delete).
-<hr>
+
+**Test Cases:**
+
+Test Scenario 1: No sessions are currently stored in the application.
+* Test Command: `activity /delete /sid 1 /aid 1` <br>
+  Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
+
+Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command. No activities are currently stored in the session.
+* Test Command: `activity /delete /sid 1 /aid 1` <br>
+  Expected: An error message should be printed, indicating that the list of activities in the session is currently empty.
+
+Test Scenario 3: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
+Also, only an activity with an activity unique identifier of `1` within this session exists in the application after creating
+an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-an-activity-activity-create) command.
+1. Test Command: `activity /delete /sid 1 /aid 1` <br>
+   Expected: A success message should be printed, indicating that the activity was deleted.
+2. Test Command: `activity /delete /sid 3 /aid 1` <br>
+   Expected: An error message should be printed, indicating that the session specified was not found.
+3. Test Command: `activity /delete /sid 1 /aid 4` <br>
+   Expected: An error message should be printed, indicating that the activity specified was not found in the particular session.
 
 #### Editing an Activity
 > For details on the usage of `activity /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-an-activity-activity-edit).
-<hr>
+
+**Test Cases:**
+
+Test Scenario 1: No sessions are currently stored in the application.
+* Test Command: `activity /edit /sid 1 /aid 1 /n ActivityTest2` <br>
+  Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
+
+Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command. No activities are currently stored in the session.
+* Test Command: `activity /edit /sid 1 /aid 1 /n ActivityTets2` <br>
+  Expected: An error message should be printed, indicating that the list of activities in the session is currently empty.
+
+Test Scenario 3: Only a single session with a session unique identifier of `1`, consisting of only `Alice` and `Bob`, exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
+Also, only an activity with an activity unique identifier of `1`, named `ActivityTest1` with a total cost of `$20`, paid by `Alice`, involving `Alice` and `Bob` within this session exists in the application after creating
+an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-an-activity-activity-create) command.
+1. Test Command: `activity /edit /sid 1 /aid 2 /n ActivityTest2` <br>
+   Expected: An error message should be printed, indicating that the activity specified was not found in the particular session.
+2. Test Command: `activity /edit /sid 1 /aid 1 /n ActivityTest1`
+   Expected: A message should be printed, indicating that no edits were made.
+3. Test Command: `activity /edit /sid 1 /aid 1 /n ActivityTest2` <br>
+   Expected: A success message should be printed, indicating that the activity was edited.
+4. Test Command: `activity /edit /sid 1 /aid 1 /p Bob` <br>
+   Expected: A success message should be printed, indicating that the activity was edited.
 
 #### Viewing an Activity
 > For details on the usage of `activity /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-an-activity-activity-view).
-<hr>
+
+**Test Cases:**
+
+Test Scenario 1: No sessions are currently stored in the application.
+* Test Command: `activity /view /sid 1 /aid 1` <br>
+  Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
+
+Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command. No activities are currently stored in the session.
+* Test Command: `acitivty /view /sid 1` <br>
+  Expected: An error message should be printed, indicating that the list of activities in the session is currently empty.
+
+Test Scenario 3: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command.
+Also, only an activity with an activity unique identifier of 1 within this session exists in the application after creating an activity with the [activity /create](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-an-activity-activity-create) command.
+1. Test Command: `activity /view`<br>
+   Expected: An error message should be printed, indicating that the `/sid` delimiter is missing from the input.
+2. Test Command: `activity /view /sid`<br>
+   Expected: An error message should be printed, indicating that an argument following the `/sid` delimiter is missing from the input.
+3. Test Command: `activity /view /sid apple`<br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
+4. Test Command: `activity /view /sid 1`<br>
+   Expected: An error message should be printed, indicating that the `/aid` delimiter is missing from the input.
+5. Test Command: `activity /view /sid 1 /aid`<br>
+   Expected: An error message should be printed, indicating that an argument following the `/aid` delimiter is missing from the input.
+6. Test Command: `activity /view /sid 1 /aid apple` <br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/aid` delimiter.
+7. Test Command: `activity /view /sid 1 /aid 1`<br>
+   Expected: The full details of the activity with unique identifier of `1` within the session of unique identifier of `1` should be printed.
 
 #### Listing all Activities
 > For details on the usage of `activity /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-activities-in-a-session-activity-list).
+
+**Test Cases:**
+
+Test Scenario 1: No sessions are currently stored in the application.
+* Test Command: `activity /list /sid 1` <br>
+  Expected: An error message should be printed, indicating that no sessions are stored in SplitLah.
+
+Test Scenario 2: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command. No activities are currently stored in the session.
+* Test Command: `acitivty /view /sid 1` <br>
+  Expected: An error message should be printed, indicating that the list of activities in the session is currently empty.
+
+Test Scenario 3: Only a single session with a session unique identifier of `1` exists in the application after creating
+a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-session-session-create) command. At least 1 activity is stored in the session.
+1. Test Command: `activity /list`<br>
+   Expected: An error message should be printed, indicating that the `/sid` delimiter is missing from the input.
+2. Test Command: `activity /list /sid`<br>
+   Expected: An error message should be printed, indicating that an argument following the `/sid` delimiter is missing from the input.
+3. Test Command: `activity /list /sid apple`<br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
+4. Test Command: `activity /view /sid 1`<br>
+   Expected: A table summarising the details of all existing activities in the session with session unique identifier of `1` should be printed.
+
 <hr>
 
 ### Group Testing
-<hr>
 
 #### Creating a Group
 > For details on the usage of `group /create` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-group-group-create).
-<hr>
 
-Test Scenario 1: No groups are currently stored in the application. <br>
+**Test Cases:**
+
+Test Scenario 1: No groups are currently stored in the application.
 1. Test Command: `group /create /n GroupTest1 /pl Alice Bob Charlie` <br>
    Expected: A success message should be printed, indicating the details of the group as provided in the command.
 2. Test Command: `group /create /n GruopTest2 /pl Alice Bob Charlie David Mike`<br>
@@ -914,7 +1105,7 @@ Test Scenario 1: No groups are currently stored in the application. <br>
 3. Test Command: `group /create /n GruopTest3 /pl Alice Alice` <br>
    Expected: An error message should be printed, indicating that there are duplicates in the list of persons provided.
 
-Test Scenario 2: There is a group named GroupTest1 currently stored in the application. <br>
+Test Scenario 2: There is a group named GroupTest1 currently stored in the application.
 1. Test Command: `group /create /n GruopTest3 /pl Alice Bob` <br>
    Expected: A success message should be printed, indicating the details of the group as provided in the command.
 2. Test Command: `group /create /n GroupTest1 /pl Alice Bob Charlie` <br>
@@ -922,9 +1113,10 @@ Test Scenario 2: There is a group named GroupTest1 currently stored in the appli
 
 #### Deleting a Group
 > For details on the usage of `group /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-group-group-delete).
-<hr>
 
-Test Scenario 1: There is a group with unique identifier of 1 stored in the application. <br>
+**Test Cases:**
+
+Test Scenario 1: There is a group with unique identifier of 1 stored in the application.
 1. Test Command: `group /delete /gid 1`<br>
    Expected: A success message should be printed, indicating that the group has been deleted.
 2. Test Command: `group /delete /gid 2`<br>
@@ -934,7 +1126,8 @@ Test Scenario 1: There is a group with unique identifier of 1 stored in the appl
 
 #### Editing a Group
 > For details on the usage of `group /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-group-group-edit).
-<hr>
+
+**Test Cases:**
 
 Test Scenario 1: A group has been created with a unique identifier of 1, named GroupTest1 with Alice, Bob and Charlie.
 1. Test Command: `group /edit /gid 1 /n GroupTest1`<br>
@@ -950,14 +1143,44 @@ Test Scenario 1: A group has been created with a unique identifier of 1, named G
 
 #### Viewing a Group
 > For details on the usage of `group /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-group-group-view).
-<hr>
+
+**Test Cases:**
+
+Test Scenario 1: No groups are currently stored in the application.
+* Test Command: `group /view /gid 1` <br>
+  Expected: An error message should be printed indicating that there are currently no groups stored.
+
+Test Scenario 1: Only a single group with a group unique identifier of `1` exists in the application after creating
+a single group with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#creating-a-group-group-create) command.
+1. Test Command: `group /view`<br>
+   Expected: An error message should be printed, indicating that the `/gid` delimiter is missing from the input.
+2. Test Command: `group /view /gid`<br>
+   Expected: An error message should be printed, indicating that an argument following the `/gid` delimiter is missing from the input.
+3. Test Command: `group /view /gid apple`<br>
+   Expected: An error message should be printed, indicating that an integer argument should be provided following the `/gid` delimiter.
+4. Test Command: `group /view /gid 2`<br>
+   Expected: An error message should be printed, indicating that a group with the specified group unique identifier was not found.
+5. Test Command: `group /view /gid 1`<br>
+   Expected: The full details of the group with a group unique identifier of `1` should be printed.
 
 #### Listing all Groups
 > For details on the usage of `group /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-groups-group-list).
+
+**Test Cases:**
+
+Test Scenario 1: No groups are currently stored in the application.
+* Test Command: `group /list` <br>
+  Expected: An error message should be printed, indicating that no groups are stored in SplitLah.
+
+Test Scenario 2: At least 1 group exists in the application.
+* Test Command: `group /list`<br>
+  Expected: A table summarising the details of all existing groups should be printed.
+
 <hr>
 
 ### Storage Testing
-<hr>
+
+**Test Cases:**
 
 Test Scenario 1: splitlah.jar is placed in a location where read and write permissions are given.
 1. Test: No save file was found. <br>
