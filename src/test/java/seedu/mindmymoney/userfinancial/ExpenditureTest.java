@@ -16,8 +16,8 @@ public class ExpenditureTest {
      */
     @Test
     void serialization_normalInput_correctSerialization() {
-        Expenditure expenditure = new Expenditure("cash", "Food", "chicken"
-                + "expenditure", 20, "March 2022");
+        Expenditure expenditure = new Expenditure("Cash", "Food", "chicken"
+                + "expenditure", 20, "05/03/2022");
         try {
             String serialized = expenditure.serialize();
             Expenditure deserialized = Expenditure.deserialize(serialized);

@@ -3,6 +3,7 @@ package seedu.mindmymoney.userfinancial;
 
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.PropertyList;
+import seedu.mindmymoney.helper.ValidatorFunctions;
 
 import static seedu.mindmymoney.constants.CalculationConversion.FLOAT_TO_PERCENTAGE;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
@@ -107,13 +108,21 @@ public class CreditCard implements MindMyMoneySerializable {
     public static CreditCard deserialize(String serialized) throws MindMyMoneyException {
         PropertyList plist = PropertyList.deserialize(serialized);
         try {
+            double cashback = Double.parseDouble(plist.getValue("cashback"));
+            double monthlyCardLimit = Double.parseDouble(plist.getValue("monthlyCardLimit"));
+            double totalExpenditure = Double.parseDouble(plist.getValue("totalExpenditure"));
+            ValidatorFunctions.validateInRange(cashback, 0, 100, "cashback");
+            ValidatorFunctions.validateInRange(monthlyCardLimit, 0, 40000, "monthly limit");
+            ValidatorFunctions.validateInRange(totalExpenditure, 0, monthlyCardLimit, "total expenditures");
             CreditCard cc = new CreditCard(plist.getValue("nameOfCard"),
-                    Double.parseDouble(plist.getValue("cashback")),
-                    Float.parseFloat(plist.getValue("monthlyCardLimit")));
-            cc.totalExpenditure = Float.parseFloat(plist.getValue("totalExpenditure"));
+                    cashback,
+                    (float) monthlyCardLimit);
+            cc.totalExpenditure = (float) totalExpenditure;
             return cc;
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("Invalid number during deserialization of " + serialized);
+        } catch (ValidationException e) {
+            throw e;
         } catch (MindMyMoneyException e) {
             String missingProperty = e.getMessage();
             throw new MindMyMoneyException("Line [" + serialized + "] does not contain required value "
