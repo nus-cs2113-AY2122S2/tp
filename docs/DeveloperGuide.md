@@ -48,71 +48,8 @@ Besides `Main`, the application also consists of four components which are:
 
 ## Design
 
-### Add Housekeeper Command
-
-The objective of the `AddHousekeeperCommand` is to take in user input and spilt it into two parts which is the name and 
-age of a Housekeeper. These details make up parts of the Housekeeper profile. With the name and age derived, 
-this information will be added into a new Housekeeper object, which will be recorded into the list of 
-housekeeper. The class diagram below depicts how the `AddHousekeeperCommand` interacts with other classes.
-
-PLEASE NOTE: This class diagram omits the details of some classes involved, like the `Duke`, `CommandParser` and `Command` class.
-It also omits some unused methods.
-![class](team/falicia_addHousekeeperCommand/classAddHousekeeperFinal.jpg)
-
-Below is an example showing the usage of `AddHousekeeperCommand`.
-
-Step 1: Command given from the user: `add housekeeper susan / 33`. This command meant to add a new housekeeper called susan who is 33 years old.
-
-Step 2: The parse method from `CommandParser` will run parse to create `AddHousekeeperCommand` and would be return to Duke.
-
-Step 3: The execute method in `AddHousekeeperCommand` will be performed. It would get the `housekeeperList` from `ListContainer`.
-
-Step 4: The `addHousekeeperInList` method from `HousekeeperList` would be called to check if the housekeeper has been recorded.
-name of the housekeeper to be added has been recorded into the list. 
-
-Step 5: `addHousekeeperInList` will verify if housekeeper name is in the list by calling `hasNameAdded` and stores the 
-result in boolean.
-If it has not been recorded, housekeeperList would then add this new user into the records by calling `addHousekeeper`
-method. 
-
-Step 6: `printHousekeeperNoted` will be called to print a confirmation to show that the housekeeper 
-has been entered into the list.
-
-Step 7. Housekeeper file storing all profile will be updated by calling `writeHousekeeperToFile` method.
-This method will then call method `save` from `HousekeeperFileManager`.
-
-### Delete Housekeeper Command
-
-The objective of the `DeleteHousekeeperCommand` is to take in the housekeeper's name to be deleted from the list. The 
-housekeeper's profile would be completely removed from records in the `housekeeperList`. The class diagram below depicts how the `DeleteHousekeeperCommand` interacts with other classes.
 
 
-PLEASE NOTE: This class diagram omits the details of some classes involved, like the `Duke`, `CommandParser` and `Command` class.
-It also omits unused methods.
-![Class Delete](team/falicia_deleteHousekeeperCommand/deleteHousekeeperClassFINAL.jpg)
-
-Below is an example showing the usage of `DeleteHousekeeperCommand`.
-
-Step 1: Command given from the user: `delete housekeeper susan`. This command meant to delete housekeeper called susan.
-
-Step 2: The parse method from `CommandParser` will run parse to create `DeleteHousekeeperCommand` and would be return to Duke.
-
-Step 3: The execute method in `DeleteHousekeeperCommand` will be performed. It would get the `housekeeperList` from `ListContainer`.
-
-Step 4: The `removeHousekeeperInList` method from `HousekeeperList` would be called to check if the housekeeper's name
-is in the `housekeeperList`.
-
-Step 5: `removeHousekeeperInList` will call `getHousekeeperRemove` method which will derive the index of the housekeeper
-recorded in the list. It would return an integer. Assume housekeeper `susan` is recorded in the list and is in index `0`
-of the list.
-
-Step 6: With the index given, method `removeHousekeeper` will be called to remove housekeeper profile from the list.
-
-Step 7: User will then be able to see a message notifying them that the housekeeper `susan` has been deleted and the total
-number of housekeeper currently in working in the hotel.
-
-Step 8: To update the current `housekeeperList` into housekeeper file, `writeHousekeeperToFile` method will be call in which
-it calls `save` method from `HousekeeperFileManager` to reload housekeeper's information into the housekeeper file.
 
 
 
@@ -127,8 +64,6 @@ PLEASE NOTE: This class diagram omits the details of some classes involved, like
 
 
 ### Delete Item Command
-
-
 
 
 
@@ -232,6 +167,43 @@ PLEASE NOTE: This sequence diagram omits the details of some behavior and classe
 
 ### Add Housekeeper feature
 
+### Add Housekeeper Class Diagram
+The objective of the `AddHousekeeperCommand` is to take in user input and spilt it into two parts which is the name and
+age of a Housekeeper. These details make up parts of the Housekeeper profile. With the name and age derived,
+this information will be added into a new Housekeeper object, which will be recorded into the list of
+housekeeper. The class diagram below depicts how the `AddHousekeeperCommand` interacts with other classes.
+
+PLEASE NOTE: This class diagram omits the details of some classes involved, like the `Duke`, `CommandParser` and `Command` class.
+It also omits some unused methods.
+![class](team/falicia_addHousekeeperCommand/classAddHousekeeperFinal.jpg)
+
+
+
+Below is an example showing the usage of `AddHousekeeperCommand`.
+
+Step 1: Command given from the user: `add housekeeper susan / 33`. This command meant to add a new housekeeper called susan who is 33 years old.
+
+Step 2: The parse method from `CommandParser` will run parse to create `AddHousekeeperCommand` and would be return to Duke.
+
+Step 3: The execute method in `AddHousekeeperCommand` will be performed. It would get the `housekeeperList` from `ListContainer`.
+
+Step 4: The `addHousekeeperInList` method from `HousekeeperList` would be called to check if the housekeeper has been recorded.
+name of the housekeeper to be added has been recorded into the list.
+
+Step 5: `addHousekeeperInList` will verify if housekeeper name is in the list by calling `hasNameAdded` and stores the
+result in boolean.
+If it has not been recorded, housekeeperList would then add this new user into the records by calling `addHousekeeper`
+method.
+
+Step 6: `printHousekeeperNoted` will be called to print a confirmation to show that the housekeeper
+has been entered into the list.
+
+Step 7. Housekeeper file storing all profile will be updated by calling `writeHousekeeperToFile` method.
+This method will then call method `save` from `HousekeeperFileManager`.
+
+
+### Add Housekeeper Sequence Diagram
+
 PLEASE NOTE: This sequence diagram omits the details of some behavior and classes involved, like the `Duke` class.
 It gives an overview of how the AddHousekeeperCommands runs.
 
@@ -274,9 +246,44 @@ Step 8: Since a housekeeper has been added, `AddHousekeeperCommand#writeHousekee
 `HousekeeperFileManager#save()` method to save the contents of the `housekeeperlist` into housekeeper file.
 
 
-![Sequence](team/falicia_addHousekeeperCommand/sequenceAddHousekeeperCommandFinal.jpg)
+![Sequence](team/falicia_addHousekeeperCommand/sequenceAddHousekeeperCommandFinal2.jpg)
 
 ### Delete Housekeeper feature 
+
+### Delete Housekeeper Class Diagram
+
+The objective of the `DeleteHousekeeperCommand` is to take in the housekeeper's name to be deleted from the list. The
+housekeeper's profile would be completely removed from records in the `housekeeperList`. The class diagram below depicts how the `DeleteHousekeeperCommand` interacts with other classes.
+
+
+PLEASE NOTE: This class diagram omits the details of some classes involved, like the `Duke`, `CommandParser` and `Command` class.
+It also omits unused methods.
+![Class Delete](team/falicia_deleteHousekeeperCommand/deleteHousekeeperClassFINAL2.jpg)
+
+Below is an example showing the usage of `DeleteHousekeeperCommand`.
+
+Step 1: Command given from the user: `delete housekeeper susan`. This command meant to delete housekeeper called susan.
+
+Step 2: The parse method from `CommandParser` will run parse to create `DeleteHousekeeperCommand` and would be return to Duke.
+
+Step 3: The execute method in `DeleteHousekeeperCommand` will be performed. It would get the `housekeeperList` from `ListContainer`.
+
+Step 4: The `removeHousekeeperInList` method from `HousekeeperList` would be called to check if the housekeeper's name
+is in the `housekeeperList`.
+
+Step 5: `removeHousekeeperInList` will call `getHousekeeperRemove` method which will derive the index of the housekeeper
+recorded in the list. It would return an integer. Assume housekeeper `susan` is recorded in the list and is in index `0`
+of the list.
+
+Step 6: With the index given, method `removeHousekeeper` will be called to remove housekeeper profile from the list.
+
+Step 7: User will then be able to see a message notifying them that the housekeeper `susan` has been deleted and the total
+number of housekeeper currently in working in the hotel.
+
+Step 8: To update the current `housekeeperList` into housekeeper file, `writeHousekeeperToFile` method will be call in which
+it calls `save` method from `HousekeeperFileManager` to reload housekeeper's information into the housekeeper file.
+
+### Delete Housekeeper Sequence Diagram
 
 PLEASE NOTE: This sequence diagram omits the details of some behavior and classes involved, like the `Duke` class.
 It gives an overview of how the DeleteHousekeeperCommand runs.
@@ -322,7 +329,7 @@ by calling `Ui#printNoted()`, `Ui#printMessage()` and `Ui#printBottomLine`.
 Step 7: Changes in the list will be updated to file by calling `DeleteHousekeeperCommand#writeHousekeeperToFile()` which
 invokes the`HousekeeperFileManager#save()` method.
 
-![Sequence](team/falicia_deleteHousekeeperCommand/sequenceDeleteHousekeeperFinal.jpg)
+![Sequence](team/falicia_deleteHousekeeperCommand/sequenceDeleteHousekeeperFinal2.jpg)
 
 ### Item Related Commands
 This section showcases how some of the various item related commands such as Add, Search Item Commands are implemented.
