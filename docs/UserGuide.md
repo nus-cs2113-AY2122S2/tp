@@ -114,7 +114,8 @@ Listing dishes...
     ```
 
   - You cannot have the same dish (regardless of cases) in menu:
-    ```
+    
+  - ```
     Listing dishes...
     ----------------------------------------------
     1. Some Dish                      $1.1
