@@ -226,7 +226,7 @@ Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/en
 - `edit 2 write draft essay`
 
 Before edit command:
-![](images/scheduleAfterDeletingASingleTask.png)
+![](images/scheduleAfterAddingRecurringTasksOne.png)
 
 When executing edit command:
 ![](images/editSingleTask.png)
@@ -622,6 +622,7 @@ Displays a short guide for either all the commands, or one specified command.
 Format: `help [COMMAND_WORD]`
 
 **Example**
+
 ![image](images/help_delete.png)
 
 > 💡 **Note:** Alternatively, you can enter `help quick start` for a command summary similar to the one in this document.
@@ -633,6 +634,7 @@ Exits the program.
 Format: `bye`
 
 **Example**
+
 ![image](images/bye.png)
 
 ### Saving your tasks
