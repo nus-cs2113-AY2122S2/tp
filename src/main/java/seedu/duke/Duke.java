@@ -10,11 +10,20 @@ import seedu.duke.command.housekeepercommands.AddHousekeeperCommand;
 import seedu.duke.command.housekeepercommands.AgeIncreaseCommand;
 import seedu.duke.command.housekeepercommands.ResetAvailabilityCommand;
 import seedu.duke.command.housekeepercommands.DeleteHousekeeperCommand;
+import seedu.duke.command.housekeepercommands.AddHousekeeperPerformanceCommand;
 import seedu.duke.command.itemcommands.AddItemCommand;
 import seedu.duke.command.itemcommands.DeleteItemCommand;
 import seedu.duke.command.itemcommands.UpdateItemNameCommand;
 import seedu.duke.command.itemcommands.UpdateItemPaxCommand;
+import seedu.duke.command.roomcommand.CheckAllRoomCommand;
+import seedu.duke.command.roomcommand.CheckInCommand;
+import seedu.duke.command.roomcommand.CheckOutCommand;
+import seedu.duke.command.roomcommand.CheckRoomByCatCommand;
+import seedu.duke.command.roomcommand.CheckRoomByLevelCommand;
+import seedu.duke.command.roomcommand.CheckRoomCommand;
 import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.roomlists.RoomList;
+import seedu.duke.storage.RoomFileManager;
 
 public class Duke {
     /**
@@ -25,15 +34,21 @@ public class Duke {
      * @param listContainer The object containing the lists to update depending on the command inputted by the user.
      * @throws IOException if we are unable to write to the respective file found within the ListFolder directory.
      */
-    private void writeListsToFile(Command command, ListContainer listContainer) throws IOException {
-        if (command instanceof AddItemCommand || command instanceof UpdateItemPaxCommand || command
-                instanceof UpdateItemNameCommand || command instanceof UpdateItemNameCommand || command
-                instanceof DeleteItemCommand) {
+
+    private void writeListsToFile(Command command, ListContainer listContainer)
+            throws IOException, HotelLiteManagerException {
+        if (command instanceof AddItemCommand || command instanceof UpdateItemPaxCommand
+                || command instanceof UpdateItemNameCommand || command instanceof UpdateItemNameCommand
+                || command instanceof DeleteItemCommand) {
             writeItemListsToFile(command, listContainer);
         } else if (command instanceof AddAvailabilityCommand || command instanceof AddHousekeeperCommand || command
                 instanceof AgeIncreaseCommand || command instanceof ResetAvailabilityCommand || command
-                instanceof DeleteHousekeeperCommand) {
+                instanceof DeleteHousekeeperCommand || command instanceof AddHousekeeperPerformanceCommand) {
             writeHousekeeperListsToFile(command, listContainer);
+        } else if (command instanceof CheckAllRoomCommand || command instanceof CheckInCommand || command
+                instanceof CheckOutCommand || command instanceof CheckRoomByCatCommand || command
+                instanceof CheckRoomByLevelCommand || command instanceof CheckRoomCommand) {
+            writeRoomListToFile(listContainer);
         } else if (command instanceof AddSatisfactionCommand) {
             writeSatisfactionListsToFile(command, listContainer);
         }
@@ -55,8 +70,20 @@ public class Duke {
         } else if (command instanceof ResetAvailabilityCommand) {
             ResetAvailabilityCommand resetAvailabilityCommand = (ResetAvailabilityCommand) command;
             resetAvailabilityCommand.writeHousekeeperToFile(listContainer);
+        } else if (command instanceof AddHousekeeperPerformanceCommand) {
+            AddHousekeeperPerformanceCommand addHousekeeperPerformanceCommand
+                    = (AddHousekeeperPerformanceCommand) command;
+            addHousekeeperPerformanceCommand.writeHousekeeperPerformanceListToFile(listContainer);
         }
     }
+
+
+    private void writeRoomListToFile(ListContainer listContainer) throws IOException, HotelLiteManagerException {
+        RoomList roomList = listContainer.getRoomList();
+        RoomFileManager fileManager = new RoomFileManager();
+        fileManager.save(roomList.getRoomList());
+    }
+
 
     /**
      * Updates the item list saved within the file ListFolder/ItemList.txt with the current item list.

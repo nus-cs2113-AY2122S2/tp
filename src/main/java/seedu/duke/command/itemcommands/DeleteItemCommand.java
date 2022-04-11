@@ -3,7 +3,6 @@ package seedu.duke.command.itemcommands;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.DuplicateCommandException;
 import seedu.duke.exceptions.HotelLiteManagerException;
-import seedu.duke.exceptions.ItemNotFoundException;
 import seedu.duke.itemlists.Item;
 import seedu.duke.exceptions.EmptyItemNameException;
 import seedu.duke.ListContainer;

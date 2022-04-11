@@ -35,9 +35,9 @@ public class CheckRoomCommand extends Command {
      * Print out the room information with corresponding room number
      * including information of:
      * type, room number, level, status and assigned housekeeper.
-     *
-     * @param listContainer The object containing the necessary data structure.
+     *  @param listContainer The object containing the necessary data structure.
      * @param ui            The object that deals with user interface for the program.
+     * @return
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws InvalidRoomNumberException {
@@ -49,7 +49,6 @@ public class CheckRoomCommand extends Command {
                 System.out.println(room.toString()
                         + String.format("%-30s", assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()))
                 );
-                return;
             }
         }
         throw new InvalidRoomNumberException();

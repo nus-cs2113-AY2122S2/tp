@@ -1,8 +1,36 @@
 # Developer Guide
+- [Architecture](#architecture)
+- [Design and Implementation](#design-and-implementation)
+  - [Design](#design)
+  - [Implementation](#implementation)
+    - [Assign a housekeeper to a room](#assign-a-housekeeper-to-a-room)
+    - [Adding a customer's satisfaction rating](#adding-a-customers-satisfaction-rating)
+    - [Add Housekeeper feature](#add-housekeeper-feature)
+    - [Delete Housekeeper feature](#delete-housekeeper-feature)
+    - [Item Related Commands](#item-related-commands)
+    - [Check room information by level](#check-room-information-by-level)
+- [Product Scope](#product-scope)
+  - [Target user profile](#target-user-profile)
+  - [Value proposition](#value-proposition)
+- [User Stories](#user-stories)
+- [Non-Functional Requirements](#non-functional-requirements)
+- [Instructions for manual testing](#instructions-for-manual-testing)
+- [Glossary](#glossary)
+
+
+## Architecture
+<p align="center">
+
+![Architecture Design](team/architectureDesign/architectureDesign.jpg)
+
+</p>
 
 ## Design & implementation
 
 ## Design
+
+### Logical Component
+
 
 ### Add Housekeeper Command
 
@@ -90,7 +118,7 @@ PLEASE NOTE: This class diagram omits the details of some classes involved, like
 
 ## Implementation
 
-#### Assign a housekeeper to a room
+### Assign a housekeeper to a room
 The assignment of housekeeper to a room is facilitated by `AssignHousekeeperCommand`. This command objects uses `AssignmentMap`, which keeps a `HashMap`, to help us map a `Room` object to a `Housekeeper` object. 
 
 ``
@@ -130,7 +158,7 @@ __Interaction__ To understand the interaction between objects of these classes i
 
 The command object passes on the ID of the room and the name of the housekeeper to the `AssignmentMap` object after parsing the input appropriately. The `addAssignment` function first locates the appropriate `Room` object from `RoomList`, and then looks for the `Housekeeper` object in the `HousekeeperList` and finally adds the mapping to the hash map.
 
-#### Adding a customer's satisfaction rating
+### Adding a customer's satisfaction rating
 
 The mechanism for adding a customer satisfaction (represented by the Satisfaction class) is facilitated
 by `AddSatisfactionCommand`. The constructor parses user input to create a `Satisfaction` object (which contains
@@ -182,8 +210,9 @@ obtained from the `ListContainer` object. Then, the `satisfaction` is added to t
 
 The following sequence diagram shows what would happen if the user typed `add satisfaction bob 5`.
 
-PLEASE NOTE: This sequence diagram omits the details of some behavior and classes involved, like the `Duke` class.
-![Sequence Diagram](team/alinazheng_addsatisfactioncommand_uml/AlinaZheng_AddSatisfaction_SequenceDiagram2.0.png)
+PLEASE NOTE: This sequence diagram omits the details of some behavior and classes involved, like the `Duke` and 
+`CommandParser` classes.
+![Sequence Diagram](team/alinazheng_addsatisfactioncommand_uml/sequenceAddSatisfactionCommandFinal.drawio.png)
 
 ### Add Housekeeper feature
 

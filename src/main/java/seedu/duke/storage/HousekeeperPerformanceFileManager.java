@@ -47,7 +47,7 @@ public class HousekeeperPerformanceFileManager extends FileManager {
         return housekeeperPerformanceList;
     }
 
-    public void writePerformanceListToFile(HousekeeperPerformanceList housekeeperPerformanceList) throws IOException {
+    public void save(HousekeeperPerformanceList housekeeperPerformanceList) throws IOException {
         clearFileContents();
         FileWriter fw = new FileWriter(FILE_PATH, true);
         int lastIndexOfArrayList = housekeeperPerformanceList.getSize() - 1;

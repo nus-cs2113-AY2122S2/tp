@@ -568,10 +568,10 @@ Example of usage:
 Expected output:
 
 ```
-======================================================================
-Type		Room Id		level		Status			Housekeeper Name
-======================================================================
-Triple		203			 2			Occupied			NA
+=======================================================================
+Type           Room Id        Level          Status         Housekeeper    
+=======================================================================
+Triple         203            2              Occupied       NA    
 ```
 
 
@@ -590,10 +590,10 @@ Example of usage:
 Expected output:
 
 ```
-======================================================================
-Type		Room Id		level		Status			Housekeeper Name
-======================================================================
-Triple		203			 2			Vaccant			NA
+=======================================================================
+Type           Room Id        Level          Status         Housekeeper    
+=======================================================================
+Triple         203            2              Vacant         NA      
 ```
 
 
@@ -611,10 +611,10 @@ Example of usage:
 Expected output:
 
 ```
-======================================================================
-Type		Room Id		level		Status			Housekeeper Name
-======================================================================
-Triple		203			 2			Vaccant			NA
+=======================================================================
+Type           Room Id        Level          Status         Housekeeper    
+=======================================================================
+Triple         203            2              Vacant         NA    
 ```
 
 ### Check room information by level: `check level`
@@ -631,11 +631,13 @@ Example of usage:
 Expected output:
 
 ```
-Type		Room Id		level		Status			House Keeper Name
-Double		201			 2			Vacant  			jane
-Triple		202			 2			Vacant  			jane
-Triple		203			 2			Occupied			NA
-Queen		204			 2			Vacant  			NA
+=======================================================================
+Type           Room Id        Level          Status         Housekeeper    
+=======================================================================
+Double         201            2              Vacant         NA                            
+Triple         202            2              Vacant         NA                            
+Triple         203            2              Vacant         NA                            
+Queen          204            2              Vacant         NA   
 ```
 
 ### Check room information by category: `check category`
@@ -652,11 +654,11 @@ Example of usage:
 Expected output:
 
 ```
-======================================================================
-Type		Room Id		level		Status			Housekeeper Name
-======================================================================
-Queen		204			 2			Vacant  			NA
-Queen		301			 3			Occupied			jane
+=======================================================================
+Type           Room Id        Level          Status         Housekeeper    
+=======================================================================
+Queen          204            2              Vacant         NA                            
+Queen          301            3              Vacant         NA    
 ```
 
 ### Check all room information: `check all room`
@@ -672,21 +674,22 @@ Example of usage:
 Expected output:
 
 ```
-======================================================================
-Type		Room Id		level		Status			Housekeeper Name
-======================================================================
-Single		101			 1			Occupied			NA
-Single		102			 1			Vacant  			NA
-Double		103			 1			Vacant  			NA
-Double		201			 2			Vacant  			jane
-Triple		202			 2			Vacant  			jane
-Triple		203			 2			Occupied			NA
-Queen		204			 2			Vacant  			NA
-Queen		301			 3			Occupied			jane
-King		302			 3			Occupied			NA
-King		303			 3			Vacant  			NA
-Twin		401			 4			Vacant  			susan
-Twin		402			 4			Occupied			NA
+=======================================================================
+Type           Room Id        Level          Status         Housekeeper    
+=======================================================================
+Single         101            1              Vacant         NA                            
+Single         102            1              Vacant         NA                            
+Double         103            1              Vacant         NA                            
+Double         201            2              Vacant         NA                            
+Triple         202            2              Vacant         NA                            
+Triple         203            2              Vacant         NA                            
+Queen          204            2              Vacant         NA                            
+Queen          301            3              Vacant         NA                            
+King           302            3              Vacant         NA                            
+King           303            3              Vacant         NA                            
+Twin           401            4              Vacant         NA                            
+Twin           402            4              Vacant         NA                            
+
 ```
 ## Item Related Commands
 

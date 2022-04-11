@@ -17,8 +17,6 @@ import seedu.duke.command.Command;
  */
 public class CheckRoomByLevelCommand extends Command {
     private int level;
-    private static final String TABLE_HEADER = String.format("%-15s%-15s%-15s%-15s%-15s","Type",
-            "Room Id", "Level", "Status", "Housekeeper");
 
     /**
      * Extracts the room level from user input.
@@ -42,6 +40,7 @@ public class CheckRoomByLevelCommand extends Command {
      * @param listContainer The object containing the necessary data structure.
      * @param ui            The object that deals with user interface for the program.
      * @throws InvalidLevelException if the level is invalid.
+     * @return
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)
