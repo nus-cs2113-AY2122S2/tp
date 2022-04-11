@@ -251,7 +251,7 @@ MindMyMoney allows users to track their different credit cards. Credit cards are
 method, invoked when using the `/cc` flag. Additional parameters `CREDIT_CARD_NAME`, `CASHBACK` and `CARD_LIMIT` are also
 required.
 
-![add_credit_card_command_sequence_diagram](images/Add_Credit_Card_Command_Sequence_Diagram.png)   
+![add_credit_card_command_sequence_diagram](images/AddCreditCardSequence_Diagram.png)   
 Fig 9 - Add Credit Card Command Sequence Diagram
 
 The sequence diagram above shows the interactions of different classes when adding a credit card to the list.
