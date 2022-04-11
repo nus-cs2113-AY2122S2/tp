@@ -128,6 +128,31 @@ public class Item {
     }
 
     /**
+     * Returns a list of OVERDUE borrow records filtered by borrower's name (if present)
+     * and borrow status.
+     *
+     * OVERDUE records are records that have the PAST BorrowStatus and have not been returned.
+     *
+     * @param name Either an empty Optional instance or
+     *             an Optional instance containing a String name in it.
+     * @return List of borrow records and item name in string format.
+     */
+    public List<String> filterOverdueRecords(Optional<String> name) {
+        String prefix = "Name of Item: " + this.name + System.lineSeparator();
+        return borrowRecords.stream()
+                // Filter by optional name
+                .filter(record -> record.containsBorrowerName(name))
+                // Only check for PAST records
+                .filter(record -> record.isStatus(BorrowStatus.PAST))
+                // The item also needs to have isReturned == false
+                .filter(record -> record.getReturnStatus() == false)
+                // Add item name as a prefix to every record
+                .map(record -> prefix + record.toString())
+                // Convert this stream to a list
+                .collect(Collectors.toList());
+    }
+
+    /**
      * Returns the string representation of an Item when saved to storage.
      *
      * @return String representation of an item for saving.
