@@ -47,7 +47,8 @@ public class DeleteHousekeeperCommand extends Command {
      * Remove Housekeeper that is not active from the list and print out the total strength of housekeeper in the list.
      *
      * @param listContainer List of information.
-     * @param ui            The instance of the Ui class used for printing additional messages when a command is executed.
+     * @param ui            The instance of the Ui class used for printing additional messages when a command
+     *                      is executed.
      * @throws HotelLiteManagerException User given is not in housekeeper list.
      * @throws IOException               Write to file has failed.
      */
