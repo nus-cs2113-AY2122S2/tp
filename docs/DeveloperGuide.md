@@ -232,7 +232,7 @@ Sequence diagram for `deleteStaff()`:
 
 ![](diagrams/sequence/StaffManager_deleteStaff.png)
 
-Sequence diagram for `edittStaff()`:
+Sequence diagram for `editStaff()`:
 
 ![](diagrams/sequence/StaffManager_editStaff.png)
 
