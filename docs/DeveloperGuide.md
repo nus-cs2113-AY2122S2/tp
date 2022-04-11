@@ -19,11 +19,11 @@
 
 
 ## Architecture
-<p align="center">
+
 
 ![Architecture Design](team/architectureDesign/architectureDesign.jpg)
 
-</p>
+
 
 ## Design & implementation
 
@@ -463,5 +463,55 @@ Step 6. In the `CheckRoomByLevelCommand`, it will iterate for roomList and print
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+The instructions below provide a quick summary of how to manually test the functions.
+
+* [Set up and Launching the program](#set-up-and-launching-the-program)
+* [Ending the Program](#ending-the-program)
+* [Satisfaction Related Functions](#satisfaction-related-functions)
+* [Housekeeper Related Functions](#housekeeper-related-functions)
+* [Room Related Functions](#room-related-functions)
+* [Item Related Functions](#item-related-functions)
+* [Event Related Functions](#event-related-functions)
+
+---
+### Set up and Launching the program
+1. Download the JAR file 
+2. Open command terminal and go to the directory that stores the JAR file
+3. Run the application by typing: java -jar NameOfFile. NameOfFile represents
+the JAR file name
+   
+---
+### Ending the Program
+1. To end the program, type `bye`.
+
+---
+
+### Satisfaction Related Functions
+
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:-------------|:-------------------|
+|x|x  | x|
+
+---
+### Housekeeper Related Functions
+
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:-------------|:-------------------|
+|x|x  | x|
+---
+### Room Related Functions
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:-------------|:-------------------|
+|x|x  | x|
+---
+### Item Related Functions
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:-------------|:-------------------|
+|x|x  | x|
+
+---
+### Event Related Functions
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:-------------|:-------------------|
+|x|x  | x|
 
