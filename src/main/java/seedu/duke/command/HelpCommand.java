@@ -16,7 +16,7 @@ public class HelpCommand extends Command {
             + "\t 2. view satisfactions \n"
             + "\t 3. view average satisfaction \n"
             + line
-            + "\t For commands related with housekeepers, use following formats: \n"
+            + "For commands related with housekeepers, use following formats: \n"
             + "\t 1. add housekeeper NAME / AGE \n"
             + "\t 2. availability NAME / DAY(S) \n"
             + "\t 3. view recorded housekeepers \n"
