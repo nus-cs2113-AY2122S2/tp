@@ -12,26 +12,13 @@ import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_ONE;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_TWO;
 import static seedu.sherpass.constant.Message.CLEAR_NO_EXPIRED_TASK_MESSAGE;
 import static seedu.sherpass.constant.Message.CLEAR_NO_COMPLETED_TASK_MESSAGE;
+import static seedu.sherpass.constant.Message.PARTITION_LINE;
+import static seedu.sherpass.constant.Message.LS;
+import static seedu.sherpass.constant.Message.LOGO;
 
 public class Ui {
+
     private static final Scanner in = new Scanner(System.in);
-    private static final String PARTITION_LINE = "______________________________"
-            + "______________________________";
-    private static final String LS = System.lineSeparator();
-
-    private static final String LOGO = "  ____  _\n"
-            + " / ___|| |__   ___ _ __ "
-            + "_ __   __ _ ___ ___\n"
-            + " \\___ \\| '_ \\ / _ \\ '__| "
-            + "'_ \\ / _` / __/ __|\n"
-            + "  ___) | | | |  __/ |  "
-            + "| |_) | (_| \\__ \\__ \\\n"
-            + " |____/|_| |_|\\___|_|  "
-            + "| .__/ \\__,_|___/___/\n"
-            + "                       "
-            + "|_|";
-
-
 
     /**
      * Returns any user input entered by the user through

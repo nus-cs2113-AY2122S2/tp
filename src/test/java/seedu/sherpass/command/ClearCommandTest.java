@@ -16,6 +16,7 @@ import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import static seedu.sherpass.constant.Message.LS;
 import static seedu.sherpass.constant.Message.CLEAR_ALL_COMMAND_CONFIRMATION_MESSAGE;
 import static seedu.sherpass.constant.Message.CLEAR_ALL_COMMAND_CONFIRMED_MESSAGE;
 import static seedu.sherpass.constant.Message.CLEAR_ALL_COMMAND_CANCEL_MESSAGE;
@@ -28,8 +29,6 @@ import static seedu.sherpass.constant.CommandMessage.MESSAGE_USAGE_CLEAR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ClearCommandTest {
-
-    private static final String LS = System.lineSeparator();
 
     @Test
     void execute_clearEmptyList_expectNoTaskRemoved() throws IOException, InvalidInputException, TimeClashException {
