@@ -148,18 +148,17 @@ Borrow the item that you want for the duration between the start date and end da
 |:-------------:|:-------------:|:----------------:|:-------------------------------:|
 |      i/       |  ITEM_INDEX   | Positive Integer | The index of the item to borrow |
 |      q/       |   QUANTITY    | Positive Integer |  The amount of item to borrow   |
-|      s/       |  START_DATE   | Date(yyyy-MM-dd) |    The starting date of loan    |
+|      s/       |  START_DATE   | Date(yyyy-MM-dd) |     The start date of loan      |
 |      e/       |   END_DATE    | Date(yyyy-MM-dd) |      The end date of loan       |
 |      p/       | BORROWER_NAME |      String      |        Name of borrower         |
 
 **Caveats:**
 
 * `ITEM_INDEX` should be within one of the index for ItemList.
-* `QUANTITY` should be >= 0. Error will be raised if there are insufficient quantity in inventory to borrow.
+* `QUANTITY` should be >= 0.
 * The `START_DATE` and `END_DATE` must be in YYYY-MM-DD format.
 * `END_DATE` must be either the same as `START_DATE` or a later date.
 * Borrower will borrow at `START_DATE` 00:01 HRS and return at `END_DATE` 2359 HRS.
-* The `BORROWER_NAME` cannot contain punctuations.
 
 **Examples of usage:**
 ```
@@ -173,7 +172,7 @@ Borrow Quantity: 5
 
 ### List Current Borrowings: `listcb`
 
-List all items that are currently being borrowed. You can narrow down the list by entering an optional argument of the borrower's name. Results of borrowings ordered by earliest borrowing start date.
+List all items that are currently being borrowed. You can narrow down the list by entering an optional argument of the borrower's name.
 
 **Format:**
 
@@ -189,7 +188,6 @@ List all items that are currently being borrowed. You can narrow down the list b
 
 **Caveats:**
 
-* `BORROWER_NAME` must not contain punctuations.
 
 **Examples of usage:**
 
@@ -217,7 +215,7 @@ Borrow Duration: 2021-04-24 to 2021-04-30
 
 ### List Future Borrowings: `listfb`
 
-List all items that will be borrowed in the future. You can narrow down the list by entering an optional argument of the borrower's name. Results of borrowings ordered by earliest borrowing start date.
+List all items that will be borrowed in the future. You can narrow down the list by entering an optional argument of the borrower's name.
 
 **Format:**
 
@@ -233,7 +231,6 @@ List all items that will be borrowed in the future. You can narrow down the list
 
 **Caveats:**
 
-* `BORROWER_NAME` must not contain punctuations.
 
 **Examples of usage (Assuming today's date is ***2021-03-18***):**
 ```
@@ -282,7 +279,7 @@ There are no future borrowings for David.
 
 ### List Overdue Borrowings: `listob`
 
-List all items should have been returned but have yet to be. You can narrow down the list by entering an optional argument of the borrower's name. Results of borrowings ordered by earliest borrowing start date.
+List all items should have been returned but have yet to be. You can narrow down the list by entering an optional argument of the borrower's name.
 
 **Format:**
 
@@ -298,7 +295,6 @@ List all items should have been returned but have yet to be. You can narrow down
 
 **Caveats:**
 
-* `BORROWER_NAME` must not contain punctuations.
 
 **Examples of usage (Assuming today's date is ***2021-03-31***):**
 
