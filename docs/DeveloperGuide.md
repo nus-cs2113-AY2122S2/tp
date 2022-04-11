@@ -3,6 +3,7 @@
 ## Table of Content
 - [Acknowledgements](#acknowledgements)
 - [Introduction](#introduction)
+  - [Using the Developer Guide](#using-the-developer-guide)
 - [Architecture](#architecture)
 - [Design & Implementation](#design--implementation)
   - [Task Implementation](#task-implementation)
@@ -36,6 +37,12 @@ Sherpass will then compile their tasks and present it to them in a timetable. Sh
 platform for them to focus on their academic tasks through the use of timers in our study sessions. Students can use
 the time to block out time to focus on their tasks. Optimised for use via a Command Line Interface (CLI),
 users who can type fast will be able to plan out their tasks in a much quicker fashion compared to traditional GUI apps.
+
+### Using the Developer Guide
+
+This developer guide aims to equip current and future developers of Sherpass with a better understanding of the design
+and implementation of the application. This guide will also explain some design decisions that were made during
+development. 
 
 ## Architecture
 
@@ -139,7 +146,7 @@ of the following scenario.
 
 ![offset1](images/offset1.png)
 2. The user deletes the task on 7th June
-3. The user edits the task happening on 6th June to be on 10th June.
+3. The user edits the task happening on 6th June to be on 10th June with the `/repeat` flag.
 
 |                  | Result                         |
 |------------------|--------------------------------|
@@ -340,8 +347,8 @@ of how the user's input is being parsed into data that is recognised by the prog
 Here, we will assume that **Ui** will check and obtain any user input, before sending it to Main
 and then to Parser to obtain the appropriate command to execute.
 
-
 ![](images/ShowScheduleForADateSDTwo.png)
+
 
 The second diagram shown above covers the next part of the interaction, which is after
 the ShowCommand is being executed in main. It shows the sequences of interactions between
