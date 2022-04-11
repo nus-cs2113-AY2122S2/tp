@@ -270,7 +270,8 @@ Edits a lesson from the user's specified timetable based on the user input
 * **Optional parameters:** `TITLE`, `DAY_OF_WEEK`, `START_TIME`, `END_TIME`, `MODE`
     * To update the lesson's parameters with the values in user input.
     * Provide at least one optional parameter.
-* Note that meetings are non-editable.
+* Note that meetings are **non-editable**.
+* Edit that results in an invalid event (eg. overlapping event, invalid parameters' values) will be aborted.
 
 **Example of usage:**
 
