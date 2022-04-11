@@ -15,7 +15,8 @@ import static seedu.duke.parser.CliSyntax.PREFIX_END_DATE;
  */
 public class ListAvailableBorrowingsParser implements Parser<ListAvailableBorrowingsCommand> {
     
-    private final String INVALID_DATE_ORDER = "Input start date has to be before end date";
+    public static final String INVALID_DATE_ORDER = "Input start date has to be before end date";
+
     /**
      * Parses the given {@code String} of arguments in the context of the 
      * ListAvailableBorrowingsCommand and returns an ListAvailableBorrowingsCommand 

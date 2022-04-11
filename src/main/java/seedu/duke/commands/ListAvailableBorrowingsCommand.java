@@ -111,8 +111,8 @@ public class ListAvailableBorrowingsCommand extends Command {
             Item item = itemList.getItem(i);
             if (minQuantityAvailable(item) > 0) {
                 hasItem = true;
-                ui.showMessages(String.valueOf(i + 1) + "." + item.getName() + " | " + 
-                        minQuantityAvailable(item));
+                ui.showMessages(String.valueOf(i + 1) + "." + item.getName() + " | " 
+                        + minQuantityAvailable(item));
             }
         }
         if (!hasItem) {
