@@ -1,6 +1,6 @@
 # Dan Baterisna - Project Portfolio Page
 
-##Overview
+## Overview
 `MindMyMoney` (M<sup>3</sup>) is a desktop app for managing your personal finances, optimized for use via a Command Line
 Interface (CLI). You can use it to track your expenditures across multiple payment methods, calculate monthly
 expenditure, and set financial goals.
