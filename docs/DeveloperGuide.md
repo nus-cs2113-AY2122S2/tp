@@ -253,6 +253,30 @@ The above sequence diagram shows the operation of how the list goods method will
 #### Description
 Total Goods belongs as part of the Commands Class. It is used to show the total quantity of Goods Objects currently in the Warehouse.
 
+
+## Local Storage
+
+Local storage has two general functions:
+
+1. to serialize everything that needs to be saved
+2. to restore everything that was originally saved
+
+The format of the savefile is JSON.
+
+We namely save four large components:
+
+1. Unit Goods Hash Map
+2. Goods List
+3. Order List
+4. Total Capacity
+
+The keys of the JSON savefile are all defined in the src/java/seedu.simplst/jsonkeyconstants
+
+### Classes and methods for local storage
+
+
+
+
 #### Operation
 
 ![Regex Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/totalGoods.puml)
@@ -309,6 +333,7 @@ Device Requirement:
 * Supports 32-bit and 64-bit systems
 * Supports use of the Command Line Interface
 * Supports use on ***mainstream OS*** requirements as long as the above requirements are met
+* Directory where jar file is run in has read and write permissions.
 
 Application Performance:
 * Does not require internet connection; Functions offline

@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant Simplst as S
+participant Warehouse as w
+participant LocalStorage as ls
+
+create w
+S -> w
+activate w
+w -> w ++ : restoreWarehouseState()
+w -> ls ++ : readSaveFile(fp)
+ls --> w -- : Raw savefile string
+w -> w ++ : setTotalCapacity(capacity)
+w --> w -- : Boolean if successfully set
+w --> w ++ : :restoreOrders()
+w --> w -- : Boolean if successfully set
+w --> w ++ : :restoreGoods()
+w --> w -- : Boolean if successfully set
+w --> S : :HashMap
+@enduml

@@ -8,7 +8,7 @@ Class Good
 Class Order
 Class Warehouse {
 -totalCapacity : int
--{static}orderLists : ArrayList<Order>
+-orderLists : ArrayList<Order>
 -unitGoodHashMap : HashMap<String, UnitGood>
 -goodList : LinkedHashMap<String, Good>
 +addUnitGoodToInventory(String sku, String name, String description, String capacity) : void
@@ -37,9 +37,6 @@ Class Warehouse {
 -checkOrderComplete(Order order, ArrayList<Orderline> orderlines) : boolean
 -addGoodToOrder(Order order, String sku, String qty) : void
 -getUnitGoodBySku(String sku) : UnitGood
-
-
-
 }
 
 Warehouse "0..*"--> "Unit Good"
