@@ -305,6 +305,24 @@ Step 10: If there are no items with a matching name found, we would then add the
 
 :information_source: **Note:** As the Add Item, Delete Item, Update Item Pax or Update Item Name Commands have similair class and sequence diagrams, we only require a few changes to be able to use the above class and sequence diagrams to represent the Delete Item, Update Item Pax or Update Item Name Commands. The changes would be mentioned below.
 
+The `Delete Item` Command is similar to that of the `Add Item` Command with the difference being:
+1. The `Delete Item` command uses the `Item(name:String)` constructor instead of `item(name:String,pax:Int)` constructor as the `Delete Item` command only uses the `name` variable.
+2. The `writeItemListToFile` method is replaced with the `deleteItemInList` method and the `extractItemName(tokens:StringTokenizer)` and `extractItemPax(token:StringTokenizer)` methods are omitted.
+3. The `addItemToList` method is replaced with the `deleteItemInList` method;
+4. The `checkForItemDuplicates` method is removed.
+5. The `printAddItemAcknowledgementMessage` method is replaced with the `printDeleteItemAcknowledgementMessage` method.
+
+The `Update Item Pax` Command is similar to that of the `Add Item` Command with the difference being:
+1. The `addItemToList` method is replaced with the `updateItemPaxInList` method.
+2. The `checkForItemDuplicates` method is removed.
+3. The `printAddItemAcknowledgementMessage` method is replaced with the `printUpdateItemPaxAcknowledgementMessage` method.
+
+The `Update Item Name` Command is similar to that of the `Add Item` Command with the difference being:
+1. The `extractItemName(tokens)` and `extractItemPax(tokens)` methods are replaced with `extractCurrentItemName(tokens)` and `extractNewItemName(tokens)`;
+2. The `Item(name:String,pax:Int)` constructor is replaced with the `Item(oldItemName:String, newItemName:String)` constructor;
+3. The `printAddItemAcknowledgementMessage` method is replaced with the `updateItemNameInList` method.
+4. The `Update Item Name` throws an extra exception called `DuplicateItemNameException` if the `oldItemName` is equals to the `newItemName`.
+
 #### Search Item, View All Items, View Items With Zero Pax Commands
 
 
