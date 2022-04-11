@@ -272,7 +272,7 @@ As such, this application provides many functionalities to do so. The possibilit
 | v2.0    | staff    | mark the deleted dish in order | keep the order up to date       |
 
 ## Class diagram
-![](diagrams/class/all.png)
+[Click here for the class diagram.](https://github.com/AY2122S2-CS2113-T11-4/tp/blob/5ae9ae9d6d1de9f3c813fd5ce42e07cae1c42bee/docs/diagrams/class/all.png)
 
 ## Non-Functional Requirements
 
