@@ -62,11 +62,13 @@ with the exception of `Loading data`
 * Above average bugs found in PE-D
 * Assisted in solving issues posted on [forums](https://github.com/nus-cs2113-AY2122S2/forum/issues/65)
 
+<div style="page-break-after: always;"></div>
+
 ## Reproduced documentation contribution
 
 Intra-document links (links to another section of the document) will not be working in this section.
 
-### Reproduced [UG](../UserGuide.md) contribution
+### Reproduced [User Guide](../UserGuide.md) contribution
 
 #### Show financial summary: `overview`
 
@@ -140,7 +142,9 @@ the [features](#features) section.
 | [Searching for details](#searching-for-details-codefindcode)                | find /d __ [ /c __ ] <br/>e.g.<br/> `> find salary` <br/> `> find sugar /c 4`                                                                                       |
 | [Exit the program](#exit-codebyecode)                                       | bye                                                                                                                                                                 |
 
-### Reproduced [DG](../DeveloperGuide) contribution
+<div style="page-break-after: always;"></div>
+
+### Reproduced [Developer Guide](../DeveloperGuide) contribution
 
 #### Family Component
 
