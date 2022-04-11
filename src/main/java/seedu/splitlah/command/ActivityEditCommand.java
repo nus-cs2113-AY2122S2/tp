@@ -12,7 +12,6 @@ import seedu.splitlah.data.Person;
 import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 

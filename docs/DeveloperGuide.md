@@ -535,7 +535,7 @@ The general workflow of the `activity /edit` command is as follows:
    does not wish to edit.
 8. `ActivityEditCommand#updateCostAndCostList` and `ActivityEditCommand#validateCostListAndInvolvedList` are called to 
    create a list of costs and validate them. These costs are necessary to recreate the activity after deleting it.
-9. `ActivityEditCommand#checkIfNoChangesMade` checks all details of the edited activity. If none of them are different from
+9. `ActivityEditCommand#checkIfNoChangesMade` is called to check all details of the edited activity. If none of them are different from
    the old activity, an `InvalidDataException` is thrown and a message is printed using `TextUI#printlnMessage` to inform the 
    user that no changes were made to the activity.
 10. `ActivityEditCommand#addAllActivityCost` is called to add the respective costs to each `Person` object involved in the activity.
