@@ -68,9 +68,8 @@ public class LostCommand extends Command {
             ui.showMessages(Messages.REPORTED_LOST_MESSAGE);
             System.out.println(lostItem);
         } else if (updatedItemQuantity == 0) {
-            System.out.println("delete command item index is " + itemIndex);
-            DeleteCommand deleteCommand = new DeleteCommand(itemIndex);
-            deleteCommand.execute(itemList, ui);
+            itemList.removeItem(itemIndex);
+            ui.showMessages(lostItem + " has been deleted.");
             ui.showMessages(Messages.REPORTED_LOST_AND_DELETED_MESSAGE);
         } else {
             throw new InvMgrException(Messages.LOST_ERROR_MESSAGE);
