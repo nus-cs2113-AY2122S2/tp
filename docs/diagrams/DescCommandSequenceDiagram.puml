@@ -1,5 +1,5 @@
 @startuml
-
+hide footbox
 skinparam sequenceStereotypeFontColor red
 
 Participant ":InvMgr" as InvMgr

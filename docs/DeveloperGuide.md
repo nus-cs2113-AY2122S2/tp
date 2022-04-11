@@ -164,6 +164,8 @@ The user starts by typing an add command. The example used in the diagram above 
 
 The above diagram shows the sequence diagram for retrieving the description of an item.
 
+
+
 For a user who is unaware of what an item is about, he/she can enter the command eg. `desc 2` command to extract the description for the second item in the inventory list. This command is interpreted by the `Parser` and a `DescCommand` is returned to `InvMgr`. `InvMgr` calls the execute command of `DescCommand` which retrieves the item's information from the `ItemList` and then outputs them into the `Ui` for the user to see.
 
 
