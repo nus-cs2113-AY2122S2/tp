@@ -40,6 +40,11 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
                 We used the `Serializable` class in `java` to help us simplify file storage.
 
 #### Enhancements to existing features:
+* Separated dependency of parser class from command class by creating Command Parser classes for certain features.
+  * These include [SessionCreateCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/SessionCreateCommandParser.java),
+    [SessionDeleteCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/SessionDeleteCommandParser.java), 
+    [SessionEditCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/SessionEditCommandParser.java) and
+    [SessionListCommandParser](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/commandparser/SessionListCommandParser.java) classes.
 * [PersonList](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/data/PersonList.java)
   * Implemented a wrapper class for storing a list of Person objects.
 * Integration of [`TableFormatter`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/ui/TableFormatter.java) class to
