@@ -34,6 +34,6 @@ List of available goods with its quantity:
 Another command?
 Order 1 already completed
 Another command?
-Output Directory created at D:\school\cs2113t\tp\build\libs\output!
+Output Directory created at /home/runner/work/tp/tp/text-ui-test/output!
 Warehouse information succesfully stored in output/WAREHOUSE.json
 Thanks for using Simplst 2.1!
