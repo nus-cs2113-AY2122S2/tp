@@ -109,9 +109,16 @@ The `UI` component
 
 ### Data Component
 
-![stuff](todo)
+![ItemListClassDiagram](img/ItemListClassDiagram.png)
 
-The above diagram todo...
+The above diagram shows the class diagram for an `ItemList`.
+
+The `ItemList` component represents an inventory list:
+- An `ItemList` contains 0 or more `Item`.
+  - Example of `Item`: JBX Speakers.
+- An `Item` contains 0 or more `BorrowRecord`.
+- A `BorrowRecord` contains only 1 `BorrowStatus`.
+  - `BorrowStatus`: Whether a borrow record is still current, or in the future or happened already in the past.
 
 ### Parser Components
 
@@ -125,11 +132,13 @@ How the parsing works:
 
 ### Command Component
 
-![CommandClassDiagram](img/CommandClassDiagram.png)
+![CommandClassDiagram1](img/CommandClassDiagram1.png)
+![CommandClassDiagram2](img/CommandClassDiagram2.png)
+![CommandClassDiagram2](img/CommandClassDiagram3.png)
 
 The above diagram shows the class diagram for the `Command` component.
 
-`Command` is an abstract class that sets certain commonalities that is implemented across all types of commands - `AddCommand`, `DescCommand`, `ListCommand`, `DeleteCommand`, `HelpCommand`, `ExitCommand`. Each of these classes have to override the `Command`'s `execute()` method as each command has a different execution. For example, `AddCommand` will be focused on adding an item to an inventory list whereas `DescCommand` will be about retrieving information from the inventory list.
+`Command` is an abstract class that sets certain commonalities that is implemented across all types of commands eg. `AddCommand`, `DescCommand`, `ListCommand`, etc. Each of these command classes have to override `Command`'s `execute()` method as each command has a different execution. For example, `AddCommand` will be focused on adding an item to an inventory list whereas `DescCommand` will be about retrieving information from the inventory list.
 
 ### Storage Component
 
@@ -145,6 +154,9 @@ The above diagram shows the class diagram for the `Storage` component.
 ## Implementation
 
 ### Add Command
+
+**Normal function**
+
 ![AddCommandSequenceDiagram](img/AddCommandSequenceDiagram.png)
 
 The above diagram shows the sequence diagram of the addition of an item.
@@ -164,7 +176,18 @@ The user starts by typing an add command. The example used in the diagram above 
 
 The above diagram shows the sequence diagram for retrieving the description of an item.
 
-For a user who is unaware of what an item is about, he/she can enter the command eg. `desc 2` command to extract the description for the second item in the inventory list. This command is interpreted by the `Parser` and a `DescCommand` is returned to `InvMgr`. `InvMgr` calls the execute command of `DescCommand` which retrieves the item's information from the `ItemList` and then outputs them into the `Ui` for the user to see.
+The user starts by typing a desc command. The example used in the diagram above is to retrieve the description of an item with the index `1`, based on the list when the user types the `list` command.
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is identified to start with the word `desc` and identifies the index given by the user ie. `1`.
+3. `parse()` then generates a new `DescCommand` with the index as the argument. The new `DescCommand` is returned to the `run` method.
+4. The `run()` method then calls on the `execute()` method in `DescCommand` which retrieves the specified `item` from `itemList`.
+5. With the `item` object, we are able to retrieve the item's description and pass it as a String to be printed by `ui` using `showMessages` method.
+
+**Error handling**
+
+Exceptions are thrown/handled for the following:
+1. When the user enters an index for an item that is not in the list (e.g. `100000` when item 100000 does not exist).
 
 ### Help Command
 
@@ -348,6 +371,32 @@ The user starts by typing a `search` command.
 Exceptions are thrown/handled for the following:
 
 1. When the user enters a command without any name or description (missing all of `n/ d/`). This is done in `SearchCommandParser`.
+
+### Borrow Command
+
+**Normal function**
+![BorrowCommandSequenceDiagram](img/BorrowCommandSequenceDiagram.png)
+
+The above diagrams show the sequence diagram for borrowing an item.
+
+The user starts by typing a `borrow` command. eg. `borrow i/1 q/5 s/2022-03-21 e/2022-03-25 p/John Smith`
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is identified to start with the word `borrow` and identifies the other arguments `index`, `quantity`, `startDate`, `endDate`, `borrowerName`.
+3. `parse()` then generates a new `BorrowCommand` with the identified arguments. The new `BorrowCommand` is returned to the `run` method.
+4. The `run()` method calls the `execute()` method in `BorrowCommand`.
+5. A new `BorrowRecord` is created with the borrow details recorded eg. `quantity`, `startDate`, `endDate`, `borrowerName`.
+6. To know which item this `BorrowRecord` belongs to, we use the item `index` given by the user to retrieve the `item` from `itemList`. 
+7. The retrieved `item` object calls its own addBorrowRecord() method to attach the new borrow record to the list of records the item is holding.
+8. Once successful, a message will be sent to the UI using `showMessages` method to inform the user.
+
+**Error handling**
+
+Exceptions are thrown/handled for the following:
+1. When the user enters an index for an item that is not in the list (e.g. `100000` when item 100000 does not exist).
+2. If there is insufficient quantity in the inventory to borrow to the user for the given dates.
+3. If there are any missing arguments `i/`, `q/`, `s/`, `e/`, `p/`.
+4. if borrow duration is longer than the maximum borrow duration of 7 days.
+5. If `startDate` > `endDate`. Ie. Dates need to be in non-descending order.
 
 ### Storage
 

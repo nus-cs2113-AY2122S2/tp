@@ -1,5 +1,5 @@
 @startuml
-
+hide footbox
 skinparam sequenceStereotypeFontColor red
 
 Participant ":InvMgr" as InvMgr
@@ -7,7 +7,6 @@ Participant "Parser" as Parser <<class>>
 Participant "inputCommand:DescCommand" as DescCommand
 Participant "itemList:ItemList" as ItemList
 Participant "ui:Ui" as Ui
-Participant "storage:Storage" as Storage
 
 InvMgr -> InvMgr: run
 activate InvMgr
@@ -30,10 +29,6 @@ activate InvMgr
         activate Ui
             return
 
-        return
-
-    InvMgr -> Storage: writeData(ArrayList)
-    activate Storage
         return
 
 deactivate InvMgr

@@ -56,7 +56,7 @@ public class BorrowCommandParser implements Parser<BorrowCommand> {
     }
 
     /**
-     * Throws exception if startDate and endDate are in ascending order.
+     * Throws exception if startDate and endDate are in the wrong order.
      *
      * @param startDate Start date of borrowing.
      * @param endDate End date of borrowing.
