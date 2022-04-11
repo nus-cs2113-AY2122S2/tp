@@ -7,7 +7,7 @@ participant affectedTasks as "affectedTasks:ArrayList<Task>"
 participant tempTasks as "tempTasks:ArrayList<Task>"
 participant currentTask as "currentTask:Task"
 participant newTask as "updatedTask:Task"
-participant TaskUtil as "<font color=red>**<<class>>**\nTaskUtil"
+participant TaskUtil as "<font color=red>**<<class>>** \nTaskUtil"
 
 [-> TaskList ++ : editRepeatedTasks()
 TaskList -> TaskList ++ : getAffectedTasks()

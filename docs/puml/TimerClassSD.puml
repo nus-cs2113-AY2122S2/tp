@@ -2,7 +2,7 @@
 
 hide footbox
 participant StudyCommand as ":StudyCommand"
-participant Parser as "<<class>>\nTimerParser"
+participant Parser as "<font color=red>**<<class>>** \nTimerParser"
 participant TimerLogic as ":TimerLogic"
 participant Timer as ":Countdown"
 

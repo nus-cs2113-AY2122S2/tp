@@ -214,7 +214,8 @@ Sequence diagram for `StudyCommand` for receiving input from `Ui`:
 
 Sequence diagram for `Timer` when user starts and stops a timer:
 
-![](images/TimerClassSD.png)
+![TimerClassSD](images/TimerClassSD.png)
+
 
 The diagram above depicts the process when user calls start and stop (in step 2 and 3 below). All the methods
 called by Timer are in parallel with other commands, since `Timer` is in a separate thread. For simplicity’s
@@ -331,7 +332,7 @@ Below is the overall sequence, represented by three sequence diagrams, showing w
 as the user enters a command to see the schedule (timetable) for 25th May 2022:
 
 
-![](images/ShowScheduleForADateSDPartOne.png)
+![](images/ShowScheduleForADateSDOne.png)
 
 The first diagram covers the interactions between the Parser component,
 the Timetable Parser, as well as the ShowCommand that is instantiated. It details
@@ -339,7 +340,7 @@ of how the user's input is being parsed into data that is recognised by the prog
 Here, we will assume that **Ui** will check and obtain any user input, before sending it to Main
 and then to Parser to obtain the appropriate command to execute.
 
-![](images/ShowScheduleForADateSDPartTwo.png)
+![](images/ShowScheduleForADateSDTwo.png)
 
 
 The second diagram shown above covers the next part of the interaction, which is after
@@ -347,7 +348,7 @@ the ShowCommand is being executed in main. It shows the sequences of interaction
 the ShowCommand, Timetable, TimetableLogic and TimetablePrinting, in order to print out the timetable 
 the user has requested to view.
 
-![](images/ShowScheduleForADateSDPartThree.png)
+![](images/ShowScheduleForADateSDThree.png)
 
 The last sequence diagram shows the inner details behind the printing of the timetable, which
 follows the interactions between Timetable, TimetablePrinting and Ui.
