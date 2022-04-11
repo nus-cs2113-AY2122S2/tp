@@ -280,7 +280,7 @@ invokes the`HousekeeperFileManager#save()` method.
 ![Sequence](team/falicia_deleteHousekeeperCommand/sequenceDeleteHousekeeperFinal.jpg)
 
 ### Item Related Commands
-This section showcases how the various item related commands such as Add, Search Item Commands are implemented.
+This section showcases how some of the various item related commands such as Add, Search Item Commands are implemented.
 
 #### Add Item, Delete Item, Update Item Pax, Update Item Name Command
 The Add Item, Delete Item, Update Item Pax, Update Item Name Commands have similiar class and sequence diagrams with the exception of some differing methods for each  command.
@@ -333,13 +333,30 @@ The `Update Item Name` Command is similar to that of the `Add Item` Command with
 3. The `printAddItemAcknowledgementMessage` method is replaced with the `updateItemNameInList` method.
 4. The `Update Item Name` throws an extra exception called `DuplicateItemNameException` if the `oldItemName` is equals to the `newItemName`.
 
-#### Search Item, View All Items, View Items With Zero Pax Commands
+#### Search Item Commands
+Below is the class diagram showcasing how the classes interact with each other when executing the Search Item Command.
+![alt text](team/SiewYangZhi_searchItemCommand/SearchItemCommandClassDiagram.png)
+:information_source: **Note:** : This class diagram omits the details of some classes involved, like the Duke, CommandParser and Command class
 
+Below is the sequence diagram which illustrates the process when an `Search Item` Command `Search Item Toilet Roll` is executed.
+![alt text](team/SiewYangZhi_searchItemCommand/SearchItemCommandSequenceDiagram.png)
+:information_source: **Note:** : This sequence diagram omits some of the more trivial details such as the getters and setters methods involved.
 
+Step 1: The user enters the `Search Item Toilet Roll` command to search for an item in the item list whose item name contains the string `Toilet Roll`. The `parse` method of `CommandParser` is called and the user input `Search Item Toilet Roll` is passed to it.
 
+Step 2: The `parse` method would identify the user input as a Search Item Command as the user input starts with `Search Item`. It would then remove `Search Item` from the user input causing the user input to be just `Toilet Roll`. The `parse` method would then call the constructor of `SearchItemCommand` and pass it `Toilet Roll`.
 
+Step 3:  A `SearchItemCommand` object would be created and it would contain the keyword `Toilet Roll`. The `SearchItemCommand` object would be passed back to the `parse` method of `CommandParser`.
 
+Step 5: The `parse` method would then call the `execute` method of `SearchItemCommand`. The `execute` method would then call the `getItemList` method of the `ListContainer` to get the `Item List` object stored within the `ListContainer`.
 
+Step 6: The `execute` method of `SearchItemCommand` would then call the `findItemsInList` method of the `Item List` object which would return an `Item List` object called listOfMatchingItems to the execute method.
+
+Step 7: The `execute` method would then call the `getSize` method of listOfMatchingItems.
+
+Step 8: If the `getSize` method returns 0 then the `execute` method would call the `printNoItemsFoundInListAcknowledgementMessage` method of the `UI` class which would print a message informing the user that there is no item within the item list whose item name contains their keyword. Step 9 is skipped.
+
+Step 9: If the `getSize` method returns an integer that is not zero then the `execute` method would call the `printItemList` method of the `UI` class which would print out the item name and pax of those items in the item list whose item name contains the keyword.
 
 
 ### check room information by level
@@ -378,8 +395,34 @@ Step 6. In the `CheckRoomByLevelCommand`, it will iterate for roomList and print
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|Hotel Manager|Add the items inside the Inventory|record the items that are in the inventory|
+|v1.0|Hotel Manager|Update the items details inside the inventory|ensure the information of items in the inventory are up to date|
+|v1.0|Hotel Manager|View the items inside the inventory along with its paxs|know what are the items currently in the inventory|
+|v1.0|Hotel Manager|View the items inside the inventory with a pax of 0|quickly identify the items that need to be replenish|
+|v1.0|Hotel Manager|Add housekeeper profile|save a record of current housekeepers|
+|v1.0|Hotel Manager|Add housekeeper availabilities|record the availability of the housekeepers|
+|v1.0|Hotel Manager|View housekeeper availabilities|quickly allocate the shift times to each housekeepers|
+|v1.0|Hotel Manager|Assign housekeeper to a room|keep a record of which housekeeper is currently assigned to which room|
+|v1.0|Hotel Manager|View where the housekeeper is assigned to|ensure that there is a maximum of 2 housekeepers assigned to each floor|
+|v1.0|Hotel Manager|Update room vacancy status|keep a record of which rooms are currently occupied |
+|v1.0|Hotel Manager|View room vacancy status|identify how many rooms are vacant per floor inorder to determine how many housekeeper will be assigned to each floor|
+|v1.0|Hotel Manager|View number of vacant rooms per category|quickly determine if the type of room a guest wants is available|
+|v1.0|Hotel Manager|View housekeeper profile|know who are the current housekeepers as well as the total number of housekeepers to prevent over-hiring|
+|v1.0|Hotel Manager|Add housekeeper performance|save a record of each housekeepers performance|
+|v1.0|Hotel Manager|Add housekeeper performance|save a record of each housekeepers performance|
+|v1.0|Hotel Manager|View housekeeper performance|know who are the under-performing employees |
+|v1.0|Hotel Manager|Add each customer satisfaction|record the average satisfaction level of the customers|
+|v1.0|Hotel Manager|View overall customer satisfaction|ensure that the customers are satisfied and improve hotel's service accordingly|
+|v2.0|Hotel Manager|Add events happening |keep track of events happening in the hotel|
+|v2.0|Hotel Manager|View the list of all events|know which events are happening where|
+|v2.0|Hotel Manager|Delete an event| update the list of events as circumstances change|
+|v2.0|Hotel Manager|Update every housekeeper age when a new year begins|easily determine which housekeeper is over the age limit and have an updated age list of the housekeeper|
+|v2.0|Hotel Manager|Delete housekeeper's profile from list|keep track of active Housekeepers|
+|v2.0|Hotel Manager|Reset the availability of housekeeper| re-enter every housekeeper's available at the start of each week|
+|v2.0|Hotel Manager|View housekeepers available from Monday to Sunday|determine which days have no available housekeeper|
+|v2.0|Hotel Manager|Search for the items inside the item list using a keyword|quickly find the items I want in the item list quickly and easily without having to scroll through the entire item list|
+|v2.0|Hotel Manager|View overall customer satisfaction|ensure that the customers are satisfied and improve hotel's service accordingly|
+|v2.0|Hotel Manager|View housekeeper performance| know who are the under-performing employees|
 
 ## Non-Functional Requirements
 

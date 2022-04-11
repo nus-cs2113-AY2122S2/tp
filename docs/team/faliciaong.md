@@ -81,8 +81,8 @@ Given below are my contribution to the projects:
 
 
 * __Contribution to DG__:
-    * Create a Class Diagram for add housekeeper command
-    * Create a Sequence Diagram for
+    * Consolidate all user stories into DG.
+    * Create a Sequence Diagram and Class Diagram for
         * Add housekeeper command
         * Delete housekeeper command
 
@@ -107,6 +107,6 @@ Given below are my contribution to the projects:
     * Suggested and review other team's DG
          * [Reviewed Group T09-3](https://github.com/nus-cs2113-AY2122S2/tp/pull/3/files#diff-1a95edf069a4136e9cb71bee758b0dc86996f6051f0d438ec2c424557de7160b)
          * [Reviewed Group F12-2](https://github.com/nus-cs2113-AY2122S2/tp/pull/21/files#diff-1a95edf069a4136e9cb71bee758b0dc86996f6051f0d438ec2c424557de7160b)
-    
-    
-    
+    * Reviewed IP project PRs
+         * [ChengXu PR](https://github.com/nus-cs2113-AY2122S2/ip/pull/39)
+         * [Mu Changrui PR](https://github.com/nus-cs2113-AY2122S2/ip/pull/4)
