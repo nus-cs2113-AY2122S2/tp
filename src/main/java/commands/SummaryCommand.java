@@ -89,9 +89,9 @@ public class SummaryCommand extends Command {
                 flag=1;
                 Subscription s = (Subscription) record;
                 if (s.getName().length()>20) {
-                    System.out.printf("%20s %20s %13s %13s", " ", s.getName().substring(0,17) + "...", s.getPrice(), s.getDate());
+                    System.out.printf("%20s %20s %13s %13s %13s", " ", s.getName().substring(0,17) + "...", s.getPrice(), s.getDate(), s.getRenewal());
                 } else {
-                    System.out.printf("%20s %20s %13s %13s", " ", s.getName(), s.getPrice(), s.getDate());
+                    System.out.printf("%20s %20s %13s %13s %13s", " ", s.getName(), s.getPrice(), s.getDate(), s.getRenewal());
                 }
                 System.out.println();
                 ExpenseManager.addToSubscriptionExpense(s.getPrice());
