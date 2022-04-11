@@ -4,15 +4,12 @@ hide footbox
 skinparam guillemet false
 skinparam sequenceStereotypeFontColor red
 skinparam sequenceStereotypeFontStyle bold
+skinparam SequenceReferenceBackgroundColor pink
 
 Participant ":InvMgr" as invmgr
 Participant "InputParser" as parser <<class>>
 Participant "CancelFutureBorrowingsParser" as cancelparser <<class>>
 Participant ":CancelFutureBorrowingsCommand" as cancelcmd
-Participant "records:ArrayList<BorrowRecord>" as rmvrcd
-Participant "items:ArrayList<Item>" as itmlst
-Participant "item:Item" as itm
-Participant "itemRecords:ArrayList<borrowRecord>" as itmrcd
 Participant "ui:Ui" as ui
 
 activate invmgr
@@ -41,21 +38,9 @@ cancelcmd -> cancelcmd:getItems(borrowerName, itemList)
 activate cancelcmd
 return items
 
-cancelcmd -> rmvrcd:get(index)
-activate rmvrcd
-return removeRecord
-
-cancelcmd -> itmlst:get(index)
-activate itmlst
-return item
-
-cancelcmd -> itm:getBorrowRecords()
-activate itm
-return itemRecords
-
-cancelcmd -> itmrcd:remove(removeRecord)
-activate itmrcd
-return
+ref over cancelcmd
+remove record in BorrowRecord
+end ref
 
 cancelcmd -> ui:showMessages()
 activate ui

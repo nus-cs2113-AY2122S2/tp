@@ -207,6 +207,7 @@ The user starts by typing a `listab s/STARTDATE e/ENDDATE` command.
 
 ### Cancel Future Borrowings Command
 ![CancelFutureBorrowingsSequenceDiagram](img/CancelFutureBorrowingsSequenceDiagram.png)
+![CancelFutureBorrowingsRef](img/CancelFutureBorrowingsRef.png)
 
 The above diagram shows the sequence diagram of cancelling future reservations of items
 
