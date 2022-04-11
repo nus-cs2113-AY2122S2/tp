@@ -11,9 +11,12 @@ import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.ListCurrentBorrowingsCommand;
 import seedu.duke.commands.SearchCommand;
+import seedu.duke.commands.ReturnCommand; 
+import seedu.duke.commands.LostCommand;
 import seedu.duke.commands.ListOverdueBorrowingsCommand;
 import seedu.duke.commands.ListFutureBorrowingsCommand;
 import seedu.duke.commands.ListAvailableBorrowingsCommand;
+import seedu.duke.commands.CancelFutureBorrowingsCommand;
 
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.common.Messages;
@@ -75,12 +78,21 @@ public class InputParser {
 
         case ListFutureBorrowingsCommand.COMMAND_WORD:
             return new ListFutureBorrowingsParser().parse(arguments);
+        
+        case ReturnCommand.COMMAND_WORD:
+            return new ReturnCommandParser().parse(arguments);
+        
+        case CancelFutureBorrowingsCommand.COMMAND_WORD:
+            return new CancelFutureBorrowingsParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case LostCommand.COMMAND_WORD:
+            return new LostCommandParser().parse(arguments);
 
         default:
             throw new InvMgrException(Messages.INVALID_COMMAND);
