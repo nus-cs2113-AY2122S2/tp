@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+participant Warehouse as w
+
+autonumber
+
+loop o in ja
+
+@enduml

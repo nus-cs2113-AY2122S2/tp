@@ -248,13 +248,19 @@ The keys of the JSON savefile are all defined in the src/java/seedu.simplst/json
 ### Classes and methods for local storage
 
 #### Warehouse class
+
 ![WarehouseLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Warehouse.puml)
 
 The entry point to saving state is saveWarehouseState(), and the entry point to restoring state is
 restoreWarehouseState().
 
+
 #### Order class
 ![OrderLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Order.puml)
+
+##### Order serialize
+![Order Serialize Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Order.puml)
+
 
 #### Orderline class
 ![OrderlineLS Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/LocalStorage/Orderline.puml)
