@@ -197,12 +197,17 @@ public class AddCommandInputTests {
 
     /**
      * Checks if user input of credit card name is valid.
-     * Credit Card name as "Cash" and that already exist in the list are not accepted.
+     * Credit Card name that is empty, as "Cash" and that already exist in the list are not accepted.
      *
      * @throws MindMyMoneyException when Credit Card name is cash or has a
      */
     public static void testCreditCardName(String inputCreditCardName, CreditCardList creditCardList)
         throws MindMyMoneyException {
+        if (inputCreditCardName.equalsIgnoreCase("")) {
+            throw new MindMyMoneyException("Credit card name cannot be empty!");
+        }
+        assert inputCreditCardName != null : "Credit Card name should not be empty.";
+
         if (inputCreditCardName.equalsIgnoreCase("cash")) {
             throw new MindMyMoneyException("Credit card name cannot be abbreviated as `Cash`.");
         }
