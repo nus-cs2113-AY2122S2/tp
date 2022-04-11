@@ -31,6 +31,7 @@ public class ViewItemsWithZeroPaxCommand extends Command {
         ItemList listOfItemsWithZeroPax = listOfItems.findItemsWithZeroPaxInList();
         if (listOfItems.getSize() == 0) {
             ui.printNoItemsFoundInListAcknowledgementMessage();
+            return;
         }
         ui.printItemList(listOfItemsWithZeroPax);
     }
