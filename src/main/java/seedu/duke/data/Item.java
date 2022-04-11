@@ -115,6 +115,33 @@ public class Item {
     }
 
     /**
+     * Returns a list of OVERDUE borrow records filtered by borrower's name (if present)
+     * and borrow status.
+     *
+     * <p>
+     *     OVERDUE records are records that have the PAST BorrowStatus and have not been returned.
+     * </p>
+     *
+     * @param name Either an empty Optional instance or
+     *             an Optional instance containing a String name in it.
+     * @return List of borrow records and item name in string format.
+     */
+    public List<String> filterOverdueRecords(Optional<String> name) {
+        String prefix = "Name of Item: " + this.name + System.lineSeparator();
+        return borrowRecords.stream()
+                // Filter by optional name
+                .filter(record -> record.containsBorrowerName(name))
+                // Only check for PAST records
+                .filter(record -> record.isStatus(BorrowStatus.PAST))
+                // The item also needs to have isReturned == false
+                .filter(record -> record.getReturnStatus() == false)
+                // Add item name as a prefix to every record
+                .map(record -> prefix + record.toString())
+                // Convert this stream to a list
+                .collect(Collectors.toList());
+    }
+
+    /**
      * Returns the string representation of an Item when saved to storage.
      *
      * @return String representation of an item for saving.
@@ -129,6 +156,12 @@ public class Item {
         return output;
     }
 
+    /**
+     * Returns a more detailed view of the Item.
+     * Typically used in EditCommand and SearchCommand.
+     *
+     * @return more detailed String representation of an item.
+     */
     public String toDetailedString() {
         if (this.description.length() > 15) {
             return String.format("%s | %d | %s", this.name, this.quantity, this.description.substring(0, 14) + "...");
@@ -136,6 +169,12 @@ public class Item {
         return String.format("%s | %d | %s", this.name, this.quantity, this.description);
     }
 
+    /**
+     * Used to check equality between two Items.
+     *
+     * @param other the Object to compare this Item against.
+     * @return true if equals, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -152,6 +191,14 @@ public class Item {
         return false;
     }
 
+    /**
+     * Used to clone an Item.
+     * Cloneable is frowned upon, see:
+     * https://www.artima.com/articles/josh-bloch-on-design#part13
+     *
+     * @param item the Item to clone.
+     * @return an Item that is the copy of {@code item}.
+     */
     public static Item copyItem(Item item) {
         String name = item.getName();
         int quantity = item.getQuantity();

@@ -9,6 +9,11 @@ package "Storage Component" <<Rectangle>> {
     class Gson
 }
 
+package "Data Component" <<Rectangle>> {
+    class ItemList
+    class List<Item>
+}
+
 class InvMgr {
     - storage: Storage
     - itemList: ItemList
@@ -20,21 +25,30 @@ class InvMgr {
 class Storage {
     - filePath:String
     - dataPath: Path
-    + load(): ArrayList<Item>
-    + save(itemList: ArrayList<Item>)
+    + load(): List<Item>
+    + save(itemList: List<Item>)
     - validatePathExists(filePath: String)
-
 }
 
 class Gson {
 
 }
 
-class ArrayList<Item> {
+class ItemList {
+
+}
+
+
+class List<Item> {
 
 }
 
 InvMgr -right-> "1" Storage
+InvMgr -left-> "1" ItemList
+
 Storage -[dashed]right-> Gson: uses
-Gson -[dashed]-> ArrayList: serialises to & deserialises >
+
+Gson -[dashed]left-> List: serialises to & deserialises >
+
+ItemList --> "1" List
 @enduml

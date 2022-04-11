@@ -35,12 +35,11 @@ public class LostCommand extends Command {
         this.itemQuantity = itemQuantity;
     }
 
-    protected static boolean checkItemListSize() {
-        if (ItemList.getSize() == 0) {
+    protected boolean checkItemListSize(ItemList itemList) {
+        if (itemList.getSize() == 0) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -52,7 +51,7 @@ public class LostCommand extends Command {
      */
     @Override
     public void execute(ItemList itemList, Ui ui) throws InvMgrException {
-        boolean isEmptyItemList = checkItemListSize();
+        boolean isEmptyItemList = checkItemListSize(itemList);
         if (isEmptyItemList) {
             throw new InvMgrException(Messages.EMPTY_ITEM_LIST_MESSAGE);
         }

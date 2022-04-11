@@ -4,7 +4,6 @@ import seedu.duke.commands.SearchCommand;
 import seedu.duke.common.Messages;
 import seedu.duke.exceptions.InvMgrException;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -19,7 +18,8 @@ public class SearchCommandParser implements Parser<SearchCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the SearchCommand
      * and returns an SearchCommand object for execution.
-     * @throws InvMgrException if the user input does not conform the expected format
+     *
+     * @throws InvMgrException if the user input does not conform the expected format.
      */
     public SearchCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION);
@@ -38,9 +38,9 @@ public class SearchCommandParser implements Parser<SearchCommand> {
 
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * Returns true if any one of the prefixes contains non-empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
-     * For SearchCommand, at least one of PREFIX_NAME, PREFIX_QUANTITY, and PREFIX_DESCRIPTION is needed.
+     * For SearchCommand, at least one of PREFIX_NAME and PREFIX_DESCRIPTION is needed.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix ->
@@ -48,6 +48,12 @@ public class SearchCommandParser implements Parser<SearchCommand> {
                 && !argumentMultimap.getValue(prefix).get().equals(""));
     }
 
+    /**
+     * Converts 0-length {@code Optional<String>} to an empty {@code Optional}.
+     *
+     * @param optionalStr the {@code Optional<String>} to check.
+     * @return the original {@code optionalStr}, or an empty {@code Optional}.
+     */
     private static Optional<String> convertEmptyStringToEmptyOptional(Optional<String> optionalStr) {
         if (optionalStr.isPresent() && optionalStr.get().equals("")) {
             return Optional.empty();
