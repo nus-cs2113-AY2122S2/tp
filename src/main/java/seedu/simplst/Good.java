@@ -1,5 +1,7 @@
 package seedu.simplst;
 
+import org.json.simple.JSONObject;
+import seedu.simplst.jsonkeyconstants.GoodKeys;
 import util.exceptions.LargeQuantityException;
 
 /**
@@ -56,16 +58,16 @@ public class Good extends UnitGood {
         int capacityUnit = 0;
 
         switch (this.getCapacity()) {
-        case LARGE:
-            capacityUnit = 3;
-            break;
-        case MEDIUM:
-            capacityUnit = 2;
-            break;
-        case SMALL:
-            capacityUnit = 1;
-            break;
-        default:
+            case LARGE:
+                capacityUnit = 3;
+                break;
+            case MEDIUM:
+                capacityUnit = 2;
+                break;
+            case SMALL:
+                capacityUnit = 1;
+                break;
+            default:
         }
 
         return capacityUnit * quantity;
@@ -75,4 +77,18 @@ public class Good extends UnitGood {
     public String toString() {
         return super.toString() + " [Qty: " + getQuantity() + "]";
     }
+
+    public JSONObject serialize() {
+        JSONObject jo = super.serialize();
+        jo.put(GoodKeys.quantity, this.quantity);
+        return jo;
+    }
+
+    public static Good restoreGood(JSONObject jo) {
+        UnitGood ug = UnitGood.restoreUnitGood(jo);
+        String qty = jo.get(GoodKeys.quantity).toString();
+        Good cur = new Good(ug, Integer.parseInt(qty));
+        return cur;
+    }
+
 }

@@ -2,11 +2,7 @@ package seedu.simplst.parsers;
 
 import seedu.simplst.MatchKeywords;
 import seedu.simplst.Warehouse;
-import util.exceptions.InvalidFileException;
-import util.exceptions.InvalidObjectType;
-import util.exceptions.ItemDoesNotExistException;
-import util.exceptions.UnitTestException;
-import util.exceptions.WrongCommandException;
+import util.exceptions.*;
 
 import java.util.HashMap;
 
@@ -14,13 +10,15 @@ public class AddParser extends CommandParser {
     public AddParser(Warehouse warehouse) {
         super(warehouse);
     }
-
+    /*For testing*/
     public AddParser(Warehouse warehouse, String userInput) {
         super(warehouse);
         this.userInput = userInput;
     }
 
-    public void initExtractParams() {
+
+    @Override
+    public void initExtractParams() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[ugbo]{1,2})/";
@@ -28,7 +26,9 @@ public class AddParser extends CommandParser {
         this.matches = matchKeywordsMatch.getGroupValues();
     }
 
-    public void extractParams() throws WrongCommandException, InvalidFileException, InvalidObjectType {
+
+    @Override
+    public void extractParams() throws WrongCommandException, InvalidFileException, InvalidObjectType, MissingFlagException, EmptyFieldException {
         if (matches.get("flag").equals("g")) {
             String regexGood = "sku/(?<sku>.*) qty/(?<qty>.*)";
             HashMap<String, String> regexGoodMatch = new MatchKeywords(userInput, regexGood).getGroupValues();
@@ -40,15 +40,16 @@ public class AddParser extends CommandParser {
             }
         } else if (matches.get("flag").equals("ug")) {
             String regexUnitGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) size/(?<size>.*)";
-            HashMap<String, String> regexUnitGoodMatch = new
+            HashMap<String, String> regexUnitGoodMatch = new MatchKeywords(userInput, regexUnitGood).getGroupValues();
+            warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
+                    regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));
+
+            regexUnitGoodMatch = new
                     MatchKeywords(userInput, regexUnitGood).getGroupValues();
-            try {
-                warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
-                        regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));
-            } catch (UnitTestException e) {
-                System.out.println("Capacity Added is not either Small, Medium, Large. "
-                        + "Default set to Medium");
-            }
+
+            warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("sku"), regexUnitGoodMatch.get("name"),
+                    regexUnitGoodMatch.get("desc"), regexUnitGoodMatch.get("size"));
+
         } else if (matches.get("flag").equals("o")) {
             // adding the base details for order
             String regexOrder = "oid/(?<oid>\\d*) r/(?<recv>.*) addr/(?<addr>.*)";
@@ -58,7 +59,7 @@ public class AddParser extends CommandParser {
                     regexOrderMatch.get("recv"), regexOrderMatch.get("addr"));
         } else if (matches.get("flag").equals("og")) {
             // adding a good for that order
-            String regexOrderline = "oid/(?<oid>\\d*) sku/(?<sku>.*) q/(?<qty>\\d*)";
+            String regexOrderline = "oid/(?<oid>\\d*) sku/(?<sku>.*) qty/(?<qty>\\d*)";
             HashMap<String, String> regexOrderlineMatch = new MatchKeywords(
                     userInput, regexOrderline).getGroupValues();
             warehouse.addOrderline(regexOrderlineMatch.get("oid"),
@@ -79,4 +80,5 @@ public class AddParser extends CommandParser {
             throw new WrongCommandException("add", true);
         }
     }
+
 }

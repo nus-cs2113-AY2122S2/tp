@@ -1,11 +1,12 @@
 package seedu.simplst.parsers;
 
 import seedu.simplst.Warehouse;
+import util.exceptions.WrongCommandException;
+import util.exceptions.MissingFlagException;
+import util.exceptions.EmptyFieldException;
+import util.exceptions.NullException;
 import util.exceptions.InvalidFileException;
 import util.exceptions.InvalidObjectType;
-import util.exceptions.NullException;
-import util.exceptions.WrongCommandException;
-
 import java.util.HashMap;
 
 public abstract class CommandParser {
@@ -17,14 +18,17 @@ public abstract class CommandParser {
         this.warehouse = warehouse;
     }
 
-    protected abstract void initExtractParams();
+    protected abstract void initExtractParams() throws WrongCommandException, MissingFlagException,
+            EmptyFieldException;
 
     protected abstract void extractParams() throws
-            WrongCommandException, NullException, InvalidFileException, InvalidObjectType;
+            WrongCommandException, NullException, InvalidFileException, InvalidObjectType, MissingFlagException,
+            EmptyFieldException;
     //    protected abstract void validate_params();   // They need implement their own validate commands
 
     public void parse(String userInput) throws
-            WrongCommandException, NullException, InvalidFileException, InvalidObjectType {
+            WrongCommandException, NullException, InvalidFileException, InvalidObjectType, MissingFlagException,
+            EmptyFieldException {
         this.userInput = userInput;
         this.initExtractParams();
         try {
@@ -33,4 +37,8 @@ public abstract class CommandParser {
             return;
         }
     }
+
+
+
+
 }

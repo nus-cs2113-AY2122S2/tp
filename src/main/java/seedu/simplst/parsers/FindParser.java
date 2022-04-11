@@ -2,6 +2,8 @@ package seedu.simplst.parsers;
 
 import seedu.simplst.MatchKeywords;
 import seedu.simplst.Warehouse;
+import util.exceptions.EmptyFieldException;
+import util.exceptions.MissingFlagException;
 import util.exceptions.WrongCommandException;
 
 public class FindParser extends CommandParser {
@@ -11,7 +13,7 @@ public class FindParser extends CommandParser {
     }
 
     @Override
-    protected void initExtractParams() {
+    protected void initExtractParams() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "n/(?<name>.*)";

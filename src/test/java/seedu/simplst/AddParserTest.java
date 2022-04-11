@@ -4,9 +4,7 @@ import org.junit.jupiter.api.Test;
 
 
 import seedu.simplst.parsers.AddParser;
-import util.exceptions.InvalidFileException;
-import util.exceptions.InvalidObjectType;
-import util.exceptions.WrongCommandException;
+import util.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +21,8 @@ public class AddParserTest{
 
 
     @Test
-    public void unitGoodAndGoodFlag_addGood_matchInput() throws WrongCommandException, InvalidFileException, InvalidObjectType {
+    public void unitGoodAndGoodFlag_addGood_matchInput() throws WrongCommandException, InvalidFileException,
+            InvalidObjectType, MissingFlagException, EmptyFieldException {
         String userInput = "add ug/ sku/WC1 n/Wooden Chair d/German oak size/Medium";
         String userInputTwo = "add g/ sku/WC1 qty/30";
         AddParser addParser = new AddParser(warehouse, userInput);
@@ -47,7 +46,8 @@ public class AddParserTest{
     }
 
     @Test
-    public void OrderFlag_addGood_matchInput() throws WrongCommandException, InvalidFileException, InvalidObjectType {
+    public void OrderFlag_addGood_matchInput() throws WrongCommandException, InvalidFileException, InvalidObjectType,
+            MissingFlagException, EmptyFieldException {
         String userInput = "add o/ oid/1 r/John Doe addr/123 Maple Ave";
         AddParser addParser = new AddParser(warehouse, userInput);
         addParser.initExtractParams();

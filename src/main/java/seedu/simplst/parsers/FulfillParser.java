@@ -2,14 +2,14 @@ package seedu.simplst.parsers;
 
 import seedu.simplst.MatchKeywords;
 import seedu.simplst.Warehouse;
-import util.exceptions.WrongCommandException;
+import util.exceptions.*;
 
 public class FulfillParser extends CommandParser {
     public FulfillParser(Warehouse warehouse) {
         super(warehouse);
     }
 
-    protected void initExtractParams() {
+    protected void initExtractParams() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "oid/(?<oid>\\d*)";
@@ -17,6 +17,7 @@ public class FulfillParser extends CommandParser {
         this.matches = matchKeywordsMatch.getGroupValues();
     }
 
+    @Override
     protected void extractParams() throws WrongCommandException {
         warehouse.fulfillOrder(matches.get("oid"));
     }

@@ -27,4 +27,5 @@ public class OrderlineTest {
         testOrderline.setQuantityFulfilled(10);
         assertEquals(false, testOrderline.getCheckedOff());
     }
+
 }
