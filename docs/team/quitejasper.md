@@ -35,8 +35,10 @@ Click [here to view the code that I contributed](https://nus-cs2113-ay2122s2.git
   - Justification: Users would be able to quickly retrieve such information for their future planning. 
   
 ### 3. Enhancements Implemented
-- Wrote tests for Add Command to increase coverage.
-- Wrote tests for Delete Command to increase coverage.
+- Wrote tests to increase coverage:
+  - Add Command
+  - Delete Command
+  - ListFutureBorrowings Command
 - Created BorrowRecord stubs to be used for testing for various classes.
 - Used Java Streams to enhance implementation of 
   - ListCurrentBorrowingsCommand, 
