@@ -9,7 +9,6 @@ participant "<font color=red>**<<class>>** \nTimetableLogic" as TimetableLogic
 participant "<font color=red>**<<class>>** \nTimetablePrinting" as TimetablePrinting
 
 
-
 ShowCommand -> Timetable: showScheduleByDay(dateInput: LocalDate, filteredtasks: ArrayList<Task>, ui: Ui)
 activate ShowCommand
 
