@@ -1,32 +1,26 @@
 @startuml
 hide footbox
 
-participant "Unspecified" as none
+participant ":Ui" as Ui
 participant ":EditCommand" as Command
 participant ":MasterTimetable" as Master
 participant ":Timetable" as Timetable
 
-create Command
-none -> Command : EditCommand("john", 1, {"d": "friday"})
-activate Command
-none <-- Command :
-deactivate Command
-
-none -> Command : execute(masterTimetable)
+Ui -> Command : execute(masterTimetable)
 activate Command
 
-Command ->  Master : getByName("john")
+Command ->  Master : getByName(name)
 activate Master
 Command <-- Master : timetable :Timetable
 deactivate Master
 
-Command -> Timetable : get(0)
+Command -> Timetable : get(index)
 activate Timetable
 Command <-- Timetable : event :Event
 deactivate Timetable
 
 opt event is type meeting
-Command -> Command : editEvent(event, {"d": "friday"})
+Command -> Command : editEvent(event, newValues)
 activate Command
 Command --> Command : isValidInput :Boolean
 deactivate Command
@@ -45,7 +39,7 @@ deactivate Command
 end
 
 end
-none <-- Command : :String
+Ui <-- Command : :String
 deactivate Command
 destroy Command
 

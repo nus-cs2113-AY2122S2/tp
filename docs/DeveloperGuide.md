@@ -62,23 +62,23 @@ The `parser` package includes:
 
 ![TimetableClassDiagram](images/TimetableClassDiagram.png)
 
-The above class diagram illustrates the classes within the timetables package.
+The above class diagram illustrates the classes within the `timetables` package.
 The `timetables` package includes 
-1. Timetable
+1. `Timetable`
    - To invoke operations involving a specific timetable object.
-2. MasterTimetable
+2. `MasterTimetable`
    - To invoke operations on the master list of all user's timetable.
    
 ## 2.6 Event Component
 ![EventClassDiagram](images/EventClassDiagram.png)
 
-The above class diagram illustrates the classes within the event package.
+The above class diagram illustrates the classes within the `events` package.
 
-The Event package includes:
+The `event` package includes:
 1. An abstract `Event` class that other event classes inherit from
 2. Individual Event classes that inherits from the `Event` class 
-   - Lesson
-   - Meeting
+   - `Lesson`
+   - `Meeting`
 
 ## 2.7 Storage Component
 ![StorageClassDiagram](images/StorageClassDiagram.png)
@@ -132,6 +132,7 @@ This is a condensed diagram. Several terms in the sequence diagram above have be
 `add_user` adds new user and his or her timetable into the master timetable.
 
 The following sequence diagram shows how the `add_user` command works:
+
 ![AddUserCommandSequenceDiagram](images/AddUserCommandSequenceDiagram.png)
 
 Given below is the steps on how the `add_user` operation works.
@@ -151,7 +152,7 @@ Given below is the steps on how the `add_user` operation works.
 **Add Lesson**
 
 The following sequence diagram shows how the `add_lesson` operation works in detail.
-![AddMeetingCommandSequenceDiagram](images/AddLessonCommandSequenceDiagram.png)
+![AddMeetingCommandSequenceDiagram](images/AddLessonCommandSequence.png)
 
 Given below is the steps on how the `add_lesson` operation works.
 
@@ -185,7 +186,7 @@ The following sequence diagram shows how the command `list all` is executed.
 ![ListCommandSequenceDiagram](images/ListCommandSequenceDiagram.png)
 
 Given below is the steps of how the `list` command works:
-1. If the given command is `list [user]`, the ListCommand calls the Timetable class to sort the user's timetable and 
+1. If the given command is `list NAME`, the ListCommand calls the Timetable class to sort the user's timetable and 
 list all events out.
 2. If the given command is `list all`, the ListCommand repeats Step 1 for all users.
 3. If user inputs `list_lesson...` instead of `list...`, the ListCommand checks first if the event listed out in Step 1 
@@ -196,7 +197,7 @@ is a Meeting. If not, it will not be printed out.
 ## 3.3 Finding Common Free Timeslots Feature
 The `free` command is a command that the user can input in order to find timeslots where all users are free.
 
-For greater customisation, `free [duration]` displays all common timeslots which has a duration longer than or equal to
+For greater customisation, `free DURATION` displays all common timeslots which has a duration longer than or equal to
 what is specified.
 
 The following sequence diagram shows how the command `free` is executed.
@@ -244,22 +245,27 @@ The following sequence diagram shows how the `delete` command works:
 ![DeleteCommandSequenceDiagram](images/DeleteCommandSequenceDiagram.png)
 
 The above diagram shows the sequence diagram of a meeting deletion.
-
-1. User inputs delete with appropriate parameters which is passed to the UI.
+1. User inputs delete with appropriate parameters which is passed to the Ui.
 2. Ui then provides user input to the Parser class which parses it and retrieves the respective delete command.
 3. Ui subsequently executes the command on the masterTimetable for the whole application.
-4. For a normal event(non-meeting) the DeleteCommand will get the user's timetable from `MasterTimetable` 
+4. For a normal event (non-meeting) the DeleteCommand will get the user's timetable from `MasterTimetable` 
 and perform the deletion of that event.
-6. If it is a meeting that the user is trying to delete, the DeleteCommand will find that meeting in 
+5. If it is a meeting that the user is trying to delete, the DeleteCommand will find that meeting in 
 everyone's timetable and delete it.
 
 
 ## 3.6 Clear events `clear`
 The `clear` command is a command that the user can clear a certain user's timetable or everyone's timetable.
 
-`clear [user]` clears the timetable for the particular user.
+`clear NAME` clears the timetable for the particular user.
 
 `clear all` clears the timetable for all users.
+
+![ClearCommandSequenceDiagram](images/ClearCommandSequenceDiagram.png)
+The above diagram shows the sequence diagram when a `clear all` command is executed.
+1. User inputs clear with appropriate parameters which is passed to the UI.
+2. Ui subsequently executes the command on the `masterTimetable` for the whole application,
+deleting all users and their timetable.
 
 ## 3.7 Data Saving Feature
 
