@@ -111,10 +111,12 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 * At the end of a session, SplitLah calculates how much each person owes and who they need to pay. This information is
   displayed in an easy-to-read summary.
 
-<hr>
+<br>
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
+
+<hr>
 
 ## Features 
 
@@ -339,7 +341,7 @@ However, deleted sessions are not listed.
   * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
   * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
 
-
+<br>
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
@@ -658,9 +660,12 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 * [Viewing a group: `group /view`](#viewing-a-group-group-view)
 * [Listing all groups: `group /list`](#listing-all-groups-group-list)
 
+<br>
 <div class="button-box">
   <a class="back-button" href="#contents">Back to Contents</a>
 </div>
+
+<hr>
 
 ### Creating a group: `group /create`
 Creates a new group consisting of a group of individuals. You can use this group whenever creating a new session that
@@ -694,6 +699,8 @@ involves the same group of individuals. This saves you time when entering the li
   <a class="back-button" href="#group-management">Back to Group Management</a>
 </div>
 
+<hr>
+
 ### Deleting a group: `group /delete`
 Deletes an existing group so that you can remove groups that you no longer need.
 
@@ -722,6 +729,8 @@ Deletes an existing group so that you can remove groups that you no longer need.
 <div class="button-box">
   <a class="back-button" href="#group-management">Back to Group Management</a>
 </div>
+
+<hr>
 
 ### Editing a group: `group /edit`
 Edits an existing group so that you can change the details of a group.<br>
@@ -771,6 +780,8 @@ Examples of usage:
   <a class="back-button" href="#group-management">Back to Group Management</a>
 </div>
 
+<hr>
+
 ### Viewing a group: `group /view`
 Displays the details about a group so that you can review it.<br>
 
@@ -796,6 +807,8 @@ Displays the details about a group so that you can review it.<br>
 <div class="button-box">
   <a class="back-button" href="#group-management">Back to Group Management</a>
 </div>
+
+<hr>
 
 ### Listing all groups: `group /list`
 Displays all existing groups so that you can have an overview of previously created groups.

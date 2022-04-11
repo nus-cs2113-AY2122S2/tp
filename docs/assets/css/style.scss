@@ -4,7 +4,10 @@
 @import "{{ site.theme }}";
 
 hr {
-    border-top: 10px solid #8c8b8b;
+    border: none;
+    height: 3px;
+    color: #808080;
+    background-color: #808080;
 }
 
 div.button-box {
