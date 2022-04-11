@@ -50,11 +50,10 @@ public class SearchItemCommand extends Command {
      * @param listContainer The object containing the data structure necessary to search for items within the item
      *                      list.
      *                      In this case, we require access to the ItemList object which is within listContainer.
-     * @throws HotelLiteManagerException if the keyword is empty.
      */
 
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) {
         ItemList listOfItems = listContainer.getItemList();
         String keyword = getKeyword();
         ItemList listOfMatchingItems = listOfItems.findItemsInList(keyword);
