@@ -3,7 +3,7 @@
 ## Table of Content
 - [Acknowledgements](#acknowledgements)
 - [Introduction](#introduction)
-  - [Target Audience](#target-audience)
+  - [Using the Developer Guide](#using-the-developer-guide)
 - [Architecture](#architecture)
 - [Design & Implementation](#design--implementation)
   - [Task Implementation](#task-implementation)
@@ -38,11 +38,11 @@ platform for them to focus on their academic tasks through the use of timers in 
 the time to block out time to focus on their tasks. Optimised for use via a Command Line Interface (CLI),
 users who can type fast will be able to plan out their tasks in a much quicker fashion compared to traditional GUI apps.
 
-### Target audience
+### Using the Developer Guide
 
-This developer guide is written for any current and future developers of Sherpass to better understand the design
+This developer guide aims to equip current and future developers of Sherpass with a better understanding of the design
 and implementation of the application. This guide will also explain some design decisions that were made during
-development.
+development. 
 
 ## Architecture
 
