@@ -31,6 +31,7 @@ public class MeetingJio {
             Ui.executeCommand(userInput, masterTimetable, in);
         } catch (NoSuchElementException nsee) {
             System.out.println(ERROR_CONTROL_C_ALL_CLEARED);
+            System.exit(0);
         }
         exit();
     }
