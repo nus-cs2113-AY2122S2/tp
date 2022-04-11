@@ -637,8 +637,6 @@ The general workflow of the `group /edit` command is as follows:
 8. The `GroupEditCommand` class then prints a message indicating that a group has been successfully edited.
 
 
-
-
 ### View a group
 **API reference:** [`GroupViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
 The sequence diagram for `GroupViewCommand` is omitted as it bears many similarities with [`SessionViewCommand`](#view-a-session).<br>
