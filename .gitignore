@@ -15,3 +15,14 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+data/route.txt
+docs/.Architecture diagram.vpp.lck
+docs/Architecture diagram.vux
+docs/Architecture diagram.vpp.bak_000f
+docs/Architecture diagram.vpp.bak_001d
+docs/Architecture diagram.vpp.bak_002d
+docs/Architecture diagram.vpp.bak_003d
+data/menuItem.txt
+data/mealReservation.txt
+data/flightBooking.txt
+docs/Architecture diagram.vux.bak

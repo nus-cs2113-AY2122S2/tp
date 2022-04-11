@@ -1,9 +1,7 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
-What is your name?
-Hello James Gosling
+Hello! Welcome to ARCS system.
+What can I do for you?
+Exiting the system ...
+==================================================
+Your data has been saved!
+Thank you for using ARCS system.
+Good bye!
