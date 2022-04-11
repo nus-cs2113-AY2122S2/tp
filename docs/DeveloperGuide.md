@@ -80,10 +80,13 @@ for which we execute the non-static method `run()`, which contains a loop for su
 where `Logger` (`logger`) object is already contained in the relevant field of the `:AllOnUs` object. 
 
 Once the `run()` method is called, the program enters a loop with the following sequence:
+
 1) `is*Mode()` method is called with parameter `mode` of enumeration `Mode`. If `mode` has value not corresponding to 
 menu mode, step 2 executes. Else, step 3 executes.
+
 2) either of `expenseRunner()` (belongs to `expenseTracker`), `studyManagerRunner()` (belongs to `studyManager`) or 
 `contactsRunner()` (belongs to `contactsManager`) methods is called depending on `mode` value. 
+
 3) `getUserInput()` method is called, which belongs to object `ui`, and then checks the returned string for 
 whether it is a command to enter a particular section (essentially step 2), to get help, to exit the application or 
 is an empty or unrecognizable command. 
@@ -527,13 +530,17 @@ faster than a typical mouse driven or GUI driven apps.
 
 Given below are instructions to test the app manually:
 
-> :information_source: **Note:** These instructions only provide a starting point for testers to work on; testers are
+> **Note:** These instructions only provide a starting point for testers to work on; testers are
 > expected to do more *exploratory* testing.
 
 ### Launch and Shutdown 
 1. Initial launch 
    1. Download the jar file and copy into an empty directory.
    2. Using command line, navigate to the above directory and execute the jar file.
+
+2. Shutdown
+   1. Navigate to menu using `menu` command.
+   2. Enter `exit` command to appropriately terminate the application. 
    
 
 ### Study Manager
