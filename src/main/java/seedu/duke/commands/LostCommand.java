@@ -11,12 +11,10 @@ import static seedu.duke.parser.CliSyntax.PREFIX_QUANTITY;
 
 public class LostCommand extends Command {
     private int itemIndex;
-    private int itemQuantity;
     public static final String COMMAND_WORD = "lost";
     public static final String COMMAND_NAME = "Report Lost Item";
     public static final String USAGE_MESSAGE = "Marks item as lost";
-    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + PREFIX_ITEM_INDEX + "[item number] "
-            + PREFIX_QUANTITY + "[item quantity]";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + PREFIX_ITEM_INDEX + "[item number]";
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n"
             + "[Function] "
             + USAGE_MESSAGE
@@ -30,9 +28,8 @@ public class LostCommand extends Command {
      *
      * @param itemIndex Index of item to be marked as lost.
      */
-    public LostCommand(int itemIndex, int itemQuantity) {
+    public LostCommand(int itemIndex) {
         this.itemIndex = itemIndex;
-        this.itemQuantity = itemQuantity;
     }
 
     protected boolean checkItemListSize(ItemList itemList) {
@@ -59,24 +56,11 @@ public class LostCommand extends Command {
         try {
             lostItem = itemList.getItem(itemIndex);
         } catch (IndexOutOfBoundsException e) {
-            ui.showMessages(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE);
-            ui.showDivider();
-            return;
+            throw new InvMgrException(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE);
         }
-        int updatedItemQuantity = lostItem.getQuantity() - itemQuantity;
-        if (updatedItemQuantity > 0) {
-            lostItem.setQuantity(updatedItemQuantity);
-            ui.showMessages(Messages.REPORTED_LOST_MESSAGE);
-            System.out.println(lostItem);
-        } else if (updatedItemQuantity == 0) {
-            System.out.println("delete command item index is " + itemIndex);
-            DeleteCommand deleteCommand = new DeleteCommand(itemIndex);
-            deleteCommand.execute(itemList, ui);
-            ui.showMessages(Messages.REPORTED_LOST_AND_DELETED_MESSAGE);
-        } else {
-            throw new InvMgrException(Messages.LOST_ERROR_MESSAGE);
-        }
-        ui.showDivider();
+        itemList.removeItem(itemIndex);
+        ui.showMessages(lostItem + " has been deleted.");
+        ui.showMessages(Messages.REPORTED_LOST_AND_DELETED_MESSAGE);
     }
 
     /**
@@ -95,7 +79,7 @@ public class LostCommand extends Command {
             return false;
         }
         LostCommand that = (LostCommand) o;
-        return itemIndex == that.itemIndex && itemQuantity == that.itemQuantity;
+        return itemIndex == that.itemIndex;
     }
 
 }

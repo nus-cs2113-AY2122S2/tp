@@ -1,6 +1,5 @@
 package seedu.duke.commands;
 
-
 import seedu.duke.data.ItemList;
 import seedu.duke.ui.Ui;
 

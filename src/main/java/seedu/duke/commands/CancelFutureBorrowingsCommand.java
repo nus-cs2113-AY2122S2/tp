@@ -6,6 +6,7 @@ import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
 import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.Item;
+import seedu.duke.common.Messages;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,6 @@ public class CancelFutureBorrowingsCommand extends Command {
             + "\n" + "[Command Format] " + COMMAND_FORMAT + "\n";
     private final String borrowerName;
     private final int borrowIndex;
-    public static final String INVALID_INDEX = "Error. The index you entered was invalid!";
 
     /**
      * Constructor of CancelFutureBorrowingsCommand.
@@ -105,8 +105,9 @@ public class CancelFutureBorrowingsCommand extends Command {
 
         if (borrowIndex + 1 > records.size() || borrowIndex + 1 > items.size() 
                 || borrowIndex < 0) {
-            throw new InvMgrException(INVALID_INDEX);
+            throw new InvMgrException(Messages.INVALID_INDEX);
         }
+        
         BorrowRecord removeRecord = records.get(borrowIndex);
         Item item = items.get(borrowIndex);
         int itemQuantity = removeRecord.getQuantity();

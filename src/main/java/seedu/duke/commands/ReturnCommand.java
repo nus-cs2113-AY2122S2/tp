@@ -5,6 +5,7 @@ import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.BorrowStatus;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
+import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -54,21 +55,17 @@ public class ReturnCommand extends Command {
      * @param ui Displays messages to the user.
      */
     @Override
-    public void execute(ItemList itemList, Ui ui) {
+    public void execute(ItemList itemList, Ui ui) throws InvMgrException {
         // If the item list is empty, then no item can be returned.
         boolean isEmptyItemList = checkItemListSize(itemList);
         if (isEmptyItemList) {
-            ui.showMessages(Messages.EMPTY_ITEM_LIST_MESSAGE);
-            ui.showDivider();
-            return;
+            throw new InvMgrException(Messages.EMPTY_ITEM_LIST_MESSAGE);
         }
         Item returnedItem = null;
         try {
             returnedItem = itemList.getItem(itemIndex);
         } catch (IndexOutOfBoundsException e) {
-            ui.showMessages(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE);
-            ui.showDivider();
-            return;
+            throw new InvMgrException(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE);
         }
         ArrayList<BorrowRecord> itemBorrowRecords = returnedItem.getBorrowRecords();
         for (BorrowRecord record : itemBorrowRecords) {
@@ -87,7 +84,7 @@ public class ReturnCommand extends Command {
             }
         }
         if (!isValidReturnRequest) {
-            ui.showMessages(Messages.RETURN_ERROR_MESSAGE);
+            throw new InvMgrException(Messages.RETURN_ERROR_MESSAGE);
         }
     }
 
