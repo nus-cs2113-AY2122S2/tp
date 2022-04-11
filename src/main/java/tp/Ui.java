@@ -72,7 +72,7 @@ public class Ui {
         String listPatient = "list patient" + System.lineSeparator();
         String listNurse = "list nurse" + System.lineSeparator();
         String listWard = "list ward" + System.lineSeparator();
-        String sortAppointment = "sort appointment according to appointment time"
+        String sortAppointment = "sort appointment"
                                          + System.lineSeparator();
         String listAppointment = "list appointment" + System.lineSeparator();
         System.out.println("2. To list something:" + System.lineSeparator()

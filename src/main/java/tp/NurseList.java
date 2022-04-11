@@ -47,6 +47,7 @@ public class NurseList {
 
     public Nurse deleteNurse(int index) {
         Nurse cur = nurses.get(index - 1);
+        nurses.remove(cur);
         size -= 1;
         return cur;
     }

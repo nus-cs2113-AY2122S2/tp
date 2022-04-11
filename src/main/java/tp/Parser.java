@@ -190,6 +190,16 @@ public class Parser {
 
     //@@author Demonshaha
     public Command parseAddCommand(String fullCommand) throws IHospitalException {
+        //@@author cczhouqi
+        if (fullCommand.trim().equals("add doctor") || fullCommand.trim().equals("add patient")
+                    || fullCommand.trim().equals("add nurse") || fullCommand.trim().equals("add ward")
+                    || fullCommand.trim().equals("add appointment")
+                    || fullCommand.trim().equals("add patient description")) {
+            throw new IHospitalException("Wrong input format. "
+                                                 + "You can type `help` to view available commands.\n");
+        }
+
+        //@@author Demonshaha
         if (fullCommand.contains("add doctor")) {
             return parseAddDoctor(fullCommand);
         } else if (fullCommand.contains("add patient")) {
@@ -362,6 +372,8 @@ public class Parser {
         } else if (fullCommand.contains("/n")) {
             String newInformation = dummy.substring(dummy.indexOf("/n") + 3);
             return new EditDoctorCommand(index, "n", newInformation);
+        } else if (fullCommand.contains("/dep")) {
+            throw new IHospitalException("Department cannot be changed.\n");
         } else {
             throw new IHospitalException("Wrong format detected\n");
         }

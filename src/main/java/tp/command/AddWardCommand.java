@@ -34,26 +34,34 @@ public class AddWardCommand extends Command {
                           DoctorStorage doctorStorage, WardStorage wardStorage,
                           PatientStorage patientStorage, NurseStorage nurseStorage,
                           AppointmentStorage appointmentStorage) throws IHospitalException {
-        if (wardNumber <= 0 || wardNumber > wardList.getSize()) {
-            throw new IHospitalException("The ward does not exist\n");
-        }
 
         for (int docs : docIndexes) {
-            if (doctorList.getDoctor(docs).getWardNumber() != -1) {
+            if (docs <= 0 || docs > doctorList.getSize()) {
+                throw new IHospitalException("The doctor does not exist.\n");
+            } else if (doctorList.getDoctor(docs).getWardNumber() != -1) {
                 throw new IHospitalException("The doctor" + docs + "already assigned to a ward\n");
             } else {
                 doctorList.getDoctor(docs).setWardNumber(wardNumber);
             }
         }
 
+        //@@author cczhouqi
+        for (int pats: patientIndexes) {
+            if (pats <= 0 || pats > patientList.getSize()) {
+                throw new IHospitalException("The patient does not exist\n");
+            }
+        }
+
         for (int nurs : nurseIndexes) {
-            if (nurseList.getNurse(nurs).getWardNumber() != -1) {
+            if (nurs <= 0 || nurs > nurseList.getSize()) {
+                throw new IHospitalException("The nurse does not exist.\n");
+                //@@author DolphXty
+            } else if (nurseList.getNurse(nurs).getWardNumber() != -1) {
                 throw new IHospitalException("The nurse" + nurs + "already assigned to a ward\n");
             } else {
                 nurseList.getNurse(nurs).setWardNumber(wardNumber);
             }
         }
-
 
         wardList.addWard(docIndexes, patientIndexes, nurseIndexes,wardNumber);
         return String.format(boundary + "Noted. I've added this ward:"

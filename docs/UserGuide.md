@@ -3,7 +3,7 @@
 ## Introduction
 
 IHospital is a desktop application meant for staff in hospitals. 
-Its main purpose is to manage patients, doctors, nurses, appointments and operation rooms data, 
+Its main purpose is to manage patients, doctors, nurses, appointments and wards data, 
 and it’s optimised for use via a Command Line Interface (CLI). If you can type fast, 
 this application allows you to access relevant hospital information faster than traditional GUI applications.
 
@@ -52,8 +52,10 @@ Format: `add appointment /t DATETIME /d DOCTOR_NO /p PATIENT_NO`
 
 Example of usage:
 
-`add appointment /t 2007-12-03T10:15:30 /d 1 /p 1`
+`add appointment /t 2022-06-03T10:30:00 /d 1 /p 1`
 
+Expected output:
+![](AddAppointmentOutput.png)
 
 ### Adding a nurse: `add nurse`
 Adds a new nurse to the system.
@@ -70,7 +72,7 @@ Adds a new ward to the system.
 
 Format: `add ward /d NO /p NO /n NO /id NO`
 
-* The `NO` refers to the indexes of the respective doctors, patients or nurses. 
+* The `NO` refers to the indexes of the respective doctors, patients or nurses in the list, not their IDs. 
 * Input can also take in an array of indexes
 
 * Note that one doctor/nurse can only be assigned to one ward.
@@ -105,7 +107,7 @@ Example of usage:
 
 `list appointment`
 
-Expected Output:
+Expected Output (for `list doctor`):
 ![](ListDoctorOutput.png)
 
 ### Searching an entity: `search`
@@ -139,6 +141,7 @@ Editing an existing person's information.
 Format: `edit /entity NO /field info`
 
 * Note that you can only edit one information at a time.
+* Note that department cannot be changed for doctors.
 * `NO` refers to the index of the object in the entity list
 * `field` is the attribute to be changed with the new `info`
 
@@ -160,6 +163,16 @@ Editing the details of an appointment.
 Format: `edit /a APPOINTMENT_INDEX /doctor DOCTOR_INDEX` OR `edit /a APPOINTMENT_INDEX /patient PATIENT_INDEX` OR `edit /a APPOINTMENT_INDEX /time DATETIME`
 
 * Note that you can only edit one information at a time.
+
+Example of usage:
+To change the doctor for this appointment to the 2nd doctor in th list:
+`edit /a 1 /doctor 2`
+
+To change appointment time: `edit /a 1 /time 2022-06-01T16:30`
+
+Expected output:
+![](EditAppointmentOutput1.png)
+![](EditAppointmentOutput2.png)
 
 ### Deleting an entity: `delete`
 Removes an entity from the system.
@@ -191,15 +204,17 @@ Example of usage:
 ## Command Summary
 
 * View Help `help`
-* Add Doctor `add doctor /id ID /n NAME /ph PHONE /e EMAIL`
+* View Doctor Page `doctor page`
+* View Patient Page `patient page`
+* Add Doctor `add doctor /id ID /n NAME /ph PHONE /e EMAIL /dep DEPARTMENT`
 * Add Patient `add patient /id ID /n NAME /ph PHONE /e EMAIL /s SYMPTOM /d DESCRIPTIONS`
 * Add Appointment `add appointment /t 2022-03-19T15:16:00 /d DOCTOR_NO /p PATIENT_NO`
-* Add Nurse `add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE /w WARD_NO`
-* Add Ward `add ward /d NO /p NO /n NO /id NO`
-* Delete Doctor `delete doctor DOCTOR_ID`
-* Delete Patient `delete patient PATIENT_ID`
+* Add Nurse `add nurse /id ID /n NAME /ph PHONE /e EMAIL /t TITLE`
+* Add Ward `add ward /d DOCTOR_NOs /p PATIENT_NOs /n NURSE_NOs /id WARD_ID`
+* Delete Doctor `delete doctor DOCTOR_NO`
+* Delete Patient `delete patient PATIENT_NO`
 * Delete Appointment `delete appointment APPOINTMENT_NO.`
-* Delete Nurse `delete nurse NURSE_ID`
+* Delete Nurse `delete nurse NURSE_NO`
 * Delete Ward `delete ward WARD_ID`
 * Sort Appointment List `sort appointment`
 * View Doctor list `list doctor`
