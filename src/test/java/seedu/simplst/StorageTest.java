@@ -15,11 +15,6 @@ class StorageTest {
     Boolean status = warehouse.restoreWarehouseState();
 
     @Test
-    void checkRestore() {
-        assertTrue(status);
-    }
-
-    @Test
     void checkSave() throws IOException {
         this.status = warehouse.saveWarehouseState();
         assertTrue(status);
