@@ -3,16 +3,8 @@
 
 @import "{{ site.theme }}";
 
-div.format-box {
-    background-color: #d0dee9;
-}
-
-div.note-box {
-    background-color: #ffffb2;
-}
-
-div.warning-box {
-    background-color: #ffb2b2;
+hr {
+    border-top: 10px solid #8c8b8b;
 }
 
 div.button-box {
@@ -20,9 +12,7 @@ div.button-box {
     width: 100%;
 }
 
-
-
-a.btn {
+a.back-button {
     background-color: #155a95;
     color: white;
     padding: 5px 20px 5px 20px;

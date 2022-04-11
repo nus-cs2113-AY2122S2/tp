@@ -113,7 +113,7 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 
 <hr>
 <div class="button-box">
-  <a class="btn" href="#contents">Back to Contents</a>
+  <a class="back-button" href="#contents">Back to Contents</a>
 </div>
 
 ## Features 
@@ -130,10 +130,13 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 * [Viewing a session: `session /view`](#viewing-a-session--session-view)
 * [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
 
+<br>
 
 <div class="button-box">
-  <a class="btn" href="#contents">Back to Contents</a>
+  <a class="back-button" href="#contents">Back to Contents</a>
 </div>
+
+<hr>
 
 ### Creating a session: `session /create`
 Creates a session so that you can manage your group outings. <br>
@@ -178,9 +181,10 @@ Creates a session so that you can manage your group outings. <br>
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#session-management">Back to Session Management</a>
+  <a class="back-button" href="#session-management">Back to Session Management</a>
 </div>
 
+<hr>
 
 ### Deleting a session: `session /delete`
 Deletes an existing session so that you can remove sessions that you no longer need.<br>
@@ -208,8 +212,10 @@ Deletes an existing session so that you can remove sessions that you no longer n
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#session-management">Back to Session Management</a>
+  <a class="back-button" href="#session-management">Back to Session Management</a>
 </div>
+
+<hr>
 
 ### Editing a session: `session /edit`
 Edits an existing session so that you can change the details of a session.<br>
@@ -269,8 +275,10 @@ Edits an existing session so that you can change the details of a session.<br>
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#session-management">Back to Session Management</a>
+  <a class="back-button" href="#session-management">Back to Session Management</a>
 </div>
+
+<hr>
 
 ### Viewing a session : `session /view`
 Displays the details of a session so that you can review it.<br>
@@ -294,6 +302,12 @@ Displays the details of a session so that you can review it.<br>
   <br>     
   <br>
 
+<div class="button-box">
+  <a class="back-button" href="#session-management">Back to Session Management</a>
+</div>
+
+<hr>
+
 ### Listing all sessions: `session /list`
 Displays all existing sessions so that you can have an overview of previously created sessions. 
 However, deleted sessions are not listed.
@@ -309,11 +323,11 @@ However, deleted sessions are not listed.
   <br>
   <br>
 
-<hr>
-
 <div class="button-box">
-  <a class="btn" href="#session-management">Back to Session Management</a>
+  <a class="back-button" href="#session-management">Back to Session Management</a>
 </div>
+
+<hr>
 
 ## _Activity Management_
 > An activity represents a single group activity and stores its name, costs and the name of the payer.
@@ -327,8 +341,10 @@ However, deleted sessions are not listed.
 
 
 <div class="button-box">
-  <a class="btn" href="#contents">Back to Contents</a>
+  <a class="back-button" href="#contents">Back to Contents</a>
 </div>
+
+<hr>
 
 ### Creating an activity: `activity /create`
 Creates an activity with the details that you specify and then assigns it to a session. <br>
@@ -398,8 +414,10 @@ There are 2 ways that you can specify the costs of an activity:
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#activity-management">Back to Activity Management</a>
+  <a class="back-button" href="#activity-management">Back to Activity Management</a>
 </div>
+
+<hr>
 
 ### Deleting an activity: `activity /delete`
 Deletes an existing activity from a particular session so that you can remove activities that you no longer need.<br>
@@ -430,8 +448,10 @@ Deletes an existing activity from a particular session so that you can remove ac
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#activity-management">Back to Activity Management</a>
+  <a class="back-button" href="#activity-management">Back to Activity Management</a>
 </div>
+
+<hr>
 
 ### Editing an activity: `activity /edit`
 Edits an existing activity so that you can change the details of an activity.<br>
@@ -517,8 +537,10 @@ distributed amongst all participants.
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#activity-management">Back to Activity Management</a>
+  <a class="back-button" href="#activity-management">Back to Activity Management</a>
 </div>
+
+<hr>
 
 ### Viewing an activity: `activity /view`
 Displays the details about an activity so that you can review it.<br>
@@ -547,8 +569,10 @@ Displays the details about an activity so that you can review it.<br>
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#activity-management">Back to Activity Management</a>
+  <a class="back-button" href="#activity-management">Back to Activity Management</a>
 </div>
+
+<hr>
 
 ### Listing all activities in a session: `activity /list`
 Displays all existing activities so that you can have an overview of previously created activities.
@@ -574,7 +598,7 @@ However, deleted activities are not listed.
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#activity-management">Back to Activity Management</a>
+  <a class="back-button" href="#activity-management">Back to Activity Management</a>
 </div>
 
 <hr>
@@ -584,9 +608,7 @@ However, deleted activities are not listed.
 ### Overview
 * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
 
-<div class="button-box">
-  <a class="btn" href="#contents">Back to Contents</a>
-</div>
+<hr>
 
 ### Settling all transactions for a session: `session /summary`
 
@@ -620,7 +642,7 @@ must pay and to whom they should pay for all debts to be resolved.<br>
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#transaction-management">Back to Transaction Management</a>
+  <a class="back-button" href="#contents">Back to Contents</a>
 </div>
 
 <hr>
@@ -637,7 +659,7 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 * [Listing all groups: `group /list`](#listing-all-groups-group-list)
 
 <div class="button-box">
-  <a class="btn" href="#contents">Back to Contents</a>
+  <a class="back-button" href="#contents">Back to Contents</a>
 </div>
 
 ### Creating a group: `group /create`
@@ -669,7 +691,7 @@ involves the same group of individuals. This saves you time when entering the li
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#group-management">Back to Group Management</a>
+  <a class="back-button" href="#group-management">Back to Group Management</a>
 </div>
 
 ### Deleting a group: `group /delete`
@@ -698,7 +720,7 @@ Deletes an existing group so that you can remove groups that you no longer need.
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#group-management">Back to Group Management</a>
+  <a class="back-button" href="#group-management">Back to Group Management</a>
 </div>
 
 ### Editing a group: `group /edit`
@@ -746,7 +768,7 @@ Examples of usage:
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#group-management">Back to Group Management</a>
+  <a class="back-button" href="#group-management">Back to Group Management</a>
 </div>
 
 ### Viewing a group: `group /view`
@@ -772,7 +794,7 @@ Displays the details about a group so that you can review it.<br>
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#group-management">Back to Group Management</a>
+  <a class="back-button" href="#group-management">Back to Group Management</a>
 </div>
 
 ### Listing all groups: `group /list`
@@ -791,16 +813,12 @@ However, deleted groups are not listed.
   <br>
 
 <div class="button-box">
-  <a class="btn" href="#group-management">Back to Group Management</a>
+  <a class="back-button" href="#group-management">Back to Group Management</a>
 </div>
 
 <hr>
 
 ## _Miscellaneous_
-
-<div class="button-box">
-  <a class="btn" href="#contents">Back to Contents</a>
-</div>
 
 ### Listing all available commands: `help`
 Displays all available SplitLah commands and their syntax to help you use SplitLah.<br>
@@ -816,6 +834,10 @@ Quits the application.<br>
 > Format: `exit`
 
 <br>
+
+<div class="button-box">
+  <a class="back-button" href="#contents">Back to Contents</a>
+</div>
 
 <hr>
  
@@ -839,7 +861,7 @@ Stay tuned to future updates from us!
 <br>
 
 <div class="button-box">
-  <a class="btn" href="#contents">Back to Contents</a>
+  <a class="back-button" href="#contents">Back to Contents</a>
 </div>
 
 <hr>
