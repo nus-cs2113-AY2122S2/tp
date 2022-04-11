@@ -13,6 +13,7 @@ import tp.Ui;
 import tp.WardList;
 import tp.WardStorage;
 
+//@@author sethlxk
 public class ListNurseListCommand extends Command {
     @Override
     public String execute(DoctorList doctorList, PatientList patientList, NurseList nurseList,

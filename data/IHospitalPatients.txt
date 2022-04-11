@@ -1,8 +1,8 @@
 1
 1. Patient:
-4321
-Tom
-93333333
-3233@qq.com
-symptom
-descriptions
+333
+Draco Malfoy
+88888888
+poorPotter@gmail.com
+cough
+Allergic to Harry Potter

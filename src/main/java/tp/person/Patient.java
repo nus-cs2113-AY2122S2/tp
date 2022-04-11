@@ -15,6 +15,7 @@ public class Patient extends Person {
         this.symptom = symptom;
     }
 
+    //@@author DolphXty
     public String getSymptom() {
         return symptom;
     }
