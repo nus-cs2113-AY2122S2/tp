@@ -16,7 +16,10 @@ Below are my contributions to the project:
     * User Guide:
         * Added documentation for customer functionality and create segregation:
           (Pull request: [\#116](https://github.com/AY2122s2-CS2113-F12-3/tp/pull/116))
-    
+    * Developer Guide:
+        * Added non-functional requirements
+        * Added User stories
+            * Flight route related stories
 * **Review/mentoring contributions**:
   * Reviewing teammate PR. (Examples: [1](https://github.com/AY2122s2-CS2113-F12-3/tp/pull/120))
   * Reported bugs and suggestions for other teams in the class. (Examples: [1](https://github.com/johnsuharjono/ped/issues/1), [2](https://github.com/johnsuharjono/ped/issues/3), [3](https://github.com/johnsuharjono/ped/issues/5))
