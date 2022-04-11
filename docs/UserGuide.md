@@ -494,7 +494,7 @@ to enhance usage of this program.
 | List Orders                          | `list o/`                                                         |
 | View Order                           | `view o/ oid/[ORDER_ID]`                                          |
 | Fulfill Order                        | `fulfill oid/[ORDER_ID]`                                          |
-| Add Orderline                        | `add og/ oid/[ORDER_ID] sku/[SKU] q/[QUANTITY_NEEDED]`            |
-| Remove Orderline Quantity            | `remove og/ oid/[ORDER_ID] sku/[SKU] q/[QUANTITY_TO_REMOVE]`      |
+| Add Orderline                        | `add og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_NEEDED]`          |
+| Remove Orderline Quantity            | `remove og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_TO_REMOVE]`    |
 | List Orderlines                      | `list og/ oid/[ORDER_ID]`                                         |
 
