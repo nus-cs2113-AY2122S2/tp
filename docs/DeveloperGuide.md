@@ -200,7 +200,7 @@ For example, `addDishToOrder(Dish dish, int orderIdx)`, iterates through `orders
 
 Both methods `getOrderPrice(int)` and `getAllOrderValue()` call `getTotalPrice()`:
 
-![](diagrams/sequence/OrderManager_displayAllOrderPrice.png)
+![](diagrams/sequence/OrderManager_diaplayAllOrderPrice.png)
 
 ## Staff Management
 
