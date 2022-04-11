@@ -101,8 +101,9 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
    * Added explanation for the sequence diagrams
 
 ### Miscellaneous Contributions
- * Spearheaded replacement of `XYZCommand#prepare` method with a `XYZCommandParser` class
-   * Previously, `XYZCommand#prepare` was used instead to process the user input and create a `XYZCommand` object.
+ * Spearheaded replacement of `XYZCommand#prepare` method with a [`XYZCommandParser`](https://github.com/AY2122S2-CS2113T-T10-1/tp/tree/master/src/main/java/seedu/splitlah/parser/commandparser) class
+   * Previously, `XYZCommand#prepare` (e.g. [`SessionCreateCommand#prepare`](https://github.com/AY2122S2-CS2113T-T10-1/tp/commit/5b05ce84aa13841db2383fad527184aca772fb33))
+     was used instead to process the user input and create a `XYZCommand` object.
    * Encouraged other developers to follow separation of concerns principle to improve code quality by replacing
      `XYZCommand#prepare` with `XYZCommandParser` class.
  * Headed the fixing of bugs found by other teams during the PE dry run
