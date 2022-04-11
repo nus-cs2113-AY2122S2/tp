@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.splitlah.exceptions.InvalidDataException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -96,9 +97,9 @@ public class PersonTest {
     }
 
     @Test
-    public void equals_differetName_returnsFalse() {
+    public void equals_differentName_returnsFalse() {
         Person john = Person.createPersonFromString("John");
         Person sam = Person.createPersonFromString("Sam");
-        assertEquals(john, sam);
+        assertNotEquals(john, sam);
     }
 }
