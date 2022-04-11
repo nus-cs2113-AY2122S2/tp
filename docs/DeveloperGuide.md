@@ -427,7 +427,7 @@ separate `ListCommand.listToString()` method.
 ### Delete Command
 The source code can be found in [`DeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command/DeleteCommand.java)
 
-The List Command feature allows users to delete an entry in their current `Expenditure`, `Credit card` or `Income` list, using their
+The List Command feature allows users to delete an entry in their current `Expenditure`, `Credit Card` or `Income` list, using their
 respective flags and followed by the index of the entry to be deleted:
 - Delete an expenditure `/e [INDEX]`.
 - Delete a credit card `/cc [INDEX]`.

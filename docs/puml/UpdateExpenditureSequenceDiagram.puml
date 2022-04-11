@@ -50,15 +50,6 @@ activate GeneralFunctions HELPER_COLOUR
 GeneralFunctions --> updateCommand
 deactivate GeneralFunctions
 
-opt isSimilarExpenditure()
-updateCommand --> MMM
-note right
-An exception is thrown, warning user
-that the new Expenditure is similar to
-old Expenditure
-end note
-end
-
 updateCommand -> updateCommand: updatePaymentMethod()
 activate updateCommand COMMANDS_COLOUR
 updateCommand --> updateCommand
