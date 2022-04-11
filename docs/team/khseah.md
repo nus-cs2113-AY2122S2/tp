@@ -19,23 +19,18 @@ Enhancements implemented:
    - Implemented the `>` prompt to help the user differentiate between their input and the program's output.
    - Sourced for 49 financial tips, of which 1 would be printed on startup, making it more interactive.
    
-3. Set up the `HelpCommand` class.
-   - Provides the user a convenient way to view command formats should they forget.
-   
-4. Added Add, Delete, Update and List functionalities for `Income`.
+3. Added Add, Delete, Update and List functionalities for `Income`.
    - As a Personal Finance app, it is imperative that income can be tracked, so that users can monitor their income
 inflow and outflow.
    - Affected existing Add, Delete, Update and List commands as these commands were also used for `Expenditure` and
 `CreditCard`.
    
-5. Added the `User` class.
+4. Added the `User` class.
    - Abstracts out `ExpenditureList`, `CreditCardList` and `IncomeList` classes into 1 class, increasing OOP.
-   - Affected a majority of existing code as previous methods had the 3 lists as parameters, and required significant 
-changes.
+   - Affected a majority of existing code as previous methods had the 3 lists as parameters.
    
-6. Miscellaneous
+5. Miscellaneous.
    - Added JUnit tests for `HelpCommand`, `AddCommand` and `DeleteCommand`.
-   - Wrote JavaDoc comments for a majority of methods.
    - Fixed bugs raised during PE-Dry testing pertaining to `CreditCard` limit.
 
 ### UG Contribution
@@ -80,6 +75,5 @@ PR reviews (with non-trivial comments):
 [#72](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/72), [#86](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/86), 
 [#87](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/87), [#143](https://github.com/AY2122S2-CS2113T-T10-4/tp/pull/143).
 
-DG review for `Simplst` can be found [here](https://github.com/nus-cs2113-AY2122S2/tp/pull/6/files/4125efa69fbb7ffda1b2ade950ec48b6e80f5baf).
-
-Bugs found during PE-Dry testing for `Spendvelope` can be viewed [here](https://github.com/khseah/ped/issues).
+[DG review](https://github.com/nus-cs2113-AY2122S2/tp/pull/6/files/4125efa69fbb7ffda1b2ade950ec48b6e80f5baf) for `Simplst`,
+[Bugs found](https://github.com/khseah/ped/issues) during PE-Dry testing for `Spendvelope`.
