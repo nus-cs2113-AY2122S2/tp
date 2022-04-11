@@ -7,8 +7,6 @@ import seedu.duke.data.ItemList;
 import seedu.duke.ui.Ui;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
 
 /**
  * Adds an item to the item list.
