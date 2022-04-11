@@ -8,12 +8,15 @@ Package "Family" <<Rectangle>> {
 }
 
 class Command COMMAND_COLOR
+class Main #grey
 class UI UI_COLOR
 class Storage STORAGE_COLOR
 class IncomeList MONEY_COLOR
 class ExpenditureList MONEY_COLOR
 
 Command -down[#grey].> Family
+
+Main -down[#grey]-> Family
 
 Storage "1" -down[#grey]-> "1" Family
 
