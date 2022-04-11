@@ -6,14 +6,13 @@ The target users of this application are executive committee members of student 
 
 ## My Contributions
 
-1. Code Contributed 
-2. Features Implemented 
-3. Enhancements Implemented 
-4. Contributions to the User Guide 
-5. Contributions to the Developer's Guide 
-6. Contributions to Team Based Tasks 
-7. Review/Mentoring Contributions
-
+1. [Code Contributed](https://github.com/quitejasper/tp/blob/master/docs/team/quitejasper.md#1-code-contributed-)
+2. [Features Implemented](https://github.com/quitejasper/tp/blob/master/docs/team/quitejasper.md#2-features-implemented-)
+3. [Enhancements Implemented](https://github.com/quitejasper/tp/blob/master/docs/team/quitejasper.md#3-enhancements-implemented-) 
+4. [Contributions to the User Guide](https://github.com/quitejasper/tp/blob/master/docs/team/quitejasper.md#4-contributions-to-the-user-guide-) 
+5. [Contributions to the Developer's Guide](https://github.com/quitejasper/tp/blob/master/docs/team/quitejasper.md#5-contributions-to-the-developers-guide-)
+6. [Contributions to Team Based Tasks](https://github.com/quitejasper/tp/blob/master/docs/team/quitejasper.md#6-contributions-to-team-based-tasks-)
+7. [Review/Mentoring Contributions](https://github.com/quitejasper/tp/blob/master/docs/team/quitejasper.md#7-reviewmentoring-contributions-)
 
 ### 1. Code Contributed
 Click <a href="https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=quitejasper&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-02-18&tabOpen=true&tabType=authorship&tabAuthor=quitejasper&tabRepo=AY2122S2-CS2113-F10-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false">here to view the code that I contributed.
@@ -34,9 +33,7 @@ Click <a href="https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=quitej
 - ListOverdueBorrowings Command
   - What it does: Lists all borrowings that are overdue based on the existing borrow records of every item. 
   - Justification: Users would be able to quickly retrieve such information for their future planning. 
-    
-
-
+  
 ### 3. Enhancements Implemented
 - Wrote tests for Add Command to increase coverage.
 - Wrote tests for Delete Command to increase coverage.
@@ -54,16 +51,13 @@ Click <a href="https://nus-cs2113-ay2122s2.github.io/tp-dashboard/?search=quitej
   - List Overdue Borrowings
 -  Command Summary
 
-
 ### 5. Contributions to the Developer's Guide
  - Implementation (with sequence diagrams) of:
    - Add Command
    - Delete Command
    - ListFutureBorrowings Command
    - ListOverdueBorrowings Command
-
-
-
+   
 ### 6. Contributions to Team Based Tasks
  - Setting up the GitHub team org/repo
  - Necessary general code enhancements
