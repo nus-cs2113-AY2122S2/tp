@@ -664,6 +664,7 @@ The following fields are required to correctly load a task:
 
 
 <div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: My save file is corrupted, how do I resolve this?
@@ -688,6 +689,7 @@ one of the options provided is `show all`. The `all` keyword would thus be the p
 * *Extraneous* - Something that is unnecessary or irrelevant.
 
 <div style="page-break-after: always;"></div>
+
 ## Command Summary
 
 | Action                                | Format, Examples                                                                                                                                                                                                                                 |
