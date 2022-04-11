@@ -15,7 +15,7 @@ alt eventType = "L"
 ":StorageFile" -> ":ParserLocalData" ++:
 ":ParserLocalData" -> ":ParserLocalData" ++:prepareLoadLesson(name, data, masterTimetable).execute(masterTimetable
 create ":AddLessonCommand"
-":ParserLocalData" -> ":AddLessonCommand"
+":ParserLocalData" -> ":AddLessonCommand" ++
 ":AddLessonCommand" --> ":ParserLocalData"
 deactivate ":AddLessonCommand"
 else eventType = "M"
@@ -33,7 +33,7 @@ alt hasMeeting = true
 loop for each row of data in meetingList
 ":ParserLocalData" -> ":ParserLocalData" ++:prepareLoadMeeting(data, masterTimetable).execute(masterTimetable)
 create ":AddMeetingCommand"
-":ParserLocalData" -> ":AddMeetingCommand"
+":ParserLocalData" -> ":AddMeetingCommand" ++
 ":AddMeetingCommand" --> ":ParserLocalData"
 deactivate ":AddMeetingCommand"
 ":ParserLocalData" --> ":ParserLocalData"
@@ -41,10 +41,13 @@ deactivate ":ParserLocalData"
 end
 end
 destroy ":AddMeetingCommand"
+":ParserLocalData" --> ":StorageFile"
 ":StorageFile" --> ":StorageFile"
 deactivate ":StorageFile"
-":ParserLocalData" --> ":StorageFile"
+":StorageFile" --> ":MeetingJio"
 ":MeetingJio" --> ":MeetingJio"
 deactivate ":MeetingJio"
-":StorageFile" --> ":MeetingJio"
+
+":MeetingJio" --> User
+
 @enduml
