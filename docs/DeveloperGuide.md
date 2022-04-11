@@ -2,7 +2,6 @@
 - [Architecture](#architecture)
 - [Design and Implementation](#design-and-implementation)
   - [Design](#design)
-    - [Logical Component](#logical-component)
   - [Implementation](#implementation)
     - [Assign a housekeeper to a room](#assign-a-housekeeper-to-a-room)
     - [Adding a customer's satisfaction rating](#adding-a-customers-satisfaction-rating)
@@ -20,6 +19,12 @@
 
 
 ## Architecture
+<p align="center">
+
+![Architecture Design](team/architectureDesign/architectureDesign.jpg)
+
+</p>
+
 ## Design & implementation
 
 ## Design
