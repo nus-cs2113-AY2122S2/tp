@@ -46,6 +46,11 @@ class Event {
 
 }
 
+class Meeting {
+}
+
+
 "Timetable" -u- "*" "Event" : list
 "MasterTimetable" -u- "*" "Timetable" : timetables
+"MasterTimetable" -u- "*" "Meeting" : meetingList
 @enduml
