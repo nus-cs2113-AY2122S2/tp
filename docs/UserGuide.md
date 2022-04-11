@@ -556,7 +556,7 @@ Displays the details about an activity so that you can review it.<br>
 
 <br>
 
-> **💡 Note:**
+> **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity in that session can be viewed.
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be viewed.
 >- All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
