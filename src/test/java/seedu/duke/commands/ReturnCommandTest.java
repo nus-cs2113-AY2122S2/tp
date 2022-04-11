@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.common.Messages;
 import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
@@ -11,10 +12,10 @@ import seedu.duke.ui.Ui;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class ReturnCommandTest {
     private ArrayList<Item> itemArrayList = new ArrayList<>();
@@ -42,7 +43,7 @@ public class ReturnCommandTest {
      * Asserts that isValidReturnRequest is false when there is no outstanding loan of an item.
      * */
     @Test
-    public void execute_noOutstandingLoan_printsReturnErrorMessage() {
+    public void execute_noOutstandingLoan_printsReturnErrorMessage() throws InvMgrException {
         Ui ui = new Ui();
         ReturnCommand c = new ReturnCommand(0);
         c.execute(itemList, ui);
@@ -55,7 +56,7 @@ public class ReturnCommandTest {
      * and that the end date of its borrow record is the date of return.
      * */
     @Test
-    public void execute_overdueItem_success() {
+    public void execute_overdueItem_success() throws InvMgrException {
         Ui ui = new Ui();
         ReturnCommand c = new ReturnCommand(1);
         c.execute(itemList, ui);
@@ -102,17 +103,37 @@ public class ReturnCommandTest {
     }
 
     /**
-     * Asserts that isValidReturn is false when the inventory is empty.
+     * Checks that InvMgrException is thrown when the inventory is empty.
+     * Checks that Messages.EMPTY_ITEM_LIST_MESSAGE is displayed.
      * */
     @Test
-    public void execute_emptyItemList_displaysEmptyItemListMessage() {
+    public void execute_emptyItemList_InvMgrExceptionThrown() {
         Ui ui = new Ui();
         ArrayList<Item> emptyItemArrayList = new ArrayList<>();
         ItemList emptyItemList = new ItemList(emptyItemArrayList);
         ReturnCommand c = new ReturnCommand(0);
-        c.execute(emptyItemList, ui);
-        boolean isValidReturn = c.getValidityOfReturn();
-        assertFalse(isValidReturn);
+        try {
+            c.execute(emptyItemList, ui);
+            fail();
+        } catch (InvMgrException e) {
+            assertEquals(Messages.EMPTY_ITEM_LIST_MESSAGE, e.getMessage());
+        }
+    }
+
+    /**
+     * Checks that InvMgrException is thrown when the item index is out of range.
+     * Checks that Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE is displayed.
+     * */
+    @Test
+    public void execute_indexOutOfRange_InvMgrExceptionThrown() {
+        Ui ui = new Ui();
+        ReturnCommand c = new ReturnCommand(10);
+        try {
+            c.execute(itemList, ui);
+            fail();
+        } catch (InvMgrException e) {
+            assertEquals(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE, e.getMessage());
+        }
     }
 
 }

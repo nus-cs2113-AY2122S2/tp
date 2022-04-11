@@ -26,7 +26,6 @@ public class DeleteCommand extends Command {
      * @param index index specified.
      */
     public DeleteCommand(int index) {
-        requireNonNull(index, "no index was indicated!");
         this.index = index;
     }
 

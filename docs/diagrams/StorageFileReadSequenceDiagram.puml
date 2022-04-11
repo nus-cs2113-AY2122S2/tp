@@ -1,0 +1,23 @@
+@startuml
+
+hide footbox
+
+skinparam PackageBackgroundColor pink
+
+participant "storage:Storage" as Storage
+participant "String" as String <<class>>
+participant "File" as Files <<class>>
+
+group sd Read dataPath into wholeJsonData: String
+activate Storage
+    Storage -> Files: readAllLines(dataPath: Path)
+    activate Files
+    return jsonDataList: List<String>
+
+    Storage -> String: join("\\n", jsonDataList: List<String>)
+    activate String
+    note right: join is a core Java library functionality.
+    return wholeJsonData: String
+
+end
+@enduml

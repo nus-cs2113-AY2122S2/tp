@@ -11,7 +11,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of DeleteCommand
      * and returns a DeleteCommand object for execution.
-     * @throws InvMgrException if the user input does not conform to the expected format
+     *
+     * @throws InvMgrException if the user input does not conform to the expected format.
      */
     public DeleteCommand parse(String args) throws InvMgrException {
         int index = ParserUtils.parseIndex(args) - 1;
