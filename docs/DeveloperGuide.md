@@ -553,6 +553,19 @@ the JAR file name
 | View recorded housekeeper performances | `view performances` | Lists out all housekeeper performances that user has recorded so far|
 | Add extra characters to view recorded housekeeper performances | `view performances blah blah` | Error message to user |
 
+#### Assign Housekeeper
+* The format of the command is `assign NAME / ROOMID`.
+* Prerequisites:
+    - the housekeeper with this `NAME` should already exist in the system.
+    - the room with this `ROOMID` should already exist in the system.
+
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:-------------|:-------------------|
+| Assign `Susan` to room `301` |`assign susan / 301`  | Registers the assignment|
+| Assign housekeeper that does not exist |`assign james / 301`  | Error message to the user|
+| Add `susan` to invalid room  | `assign susan / 90` | Error message to the user|
+| Add `susan` to non-integer room id | `assign susan / ioduf`  | Error message to the user|
+| Fail to separate fields | `assign susan 301`  | Error message to the user|
 
 ---
 ### Room Related Functions
@@ -567,7 +580,32 @@ the JAR file name
 
 ---
 ### Event Related Functions
+#### Add Event
+* The format of the command is `add event DESCRIPTION / DATE`.
+* Prerequisites:  
+  - date should be in `yyyy-mm-dd` format.
+  - the description should only contain alphanumeric characters.
+  - the event should not already exist in the system.
+
 | **Test Case** | **Command** | **Expected Result** |
 |:-------------:|:-------------|:-------------------|
-|x|x  | x|
+| Add event `study` on 19 Nov 2022 |`add event study / 2022-11-19`  | Adds the event|
+| Add event `study` with no date |`add event study`  | Error message to the user|
+| Add event `st*&udy` |`add event st*&udy / 2022-11-21`  | Error message to the user|
+| Add duplicate event | `add event study / 2022-11-19`  | Error message to the user|
+| Add extra fields to the command | `add event submit TP / 2022-04-11 / blah`  | Error message to the user|
+| Fail to separate fields | `add event submit TP 2022-04-11`  | Error message to the user|
+
+#### Delete Event
+* The format of the command is `delete event INDEX`.
+* Prerequisites:
+    - index should be an integer.
+    - the event should exist in the system.
+
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:-------------|:-------------------|
+| Delete event `study` from the list |`delete event 1`  | Deletes the event|
+| Delete event with index out of bounds |`delete event 6`  | Error message to the user|
+| Delete event with non-integer index |`delete event sf`  | Error message to the user|
+| Delete event with no index |`delete event`  | Error message to the user|
 
