@@ -512,7 +512,7 @@ The instructions below provide a quick summary of how to manually test the funct
 ### Set up and Launching the program
 1. Download the JAR file 
 2. Open command terminal and go to the directory that stores the JAR file
-3. Run the application by typing: java -jar NameOfFile. NameOfFile represents
+3. Run the application by typing: `java -jar NameOfFile`. NameOfFile represents
 the JAR file name
    
 ---
@@ -542,8 +542,26 @@ the JAR file name
 
 ---
 ### Housekeeper Related Functions
+
+#### Housekeeper functions
+* Assume that the `HousekeeperList` has a `Housekeeper` named `Steve` and a `Housekeeper` named `Fred`.
+
+| **Test Case** | **Command** | **Expected Result** |
+|:-------------:|:-------------|:-------------------|
+|Add 1 housekeeper.|`add housekeeper mary / 33`  | Adds housekeeper name `mary` and is `33` years old |
+|Add empty name and empty age|`add housekeeper /` |Error message to user |
+|Add existing housekeeper|`add housekeeper steve / 33` |Error message to user  |
+|Add availability to `Steve`|`availability Steve/1,3`  | Adds `steve` availability to `Monday` and `Wednesday` |
+|Add availability is not between 1 and 7|`availability Steve/1,3,10`  | Error message to user |
+|| | |
+|| | |
+|| | |
+|| | |
+
+
+#### Housekeeper Performance functions
 * Prerequisite: For `HousekeeperPerformance`-related commands, the the `HousekeeperList` must contain all the housekeepers that the user wants to record performances for.
-  Assume that the `HousekeeperList` has a `Housekeeper` named `Steve` and a `Housekeeper` named `Fred`.
+* Assume that the `HousekeeperList` has a `Housekeeper` named `Steve` and a `Housekeeper` named `Fred`.
 
 | **Test Case** | **Command** | **Expected Result** |
 |:-------------:|:-------------|:-------------------|
@@ -552,6 +570,7 @@ the JAR file name
 | Add 1 housekeeper performance for `Fred` with rating that is not within range of 1-5, inclusive. | `add performance Fred / -1` | Error message to user|
 | View recorded housekeeper performances | `view performances` | Lists out all housekeeper performances that user has recorded so far|
 | Add extra characters to view recorded housekeeper performances | `view performances blah blah` | Error message to user |
+
 
 
 ---
