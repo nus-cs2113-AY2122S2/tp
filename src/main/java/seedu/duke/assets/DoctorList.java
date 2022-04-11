@@ -92,6 +92,15 @@ public class DoctorList extends List {
         }
     }
 
+    public void removeAppointmentDate(String nric, String date) {
+        for (Doctor doctor : doctors) {
+            if (doctor.getNric().equals(nric)) {
+                doctor.removeAppointmentDate(date);
+                break;
+            }
+        }
+    }
+
 
     public boolean hasDoctorDate(String nric, String date) throws DuplicateEntryException {
         ArrayList<String> doctorDateList = new ArrayList<>();

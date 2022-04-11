@@ -66,7 +66,6 @@ public class UI {
         printEditDoctorMessage();
         printEditPatientMessage();
         printEditMedicineMessage();
-        printEditAppointmentMessage();
         printFindDoctorMessage();
         printFindPatientMessage();
         printFindMedicineMessage();
