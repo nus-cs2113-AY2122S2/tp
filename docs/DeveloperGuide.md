@@ -257,9 +257,27 @@ To aid in visualisation,
   3. User decides to view the `parents` generation in detail
   4. User decides to view the overall situation in the `Family`
 
-The following Sequence Diagram shows how the `Family` component handles each call by the `Command` component.  
+The following Sequence Diagrams shows how the `Family` component handles each call by the `Command` component.  
 
-![FamilySequenceDiagram](images/FamilySequenceDiagram.png)
+Step 1. User adds a Person, *Alice* to `parents`
+
+![FamilySequenceDiagram1](images/FamilySequenceDiagram1.png)
+
+Step 2. User adds an income to *Alice*
+
+![FamilySequenceDiagram2](images/FamilySequenceDiagram2.png)
+
+Additionally, the following Object Diagram shows what is present in the `Family` structure at this point in time.
+
+![FamilyObjectDiagram](images/FamilyObjectDiagram.png)
+
+Step 3. User decides to view the `parents` generation in detail
+
+![FamilySequenceDiagram3](images/FamilySequenceDiagram3.png)
+
+Step 4. User decides to view the overall situation in the `Family`.
+
+![FamilySequenceDiagram4](images/FamilySequenceDiagram4.png)
 
 ### Money Component
 
@@ -651,6 +669,7 @@ Upon request for input, type `bye` and press [Enter].
    Expected: No income is added. Error details shown in the error message.
 4. Other incorrect addin commands to try: `addin`, `addin /g 1 /u 1 /d Test case /i notDouble /p f`  
    Expected: Similar to previous.
+
 #### Adding a recurring income
 1. Prerequisite: Similar to previous.
 2. Testing similar to previous, but with `/p t` instead.
@@ -667,6 +686,7 @@ Upon request for input, type `bye` and press [Enter].
    Expected: No expenditure is added. Error details shown in the error message.
 4. Other incorrect addout commands to try: Similar to the case of [addin](#Adding-an-expenditure), with the inclusion of `/c`  
    Expected: Similar to previous.
+
 #### Adding a recurring expenditure
 1. Prerequisite: Similar to previous.
 2. Testing similar to previous, but with `/p t` instead.
@@ -683,6 +703,7 @@ Upon request for input, type `bye` and press [Enter].
    Expected: No income is deleted. Error details shown in the error message.
 4. Other incorrect deletein commands to try: `deletein`, `deletein /u 1 /r 1`, `deletein /g 1 /u 1 /r first`  
    Expected: Similar to previous.
+
 #### Deleting an expenditure
 1. Prerequisite: Similar to previous, but existing expenditure instead of income.
 2. Testing similar to previous, but with `deleteout` instead.
@@ -701,6 +722,7 @@ Upon request for input, type `bye` and press [Enter].
    Expected: No income is edited. Error details shown in the error message.
 5. Other incorrect editin commands to try: `editin /g 1 /u 1 /r 1`, `editin /g 1 /u 1 /r 1 /i notDouble`  
    Expected: Similar to previous.
+
 #### Editing an expenditure
 1. Prerequisite: Similar to previous, but existing expenditure instead of income.
 2. Testing similar to previous, but with `editin` instead and additional delimiter of `/c` can be added for category.
@@ -710,12 +732,29 @@ Upon request for input, type `bye` and press [Enter].
 #### Finding incomes and general expenditures
 Test case: `find /d Test`  
 Expected: All incomes and expenditures whose description contains `Test` will be printed out.
+
 #### Finding expenditures in a category
 1. Test case: `find /d Test /c 1`  
    Expected: All incomes, and expenditures in the category of `Others`, whose description contains `Test` will be
    printed out.
 2. Test case: `find /d Test /c 7`  
    Expected: No entries are printed. Error details shown in the error message.
+
+### Moving to the next month
+
+1. Prerequisite: Launch the program and add valid person such as `add /n Alice /g 1` and
+   a valid income such as `addin /g 1 /u 1 /d Donations /i 6000 /p f`.
+2. Execute the command `bye` to save the data to `PlanITarium.txt`.
+3. Open the save file `PlanITarium.txt` in directory `data` and manually edit the income record
+   added above.
+4. To demonstrate, an example entry should look like this `i Donations /d 6000.0 /d false /d 2022-04-11`.
+5. Test case: Change the month to an earlier month. The simulated record should look like this
+   `i Donations /d 6000.0 /d false /d 2022-01-11`.  
+   Expected: Upon starting up the program again and running any command which iterates through the lists such as `overview`,
+   the entry is automatically deleted.
+6. Test case: Change the year to an earlier year. The simulated record should look like this
+   `i Donations /d 6000.0 /d false /d 2020-04-11`.  
+   Expected: Similar to previous.
 
 ### Loading data
 
