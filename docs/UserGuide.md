@@ -115,7 +115,7 @@ Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate 
 > When using the optional parameter shown in `[]`, both the`DEADLINE` and `END_TIME` to need be used together.
 
 **Examples**
-- `add write final essay /do 25/6/2022 /start 20:00 /end 22:00 /bydate 27/6/2022 /bytime 23:59`
+- `add write final essay /do 11/4/2022 /start 22:00 /end 24:00 /bydate 13/4/2022 /bytime 23:59`
 
 ![](images/addSingleTaskWithDeadline.png)
 
