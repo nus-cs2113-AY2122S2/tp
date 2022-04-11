@@ -24,10 +24,10 @@ ClubInvMgr is a desktop CLI app for inventory management for CCA clubs. It allow
 
 ### Contributions to the Developer Guide
 1. Created architecture diagram
-2. Created class diagrams for the Storage component
-3. Created `Storage` sequence diagrams for implementation.
-4. Created `EditCommand` sequence diagrams for implementation.
-5. Created `SearchCommand` sequence diagrams for implementation.
+2. Wrote section on the `Storage` component for **Design**.
+3. Wrote section on `Storage` for **Implementation**.
+4. Wrote section on `EditCommand` for **Implementation**.
+5. Wrote section on `SearchCommand`  for **Implementation**.
 6. Streamlined format for DG.
 
 ### Contributions to team-based-tasks
