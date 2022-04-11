@@ -52,6 +52,7 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 - In each command: 
   - The points indicated under 💡 are **important notes** to be mindful of when using the command.
   - The points indicated under ⚠️ are **warnings** that you should pay attention to when using the command.
+- The button at the end of each section or subsection provides a hyperlink back to the table of contents that includes it. 
 
 ## Quick Notes
 - Allowed characters for values:
