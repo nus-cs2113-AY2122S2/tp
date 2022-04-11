@@ -15,6 +15,7 @@ and maintaining the state of checked-in/checked-out rooms.
 3. To get a list of commands available type `help` after running the application.
 4. **WARNING: Please do not touch the save files (in the `ListFolder` folder) that save the
 user's application usage history.** This will interfere with the function of the program. 
+5. __WARNING: This application does not allow duplicate command strings.__ For example, `help help` will not be accepted and will throw an exception.
 
 ## Features
 1. [Customer Satisfaction Related Commands](#customer-satisfaction-related-commands)
