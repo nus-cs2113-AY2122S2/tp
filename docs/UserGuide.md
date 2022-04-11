@@ -56,6 +56,8 @@ improve efficiency in managing warehouse inventory and orders.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
+If you do not, you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java11).
+![img_1.png](img_1.png)
 2. Down the latest version of ***Simplst*** from [here](https://github.com/AY2122S2-CS2113T-T09-4/tp/releases/).
 3. Copy the file to the folder you want to use as the home folder for Simplst
 4. Open the terminal in the folder which contains Simplst.jar and run java -jar Simplst.jar. The Startup should look like below:
