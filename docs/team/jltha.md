@@ -79,6 +79,7 @@ complete the activities with the use of the study session.
     - Enabled assertions and logging for teammates to use.
 
 - Documentation
+    - Added a new Jekyll theme to user and developer guide (Cayman theme) - [link](https://github.com/AY2122S2-CS2113T-T09-1/tp/tree/master/docs) 
     - User Guide:
       - Added documentation for features `study session` 
       (add timer Ui diagrams and explanations on it), `timetable` and `mark/unmark`. 
