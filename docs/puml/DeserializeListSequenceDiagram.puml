@@ -1,0 +1,34 @@
+@startuml
+!include Style.puml
+
+box Deserialize List
+participant ":ExpenditureList" as ExpenditureList USERFINANCIAL_COLOUR
+participant ":SerializerFunctions" as SerializerFunctions STORAGE_COLOUR
+participant ":Expenditure" as Expenditure USERFINANCIAL_COLOUR
+participant ":PropertyList" as PropertyList STORAGE_COLOUR
+end box
+hide footbox
+
+[-> ExpenditureList : deserializeFrom()
+activate ExpenditureList USERFINANCIAL_COLOUR
+ExpenditureList -> SerializerFunctions : convertInputToList()
+activate SerializerFunctions STORAGE_COLOUR
+loop until end line is read
+    SerializerFunctions -> Expenditure ** : deserialize()
+    activate Expenditure USERFINANCIAL_COLOUR
+    deactivate Expenditure
+
+    Expenditure -> PropertyList ** : deserialize()
+    activate PropertyList STORAGE_COLOUR
+    deactivate PropertyList
+    PropertyList --> Expenditure --
+    Expenditure -> PropertyList: getValue()
+    activate PropertyList STORAGE_COLOUR
+    PropertyList --> Expenditure --
+
+    Expenditure --> SerializerFunctions --
+end
+SerializerFunctions --> ExpenditureList --
+[<-- ExpenditureList --
+
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+!include Style.puml
+
+box Loading
+participant ":MMM" as MMM MMM_COLOUR
+participant ":Storage" as Storage STORAGE_COLOUR
+participant ":User" as User USERFINANCIAL_COLOUR
+participant ":ExpenditureList" as ExpenditureList USERFINANCIAL_COLOUR
+participant ":CreditCardList" as CreditCardList USERFINANCIAL_COLOUR
+participant ":IncomeList" as IncomeList USERFINANCIAL_COLOUR
+end box
+hide footbox
+
+MMM -> Storage ** : Storage()
+activate Storage STORAGE_COLOUR
+Storage --> MMM --
+
+MMM -> Storage : load()
+activate Storage STORAGE_COLOUR
+Storage -> User ** : deserializeFrom()
+activate User USERFINANCIAL_COLOUR
+User -> ExpenditureList ** : deserializeFrom()
+activate ExpenditureList USERFINANCIAL_COLOUR
+ref over User, ExpenditureList : deserialize list
+ExpenditureList --> User --
+User -> CreditCardList ** : deserializeFrom()
+activate CreditCardList USERFINANCIAL_COLOUR
+CreditCardList --> User --
+User -> IncomeList ** : deserializeFrom()
+activate IncomeList USERFINANCIAL_COLOUR
+IncomeList --> User --
+User --> Storage --
+Storage --> MMM --
+@enduml

@@ -14,36 +14,13 @@ hide footbox
 MMM -> updateCommand: executeCommand()
 activate updateCommand COMMANDS_COLOUR
 
-updateCommand -> updateCommand: updateExpenditure()
+updateCommand -> updateCommand: updateCreditCard()
 activate updateCommand COMMANDS_COLOUR
 
 updateCommand -> GeneralFunctions: parseInputWithCommandFlag()
 activate GeneralFunctions HELPER_COLOUR
 GeneralFunctions --> updateCommand
 deactivate GeneralFunctions
-
-updateCommand -> CreditCardList: get()
-activate CreditCardList DATA_COLOUR
-CreditCardList --> updateCommand
-deactivate CreditCardList
-
-opt oldCreditCard.getTotalExpenditure() > newCardLimit
-updateCommand --> MMM
-note right
-An exception is thrown, warning user
-that the new credit card limit is smaller than
-their old credit card's total expenditure
-end note
-end
-
-opt isSimilarCreditCard()
-updateCommand --> MMM
-note right
-An exception is thrown, warning user
-that the new CreditCard is similar to
-old CreditCard
-end note
-end
 
 create CreditCard
 updateCommand -> CreditCard: CreditCard()
