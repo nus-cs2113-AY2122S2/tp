@@ -325,7 +325,7 @@ Note that in this, case if a meeting event for this user exists, it will only be
 
 **Format:** 
 ```
-clear [NAME]
+clear NAME
 ```
 
 |  Parameters   | Description              | Accepted inputs                  |  
