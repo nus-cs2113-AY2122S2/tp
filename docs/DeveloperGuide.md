@@ -62,23 +62,23 @@ The `parser` package includes:
 
 ![TimetableClassDiagram](images/TimetableClassDiagram.png)
 
-The above class diagram illustrates the classes within the timetables package.
+The above class diagram illustrates the classes within the `timetables` package.
 The `timetables` package includes 
-1. Timetable
+1. `Timetable`
    - To invoke operations involving a specific timetable object.
-2. MasterTimetable
+2. `MasterTimetable`
    - To invoke operations on the master list of all user's timetable.
    
 ## 2.6 Event Component
 ![EventClassDiagram](images/EventClassDiagram.png)
 
-The above class diagram illustrates the classes within the event package.
+The above class diagram illustrates the classes within the `events` package.
 
-The Event package includes:
+The `event` package includes:
 1. An abstract `Event` class that other event classes inherit from
 2. Individual Event classes that inherits from the `Event` class 
-   - Lesson
-   - Meeting
+   - `Lesson`
+   - `Meeting`
 
 ## 2.7 Storage Component
 ![StorageClassDiagram](images/StorageClassDiagram.png)
@@ -244,10 +244,10 @@ The following sequence diagram shows how the `delete` command works:
 ![DeleteCommandSequenceDiagram](images/DeleteCommandSequenceDiagram.png)
 
 The above diagram shows the sequence diagram of a meeting deletion.
-1. User inputs delete with appropriate parameters which is passed to the UI.
+1. User inputs delete with appropriate parameters which is passed to the Ui.
 2. Ui then provides user input to the Parser class which parses it and retrieves the respective delete command.
 3. Ui subsequently executes the command on the masterTimetable for the whole application.
-4. For a normal event(non-meeting) the DeleteCommand will get the user's timetable from `MasterTimetable` 
+4. For a normal event (non-meeting) the DeleteCommand will get the user's timetable from `MasterTimetable` 
 and perform the deletion of that event.
 5. If it is a meeting that the user is trying to delete, the DeleteCommand will find that meeting in 
 everyone's timetable and delete it.
