@@ -25,6 +25,11 @@ public class UI {
     public UI() {
     }
 
+    public void printErrorMsg(String message) {
+        System.out.println(message);
+        System.out.println(HORI_LINE);
+    }
+
     public void printMsg(String message) {
         System.out.println(HORI_LINE);
         System.out.println(message);

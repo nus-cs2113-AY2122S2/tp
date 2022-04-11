@@ -4,6 +4,8 @@ skinparam groupInheritance 2
 
 !include style.puml
 
+Title: Command Component
+
 Package Command as C {
     class XYZCommand COMMAND_COLOR_T1
     abstract class Command COMMAND_COLOR_T1

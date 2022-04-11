@@ -2,6 +2,7 @@
 'https://plantuml.com/sequence-diagram
 !include style.puml
 
+Title: Add Person Sequence
 
 participant Main #grey
 
@@ -10,6 +11,7 @@ Box " "#WHITE
     participant ":Parser" as Parser LOGIC_COLOR
     participant ":AddPersonCommand" as AddPersonCommand COMMAND_COLOR_T1
 end Box
+
 
 participant ":Family" as Family MODEL_COLOR
 
