@@ -11,7 +11,7 @@ public class Constants {
     public static final String SEPARATOR = "____________________________________________________________";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n";
     public static final String NO_COMMAND_ENTERED = "No command is entered.";
-    public static final String NEGATIVE_INDEX = "Unsuccessful. The index is a negative number!";
+    public static final String NEGATIVE_INDEX = "Unsuccessful. The index is not a positive number!";
     public static final String NON_INTEGER_INDEX = "Unsuccessful. The index is not an integer!";
     public static final String INDEX_PARSING_ERROR = "Unsuccessful. Cannot parse the index.\n "
             + "Please check if the index is too large or it is not a number.";

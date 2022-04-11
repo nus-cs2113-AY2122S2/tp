@@ -361,7 +361,7 @@ Given below are instructions to test the app manually.
 |-----------|----------|----------|
 |`todo`|when the command is invalid|Execution result: Invalid command format!<br>The correct format should be:<br>todo [project_index] [todo_description]|
 |`todo 1 buy textbooks`|when command is valid|Todo: buy textbooks  have been added to project newproject|
-|`todo -1 buy textbooks`|when project index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
+|`todo -1 buy textbooks`|when project index is a negative number|Execution result: Unsuccessful. The index is not a positive number!|
 |`todo buy textbooks`|when project index is not entered|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
 |`todo 1000000000000000000000 buy textbooks`|when project index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
 |`todo 1`|when todo description is not entered|Execution result: Invalid command format!<br>The correct format should be:<br>todo [project_index] [todo_description]|
@@ -375,7 +375,7 @@ Given below are instructions to test the app manually.
 |`mark 1`|when todo index is not entered|Execution result: Invalid command format!<br>The correct format should be:<br>mark [project_index] [todo_index]|
 |`mark -1 1`|when project index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
 |`mark 1000000000000000000000 1`|when project index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
-|`mark 1 -1`|when todo index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
+|`mark 1 -1`|when todo index is a negative number|Execution result: Unsuccessful. The index is not a positive number!|
 |`mark 1 4`|when target todo index is out of range|Unsuccessful operation. Please check the target indexes.|
 |`mark 4 1`|when target project index is out of range|Unsuccessful operation. Please check the target indexes.|
 
@@ -388,7 +388,7 @@ Given below are instructions to test the app manually.
 |`projdeadline 1`|when deadline is not entered|Execution result: Invalid command format!<br>The correct format should be:<br>projdeadline [project_index] [deadline (yyyy-mm-dd)]|
 |`projdeadline 1 2022`|when the date format is not correct|Improper format. Please type it in yyyy-mm-dd format.|
 |`projdeadline 1 2022-04-01`|when command is valid|Deadline set for newproject: 2022-04-01|
-|`projdeadline -1 2022-04-01`|when project index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
+|`projdeadline -1 2022-04-01`|when project index is a negative number|Execution result: Unsuccessful. The index is not a positive number!|
 |`projdeadline 1000000000000000000000 2022-04-01`|when project index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
 
 
@@ -401,7 +401,7 @@ Given below are instructions to test the app manually.
 |`changegit 1 https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when the command is valid|The Github Repo for newproject has been changed to: https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html|
 |`changegit 1`|when the url is not entered|Execution result: Invalid command format!<br>The correct format should be:<br>changegit [project_index] [website URL]|
 |`changegit 1 url`|when the url is in invalid format|Please make sure your link begins with the following: http:// or https://|
-|`changegit -1 https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when project index is a negative number|Execution result: Unsuccessful. The index is a negative number!
+|`changegit -1 https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when project index is a negative number|Execution result: Unsuccessful. The index is not a positive number!|
 |`changegit 1000000000000000000000  https://nus-cs2113-ay2122s2.github.io/website/admin/tp-pe.html`|when project index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
 
 ### Opening the GitHub repo  
@@ -421,7 +421,7 @@ Given below are instructions to test the app manually.
 |`tododeadline 1 1 2022-05-22`|when command is valid|Deadline set for buy textbooks : 2022-05-22|
 |`tododeadline 1 1`|when deadline is not entered|Execution result: Invalid command format!<br>The correct format should be:<br>tododeadline [project_index] [todo_index] [deadline (yyyy-mm-dd)]|
 |`tododeadline 1 1 2002`|when the date format is not correct|Improper format. Please type it in yyyy-mm-dd format.|
-|`tododeadline -1 1 2022-05-22`|when the target index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
+|`tododeadline -1 1 2022-05-22`|when the target index is a negative number|Execution result: Unsuccessful. The index is not a positive number!|
 |`tododeadline 1000000000000000000000 1 2022-05-22`|when target index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number. |
 
 ### Viewing details of a project
@@ -436,11 +436,11 @@ Given below are instructions to test the app manually.
 
 | Command |Test case| Expected Output |  
 |-----------|----------|----------|
-|`addlanguage`|when command is invalid|Execution result: Invalid command format!<br>The correct format should be: <br>addlanguage [project_name] [language_name]|
-|`addlanguage 1`|when the language is not entered|Execution result: Invalid command format!<br>The correct format should be: <br>addlanguage [project_name] [language_name]|
-|`addlanguage java`|when the index is not entered|Execution result: Invalid command format!<br>The correct format should be: <br>addlanguage [project_name] [language_name]|
+|`addlanguage`|when command is invalid|Execution result: Invalid command format!<br>The correct format should be: <br>addlanguage [project_index] [language_name]|
+|`addlanguage 1`|when the language is not entered|Execution result: Invalid command format!<br>The correct format should be: <br>addlanguage [project_index] [language_name]|
+|`addlanguage java`|when the index is not entered|Execution result: Invalid command format!<br>The correct format should be: <br>addlanguage [project_index] [language_name]|
 |`addlanguage 1 java`|when command is valid|java language added.|
-|`addlanguage -1 java`|when the target project index is a negative number|Execution result: Unsuccessful. The index is a negative number!|
+|`addlanguage -1 java`|when the target project index is not a positive number|Execution result: Unsuccessful. The index is not a positive number!|
 |`addlanguage 1000000000000000000000 java`|when target index is a very large number|Execution result: Unsuccessful. Cannot parse the index. Please check if the index is too large or it is not a number.|
 
 ### Listing languages of a project

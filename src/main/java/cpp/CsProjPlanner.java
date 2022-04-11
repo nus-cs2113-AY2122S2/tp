@@ -23,7 +23,7 @@ public class CsProjPlanner {
     /**
      * Main entry-point for the CSProjPlanner application.
      */
-    
+
     public static void main(String[] args) {
         //read data from hard disk
         projectList = Storage.read();
