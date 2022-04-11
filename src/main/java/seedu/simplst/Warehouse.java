@@ -124,7 +124,7 @@ public class Warehouse {
         if (!isSkuInInventory(sku)) {
             System.out.println("Good does not exist in the warehouse");
             System.out.println("Try adding a good first");
-            throw new WrongCommandException("add", true);
+            return false;
         }
 
         Orderline ol =  order.addOrderline(getUnitGoodBySku(sku), qty);
@@ -650,7 +650,7 @@ public class Warehouse {
         // Create JSON Obj
         JSONObject state = this.serialize();
         // Save to file
-        Boolean status = LocalStorage.writeSaveFile(LocalStorage.json2str(state), fp);
+        Boolean status = LocalStorage.writeSaveFile(state.toJSONString(), fp);
         if (!status) {
             Display.warehouseStateNotSaved();
             return false;

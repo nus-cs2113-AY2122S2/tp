@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant Simplst as S
+participant Warehouse as w
+participant LocalStorage as ls
+
+create w
+S -> w
+activate w
+w -> w ++ : saveWarehouseState()
+w -> w ++ : serialize()
+w -> w ++ : serializeOrders()
+w --> w -- : Boolean if successfully set
+w -> w ++ : serializeGoods()
+w --> w -- : Boolean if successfully set
+w -> w ++ : serializeUnitGoods()
+w --> w -- : Boolean if successfully set
+w --> w -- : Boolean if successfully set
+w --> w -- : Boolean if successfully set
+w -> ls ++ : :writeSaveFile(state, fp)
+ls --> w -- : Boolean if successfully saved
+w --> S -- : Boolean if successfully saved
+@enduml
