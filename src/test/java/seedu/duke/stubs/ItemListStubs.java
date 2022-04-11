@@ -11,6 +11,11 @@ import java.util.List;
 import static seedu.duke.stubs.ItemStubs.ITEM_MARKER;
 import static seedu.duke.stubs.ItemStubs.ITEM_PENCIL;
 import static seedu.duke.stubs.ItemStubs.ITEM_WHITEBOARD;
+import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A4_10;
+import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A4_15;
+import static seedu.duke.stubs.ItemStubs.ITEM_PAPER_A5_10;
+import static seedu.duke.stubs.ItemStubs.ITEM_DVI_CABLE;
+import static seedu.duke.stubs.ItemStubs.ITEM_HDMI_CABLE;
 
 public class ItemListStubs {
 
