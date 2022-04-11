@@ -15,6 +15,7 @@ public class AddParser extends CommandParser {
     public AddParser(Warehouse warehouse) {
         super(warehouse);
     }
+
     /*For testing*/
     public AddParser(Warehouse warehouse, String userInput) {
         super(warehouse);
@@ -33,7 +34,8 @@ public class AddParser extends CommandParser {
 
 
     @Override
-    public void extractParams() throws WrongCommandException, InvalidFileException, InvalidObjectType, MissingFlagException, EmptyFieldException {
+    public void extractParams() throws WrongCommandException, InvalidFileException, InvalidObjectType,
+            MissingFlagException, EmptyFieldException {
         if (matches.get("flag").equals("g")) {
             String regexGood = "sku/(?<sku>.*) qty/(?<qty>.*)";
             HashMap<String, String> regexGoodMatch = new MatchKeywords(userInput, regexGood).getGroupValues();

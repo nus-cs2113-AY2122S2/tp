@@ -2,7 +2,9 @@ package seedu.simplst.parsers;
 
 import seedu.simplst.MatchKeywords;
 import seedu.simplst.Warehouse;
-import util.exceptions.*;
+import util.exceptions.MissingFlagException;
+import util.exceptions.EmptyFieldException;
+import util.exceptions.WrongCommandException;
 
 public class FulfillParser extends CommandParser {
     public FulfillParser(Warehouse warehouse) {
