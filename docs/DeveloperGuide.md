@@ -188,31 +188,58 @@ The above diagram shows the sequence diagram of the listing of items in `itemLis
 
 The user starts by typing a list command.
 
-1. `InvMgr` calls `parse("list")` method in `Parser` class, which returns a ListCommand object.
+1. `InvMgr` calls `parse("list")` method in `InputParser` class, which returns a ListCommand object.
 2. `InvMgr` calls `execute(itemList, ui)` method in `ListCommand` object.
-3. `ListCommand` loops through every `Item` in `itemList` and prints them line by line
-   and numbers them.
+3. `ListCommand` loops through every `Item` in `itemList` and prints them line by line and numbers them.
+
+### List Available Borrowings Command
+![ListAvailableBorrowingsSequenceDiagram](img/ListAvailableBorrowingsSequenceDiagram.png)
+
+The above diagram shows the sequence diagram of listing the minimum number of items that can be borrowed between a start date and an end date
+
+The user starts by typing a `listab s/STARTDATE e/ENDDATE` command. 
+
+1. `InvMgr` calls `parse("listab s/XYZ e/ABC")` method in `InputParser` class, which then calls `parse("listab s/XYZ e/ABC")` method in `ListAvailableBorrowingsParser`.
+2. `ListAvailableBorrowingsParser` parses the user input into `startDate` and `endDate`, and returns a `ListAvailableBorrowingsCommand` object.
+3. `InvMgr` calls `execute(itemList, ui)` method in `ListAvailableBorrowingsCommand` object.
+4. `ListAvailableBorrowingsCommand` loops through each item in `itemList`, and calls the `minQuantityAvailable` method to check the minimum quantity that can be borrowed throughout `startDate` to `endDate`.
+5. If `minQuantity` is more than 0, the item is printed out with the quantity that can be borrowed.
+
+### Cancel Future Borrowings Command
+![CancelFutureBorrowingsSequenceDiagram](img/CancelFutureBorrowingsSequenceDiagram.png)
+![CancelFutureBorrowingsRef](img/CancelFutureBorrowingsRef.png)
+
+The above diagram shows the sequence diagram of cancelling future reservations of items
+
+The user starts by typing `cancel p/NAME i/INDEX` command. 
+
+1. `InvMgr` calls `parse("cancel p/ABC i/1")` method in `InputParser` class, which then calls `parse("cancel p/ABC i/1")` method in `CancelFutureBorrowingsParser`.
+2. `CancelFutureBorrowingsParser` parses the input into `name` and `index`, and returns a `CancelFutureBorrowingsCommand` object.
+3. `InvMgr` calls `execute(itemList, ui)` method in `CancelFutureBorrowingsCommand` object.
+4. `CancelFutureBorrowingsCommand` retrieves the `BorrowRecord` that is to be removed, and the `Item` that contains this `BorrowRecord`
+5. `BorrowRecord` is then removed from the `Item`'s BorrowRecord list.
+
 
 ### Edit Command
 
 **Normal function**
 
-![EditCommand1SequenceDiagram](EditCommand1SequenceDiagram.png)
-![EditCommand2SequenceDiagram](EditCommand2SequenceDiagram.png)
-![EditCommand3SequenceDiagram](EditCommand3SequenceDiagram.png)
+![EditCommand1SequenceDiagram](img/EditCommand1SequenceDiagram.png)
+![EditCommand2SequenceDiagram](img/EditCommand2SequenceDiagram.png)
+![EditCommand3SequenceDiagram](img/EditCommand3SequenceDiagram.png)
 
 The above diagrams show the sequence diagram when editing an item.
 
 The user starts by typing an `edit` command.
 
 1. `InvMgr` calls `parse(command)`. `command` is the user input, i.e. `edit 1 n/Marker q/5 d/To draw on whiteboard r/+`.
-2. `InvMgr` creates the appropriate `Command` object based on the user input. The arguments are also parsed and the needed values are stored within `EditCommand`.
+2. `InvMgr` creates the appropriate `Command` object based on the user input, which is the `EditCommand`. The arguments are also parsed and the needed values are stored within `EditCommand`.
 3. `InvMgr` calls `execute(itemList, ui)` of the `EditCommand` object.
 4. Within the `execute()` method of `EditCommand`, `EditCommand` will try to extract the `Item` at the specified index of `ItemList` (`1` in this case).
-5. Next, `EditCommand` duplicates the `Item`. It will be named as placeholderItem.
+5. Next, `EditCommand` duplicates the `Item`. It will be named as `placeholderItem`.
 6. `placeholderItem` will have its attributes set accordingly based on the presence of various arguments.
    1. Since `name` is present (`n/Marker`), `EditCommand` will change the name of `placeholderItem` to `Marker`.
-   2. Since `quantity` is present (`q/5`), `EditCommand` will change the quantity of `placeholderItem`. An intermediary calculation is needed due to the presence of the relative modifier `r/+`. Ultimately, the quantity of `placeholderItem` will be increased by 5. 
+   2. Since `quantity` is present (`q/5`), `EditCommand` will add 5 to the quantity of `placeholderItem`.
    3. Since `description` is present (`q/To draw on whiteboard`), `EditCommand` will change the description of `placeholderItem` to `To draw on whiteboard`.
 7. The `Item` at index 1 of `ItemList` will be replaced by the `placeholderItem`.
 8. `EditCommand` will print out the changes in `Item`.
@@ -229,15 +256,15 @@ Exceptions are thrown/handled for the following:
 
 **Normal function**
 
-![SearchCommand1SequenceDiagram](SearchCommand1SequenceDiagram.png)
-![SearchCommand2SequenceDiagram](SearchCommand2SequenceDiagram.png)
+![SearchCommand1SequenceDiagram](img/SearchCommand1SequenceDiagram.png)
+![SearchCommand2SequenceDiagram](img/SearchCommand2SequenceDiagram.png)
 
 The above diagrams show the sequence diagram when searching for items.
 
 The user starts by typing a `search` command.
 
 1. `InvMgr` calls `parse(command)`. `command` is the user input, i.e. `search n/Marker d/draw`.
-2. `InvMgr` creates the appropriate `Command` object based on the user input. The arguments are also parsed and the needed values are stored within `SearchCommand`.
+2. `InvMgr` creates the appropriate `Command` object based on the user input, which is the `SearchCommand`. The arguments are also parsed and the needed values are stored within `SearchCommand`.
 3. `InvMgr` calls `execute(itemList, ui)` of the `SearchCommand` object.
 4. For each `Item` in `ItemList`, `SearchCommand` will try to:
    1. Match, if given, the `name` to search in the name of `Item`.

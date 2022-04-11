@@ -5,6 +5,7 @@ import seedu.duke.data.BorrowRecord;
 import seedu.duke.data.BorrowStatus;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
+import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class ReturnCommand extends Command {
     public static final String HELP_MESSAGE = COMMAND_NAME + ":\n"
             + "[Function] "
             + USAGE_MESSAGE
-            + ":\n"
+            + "\n"
             + "[Command Format] "
             + COMMAND_FORMAT
             + "\n";
@@ -33,7 +34,7 @@ public class ReturnCommand extends Command {
     /**
      * Prepares the return command for execution by extracting the task number of the task to be marked.
      *
-     * @param itemIndex    Index of item to be returned
+     * @param itemIndex Index of item to be returned.
      */
     public ReturnCommand(int itemIndex) {
         this.itemIndex = itemIndex;
@@ -48,27 +49,23 @@ public class ReturnCommand extends Command {
     }
 
     /**
-     * Updates a current borrow record of item in ItemList.itemArrayList as returned
+     * Updates a current borrow record of item in ItemList.itemArrayList as returned.
      *
-     * @param itemList Manages the user's task list
-     * @param ui       Displays messages to the user
+     * @param itemList Manages the user's task list.
+     * @param ui Displays messages to the user.
      */
     @Override
-    public void execute(ItemList itemList, Ui ui) {
+    public void execute(ItemList itemList, Ui ui) throws InvMgrException {
         // If the item list is empty, then no item can be returned.
         boolean isEmptyItemList = checkItemListSize(itemList);
         if (isEmptyItemList) {
-            ui.showMessages(Messages.EMPTY_ITEM_LIST_MESSAGE);
-            ui.showDivider();
-            return;
+            throw new InvMgrException(Messages.EMPTY_ITEM_LIST_MESSAGE);
         }
         Item returnedItem = null;
         try {
             returnedItem = itemList.getItem(itemIndex);
         } catch (IndexOutOfBoundsException e) {
-            ui.showMessages(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE);
-            ui.showDivider();
-            return;
+            throw new InvMgrException(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE);
         }
         ArrayList<BorrowRecord> itemBorrowRecords = returnedItem.getBorrowRecords();
         for (BorrowRecord record : itemBorrowRecords) {
@@ -82,13 +79,12 @@ public class ReturnCommand extends Command {
                 ui.showMessages("Name of Item: " + returnedItem.getName(),
                         "Name of Borrower: " + record.getBorrowerName(),
                         "Borrow Duration: " + record.getBorrowDuration());
-                ui.showDivider();
                 isValidReturnRequest = true;
                 break;
             }
         }
         if (!isValidReturnRequest) {
-            ui.showMessages(Messages.RETURN_ERROR_MESSAGE);
+            throw new InvMgrException(Messages.RETURN_ERROR_MESSAGE);
         }
     }
 

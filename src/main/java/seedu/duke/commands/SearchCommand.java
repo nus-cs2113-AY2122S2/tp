@@ -13,7 +13,7 @@ public class SearchCommand extends Command {
     public static final String COMMAND_NAME = "Search Item";
     public static final String USAGE_MESSAGE = "Search for the name and/or description of an item.";
     public static final String COMMAND_FORMAT = COMMAND_WORD + "/n name [/d description] | [/n name] /d description]";
-    public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
+    public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + "\n"
             + "[Command Format] " + COMMAND_FORMAT + "\n";
 
     private static final String SEARCH_RESULT_PREAMBLE = "Here are the items matching your search terms: ";
