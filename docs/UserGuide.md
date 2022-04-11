@@ -8,11 +8,11 @@
     1. [Add an Item](#add-an-item-add)
     2. [Search for Items](#search-for-items-search)
     3. [List All Items](#list-all-items-list)
-    4. [List Current Borrowings](#list-current-borrowings-listcb)
-    5. [List Future Borrowings](#list-future-borrowings-listfb)
-    6. [List Overdue Borrowings](#list-overdue-borrowings-listob)
-    7. [List Available Borrowings](#list-available-borrowings-listab)
-    8. [Borrow an Item](#borrow-an-item-borrow)
+    4. [Borrow an Item](#borrow-an-item-borrow)
+    5. [List Current Borrowings](#list-current-borrowings-listcb)
+    6. [List Future Borrowings](#list-future-borrowings-listfb)
+    7. [List Overdue Borrowings](#list-overdue-borrowings-listob)
+    8. [List Available Borrowings](#list-available-borrowings-listab)
     9. [Return an Item](#return-an-item-return)
     10. [Mark Item as Lost](#mark-item-as-lost-lost)
     11. [Get Description of Item](#get-description-of-item-desc)
@@ -168,18 +168,18 @@ Borrow the item that you want for the duration between the start date and end da
 |:-------------:|:-------------:|:----------------:|:-------------------------------:|
 |      i/       |  ITEM_INDEX   | Positive Integer | The index of the item to borrow |
 |      q/       |   QUANTITY    | Positive Integer |  The amount of item to borrow   |
-|      s/       |  START_DATE   | Date(yyyy-MM-dd) |    The starting date of loan    |
+|      s/       |  START_DATE   | Date(yyyy-MM-dd) |     The start date of loan      |
 |      e/       |   END_DATE    | Date(yyyy-MM-dd) |      The end date of loan       |
 |      p/       | BORROWER_NAME |      String      |        Name of borrower         |
 
 **Caveats:**
 
 * `ITEM_INDEX` should be within one of the index for ItemList.
-* `QUANTITY` should be >= 0. Error will be raised if there are insufficient quantity in inventory to borrow.
+* `QUANTITY` should be >= 0.
 * The `START_DATE` and `END_DATE` must be in YYYY-MM-DD format.
+* Each item can only be borrowed for a maximum of 7 days.
 * `END_DATE` must be either the same as `START_DATE` or a later date.
 * Borrower will borrow at `START_DATE` 00:01 HRS and return at `END_DATE` 2359 HRS.
-* The `BORROWER_NAME` cannot contain punctuations.
 
 **Examples of usage:**
 ```
@@ -187,14 +187,8 @@ Borrow the item that you want for the duration between the start date and end da
 You have successfully borrowed the following item:
 Name of Item: JBLFlip5
 Name of Borrower: John Smith
-Borrow Duration: 2021-03-21 to 2021-03-23
+Borrow Duration: 2022-03-21 to 2022-03-25
 Borrow Quantity: 5
-
-> borrow i/1 s/2021-03-25 e/2021-03-21 p/John Smith
-Error: Incorrect start and end date order. Please ensure that end date >= start date.
-
-> borrow i/28 s/2021-03-21 e/2021-03-21 p/John Smith
-Sorry. This item does not exist in the current inventory.
 ```
 
 ### Return an Item: `return`
@@ -253,13 +247,13 @@ Your inventory is currently empty. Please add an item first!
 
 ### List Current Borrowings: `listcb`
 
-List all items that are currently being borrowed. You can narrow down the list by entering an optional argument of the borrower's name. Results of borrowings ordered by earliest borrowing start date.
+List all items that are currently being borrowed. You can narrow down the list by entering an optional argument of the borrower's name.
 
 **Format:**
 
 `listcb`: List all items that are currently being borrowed.  
 
-`listcb p/BORROWER_NAME`: List all items that are currently being borrowed by BORROWER_NAME
+`listcb p/BORROWER_NAME`: List all items that are currently being borrowed by BORROWER_NAME.
 
 **Arguments:**
 
@@ -267,56 +261,38 @@ List all items that are currently being borrowed. You can narrow down the list b
 |:-------------:|:-------------:|:---------------:|:------------------------------:|
 |      p/       | BORROWER_NAME |     String      | Name of borrower to search for |
 
-**Caveats:**
+**Caveats:**  
+None  
 
-* `BORROWER_NAME` must not contain punctuations.
-
-**Examples of usage:**
+**Examples of usage: (Assuming today's date is ***2021-03-18***)**
 
 ```
 > listcb
 Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Duration: 2021-03-17 to 2021-03-20
 Borrow Quantity: 5
 
 Name of Item: JBLFlip5
-Name of Borrower: John Smith
-Borrow Duration: 2021-03-21 to 2021-03-23
-Borrow Quantity: 1
-
-Name of Item: JBLFlip5
 Name of Borrower: Sally
-Borrow Duration: 2021-03-29 to 2021-04-01
+Borrow Duration: 2021-03-16 to 2021-03-20
 Borrow Quantity: 1
 
 > listcb p/Sally
 Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 2021-03-23 to 2021-03-30
+Borrow Duration: 2021-03-17 to 2021-03-20
+Borrow Quantity: 1
 
 Name of Item: JBLFlip5
 Name of Borrower: Sally
-Borrow Duration: 2021-04-24 to 2021-04-30
-```
-
-If there are no items have been borrowed from the inventory, the `listcb` command will return:
-
-```
-> listcb
-There are no items in the inventory being borrowed.
-```
-
-If the person does not exist in the borrowings, the `listcb p/BORROWER_NAME` will return:
-
-```
-> listcb p/David
-There are no items currently borrowed by David.
+Borrow Duration: 2021-03-17 to 2021-03-19
+Borrow Quantity: 1
 ```
 
 ### List Future Borrowings: `listfb`
 
-List all items that will be borrowed in the future. You can narrow down the list by entering an optional argument of the borrower's name. Results of borrowings ordered by earliest borrowing start date.
+List all items that will be borrowed in the future. You can narrow down the list by entering an optional argument of the borrower's name.
 
 **Format:**
 
@@ -330,9 +306,8 @@ List all items that will be borrowed in the future. You can narrow down the list
 |:-------------:|:-------------:|:---------------:|:------------------------------:|
 |      p/       | BORROWER_NAME |     String      | Name of borrower to search for |
 
-**Caveats:**
-
-* `BORROWER_NAME` must not contain punctuations.
+**Caveats:**  
+None
 
 **Examples of usage (Assuming today's date is ***2021-03-18***):**
 ```
@@ -357,7 +332,7 @@ Borrow Quantity: 1
 Here is a list of future borrowings for Sally:
 1) Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Duration: 2021-03-19 to 2021-03-21
 Borrow Quantity: 5
 
 2) Name of Item: Loudhailer
@@ -381,7 +356,7 @@ There are no future borrowings for David.
 
 ### List Overdue Borrowings: `listob`
 
-List all items should have been returned but have yet to be. You can narrow down the list by entering an optional argument of the borrower's name. Results of borrowings ordered by earliest borrowing start date.
+List all items should have been returned but have yet to be. You can narrow down the list by entering an optional argument of the borrower's name.
 
 **Format:**
 
@@ -395,9 +370,8 @@ List all items should have been returned but have yet to be. You can narrow down
 |:-------------:|:-------------:|:---------------:|:------------------------------:|
 |      p/       | BORROWER_NAME |     String      | Name of borrower to search for |
 
-**Caveats:**
-
-* `BORROWER_NAME` must not contain punctuations.
+**Caveats:**  
+None
 
 **Examples of usage (Assuming today's date is ***2021-03-31***):**
 
@@ -406,7 +380,7 @@ List all items should have been returned but have yet to be. You can narrow down
 Here is a list of overdue borrowings:
 1) Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Duration: 2021-03-25 to 2021-03-30
 Borrow Quantity: 5
 
 2) Name of Item: JBLFlip5
@@ -416,19 +390,19 @@ Borrow Quantity: 1
 
 3) Name of Item: Loudhailer
 Name of Borrower: Sally
-Borrow Duration: 2021-03-29 to 2021-04-01
+Borrow Duration: 2021-03-24 to 2021-03-26
 Borrow Quantity: 1
 
 > listob p/Sally
 Here is a list of overdue borrowings for Sally:
 1) Name of Item: Trolley
 Name of Borrower: Sally
-Borrow Duration: 2021-03-19 to 2021-03-30
+Borrow Duration: 2021-03-25 to 2021-03-30
 Borrow Quantity: 5
 
 2) Name of Item: Loudhailer
 Name of Borrower: Sally
-Borrow Duration: 2021-03-29 to 2021-04-01
+Borrow Duration: 2021-03-24 to 2021-03-26
 Borrow Quantity: 1
 ```
 
