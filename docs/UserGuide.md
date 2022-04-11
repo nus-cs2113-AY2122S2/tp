@@ -425,7 +425,6 @@ Example 6: `find appointment /info date, 2022-10-15`
 
 ![findAppointment](photos/findAppointment.jpg)
 
-
 ### Features involving Medicine Inventory
 
 #### Retrieving List of Expired/Run Out Medicine in the inventory
