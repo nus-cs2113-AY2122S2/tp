@@ -19,6 +19,7 @@ for you and your family. It allows you to:
 * **Experienced Typists** who are comfortable operating the application on a terminal.
 
 <div style="page-break-after: always;"></div>
+
 ## Table of Contents
 
 * [Quick Start](#quick-start)
@@ -55,6 +56,7 @@ for you and your family. It allows you to:
 6. Refer to [Features](#features) below for details on each command.
 
 <div style="page-break-after: always;"></div>
+
 ## Quick Notes
 
 The following table describes the **formats** used in this User Guide.
@@ -106,6 +108,7 @@ This section describes each command in detail.
 
 ---
 <div style="page-break-after: always;"></div>
+
 ### Viewing all commands: `help`
 
 > Shows you a list of available commands that is described in this section.
@@ -141,6 +144,7 @@ Example of usage:
 ---
 
 <div style="page-break-after: always;"></div>
+
 ### Delete a person: `delete`
 
 > Deletes a person from your family group.
@@ -166,6 +170,7 @@ Example of usage:
 ---
 
 <div style="page-break-after: always;"></div>
+
 ### Add an income: `addin`
 
 > Adds an entry to your list of tracked incomes.
@@ -195,6 +200,7 @@ Example of usage:
 ---
 
 <div style="page-break-after: always;"></div>
+
 ### Delete an income: `deletein`
 
 > Deletes an entry from your list of tracked incomes.
@@ -222,6 +228,7 @@ Example of usage:
 ---
 
 <div style="page-break-after: always;"></div>
+
 ### Edit an income: `editin`
 
 > Edits an entry in your list of tracked incomes.
@@ -252,6 +259,7 @@ Example of usage:
 ---
 
 <div style="page-break-after: always;"></div>
+
 ### Add an expenditure: `addout`
 
 > Adds an entry to your list of tracked expenditures.
@@ -283,6 +291,7 @@ Example of usage:
 ---
 
 <div style="page-break-after: always;"></div>
+
 ### Delete an expenditure: `deleteout`
 
 > Deletes an entry from your list of tracked expenditure.
@@ -310,6 +319,7 @@ Example of usage:
 ---
 
 <div style="page-break-after: always;"></div>
+
 ### Edit an expenditure: `editout`
 
 > Edits an entry from your list of tracked expenditures.
@@ -341,6 +351,7 @@ Example of usage:
 ---
 
 <div style="page-break-after: always;"></div>
+
 ### Show financial summary: `overview`
 
 > Shows a summary of the total income, expenditure and disposable income of each group.
@@ -381,6 +392,7 @@ Format: `listcat`
 ---
 
 <div style="page-break-after: always;"></div>
+
 ### Searching for details: `find`
 
 > Search for a string as provided by you throughout all your income and expenditure.
@@ -428,6 +440,7 @@ Format: `bye`
 ---
 
 <div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
@@ -437,8 +450,6 @@ transfer the data by transferring the text file to another computer and put it i
 in the new computer. When the application starts up, it will automatically load the saved data in the text file. Do note
 that the application running in the new computer should be the same version as the application in your previous
 computer.
-
-<br/>
 
 ## Command Summary
 
