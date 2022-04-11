@@ -98,21 +98,21 @@ Map<Room, Housekeeper> map = new HashMap<>();
 ``
 
 The following steps exhibit how `AssignHousekeeperCommand` 
-and `AssignmentMap` fit together in the structure and how the mechanism for adding an assinment behaves at each step.
+and `AssignmentMap` fit together in the structure and how the mechanism for adding an assingment behaves at each step.
 
 __Step 1.__ The user launches the application. In the `Duke` class, an empty instance of the `AssignmentMap` class,
 called `assignmentMap`, is created.
 
 ![Step 1](team/aiman_assignment/step1.png)
 
-__Step 2.__ The user types the command `Assign Susan ## 301`. In the `Duke` class, a `Command` object
+__Step 2.__ The user types the command `Assign susan / 301`. In the `Duke` class, a `Command` object
 is created by invoking the `CommandParser` class's constructor on the user input. The details of this
 step are further described below.
 
 ![Step 2](team/aiman_assignment/step2.png)
 
-__Step 3.__ The `CommandParser` class replaces the `Assign Susan ## 301` in the user input with an empty string,
-leaving just `Susan ## 301`. Then, an instance of `AssignHousekeeperCommand` is created which extends the class `Command`.
+__Step 3.__ The `CommandParser` class replaces the `assign susan / 301` in the user input with an empty string,
+leaving just `susan / 301`. Then, an instance of `AssignHousekeeperCommand` is created which extends the class `Command`.
 
 ![Step 3](team/aiman_assignment/step3.png)
 
@@ -314,6 +314,24 @@ Step 9: The `printErrorMessage` method would then print out  a message informing
 Step 10: If there are no items with a matching name found, we would then add the `Item` object to the ArrayList of `Item` objects called listOfItems. The  `printAddItemAcknowledgementMessage` method of `UI` would be executed. It would then print an acknowledgement message to the user informing him that the item has been added into the item list.
 
 :information_source: **Note:** As the Add Item, Delete Item, Update Item Pax or Update Item Name Commands have similair class and sequence diagrams, we only require a few changes to be able to use the above class and sequence diagrams to represent the Delete Item, Update Item Pax or Update Item Name Commands. The changes would be mentioned below.
+
+The `Delete Item` Command is similar to that of the `Add Item` Command with the difference being:
+1. The `Delete Item` command uses the `Item(name:String)` constructor instead of `item(name:String,pax:Int)` constructor as the `Delete Item` command only uses the `name` variable.
+2. The `writeItemListToFile` method is replaced with the `deleteItemInList` method and the `extractItemName(tokens:StringTokenizer)` and `extractItemPax(token:StringTokenizer)` methods are omitted.
+3. The `addItemToList` method is replaced with the `deleteItemInList` method;
+4. The `checkForItemDuplicates` method is removed.
+5. The `printAddItemAcknowledgementMessage` method is replaced with the `printDeleteItemAcknowledgementMessage` method.
+
+The `Update Item Pax` Command is similar to that of the `Add Item` Command with the difference being:
+1. The `addItemToList` method is replaced with the `updateItemPaxInList` method.
+2. The `checkForItemDuplicates` method is removed.
+3. The `printAddItemAcknowledgementMessage` method is replaced with the `printUpdateItemPaxAcknowledgementMessage` method.
+
+The `Update Item Name` Command is similar to that of the `Add Item` Command with the difference being:
+1. The `extractItemName(tokens)` and `extractItemPax(tokens)` methods are replaced with `extractCurrentItemName(tokens)` and `extractNewItemName(tokens)`;
+2. The `Item(name:String,pax:Int)` constructor is replaced with the `Item(oldItemName:String, newItemName:String)` constructor;
+3. The `printAddItemAcknowledgementMessage` method is replaced with the `updateItemNameInList` method.
+4. The `Update Item Name` throws an extra exception called `DuplicateItemNameException` if the `oldItemName` is equals to the `newItemName`.
 
 #### Search Item, View All Items, View Items With Zero Pax Commands
 
