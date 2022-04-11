@@ -206,7 +206,7 @@ public class AddCommandInputTests {
         if (inputCreditCardName.equalsIgnoreCase("")) {
             throw new MindMyMoneyException("Credit card name cannot be empty!");
         }
-        assert inputCreditCardName != null: "Credit Card name should not be empty";
+        assert inputCreditCardName != null : "Credit Card name should not be empty.";
 
         if (inputCreditCardName.equalsIgnoreCase("cash")) {
             throw new MindMyMoneyException("Credit card name cannot be abbreviated as `Cash`.");
