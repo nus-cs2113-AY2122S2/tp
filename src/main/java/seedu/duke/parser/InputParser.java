@@ -9,9 +9,15 @@ import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.HelpCommand;
+import seedu.duke.commands.ListCurrentBorrowingsCommand;
 import seedu.duke.commands.SearchCommand;
+import seedu.duke.commands.ReturnCommand; 
+import seedu.duke.commands.LostCommand;
 import seedu.duke.commands.ListOverdueBorrowingsCommand;
 import seedu.duke.commands.ListFutureBorrowingsCommand;
+import seedu.duke.commands.ListAvailableBorrowingsCommand;
+import seedu.duke.commands.CancelFutureBorrowingsCommand;
+
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.common.Messages;
 
@@ -58,20 +64,35 @@ public class InputParser {
         case BorrowCommand.COMMAND_WORD:
             return new BorrowCommandParser().parse(arguments);
 
+        case ListAvailableBorrowingsCommand.COMMAND_WORD:
+            return new ListAvailableBorrowingsParser().parse(arguments);
+        
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ListCurrentBorrowingsCommand.COMMAND_WORD:
+            return new ListCurrentBorrowingsParser().parse(arguments);
 
         case ListOverdueBorrowingsCommand.COMMAND_WORD:
             return new ListOverdueBorrowingsParser().parse(arguments);
 
         case ListFutureBorrowingsCommand.COMMAND_WORD:
             return new ListFutureBorrowingsParser().parse(arguments);
+        
+        case ReturnCommand.COMMAND_WORD:
+            return new ReturnCommandParser().parse(arguments);
+        
+        case CancelFutureBorrowingsCommand.COMMAND_WORD:
+            return new CancelFutureBorrowingsParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case LostCommand.COMMAND_WORD:
+            return new LostCommandParser().parse(arguments);
 
         default:
             throw new InvMgrException(Messages.INVALID_COMMAND);
