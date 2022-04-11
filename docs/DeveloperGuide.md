@@ -201,7 +201,19 @@ The user starts by typing a return command. The diagram above uses the example o
    `ReturnCommand` then converses with `Ui` to show the successful returned message.
 10. If none of the borrow records are overdue or outstanding, then it is taken to be an invalid return request. In this scenario, `ReturnCommand` will converse with `Ui` to display the return error message.
 
-### Return Command
+**Error handling**
+
+`ReturnCommandParser` throws/handles exceptions in the following situations:
+1. When the user enters a command without any item index (missing `i/ `). This is done in `ReturnCommandParser`.
+2. When the user enters an invalid item index (item index < 0). This is done in `ReturnCommandParser`.
+3. When the user enters an invalid item index (item index is not an integer). This is done in `ReturnCommandParser`.
+
+`ReturnCommand` throws/handles exceptions in the following situations: 
+1. When the user enters an item index that is out of range (> total number of items in inventory).
+2. When the user tries to return an item but the inventory is empty. 
+3. When there are no items that are overdue or currently on loan and hence no items are due to be returned.
+
+### Lost Command
 
 ![LostCommandSequenceDiagram](img/LostCommandSequenceDiagram.png)
 
@@ -217,7 +229,18 @@ The user starts by typing a lost command. The diagram above uses the example of 
 6. Then, it calls `getItem()` to check if the item index is within range. If it is not, an exception is thrown and lost cannot be performed.
 7. `removeItem(itemIndex: Integer)` is called to remove the item from the item list. Then, `showMessages(lostItem + "has been deleted")` is called to display a message that tells the user that the item has been deleted. 
 8. `showMessages(Messages.REPORTED_LOST_AND_DELETED` is called to tell the user that the item has been reported lost and deleted from the inventory.
- 
+
+**Error handling**
+
+`LostCommandParser` throws/handles exceptions in the following situations:
+1. When the user enters a command without any item index (missing `i/ `). This is done in `ReturnCommandParser`.
+2. When the user enters an invalid item index (item index < 0). This is done in `ReturnCommandParser`.
+3. When the user enters an invalid item index (item index is not an integer). This is done in `ReturnCommandParser`.
+
+`LostCommand` throws/handles exceptions in the following situations:
+1. When the user enters an item index that is out of range (> total number of items in inventory).
+2. When the user tries to report an item as lost but the inventory is empty.
+
 ### List Command
 
 ![ListCommandSequenceDiagram](img/ListCommandSequenceDiagram.png)
