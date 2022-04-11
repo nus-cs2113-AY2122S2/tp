@@ -41,6 +41,7 @@ Summary of code contributions:
 - Explained the storage component in the Design & Implementation section [(Link)](https://ay2122s2-cs2113t-t09-1.github.io/tp/DeveloperGuide.html#storage-implementation)
 - Added class diagram for `Storage` and `Task` to aid explanation.
 - Added sequence diagrams to explain how save files are loaded and how tasks are edited.
+- Added some example scenarios of task management in Manual Testing section [(Link)](https://ay2122s2-cs2113t-t09-1.github.io/tp/DeveloperGuide.html#instructions-for-manual-testing)
 
 #### Contributions to team-based tasks:
 - Set up the initial format for user guide
@@ -52,3 +53,6 @@ Summary of code contributions:
 - [Pull Request #40](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/40#pullrequestreview-911017528)
 - [Pull Request #36](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/36#discussion_r825325236)
 - [Pull Request #53](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/53#discussion_r830723256)
+
+#### Contributions beyond the project team:
+- Reviewed another team's project during PE-D [(Link)](https://github.com/thedarie/ped/issues)

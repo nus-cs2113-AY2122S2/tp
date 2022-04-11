@@ -27,7 +27,6 @@ class Countdown {
     -hasTimeLeft:boolean
     #timeLeft:int
     +Countdown(taskList:TaskList,ui:Ui,jframe:JFRAME,jlabel:JLABEL)
-    -convertTimeToString():String
     +run():void
     #update():void
     +stopTimer():void
@@ -37,7 +36,6 @@ class Countdown {
 class Stopwatch {
     -timeElapsed:int
     +Stopwatch(taskList:TaskList,ui:Ui,jframe:JFRAME,jlabel:JLABEL)
-    -convertTimeToString():String
     +run():void
     #update():void
     +stopTimer():void
