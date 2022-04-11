@@ -118,7 +118,7 @@ methods if required. If possible, additional methods should continue to depend o
 
 ## Dish
 
-`Dish` is basically consist of `name` and `price` and corresponding modification methods.
+`Dish` consists of `name` and `price` and corresponding modification methods.
 It is used as a structure to store dish information.
 
 ## DishManager
