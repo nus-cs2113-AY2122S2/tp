@@ -7,10 +7,11 @@
 *** StorageParser
 ** Timetable
 *** Timetable
-*** Task
+*** TimetableLogic
+*** TimetablePrinting
+*** TimetableParser
 *** TaskList
-*** TaskParser
-*** TaskLogic
+**** Task
 *** Commands
 ** Study session
 *** Timer
