@@ -1,35 +1,6 @@
 package seedu.simplst;
 
 public class Display {
-
-    //    public static void addGood(String id, String name, String qty,
-    //                               String desc, ArrayList<Orderline> userOrderlines) throws WrongCommandException {
-    //        if (id.isBlank() || name.isBlank() || qty.isBlank()) {
-    //            throw new WrongCommandException("add", true);
-    //        }
-    //        try {
-    //            Orderline orderline = new Orderline(
-    //                    Integer.parseInt(id),
-    //                    name,
-    //                    Integer.parseInt(qty),
-    //                    desc);
-    //            userOrderlines.add(orderline);
-    //            System.out.printf("%d %s %s added\n", orderline.getQuantity(), orderline,
-    //                    checkPlural(orderline.getQuantity()));
-    //        } catch (NumberFormatException e) {
-    //            throw new WrongCommandException("add", true);
-    //        }
-    //    }
-
-    // Function to print grammar for statements to print
-    //    public static String checkPlural(int numberOfGoods) {
-    //        if (numberOfGoods <= 1) {
-    //            return "is ";
-    //        } else {
-    //            return "are ";
-    //        }
-    //    }
-
     public static void hello() {
         String logo = "Simplst";
         System.out.println("Hello from\n" + logo);
