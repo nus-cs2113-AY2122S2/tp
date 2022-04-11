@@ -35,6 +35,7 @@ public class SearchTest {
         try {
             initialize();
             search = new SearchCommand(CommandsForTesting.FIND2, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_DES_MSG);
         } catch (Exception e) {
@@ -47,6 +48,7 @@ public class SearchTest {
         try {
             initialize();
             search = new SearchCommand(CommandsForTesting.FIND3, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_CATINX_MSG);
         } catch (Exception e) {
@@ -55,7 +57,7 @@ public class SearchTest {
     }
 
     @Test
-    void  find_success() {
+    void  find_validInput_success() {
         try {
             initialize();
             search = new SearchCommand(CommandsForTesting.FIND, family);

@@ -47,6 +47,7 @@ public class EditRecordTest {
         try {
             initialize();
             editIn = new EditRecordCommand(CommandsForTesting.EDITINCOME6, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_UID_MSG);
         } catch (Exception e) {
@@ -59,6 +60,7 @@ public class EditRecordTest {
         try {
             initialize();
             editIn = new EditRecordCommand(CommandsForTesting.EDITINCOME2, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_GROUPINX_ERROR_MSG);
         } catch (Exception e) {
@@ -71,6 +73,7 @@ public class EditRecordTest {
         try {
             initialize();
             editIn = new EditRecordCommand(CommandsForTesting.EDITINCOME5, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_DES_MSG);
         } catch (Exception e) {
@@ -83,6 +86,7 @@ public class EditRecordTest {
         try {
             initialize();
             editIn = new EditRecordCommand(CommandsForTesting.EDITINCOME3, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_RECINX_MSG1);
         } catch (Exception e) {
@@ -92,6 +96,7 @@ public class EditRecordTest {
         try {
             initialize();
             editOut = new EditRecordCommand(CommandsForTesting.EDITEXPEND2, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_RECINX_MSG2);
         } catch (Exception e) {
@@ -104,6 +109,7 @@ public class EditRecordTest {
         try {
             initialize();
             editIn = new EditRecordCommand(CommandsForTesting.EDITINCOME4, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_IMONEY_MSG);
         } catch (Exception e) {
@@ -113,6 +119,7 @@ public class EditRecordTest {
         try {
             initialize();
             editOut = new EditRecordCommand(CommandsForTesting.EDITEXPEND3, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_EMONEY_MSG);
         } catch (Exception e) {
@@ -122,12 +129,26 @@ public class EditRecordTest {
     }
 
     @Test
-    void addExpend_invalidCat_fail() {
+    void editExpend_invalidCat_fail() {
         try {
             initialize();
             editOut = new EditRecordCommand(CommandsForTesting.EDITEXPEND4, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_CATINX_MSG);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    void editRec_validInput_success() {
+        try {
+            initialize();
+            editIn = new EditRecordCommand(CommandsForTesting.EDITINCOME, family);
+            editOut = new EditRecordCommand(CommandsForTesting.EDITEXPEND, family);
+            editIn.execute();
+            editOut.execute();
         } catch (Exception e) {
             fail();
         }

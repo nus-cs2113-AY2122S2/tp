@@ -22,6 +22,7 @@ public class AddPersonTest {
     void addPerson_invalidName_fail() {
         try {
             add = new AddPersonCommand(CommandsForTesting.ADDPERSON4, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), NAME_ERROR_MSG);
         } catch (Exception e) {
@@ -33,6 +34,7 @@ public class AddPersonTest {
     void addPerson_invalidGroupInx_fail() {
         try {
             add = new AddPersonCommand(CommandsForTesting.ADDPERSON6, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), EMPTY_GROUPINX_ERROR_MSG);
         } catch (Exception e) {
@@ -41,6 +43,7 @@ public class AddPersonTest {
 
         try {
             add = new AddPersonCommand(CommandsForTesting.ADDPERSON5, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_GRPINX_ERROR_MSG);
         } catch (Exception e) {
@@ -49,7 +52,7 @@ public class AddPersonTest {
     }
 
     @Test
-    void addPerson_sucess() {
+    void addPerson_validInput_sucess() {
         try {
             add = new AddPersonCommand(CommandsForTesting.ADDPERSON, family);
         } catch (Exception e) {

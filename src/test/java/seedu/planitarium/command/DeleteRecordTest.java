@@ -39,6 +39,7 @@ public class DeleteRecordTest {
         try {
             initialize();
             deleteIn = new DeleteRecordCommand(CommandsForTesting.DELETEINCOME4, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_UID_MSG);
         } catch (Exception e) {
@@ -51,6 +52,7 @@ public class DeleteRecordTest {
         try {
             initialize();
             deleteIn = new DeleteRecordCommand(CommandsForTesting.DELETEINCOME3, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_GROUPINX_ERROR_MSG);
         } catch (Exception e) {
@@ -63,6 +65,7 @@ public class DeleteRecordTest {
         try {
             initialize();
             deleteIn = new DeleteRecordCommand(CommandsForTesting.DELETEINCOME2, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_RECINX_MSG1);
         } catch (Exception e) {
@@ -72,6 +75,7 @@ public class DeleteRecordTest {
         try {
             initialize();
             deleteOut = new DeleteRecordCommand(CommandsForTesting.DELETEEXPEND2, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_RECINX_MSG2);
         } catch (Exception e) {
@@ -80,7 +84,7 @@ public class DeleteRecordTest {
     }
 
     @Test
-    void deleteRec_success() {
+    void deleteRec_validInput_success() {
         try {
             initialize();
             deleteIn = new DeleteRecordCommand(CommandsForTesting.DELETEINCOME, family);

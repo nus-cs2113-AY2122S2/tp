@@ -29,6 +29,7 @@ public class DeletePersonTest {
         try {
             initialize();
             delete = new DeletePersonCommand(CommandsForTesting.DELETEPERSON2, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_UID_MSG);
         } catch (Exception e) {
@@ -41,6 +42,7 @@ public class DeletePersonTest {
         try {
             initialize();
             delete = new DeletePersonCommand(CommandsForTesting.DELETEPERSON3, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), EMPTY_GROUPINX_ERROR_MSG);
         } catch (Exception e) {
@@ -49,7 +51,7 @@ public class DeletePersonTest {
     }
 
     @Test
-    void addPerson_sucess() {
+    void addPerson_validInput_sucess() {
         try {
             initialize();
             delete = new DeletePersonCommand(CommandsForTesting.DELETEPERSON, family);

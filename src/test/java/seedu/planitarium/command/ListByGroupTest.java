@@ -32,6 +32,7 @@ public class ListByGroupTest {
         try {
             initialize();
             list = new ListCommand(CommandsForTesting.LISTBYGROUP2, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_GROUPINX_ERROR_MSG);
         } catch (Exception e) {

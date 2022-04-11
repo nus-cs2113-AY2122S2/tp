@@ -41,6 +41,7 @@ public class AddRecordTest {
         try {
             initialize();
             addRec = new AddRecordCommand(CommandsForTesting.ADDINCOME2, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_UID_MSG);
         } catch (Exception e) {
@@ -53,6 +54,7 @@ public class AddRecordTest {
         try {
             initialize();
             addRec = new AddRecordCommand(CommandsForTesting.ADDINCOME3, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_IMONEY_MSG2);
         } catch (Exception e) {
@@ -62,6 +64,7 @@ public class AddRecordTest {
         try {
             initialize();
             addRec = new AddRecordCommand(CommandsForTesting.ADDINCOME4, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_IMONEY_MSG);
         } catch (Exception e) {
@@ -71,6 +74,7 @@ public class AddRecordTest {
         try {
             initialize();
             addRec = new AddRecordCommand(CommandsForTesting.ADDEXPEND2, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_EMONEY_MSG);
         } catch (Exception e) {
@@ -83,6 +87,7 @@ public class AddRecordTest {
     void addPerson_invalidGroupInx_fail() {
         try {
             addRec = new AddRecordCommand(CommandsForTesting.ADDINCOME5, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_GROUPINX_ERROR_MSG);
         } catch (Exception e) {
@@ -95,6 +100,7 @@ public class AddRecordTest {
         try {
             initialize();
             addIn = new AddRecordCommand(CommandsForTesting.ADDINCOME6, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_DES_MSG);
         } catch (Exception e) {
@@ -107,6 +113,7 @@ public class AddRecordTest {
         try {
             initialize();
             addOut = new AddRecordCommand(CommandsForTesting.ADDEXPEND3, family);
+            fail();
         } catch (PlanITariumException e) {
             assertEquals(e.toString(), INVALID_CAT_MSG);
         } catch (Exception e) {
@@ -115,7 +122,7 @@ public class AddRecordTest {
     }
 
     @Test
-    void addRec_success() {
+    void addRec_validInput_success() {
         try {
             initialize();
             addIn = new AddRecordCommand(CommandsForTesting.ADDEXPEND, family);
