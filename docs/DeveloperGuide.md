@@ -156,7 +156,7 @@ The `TimerLogic` component
 
 The `Timer` component
 
-![TimerClassDiagram](https://user-images.githubusercontent.com/69501969/162180366-87a7ba16-fd03-45e3-9d45-682382412ea5.png)
+![TimerClassDiagram](images/TimerClassDiagram.png)
 
 - Consists of abstract `Timer` class, `Countdown` class and `Stopwatch` class as depicted in the class diagram above
 - `Timer` inherits from Java's `Thread` class
@@ -196,6 +196,8 @@ Sequence diagram for `StudyCommand` for receiving input from `Ui`:
 Sequence diagram for `Timer` when user starts and stops a timer:
 
 ![TimerClassSD](https://user-images.githubusercontent.com/69501969/162565061-146f1c9d-3e69-4c75-8d49-2eb5e5ccab17.png)
+
+
 The diagram above depicts the process when user calls start and stop (in step 2 and 3 below). All the methods
 called by Timer are in parallel with other commands, since `Timer` is in a separate thread. For simplicity’s
 sake, `Countdown-update()` methods are omitted in step 3 to reduce clutter.
