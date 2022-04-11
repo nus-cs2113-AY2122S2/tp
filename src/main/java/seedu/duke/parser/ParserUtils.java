@@ -22,7 +22,7 @@ public class ParserUtils {
         String trimmedIndex = oneBasedIndex.trim();
         try {
             int value = Integer.parseInt(trimmedIndex);
-            if (!(value > 0)) {
+            if (value <= 0) {
                 throw new InvMgrException(Messages.INVALID_INDEX);
             }
             return value;
@@ -43,31 +43,13 @@ public class ParserUtils {
         String trimmedQuantity = quantity.trim();
         try {
             int value = Integer.parseInt(trimmedQuantity);
-            if (!(value >= 0)) {
+            if (value <= 0) {
                 throw new InvMgrException(Messages.INVALID_QUANTITY);
             }
             return value;
         } catch (NumberFormatException ex) {
             throw new InvMgrException(Messages.INVALID_QUANTITY);
         }
-    }
-
-    /**
-     * Returns false if {@code relativeAdd} is "-", and true if {@code relativeAdd} is "+".
-     * The value returned represents a multiplier on the quantity, used to edit quantity relatively.
-     *
-     * @param relativeAdd the modifier to use.
-     * @return true for add, false for subtract.
-     * @throws InvMgrException if @{code relativeAdd} is neither "+" nor "-".
-     */
-    public static boolean parseRelative(String relativeAdd) throws InvMgrException {
-        String trimmedRelativeAdd = relativeAdd.trim();
-        if (trimmedRelativeAdd.equals("+")) {
-            return true;
-        } else if (trimmedRelativeAdd.equals("-")) {
-            return false;
-        }
-        throw new InvMgrException(Messages.INVALID_RELATIVE_MESSAGE);
     }
 
     /**

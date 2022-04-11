@@ -31,13 +31,18 @@ public class Messages {
             + " key in 'help'.";
     public static final String DIVIDER = "===================================================";
     public static final String COMMAND_MENU_MESSAGE = "Here are my functionalities and how to call them: \n";
-    public static final String ERROR_MESSAGE = "Sorry, there was an error!\n";
+    public static final String ERROR_MESSAGE = "Sorry, there was an error!";
     public static final String INVALID_COMMAND = "I did not understand your command.\n" + HELP_MESSAGE;
-    public static final String INVALID_INDEX = "Error. The index you entered was invalid!\n";
+    public static final String INVALID_INDEX = "Error: The index you entered was invalid!\n";
     public static final String INVALID_SYNTAX = "The syntax you entered for the command is invalid!";
     public static final String INVALID_QUANTITY = "The quantity you entered was invalid!\n";
     public static final String INVALID_DATE_FORMAT = "Error: Incorrect date format. Please enter "
             + "dates in YYYY-MM-DD format.";
+
+    /** AddCommand messages. **/
+    public static final String DUPLICATE_ITEM_MESSAGE = "There is already a similar item in the list!\n"
+            + "Use edit command to edit the item's quantity/description instead.\n"
+            + "Or change the name of the item to be more specific.";
 
     /** EditCommandParser messages. **/
     public static final String INVALID_RELATIVE_MESSAGE = "The relative multiplier you entered was invalid! "

@@ -12,6 +12,11 @@ import java.util.stream.Collectors;
 
 public class ListFutureBorrowingsCommand extends Command {
     public static final String COMMAND_WORD = "listfb";
+    public static final String COMMAND_NAME = "List Future Borrowings";
+    public static final String USAGE_MESSAGE = "List all borrow records that will be borrowed after today";
+    public static final String COMMAND_FORMAT = COMMAND_WORD;
+    public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + "\n"
+            + "[Command Format] " + COMMAND_FORMAT + "\n";
 
     private final Optional<String> name;
 
