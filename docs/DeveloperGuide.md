@@ -2,18 +2,19 @@
 
 ## Table of Contents 
 * [Acknowledgements](#acknowledgements)
-* [Product Scope](#product-scope)
-  * [Target User Profile](#target-user-profile)
-  * [Value Proposition](#value-proposition)
-* [User Stories](#user-stories)
 * [Design & Implementation](#design--implementation)
   * [Main Menu component](#main-menu)
   * [Study Manager component](#study-manager-component)
   * [Expense Tracker component](#expense-tracker-component)
   * [Contacts Manager component](#contacts-manager-component)
   * [Load and Store](#load-and-store)
-* [Non-Functional Requirements](#non-functional-requirements)
-* [Glossary](#glossary)
+* [Appendix](#appendix)
+  * [Product Scope](#product-scope)
+  * [Target User Profile](#target-user-profile)
+  * [Value Proposition](#value-proposition)
+  * [User Stories](#user-stories)
+  * [Non-Functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
   * [Study Manager](#study-manager)
   * [Expense Tracker](#expense-tracker)
@@ -37,58 +38,7 @@ We have used the following third-party libraries:
 * [SLF4j NOP](https://www.slf4j.org/)
   - Version 1.7.25
   - To remove runtime logging warning messages that result from using ical4j.
-
-
-
-## Product scope
-### Target user profile
-* NUS undergraduate students
-* has a need to manage their academic schedule 
-* has a need to manage their expenses as a student
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-### Value proposition
-
-This product helps NUS students who are struggling to keep track of their classes, 
-expenses and networking centrally. It is a standalone product that works solely 
-on data provided by the user. It also allows for parsing `.ics` files downloaded from NUSMods.
-
-It solves the basic needs of a student such as managing academic schedule, expenses and contacts 
-faster than a typical mouse driven or GUI driven apps.
-
-## User Stories
-
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v1.0| user|add a new module|refer when I am not sure what is on my schedule right now|
-|v1.0| user|list all modules|get a list of all my modules in one place|
-|v1.0| user|delete a module|remove modules or tasks that I am done with|
-|v1.0| user|add a new expense|keep track of my expenditure|
-|v1.0| user|list all expenses|get a list of all my expenses in one place|
-|v1.0| user|delete an expense|remove expenses that I do not need to track|
-|v1.0| user|add a new contact|keep track of my contacts|
-|v1.0| user|list all contacts|get a list of all my contacts in one place|
-|v1.0| user|delete a contacts|remove contacts that I do not need to track|
-|v2.0|user|find a module by name|locate a module without having to go through the entire list|
-|v2.0|user|edit a module|change details for my existing modules to ensure consistency|
-|v2.0|user|find an expense|locate an expense without having to go through the entire list|
-|v2.0|user|edit an expense |change details for my existing expenses |
-|v2.0|user|find a contact|locate a contact without having to go through the entire list|
-|v2.0|user|edit a contact|change details for my existing contacts|
-|v2.0|user|parse modules from NUSMods|easily add all my modules with a single command|
-|v2.0|user|save and load entries from a session|reload my entries from the previous session|
-
-## Non-Functional Requirements
-1. Application should work on any mainstream operating system that has **Java 11** or above
-2. Application should work ideally for users who type fast, yet no need for users to have prior
-programming background
-3. Application should be able to perform load and store operations on any mainstream operating
-system without difficulty.
+  
 
 ## Design & Implementation
 
@@ -138,7 +88,7 @@ menu mode, step 2 executes. Else, step 3 executes.
 whether it is a command to enter a particular section (essentially step 2), to get help, to exit the application or 
 is an empty or unrecognizable command. 
 
-**Step 1 and 2**:
+**Steps 1 and 2**:
 
 `mode` can only take 4 possible values which are reflected in the class diagram above in the `Mode` enumeration. 
 * `mode = MENU` signifies that the program is currently in menu mode and should execute normally (i.e. step 3 above).
@@ -150,8 +100,9 @@ to `contactsManager` object (call to runner method of this object).
 to `expenseTracker` object.
 
 `mode` is updated upon every return from a method call to any of the manager/tracker objects. This allows for user to indicate 
-whether they actually want to return to the menu (`mode = MENU`) or want to enter another section of the application
-from the section they entered the command from (any other value of `mode`). The `mode` value is checked by calls to methods of 
+whether they actually want to return to the menu (`mode` is set to `MENU` when user enters `menu` command in any of the other sections)
+or want to enter another section of the application (`mode` is set to any other value of `mode` when user enters a valid `goto` command
+in any of the other sections) from the section they entered the command from. The `mode` value is checked by calls to methods of 
 the form `is*Mode()` which are `isContactsManagerMode()`, `isStudyManagerMode()` and `isExpenseTrackerMode()`. 
 
 For example, if user is currently in expense tracker (runner method of `expenseTracker` is executing) and user wants 
@@ -191,7 +142,7 @@ which indicate whether `userInput` is a command concerning either of the followi
 * Exit command:
   * If the `isExitCommand()` method returns `true` on `userInput`, the loop breaks, and control is returned to the static `main()`
   method of the `AllOnUs` class, which then calls the static `exit` method in the same class to print a termination message, and then finally control
-  is returned to the OS. 
+  is returned to the OS.  
 
 ### Modules
 
@@ -441,7 +392,8 @@ customized information if we prevent entering certain symbols.
 ![](images/StorageFileClassDiagram.png)
 
 Note: Exception classes are left out of this diagram that aims to show the core structure of the load-save functionality.
-Some methods and attributes are not mentioned to keep the diagram simple while keeping the core information visible.
+TextUi class is also left out since it is used once for printing an error message. 
+Some methods and attributes are not mentioned to keep the diagram simple while keeping the core information visible. 
 
 As seen from the class diagram above (which shows the portions relevant to the `StorageFile` class), 
 the `StorageFile` class associates to a `Logger` class, a `ContactsManager` class, an `ExpenseTracker` class
@@ -507,6 +459,56 @@ Similar operations occur for entries of type module and contact.
 Once all the entries have been loaded and there are no more lines to be read, the loop breaks and control returns to 
 the `run()` method of `:AllOnUs`, so that interactions with the user can begin. 
 
+##  Appendix
+## Product scope
+### Target user profile
+* NUS undergraduate students
+* has a need to manage their academic schedule
+* has a need to manage their expenses as a student
+* has a need to manage a significant number of contacts
+* prefer desktop apps over other types
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
+
+### Value proposition
+
+This product helps NUS students who are struggling to keep track of their classes,
+expenses and networking centrally. It is a standalone product that works solely
+on data provided by the user. It also allows for parsing `.ics` files downloaded from NUSMods.
+
+It solves the basic needs of a student such as managing academic schedule, expenses and contacts
+faster than a typical mouse driven or GUI driven apps.
+
+## User Stories
+
+|Version| As a ... | I want to ... | So that I can ...|
+|--------|----------|---------------|------------------|
+|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
+|v1.0| user|add a new module|refer when I am not sure what is on my schedule right now|
+|v1.0| user|list all modules|get a list of all my modules in one place|
+|v1.0| user|delete a module|remove modules or tasks that I am done with|
+|v1.0| user|add a new expense|keep track of my expenditure|
+|v1.0| user|list all expenses|get a list of all my expenses in one place|
+|v1.0| user|delete an expense|remove expenses that I do not need to track|
+|v1.0| user|add a new contact|keep track of my contacts|
+|v1.0| user|list all contacts|get a list of all my contacts in one place|
+|v1.0| user|delete a contacts|remove contacts that I do not need to track|
+|v2.0|user|find a module by name|locate a module without having to go through the entire list|
+|v2.0|user|edit a module|change details for my existing modules to ensure consistency|
+|v2.0|user|find an expense|locate an expense without having to go through the entire list|
+|v2.0|user|edit an expense |change details for my existing expenses |
+|v2.0|user|find a contact|locate a contact without having to go through the entire list|
+|v2.0|user|edit a contact|change details for my existing contacts|
+|v2.0|user|parse modules from NUSMods|easily add all my modules with a single command|
+|v2.0|user|save and load entries from a session|reload my entries from the previous session|
+
+## Non-Functional Requirements
+1. Application should work on any mainstream operating system that has **Java 11** or above
+2. Application should work ideally for users who type fast, yet no need for users to have prior
+   programming background
+3. Application should be able to perform load and store operations on any mainstream operating
+   system without difficulty.
 
 ## Glossary
 

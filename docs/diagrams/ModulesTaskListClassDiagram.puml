@@ -2,7 +2,7 @@
  skinparam arrowThickness 1.1
  skinparam arrowColor black
  skinparam classBackgroundColor LOGIC_COLOR
-
+    hide circle
     Class Module {
         -moduleCode: String
         -category: String

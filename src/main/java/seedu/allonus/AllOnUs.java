@@ -243,6 +243,7 @@ public class AllOnUs {
         StorageFile.setFields(contactsManager, expenseTracker, studyManager, FILE_NAME);
         StorageFile storageFile = new StorageFile();
         storageFile.loadData();
+        storageFile.saveData();
 
         logger.log(Level.INFO, LOG_FIRST_ENTRY_TO_MENU);
         Mode mode = Mode.MENU;

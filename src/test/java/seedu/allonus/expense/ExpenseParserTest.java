@@ -7,6 +7,9 @@ import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
 import seedu.allonus.expense.exceptions.ExpenseMissingFieldException;
 import seedu.allonus.expense.exceptions.ExpenseExtraFieldException;
 import seedu.allonus.expense.exceptions.ExpenseSurroundSlashSpaceException;
+import seedu.allonus.expense.exceptions.ExpenseInvalidYearException;
+import seedu.allonus.ui.TextUi;
+
 import java.time.format.DateTimeParseException;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -39,7 +42,7 @@ class ExpenseParserTest {
             assertEquals(remarks, "This is a remark");
         } catch (ExpenseAmountException | ExpenseEmptyFieldException | ExpenseExtraFieldException
                 | ExpenseSurroundSlashSpaceException e) {
-            System.out.println(e.getMessage());
+            TextUi.showToUser(e.getMessage());
         }
     }
 
@@ -52,7 +55,12 @@ class ExpenseParserTest {
     @Test
     void testReformatDate() {
         String testDate = "2022-03-27";
-        String parsedTestDate = reformatDate(testDate);
+        String parsedTestDate = null;
+        try {
+            parsedTestDate = reformatDate(testDate);
+        } catch (ExpenseInvalidYearException e) {
+            TextUi.showToUser(e.getMessage());
+        }
         assertEquals("2022-03-27", parsedTestDate);
     }
 
@@ -74,21 +82,23 @@ class ExpenseParserTest {
             String[] expected = {"2022-03-13", "18.00", "Movie", "This is a remark"};
             assertArrayEquals(expected, result);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(MSG_MISSING_FIELDS);
+            TextUi.showToUser(MSG_MISSING_FIELDS);
         } catch (DateTimeParseException e) {
-            System.out.println(MSG_INCORRECT_DATE_FORMAT);
+            TextUi.showToUser(MSG_INCORRECT_DATE_FORMAT);
         } catch (NumberFormatException e) {
-            System.out.println(MSG_NUMBERS_ONLY_AMOUNT);
+            TextUi.showToUser(MSG_NUMBERS_ONLY_AMOUNT);
         } catch (ExpenseAmountException e) {
-            System.out.println(e.getMessage());
+            TextUi.showToUser(e.getMessage());
         } catch (ExpenseEmptyFieldException e) {
-            System.out.println(e.getMessage());
+            TextUi.showToUser(e.getMessage());
         } catch (ExpenseMissingFieldException e) {
-            System.out.println(e.getMessage());
+            TextUi.showToUser(e.getMessage());
         } catch (ExpenseExtraFieldException e) {
-            System.out.println(e.getMessage());
+            TextUi.showToUser(e.getMessage());
         } catch (ExpenseSurroundSlashSpaceException e) {
-            System.out.println(e.getMessage());
+            TextUi.showToUser(e.getMessage());
+        } catch (ExpenseInvalidYearException e) {
+            TextUi.showToUser(e.getMessage());
         }
 
     }
