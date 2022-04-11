@@ -13,8 +13,13 @@ public class ListParser extends CommandParser {
         super(warehouse);
     }
 
+    public ListParser(Warehouse warehouse, String userInput) {
+        super(warehouse);
+        this.userInput = userInput;
+    }
+
     @Override
-    protected void initExtractParams() throws MissingFlagException, EmptyFieldException {
+    public void initExtractParams() throws MissingFlagException, EmptyFieldException {
         MatchKeywords matchKeywordsMatch;
         String regex;
         regex = "(?<flag>[uog]{1,2})/";
@@ -23,7 +28,7 @@ public class ListParser extends CommandParser {
     }
 
     @Override
-    protected void extractParams() throws WrongCommandException, MissingFlagException, EmptyFieldException {
+    public void extractParams() throws WrongCommandException, MissingFlagException, EmptyFieldException {
         if (matches.get("flag").equals("o")) {
             // list orders with flag "o/"
             this.warehouse.listOrders();

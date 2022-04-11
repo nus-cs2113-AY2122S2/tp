@@ -5,7 +5,6 @@ import seedu.simplst.parsers.HelpParser;
 import util.exceptions.EmptyFieldException;
 import util.exceptions.MissingFlagException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
