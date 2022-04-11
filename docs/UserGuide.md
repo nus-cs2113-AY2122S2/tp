@@ -108,7 +108,6 @@ This section describes each command in detail.
 | <code>/p <T&#124;(any)>           | `T` indicates that an income or expense that you are tracking in the application is recurrent on a monthly-basis while `(any)` refers to any other inputs which will indicate that it is non-recurrent. Non-recurrent entries will be deleted on the following month. |
 
 ---
-<div style="page-break-after: always;"></div>
 
 ### Viewing all commands: `help`
 
