@@ -15,8 +15,8 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
     * What it does: Encapsulates the cost paid and owed for a specific activity by a person.
     * Justification: Allows costs to be tracked per person across multiple activities.
 * [Activity Edit](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityEditCommand.java)
-    * What it does: Edits an activity, only requiring the user to specify the details they wish to edit. Details not specified
-      are left unchanged from the original activity. If the user input does not result in any real changes to the activity (e.g. changing
+    * What it does: Edits an activity. Users can specify any number of delimiters while using this command to indicate the details they wish to edit.
+      Details not specified are left unchanged from the original activity. If the user input does not result in any real changes to the activity (e.g. changing
       the activity name to the same name as before), this command informs the user that nothing has been changed. 
     * Justification: Saves users the effort of having to delete and recreate an activity with incorrect or outdated details. 
       Editing an activity preserves the unique activity identifier whereas deleting and recreating the activity does not. This makes the
@@ -32,6 +32,8 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
       Recreating the activity was also difficult, as many methods in other classes rely on `activityId` to do things such as removing
       `ActivityCost` objects from `Person` objects. Recreating the activity with the same `activityId` would cause bugs with these
       methods, and so a temporary activityId must be used when recreating the activity and changed later after the original has been removed.
+      Since all the activity detail delimiters are entirely optional when editing an activity, there are several permutations of delimiters
+      that the user can supply. Each permutation must be handled differently, and some must be rejected outright to prevent bugs. 
 * [Session View](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionViewCommand.java)
     * What it does: Views a session. Displays session details and a list of activities involved.
     * Justification: Users need a way to get a quick bird's-eye view of a session and the activities involved without 
