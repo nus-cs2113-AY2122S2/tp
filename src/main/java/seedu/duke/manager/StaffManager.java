@@ -40,6 +40,20 @@ public class StaffManager extends Manager {
         singleton = null;
     }
 
+    @Override
+    protected void loadData() throws Exception {
+        this.staffs = new ArrayList<>();
+        ArrayList<?> list = (ArrayList<?>) this.load();
+        for (Object object : list) {
+            this.loadStaff((Staff) object);
+        }
+    }
+
+    @Override
+    public void saveData() throws Exception {
+        this.save(this.staffs);
+    }
+
     public ArrayList<Staff> getStaff() {
         return staffs;
     }
@@ -50,13 +64,8 @@ public class StaffManager extends Manager {
 
     /**
      * Print all the Staffs.
-     *
-     * @throws IllegalArgumentException If there is no staff.
      */
-    public void printStaff() throws IllegalStateException {
-        if (staffs.size() == 0) {
-            throw new IllegalStateException("There is no staff.");
-        }
+    public void printStaff() {
         for (int i = 0; i < staffs.size(); i++) {
             System.out.println((i + 1) + ". " + staffs.get(i));
         }
@@ -69,10 +78,12 @@ public class StaffManager extends Manager {
      * @param staffName Name of the Staff.
      * @param position  Job position of the Staff.
      * @param salary    Salary of the Staff.
+     *
+     * @throws IllegalArgumentException If salary is zero or negative.
      */
-    public void addStaff(int staffId, String staffName, String position, double salary) {
-        MainLogger.logInfo(this, "Successful addition of staff");
+    public void addStaff(int staffId, String staffName, String position, double salary) throws IllegalArgumentException {
         staffs.add(new Staff(staffId, staffName, position, salary));
+        MainLogger.logInfo(this, "Successful addition of staff");
     }
 
     /**
@@ -115,19 +126,5 @@ public class StaffManager extends Manager {
      */
     public int getNumOfStaffs() {
         return staffs.size();
-    }
-
-    @Override
-    protected void loadData() throws Exception {
-        this.staffs = new ArrayList<>();
-        ArrayList<?> list = (ArrayList<?>) this.load();
-        for (Object object : list) {
-            this.loadStaff((Staff) object);
-        }
-    }
-
-    @Override
-    public void saveData() throws Exception {
-        this.save(this.staffs);
     }
 }
