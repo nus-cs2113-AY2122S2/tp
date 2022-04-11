@@ -149,6 +149,8 @@ If you can type fast, SplitLah can manage your outings faster than applications 
 ### Creating a session: `session /create`
 Creates a session so that you can manage your group outings. <br>
 
+<div class="format-box">
+
 > Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] {/pl [NAME1 NAME2 ...] /gid [GROUD_ID]}`
 >* `[SESSION_NAME]` refers to the name of the session.
 >  * The session name is **case-insensitive**.
@@ -158,20 +160,29 @@ Creates a session so that you can manage your group outings. <br>
 >  * Each individual name is **case-insensitive**.
 >* `[GROUP_ID]` refers to the unique identifier of a group.
 >  * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
- 
+
+</div>
 <br>
+
+<div class="note-box">
 
 >  **💡 Notes:**
 >* The `[SESSION_NAME]` should be unique across all existing sessions.
 >* Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 >* The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
 >  * Example: `Alice Tan` is not allowed.
-> 
+
+</div>
+
+<div class="warning-box">
+
 > **⚠️Warnings:**
 >* If you include a name of an individual in `[NAME1 NAME2 ...]` who already exists in the group specified by
    `[GROUP_ID]`, only one instance of this individual is stored in the session.
 >  * Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
      includes Alice, only two names, Alice and Bob, would be saved.
+
+</div>
 
 <br>
 

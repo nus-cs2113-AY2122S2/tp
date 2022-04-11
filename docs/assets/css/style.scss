@@ -3,10 +3,24 @@
 
 @import "{{ site.theme }}";
 
+div.format-box {
+    background-color: #d0dee9;
+}
+
+div.note-box {
+    background-color: #ffffb2;
+}
+
+div.warning-box {
+    background-color: #ffb2b2;
+}
+
 div.button-box {
     text-align: center;
     width: 100%;
 }
+
+
 
 a.btn {
     background-color: #155a95;
