@@ -32,7 +32,8 @@ complete the activities with the use of the study session.
   [Pomodoro study sessions](https://examstudyexpert.com/pomodoro-study-method/).
   
     - **Highlights**: Learned about and used Java's thread library and used their sleep function to keep track of time.
-  
+
+<div style="page-break-after: always;"></div>
 
 - Implemented `TimerLogic` class in the Study Session (Pull request 
 [#36](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/36))
