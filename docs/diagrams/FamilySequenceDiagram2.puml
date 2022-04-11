@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+skinparam arrowColor #BLACK
+skinparam noteTextAlignment left
+
+Title: Family component command handling (Step 2)
+
+participant ":XYZCommand" as Command COMMAND_COLOR
+
+box
+participant ":Family" as Family MODEL_COLOR
+participant "parents:PersonList" as Parents MODEL_COLOR_T3
+participant ":Person" as Person MODEL_COLOR_T2
+end box
+
+participant ":System" as System SYSTEM_COLOR
+participant ":MoneyList" as Money MONEY_COLOR
+participant ":UI" as UI UI_COLOR
+
+-> Command: addin /g 1 /u 1 /i ...
+activate Command
+Command -> Family: addIncome()
+activate Family
+Family -> Parents: addIncome()
+activate Parents
+Parents -> Person: addIncome()
+activate Person
+Person -> Money: addIncome()
+activate Money
+Person <-- Money
+deactivate Money
+opt OPT_COLOR Not Silent
+    Person -> UI: formatValue(amount)
+    activate UI
+    Person <-- UI: income:String
+    deactivate UI
+    Person -> System: println()
+    activate System
+    Person <-- System
+    deactivate System
+end opt
+Parents <-- Person
+deactivate Person
+Family <-- Parents
+deactivate Parents
+Command <-- Family
+deactivate Family
+<-- Command
+deactivate Command
+
+@enduml

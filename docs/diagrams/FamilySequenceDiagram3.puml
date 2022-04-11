@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam arrowColor #BLACK
+skinparam noteTextAlignment left
+
+Title: Family component command handling (Step 3)
+
+participant ":XYZCommand" as Command COMMAND_COLOR
+
+box
+participant ":Family" as Family MODEL_COLOR
+participant "parents:PersonList" as Parents MODEL_COLOR_T3
+participant ":Person" as Person MODEL_COLOR_T2
+end box
+
+participant ":System" as System SYSTEM_COLOR
+participant ":MoneyList" as Money MONEY_COLOR
+
+-> Command: list /g 1
+activate Command
+Command -> Family: list()
+activate Family
+Family -> Family: getGenerationName()
+activate Family
+Family --> Family: generation:String
+deactivate Family
+Family -> System: println()
+activate System
+Family <-- System
+deactivate System
+Family -> Family: getList()
+activate Family
+Family --> Family: personList:PersonList
+deactivate Family
+Family -> Parents: list()
+activate Parents
+loop LOOP_COLOR for every Person
+    Parents -> Parents: getPerson()
+    activate Parents
+    Parents --> Parents:
+    deactivate Parents
+    Parents -> System: println()
+    activate System
+    Parents <-- System
+    deactivate System
+    Parents -> Person: listIncome()
+    activate Person
+    Person -> Money: printIncomeList()
+    activate Money
+    Person <-- Money
+    deactivate Money
+    Parents <-- Person
+    deactivate Person
+    Parents -> Person: listExpenditure()
+    activate Person
+    Person -> Money: printExpenditureList()
+    activate Money
+    Person <-- Money
+    deactivate Money
+    Parents <-- Person
+    deactivate Person
+    Parents -> System: println()
+    activate System
+    Parents <-- System
+    deactivate System
+end loop
+Family <-- Parents
+deactivate Parents
+Command <-- Family
+deactivate Family
+<-- Command
+deactivate Command
+
+@enduml
