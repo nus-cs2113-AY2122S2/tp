@@ -252,7 +252,7 @@ public class CommandParser {
     }
 
     /**
-     * Parses the user-provided add-related command and creates the relevant Command object.
+     * Parses the user-provided view-related command and creates the relevant Command object.
      *
      * @param userInputLowerCase User input to be parsed and turned into a delete-related Command object.
      * @return The relevant Command object created based on the user input.
