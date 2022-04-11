@@ -26,7 +26,7 @@ Given below are my contributions to the project.
   the input is valid. 
   * Highlights: This could simplify further development on command component since developer only need to add new
     command on without touching previous implementation.
-* **New Feature**: Implemented UI component to standardize output.
+* **New Feature**: Implemented logic part of UI component to standardize output.
 
 * **Enhancements to Existing Features**: 
     * Implemented JUnit testing for all commands: [PR90](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/90) [PR163](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/163) [PR257](https://github.com/AY2122S2-CS2113T-T10-2/tp/pull/257)
