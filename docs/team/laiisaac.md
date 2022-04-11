@@ -49,7 +49,7 @@ complete the activities with the use of the study session.
   
 - Add JUnit tests to TimerTest (Pull request
   [#154](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/154))
-- Fix various bugs pertaining to the timer in Study session (Pull requests
+- Fix various bugs pertaining to the timer in Study session (examples: Pull requests
   [#40](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/40),
   [#93](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/93),
   [#147](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/147))
@@ -58,15 +58,17 @@ complete the activities with the use of the study session.
 
 - **User Guide**:
 
-  - Added documentation for Timer feature under study session (Pull requests 
+  - Added documentation for Timer feature under study session (examples: Pull requests 
   [#71](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/71),
   [#84](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/84))
 
+
 - **Developer Guide**:
 
-  - Added documentation, including UML diagrams, for Timer implementation (Pull requests 
+  - Added documentation, including UML diagrams, for Timer implementation (examples: Pull requests 
   [#63](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/63),
   [#85](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/85))
+  - Added architecture diagram
 
 ### Contribution to team tasks
 
