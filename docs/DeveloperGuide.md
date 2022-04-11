@@ -417,7 +417,18 @@ Step 6. In the `CheckRoomByLevelCommand`, it will iterate for roomList and print
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+
+This application is designed for __hotel managers__ who:
+* have a need to manage inventory of items in the hotel
+* have a need to store and view the events happening in the hotel
+* have a need to view and record the status of rooms (whether they've been checked into or checked out of)
+* need to keep track of the information related to their housekeeping staff, including their available hours
+  and performance ratings
+* like to keep track of customer ratings
+* prefer desktop apps over other types
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
 ### Value proposition
 Hotels can be difficult to manage, as hotel managers must keep track of their employees, their inventory, and
