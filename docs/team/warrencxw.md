@@ -106,9 +106,11 @@ Documentation Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.
      was used instead to process the user input and create a `XYZCommand` object.
    * Encouraged other developers to follow separation of concerns principle to improve code quality by replacing
      `XYZCommand#prepare` with `XYZCommandParser` class.
+ * Reviewed and reported [bugs found](https://github.com/warrencxw/ped/issues) in another group's project ([_Spendvalope_](https://ay2122s2-cs2113-f12-1.github.io/tp/))
+   as part of the Practical Exam Dry-Run
  * Headed the fixing of bugs found by other teams during the PE dry run
-   * Set up a collaborative document for the sorting of bugs, allocation of duties and tracking of progress
- * Assisted in the drafting of script and slides for demo video v1.0 and v2.1.
+    * Set up a collaborative document for the sorting of bugs, allocation of duties and tracking of progress
+ * Assisted in the drafting of script and slides for demo video v1.0 and v2.1
 
 #### Project Management
 * Worked on pre-planning and ideation of project
