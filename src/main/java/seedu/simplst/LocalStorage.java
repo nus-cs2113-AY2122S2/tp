@@ -47,7 +47,7 @@ public class LocalStorage {
         if (!Files.exists(dir)) {
             try {
                 Files.createDirectory(dir);
-                System.out.printf("Output Directory created at %s!\n", dir.toString());
+                System.out.println("Output Directory created at current directory!\n");
             } catch (IOException e) {
                 System.err.println("Failed to create directory! " + e.getMessage());
                 return false;
