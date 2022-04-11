@@ -1,15 +1,6 @@
 @startuml
-actor user
+hide footbox
 
-user -> ":Ui" ++ : "list all"
-create ":Parser"
-":Ui" -> ":Parser" ++: new Parser("list all")
-":Parser" --> ":Ui" --: parser:Parser
-":Ui" -> ":Parser" ++: parseCommand()
-create ":ListCommand"
-":Parser" -> ":ListCommand" ++: new ListCommand()
-":ListCommand" --> ":Parser" --: listCommand:ListCommand
-":Parser" --> ":Ui" --: listCommand:ListCommand
 ":Ui" -> ":ListCommand" ++: execute(masterTimetable)
 ":ListCommand" -> ":ListCommand"++: listAll(masterTimetable)
 ":ListCommand" -> ":MasterTimetable" ++: collateAll()
@@ -24,5 +15,5 @@ end
 ":MasterTimetable" --> ":ListCommand" --: str
 ":ListCommand" --> ":ListCommand" --: str
 ":ListCommand" --> ":Ui" --: str
-":Ui" --> user
+destroy ":ListCommand"
 @enduml

@@ -1,29 +1,23 @@
 @startuml
 hide footbox
 
-participant "Unspecified" as none
+participant ":Ui" as Ui
 participant ":AddLessonCommand" as Command
 participant ":Lesson" as Lesson
 participant ":MasterTimetable" as Master
 participant ":Timetable" as Timetable
 
-create Command
-none -> Command : AddLessonCommand("john", "cs2113", "monday", 1200, 1400, "online")
-activate Command
-none <-- Command :
-deactivate Command
-
-none -> Command : execute(masterTimetable)
+Ui -> Command : execute(masterTimetable)
 activate Command
 create Lesson
-Command -> Lesson : Lesson("cs2113", "monday", 1200, 1400, "online")
+Command -> Lesson : Lesson(title, day, startTime, endTime, mode)
 activate Lesson
 Command <-- Lesson : lesson :Lesson
 deactivate Lesson
 
-Command ->  Master : addLesson(lesson, "john")
+Command ->  Master : addLesson(lesson, name)
 activate Master
-Master -> Master : getByName("john")
+Master -> Master : getByName(name)
 activate Master
 Master --> Master : :Timetable
 deactivate Master
@@ -36,12 +30,12 @@ deactivate Timetable
 Command <-- Master
 deactivate Master
 
-Command -> Command : addConfirmation(lesson, "john")
+Command -> Command : addConfirmation(lesson, name)
 activate Command
 Command --> Command : :String
 deactivate Command
 
-none <-- Command : :String
+Ui <-- Command : :String
 deactivate Command
 destroy Command
 

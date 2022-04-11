@@ -14,12 +14,10 @@ import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.exceptions.DuplicateTimetableException;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_NON_EMPTY_LIST;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EXCEPTION_NOT_HANDLED;
 import static seedu.meetingjio.common.Messages.MEETING_ADDED_TO_ALL_CONFIRMATION;
 import static seedu.meetingjio.common.Messages.MEETING_CLEARED_FROM_ALL_CONFIRMATION;
-import static seedu.meetingjio.common.Messages.NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
 import static seedu.meetingjio.parser.Parser.logger;
 
 public class MasterTimetable {
@@ -75,6 +73,10 @@ public class MasterTimetable {
      */
     public Timetable getByIndex(int index) {
         return timetables.get(index);
+    }
+
+    public void clearAll() {
+        timetables.clear();
     }
 
     /**
@@ -281,38 +283,6 @@ public class MasterTimetable {
         for (int i = 0; i < meetingList.size(); i++) {
             if (meeting.equals(meetingList.get(i))) {
                 meetingList.remove(i);
-            }
-        }
-    }
-
-    /**
-     * Deletes all meetings that exist.
-     *
-     * @return String Message that all meetings were deleted as new user was added
-     *
-     */
-    public String deleteAllMeetings() {
-        for (Timetable timetable : timetables) {
-            deleteMeetingsFromTimetable(timetable);
-        }
-        for (int i = 0; i < meetingList.size(); i++) {
-            meetingList.remove(0);
-        }
-        assert meetingList.size() == 0 : ERROR_NON_EMPTY_LIST;
-        return NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
-    }
-
-    /**
-     * Deletes all meetings from specified timetable.
-     *
-     * @param timetable Specific timetable to perform delete on
-     *
-     */
-    public void deleteMeetingsFromTimetable(Timetable timetable) {
-        for (int i = 0; i < timetable.size(); i++) {
-            Event event = timetable.get(i);
-            if (event instanceof Meeting) {
-                timetable.remove(i);
             }
         }
     }

@@ -38,6 +38,7 @@ View my code contributions to the project here: [Reposense report](https://nus-c
 - [Developer guide](https://ay2122s2-cs2113-t11-3.github.io/tp/DeveloperGuide.html):
   - Add common style for Sequence diagrams
   - Added Sequence diagrams for `clear`, `delete` and `add_meeting` features
+  - Class diagram for Timetable and MasterTimetable
   
 ## Other roles
 - Project leader

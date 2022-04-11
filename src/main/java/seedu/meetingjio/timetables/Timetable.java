@@ -47,6 +47,10 @@ public class Timetable {
         list.remove(index);
     }
 
+    public void clearAll() {
+        list.clear();
+    }
+
     public int size() {
         return list.size();
     }

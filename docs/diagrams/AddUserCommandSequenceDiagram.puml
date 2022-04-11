@@ -1,21 +1,15 @@
 @startuml
 hide footbox
 
-participant "Unspecified" as none
+participant ":Ui" as Ui
 participant ":AddUserCommand" as Command
 participant ":MasterTimetable" as Master
 participant ":Timetable" as Timetable
 
-create Command
-none -> Command : AddUserCommand("john")
-activate Command
-none <-- Command :
-deactivate Command
-
-none -> Command : execute(masterTimetable)
+Ui -> Command : execute(masterTimetable)
 activate Command
 create Timetable
-Command -> Timetable : Timetable("john")
+Command -> Timetable : new Timetable(name)
 activate Timetable
 Command <-- Timetable : timetable :Timetable
 deactivate Timetable
@@ -25,12 +19,12 @@ activate Master
 Command <-- Master
 deactivate Master
 
-Command -> Command : addConfirmation("john")
+Command -> Command : addConfirmation(name)
 activate Command
 Command --> Command : :String
 deactivate Command
 
-none <-- Command : :String
+Ui <-- Command : :String
 deactivate Command
 destroy Command
 

@@ -26,11 +26,11 @@ ParserHelperMethods
 ###Enhancements Implemented
 **List Command**
 - Extended `list` to `list_lesson` and `list_meeting` to allow users to specify what type of event to list out
-- Extended `list` to `list all` and `list [user]` to allow users to specify whose timetable to list out
+- Extended `list` to `list all` and `list NAME` to allow users to specify whose timetable to list out
 - Wrote a sorting algorithm to ensure the events listed out are sorted from earliest to latest
 
 **Free Command**
-- Extended `free` to `free [duration]` to allow users to specify the minimum duration required for everyone to be free 
+- Extended `free` to `free DURATION` to allow users to specify the minimum duration required for everyone to be free 
 
 ###Contributions to UG
 **List Command**
