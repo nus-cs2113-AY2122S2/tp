@@ -43,7 +43,7 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
     * Set up this class to represent an exception thrown when format-related errors occur.
 
 #### Testing
-* Added JUnit tests for `ActivityEditCommand`,`ActivityEditCommandParser`, `Name` and `ActivityCost`.
+* Added JUnit tests for `ActivityEditCommand`,`ActivityEditCommandParser`, `Name`, `Person` and `ActivityCost`.
 * As `TextUI` mostly consists of methods that print to the interface instead of returning a value, we decided not to add JUnit tests for this 
   class.
  
