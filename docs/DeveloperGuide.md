@@ -801,6 +801,7 @@ This section includes instructions to test SplitLah manually.
 * [Activity Testing](#activity-testing)
 * [Group Testing](#group-testing)
 * [Storage Testing](#storage-testing)
+
 <hr>
 
 ### Launch and Shutdown
@@ -853,8 +854,6 @@ it with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGu
 3. Test Command: `session /create /n SessionTest6 /gid 2 /d today`<br>
    Expected: An error message should be printed, indicating that the specified group unique identifier cannot be found.
 
-<hr>
-
 #### Deleting a Session
 > For details on the usage of `session /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-session-session-delete).
 
@@ -868,8 +867,6 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    Expected: An error message should be printed, indicating that the specified session unique identifier cannot be found.
 3. Test Command; `session /delete /sid apple`<br>
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
-
-<hr>
 
 #### Editing a Session
 > For details on the usage of `session /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-session-session-edit).
@@ -890,8 +887,6 @@ it with the [`session /create`](https://ay2122s2-cs2113t-t10-1.github.io/tp/User
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/sid` delimiter.
 6. Test Command: `session /edit /sid 1`<br>
    Expected: An error message should be printed, indicating that no delimiters were found.
-
-<hr>
 
 #### Settling a Session
 > For details on the usage of `session /summary` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#settling-all-transactions-for-a-session-session-summary).
@@ -916,8 +911,6 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    Expected: A summary indicating the transactions that have to be made to settle all debts of the session with a 
    session unique identifier of `1` should be printed.
 
-<hr>
-
 #### Viewing a Session
 > For details on the usage of `session /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-session--session-view)
 
@@ -939,8 +932,6 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
    Expected: An error message should be printed, indicating that a session with the specified session unique identifier was not found.
 5. Test Command: `session /view /sid 1`<br>
    Expected: The full details of the session with a session unique identifier of `1` should be printed.
-
-<hr>
 
 #### Listing all Sessions
 > For details on the usage of `session /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-sessions-session-list)
@@ -986,8 +977,6 @@ a single session with the [`session /create`](https://ay2122s2-cs2113t-t10-1.git
 2. Test Command: `activity /create /sid 1 /n ActivityTest1 /p Alice /i Bob Mallory /cl 5 10 /gst 7 /sc 10` <br>
    Expected: An error message should be printed, indicating that a person specified was not found in the particular session.
 
-<hr>
-
 #### Deleting an Activity
 > For details on the usage of `activity /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-an-activity-activity-delete).
 
@@ -1012,8 +1001,6 @@ an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.
    Expected: An error message should be printed, indicating that the session specified was not found.
 3. Test Command: `activity /delete /sid 1 /aid 4` <br>
    Expected: An error message should be printed, indicating that the activity specified was not found in the particular session.
-
-<hr>
 
 #### Editing an Activity
 > For details on the usage of `activity /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-an-activity-activity-edit).
@@ -1041,8 +1028,6 @@ an activity with the [`activity /create`](https://ay2122s2-cs2113t-t10-1.github.
    Expected: A success message should be printed, indicating that the activity was edited.
 4. Test Command: `activity /edit /sid 1 /aid 1 /p Bob` <br>
    Expected: A success message should be printed, indicating that the activity was edited.
-
-<hr>
 
 #### Viewing an Activity
 > For details on the usage of `activity /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-an-activity-activity-view).
@@ -1075,8 +1060,6 @@ Also, only an activity with an activity unique identifier of 1 within this sessi
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/aid` delimiter.
 7. Test Command: `activity /view /sid 1 /aid 1`<br>
    Expected: The full details of the activity with unique identifier of `1` within the session of unique identifier of `1` should be printed.
-
-<hr>
 
 #### Listing all Activities
 > For details on the usage of `activity /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-activities-in-a-session-activity-list).
@@ -1126,8 +1109,6 @@ Test Scenario 2: There is a group named GroupTest1 currently stored in the appli
 2. Test Command: `group /create /n GroupTest1 /pl Alice Bob Charlie` <br>
    Expected: An error message should be printed, indicating that a group with the same name already exists within the application.
 
-<hr>
-
 #### Deleting a Group
 > For details on the usage of `group /delete` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#deleting-a-group-group-delete).
 
@@ -1140,8 +1121,6 @@ Test Scenario 1: There is a group with unique identifier of 1 stored in the appl
    Expected: An error message should be printed, indicating that the specified group unique identifier cannot be found.
 3. Test Command; `group /delete /gid apple`<br>
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/gid` delimiter.
-
-<hr>
 
 #### Editing a Group
 > For details on the usage of `group /edit` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#editing-a-group-group-edit).
@@ -1159,8 +1138,6 @@ Test Scenario 1: A group has been created with a unique identifier of 1, named G
    Expected: An error message should be printed, indicating that an integer argument should be provided following the `/gid` delimiter.
 5. Test Command: `group /edit /gid 1`<br>
    Expected: An error message should be printed, indicating that no delimiters were found.
-
-<hr>
 
 #### Viewing a Group
 > For details on the usage of `group /view` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#viewing-a-group-group-view).
@@ -1183,8 +1160,6 @@ a single group with the [`group /create`](https://ay2122s2-cs2113t-t10-1.github.
    Expected: An error message should be printed, indicating that a group with the specified group unique identifier was not found.
 5. Test Command: `group /view /gid 1`<br>
    Expected: The full details of the group with a group unique identifier of `1` should be printed.
-
-<hr>
 
 #### Listing all Groups
 > For details on the usage of `group /list` command, please refer to our [User Guide](https://ay2122s2-cs2113t-t10-1.github.io/tp/UserGuide.html#listing-all-groups-group-list).
