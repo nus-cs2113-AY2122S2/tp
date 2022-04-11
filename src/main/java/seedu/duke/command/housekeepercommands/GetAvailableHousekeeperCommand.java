@@ -42,7 +42,7 @@ public class GetAvailableHousekeeperCommand extends Command {
      *
      * @param commandStringWithoutCommand Day input given by user.
      * @return Day within valid range.
-     * @throws InvalidDayException if input is not an integer or not between 1 and 7.
+     * @throws HotelLiteManagerException if input is not an integer or not between 1 and 7.
      */
     private int checkCorrectDayGiven(String commandStringWithoutCommand) throws HotelLiteManagerException {
         int day;
@@ -64,8 +64,15 @@ public class GetAvailableHousekeeperCommand extends Command {
         return searchDay;
     }
 
+    /**
+     * Method will derive all housekeeper available on the day given by the user in an list.
+     *
+     * @param listContainer The object containing the lists to update depending on the command inputted by the user.
+     * @param ui            The instance of the Ui class used for printing additional messages
+     *                      when a command is executed.
+     */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         ArrayList<Housekeeper> foundList = housekeeperList.getAvailableHousekeeperByDay(searchDay);
         ui.printFoundHousekeeperList(foundList, searchDay);

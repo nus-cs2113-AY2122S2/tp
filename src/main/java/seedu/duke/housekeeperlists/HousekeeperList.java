@@ -1,5 +1,6 @@
 package seedu.duke.housekeeperlists;
 
+import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.exceptions.InvalidUserException;
 import seedu.duke.exceptions.UserDoesNotExistException;
 
@@ -81,7 +82,7 @@ public class HousekeeperList {
     /**
      * Method to find the housekeeper name in the records and add their availability into the records.
      *
-     * @param name         Housekeeper Name.
+     * @param name         Housekeeper's name.
      * @param availability Housekeeper's availability to be added in records.
      */
     public void addAvailabilityInList(String name, String availability) throws UserDoesNotExistException {
@@ -112,8 +113,8 @@ public class HousekeeperList {
     /**
      * Finds the housekeeper's index in the list.
      *
-     * @param name Housekeeper to be remove.
-     * @return Index of the housekeeper to be remove in the list.
+     * @param name Housekeeper to be removed.
+     * @return Index of the housekeeper to be removed in the list.
      */
     private int getHousekeeperRemove(String name) {
         int index = 0;
@@ -159,7 +160,14 @@ public class HousekeeperList {
         }
     }
 
-    public void addHousekeeperInList(Housekeeper housekeeper) throws InvalidUserException {
+    /**
+     * This method make sures housekeeper name has not been recorded in the list to prevent duplicated names to be
+     * recorded in the list.
+     *
+     * @param housekeeper Housekeeper to be added into the housekeeper list.
+     * @throws HotelLiteManagerException If user has already been recorded in the list.
+     */
+    public void addHousekeeperInList(Housekeeper housekeeper) throws HotelLiteManagerException {
         boolean isRecorded = hasNameAdded(housekeeper.getName());
         if (!isRecorded) {
             addHousekeeper(housekeeper);
@@ -168,8 +176,14 @@ public class HousekeeperList {
         }
     }
 
-
-    public void removeHousekeeperInList(String name) throws UserDoesNotExistException {
+    /**
+     * This method will check if housekeeper's name exist in the list and remove housekeeper from the list if they
+     * exists.
+     *
+     * @param name Housekeeper's name to be removed.
+     * @throws HotelLiteManagerException If housekeeper to be delete does not exist in the list.
+     */
+    public void removeHousekeeperInList(String name) throws HotelLiteManagerException {
         boolean isRecorded = hasNameAdded(name);
         if (isRecorded) {
             int housekeeperToRemoveIndex = getHousekeeperRemove(name);

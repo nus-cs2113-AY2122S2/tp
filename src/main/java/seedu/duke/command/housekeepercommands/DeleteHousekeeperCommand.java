@@ -14,6 +14,10 @@ import seedu.duke.housekeeperlists.HousekeeperList;
 import seedu.duke.AssignmentMap;
 import seedu.duke.storage.HousekeeperFileManager;
 
+/**
+ * Represents a command to delete an existing housekeeper within the housekeeper list.
+ * A DeleteHousekeeperCommand object consists of the name of the housekeeper to be deleted.
+ */
 public class DeleteHousekeeperCommand extends Command {
     private String name;
     private static final String DELETE_PROFILE_COMMAND = "delete housekeeper";
@@ -43,9 +47,9 @@ public class DeleteHousekeeperCommand extends Command {
      * Remove Housekeeper that is not active from the list and print out the total strength of housekeeper in the list.
      *
      * @param listContainer List of information.
-     * @param ui The instance of the Ui class (used for printing additional messages when a command is executed.
+     * @param ui            The instance of the Ui class used for printing additional messages when a command is executed.
      * @throws HotelLiteManagerException User given is not in housekeeper list.
-     * @return
+     * @throws IOException               Write to file has failed.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
@@ -54,14 +58,14 @@ public class DeleteHousekeeperCommand extends Command {
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         assignmentMap.removeAssignment(name);
         assignmentMap.save();
-        ui.printNotifiedDeletionOfHousekeeper(housekeeperList, getName());
+        ui.printNotifiedDeletionOfHousekeeper(housekeeperList, name);
     }
 
     /**
      * After deletion of housekeeper, the housekeeper file has to be updated. This method will update
      * by removing the housekeeper from the records.
      *
-     * @param listContainer List of information.
+     * @param listContainer The object containing the lists to update depending on the command inputted by the user.
      * @throws IOException Write to file has failed.
      */
     public void writeHousekeeperToFile(ListContainer listContainer) throws IOException {

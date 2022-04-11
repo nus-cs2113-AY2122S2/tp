@@ -12,6 +12,10 @@ import seedu.duke.command.Command;
 import seedu.duke.exceptions.InvalidNewYearException;
 import seedu.duke.storage.HousekeeperFileManager;
 
+/**
+ * Represents a command to increase every housekeeper age by one and delete housekeeper whose age has exceeded age
+ * limit.
+ */
 public class AgeIncreaseCommand extends Command {
     private static final String UPDATE_AGE_BY_ONE = "is a new year";
 
@@ -24,9 +28,10 @@ public class AgeIncreaseCommand extends Command {
     /**
      * Increases all housekeeper's age by one and records housekeeper who has exceed age limit. Housekeeper who exceed
      * age limit will be removed from the list.
-     *  @param listContainer The list of information.
-     * @param ui            The instance of the Ui class used for printing additional messages when a command is
-     * @return
+     *
+     * @param listContainer The object containing the lists to update depending on the command inputted by the user.
+     * @param ui            The printing of message to notify user that every housekeeper age has increase by one
+     *                      and also prints the the list of overage housekeepers.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws IOException {
@@ -42,8 +47,8 @@ public class AgeIncreaseCommand extends Command {
     /**
      * This method updates all the age of housekeeper in records by one.
      *
-     * @param listContainer The list of information.
-     * @throws IOException Write to file fail.
+     * @param listContainer The object containing the lists to update depending on the command inputted by the user.
+     * @throws IOException Write to has file failed.
      */
     public void writeAgeIncreaseToFile(ListContainer listContainer) throws IOException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();

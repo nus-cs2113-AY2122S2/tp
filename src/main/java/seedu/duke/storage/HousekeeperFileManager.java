@@ -22,6 +22,14 @@ public class HousekeeperFileManager extends FileManager {
     private static final int MIN_AGE_ACCEPTED = 21;
     private static final int MAX_AGE_ACCEPTED = 60;
 
+    /**
+     * Returns the Item List which contains the contents stored within the file ListFolder/housekeeper_file.txt.
+     *
+     * @return the Housekeeper List containing the contents stored within the file ListFolder/housekeeper_file.txt
+     * @throws HotelLiteManagerException if the folder that the file is stored in does not exist and we are unable to
+     *                                   create it, if the file specified by the file path does not exist and we are
+     *                                   unable to create it.
+     */
     public HousekeeperList load() throws HotelLiteManagerException {
         HousekeeperList housekeeperList = new HousekeeperList();
         Housekeeper housekeeper;
@@ -51,7 +59,13 @@ public class HousekeeperFileManager extends FileManager {
         return housekeeperList;
     }
 
-
+    /**
+     * This method verifies information of age in the housekeeper_file.txt is valid.
+     *
+     * @param housekeeperAge Housekeeper age given from the file.
+     * @return A valid age number.
+     * @throws HotelLiteManagerException If age given is not an integer or within age limit given.
+     */
     private int getAgeNumber(String housekeeperAge) throws HotelLiteManagerException {
         int ageNumber;
         String age;
@@ -74,6 +88,14 @@ public class HousekeeperFileManager extends FileManager {
         return ageNumber;
     }
 
+    /**
+     * This method verifies that the housekeeper's name given from the housekeeper_file.txt does not contain
+     * any symbols or digits.
+     *
+     * @param housekeeperName Housekeeper name given from the file.
+     * @return A valid name.
+     * @throws HotelLiteManagerException If name contains integer and digits.
+     */
     private String getName(String housekeeperName) throws HotelLiteManagerException {
         String name;
         try {
@@ -90,11 +112,22 @@ public class HousekeeperFileManager extends FileManager {
         return name;
     }
 
+    /**
+     * Deletes all the content currently stored within the file ListFolder/housekeeper_file.txt.
+     *
+     * @throws IOException if we are unable to write to the file ListFolder/housekeeper_file.txt.
+     */
     private void clearFileContents() throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH);
         fw.close();
     }
 
+    /**
+     * Update the contents stored within the file ListFolder/housekeeper_file.txt with the
+     * current content of the housekeeper list.
+     *
+     * @throws IOException if we are unable to write to the file ListFolder/housekeeper_file.txt.
+     */
     public void save(HousekeeperList housekeeperList) throws IOException {
         clearFileContents();
         FileWriter fileWriter = new FileWriter(FILE_PATH, true);
