@@ -44,7 +44,7 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
 
 #### Testing
 * Added JUnit tests for `ActivityEditCommand`,`ActivityEditCommandParser`, `Name` and `ActivityCost`.
-* As `TextUI` mostly consists of void methods that print to the interface, we decided not to add JUnit tests for this 
+* As `TextUI` mostly consists of methods that print to the interface instead of returning a value, we decided not to add JUnit tests for this 
   class.
  
 ### Documentation Contributions
