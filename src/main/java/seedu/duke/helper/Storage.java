@@ -230,7 +230,7 @@ public class Storage {
             FileWriter dataWrite = new FileWriter(PATH_APT_MEDS,false);
             for (Appointment appointment : appointments.getList()) {
                 String saveString = appointment.saveMedicineString();
-                if(saveString.equals("")) {
+                if (saveString.equals("")) {
                     continue;
                 }
                 dataWrite.write(appointment.saveMedicineString() + "\n");
@@ -255,7 +255,7 @@ public class Storage {
             FileWriter dataWrite = new FileWriter(PATH_DOC_DATE,false);
             for (Doctor d : doctors.getList()) {
                 String saveString = d.saveDateString();
-                if(saveString.equals("")) {
+                if (saveString.equals("")) {
                     continue;
                 }
                 dataWrite.write(d.saveDateString() + "\n");
@@ -280,7 +280,7 @@ public class Storage {
             FileWriter dataWrite = new FileWriter(PATH_PAT_DATE,false);
             for (Patient p : patients.getList()) {
                 String saveString = p.saveDateString();
-                if(saveString.equals("")) {
+                if (saveString.equals("")) {
                     continue;
                 }
                 dataWrite.write(p.saveDateString() + "\n");

@@ -1,9 +1,10 @@
 @startuml
 'https://plantuml.com/class-diagram
 hide circle
+
 skinparam classAttributeIconSize 0
-class HalpmiException {
-    +HalpmiException(String)
+class UserInputErrorException {
+    +UserInputErrorException(String)
     +toString() : String
 }
 class DuplicateEntryException {
@@ -15,7 +16,14 @@ class NotFoundException {
     +DuplicateEntryException(String)
     +toString() : String
 }
-DuplicateEntryException --|> Exception
+
+class HalpmiException{
+    +HalpmiException(String)
+    +toString() : String
+}
+DuplicateEntryException --|> HalpmiException
+UserInputErrorException --|> HalpmiException
+NotFoundException --|> HalpmiException
+
 HalpmiException --|> Exception
-NotFoundException --|> Exception
 @enduml

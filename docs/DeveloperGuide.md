@@ -100,12 +100,13 @@ How the Command class works:
 * If it is valid, the `Command` subclass executes its method.
 * The subclass is based on whether the user wants to access either the `Doctor`, `Patient`, `Medicine` or `Appointment` asset list class.
 * The input parameters determine which of the `Command` subclass is used.
+* These input parameters are actions which can be `Add`, `Delete`, `View`, `Edit`, `Find`, `Check`, `Update` or `Clear`
 
 #### `Validator`
 
 ![ValidatorClassUML](diagrams/ValidatorClassUML.png)
 
-The validator has a series of methods to ensure that the parameters entered are correct.  It throws a `HalpmiException` if the parameters
+The validator has a series of methods to ensure that the parameters entered are correct.  It throws a `HalpmiException` if the parameters and/or number of parameters
 entered are invalid.
 For example, validateAddPatient validates the parameter of `add patient` command, ensuring each parameter is in correct
 format. Please refer to the below sequence diagram for a clearer understanding.
@@ -117,10 +118,16 @@ format. Please refer to the below sequence diagram for a clearer understanding.
 
 ![ParserClassUML](diagrams/ParserClassUML.png)
 
-The parser parses the description of the command. It first checks the number of parameters entered is correct and
-calls the validator class to validate the parameters, and then returns a command if the validation is successful.
+The parser parses the description of the command. It calls the validator class to validate the parameters, and then returns a command if the validation is successful.
 
 ![ParserUML](diagrams/ParserUML.png)
+
+
+#### `HalpmiException`
+![ExceptionClassUML](diagrams/ExceptionClassUML.png)
+There are three types of HalpmiExceptions, namely, `UserInputErrorException` (usually thrown by Validator), `NotFoundException` (thrown by `find` command) and `DuplicateEntryException` (thrown when trying to add already existing data). 
+
+The exception message will be printed out by the `Ui` class somewhere in the program. 
 
 #### `Storage`
 
@@ -133,6 +140,8 @@ into their respective lists. The Storage class has 5 save methods that save the 
 in the CSV format. The Directory of these text files is found in the DIR String variable, the PATH for each of the 4 text files
 can be found in the PATH_MED, PATH_PAT, PATH_DOC, PATH_APP, PATH_APT_MEDS String variables respectively.
 
+#### Corrupted files
+A preliminary check for corrupted files will be done when HalpMi starts. The validator function will be invoked to ensure the the input lines are correct. Else, the corrupted files will be moved into another separate text file named `[datatype]_corrupted.txt`.
 ### Asset classes
 
 #### `Appointment`
@@ -223,9 +232,10 @@ be returned if the user input passes the validation by `Validator`. Else, a `Hal
 indicating missing parameters.
 
 Below is a simplified sequence diagram showing the key class interactions specifically when the User calls the
-`view appointment` command appropriately. 
+`view appointment` command appropriately.
 
 ![ViewAppointmentImplementationUML](diagrams/ViewAppointmentImplementationUML.png)
+<br>
 The user first types in the command for view appointment correctly. Then, Manager will call UI methods to
 parse and identify the command string and parameters string before parsing within Parser. If parameters are absent,
 then a ViewAppointmentCommand is returned. Else, a FindAppointmentCommand with the parameters is returned. The Command
@@ -271,15 +281,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Version | Priority | As a ...                                   | I want to ...                                | So that I can ...                                                      |
 |---------|----------|--------------------------------------------|----------------------------------------------|------------------------------------------------------------------------|
-|         | `* * *`  | new user                                   | see usage instructions                       | refer to instructions when I forget how to use the App                 |
-|         | `* * *`  | new user                                   | import or export data                        | share with others when needed and make backup copies                   |
-|         | `* *`    | user                                       | find appointments based on selected criteria | filter out the appointments that I want to know about                  |
-|         | `* * *`  | user                                       | find a person by name                        | locate details of persons without having to go through the entire list |
-|         | `* *`    | user                                       | hide private contact details                 | minimize chance of someone else seeing them by accident                |
-|         | `*`      | user with many persons in the address book | sort persons by name                         | locate a person easily                                                 |
+|   1.0   | `***`    | new user | view the user guide  | to learn how to use the system |
+|   1.0   | `***`    | user | use the help function  | to get help quickly within the application |
+|   1.0   | `***`    | user | add patient  | keep track of the patients |
+|   1.0   | `***`    | user | add doctor  | keep track of the doctors |
+|   1.0   | `***`    | user | add medicine  | keep track of the medicines|
+|   1.0   | `***`    | user | view patient  | see all patients in the clinic |
+|   1.0   | `***`    | user | view doctor  | see all doctors in the clinic |
+|   1.0   | `***`    | user | view medicine  | see all medicines in the clinic |
+|   1.0   | `**`     | user | delete patient  | remove data of patients that are not needed anymore |
+|   1.0   | `**`     | user | delete doctor  | remove data of doctors that are not needed anymore |
+|   1.0   | `**`     | user | delete medicine  | remove data of medicines that are not needed anymore |
+|   1.0   | `*`      | user | save data of the application  | all changes I made in one session is saved |
+|   1.0   | `*`      | user | exit the app  | work on other issues whenever appropriate |
+|   2.0   | `***`    | user | add appointment  | keep track of appointments |
+|   2.0   | `***`    | user | delete appointment  | remove appointments that are not needed anymore |
+|   2.0   | `***`    | user | view appointment  | see all appointment in the clinic |
+|   2.0   | `**`     | user | edit appointment  | update changes to appointments |
+|   2.0   | `**`     | user | edit patient  | update changes of patients |
+|   2.0   | `**`     | user | edit doctor  | update changes of doctors |
+|   2.0   | `**`     | user | edit medicine  | update changes of medicines |
+|   2.0   | `**`     | user | find patient  | filter out patients by specific criteria |
+|   2.0   | `**`     | user | find doctor  | filter out doctors by specific criteria |
+|   2.0   | `**`     | user | find medicine  | filter out medicines by specific criteria |
+|   2.0   | `**`     | user | find appointment  | filter out appointments by specific criteria |
+|   2.1   | `*`      | user | update medicines in inventory | find medicines that are expired or have ran out |
+|   2.1   | `*`      | user | clear expired medicines | remove expired/ran out medicines from the inventory |
+|   2.1   | `*`      | user | generate the batch id of medicines to dispense | dispense medicine that expire earlier first |
+|   2.1   | `*`      | user | schedule an appointment | schedule an appointment with a doctor that is free |
 
 ### Use cases
-
 
 ### Non-Functional Requirements
 Device Environment:
@@ -291,17 +322,20 @@ Device Environment:
 * Function offline, without the need for internet access
 * Quick to launch and use
 * No noticeable lag or delay in performance when running
-* Intuitive and seamless for new users.
+* Intuitive and seamless for new users
 * Ability to export the data into a txt file to load on another OS
 
   Reliability of app:
 * Data files should be updated constantly and accurately, with no data loss
 * Data records should be retrievable and readable
-* Text inputs should produce similar results if utilised multiple times.
+* Text inputs should produce similar results if utilised multiple times
 * Program should run without any forced-close error due to bugs
+
 --------------------------------------------------------------------------------------------------------------------
+
 ## Glossary
-* *FUllNAME* - Standard form for fullname of patients and doctors is a String value with no spaces
+
+* *FUllNAME* - Standard form for full name of patients and doctors is a String value with no spaces
 * *NRIC* - Standard form for nric of patients and doctors is a String value with no spaces
 * *AGE* - Standard form for age is an int value more than 0
 * *GENDER* - Standard form for gender of patients and doctors is a char value of "M" or "F"
@@ -334,11 +368,11 @@ For manual testing, developers can follow the instructions listed out in the [Us
 3. `add medicine /info [name],[dosage],[expiry date],[side effects],[quantity]`
   * Adds a new medicine with the specified parameters into the system
 4. `view doctor` or `view doctor /info [criteria],[input]`
-  * View records of all doctors or specific doctors fulfilling the criteria.
+  * View records of all doctors or specific doctors fulfilling the criteria
 5. `view patient` or `view patient /info [criteria],[input]`
-  * View records of all patients or specific patients fulfilling the criteria.
+  * View records of all patients or specific patients fulfilling the criteria
 6. `view medicine` or `view medicine /info [criteria],[input]`
-  * View records of all medicines or specific medicines fulfilling the criteria.
+  * View records of all medicines or specific medicines fulfilling the criteria
 7. `delete doctor /info [nric]`
   * deletes the record of the doctor with the specified nric
 8. `delete patient /info [nric]`

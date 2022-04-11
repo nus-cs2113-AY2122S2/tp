@@ -16,6 +16,7 @@ public class MedicineList extends List {
     private ArrayList<Medicine> medicines = new ArrayList<>();
     private ArrayList<Medicine> expiredMedicines = new ArrayList<>();
     private ArrayList<Medicine> returnedFinderArray = new ArrayList<>();
+    private final String title = "Table of medicines";
 
     public int getSize() {
         return medicines.size();
@@ -66,7 +67,7 @@ public class MedicineList extends List {
         if (medicine == null) {
             throw new UserInputErrorException("Medicine doesn't exist please try again!");
         }
-        CommandLineTable medicineTable = new CommandLineTable();
+        CommandLineTable medicineTable = new CommandLineTable(title);
         medicineTable.setShowVerticalLines(true);
         medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
         medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(),
@@ -76,7 +77,7 @@ public class MedicineList extends List {
     }
 
     public void view() throws UserInputErrorException {
-        CommandLineTable medicineTable = new CommandLineTable();
+        CommandLineTable medicineTable = new CommandLineTable(title);
         medicineTable.setShowVerticalLines(true);
         medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
 
@@ -114,7 +115,7 @@ public class MedicineList extends List {
     }
 
     public void viewExpired() throws UserInputErrorException {
-        CommandLineTable medicineTable = new CommandLineTable();
+        CommandLineTable medicineTable = new CommandLineTable("Table of expired medicine");
         medicineTable.setShowVerticalLines(true);
         medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
         if (expiredMedicines.size() == 0) {
@@ -165,7 +166,7 @@ public class MedicineList extends List {
 
     public void checkStock(String [] medicines) throws UserInputErrorException {
         updateStockBackend();
-        CommandLineTable medicineTable = new CommandLineTable();
+        CommandLineTable medicineTable = new CommandLineTable("Table of missing medicines");
         medicineTable.setShowVerticalLines(true);
         medicineTable.setHeaders("MedicineName", "Quantity");
 
@@ -191,7 +192,7 @@ public class MedicineList extends List {
         if (hasShortage) {
             medicineTable.print();
             throw new UserInputErrorException("The medicines mentioned on the table"
-                    + "above do not have enough stock to dispense!");
+                    + " above do not have enough stock to dispense!");
         }
     }
 
@@ -259,7 +260,7 @@ public class MedicineList extends List {
         if (returnedFinderArray.isEmpty()) {
             UI.printParagraph("Medicine doesn't exist please try again!");
         } else {
-            CommandLineTable findMedicineTable = new CommandLineTable();
+            CommandLineTable findMedicineTable = new CommandLineTable(title);
             for (int i = 0; i < returnedFinderArray.size(); i++) {
                 findMedicineTable.setShowVerticalLines(true);
                 findMedicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry",
@@ -276,7 +277,7 @@ public class MedicineList extends List {
     }
 
     public void dispenseMedicine(String[] medicineArray) {
-        CommandLineTable medicineTable = new CommandLineTable();
+        CommandLineTable medicineTable = new CommandLineTable("Table of medicines to dispense");
         medicineTable.setShowVerticalLines(true);
         medicineTable.setHeaders("MedicineId", "MedicineName", "Expiry", "Quantity");
         medicines.sort(new ExpiryComparator());

@@ -30,11 +30,11 @@ public class AddAppointmentCommand extends Command {
      */
     @Override
     public Status execute(List appointmentList) throws DuplicateEntryException, UserInputErrorException {
-        if(appointmentList instanceof AppointmentList) {
+        if (appointmentList instanceof AppointmentList) {
             appointmentList.add(parameterArray);
-        } else if(appointmentList instanceof PatientList) {
+        } else if (appointmentList instanceof PatientList) {
             ((PatientList) appointmentList).addAppointmentDate(parameterArray[0], parameterArray[2]);
-        } else if(appointmentList instanceof DoctorList) {
+        } else if (appointmentList instanceof DoctorList) {
             ((DoctorList) appointmentList).addAppointmentDate(parameterArray[1], parameterArray[2]);
         }
         return Status.ADD_APPOINTMENT_SUCCESS;

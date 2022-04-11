@@ -143,13 +143,13 @@ public class Validator {
     }
 
 
-    static void validateAddDoctor(String[] parameters) throws UserInputErrorException {
+    public static void validateAddDoctor(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 7);
         validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         validateSpecialization(parameters[6]);
     }
 
-    static void validateAddPatient(String[] parameters) throws UserInputErrorException {
+    public static void validateAddPatient(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 7);
         validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         validateAdmissionDate(parameters[6]);
@@ -169,6 +169,9 @@ public class Validator {
     private static boolean validateDosage(String dosage) throws UserInputErrorException {
         try {
             int dosageInt = Integer.parseInt(dosage);
+            if (dosageInt <= 0) {
+                throw new UserInputErrorException("Invalid medicine dosage");
+            }
             return dosageInt > 0;
         } catch (NumberFormatException numberFormatException) {
             throw new UserInputErrorException("Invalid Medicine dosage");
@@ -191,57 +194,28 @@ public class Validator {
     private static boolean validateQuantity(String quantity) throws UserInputErrorException {
         try {
             int quantityInt = Integer.parseInt(quantity);
+            if (quantityInt <= 0) {
+                throw new UserInputErrorException("Invalid medicine quantity");
+            }
             return quantityInt > 0;
         } catch (NumberFormatException numberFormatException) {
             throw new UserInputErrorException("Invalid Medicine Quantity");
         }
     }
 
-    private static void validateMedicineId(String medicineId) throws UserInputErrorException {
-        Pattern fullNamePattern = Pattern.compile("[A-Z][0-9][3}]");
-        Matcher fullNameMatcher = fullNamePattern.matcher(medicineId);
-        if (!fullNameMatcher.matches()) {
-            throw new UserInputErrorException("Medicine must contain only alphabets and Numbers.");
-        }
-    }
-
-    private static void validateMedicineSideEffects(String sideEffects) throws UserInputErrorException {
-        Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
-        Matcher fullNameMatcher = fullNamePattern.matcher(sideEffects);
-        if (!fullNameMatcher.matches()) {
-            throw new UserInputErrorException("Specialization must contain only alphabets and no special characters.");
-        }
-    }
-
-    /* Validate medicine */
+    // Validate medicine
+    
     public static void validateMedicine(String[] parameters) throws UserInputErrorException {
         minParameterCheck(parameters, 6);
         assert parameters.length == 6 : "Validate failed to check parameter length";
-        boolean check = true;
-        for (int i = 0; i < 5; i++) {
-            switch (i) {
-            case 1:
-                check = validateMedicineName(parameters[i]);
-                break;
-            case 2:
-                check = check && validateDosage(parameters[i]);
-                break;
-            case 3:
-                check = check && validateExpiry(parameters[i]);
-                break;
-            case 5:
-                check = check && validateQuantity(parameters[i]);
-                break;
-            default:
-                break;
-            }
-        }
-        if (!check) {
-            throw new UserInputErrorException("Some Parameters are invalid!");
-        }
+        validateMedicineName(parameters[1]);
+        validateDosage(parameters[2]);
+        validateExpiry(parameters[3]);
+        validateQuantity(parameters[5]);
     }
-
-    /* Validate appointment */
+    
+    // Validate appointment
+    
     private static void validateAppointmentDetails(String appointmentDetails) throws UserInputErrorException {
         if (appointmentDetails.isBlank() || appointmentDetails.isEmpty()) {
             throw new UserInputErrorException("Appointment details cannot be empty. Please indicate some details.");
@@ -386,7 +360,7 @@ public class Validator {
         case "dob":
             validateDob(parameters[1]);
             break;
-        case "admissiondate":
+        case "registrationdate":
             validateAdmissionDate(parameters[1]);
             break;
         default:
@@ -404,7 +378,6 @@ public class Validator {
             String medicineName = dispenseMedicineParameters[i];
             String medicineQuantity = dispenseMedicineParameters[i + 1];
             validateMedicineName(medicineName);
-            validateQuantity(medicineQuantity);
         }
     }
 }

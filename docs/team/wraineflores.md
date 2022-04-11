@@ -23,11 +23,13 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 
 * Tests examples in the UG to ensure its validity
 
+* Checked every section in UG to know that 
+
 ## **DG contributions:**
 
-* Helped explain the Manager class of HalpMi
+* Helped explain the Manager class and made its diagram
 
-* Helped explain the Command classes of HalpMi
+* Helped explain the Command classes and made its diagram
 
 ## **Team-based tasks contributions:**
 
@@ -37,4 +39,6 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 
 * Help remind our group of possible gaps in our product
 
-* Updating user/developer docs that are not specific to a feature is by everyone when we see a change fits
+* Updating user/developer docs that are not specific to a feature and see a change fits it
+
+* Before the final release for v2.1, I have checked that all functions work as indicated in our guides

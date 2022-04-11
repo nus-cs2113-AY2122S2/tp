@@ -22,6 +22,7 @@ public class AppointmentList extends List {
 
     private PatientList referencePatientList;
     private DoctorList referenceDoctorList;
+    private final String title = "Table of appointments";
 
 
 
@@ -58,8 +59,8 @@ public class AppointmentList extends List {
         if (foundPatient == null) {
             throw new DuplicateEntryException("Patient NRIC corrupted");
         }
-        String patientName = foundPatient.get(0).getPatientName();
-        if(foundPatient == null) {
+
+        if (foundPatient == null) {
             throw new DuplicateEntryException("Patient Nric corrupted");
         }
 
@@ -72,12 +73,7 @@ public class AppointmentList extends List {
             throw new DuplicateEntryException("Doctor NRIC corrupted");
         }
 
-
-        String doctorName = foundDoctor.get(0).getFullName();
-
-
         String appointmentDate = addAppointmentParameters[2];
-        String appointmentDetails = addAppointmentParameters[3];
         String id = IdGenerator.createAppointmentId(patientNric, doctorNric, appointmentDate);
 
         for (Appointment appointment : appointments) {
@@ -87,31 +83,23 @@ public class AppointmentList extends List {
             }
         }
 
-        /*
-        for(int i = 0; i < referenceDoctorList.getSize(); ++i){
-            Doctor doctor = referenceDoctorList.getList().get(i);
-            ArrayList<String> appointmentDate1 = doctor.appointmentDate;
-            System.out.println(doctor.getFullName());
-            for(String appointment : appointmentDate1) {
-                System.out.println(appointment);
-            }
 
-         */
+        if (referencePatientList.hasPatientDate(patientNric, appointmentDate)) {
+            throw new DuplicateEntryException("Patient already has an appointment on this date,"
+                    + " choose another appointment date ");
+        }
+        if (referenceDoctorList.hasDoctorDate(doctorNric, appointmentDate)) {
+            throw new DuplicateEntryException("Doctor already has an appointment on this date,"
+                    + " choose another appointment date ");
+        }
 
-            if (referencePatientList.hasPatientDate(patientNric, appointmentDate)) {
-                throw new DuplicateEntryException("Patient already has an appointment on this date," +
-                        " choose another appointment date ");
-            }
-            if (referenceDoctorList.hasDoctorDate(doctorNric, appointmentDate)) {
-                throw new DuplicateEntryException("Doctor already has an appointment on this date," +
-                        " choose another appointment date ");
-
-            }
-
-            Appointment newAppointment = new Appointment(id, patientNric, patientName, doctorNric, doctorName,
-                    appointmentDate, appointmentDetails);
-            appointments.add(newAppointment);
-            assert appointments.size() == numberOfAppointmentsBefore + 1;
+        String patientName = foundPatient.get(0).getPatientName();
+        String doctorName = foundDoctor.get(0).getFullName();
+        String appointmentDetails = addAppointmentParameters[3];
+        Appointment newAppointment = new Appointment(id, patientNric, patientName, doctorNric, doctorName,
+                appointmentDate, appointmentDetails);
+        appointments.add(newAppointment);
+        assert appointments.size() == numberOfAppointmentsBefore + 1;
 
     }
 
@@ -150,12 +138,13 @@ public class AppointmentList extends List {
 
     @Override
     public void view() throws UserInputErrorException {
-        CommandLineTable appointmentTable = new CommandLineTable();
-        CommandLineTable appointmentTableDoctordate = new CommandLineTable();
+
+
+        CommandLineTable appointmentTable = new CommandLineTable(title);
+
         appointmentTable.setShowVerticalLines(true);
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
-        appointmentTableDoctordate.setHeaders("date");
         if (appointments.size() == 0) {
             throw new UserInputErrorException("Appointment list is empty, please add appointment");
         }
@@ -175,7 +164,7 @@ public class AppointmentList extends List {
         if (foundAppointment == null) {
             throw new UserInputErrorException("Appointment doesn't exist please try again!");
         }
-        CommandLineTable appointmentTable = new CommandLineTable();
+        CommandLineTable appointmentTable = new CommandLineTable(title);
         appointmentTable.setShowVerticalLines(true);
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
@@ -243,7 +232,7 @@ public class AppointmentList extends List {
         if (returnedFinderArray.isEmpty()) {
             UI.printParagraph("Appointment doesn't exist please try again!");
         } else {
-            CommandLineTable findAppointmentTable = new CommandLineTable();
+            CommandLineTable findAppointmentTable = new CommandLineTable(title);
             findAppointmentTable.setShowVerticalLines(true);
             findAppointmentTable.setHeaders("Appointment Id", "Patient Nric", "Patient Name", "Doctor Nric",
                     "Doctor Name", "Appointment Date", "Appointment Details");
