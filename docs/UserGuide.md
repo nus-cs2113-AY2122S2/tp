@@ -102,12 +102,13 @@ Words starting with a `/` are flags.
 
 > **💡 Note:**
 >- Parameters and flags are space-separated. For example: `list/e` is not a valid command while `list /e` is valid.
->- All parameters are compulsory unless stated otherwise.
+>- 
 
 > **⚠️Warning⚠️**
->- All parameters are compulsory! Input the parameters in the order shown, or the application will not be able to read your
+>- All parameters are compulsory unless stated otherwise.
+>- Input the parameters in the order shown, or the application will not be able to read your
    > input.
->- ENTER RULES ON FORBIDDEN CHARACTERS HERE
+>- When entering your input, use only ascii characters. Any other input may not properly display in the command line.
 
 <br/>
 
@@ -422,6 +423,8 @@ into the account
 > **⚠️Warning⚠️**
 >- `[CREDIT_CARD_NAME]` cannot be `cash`, `CASH`, or a combination of either.
 >- `[CASHBACK]` cannot be more than 100%.
+>- `[CARD_LIMIT]` cannot be more than 40,000. Generally, students should not have a monthly income of more than 
+   > $10,000, and a monthly credit card limit of $40,000 calculated through [here](https://www.moneysmart.sg/credit-cards/credit-limit-singapore-ms).
 
 <br/>
 
