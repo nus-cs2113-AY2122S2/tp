@@ -20,7 +20,6 @@
  activate Parser
  Parser -> Parser: split fullCommand String
  Parser -> TaskParser: prepareEdit(argument:String, ui:Ui)
- deactivate Parser
 
  activate TaskParser
  TaskParser -> TaskParser: prepareEditTaskContent(argument:String)
@@ -33,6 +32,8 @@
  TaskParser -> TaskParser: prepareEditByDate(argument:String)
  TaskParser -> EditCommand: checkValidCommand()
  TaskParser -> Parser: :EditCommand
+ deactivate TaskParser
  Parser -> Main: :EditCommand
+ deactivate Parser
 
  @enduml
