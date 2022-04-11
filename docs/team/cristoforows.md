@@ -29,6 +29,7 @@ Given below are my contributions to the project.
 
 * Project management:
     * Managed release of v1.0 on GitHub.
+    * Managed release of v2.1 on GitHub
 
 
 * Community
