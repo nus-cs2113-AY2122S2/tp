@@ -6,7 +6,7 @@ Project: IHospital
 IHospital is a desktop application meant for staff in hospitals.
 Its main purpose is to manage patients, doctors, nurses, appointments and wards data,
 and it’s optimised for use via a Command Line Interface (CLI).
-It is written in Java, and has about 3k LoC.
+It is written in Java, and has about 4-5k LoC.
 
 ### Summary of Contributions
 #### New Feature: Added UI class
