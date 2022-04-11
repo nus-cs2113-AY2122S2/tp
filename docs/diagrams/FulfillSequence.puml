@@ -41,7 +41,7 @@ alt isFulfilled == false
     Warehouse -> Warehouse : checkOrderComplete()
     alt checkOrderComplete() == true
         Warehouse --> user -- : "Order completed"
-    else checkOrderComplete == false
+    else checkOrderComplete() == false
         Warehouse --> user -- : "Order not completed"
     end
 end
