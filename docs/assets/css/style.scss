@@ -4,8 +4,7 @@
 @import "{{ site.theme }}";
 
 .main-content blockquote{
-    background-color: #edf2f7;
-    padding-top: 5px;
+    border-left: 0.4rem solid #dce6f0;
 }
 
 div.button-box {
