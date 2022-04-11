@@ -664,7 +664,7 @@ The sequence diagram above shows the interactions when saving user data.
 Fig 24 - ExpenditureList Serialization Sequence Diagram
 
 The above sequence diagram shows the interactions when a list of
-`MMMSerializable`s is being serialized. Although the given diagram shows the interaction for an
+`MMMSerializable` is being serialized. Although the given diagram shows the interaction for an
 `ExpenditureList`, the interactions for `CreditCardList` and `IncomeList` are similar.
 
 1. `ExpenditureList` calls `SerializerFunctions.addListToStringBuilder`, passing in an `ArrayList` of 
