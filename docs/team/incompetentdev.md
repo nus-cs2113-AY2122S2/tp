@@ -25,6 +25,7 @@ ClubInvMgr is a desktop CLI app for inventory management for CCA clubs. It allow
 4. Wrote section on `EditCommand` for **Implementation**. [#190](https://github.com/AY2122S2-CS2113-F10-2/tp/pull/190))
 5. Wrote section on `SearchCommand`  for **Implementation**. [#190](https://github.com/AY2122S2-CS2113-F10-2/tp/pull/190))
 6. Streamlined format for DG. [#190](https://github.com/AY2122S2-CS2113-F10-2/tp/pull/190))
+7. Added Table of Contents.
 
 ### Contributions to team-based-tasks
 1. Implemented a skeleton structure for the project ([#14](https://github.com/AY2122S2-CS2113-F10-2/tp/pull/14))
@@ -32,6 +33,7 @@ ClubInvMgr is a desktop CLI app for inventory management for CCA clubs. It allow
 3. Maintained the issue tracker.
 4. Release v1.0.
 5. Developed some utilities for JUnit testing. (Stubs [#85](https://github.com/AY2122S2-CS2113-F10-2/tp/pull/85), ParserTestUtils [#75](https://github.com/AY2122S2-CS2113-F10-2/tp/pull/75))
+6. Release v2.1.
 
 ### Review/mentoring contributions
 Team's Repo Issue/Review:
