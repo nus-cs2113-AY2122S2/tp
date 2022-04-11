@@ -38,7 +38,7 @@ public class FindPatientCommand extends Command {
             case "dob":
                 ((PatientList) patientList).findByDob(parameterArray);
                 break;
-            case "admissiondate":
+            case "registrationdate":
                 ((PatientList) patientList).findByDateAdmission(parameterArray);
                 break;
             default:

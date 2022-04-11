@@ -68,8 +68,8 @@ public class PatientList extends List {
         }
         CommandLineTable patientTable = new CommandLineTable(title);
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
-        patientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
-                "DateRegistration");
+        patientTable.setHeaders("Nric", "Full Name", "Age", "Address", "Gender", "Dob",
+                "Registration Date");
         patientTable.addRow(patient.getPatientNric(), patient.getPatientName(),
                 String.valueOf(patient.getPatientAge()),
                 patient.getPatientAddress(), String.valueOf(patient.getPatientGender()),
@@ -83,8 +83,8 @@ public class PatientList extends List {
     public void view() throws UserInputErrorException {
         CommandLineTable patientTable = new CommandLineTable(title);
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
-        patientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
-                "DateRegistration");
+        patientTable.setHeaders("Nric", "Full Name", "Age", "Address", "Gender", "Dob",
+                "Registration Date");
         if (patients.size() == 0) {
             throw new UserInputErrorException("Patient list is empty, please add patient");
         }

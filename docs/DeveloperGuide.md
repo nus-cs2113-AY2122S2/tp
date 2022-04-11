@@ -314,17 +314,20 @@ Device Environment:
 * Function offline, without the need for internet access
 * Quick to launch and use
 * No noticeable lag or delay in performance when running
-* Intuitive and seamless for new users.
+* Intuitive and seamless for new users
 * Ability to export the data into a txt file to load on another OS
 
   Reliability of app:
 * Data files should be updated constantly and accurately, with no data loss
 * Data records should be retrievable and readable
-* Text inputs should produce similar results if utilised multiple times.
+* Text inputs should produce similar results if utilised multiple times
 * Program should run without any forced-close error due to bugs
+
 --------------------------------------------------------------------------------------------------------------------
+
 ## Glossary
-* *FUllNAME* - Standard form for fullname of patients and doctors is a String value with no spaces
+
+* *FUllNAME* - Standard form for full name of patients and doctors is a String value with no spaces
 * *NRIC* - Standard form for nric of patients and doctors is a String value with no spaces
 * *AGE* - Standard form for age is an int value more than 0
 * *GENDER* - Standard form for gender of patients and doctors is a char value of "M" or "F"
@@ -357,11 +360,11 @@ For manual testing, developers can follow the instructions listed out in the [Us
 3. `add medicine /info [name],[dosage],[expiry date],[side effects],[quantity]`
   * Adds a new medicine with the specified parameters into the system
 4. `view doctor` or `view doctor /info [criteria],[input]`
-  * View records of all doctors or specific doctors fulfilling the criteria.
+  * View records of all doctors or specific doctors fulfilling the criteria
 5. `view patient` or `view patient /info [criteria],[input]`
-  * View records of all patients or specific patients fulfilling the criteria.
+  * View records of all patients or specific patients fulfilling the criteria
 6. `view medicine` or `view medicine /info [criteria],[input]`
-  * View records of all medicines or specific medicines fulfilling the criteria.
+  * View records of all medicines or specific medicines fulfilling the criteria
 7. `delete doctor /info [nric]`
   * deletes the record of the doctor with the specified nric
 8. `delete patient /info [nric]`
