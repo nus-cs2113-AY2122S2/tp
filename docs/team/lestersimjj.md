@@ -10,7 +10,7 @@ ClubInvMgr is a desktop CLI app for inventory management for CCA clubs. It allow
 ### Enhancements Implemented
 1. Implemented `BorrowCommand` class to borrow an item from the inventory.
    1. The difficulty of implementing this class lies in the complexity of managing different borrowing records. eg. Records of the same item cannot overlap, must be easily retrievable by other classes such as `ListCurrentBorrowings`.
-   2. Initial deliberations were the location of storing these records, if they should be stored in a separate ArrayList or attached to an item. After considering other methods' implementation, it was decided that each item would contain an ArrayList of borrowing records.
+   2. Initial deliberations were the location of storing these records, if they should be stored in a separate ArrayList or attached to an item. After considering other methods' implementation, it was decided that each item would contain an ArrayList of borrow records.
 2. Implemented `Item` class which forms the basic entity of how items are stored.
 3. Implemented `ListCurrentBorrowingsCommand` to list all items that are currently being borrowed.
 4. Implemented `DescCommand` class to retrieve the description from a chosen item by the user.
@@ -18,17 +18,18 @@ ClubInvMgr is a desktop CLI app for inventory management for CCA clubs. It allow
 ### Contributions to the User Guide
 1. Wrote the user guide for `borrow`, `desc`, `listcb`.
 2. Created the base template for the user guide.
-3. Update the Command Summary.
+3. Updated the Command Summary.
 
 ### Contributions to the Developer Guide
-1. Created `Command` class diagram.
-2. Created `Description Command` sequence diagram.
-3. Added v1.0 and v2.0 user stories.
+1. Created `ItemList` class diagram.
+2. Created `Command` class diagram.
+3. Created `Description Command` sequence diagram.
+4. Added v1.0 and v2.0 user stories.
 
 ### Contributions to team-based-tasks
 1. General code enhancements.
 2. Maintained the issue tracker.
-3. Release v2.0.
+3. Released v2.0.
 
 ### Review/mentoring contributions
 Team's Repo:
@@ -37,7 +38,9 @@ Team's Repo:
 3. [Issue #116](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/116)
 4. [Issue #128](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/128)
 5. [Issue #165](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/164)
-6. [PR #85](https://github.com/AY2122S2-CS2113-F10-2/tp/pull/85)
+6. [Issue #165](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/164)
+7. [Issue #203](https://github.com/AY2122S2-CS2113-F10-2/tp/issues/203)
+8. [PR #85](https://github.com/AY2122S2-CS2113-F10-2/tp/pull/85)
  
 Team CS2113-T11-1 Repo:
 1. [Issue #319](https://github.com/AY2122S2-CS2113-T11-1/tp/issues/319)
