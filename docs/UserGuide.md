@@ -145,13 +145,13 @@ Creates a session so that you can manage your group outings. <br>
 
 > Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] {/pl [NAME1 NAME2 ...] /gid [GROUD_ID]}`
 >* `[SESSION_NAME]` refers to the name of the session.
->  * The session name is **case-insensitive**.
+>   * The session name is **case-insensitive**.
 >* `[SESSION_DATE]` refers to the date of the session.
->  * The format of the date must be in `DD-MM-YYYY` or `today`.
+>   * The format of the date must be in `DD-MM-YYYY` or `today`.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the session.
->  * Each individual name is **case-insensitive**.
+>   * Each individual name is **case-insensitive**.
 >* `[GROUP_ID]` refers to the unique identifier of a group.
->  * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
+>   * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
  
 <br>
 
@@ -159,13 +159,13 @@ Creates a session so that you can manage your group outings. <br>
 >* The `[SESSION_NAME]` should be unique across all existing sessions.
 >* Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 >* The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
->  * Example: `Alice Tan` is not allowed.
+>   * Example: `Alice Tan` is not allowed.
 > 
 > **⚠️Warnings:**
 >* If you include a name of an individual in `[NAME1 NAME2 ...]` who already exists in the group specified by
    `[GROUP_ID]`, only one instance of this individual is stored in the session.
->  * Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
-     includes Alice, only two names, Alice and Bob, would be saved.
+>   * Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
+      includes Alice, only two names, Alice and Bob, would be saved.
 
 <br>
 
@@ -224,13 +224,13 @@ Edits an existing session so that you can change the details of a session.<br>
 
 >Format: `session /edit /sid [SESSION_ID] {/n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...]}`
 >* `[SESSION_ID]` refers to the unique identifier of the session.
->  * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
+>   * The unique identifier for a session can be retrieved with the [`session /list`](#listing-all-sessions-session-list) command.
 >* `[SESSION_NAME]` refers to the name of the session.
->  * The session name is **case-insensitive**.
+>   * The session name is **case-insensitive**.
 >* `[SESSION_DATE]` refers to the date of the session.
->  * The format of the date must be in `DD-MM-YYYY` or `today`.
+>   * The format of the date must be in `DD-MM-YYYY` or `today`.
 >* `[NAME1 NAME2 ...]` refers to a list of participants in the session.
->  * Each individual name is **case-insensitive**.
+>   * Each individual name is **case-insensitive**.
 
 <br>
 
@@ -239,21 +239,21 @@ Edits an existing session so that you can change the details of a session.<br>
 > The `[SESSION_NAME]` should be unique across all existing sessions.
 >* Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 >* The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
->  * Example: `Alice Tan` is not allowed.
+>   * Example: `Alice Tan` is not allowed.
 >* There are 3 editable fields: _session name_, _session date_ and the _list of participants_ in the session.
->  * At least 1 field has to be edited for the command to run.
->  * More than 1 field can be edited in a single run of the command.
+>   * At least 1 field has to be edited for the command to run.
+>   * More than 1 field can be edited in a single run of the command.
 >* When editing the _list of participants_, existing participants, including those part of the group declared when
 >  creating the session, must be included.
->  * Activities may have been created using participants in the list, hence the _list of participants_ can only expand
->    and not shrink. This is to prevent introducing any inconsistencies to activities in the session.
->  * Example 1: If the session with session unique identifier of 1 has been created with Alice and Bob 
->    and you wish to edit it to include Charlie, a valid edit command would be: <br>
->    `session /edit /sid 1 /pl Alice Bob Charlie`.
->  * Example 2: If the session with session unique identifier of 1 has been created with
->    Alice and a group consisting of Bob and Charlie, and you wish to edit it to include Mike,
->    a valid edit command would be: <br>
->    `session /edit /sid 1 /pl Alice Bob Charlie Mike`.
+>   * Activities may have been created using participants in the list, hence the _list of participants_ can only expand
+>     and not shrink. This is to prevent introducing any inconsistencies to activities in the session.
+>   * Example 1: If the session with session unique identifier of 1 has been created with Alice and Bob 
+>     and you wish to edit it to include Charlie, a valid edit command would be: <br>
+>     `session /edit /sid 1 /pl Alice Bob Charlie`.
+>   * Example 2: If the session with session unique identifier of 1 has been created with
+>     Alice and a group consisting of Bob and Charlie, and you wish to edit it to include Mike,
+>     a valid edit command would be: <br>
+>     `session /edit /sid 1 /pl Alice Bob Charlie Mike`.
 > 
 > **⚠️Warning:**
 >* This action is irreversible. The session is edited immediately after entering this command.
@@ -384,7 +384,7 @@ There are 2 ways that you can specify the costs of an activity:
 >* The names in `[PAYER]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
 >  `[SESSION_ID]`.
 >* The names in `[PAYER]` and `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
->  * Example: `Alice Tan` is not allowed.
+>   * Example: `Alice Tan` is not allowed.
 >* The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` are decimal values with a maximum of 12 digits before
 >  and 2 digits after the decimal point, if any.
 >* The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that range from 0 to 100,
@@ -622,10 +622,10 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 >* A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
 >* All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
 >* SplitLah simplifies transactions to minimise the number of transactions you have to make.
->  * Example: In the same session, _Alice_ paid for _Bob_'s lunch which costs $10 and _Bob_ paid for _Charlie_'s
->    movie ticket which costs $10. 
->  * Instead of having _Bob_ pay _Alice_ $10 and _Charlie_ pay _Bob_ $10, SplitLah simplifies this
->    so _Charlie_ just has to pay $10 directly to _Alice_, settling all debts in a single transaction.
+>   * Example: In the same session, _Alice_ paid for _Bob_'s lunch which costs $10 and _Bob_ paid for _Charlie_'s
+>     movie ticket which costs $10. 
+>   * Instead of having _Bob_ pay _Alice_ $10 and _Charlie_ pay _Bob_ $10, SplitLah simplifies this
+>     so _Charlie_ just has to pay $10 directly to _Alice_, settling all debts in a single transaction.
 
 <br>
 
@@ -679,7 +679,7 @@ involves the same group of individuals. This saves you time when entering the li
 >* The `[GROUP_NAME]` should be unique across all existing groups.
 >* Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
 >* The names in `[NAME1 NAME2 ...]` must only be a single word without whitespaces.
-   >  * Example: `Alice Tan` is not allowed.
+>   * Example: `Alice Tan` is not allowed.
 
 <br>
 
@@ -732,11 +732,11 @@ Edits an existing group so that you can change the details of a group.<br>
 
 >Format: `group /edit /gid [GROUP_ID] {/n [GROUP_NAME] /pl [NAME1 NAME2...]}`
 >* `[GROUP_ID]` refers to the unique identifier of the group.
->  * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
+>   * The unique identifier for a group can be retrieved with the [`group /list`](#listing-all-groups-group-list) command.
 >* `[GROUP_NAME]` refers to the name of the group.
->  * The group name is **case-insensitive**.
+>   * The group name is **case-insensitive**.
 >* `[NAME1 NAME2 ...]` refers to a list of individuals in the group.
->  * Each individual name is **case-insensitive**.
+>   * Each individual name is **case-insensitive**.
 <br>
 
 > **💡 Notes:**
@@ -744,11 +744,11 @@ Edits an existing group so that you can change the details of a group.<br>
 >- The `[GROUP_NAME]` should be unique across all existing groups.
 >- Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
 >- There are 2 editable fields: _group name_ and the _list of individuals_ in the group.
->  - At least 1 field has to be edited for the command to run.
->  - More than 1 field can be edited in a single run of the command.
+>   - At least 1 field has to be edited for the command to run.
+>   - More than 1 field can be edited in a single run of the command.
 >- Editing groups **does not** affect sessions.
->  - If a session has been created with the group that you are editing,
->    editing the group **does not modify** the _list of participants_ in the session.
+>   - If a session has been created with the group that you are editing,
+>     editing the group **does not modify** the _list of participants_ in the session.
 >
 > **⚠️Warning:**
 > - This action is irreversible. The group is edited immediately after entering this command.
