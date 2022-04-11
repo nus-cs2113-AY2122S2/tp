@@ -10,7 +10,7 @@ boxBorderColor black
 
 box Serialize List
 participant ":ExpenditureList" as ExpenditureList DATA_COLOUR
-participant ":SerializerFunctions" as SerializerFunctions STORAGE_COLOUR
+participant ":SerializerFunctions" as SerializerFunctions HELPER_COLOUR
 participant ":Expenditure" as Expenditure USERFINANCIAL_COLOUR
 participant ":PropertyList" as PropertyList DATA_COLOUR
 end box
@@ -19,7 +19,7 @@ hide footbox
 [-> ExpenditureList : serialize()
 activate ExpenditureList DATA_COLOUR
 ExpenditureList -> SerializerFunctions : addListToStringBuilder()
-activate SerializerFunctions STORAGE_COLOUR
+activate SerializerFunctions HELPER_COLOUR
 loop for each element in list
     SerializerFunctions -> Expenditure : serialize()
     activate Expenditure USERFINANCIAL_COLOUR

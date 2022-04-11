@@ -608,7 +608,7 @@ Loads the user's saved information upon startup.
 
 ![Loading_sequence_diagram](images/LoadingSequenceDiagramFinal.png)
 <br/>
-Fig 21 - Loading Sequence Diagram
+Fig 24 - Loading Sequence Diagram
 
 The sequence diagram above shows the interactions when loading user data.
 
@@ -623,7 +623,7 @@ return a `CreditCardList` and `IncomeList`, respectively.
 ![Deserialize_list_sequence_diagram](images/DeserializeListSequenceDiagramFinal.png)
 <br/>
 
-Fig 22 - ExpenditureList Deserialization Sequence Diagram
+Fig 25 - ExpenditureList Deserialization Sequence Diagram
 
 The above sequence diagram shows the interactions when a list of 
 `MMMSerializable`s is being deserialized. Although the given diagram shows the interaction for an 
@@ -648,7 +648,7 @@ command execution.
 ![Saving_sequence_diagram](images/SavingSequenceDiagramFinal.png)
 <br/>
 
-Fig 23 - Saving Sequence Diagram
+Fig 26 - Saving Sequence Diagram
 
 The sequence diagram above shows the interactions when saving user data.
 
@@ -664,7 +664,7 @@ The sequence diagram above shows the interactions when saving user data.
 ![Serialize_list_sequence_diagram](images/SerializeListSequenceDiagramFinal.png)
 <br/>
 
-Fig 24 - ExpenditureList Serialization Sequence Diagram
+Fig 27 - ExpenditureList Serialization Sequence Diagram
 
 The above sequence diagram shows the interactions when a list of
 `MMMSerializable` is being serialized. Although the given diagram shows the interaction for an

@@ -10,7 +10,7 @@ boxBorderColor black
 
 box addCreditCard()
 participant ":MMM" as MMM MMM_COLOUR
-participant "AddCommand:Command" as AddCommand COMMANDS_COLOUR
+participant "CommandType:AddCommand" as AddCommand COMMANDS_COLOUR
 participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
 participant ":AddCommandInputTest" as AddCommandInputTest HELPER_COLOUR
 participant ":CreditCard" as CreditCard USERFINANCIAL_COLOUR

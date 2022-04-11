@@ -24,16 +24,16 @@ Storage --> MMM --
 
 MMM -> Storage : load()
 activate Storage STORAGE_COLOUR
-Storage -> User ** : deserializeFrom()
+Storage -> User  : deserializeFrom()
 activate User USERFINANCIAL_COLOUR
-User -> ExpenditureList ** : deserializeFrom()
+User -> ExpenditureList : deserializeFrom()
 activate ExpenditureList DATA_COLOUR
 ref over User, ExpenditureList : deserialize list
 ExpenditureList --> User --
-User -> CreditCardList ** : deserializeFrom()
+User -> CreditCardList  : deserializeFrom()
 activate CreditCardList DATA_COLOUR
 CreditCardList --> User --
-User -> IncomeList ** : deserializeFrom()
+User -> IncomeList  : deserializeFrom()
 activate IncomeList DATA_COLOUR
 IncomeList --> User --
 User --> Storage --

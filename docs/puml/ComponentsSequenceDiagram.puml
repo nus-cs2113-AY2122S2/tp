@@ -21,7 +21,6 @@ participant ":Commands" as Commands COMMANDS_COLOUR
 participant ":Storage" as Storage STORAGE_COLOUR
 end box
 
-activate MMM MMM_COLOUR
 MMM -> Ui: readInput()
 activate Ui UI_COLOUR
 User -> Ui: \t\t add /e /pm cash /c food /d Porridge /a 3 /t 04/04/2022
@@ -44,6 +43,5 @@ Storage --> MMM
 deactivate Storage
 
 MMM --> User
-deactivate MMM
 
 @enduml

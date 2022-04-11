@@ -10,7 +10,7 @@ boxBorderColor black
 
 box updateIncome()
 participant ":MMM" as MMM MMM_COLOUR
-participant "Command:UpdateCommand" as updateCommand COMMANDS_COLOUR
+participant "CommandType:UpdateCommand" as updateCommand COMMANDS_COLOUR
 participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
 participant ":AddCommandInputTest" as AddCommandInputTest HELPER_COLOUR
 participant ":Income" as Income USERFINANCIAL_COLOUR
