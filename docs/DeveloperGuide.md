@@ -626,7 +626,7 @@ The above sequence diagram shows the interactions when a list of
 `MMMSerializable`s is being deserialized. Although the given diagram shows the interaction for an 
 `ExpenditureList`, the interactions for `CreditCardList` and `IncomeList` are similar.
 
-1. `ExpenditureList` calls `SerializerFunctions.convertInputToList`, which accepts a function
+1. `ExpenditureList` calls `SerializerFunctions.convertInputToList()`, which accepts a function
 that deserializes a line of input. Here, `Expenditure.deserialize` is passed to `convertInputToList`.
 2. For each line in the input which corresponds to an `Expenditure`, `SerializerFunctions`
 invokes `Expenditure.deserialize` on this line, which returns an `Expenditure`. This is repeated until
