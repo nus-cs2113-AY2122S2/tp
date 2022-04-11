@@ -524,10 +524,6 @@ the JAR file name
 | View average satisfaction. | `view average satisfaction`           | Reports the average customer satisfaction|
 |Add extra characters to view average satisfaction. | `view average satisfaction blah blah` | Error message to user|
 
-
-
-
-
 ---
 ### Housekeeper Related Functions
 
@@ -580,6 +576,7 @@ the JAR file name
 
 ---
 ### Room Related Functions
+
 | **Test Case** | **Command** | **Expected Result** |
 |:-------------:|:-------------|:-------------------|
 | Check in room `201`| `check in 201` | Change Status of room `201` from `Vacant` to `Occupied`|
@@ -589,24 +586,26 @@ the JAR file name
 | Check all room in level `3`| `check level 3`| Lists out all room in level `3`|
 | Check all room in level `5`, which is not within the level range of 1-4| `check level 5`| Error message to user|
 
+
 ---
 
 ### Item Related Functions
-|                                              **Test Case**                                               | **Command**                                                | **Expected Result**                                                                                                                                                                      |
-|:--------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|                           Add the Toilet Paper with 15 Pax into the item list                            | `add item Toilet Paper / 15 `                              | The item Toilet Paper with a pax of 15 gets added into the item list.                                                                                                                    <br/>|
-|     Add the Item Toilet Paper with a Pax of 2000000 which is over the pax limit into the item list.      | `add item Toilet Paper / 2000000`                          | The invalid item pax error message gets displayed to the user.                                                                                                                           |
-| Update the item name of toilet paper within the item list from 2 ply toilet paper to 5 ply toilet paper. | `update item Name 2 ply toilet paper / 5 ply toilet paper` | The name of the item 2 ply toilet paper gets updated to 5 ply toilet paper.                                                                                                              |
-| Update the item name of toilet paper within the item list from 2 ply toilet paper to 2 ply toilet paper. | `update item Name 2 ply toilet paper / 2 ply toilet paper` | An error message would be shown to the user informing him/her that the item names cannot be the same.                                                                                    |
-|                 Update the pax of the table item to go from its current pax value to 20.                 | `update item Pax Table / 20`                               | The item Table would have an updated pax of 20.                                                                                                                                          |
-|                Given that the current pax of the table item is 50, update its pax to 50.                 | `update item Pax Table / 50`                               | An error message would be shown to the user informing him/her that the new item pax cannot be the same as the current pax.                                                               |
-|                     Search for items within the item list using the keyword toilet.                      | `search item Toilet`                                       | All the items within the item list whose item name contains toilet would be displayed in a list format to the user along with their pax.                                                 |
-|                   Search for items within the item list without providing any keyword.                   | `search item`                                              | An error message would be shown to the user informing him/her that the keyword cannot be empty.                                                                                          |
-|                         Delete the item called Tooth Brush within the item list.                         | `delete item Tooth Brush`                                  | The Tooth Brush item would be deleted from the item list.                                                                                                                                |
-|                             Delete a non-existent item within the item list.                             | `delete item Gold Bars`                                    | An error message would be shown to the user informing him/her that the item cannot be found in the item list.                                                                            |
-|                                   View all items within the item list.                                   | `view all items`                                           | All the items within the item list would be displayed to the user in a list format.                                                                                                      |---
-|                                 Enter an invalid view all items command.                                 | `view all items again`                                     | An error message would be shown to the user informing the user that he/she have entered the view all items command in the wrong format. The error message also shows the correct format. |
-|                         View all items within the item list with a pax of zero.                          | `view items with zero pax`                                 | All the items with a pax of zero within the item list would be displayed to the user in a list format                                                                                    |
+
+|                                              **Test Case**                                               | **Command**                                                | **Expected Result**                                                                                                                                                                                |
+|:--------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                           Add the Toilet Paper with 15 Pax into the item list                            | `add item Toilet Paper / 15 `                              | The item Toilet Paper with a pax of 15 gets added into the item list.                                                                                                                              |
+|     Add the Item Toilet Paper with a Pax of 2000000 which is over the pax limit into the item list.      | `add item Toilet Paper / 2000000`                          | The invalid item pax error message gets displayed to the user.                                                                                                                                     |
+| Update the item name of toilet paper within the item list from 2 ply toilet paper to 5 ply toilet paper. | `update item Name 2 ply toilet paper / 5 ply toilet paper` | The name of the item 2 ply toilet paper gets updated to 5 ply toilet paper.                                                                                                                        |
+| Update the item name of toilet paper within the item list from 2 ply toilet paper to 2 ply toilet paper. | `update item Name 2 ply toilet paper / 2 ply toilet paper` | An error message would be shown to the user informing him/her that the item names cannot be the same.                                                                                              |
+|                 Update the pax of the table item to go from its current pax value to 20.                 | `update item Pax Table / 20`                               | The item Table would have an updated pax of 20.                                                                                                                                                    |
+|                Given that the current pax of the table item is 50, update its pax to 50.                 | `update item Pax Table / 50`                               | An error message would be shown to the user informing him/her that the new item pax cannot be the same as the current pax.                                                                         |
+|                     Search for items within the item list using the keyword toilet.                      | `search item Toilet`                                       | All the items within the item list whose item name contains toilet would be displayed in a list format to the user along with their pax.                                                           |
+|                   Search for items within the item list without providing any keyword.                   | `search item`                                              | An error message would be shown to the user informing him/her that the keyword cannot be empty.                                                                                                    |
+|                         Delete the item called Tooth Brush within the item list.                         | `delete item Tooth Brush`                                  | The Tooth Brush item would be deleted from the item list.                                                                                                                                          |
+|                             Delete a non-existent item within the item list.                             | `delete item Gold Bars`                                    | An error message would be shown to the user informing him/her that the item cannot be found in the item list.                                                                                      |
+|                                   View all items within the item list.                                   | `view all items`                                           | All the items within the item list would be displayed to the user in a list format.                                                                                                                |---
+|                                 Enter an invalid view all items command.                                 | `view all items again`                                     | An error message would be shown to the user informing the user that he/she have entered the view all items command in the wrong format. The error message also shows the correct format.           |
+|                         View all items within the item list with a pax of zero.                          | `view items with zero pax`                                 | All the items with a pax of zero within the item list would be displayed to the user in a list format                                                                                              |
 |                          Enter an invalid view all items with zero pax command.                          | `view items with zero pax abc abc`                         | An error message would be shown to the user informing the user that he/she have entered the view items with zero pax command in the wrong format. The error message also shows the correct format. |
 
 ### Event Related Functions
