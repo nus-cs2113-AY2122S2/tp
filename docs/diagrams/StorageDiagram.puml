@@ -5,23 +5,18 @@
 !include <office/Users/user>
 !include style.puml
 
-Package " "<<Rectangle>>{
+Package "Storage"<<Rectangle>>{
 
     Class Storage STORAGE_COLOR
     Class Family MODEL_COLOR
-    Class PersonList MODEL_COLOR_T3
-    Class Person MODEL_COLOR_T2
-    Class IncomeList MONEY_COLOR
-    Class ExpenditureList MONEY_COLOR
+    Class Main #grey
 
 }
 
 Class "<$documents>" as File STORAGE_COLOR_T3
 Storage -right[STORAGE_COLOR].> File
-Storage "1" -down[STORAGE_COLOR]-> "1" Family
-Family "1" -down[MODEL_COLOR]-> "3" PersonList
-PersonList "1" -down[MODEL_COLOR]-> "*" Person
-Person "1" -down[MODEL_COLOR]-> "1" IncomeList
-Person "1" -down[MODEL_COLOR]-> "1" ExpenditureList
+Main -right[#grey]-> "1" Storage
+Storage -down[STORAGE_COLOR]-> "1" Family
+
 
 @enduml

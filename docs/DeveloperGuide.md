@@ -299,6 +299,8 @@ section.
 **Class:** [`Storage.java`
 ](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/storage/Storage.java)
 
+The Class Diagram below shows the full structure of the `Storage` component and the components it interacts with.
+
 ![StorageDiagram](images/StorageDiagram.png)
 
 The `Storage` component,
@@ -449,9 +451,7 @@ and called by `PersonList`:
 
 ### Data Archiving
 
-#### Saving and loading feature
-
-##### Implementation
+#### Implementation
 
 The saving and loading mechanism is facilitated by `Family`. It loads records of `PersonList` for each logical
 grouping inside family from a local file, process the data and adds the record to `Family` for the current session.
@@ -468,7 +468,7 @@ the following operations:
 Given below is an example scenario and how the save and load mechanism behaves at each step.
 
 Step 1. The user launches the application. A `Storage` object will be initialised with an empty `PersonList` for each
-`Family` grouping. The following sequence diagram shows how the `Storage` object is initialised
+`Family` grouping. The following sequence diagram in step 2 shows how the `Storage` object is initialised.
 
 Step 2. The program will create a new `Family` object for the session which calls `Storage#loadData()`, causing a check 
 if the local file `PlanITarium.txt` exists by calling `Storage#checkFileExists()` and creates one if it does not. The 
@@ -482,7 +482,7 @@ The following sequence diagram shows how the loading operation works:
 Step 3. The user then decides to exit the program by executing the command `bye`, `Storage#saveData` will be called. All
 data in the `Family` object will be written to the local file `PlanITarium.txt` in the format of
 `(user/operation) (Info)` which are to be read again when the program starts up. The following
-Sequence diagram shows how the saving operation will work:
+Sequence diagram shows how the saving operation works:
 
 ![StorageSaveSequence](images/StorageSaveSequence.png)
 
