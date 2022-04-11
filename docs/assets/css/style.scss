@@ -3,11 +3,8 @@
 
 @import "{{ site.theme }}";
 
-hr {
-    border: none;
-    height: 3px;
-    color: #808080;
-    background-color: #808080;
+.main-content blockquote{
+    background-color: #DCDCDC;
 }
 
 div.button-box {
