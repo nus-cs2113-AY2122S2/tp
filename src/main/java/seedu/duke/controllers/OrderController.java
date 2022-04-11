@@ -51,7 +51,7 @@ public class OrderController extends Controller {
             displayOrders();
             break;
         case 7:
-            System.out.print(dishManager.printDishes());
+            System.out.println(dishManager.printDishes());
             break;
         default:
             System.out.println("Unknown choice!");
@@ -83,7 +83,7 @@ public class OrderController extends Controller {
     private void addNewOrder() throws OperationTerminationException {
         MainLogger.logInfo(this, "User is creating an order");
         System.out.println("Creating a new order...");
-        int index = InputParser.getInteger("Enter dishes to add, enter negative number to exit: ");
+        int index = InputParser.getInteger("Enter dishes to add, enter 0 to exit: ");
         int createdOrderIdx = orderManager.getOrderCount();
         try {
             while (index >= 1) {
@@ -130,7 +130,7 @@ public class OrderController extends Controller {
         System.out.println("Getting total price of an order...");
         try {
             int userInputInt = InputParser.getInteger("Enter the order you want to get price: ") - 1;
-            System.out.printf("Total value of this order: %f. \n", orderManager.getPrice(userInputInt));
+            System.out.printf("Total value of this order: %.2f. \n", orderManager.getPrice(userInputInt));
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Please enter a valid order index.");
         }
@@ -145,7 +145,7 @@ public class OrderController extends Controller {
         if (orderManager.getOrderCount() == 0) {
             System.out.println("No order now.");
         } else {
-            System.out.printf("Total value of all orders: %f. \n", orderManager.getAllValue());
+            System.out.printf("Total value of all orders: %.2f. \n", orderManager.getAllValue());
         }
     }
 
