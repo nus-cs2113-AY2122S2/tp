@@ -120,6 +120,16 @@ Find records with category:
 
   ![find-command-screenshot](../images/FindWithCat.png)
 
+Find records without category:
+
+* Find all the records which descriptions include _candies_.
+
+  `find /d candies`
+
+* _Result_:
+
+  ![find-command-screenshot](../images/FindWithoutCat.png)
+
 #### Command Summary
 
 To keep things simple, we will omit the parameter description for you. To view each command in detail, refer to
