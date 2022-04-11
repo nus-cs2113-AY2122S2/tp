@@ -6,7 +6,7 @@ actor User
 
 User -> ":Ui" ++: "exit"
 create ":MeetingJio"
-":Ui" -> ":MeetingJio" --: executeCommand("exit", masterTimetable)
+":Ui" -> ":MeetingJio" ++: executeCommand("exit", masterTimetable)
 ":MeetingJio" -> ":MeetingJio" ++: exit()
 create ":StorageFile"
 ":MeetingJio" -> ":StorageFile" ++: saveData(masterTimetable)
@@ -18,11 +18,16 @@ loop for each user
 ":Timetable" --> ":StorageFile" --
 ":StorageFile" --> ":MasterTimetable" --
 end
+":MasterTimetable" --> ":StorageFile"
 deactivate ":MasterTimetable"
+":StorageFile" --> ":StorageFile"
+deactivate ":StorageFile"
 ":StorageFile" --> ":MeetingJio" --:
 deactivate ":StorageFile"
 destroy ":StorageFile"
-":MeetingJio" --> ":Ui" ++: showGoodByeMessage()
+":MeetingJio" --> ":MeetingJio" :
+deactivate ":MeetingJio"
+":MeetingJio" --> ":Ui" : showGoodByeMessage()
 deactivate ":MeetingJio"
 ":Ui" --> User--: GoodBye Message
 
