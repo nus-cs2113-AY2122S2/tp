@@ -15,7 +15,7 @@ public class Simplst {
             Display.stateRestored();
         } else {
             Display.newLogin();
-            w.setTotalCapacity("1000");
+            w = new Warehouse(1000);
         }
         ui = new UserInterface(w);
         ui.run();

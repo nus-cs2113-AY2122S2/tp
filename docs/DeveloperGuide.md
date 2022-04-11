@@ -9,13 +9,6 @@
   * [Orderline Class](#orderline-class)
   * [Warehouse Class](#warehouse-class)
   * [Command Parser](#command-parser)
-    * [Add Parser](#add-parser)
-    * [Remove Parser](#remove-parser)
-    * [View Parser](#view-parser)
-    * [Find Parser](#find-parser)
-    * [List Parser](#list-parser)
-    * [Fulfill Parser](#fulfill-parser)
-    * [Help Parser](#help-parser)
   * [User Interface Class](#user-interface-class)
   * [Match Keyword Class](#match-keyword-class)
 * [Product Scope](#product-scope)
@@ -70,9 +63,9 @@ Simplst will then add the quantity specified to the LinkedHashMap of Goods store
 
 If the SKU is not known, this means that a UnitGood of the same SKU has to be added first.
 
-### Capacity Enumeration
+#### Capacity Enumeration
 The Capacity enum is meant as a heuristic to determine the size of a unit good and good.
-#### Description
+##### Description
 This enum will have 3 values:
 - SMALL
 - MEDIUM
@@ -105,7 +98,7 @@ This is to indicate that this orderline is fulfilled in that order, and it does 
 ### Warehouse Class
 The warehouse class is created to simulate an entire warehouse.
 #### Description
-![Warehouse Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/Warehouse.puml)
+![Warehouse Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Warehouse.puml)
 
 Most of the methods in the Warehouse Class will require users to know the SKU of the Good that they want to interact with.
 
@@ -149,26 +142,11 @@ This is the description for the Command Parser. This is an abstract class which 
 
 ![Command Parser Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/CommandParser.puml)
 
-#### Add Parser
-##### Description
-#### Remove Parser
-##### Description
-#### View Parser
-##### Description
-#### List Parser
-##### Description
-#### Find Parser
-##### Description
-####  Help Parser
-##### Description
-#### Fulfill Parser
-##### Description
+Each parser class will use regular expressions done in the [Match Keyword Class](#match-keyword-class) to obtain a flag
+such that the program knows which operation to perform, whether it is a command related to Unit Good, Order, etc. The 
+parsers will then perform another series of us of regular expressions to obtain more specific details of the command
+such that it can properly execute the command.
 
-### User Interface Class
-#### Description
-
-### Display Class
-#### Description
 
 ### Match Keyword Class
 #### Description
@@ -326,9 +304,22 @@ A cheap, user-friendly Warehouse Management System with intuitive commands to im
 
 ## Non-Functional Requirements
 
-1. Simplst should respond to users in less than 3 seconds
-2. Simplst should be able to hold information of up to hundreds of Unit Goods, Goods and Orders simultaneously
-3. Simplst should run on any supported and updated OS with Java 11 or higher installed.
+Device Requirement:
+* Must have Java 11 or higher installed (Recommended to use Java 11)
+* Supports 32-bit and 64-bit systems
+* Supports use of the Command Line Interface
+
+Application Performance:
+* Does not require internet connection; Functions offline
+* Quick and easy to launch and use
+* Responds to a command within 3 seconds
+* Provides function to save and load JSON files
+
+Application Reliability:
+* Data should be saved and stored accurately
+* Same input of a command should result in the same outcomes
+* Data storage will function normally as long as the application is not forced to close
+* Simplst should be able to hold data of up to hundreds of Unit Goods, Goods and Orders simultaneously
 
 ## Glossary
 
