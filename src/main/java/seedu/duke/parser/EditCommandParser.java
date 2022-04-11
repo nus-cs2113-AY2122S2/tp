@@ -20,16 +20,19 @@ public class EditCommandParser implements Parser<EditCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
-     * @throws InvMgrException if the user input does not conform the expected format
+     *
+     * @throws InvMgrException if the user input does not conform the expected format.
      */
     public EditCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_DESCRIPTION, PREFIX_RELATIVE);
 
+        // Format violation: none of required prefixes present
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_DESCRIPTION)) {
             throw new InvMgrException(Messages.INVALID_SYNTAX);
         }
 
+        // Format violation: relative without quantity
         if (argMultimap.getValue(PREFIX_RELATIVE).isPresent() && !argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
             throw new InvMgrException(Messages.INVALID_RELATIVE_WITHOUT_QUANTITY);
         }
@@ -64,9 +67,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 optionalRelativeAdd);
     }
 
-
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * Returns true if any one of the prefixes contains non-empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      * For EditCommand, at least one of PREFIX_NAME, PREFIX_QUANTITY, and PREFIX_DESCRIPTION is needed.
      */
@@ -76,6 +78,12 @@ public class EditCommandParser implements Parser<EditCommand> {
                 && !argumentMultimap.getValue(prefix).get().equals(""));
     }
 
+    /**
+     * Converts 0-length {@code Optional<String>} to an empty {@code Optional}.
+     *
+     * @param optionalStr the {@code Optional<String>} to check.
+     * @return the original {@code optionalStr}, or an empty {@code Optional}.
+     */
     private static Optional<String> convertEmptyStringToEmptyOptional(Optional<String> optionalStr) {
         if (optionalStr.isPresent() && optionalStr.get().equals("")) {
             return Optional.empty();

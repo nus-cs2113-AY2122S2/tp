@@ -6,23 +6,40 @@ skinparam SequenceReferenceBackgroundColor pink
 participant ":InvMgr" as InvMgr
 participant "storage:Storage" as Storage
 participant "gson:Gson" as Gson
+participant ":GsonManager" as GsonManager
+
 
 activate InvMgr
     InvMgr -> Storage : save(itemList: ArrayList<Item>)
     activate Storage
 
-        create Gson
-        Storage -> Gson : Gson()
-        activate Gson
+        create GsonManager
+        Storage -> GsonManager: GsonManager()
+        activate GsonManager
         return
+
+        Storage -> GsonManager: registerTypeAdapter(BorrowRecord.class, new BorrowRecordAdapter())
+        activate GsonManager
+        return
+
+        Storage -> GsonManager: create()
+        activate GsonManager
+            create Gson
+            GsonManager -> Gson: Gson(...)
+            activate Gson
+            note right: "..." represents \nconfigurations for \nthe Gson instance \nto be created
+            return
+        return gson:Gson
+        destroy GsonManager
 
         Storage -> Gson : toJson(itemList)
         activate Gson
         return serializedItems: String
+        destroy Gson
 
         ref over Storage
             Write serializedItems: String
-            into dataFile
+            into dataPath
         end ref
 
     return

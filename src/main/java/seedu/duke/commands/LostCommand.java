@@ -2,13 +2,15 @@ package seedu.duke.commands;
 
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
+import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
 import seedu.duke.common.Messages;
 
 import static seedu.duke.parser.CliSyntax.PREFIX_ITEM_INDEX;
+import static seedu.duke.parser.CliSyntax.PREFIX_QUANTITY;
 
 public class LostCommand extends Command {
-    protected int itemIndex;
+    private int itemIndex;
     public static final String COMMAND_WORD = "lost";
     public static final String COMMAND_NAME = "Report Lost Item";
     public static final String USAGE_MESSAGE = "Marks item as lost";
@@ -30,12 +32,11 @@ public class LostCommand extends Command {
         this.itemIndex = itemIndex;
     }
 
-    protected static boolean checkItemListSize() {
-        if (ItemList.getSize() == 0) {
+    protected boolean checkItemListSize(ItemList itemList) {
+        if (itemList.getSize() == 0) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -46,25 +47,40 @@ public class LostCommand extends Command {
      * @param ui Displays messages to the user
      */
     @Override
-    public void execute(ItemList itemList, Ui ui) {
-        boolean isEmptyItemList = checkItemListSize();
+    public void execute(ItemList itemList, Ui ui) throws InvMgrException {
+        boolean isEmptyItemList = checkItemListSize(itemList);
         if (isEmptyItemList) {
-            ui.showMessages(Messages.EMPTY_ITEM_LIST_MESSAGE);
-            ui.showDivider();
-            return;
+            throw new InvMgrException(Messages.EMPTY_ITEM_LIST_MESSAGE);
         }
         Item lostItem = null;
         try {
             lostItem = itemList.getItem(itemIndex);
         } catch (IndexOutOfBoundsException e) {
-            ui.showMessages(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE);
-            ui.showDivider();
-            return;
+            throw new InvMgrException(Messages.ITEM_NUMBER_OUT_OF_RANGE_MESSAGE);
         }
-        lostItem.markItemAsLost();
-        ui.showMessages(Messages.REPORTED_LOST_MESSAGE);
-        System.out.println(lostItem);
-        ui.showDivider();
+        itemList.removeItem(itemIndex);
+        ui.showMessages(lostItem + " has been deleted.");
+        ui.showMessages(Messages.REPORTED_LOST_AND_DELETED_MESSAGE);
+    }
+
+    /**
+     * Returns true if a LostCommand object is the same object compared to another LostCommand object
+     * or contains the same attributes as another LostCommand object.
+     *
+     * @param o The other LostCommand object to compare to.
+     * @return True if this LostCommand and another LostCommand
+     *     are the same object or contains the same attributes.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LostCommand that = (LostCommand) o;
+        return itemIndex == that.itemIndex;
     }
 
 }

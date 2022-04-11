@@ -18,7 +18,8 @@ public class CancelFutureBorrowingsParser implements Parser<CancelFutureBorrowin
      * Parses the given {@code String} of arguments in the context of the 
      * CancelFutureBorrowingsCommand and returns an CancelFutureBorrowingsCommand 
      * object for execution.
-     * @throws InvMgrException if the user input does not conform the expected format
+     *
+     * @throws InvMgrException if the user input does not conform the expected format.
      */
     public CancelFutureBorrowingsCommand parse(String args) throws InvMgrException {
         ArgumentMultimap argMultimap = 
@@ -30,6 +31,8 @@ public class CancelFutureBorrowingsParser implements Parser<CancelFutureBorrowin
 
         String borrowerName = argMultimap.getValue(PREFIX_BORROWER_NAME).get();
         int borrowIndex = ParserUtils.parseIndex(argMultimap.getValue(PREFIX_ITEM_INDEX).get()) - 1;
+
+        assert borrowIndex > -1 : " index must be more than 0";
 
         return new CancelFutureBorrowingsCommand(borrowerName, borrowIndex);
     }

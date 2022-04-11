@@ -1,0 +1,28 @@
+@startuml
+
+hide footbox
+
+skinparam PackageBackgroundColor pink
+skinparam SequenceReferenceBackgroundColor salmon
+
+Participant ":EditCommand" as EditCommand
+Participant "itemList:ItemList" as ItemList
+Participant "ui:Ui" as Ui
+Participant "placeholderItem" as placeholderItem
+Participant "Item" as ItemClass <<class>>
+
+-> EditCommand: execute(itemList:ItemList, ui:Ui)
+activate EditCommand
+    EditCommand -> ItemList: getItem(index:int)
+    activate ItemList
+    return targetItem:Item
+
+    EditCommand -> ItemClass: copyItem(targetItem)
+    activate ItemClass
+        create placeholderItem
+        ItemClass -> placeholderItem: duplicates targetItem
+        activate placeholderItem
+        return
+    return placeholderItem: Item
+
+@enduml
