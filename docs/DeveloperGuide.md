@@ -11,6 +11,8 @@
   - [View a Project](#view-a-project)
   - [Set the Deadline to a Project](#set-the-deadline-to-a-project)
   - [Set the Deadline to a Todo](#set-the-deadline-to-a-todo)
+  - [Change the GitHub Repo of a Project](#change-the-github-link-of-a-project)
+  - [Open the GitHub Repo of a Project](#open-the-github-link-of-a-project)
 - [Proposed Features](#proposed-features)
   - [Tasks Due Soon Feature](#tasks-due-soon-feature)
 - [Previous project structure](#previous-project-structure)
