@@ -33,10 +33,10 @@ activate UI
 UI --> Main
 deactivate UI
 
-Main -> Commands : getCommand(\n      "add /g 2\n        /n Alice")
+Main -> Commands : getCommand(\n"add /g 2 /n\nAlice":String,\nfamily:Family)
 
 activate Commands
-Commands -> Parser : parseCommandType(\n   "add /g 2 /n Alice")
+Commands -> Parser : parseCommandType(\n"add /g 2 /n Alice":String)
 activate Parser
 Parser --> Commands : "add":String
 deactivate Parser
@@ -48,7 +48,7 @@ activate Commands2
 Commands2 --> Commands
 deactivate Commands2
 
-Commands --> Main : :AddPerson\n      Command
+Commands --> Main : :AddPerson\nCommand
 deactivate Commands
 
 Main -> Commands2 : execute()
@@ -62,13 +62,13 @@ end ref
 Commands2 -> Family : addPerson(2:int, "Alice":String)
 activate Family
 
-Family -> Family : getList(2)
+Family -> Family : getList(2:int)
 activate Family
 Family --> Family
 deactivate Family
 
 
-Family -> Family2 : addPerson\n("Alice")
+Family -> Family2 : addPerson(\n"Alice":String)
 activate Family2
 
 create Family3
