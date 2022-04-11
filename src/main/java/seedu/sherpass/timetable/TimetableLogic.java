@@ -126,7 +126,7 @@ public class TimetableLogic {
 
 
 
-    //@@author
+    //@@ yuzhongng
     protected static LocalDate getFirstDayOfMonth(Month month) {
         Month currentMonth = LocalDate.now().getMonth();
 
