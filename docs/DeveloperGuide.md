@@ -164,9 +164,13 @@ The user starts by typing an add command. The example used in the diagram above 
 
 The above diagram shows the sequence diagram for retrieving the description of an item.
 
+The user starts by typing a desc command. The example used in the diagram above is to retrieve the description of an item with the index `1`, based on the list when the user types the `list` command.
 
-
-For a user who is unaware of what an item is about, he/she can enter the command eg. `desc 2` command to extract the description for the second item in the inventory list. This command is interpreted by the `Parser` and a `DescCommand` is returned to `InvMgr`. `InvMgr` calls the execute command of `DescCommand` which retrieves the item's information from the `ItemList` and then outputs them into the `Ui` for the user to see.
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is identified to start with the word `desc` and identifies the index given by the user ie. `1`.
+3. `parse()` then generates a new `DescCommand` with the index as the argument. The new `DescCommand` is returned to the `run` method.
+4. The `run()` method then calls on the `execute()` method in `DescCommand` which retrieves the specified `item` from `itemList`.
+5. With the `item` object, we are able to retrieve the item's description and pass it as a String to be printed by `ui` using `showMessages` method.
 
 
 ### Delete Command
