@@ -11,9 +11,9 @@ Code Contribution: [RepoSense Link](https://nus-cs2113-ay2122s2.github.io/tp-das
     * Justification: Allows costs to be tracked per person across multiple activities.
 * [Activity Edit](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityEditCommand.java)
     * What it does: Edits an activity. Users can specify any number of delimiters while using this command to indicate the details they wish to edit.
-      Details not specified are left unchanged from the original activity. If the user input does not result in any real changes to the activity (e.g. changing
-      the activity name to the same name as before), this command informs the user that nothing has been changed. 
-    * Justification: Saves users the effort of having to delete and recreate an activity with incorrect or outdated details. 
+      Details not specified are left unchanged from the original activity. If the user input does not change the activity
+      a message is printed indicating that nothing is changed.
+    * Justification: Saves users the effort of having to delete and recreate an activity with edited details.
       Editing an activity preserves the unique activity identifier whereas deleting and recreating the activity does not. This makes the
       overall experience of editing activites more user friendly and intuitive.
       Informing the user when no changes are made helps prevent user error, as editing an activity without changing anything is 
