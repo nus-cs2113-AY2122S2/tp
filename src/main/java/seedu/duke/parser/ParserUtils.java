@@ -53,24 +53,6 @@ public class ParserUtils {
     }
 
     /**
-     * Returns false if {@code relativeAdd} is "-", and true if {@code relativeAdd} is "+".
-     * The value returned represents a multiplier on the quantity, used to edit quantity relatively.
-     *
-     * @param relativeAdd the modifier to use.
-     * @return true for add, false for subtract.
-     * @throws InvMgrException if @{code relativeAdd} is neither "+" nor "-".
-     */
-    public static boolean parseRelative(String relativeAdd) throws InvMgrException {
-        String trimmedRelativeAdd = relativeAdd.trim();
-        if (trimmedRelativeAdd.equals("+")) {
-            return true;
-        } else if (trimmedRelativeAdd.equals("-")) {
-            return false;
-        }
-        throw new InvMgrException(Messages.INVALID_RELATIVE_MESSAGE);
-    }
-
-    /**
      * Return a string representation of date as LocalDate type.
      *
      * @param dateStr Date entered by the user as String type.
