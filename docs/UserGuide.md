@@ -164,8 +164,8 @@ Creates a session so that you can manage your group outings. <br>
 > **⚠️ Warning:**
 >* If you include a name of an individual in `[NAME1 NAME2 ...]` who already exists in the group specified by
    `[GROUP_ID]`, only one instance of this individual is stored in the session.
->   * Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
-      includes Alice, only two names, Alice and Bob, would be saved.
+>   * Example: Where the group specified by `/gid` consists of _Alice_ and _Bob_ and the arguments of `/pl` 
+      includes _Alice_, only two names, _Alice_ and _Bob_, would be saved.
 
 <br>
 
@@ -247,11 +247,11 @@ Edits an existing session so that you can change the details of a session.<br>
 >  creating the session, must be included.
 >   * Activities may have been created using participants in the list, hence the _list of participants_ can only expand
 >     and not shrink. This is to prevent introducing any inconsistencies to activities in the session.
->   * Example 1: If the session with session unique identifier of 1 has been created with Alice and Bob 
->     and you wish to edit it to include Charlie, a valid edit command would be: <br>
+>   * Example 1: If the session with session unique identifier of _1_ has been created with _Alice_ and _Bob_ 
+>     and you wish to edit it to include _Charlie_, a valid edit command would be:<br>
 >     `session /edit /sid 1 /pl Alice Bob Charlie`.
->   * Example 2: If the session with session unique identifier of 1 has been created with
->     Alice and a group consisting of Bob and Charlie, and you wish to edit it to include Mike,
+>   * Example 2: If the session with session unique identifier of _1_ has been created with
+>     _Alice_ and a group consisting of _Bob_ and _Charlie_, and you wish to edit it to include _Mike_,
 >     a valid edit command would be: <br>
 >     `session /edit /sid 1 /pl Alice Bob Charlie Mike`.
 > 
@@ -371,7 +371,7 @@ There are 2 ways that you can specify the costs of an activity:
 >    * Each individual name is **case-insensitive**.
 >* `[TOTAL_COST]` refers to the total cost of the activity.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
->    * Example: `/i Alice Bob /cl 10 20` means that Alice's portion cost $10 while Bob's portion cost $20.
+>    * Example: `/i Alice Bob /cl 10 20` means that _Alice's_ portion cost $10 while _Bob's_ portion cost $20.
 >* `[GST_PERCENTAGE]` refers to the additional percentage GST that may be charged during your activity.
 >* `[SERVICE_CHARGE]` refers to the additional percentage service charge that may be charged during your activity.
 
@@ -390,7 +390,7 @@ There are 2 ways that you can specify the costs of an activity:
 >* The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` are decimal values that range from 0 to 100,
 >  with a maximum of 3 digits before and 2 after the decimal point, if any.
 >* If the payer is also involved in the activity, the payer's name has to be included in the list of participants
->   * Example: Alice paid for a movie which she watched with Bob in a session with a session unique identifier of 1,
+>   * Example: _Alice_ paid for a movie which she watched with _Bob_ in a session with a session unique identifier of 1,
 >    costing a total of $20. The correct command format is: <br>
 >    `activity /create /sid 1 /n movie /p Alice /i Alice Bob /co 20`
 >* All values displayed are rounded off to 2 decimal places. This may result in slight inaccuracies.
