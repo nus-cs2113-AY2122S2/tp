@@ -62,6 +62,10 @@ Adds a new item into the inventory list.
 
 ```
 > add n/Chalkboard q/1 d/Draw using chalk
+Chalkboard | 1 has been added!
+
+> add n/Chalk q/0 d/Chalk to draw
+The quantity you entered was invalid!
 ```
 
 If there is an item with the same name in the inventory list, you will be told to either edit the item already in the inventory list using the `edit` command, or change the name of the item to be added.
