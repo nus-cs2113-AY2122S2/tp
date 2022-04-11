@@ -33,7 +33,8 @@ complete the activities with the use of the study session.
     For eg, All the task related command will be passed to TaskParser. Parser Class will be responsible for decoding 
     User Input. The decoded input will be then pass to its relevant Parser Class such as TaskParser for further 
     computation.
-  
+
+
 - Refactor Timetable Class
   - Pull Request [#77](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/77)
   - Original `Timetable` class is responsible for a lot of things such as, ensuring proper printing of timetable schedule, 
@@ -64,10 +65,11 @@ complete the activities with the use of the study session.
   
 #### Contribution to team-based tasks
 - Refactor Parser Class
-- Refactor Timetable Class.
+- Refactor Timetable Class
 - Modify the help Command
   - Pull Request [#153](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/153)
   - Update the help command for the add and edit features to reflect the latest implementation.
+- Formatting the UG to fit the PDF file.
 
 #### Review/mentoring contributions
 - Leave comments and improvement PR [#37](https://github.com/AY2122S2-CS2113T-T09-1/tp/pull/37)
