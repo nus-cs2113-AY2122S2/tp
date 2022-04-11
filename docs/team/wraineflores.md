@@ -11,33 +11,34 @@ and Medication. Users can also schedule appointment for Patients with Doctors an
 
 | Contribution, Enhancement                | Description                                                   |
 |------------------------------------------|---------------------------------------------------------------|
+| Created Person                           | This class is is used to base Doctor & Person Classes         |
 | Find Doctor                              | Feature finds a doctor based on a specific parameter          |
 | Find Patient                             | Feature finds a patient based on a specific parameter         |
 | Find Medicine                            | Feature finds a medicine based on a specific parameter        |
-| Help Messages                            | Compiled all messages to be printed out                       |
+| Help Function                            | Compiled all help messages to be printed out                  |
 
 ## **UG contributions:**
 
-* Edited contents in the UG for continuity purposes
+* Edited contents in the UG for continuity purposes to see an overall picture 
 
 * Tests examples in the UG to ensure its validity
 
+* Checked every section in UG to know that 
+
 ## **DG contributions:**
 
-* Helped explain the Manager class
+* Helped explain the Manager class and made its diagram
 
-* Helped explain the Command classes
+* Helped explain the Command classes and made its diagram
 
 ## **Team-based tasks contributions:**
 
-* Setting up the GitHub team org/repo is by Sharif & Wei Li
+* Helped to set up the milestones and labels on Github issues when necessary
 
-* Necessary general code enhancements is by everyone
+* Helped maintain issue trackers for our Github
 
-* Setting up tools e.g., GitHub, Gradle is by everyone
+* Help remind our group of possible gaps in our product
 
-* Maintaining the issue tracker is by everyone
+* Updating user/developer docs that are not specific to a feature and see a change fits it
 
-* Release management is done by consensus by the majority
-
-* Updating user/developer docs that are not specific to a feature is by everyone when we see a change fits
+* Before the final release for v2.1, I have checked that all functions work as indicated in our guides

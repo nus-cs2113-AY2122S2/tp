@@ -100,6 +100,7 @@ How the Command class works:
 * If it is valid, the `Command` subclass executes its method.
 * The subclass is based on whether the user wants to access either the `Doctor`, `Patient`, `Medicine` or `Appointment` asset list class.
 * The input parameters determine which of the `Command` subclass is used.
+* These input parameters are actions which can be `Add`, `Delete`, `View`, `Edit`, `Find`, `Check`, `Update` or `Clear`
 
 #### `Validator`
 
@@ -231,9 +232,10 @@ be returned if the user input passes the validation by `Validator`. Else, a `Hal
 indicating missing parameters.
 
 Below is a simplified sequence diagram showing the key class interactions specifically when the User calls the
-`view appointment` command appropriately. 
+`view appointment` command appropriately.
 
 ![ViewAppointmentImplementationUML](diagrams/ViewAppointmentImplementationUML.png)
+<br>
 The user first types in the command for view appointment correctly. Then, Manager will call UI methods to
 parse and identify the command string and parameters string before parsing within Parser. If parameters are absent,
 then a ViewAppointmentCommand is returned. Else, a FindAppointmentCommand with the parameters is returned. The Command
@@ -279,15 +281,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Version | Priority | As a ...                                   | I want to ...                                | So that I can ...                                                      |
 |---------|----------|--------------------------------------------|----------------------------------------------|------------------------------------------------------------------------|
-|         | `* * *`  | new user                                   | see usage instructions                       | refer to instructions when I forget how to use the App                 |
-|         | `* * *`  | new user                                   | import or export data                        | share with others when needed and make backup copies                   |
-|         | `* *`    | user                                       | find appointments based on selected criteria | filter out the appointments that I want to know about                  |
-|         | `* * *`  | user                                       | find a person by name                        | locate details of persons without having to go through the entire list |
-|         | `* *`    | user                                       | hide private contact details                 | minimize chance of someone else seeing them by accident                |
-|         | `*`      | user with many persons in the address book | sort persons by name                         | locate a person easily                                                 |
+|   1.0   | `***`    | new user | view the user guide  | to learn how to use the system |
+|   1.0   | `***`    | user | use the help function  | to get help quickly within the application |
+|   1.0   | `***`    | user | add patient  | keep track of the patients |
+|   1.0   | `***`    | user | add doctor  | keep track of the doctors |
+|   1.0   | `***`    | user | add medicine  | keep track of the medicines|
+|   1.0   | `***`    | user | view patient  | see all patients in the clinic |
+|   1.0   | `***`    | user | view doctor  | see all doctors in the clinic |
+|   1.0   | `***`    | user | view medicine  | see all medicines in the clinic |
+|   1.0   | `**`     | user | delete patient  | remove data of patients that are not needed anymore |
+|   1.0   | `**`     | user | delete doctor  | remove data of doctors that are not needed anymore |
+|   1.0   | `**`     | user | delete medicine  | remove data of medicines that are not needed anymore |
+|   1.0   | `*`      | user | save data of the application  | all changes I made in one session is saved |
+|   1.0   | `*`      | user | exit the app  | work on other issues whenever appropriate |
+|   2.0   | `***`    | user | add appointment  | keep track of appointments |
+|   2.0   | `***`    | user | delete appointment  | remove appointments that are not needed anymore |
+|   2.0   | `***`    | user | view appointment  | see all appointment in the clinic |
+|   2.0   | `**`     | user | edit appointment  | update changes to appointments |
+|   2.0   | `**`     | user | edit patient  | update changes of patients |
+|   2.0   | `**`     | user | edit doctor  | update changes of doctors |
+|   2.0   | `**`     | user | edit medicine  | update changes of medicines |
+|   2.0   | `**`     | user | find patient  | filter out patients by specific criteria |
+|   2.0   | `**`     | user | find doctor  | filter out doctors by specific criteria |
+|   2.0   | `**`     | user | find medicine  | filter out medicines by specific criteria |
+|   2.0   | `**`     | user | find appointment  | filter out appointments by specific criteria |
+|   2.1   | `*`      | user | update medicines in inventory | find medicines that are expired or have ran out |
+|   2.1   | `*`      | user | clear expired medicines | remove expired/ran out medicines from the inventory |
+|   2.1   | `*`      | user | generate the batch id of medicines to dispense | dispense medicine that expire earlier first |
+|   2.1   | `*`      | user | schedule an appointment | schedule an appointment with a doctor that is free |
 
 ### Use cases
-
 
 ### Non-Functional Requirements
 Device Environment:

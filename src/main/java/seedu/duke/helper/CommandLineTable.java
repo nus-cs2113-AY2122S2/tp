@@ -12,8 +12,10 @@ public class CommandLineTable {
     private String[] headers;
     private List<String[]> rows = new ArrayList<>();
     private boolean rightAlign;
+    private String title;
 
-    public CommandLineTable() {
+    public CommandLineTable(String title) {
+        this.title = title;
         setShowVerticalLines(false);
     }
 
@@ -49,7 +51,7 @@ public class CommandLineTable {
                 maxWidths[i] = Math.max(maxWidths[i], cells[i].length());
             }
         }
-
+        System.out.println(title);
         if (headers != null) {
             printLine(maxWidths);
             printRow(headers, maxWidths);

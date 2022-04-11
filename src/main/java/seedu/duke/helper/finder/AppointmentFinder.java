@@ -42,7 +42,7 @@ public class AppointmentFinder {
                                                                      String doctorName) {
         ArrayList<Appointment> appointmentArrayList = new ArrayList<>();
         for (Appointment appointment : appointments) {
-            if (appointment.getDoctorName().equals(doctorName)) {
+            if (appointment.getDoctorName().contains(doctorName)) {
                 appointmentArrayList.add(appointment);
             }
         }
