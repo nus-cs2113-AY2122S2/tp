@@ -667,7 +667,7 @@ The above sequence diagram shows the interactions when a list of
 `MMMSerializable` is being serialized. Although the given diagram shows the interaction for an
 `ExpenditureList`, the interactions for `CreditCardList` and `IncomeList` are similar.
 
-1. `ExpenditureList` calls `SerializerFunctions.addListToStringBuilder`, passing in an `ArrayList` of 
+1. `ExpenditureList` calls `SerializerFunctions.addListToStringBuilder()`, passing in an `ArrayList` of 
 `Expenditure`s.
 2. For each entry in the list, `SerializerFunctions`
    invokes `Expenditure.propetyList` on this line, which returns an `Expenditure`. This is repeated until
