@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+skinparam guillemet false
+skinparam sequenceStereotypeFontColor red
+skinparam sequenceStereotypeFontStyle bold
+skinparam dpi 260
+
+Participant ":InvMgr" as invmgr
+Participant "InputParser" as input <<class>>
+Participant "AddCommandParser" as parser <<class>>
+Participant "ArgumentTokenizer" as arg <<class>>
+Participant "ParserUtils" as utils <<class>>
+Participant "item:Item" as item
+Participant "inputCommand:AddCommand" as cmd
+Participant "itemList:ItemList" as itemlist
+Participant "ui:Ui" as ui
+
+activate invmgr
+
+-> invmgr
+invmgr -> input:parse("add n/Paper Cup q/25 d/100ml paper cups")
+activate input
+
+input -> parser:parse("n/Paper Cup q/25 d/100ml paper cups")
+activate parser
+
+parser -> arg:tokenize("n/Paper Cup q/25 d/100ml paper cups", PREFIX_NAME, PREFIX_QUANTITY, PREFIX_DESCRIPTION)
+activate arg
+return argMultimap: ArgumentMultimap
+
+parser -> utils:parseQuantity(25)
+activate utils
+return quantity: Integer
+
+create item
+parser -> item:Item("Paper Cup", 25, "100ml paper cups")
+activate item
+return :Item
+
+create cmd
+parser -> cmd:AddCommand(itemToAdd: Item)
+activate cmd
+return :AddCommand
+
+return :AddCommand
+
+return inputCommand:AddCommand
+
+invmgr -> cmd:execute(itemList: ItemList, ui: Ui)
+activate cmd
+
+cmd -> itemlist:getItemArrayList()
+activate itemlist
+return List<Item>: items
+
+cmd -> cmd:checkItemInList("Paper Cup", List<Item>: items)
+activate cmd
+
+return
+
+alt isNotInList
+    cmd -> itemlist:addItem(itemToAdd: Item)
+    activate itemlist
+    return
+
+    cmd -> ui:showMessages(itemToAdd + " has been added!")
+    activate ui
+    return
+else else
+    cmd -> ui:showMessages(DUPLICATE_ITEM_MESSAGE)
+    activate ui
+    return
+end
+
+return
+@enduml

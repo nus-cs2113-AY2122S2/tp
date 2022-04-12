@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+skinparam guillemet false
+skinparam sequenceStereotypeFontColor red
+skinparam sequenceStereotypeFontStyle bold
+skinparam dpi 290
+
+Participant ":InvMgr" as invmgr
+Participant "InputParser" as input <<class>>
+Participant "DeleteCommandParser" as parser <<class>>
+Participant "ParserUtils" as utils <<class>>
+Participant "inputCommand:DeleteCommand" as cmd
+Participant "itemList:ItemList" as itemlist
+Participant "ui:Ui" as ui
+
+activate invmgr
+
+-> invmgr
+invmgr -> input:parse("delete 1")
+activate input
+
+input -> parser:parse("1")
+activate parser
+
+parser -> utils:parseIndex("1")
+activate utils
+
+return deleteIndex: Integer
+
+create cmd
+parser -> cmd:DeleteCommand(deleteIndex: Integer)
+activate cmd
+return :DeleteCommand
+
+return :DeleteCommand
+
+return inputCommand:DeleteCommand
+
+invmgr -> cmd:execute(itemList:ItemList, ui:Ui)
+activate cmd
+
+cmd -> itemlist:removeItem(deleteIndex: Integer)
+activate itemlist
+return removedItem:Item
+
+cmd -> ui:showMessages(removedItem + " has been deleted.")
+activate ui
+return
+
+return
+@enduml

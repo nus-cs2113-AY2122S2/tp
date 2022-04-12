@@ -1,0 +1,46 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+hide empty members
+hide empty attributes
+
+abstract Command {
+ -isExit:boolean
+ +execute(itemList:ItemList, ui:Ui):void
+ +isExit():boolean
+}
+
+class ListCommand {
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+class ListCurrentBorrowingsCommand {
+ -name:Optional<String>
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+class ListFutureBorrowingsCommand {
+ -name:Optional<String>
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+class ListOverdueBorrowingsCommand {
+ -name:Optional<String>
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+class ListAvailableBorrowingsCommand {
+ -startDate:LocalDate
+ -endDate:LocalDate
+ -minQuantityAvailable(item:Item):int
+ -findMin(date:LocalDate, borrowRecord:ArrayList<BorrowRecord>, itemQuantity:int):int
+ -hasDayClash(date:LocalDate, recordStartDate:LocalDate):boolean
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+Command <|-- ListCommand
+Command <|-- ListCurrentBorrowingsCommand
+Command <|-- ListFutureBorrowingsCommand
+Command <|-- ListOverdueBorrowingsCommand
+Command <|-- ListAvailableBorrowingsCommand
+@enduml

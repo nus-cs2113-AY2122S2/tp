@@ -1,0 +1,42 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+hide empty members
+hide empty attributes
+
+abstract Command {
+ -isExit:boolean
+ +execute(itemList:ItemList, ui:Ui):void
+ +isExit():boolean
+}
+
+class AddCommand {
+ -itemToAdd:Item
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+class DescCommand {
+ -index:int
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+class DeleteCommand {
+ -index:int
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+class HelpCommand {
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+class ExitCommand {
+ +execute(itemList:ItemList, ui:Ui):void
+ +isExit():boolean
+}
+
+Command <|-- AddCommand
+Command <|-- DescCommand
+Command <|-- DeleteCommand
+Command <|-- HelpCommand
+Command <|-- ExitCommand
+@enduml

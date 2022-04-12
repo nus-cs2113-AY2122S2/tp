@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+skinparam guillemet false
+skinparam sequenceStereotypeFontColor red
+skinparam sequenceStereotypeFontStyle bold
+skinparam dpi 260
+
+Participant ":InvMgr" as invmgr
+Participant "InputParser" as input <<class>>
+Participant "ListFutureBorrowingsParser" as parser <<class>>
+Participant "ArgumentTokenizer" as arg <<class>>
+Participant "inputCommand:ListFutureBorrowingsCommand" as cmd
+Participant "itemList:ItemList" as itemlist
+Participant "ui:Ui" as ui
+
+activate invmgr
+
+-> invmgr
+invmgr -> input:parse("listfb p/Jasper")
+activate input
+
+input -> parser:parse("p/Jasper")
+activate parser
+
+parser -> arg:tokenize("p/Jasper", PREFIX_BORROWER_NAME)
+activate arg
+return argMultimap: ArgumentMultimap
+
+create cmd
+parser -> cmd:ListFutureBorrowingsCommand(name: Optional<String>)
+activate cmd
+return :ListFutureBorrowingsCommand
+
+return :ListFutureBorrowingsCommand
+
+return inputCommand:ListFutureBorrowingsCommand
+
+invmgr -> cmd:execute(itemList: ItemList, ui: Ui)
+activate cmd
+
+cmd -> itemlist:getItemArrayList()
+activate itemlist
+return List<Item>: items
+
+ref over cmd, ui: converse with Ui based on futureRecords: List<String>
+
+return
+@enduml

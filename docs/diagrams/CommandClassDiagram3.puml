@@ -1,0 +1,66 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+hide empty members
+hide empty attributes
+
+abstract Command {
+ -isExit:boolean
+ +execute(itemList:ItemList, ui:Ui):void
+ +isExit():boolean
+}
+
+class BorrowCommand {
+ -itemIndex:int
+ -quantity:int
+ -startDate:LocalDate
+ -endDate:LocalDate
+ -borrowerName:String
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+class EditCommand {
+ -index:int
+ -name:Optional<String>
+ -quantity:Optional<Integer>
+ -description:Optional<String>
+ -relativeAdd:Optional<Boolean>
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+class LostCommand {
+ -itemIndex:int
+ -itemQuantity:int
+ #checkItemListSize(itemList:ItemList):boolean
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+class ReturnCommand {
+ -itemIndex:int
+ -isValidReturnRequest:boolean
+ +getValidityOfReturn():boolean
+ {static}#checkItemListSize(itemList:itemList):boolean
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+class SearchCommand {
+ -name:Optional<String>
+ -description:Optional<String>
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+class CancelFutureBorrowingsCommand {
+ -borrowerName:String
+ -borrowIndex:int
+ -getBorrowRecords(borrowerName:String, itemList:ItemList):ArrayList<BorrowRecord>
+ -getItems(borrowerName:String, itemList:ItemList):ArrayList<Item>
+ +execute(itemList:ItemList, ui:Ui):void
+}
+
+Command <|-- BorrowCommand
+Command <|-- EditCommand
+Command <|-- LostCommand
+Command <|-- ReturnCommand
+Command <|-- SearchCommand
+Command <|-- CancelFutureBorrowingsCommand
+@enduml
