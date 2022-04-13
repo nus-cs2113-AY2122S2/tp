@@ -66,7 +66,7 @@ public class AddWardCommand extends Command {
             doctorList.getDoctor(docs).setWardNumber(wardNumber);
         }
 
-        for(int nurs: nurseIndexes) {
+        for (int nurs: nurseIndexes) {
             nurseList.getNurse(nurs).setWardNumber(wardNumber);
         }
         return String.format(boundary + "Noted. I've added this ward:"

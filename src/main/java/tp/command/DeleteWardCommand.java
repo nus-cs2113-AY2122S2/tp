@@ -32,13 +32,13 @@ public class DeleteWardCommand extends Command {
             throw new IHospitalException("The ward does not exist.\n");
         }
 
-        for (int i = 1; i <= doctorList.getSize() ; i++) {
+        for (int i = 1; i <= doctorList.getSize(); i++) {
             if (doctorList.getDoctor(i).getWardNumber() == index) {
                 doctorList.getDoctor(i).setWardNumber(-1);
             }
         }
 
-        for (int i = 1; i <= nurseList.getSize() ; i++) {
+        for (int i = 1; i <= nurseList.getSize(); i++) {
             if (nurseList.getNurse(i).getWardNumber() == index) {
                 nurseList.getNurse(i).setWardNumber(-1);
             }

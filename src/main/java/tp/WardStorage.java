@@ -88,7 +88,7 @@ public class WardStorage {
             int[] arr3 = new int[10000];
             int num3 = 0;
 
-            for(int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++) {
                 num1 = 0;
                 num2 = 0;
                 num3 = 0;
@@ -145,7 +145,8 @@ public class WardStorage {
 
                 String num = scanner.nextLine();
                 int wardNumber = Integer.parseInt(num);
-                result.addWard(Arrays.copyOf(arr1, num1), Arrays.copyOf(arr2, num2), Arrays.copyOf(arr3, num3), wardNumber);
+                result.addWard(Arrays.copyOf(arr1, num1),
+                        Arrays.copyOf(arr2, num2), Arrays.copyOf(arr3, num3), wardNumber);
             }
 
             return result;
