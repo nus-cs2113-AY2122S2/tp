@@ -24,6 +24,18 @@ public class Ward {
         this.wardNumber = number;
     }
 
+    public int[] getDoctorIndexes() {
+        return doctorIndexes;
+    }
+
+    public int[] getPatientIndexes() {
+        return patientIndexes;
+    }
+
+    public int[] getNurseIndexes() {
+        return nurseIndexes;
+    }
+
     //@@author Demonshaha
     public String[] getDoctors() {
         int size = doctorIndexes.length;

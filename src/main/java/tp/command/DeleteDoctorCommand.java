@@ -32,6 +32,30 @@ public class DeleteDoctorCommand extends Command {
         if (index <= 0 || index > doctorList.getSize()) {
             throw new IHospitalException("The doctor does not exist.\n");
         }
+
+        int wardNumber = doctorList.getDoctor(index).getWardNumber();
+
+        for (int i = 1; i <= doctorList.getSize(); i++) {
+            if (doctorList.getDoctor(i).getWardNumber() == wardNumber) {
+                doctorList.getDoctor(i).setWardNumber(-1);
+            }
+        }
+
+        for (int i = 1; i <= nurseList.getSize(); i++) {
+            if (nurseList.getNurse(i).getWardNumber() == wardNumber) {
+                nurseList.getNurse(i).setWardNumber(-1);
+            }
+        }
+
+        for (int i = 1; i <= wardList.getSize(); i++) {
+            if (wardNumber == -1) {
+                break;
+            }
+            if (wardList.getWard(i).getNumber() == wardNumber) {
+                wardList.deleteWard(i);
+            }
+        }
+
         Doctor curr = doctorList.deleteDoctor(index);
 
         //@@author cczhouqi

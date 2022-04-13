@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -48,12 +49,11 @@ public class WardStorage {
             int amount = wards.getSize();
             fw.write(String.format("%d\n", amount));
             for (int i = 1; i <= amount; i++) {
-                Ward curWard =  wards.getWard(i);
+                Ward curWard = wards.getWard(i);
                 fw.write(String.format("%d. Ward:\n", i));
-                //@@ author  DolphXty
-                fw.write(Arrays.toString(curWard.getDoctors()) + "\n");
-                fw.write(Arrays.toString(curWard.getPatients())  + "\n");
-                fw.write(Arrays.toString(curWard.getNurses()) + "\n");
+                fw.write(String.format("Doctor: ") + Arrays.toString(curWard.getDoctorIndexes()) + "\n");
+                fw.write(String.format("Patient: ") + Arrays.toString(curWard.getPatientIndexes()) + "\n");
+                fw.write(String.format("Nurse: ") + Arrays.toString(curWard.getNurseIndexes()) + "\n");
                 fw.write(curWard.getNumber() + "\n");
             }
             fw.close();
@@ -67,7 +67,8 @@ public class WardStorage {
      * @return The wardList of the IHospitalWard.txt
      * @throws IHospitalException IHospitalException
      */
-    //@@author DolphXty
+
+    //@@author Demonshaha
     public WardList loadWardList() throws IHospitalException {
         try {
             File dataFile = new File(filePath.toString());
@@ -77,35 +78,77 @@ public class WardStorage {
                 return result;
             }
             int n = scanner.nextInt();
-            scanner.nextLine();//read enter
+            scanner.nextLine();
             String data;
 
+            int[] arr1 = new int[10000];
+            int num1 = 0;
+            int[] arr2 = new int[10000];
+            int num2 = 0;
+            int[] arr3 = new int[10000];
+            int num3 = 0;
+
             for (int i = 0; i < n; i++) {
+                num1 = 0;
+                num2 = 0;
+                num3 = 0;
+                Arrays.fill(arr1, 0);
+                Arrays.fill(arr2, 0);
+                Arrays.fill(arr3, 0);
                 data = scanner.nextLine();
-                String docs = scanner.nextLine();
-                String[] strings = docs.replaceAll("\\[","")
-                        .replaceAll("]","").split(",");
-                int [] docIndexes = new int[strings.length];
-                for (int j = 0; j < strings.length; j++) {
-                    docIndexes[j] = Integer.parseInt(strings[j]);
+                String doctorString = scanner.nextLine();
+                int frontIndex = doctorString.indexOf("[") + 1;
+                int behindIndex = doctorString.indexOf(",");
+                if (behindIndex == -1) {
+                    behindIndex = doctorString.indexOf("]");
                 }
-                String pats = scanner.nextLine();
-                strings = pats.replaceAll("\\[","")
-                        .replaceAll("]","").split(",");
-                int [] patIndexes = new int[strings.length];
-                for (int j = 0; j < strings.length; j++) {
-                    patIndexes[j] = Integer.parseInt(strings[j]);
+
+                while (frontIndex < behindIndex) {
+                    arr1[num1++] = (Integer.parseInt(doctorString.substring(frontIndex, behindIndex).trim()));
+                    frontIndex = behindIndex + 2;
+                    behindIndex = doctorString.indexOf(",", frontIndex);
+                    if (behindIndex == -1) {
+                        behindIndex = doctorString.indexOf("]");
+                    }
                 }
-                String nurs = scanner.nextLine();
-                strings = nurs.replaceAll("\\[","")
-                                .replaceAll("]","").split(",");
-                int [] nurIndexes = new int[strings.length];
-                for (int j = 0; j < strings.length; j++) {
-                    nurIndexes[j] = Integer.parseInt(strings[j]);
+
+                String patientString = scanner.nextLine();
+                frontIndex = patientString.indexOf("[") + 1;
+                behindIndex = patientString.indexOf(",");
+                if (behindIndex == -1) {
+                    behindIndex = patientString.indexOf("]");
                 }
-                int wardNumber = Integer.parseInt(scanner.nextLine());
-                result.addWard(docIndexes, patIndexes, nurIndexes, wardNumber);
+
+                while (frontIndex < behindIndex) {
+                    arr2[num2++] = (Integer.parseInt(patientString.substring(frontIndex, behindIndex).trim()));
+                    frontIndex = behindIndex + 2;
+                    behindIndex = patientString.indexOf(",", frontIndex);
+                    if (behindIndex == -1) {
+                        behindIndex = patientString.indexOf("]");
+                    }
+                }
+
+                String nurseString = scanner.nextLine();
+                frontIndex = nurseString.indexOf("[") + 1;
+                behindIndex = nurseString.indexOf(",");
+                if (behindIndex == -1) {
+                    behindIndex = nurseString.indexOf("]");
+                }
+                while (frontIndex < behindIndex) {
+                    arr3[num3++] = (Integer.parseInt(nurseString.substring(frontIndex, behindIndex).trim()));
+                    frontIndex = behindIndex + 2;
+                    behindIndex = nurseString.indexOf(",", frontIndex);
+                    if (behindIndex == -1) {
+                        behindIndex = nurseString.indexOf("]");
+                    }
+                }
+
+                String num = scanner.nextLine();
+                int wardNumber = Integer.parseInt(num);
+                result.addWard(Arrays.copyOf(arr1, num1),
+                        Arrays.copyOf(arr2, num2), Arrays.copyOf(arr3, num3), wardNumber);
             }
+
             return result;
         } catch (FileNotFoundException e) {
             throw new IHospitalException("Cannot load task list from file: " + filePath.toString());
