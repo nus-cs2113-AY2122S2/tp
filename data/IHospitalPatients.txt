@@ -1,8 +1,0 @@
-1
-1. Patient:
-333
-Mike
-88888888
-poorPotter@gmail.com
-cough
-Allergic to Harry Potter

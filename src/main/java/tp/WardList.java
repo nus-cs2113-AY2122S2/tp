@@ -23,7 +23,12 @@ public class WardList {
      * @param patientIndexes indexes of Patients coming for this ward.
      * @param nurseIndexes indexes of Nurses assigned for this ward.
      */
-    public void addWard(int[] doctorIndexes, int[] patientIndexes, int[] nurseIndexes, int number) {
+    public void addWard(int[] doctorIndexes, int[] patientIndexes, int[] nurseIndexes, int number) throws IHospitalException {
+        for(Ward ward : wards) {
+            if (ward.getNumber() == number) {
+                throw new IHospitalException("Ward with this ID already exists.\n");
+            }
+        }
         wards.add(new Ward(doctorIndexes, patientIndexes, nurseIndexes, number));
         countWard++;
     }

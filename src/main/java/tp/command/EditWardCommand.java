@@ -1,17 +1,6 @@
 package tp.command;
 
-import tp.AppointmentList;
-import tp.AppointmentStorage;
-import tp.DoctorList;
-import tp.DoctorStorage;
-import tp.IHospitalException;
-import tp.NurseList;
-import tp.NurseStorage;
-import tp.PatientList;
-import tp.PatientStorage;
-import tp.Ui;
-import tp.WardList;
-import tp.WardStorage;
+import tp.*;
 
 public class EditWardCommand extends Command {
     private int index;
@@ -34,6 +23,11 @@ public class EditWardCommand extends Command {
             throw new IHospitalException("The ward does not exist\n");
         }
         if (type.contains("id")) {
+            for (int i = 1; i <= wardList.getSize() ; i++) {
+                if (wardList.getWard(i).getNumber() == newInformation) {
+                    throw new IHospitalException("Ward with this ID already exists.\n");
+                }
+            }
             wardList.getWard(index).editNumber(newInformation);
             return String.format(boundary + "Updated already!\n" + wardList.getWard(index) + "\n" + boundary);
         } else {
