@@ -72,14 +72,7 @@ public class Parser {
 
         case PrintReservationsCommand.COMMAND_WORD:
             return prepareReservations(arguments);
-            
-        case AddHotelCommand.COMMAND_WORD:
-            return prepareAddHotel(arguments);
 
-        case PrintHotelsCommand.COMMAND_WORD:
-            return prepareHotels(arguments);
-            
-            
         case PrintAllCommand.COMMAND_WORD:
             return new PrintAllCommand();
 
@@ -189,7 +182,6 @@ public class Parser {
         }
     }
 
-
     private static Command prepareAddHotel(String args) {
         final Matcher matcher = HOTEL_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
@@ -219,9 +211,6 @@ public class Parser {
             return new WrongFormatCommand(e.getMessage());
         }
     }
-
-
-
 
     public static boolean dateStartEndValid(LocalDate startDate, LocalDate endDate) {
         return endDate.isAfter(startDate);
