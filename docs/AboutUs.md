@@ -1,9 +1,8 @@
 # About us
 
-Display | Name | Github Profile | Portfolio 
---------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+   Name   | Github Profile | Portfolio 
+--------:|:--------------:|:---------:
+ Zhou Qi  | [Github](https://github.com/cczhouqi) | [Portfolio](team/cczhouqi.md)
+ Zhou Chengxu  | [Github](https://github.com/Demonshaha) | [Portfolio](team/Demonshaha.md)
+ Dolph Xia | [Github](https://github.com/Dolphxty) | [Portfolio](team/dolphxty.md)
+ Seth Lee | [Github](https://github.com/sethlxk) | [Portfolio](team/sethlxk.md)
