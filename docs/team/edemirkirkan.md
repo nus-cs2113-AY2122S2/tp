@@ -15,7 +15,7 @@ Our project, Travel Agency Reservation Booking System (TARBS) was developed to a
 - Implemented the `HelpCommand` class and feature in TARBS
 
     - Displays the all user documentation in the command line interface
- 
+- Implement part of the parser and tests
 - Revised coding and style conventions continuously
 - Fix most of the PED bugs
 
