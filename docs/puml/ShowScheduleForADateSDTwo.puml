@@ -1,0 +1,66 @@
+@startuml
+skinparam maxMessageSize 80
+
+hide footbox
+participant "c:ShowCommand" as ShowCommand
+participant "<font color=red>**<<class>>** \nTimetable" as Timetable
+participant ":TaskList" as TaskList
+participant "<font color=red>**<<class>>** \nTimetableLogic" as TimetableLogic
+participant "<font color=red>**<<class>>** \nTimetablePrinting" as TimetablePrinting
+
+
+ShowCommand -> Timetable: showScheduleByDay(dateInput: LocalDate, filteredtasks: ArrayList<Task>, ui: Ui)
+activate ShowCommand
+
+activate Timetable
+
+Timetable -> TaskList: getFilteredTasksByDate(dateInput: LocalDate)
+activate TaskList
+
+TaskList --> Timetable: filteredTasks: ArrayList<Task>
+deactivate TaskList
+
+Timetable -> Timetable: setInitialTimetableInputs(dateInput: LocalDate, filtererdTasks: ArrayList<Task>, ui: Ui)
+activate Timetable
+Timetable --> Timetable
+deactivate Timetable
+Timetable -> Timetable: prepareFullTimetable()
+activate Timetable
+
+Timetable -> TimetableLogic: prepareTaskContentLength(filteredTasks: ArrayList<Task>, taskContentCompareLength: long, taskOffsetLength: long, taskFullLength: long, type: TaskContentType)
+activate TimetableLogic
+
+TimetableLogic --> Timetable: taskLength: long
+deactivate TimetableLogic
+
+Timetable -> TimetableLogic: prepareTaskContentLength(filteredTasks: ArrayList<Task>, taskContentCompareLength: long, taskOffsetLength: long, taskFullLength: long, type: TaskContentType)
+activate TimetableLogic
+
+TimetableLogic --> Timetable: byDateLength: long
+deactivate TimetableLogic
+
+Timetable -> TimetableLogic: calcPartitionLength(taskLength: long, byDateLength: long, doOnDateLength: long, taskNumberLength: long, isFullTimetable: boolean)
+activate TimetableLogic
+
+TimetableLogic --> Timetable: partitionLength: long
+deactivate TimetableLogic
+
+Timetable -> TimetablePrinting: printFullTimetable(day: String, date: String, filteredTasks: ArrayList<Task>, ui: Ui, taskLength: long, doOnDateLength: long, partitionLength: long)
+activate TimetablePrinting
+
+ref over TimetablePrinting: print Full Timetable
+
+TimetablePrinting --> Timetable
+deactivate TimetablePrinting
+
+Timetable --> Timetable
+deactivate Timetable
+
+Timetable --> ShowCommand
+deactivate Timetable
+
+deactivate ShowCommand
+
+destroy ShowCommand
+
+@enduml

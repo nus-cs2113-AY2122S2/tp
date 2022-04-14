@@ -1,0 +1,77 @@
+@startuml
+
+hide footbox
+participant StudyCommand as ":StudyCommand"
+participant Parser as "<font color=red>**<<class>>** \nTimerParser"
+participant TimerLogic as ":TimerLogic"
+participant Timer as ":Countdown"
+
+activate StudyCommand
+ref over StudyCommand
+Receive input from Ui component
+end
+
+StudyCommand -> Parser: parseStudyMode(start 1)
+activate Parser
+
+Parser -> TimerLogic: callStartTimer()
+activate TimerLogic
+
+create Timer
+TimerLogic -> Timer: startTimer
+activate Timer
+
+par
+Timer -> Timer: start
+activate Timer
+Timer --> Timer
+deactivate Timer
+
+TimerLogic --> Parser
+deactivate TimerLogic
+end
+
+par
+Timer -> Timer: update
+activate Timer
+Timer --> Timer
+deactivate Timer
+Parser --> StudyCommand
+deactivate Parser
+end
+
+ref over StudyCommand
+Receive input from Ui component
+end
+
+note over Timer
+Countdown-update() occurs concurrently
+with method calls from the main program.
+We have omitted Countdown#update() here
+for less clutter.
+end note
+
+StudyCommand -> Parser: parseStudyMode(stop)
+activate Parser
+
+Parser -> TimerLogic: callStopTimer()
+activate TimerLogic
+
+TimerLogic -> Timer: stopTimer
+
+par
+Timer -> Timer: stop
+activate Timer
+Timer --> Timer
+deactivate Timer
+
+TimerLogic --> Parser
+deactivate Timer
+deactivate TimerLogic
+end
+
+Parser --> StudyCommand
+deactivate Parser
+
+deactivate StudyCommand
+@enduml

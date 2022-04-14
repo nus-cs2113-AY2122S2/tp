@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+participant Storage as "storage:Storage"
+participant File as "<font color=red>**<<class>>** \nFile"
+participant JSONObject as ":JSONObject"
+participant JSONArray as "taskArray:JSONArray"
+participant Parser as "<font color=red>**<<class>>** \nParser"
+participant Task as "newTask:Task"
+participant List as "taskList:TaskList"
+
+[-> Storage ++: load(taskList:TaskList)
+
+Storage -> File as "<<class>>\nFile" ++: readAllLines(saveFilePath)
+
+File --> Storage --: fileContent
+
+opt fileContent not empty
+    create JSONObject
+    Storage -> JSONObject ++: JSONObject(fileContent)
+    JSONObject --> Storage --:
+
+    Storage -> JSONObject ++:getJSONArray()
+
+    create JSONArray
+    JSONObject -> JSONArray ++: new :JSONArray
+
+    JSONArray --> JSONObject --: taskArray
+    JSONObject --> Storage: taskArray
+    deactivate JSONObject
+
+
+    loop all element in taskArray
+        Storage -> Parser ++: parseSaveData(taskElement)
+
+        create Task
+        Parser -> Task ++: Task()
+
+        Task --> Parser --
+
+        Parser --> Storage --: task
+
+        Storage -> List ++: addTask(task)
+        List --> Storage --
+    end
+end
+Storage -> Storage ++ : writeSavedData(taskList)
+Storage --> Storage --
+return taskList
+@enduml

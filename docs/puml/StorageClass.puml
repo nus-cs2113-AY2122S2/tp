@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide circle
+class Storage {
+    -saveFilePath:String
+    +Storage(filePath:String)
+    +writeSaveData(taskList:TaskList):JSONObject
+    +load():ArrayList<Task>
+    -wipeSaveData():void
+}
+
+class StorageParser {
+    +parseSaveData(taskData:JSONObject):Task
+}
+
+class TaskList {
+    +getTasks():ArrayList<Task>
+}
+
+Storage ..> StorageParser
+Storage ..> TaskList
+@enduml

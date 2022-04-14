@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+hide circle
+abstract class "{abstract}\nTimer" as Timer
+class Countdown
+class Stopwatch
+
+Thread <|-- Timer
+Timer <|-- Countdown
+Timer <|-- Stopwatch
+
+
+abstract class Timer {
+    # isTimerRunning:boolean
+    # isTimerPaused:boolean
+    # forcedStop:boolean
+    # taskList:TaskList
+    + Timer(taskList:TaskList,ui:Ui)
+    # update():void {abstract}
+    + resumeTimer():void {abstract}
+    + stopTimer():void {abstract}
+    + pauseTimer():void
+}
+
+class Countdown {
+    -hasTimeLeft:boolean
+    #timeLeft:int
+    +Countdown(taskList:TaskList,ui:Ui,jframe:JFRAME,jlabel:JLABEL)
+    +run():void
+    #update():void
+    +stopTimer():void
+    +resumeTimer():void
+}
+
+class Stopwatch {
+    -timeElapsed:int
+    +Stopwatch(taskList:TaskList,ui:Ui,jframe:JFRAME,jlabel:JLABEL)
+    +run():void
+    #update():void
+    +stopTimer():void
+    +resumeTimer():void
+}
+
+@enduml

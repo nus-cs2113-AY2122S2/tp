@@ -1,0 +1,23 @@
+@startmindmap
+* Sherpass
+** User Interface (UI)
+*** UI
+** Storage
+*** Storage
+*** StorageParser
+** Timetable
+*** Timetable
+*** TimetableLogic
+*** TimetablePrinting
+*** TimetableParser
+*** TaskList
+**** Task
+*** Commands
+** Study session
+*** Timer
+**** Stopwatch
+**** Countdown
+*** TimerParser
+*** TimerLogic
+*** Commands
+@endmindmap

@@ -1,0 +1,39 @@
+@startuml
+
+ hide footbox
+ participant User as "User"
+ participant Main as "<font color=red>**<<class>>** \nMain"
+ participant Ui as "ui:Ui"
+ participant Parser as "<font color=red>**<<class>>** \nParser"
+ participant TaskParser as "<font color=red>**<<class>>** \nTaskParser"
+ participant EditCommand as ":EditCommand"
+
+ User -> Ui: user input
+
+ Main -> Ui: readCommand()
+ activate Ui
+ Ui --> Main: fullCommand
+ deactivate Ui
+
+ Main -> Parser: parseCommand(fullCommand:String, ui:Ui)
+
+ activate Parser
+ Parser -> Parser: split fullCommand String
+ Parser -> TaskParser: prepareEdit(argument:String, ui:Ui)
+
+ activate TaskParser
+ TaskParser -> TaskParser: prepareEditTaskContent(argument:String)
+ activate TaskParser
+ TaskParser -> EditCommand **: new :EditCommand
+ activate EditCommand
+ TaskParser --> TaskParser
+ deactivate TaskParser
+ TaskParser -> EditCommand: setRepeating(isRepeating:bool)
+ TaskParser -> TaskParser: prepareEditByDate(argument:String)
+ TaskParser -> EditCommand: checkValidCommand()
+ TaskParser -> Parser: :EditCommand
+ deactivate TaskParser
+ Parser -> Main: :EditCommand
+ deactivate Parser
+
+ @enduml

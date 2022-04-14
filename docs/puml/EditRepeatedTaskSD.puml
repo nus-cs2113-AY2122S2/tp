@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+participant TaskList as ":TaskList"
+participant affectedTasks as "affectedTasks:ArrayList<Task>"
+participant tempTasks as "tempTasks:ArrayList<Task>"
+participant currentTask as "currentTask:Task"
+participant newTask as "updatedTask:Task"
+participant TaskUtil as "<font color=red>**<<class>>** \nTaskUtil"
+
+[-> TaskList ++ : editRepeatedTasks()
+TaskList -> TaskList ++ : getAffectedTasks()
+create affectedTasks
+TaskList -> affectedTasks ++:
+affectedTasks --> TaskList --
+TaskList --> TaskList --
+
+create tempTasks
+TaskList -> tempTasks ++: new ArrayList<Task>(tasks)
+tempTasks --> TaskList --
+
+TaskList -> tempTasks ++: removeAll(affectedTasks)
+tempTasks --> TaskList --
+
+ref over TaskList : get difference between new and old dates
+
+loop foreach task in affectedTasks
+    TaskList -> currentTask ++ : copy()
+    create newTask
+    currentTask -> newTask ++
+    newTask --> currentTask --
+    currentTask --> TaskList -- : updatedTask
+    TaskList -> newTask ++ : editTask(identifier, description, newDoStartDate, newDoEndDate, newByDate)
+    newTask --> TaskList --
+    TaskList -> TaskUtil ++ : checkDateTimeClash(tempTasks, updatedTask)
+    TaskUtil --> TaskList --
+    TaskList -> tempTasks ++ : add(updatedTask)
+    tempTasks --> TaskList --
+end
+return
+@enduml
