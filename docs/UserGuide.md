@@ -103,6 +103,8 @@ the earliest task assigned the first number, second-earliest task the second num
 >⚠️Important note: When adding tasks, TASK_DESCRIPTION must be the first parameter provided.
 Order of other parameters can be switched.
 
+<div style="page-break-after: always;"></div>
+
 #### Adding a single task
 
 Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate DUE_DATE /bytime END_TIME]`
@@ -146,6 +148,7 @@ Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate 
 |     DUE_TIME     | Due time for the task           | HH:mm format, must be after END_TIME if DUE_DATE is the same as DO_DATE             | No if DUE_DATE is given |
 |    FREQUENCY     | How often does the task repeat  | DAILY, WEEKLY, MONTHLY                                                              | No                      |
 
+<div style="page-break-after: always;"></div>
 
 **Example**
 - `add cs2113t weekly quiz /do 21/6/2022 /start 16:00 /end 18:00 /bydate 25/6/2022 /bytime 16:00 /repeat WEEKLY`
@@ -163,6 +166,8 @@ After adding :
 ![](images/scheduleAfterAddingRecurringTasksOne.png)
 
 <!--- extra example- `add browse internship offers /do 27/6/2022 /start 21:00 /end 21:30 /repeat DAILY` -->
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting your tasks: `delete`
 
@@ -187,6 +192,8 @@ After delete command:
 
 ![](images/scheduleAfterDeletingASingleTask.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting your recurring tasks
 - The specified task and all its future occurrence will be deleted.
 - Occurrences earlier than the specified task will not be affected.
@@ -206,6 +213,8 @@ Before delete command:
 After command: `delete 3 /repeat`
 
 ![after delete](images/afterdelete.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Editing your tasks: `edit`
 
@@ -250,6 +259,8 @@ After edit command:
 
 <!--- extra example - `edit 3 submit draft essay /do 26/3/2022 /start 10:00 /end 13:00 /bydate 30/3/2022 /bytime 23:59`--->
 
+<div style="page-break-after: always;"></div>
+
 #### Editing a recurring task
 
 >⚠️Important note:
@@ -278,6 +289,7 @@ After command: `edit 4 /start 13:00 /end 15:00 /repeat`
 
 ![afteredit](images/afteredit.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Marking your tasks: `mark TASK_NUMBER` / `unmark TASK_NUMBER`
 
@@ -294,6 +306,7 @@ Format: `mark TASK_NUMBER` or `unmark TASK_NUMBER`
 
 ![](images/markTasks.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Generating a timetable: `show`
 >💡 Note: A full display of the timetable will only be shown when checking the daily or weekly schedule.
@@ -324,6 +337,7 @@ Format:
 
 ![ShowDateTimetableFormat](images/showDateTimetableFormat.PNG)
 
+<div style="page-break-after: always;"></div>
 
 ### Display Weekly Schedule: `show week` / `show next week`
 If you are wondering what is your schedule for the current week or the next week. Fret not, 
@@ -340,10 +354,13 @@ Format:
 |        week         | Shows the schedule for the week you are in          | N.A.                                                             | No if you are intending to use this parameter |
 | next week/ nextweek | Shows the schedule for the week after               | Command for `show next week` can be shortened to `show nextweek` | No if you are intending to use this parameter |
 
+<div style="page-break-after: always;"></div>
 
 **Example**
 
 ![weeklyTimetable](images/weeklyTimetable.PNG)
+
+<div style="page-break-after: always;"></div>
 
 ### Display Monthly Schedule: `show month` / `show MONTH`
 If showing of your daily schedule or weekly schedule is not enough, Sherpass also allows you to track your
@@ -373,6 +390,8 @@ Format:
 
 ![monthlySchedule](images/monthlySchedule.PNG)
 
+<div style="page-break-after: always;"></div>
+
 #### Display all tasks/ pending tasks: `show all` / `show todo`
 
 Other than getting a timetable, Sherpass also allows you
@@ -398,6 +417,7 @@ Show pending tasks:
 
 ![](images/showPendingTasks.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Clear multiple tasks: `clear all` / `clear expired` / `clear done`
 Do you find it troublesome to delete your tasks one by one? If so, fret not as Sherpass
@@ -429,6 +449,8 @@ If the user inputs `y`:
 If the user inputs `n`:
 
 ![image](images/clear_all_no_execute.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Enter study session: `study`
 Enter the study session where you can start timers to help finish your tasks.
@@ -473,6 +495,8 @@ Format: `start MODE_NUMBER`
 **Examples**
 
 - `start 1`
+
+<div style="page-break-after: always;"></div>
 
 In the terminal:
 
@@ -532,6 +556,8 @@ your tasks for the day, or mark a task as done.
 
 Format: `pause` or clicking the pause button in the pop-up window.
 
+<div style="page-break-after: always;"></div>
+
 **Example**
 
 In the terminal:
@@ -564,6 +590,8 @@ In the pop-up window:
 
 Time left/elapsed time will continue to run.
 
+<div style="page-break-after: always;"></div>
+
 ### Stopping a timer/stopwatch: `stop`
 Finished your task earlier than expected, or something more urgent came up? You can stop a timer/stopwatch at any time.
 
@@ -573,6 +601,8 @@ Format:
 - Entering `stop` in the terminal
 - Clicking the stop button in the pop-up window
 - Closing the pop-up window (Clicking the X button in the top right corner)
+
+<div style="page-break-after: always;"></div>
 
 **Example**
 
@@ -624,6 +654,7 @@ Format: `leave`
 
 ![](images/studyLeave.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Help: `help`
 
@@ -656,6 +687,8 @@ There is no need to manually save your tasks.
 > 💡 **Note:**
 >
 >Advanced users are welcome to manually edit the save file.
+
+<div style="page-break-after: always;"></div>
 
 The following fields are required to correctly load a task:
 
