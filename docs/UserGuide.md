@@ -525,6 +525,13 @@ warehouse. As orders for Goods come in, you can begin [adding Orders](#adding-an
 to simplify workflow for your Warehouse needs. Other features can be done as well including [listing available Goods](#listing-available-goods-list-g)
 to enhance usage of this program.
 
+Q: Can I edit the savefile directly?
+
+A: As mentioned in the section [Saving Program State](#saving-program-state), it is not recommended but you are able to 
+do so by opening the file and editing its contents. However, and manual edits that are corrupt/incorrect/incomplete and the 
+problems that follow will not fall under the responsibility of the team. Do contact the team through email at 
+queriesforsimplst@gmail.com if there are any issues faced or if the file has accidentally been manually edited.
+
 ## Command Summary
 
 | Actions/Features                     | Command to be keyed into the terminal                                                                               |
