@@ -2,26 +2,27 @@
 
 ## Introduction
 
-*Simplst* is a Warehouse Management System (WMS) for warehouse management workers and managers to manage your warehouse inventory
+*Simplst* is a Warehouse Management System (WMS) for warehouse workers and managers to manage your warehouse inventory
 and orders. Simplst is optimised for use via a Command Line Interface (CLI).
 
-Simplst aims to improve efficiency and optimise standard warehouse tasks by having a CLI app which is simple to 
-setup and quick to use. Simplst will mainly be used to add, remove, list and view goods and orders for the warehouse.
+Simplst aims to improve the efficiency of standard warehouse procedures such as inventory and order management by
+having a CLI app which is simple to setup and quick to use. Simplst is mainly used to add, remove, list and view goods and orders for the warehouse.
 
 ## Purpose
 
-This User Guide is meant for both warehouse workers and managers to learn how to use Simplst and the features which you
-can use to improve efficiency in managing your warehouse inventory and orders. Our guide will show you how to get started
-with Simplst, and introduce how to interact with Simplst using special commands.
+This User Guide is meant for both warehouse workers and managers to learn how to use the Simplst's features which
+will help you to improve efficiency in managing your warehouse inventory and orders. Our guide will show you how to get started
+with Simplst, and introduce the Simple commands to interact with the application.
 
 As a new user of Simplst, you can go through the guide in detail starting from the [quick start](#quick-start) section.
-The guide also has [explanations](#explanation-of-key-terms-or-symbols) of certain key terms which we will be using throughout the guide.
+The guide also has [explanations](#explanation-of-key-terms-or-symbols) of certain key terms which are present throughout the guide.
 
-As a seasoned user of Simplst, the [command summary](#command-summary) section would be useful to show you an overview 
-of the commands available and how to call them.
+As a seasoned user of Simplst, the [command summary](#command-summary) section would be useful to show you an overview
+of the commands available and how to use them.
 
 Lastly, the [FAQ](#faq) section will provide you with answers to questions that you might have while using Simplst.
-Otherwse, the contents page below will show all the features Simplst has to offer.
+Otherwise, the [contents page](#contents-page) below displays all the features that Simplst has to offer. You can click
+on any section and you will be brought to that section directly.
 
 ## Contents page
 * [Explanation of Key Terms or Symbols](#explanation-of-key-terms-or-symbols)
@@ -37,7 +38,7 @@ Otherwse, the contents page below will show all the features Simplst has to offe
     * [Removing quantity of a Good](#removing-quantity-of-a-good-remove-g)
     * [Listing available Goods](#listing-available-goods-list-g)
     * [Viewing a Good](#viewing-a-good-view-g)
-    * [Finding a Good](#finding-a-good-find) 
+    * [Finding a Good](#finding-a-good-find)
   * [Order Commands](#order-commands)
     * [Adding an Order](#adding-an-order-add-o)
     * [Removing an Order](#removing-an-order-remove-o)
@@ -65,17 +66,17 @@ Otherwse, the contents page below will show all the features Simplst has to offe
 | [Orderline](#orderline-commands)                   | An orderline is the goods required by the order.                                                                                             |
 | [Fulfill](#fulfill-order-fulfill)                  | Used to check and indicate if an order is completed.                                                                                         |
 | `Words in MarkUp`                                  | Used to highlight keywords used for commands and commands themselves.                                                                        |
-| <img src="img.png" alt="img" style="width:30px;"/> | Used to denote features for warehouse managers.                                                                                              |
+| <img src="img.png" alt="img" style="width:30px;"/> | Used to denote features for warehouse managers that have higher sensitivity.                                                                 |
 | `*Optional*`                                       | Fields in MarkUp bounded by asterisks (*) are optional to be filled in, but should be replaced with a space ' ' instead.                     |
 
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-If you do not, you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java11).
-![img_1.png](img_1.png)
+   If you do not, you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java11).
+   ![img_1.png](img_1.png)
 2. Down the latest version of ***Simplst*** from [here](https://github.com/AY2122S2-CS2113T-T09-4/tp/releases/).
-3. Copy the file to the folder you want to use as the home folder for Simplst
+3. Copy the file to the folder you want to use as the home folder for Simplst.
 4. Open the terminal in the folder which contains Simplst.jar and run java -jar Simplst.jar. The Startup should look like below:
 ```
 ____________________________________________________________
@@ -86,7 +87,7 @@ What would you like to do?
 ____________________________________________________________
 ```
 5. Type the commands in the terminal and press `Enter` to execute them. For example: typing help and pressing `Enter` will show you the features
-    available in Simplst and how to type the command into the command line.
+   available in Simplst and how to type the command into the command line.
 
 ## Features
 
@@ -97,13 +98,13 @@ to view.
 
 Help Commands:
 * `help` - View all commands
-* `help ug` - View commands related to Unit Goods
-* `help g` - View commands related to Goods
-* `help o` - View commands related to Orders and Orderlines
+* `help ug/` - View commands related to Unit Goods
+* `help g/` - View commands related to Goods
+* `help o/` - View commands related to Orders and Orderlines
 
 ### ***Unit Good Commands***
 A Unit Good is a template of a good. A unit good should be added to the warehouse to allow Simplst to know what kind goods will be added to the warehouse later.
-Unit Goods can help Simplst to estimate storage capacity in the future and other predicitive features for future versions. 
+Unit Goods can help Simplst estimate storage capacity in the future and other predictive features for future versions.
 
 A Unit Good contains:
 * Unique SKU
@@ -114,11 +115,10 @@ A Unit Good contains:
 ### Adding a Unit Good `add ug/`
 Add a new unit good to the warehouse, creating a Good with quantity 0 in the process.
 
-
 Format: `add ug/ sku/[SKU] n/[NAME] d/*[DESCRIPTION]* size/[CAPACITY]`
 
-Note: 
-* Refer to the explanation on Key Terms and Symbols for what an SKU is
+Note:
+* Refer to the Explanation on Key Terms and Symbols for what an SKU is
 * Optional description field. If there are no descriptions, key in `d/` followed by a space before keying in the next parameter.
 * If the size input is not either [SMALL / MEDIUM / LARGE], the capacity would be set to the default MEDIUM
 
@@ -139,8 +139,8 @@ Removing a unit good from the warehouse.
 Format: `remove ug/ sku/[SKU]`
 
 Note:
-* Usually used when there occurs a mistake when a Unit Good is added, or if the warehouse does not store the Unit Good
-anymore
+* Usually used when a mistake is made when adding a Unit Good, or if the warehouse does not store the Unit Good
+  anymore
 
 Example of removing a unit good:<br/>
 Removing a Unit Good of SKU WC1<br/>
@@ -170,8 +170,8 @@ Another command?
 ```
 ### ***Good Commands***
 A Good is the actual good that is currently in the warehouse inventory. It will also have the same information as the Unit Good previously added into Simplst with the same SKU.
-In addition to the details in the Unit Good, a Good will also contain:
-- Quantity of good available in the warehouse
+In addition to the details already present in the Unit Good, a Good will also contain:
+- Quantity of Good available in the warehouse
 
 ### Adding quantity of a Good `add g/`
 Adding a quantity of a Unit Good to be available at the warehouse.
@@ -190,12 +190,12 @@ Another command?
 ```
 
 ### Removing quantity of a Good `remove g/`
-Removing a quantity of a Unit Good available at the warehouse.
+Removing a quantity of a Unit Good available in the warehouse.
 
 Format: `remove g/ sku/[SKU] qty/[QUANTITY]`
 
 Note:
-* Used when certain units of the good has been shipped out and thus quantity has to be decreased.
+* Used when certain units of the good has been shipped out or damanged and thus quantity has to be decreased.
 
 Example of removing quantity of a specific Unit Good:<br/>
 Removing 10 of a good with its SKU being WC1<br/>
@@ -213,10 +213,10 @@ Listing all available goods in the warehouse.
 
 Format: `list g/`
 
-Example of listing all Goods (This will continue the above example [here](#adding-quantity-of-a-good-add-g)):<br/>
+Example of listing all Goods (This will continue from the above example [here](#adding-quantity-of-a-good-add-g)):<br/>
 
 Note:
-* If a unit good is added, but the good has yet to be added into the warehouse (There are currently 0 quantity of the good in the warehouse). It will not show up in the list of goods.
+* If a Unit Good is added, but the Good has yet to be added into the warehouse (There are currently 0 quantity of the Good in the warehouse). It will not show up in the list of Goods.
 
 `list g/`
 
@@ -227,10 +227,14 @@ List of available goods with its quantity:
 Another command?
 ```
 
-### Viewing a good `view g/`
-View a good in the warehouse using its SKU. This will show more details of the specified good.
+### Viewing a Good `view g/`
+View a specific Good in the warehouse using its SKU. This will show more details of the specified Good.
 
 Format: `view g/ sku/[SKU]`
+
+Note:
+* Differs from listing available Goods as Viewing a Good looks into a single specific Good, while listing displays all Goods
+  present in the warehouse
 
 Example of finding a Good:<br/>
 Viewing details of the Wooden Chair with SKU: WC1
@@ -256,9 +260,13 @@ Another command?
 ```
 
 ### Finding a Good `find`
-Finding Goods in the warehouse through the name of the Unit Good. After finding the goods, it will show the details of all the goods found.
+Finding Goods in the warehouse through the name of the Unit Good. After finding the Goods, it will show the details of all the Goods found.
 
 Format: `find n/[NAME]`
+
+Note:
+* Differs from Viewing a Good as Finding a Good works through searching a keyword and does not require one to know the
+  exact SKU of the Good that you are looking for
 
 Example of finding a Good:<br/>
 Finding if any Unit Good with "Wooden" in its name exists in the warehouse.
@@ -286,7 +294,7 @@ Another command?
 ```
 
 ### ***Order Commands***
-An order in Simplst is used to know who made the order and what goods to deliver to that shipping address.
+An order in Simplst records the name of the recipient of that Order and what Goods to deliver to his/her shipping address.
 
 An Order contains:
 * Order ID which will be a unique positive number
@@ -301,7 +309,7 @@ Adding a new order to be tracked in the warehouse.
 
 Format: `add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]`
 
-Notes: 
+Notes:
 * Order ID (oid) must be an unique non-negative number (i.e 0, 1, 2... etc)
 
 Example of adding an order for Danny Phantom who lives at Amity Park:<br/>
@@ -393,12 +401,12 @@ Another command?
 
 <img src="img.png" alt="img" style="width:30px;"/>
 
-Fulfill a currently unfulfilled order in the warehouse. To fulfill an order, Simplst will check if all the orderlines relating to the order have their required quantities met.<br/>
+To fulfill a currently unfulfilled order in the warehouse. To fulfill an order, Simplst will check if all the orderlines relating to the order have their required quantities met.<br/>
 When all the orderlines quantities are fulfilled, the order will be considered as fulfilled.
 
 Format: `fulfill oid/[ORDER_ID]`
 
-Note: 
+Note:
 * If the current quantity in the warehouse is lesser than the required quantity to fulfill an orderline, Simplst will not fulfill that orderline and consequently not fulfill that order
 
 Example of fulfilling order 1:<br/>
@@ -432,7 +440,7 @@ Another command?
 ```
 
 ### ***Orderline Commands***
-An orderline is the goods required by the order. It is the same as a Good with the same SKU, and contains the quantity required to fulfill the good.
+An orderline records the Goods required by an order. It is equivalent to a Good with the same SKU, and contains the quantity of the Good required to fulfill the particular order.
 
 In addition to the details in a Good. An orderline will also contain:
 - Quantity of Good required to fulfill the order
@@ -498,15 +506,15 @@ Bye
 ```
 
 ### Saving Program State
-The program uses a savefile to save all information before the program exits, and loads back everything when the program first starts up. 
+The program uses a savefile to save all information before the program exits, and loads back everything when the program first starts up.
 
 All you have to do is ensure that the jar file and the savefile are in a specific file directory structure as shown below:
 
 tp.main.jar
 output/
-	WAREHOUSE.json
-	
-You are strongly advised against editting the savefile structure. We did not design this system to handle manual edits to the savefile.
+WAREHOUSE.json
+
+You are strongly advised against editing the savefile structure. We did not design this system to handle manual edits to the savefile.
 
 ## FAQ
 Q: How to use the program effectively as a new user?
@@ -519,22 +527,23 @@ to enhance usage of this program.
 
 ## Command Summary
 
-| Action                               | Command to be keyed into the terminal                             |
-|--------------------------------------|-------------------------------------------------------------------|
-| Add Unit Good                        | `add ug/ sku/[SKU] n/[NAME] d/*[DESCRIPTION]* size/[CAPACITY]`    |
-| Remove Unit Good                     | `remove ug/ sku/[SKU]`                                            |
-| List Unit Good                       | `list ug/`                                                        |
-| Add Good quantity                    | `add g/ sku/[SKU] qty/[QUANTITY]`                                 |
-| Remove Good quantity                 | `remove g/ sku/[SKU] qty/[QUANTITY]`                              |
-| List Goods (with quantity displayed) | `list g/`                                                         |
-| Viewing a Good                       | `view g/ sku/[SKU]`                                               |
-| Find Good                            | `find n/[NAME]`                                                   |
-| Add Order                            | `add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]` |
-| Remove Order                         | `remove o/ oid/[ORDER_ID]`                                        |
-| List Orders                          | `list o/`                                                         |
-| View Order                           | `view o/ oid/[ORDER_ID]`                                          |
-| Fulfill Order                        | `fulfill oid/[ORDER_ID]`                                          |
-| Add Orderline                        | `add og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_NEEDED]`          |
-| Remove Orderline Quantity            | `remove og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_TO_REMOVE]`    |
-| List Orderlines                      | `list og/ oid/[ORDER_ID]`                                         |
+| Actions/Features                     | Command to be keyed into the terminal                                                                               |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| Help                                 | Display commands for ... <br/>General: `help` <br/> Unit Good: `help ug/`<br/> Good: `help g/`<br/>Order: `help o/` |  
+| Add Unit Good                        | `add ug/ sku/[SKU] n/[NAME] d/*[DESCRIPTION]* size/[CAPACITY]`                                                      |
+| Remove Unit Good                     | `remove ug/ sku/[SKU]`                                                                                              |
+| List Unit Good                       | `list ug/`                                                                                                          |
+| Add Good quantity                    | `add g/ sku/[SKU] qty/[QUANTITY]`                                                                                   |
+| Remove Good quantity                 | `remove g/ sku/[SKU] qty/[QUANTITY]`                                                                                |
+| List Goods (with quantity displayed) | `list g/`                                                                                                           |
+| Viewing a Good                       | `view g/ sku/[SKU]`                                                                                                 |
+| Find Good                            | `find n/[NAME]`                                                                                                     |
+| Add Order                            | `add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]`                                                   |
+| Remove Order                         | `remove o/ oid/[ORDER_ID]`                                                                                          |
+| List Orders                          | `list o/`                                                                                                           |
+| View Order                           | `view o/ oid/[ORDER_ID]`                                                                                            |
+| Fulfill Order                        | `fulfill oid/[ORDER_ID]`                                                                                            |
+| Add Orderline                        | `add og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_NEEDED]`                                                            |
+| Remove Orderline Quantity            | `remove og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_TO_REMOVE]`                                                      |
+| List Orderlines                      | `list og/ oid/[ORDER_ID]`                                                                                           |
 
