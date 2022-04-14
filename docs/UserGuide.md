@@ -79,10 +79,12 @@ it correctly and with ease. Here are some icons which we will use to convey impo
 1. Ensure that you have Java 11 or above installed. Click on this [link](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 to get an overview of how to install java if you are unsure of how to do so.
 2. Download the latest version of `Sherpass` 
-from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v1.0-Release).
-3. Copy the jar file to the folder you want to use as the home folder for Sherpass.
-4. Open a terminal and navigate to the folder containing the jar file.
-5. Start the application on the terminal using `java -jar Sherpass.jar`
+from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v2.1-Release).
+3. Copy the `Sherpass.jar` file to the folder you want to use as the home folder for Sherpass.
+4. Open a command line terminal and navigate to the folder containing the jar file.<br/>
+Here is a [quick guide](https://towardsdatascience.com/a-quick-guide-to-using-command-line-terminal-96815b97b955) on how to do so if you are new to this.
+5. Start the application in the terminal by typing in `java -jar Sherpass.jar`
+6. If you see this message appear, you are set to go!![img.png](images/welcomeImage.png)
 
 ## Command Guide
 
