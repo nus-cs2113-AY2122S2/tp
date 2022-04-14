@@ -80,9 +80,11 @@ it correctly and with ease. Here are some icons which we will use to convey impo
 to get an overview of how to install java if you are unsure of how to do so.
 2. Download the latest version of `Sherpass` 
 from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v2.1-Release).
-3. Copy the jar file to the folder you want to use as the home folder for Sherpass.
-4. Open a [terminal](#glossary) and navigate to the folder containing the jar file.
-5. Start the application on the terminal using `java -jar Sherpass.jar`
+3. Copy the `Sherpass.jar` file to the folder you want to use as the home folder for Sherpass.
+4. Open a command line [terminal](#glossary) and navigate to the folder containing the `.jar` file.<br/>
+Here is a [beginner's guide](https://towardsdatascience.com/a-quick-guide-to-using-command-line-terminal-96815b97b955) on how to do so if you are new to this.
+5. Start the application in the terminal by typing in `java -jar Sherpass.jar`
+6. If you see this message appear, you are set to go!![img.png](images/welcomeImage.png)
 
 ## Command Guide
 
