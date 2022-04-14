@@ -3,7 +3,7 @@
 ## Introduction
 
 *Simplst* is a Warehouse Management System (WMS) for warehouse management workers and managers to manage your warehouse inventory
-and orders. Simplst is optimsed for use via a Command Line Interface (CLI).
+and orders. Simplst is optimised for use via a Command Line Interface (CLI).
 
 Simplst aims to improve efficiency and optimise standard warehouse tasks by having a CLI app which is simple to 
 setup and quick to use. Simplst will mainly be used to add, remove, list and view goods and orders for the warehouse.
@@ -11,7 +11,17 @@ setup and quick to use. Simplst will mainly be used to add, remove, list and vie
 ## Purpose
 
 This User Guide is meant for both warehouse workers and managers to learn how to use Simplst and the features which you
-can use to improve efficiency in managing your warehouse inventory and orders. 
+can use to improve efficiency in managing your warehouse inventory and orders. Our guide will show you how to get started
+with Simplst, and introduce how to interact with Simplst using special commands.
+
+As a new user of Simplst, you can go through the guide in detail starting from the [quick start](#quick-start) section.
+The guide also has [explanations](#explanation-of-key-terms-or-symbols) of certain key terms which we will be using throughout the guide.
+
+As a seasoned user of Simplst, the [command summary](#command-summary) section would be useful to show you an overview 
+of the commands available and how to call them.
+
+Lastly, the [FAQ](#faq) section will provide you with answers to questions that you might have while using Simplst.
+Otherwse, the contents page below will show all the features Simplst has to offer.
 
 ## Contents page
 * [Explanation of Key Terms or Symbols](#explanation-of-key-terms-or-symbols)
@@ -39,6 +49,7 @@ can use to improve efficiency in managing your warehouse inventory and orders.
     * [Removing an Orderline by Quantity](#removing-a-quantity-of-an-orderline-remove-og)
     * [Listing Orderlines in an Order](#listing-orderlines-in-an-order-list-og)
   * [Exiting the Program](#exiting-the-program-bye)
+    * [Saving the Program State](#saving-program-state)
   * [FAQ](#faq)
   * [Command Summary](#command-summary)
 
@@ -486,7 +497,7 @@ State saved!
 Bye
 ```
 
-## Saving Program State
+### Saving Program State
 The program uses a savefile to save all information before the program exits, and loads back everything when the program first starts up. 
 
 All you have to do is ensure that the jar file and the savefile are in a specific file directory structure as shown below:
