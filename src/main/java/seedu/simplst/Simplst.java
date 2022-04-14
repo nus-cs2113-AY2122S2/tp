@@ -1,5 +1,9 @@
 package seedu.simplst;
 
+import util.exceptions.NullException;
+
+import java.io.IOException;
+
 /**
  * Main entry-point for the java.duke.Duke application.
  */
