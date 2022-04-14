@@ -2,11 +2,16 @@
 
 ## Introduction
 
-*Simplst* is a Warehouse Management System (WMS) for managing warehouse inventory and order management, optimzed for use 
-via a Command Line Interface (CLI) for warehouse management workers and managers.
+*Simplst* is a Warehouse Management System (WMS) for warehouse management workers and managers to manage your warehouse inventory
+and orders. Simplst is optimsed for use via a Command Line Interface (CLI).
 
 Simplst aims to improve efficiency and optimise standard warehouse tasks by having a CLI app which is simple to 
 setup and quick to use. Simplst will mainly be used to add, remove, list and view goods and orders for the warehouse.
+
+## Purpose
+
+This User Guide is meant for both warehouse workers and managers to learn how to use Simplst and the features which you
+can use to improve efficiency in managing your warehouse inventory and orders. 
 
 ## Contents page
 * [Explanation of Key Terms or Symbols](#explanation-of-key-terms-or-symbols)
@@ -52,9 +57,6 @@ setup and quick to use. Simplst will mainly be used to add, remove, list and vie
 | <img src="img.png" alt="img" style="width:30px;"/> | Used to denote features for warehouse managers.                                                                                              |
 | `*Optional*`                                       | Fields in MarkUp bounded by asterisks (*) are optional to be filled in, but should be replaced with a space ' ' instead.                     |
 
-
-This User Guide is meant for both warehouse workers and managers to learn how to use Simplst and the features to 
-improve efficiency in managing warehouse inventory and orders. 
 
 ## Quick Start
 
