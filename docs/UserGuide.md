@@ -118,7 +118,6 @@ Add a new unit good to the warehouse, creating a Good with quantity 0 in the pro
 Format: `add ug/ sku/[SKU] n/[NAME] d/*[DESCRIPTION]* size/[CAPACITY]`
 
 Note: 
-* Refer to the explanation on Key Terms and Symbols for what an SKU is
 * Optional description field. If there are no descriptions, key in `d/` followed by a space before keying in the next parameter.
 * If the size input is not either [SMALL / MEDIUM / LARGE], the capacity would be set to the default MEDIUM
 
@@ -136,11 +135,11 @@ Another command?
 ### Removing a Unit Good `remove ug/`
 Removing a unit good from the warehouse.
 
-Format: `remove ug/ sku/[SKU]`
+Tips:
+* You can use this command when there was a mistake adding a Unit Good, or if you know that the warehouse will no longer
+  take in this Unit Good anymore.
 
-Note:
-* Usually used when there occurs a mistake when a Unit Good is added, or if the warehouse does not store the Unit Good
-anymore
+Format: `remove ug/ sku/[SKU]`
 
 Example of removing a unit good:<br/>
 Removing a Unit Good of SKU WC1<br/>
@@ -258,6 +257,9 @@ Another command?
 ### Finding a Good `find`
 Finding Goods in the warehouse through the name of the Unit Good. After finding the goods, it will show the details of all the goods found.
 
+Tips:
+* This command is good for finding the SKU of a Good or Unit Good which you only know the name for.
+
 Format: `find n/[NAME]`
 
 Example of finding a Good:<br/>
@@ -274,7 +276,8 @@ Unit size of good: LARGE
 Another command?
 ```
 
-If there are no Unit Goods in the warehouse with its name containing any part of the input, Simplst will inform you accordingly.
+Note:
+* If there are no Unit Goods in the warehouse with its name containing any part of the input, Simplst will inform you accordingly.
 Example of trying to find spoon in the warehouse.
 
 `find n/spoon`
@@ -341,6 +344,9 @@ Listing all orders in the warehouse. This would show the order details such as:
 * Receiver Name
 * Shipping address
 * Fulfilled/Completion status
+
+Tips:
+* Listing is a good way to find out the Order Id of any order in Simplst.
 
 Format: `list o/`
 
@@ -516,6 +522,14 @@ begin [populating the available Goods](#adding-quantity-of-a-good-add-g) so that
 warehouse. As orders for Goods come in, you can begin [adding Orders](#adding-an-order-add-o) and [goods to those Orders](#adding-an-orderline-add-og)
 to simplify workflow for your Warehouse needs. Other features can be done as well including [listing available Goods](#listing-available-goods-list-g)
 to enhance usage of this program.
+
+Q: What happens when I call fulfill for an order but the warehouse does not have enough goods to fulfill all orderlines 
+in that order?
+
+A: [Fulfill](#fulfill-order-fulfill) will not consider an order fulfilled or completed if any single orderline is not fulfilled.
+You can call fulfill once the warehouse has enough quantity of the corresponding [Good](#good-commands) and Simplst will 
+attempt to complete the unfulfilled orderlines in that order again. The order will only be considered fulfilled when all 
+orderlines in that order is fulfilled.
 
 ## Command Summary
 
