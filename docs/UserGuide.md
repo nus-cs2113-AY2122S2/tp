@@ -239,6 +239,7 @@ Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/en
 |     DUE_DATE     | Due date for the task                               | d/M/yyyy format, must be equal to or after DUE_DATE                                 | Yes                     |
 |     DUE_TIME     | Due time for the task                               | HH:mm format, must be after END_TIME if DUE_DATE is the same as DO_DATE             | No if DUE_DATE is given |
 
+<div style="page-break-after: always;"></div>
 
 **Example**
 - `edit 2 write draft essay`
@@ -281,6 +282,8 @@ Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/en
 |     DUE_DATE     | Due date for the task                               | d/M/yyyy format, must be equal to or after DUE_DATE                                | Yes                     |
 |     DUE_TIME     | Due time for the task                               | HH:mm format, must be after END_TIME if DUE_DATE is the same as DO_DATE            | No if DUE_DATE is given |
 
+<div style="page-break-after: always;"></div>
+
 Before edit command:
 
 ![beforeedit](images/beforeedit.png)
@@ -288,8 +291,6 @@ Before edit command:
 After command: `edit 4 /start 13:00 /end 15:00 /repeat`
 
 ![afteredit](images/afteredit.png)
-
-<div style="page-break-after: always;"></div>
 
 ### Marking your tasks: `mark TASK_NUMBER` / `unmark TASK_NUMBER`
 
@@ -442,6 +443,8 @@ Below are some sample outputs for `clear all`, which asks a confirmation message
 
 ![image](images/clear_all_confirmation.png)
 
+<div style="page-break-after: always;"></div>
+
 If the user inputs `y`:
 
 ![image](images/clear_all_execute.png)
@@ -483,6 +486,8 @@ Format: `start MODE_NUMBER`
 - `MODE_NUMBER` 2 starts a 1 hour(s) timer
 - `MODE_NUMBER` 3 starts a 1.5 hour(s) timer
 
+<div style="page-break-after: always;"></div>
+
 > 💡 **Note:**
 >- Only one timer can be running at any given point of time.
 >- Once you have entered the study session and have selected a timer,
@@ -496,8 +501,6 @@ Format: `start MODE_NUMBER`
 
 - `start 1`
 
-<div style="page-break-after: always;"></div>
-
 In the terminal:
 
 ![](images/startDefaultOneTerminal.png)
@@ -505,6 +508,8 @@ In the terminal:
 In the pop-up window:
 
 ![](images/startDefaultOne.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Starting a custom timer: `start`
 Need something else rather than what is provided by our default timers? You can start your own custom timer to suit 
@@ -533,6 +538,8 @@ In the pop-up window:
 
 ![](images/customTimer60sec.JPG)
 
+<div style="page-break-after: always;"></div>
+
 ### Starting a stopwatch: `start stopwatch`
 Not sure how long you'll need to complete your academic tasks? You can start a stopwatch to keep track of how long 
 you've been studying.
@@ -556,13 +563,13 @@ your tasks for the day, or mark a task as done.
 
 Format: `pause` or clicking the pause button in the pop-up window.
 
-<div style="page-break-after: always;"></div>
-
 **Example**
 
 In the terminal:
 
 ![](images/pauseTimerTerminal.png)
+
+<div style="page-break-after: always;"></div>
 
 In the pop-up window:
 
@@ -602,8 +609,6 @@ Format:
 - Clicking the stop button in the pop-up window
 - Closing the pop-up window (Clicking the X button in the top right corner)
 
-<div style="page-break-after: always;"></div>
-
 **Example**
 
 In the terminal:
@@ -615,6 +620,8 @@ In the pop-up window:
 ![](images/stopTimer.png)
 
 The window will disappear immediately after stopping the timer.
+
+<div style="page-break-after: always;"></div>
 
 ### Show your tasks: `show`
 The show feature is supported in the study session, in case you need to remind yourselves of the tasks you have to 
@@ -638,6 +645,8 @@ to mark your task.
 > 💡 **Note:**
 >- You can only mark tasks while the timer is paused or stopped.
 >- You can also use the unmark feature within the study session if you've marked a task wrongly.
+
+<div style="page-break-after: always;"></div>
 
 **Example**
 
@@ -678,6 +687,8 @@ Format: `bye`
 
 ![image](images/bye.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Saving your tasks
 
 All changes to your tasks are saved automatically into a JSON file at `[JAR FILE LOCATION]/data/Sherpass.json`.
@@ -687,8 +698,6 @@ There is no need to manually save your tasks.
 > 💡 **Note:**
 >
 >Advanced users are welcome to manually edit the save file.
-
-<div style="page-break-after: always;"></div>
 
 The following fields are required to correctly load a task:
 
