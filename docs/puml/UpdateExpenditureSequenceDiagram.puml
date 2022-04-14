@@ -1,0 +1,83 @@
+@startuml
+!include Style.puml
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
+box updateExpenditure()
+participant ":MMM" as MMM MMM_COLOUR
+participant "CommandType:UpdateCommand" as updateCommand COMMANDS_COLOUR
+participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
+participant ":AddCommandInputTest" as AddCommandInputTest HELPER_COLOUR
+participant ":Expenditure" as Expenditure USERFINANCIAL_COLOUR
+participant ":ExpenditureList" as ExpenditureList DATA_COLOUR
+
+end box
+hide footbox
+
+MMM -> updateCommand: executeCommand()
+activate updateCommand COMMANDS_COLOUR
+
+updateCommand -> updateCommand: updateExpenditure()
+activate updateCommand COMMANDS_COLOUR
+
+updateCommand -> GeneralFunctions: parseInputWithCommandFlag()
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> updateCommand
+deactivate GeneralFunctions
+
+
+updateCommand -> AddCommandInputTest: testUpdateExpenditureParameters()
+activate AddCommandInputTest HELPER_COLOUR
+
+
+AddCommandInputTest --> updateCommand
+deactivate AddCommandInputTest
+updateCommand --> updateCommand
+deactivate updateCommand COMMANDS_COLOUR
+
+opt NEW_PAYMENT_METHOD == cash
+updateCommand -> GeneralFunctions: capitalise(paymentMethod)
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> updateCommand
+deactivate GeneralFunctions
+end
+
+updateCommand -> GeneralFunctions: capitalise(category)
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> updateCommand
+deactivate GeneralFunctions
+
+updateCommand -> GeneralFunctions: formatFloat(amount)
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> updateCommand
+deactivate GeneralFunctions
+
+updateCommand -> updateCommand: updatePaymentMethod()
+activate updateCommand COMMANDS_COLOUR
+updateCommand --> updateCommand
+deactivate updateCommand
+
+create Expenditure
+updateCommand -> Expenditure: Expenditure()
+activate Expenditure USERFINANCIAL_COLOUR
+Expenditure --> updateCommand
+deactivate Expenditure
+
+updateCommand -> ExpenditureList: set()
+activate ExpenditureList DATA_COLOUR
+ExpenditureList --> updateCommand
+deactivate ExpenditureList
+
+note left
+Details of newly updated
+expenditure is printed out
+end note
+
+updateCommand --> MMM
+deactivate updateCommand
+@enduml

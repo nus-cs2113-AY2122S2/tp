@@ -1,0 +1,51 @@
+@startuml
+!include Style.puml
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
+box CalculateInputCommand
+participant ":MMM" as MMM MMM_COLOUR
+participant "CommandType:CalculateInputCommand" as CalculateInputCommand COMMANDS_COLOUR
+participant ":Calculations" as Calculations HELPER_COLOUR
+participant ":GeneralFunctions" as GeneralFunctions  HELPER_COLOUR
+end box
+hide footbox
+
+MMM -> CalculateInputCommand: executeCommand()
+activate CalculateInputCommand COMMANDS_COLOUR
+
+CalculateInputCommand -> GeneralFunctions: parseInput()
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> CalculateInputCommand
+deactivate GeneralFunctions HELPER_COLOUR
+
+
+alt contain FLAG_OF_EXPENDITURE_PER_MONTH
+CalculateInputCommand -> Calculations: calculateExpenditure()
+activate Calculations HELPER_COLOUR
+Calculations -> GeneralFunctions: findItemInList()
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> Calculations
+deactivate GeneralFunctions HELPER_COLOUR
+Calculations -> Calculations: displayCalculationBreakdown()
+activate Calculations HELPER_COLOUR
+Calculations --> Calculations
+deactivate Calculations HELPER_COLOUR
+Calculations --> CalculateInputCommand
+deactivate Calculations HELPER_COLOUR
+CalculateInputCommand --> MMM
+
+else else
+CalculateInputCommand --> MMM
+note right
+An exception containing warning messages is thrown
+end note
+deactivate CalculateInputCommand COMMANDS_COLOUR
+end
+
+@enduml

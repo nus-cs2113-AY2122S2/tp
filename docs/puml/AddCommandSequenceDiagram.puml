@@ -1,0 +1,58 @@
+@startuml
+!include Style.puml
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
+box AddCommand
+participant ":MMM" as MMM MMM_COLOUR
+participant "CommandType:AddCommand" as AddCommand COMMANDS_COLOUR
+end box
+hide footbox
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
+MMM -> AddCommand: executeCommand()
+activate AddCommand COMMANDS_COLOUR
+
+alt hasCreditCardFlag()
+AddCommand -> AddCommand: addCreditCard()
+activate AddCommand COMMANDS_COLOUR
+AddCommand --> AddCommand
+deactivate AddCommand
+AddCommand --> MMM
+
+
+else hasIncomeFlag()
+AddCommand -> AddCommand: addIncome()
+activate AddCommand COMMANDS_COLOUR
+AddCommand --> AddCommand
+deactivate AddCommand
+AddCommand --> MMM
+
+
+else hasExpenditureFlag()
+AddCommand -> AddCommand: addExpenditure()
+activate AddCommand COMMANDS_COLOUR
+AddCommand --> AddCommand:
+deactivate AddCommand COMMANDS_COLOUR
+AddCommand --> MMM
+
+else else
+AddCommand --> MMM
+deactivate AddCommand COMMANDS_COLOUR
+note right
+An exception containing warning messages is thrown
+end note
+end
+@enduml
+@enduml

@@ -1,0 +1,47 @@
+@startuml
+!include Style.puml
+
+hide footbox
+skinparam sequenceMessageAlign center
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+ActorBorderColor black
+}
+
+box Components Sequence Diagram
+actor User
+participant ":MMM" as MMM MMM_COLOUR
+participant ":Ui" as Ui UI_COLOUR
+participant ":Parser" as Parser PARSER_COLOUR
+participant ":Commands" as Commands COMMANDS_COLOUR
+participant ":Storage" as Storage STORAGE_COLOUR
+end box
+
+MMM -> Ui: readInput()
+activate Ui UI_COLOUR
+User -> Ui: \t\t add /e /pm cash /c food /d Porridge /a 3 /t 04/04/2022
+Ui --> MMM: add /e /pm cash /c food /d Porridge /a 3 /t 04/04/2022
+deactivate Ui
+
+MMM -> Parser: parseCommand()
+activate Parser PARSER_COLOUR
+Parser --> MMM: AddCommand()
+deactivate Parser
+
+MMM -> Commands: executeCommand()
+activate Commands COMMANDS_COLOUR
+Commands --> MMM
+deactivate Commands
+
+MMM -> Storage: save()
+activate Storage STORAGE_COLOUR
+Storage --> MMM
+deactivate Storage
+
+MMM --> User
+
+@enduml

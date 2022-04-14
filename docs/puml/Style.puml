@@ -1,0 +1,14 @@
+!define LOGIC_COLOR #3333C4
+!define LOGIC_COLOR_T1 #7777DB
+!define LOGIC_COLOR_T2 #5252CE
+!define LOGIC_COLOR_T3 #1616B0
+!define LOGIC_COLOR_T4 #101086
+
+!define MMM_COLOUR #dddddd
+!define PARSER_COLOUR #00b0f0
+!define UI_COLOUR #92d050
+!define COMMANDS_COLOUR #ff5050
+!define STORAGE_COLOUR #ffc000
+!define HELPER_COLOUR #e6d6c2
+!define USERFINANCIAL_COLOUR #ca8dfd
+!define DATA_COLOUR #aeed00

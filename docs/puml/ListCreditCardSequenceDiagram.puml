@@ -1,0 +1,36 @@
+@startuml
+!include Style.puml
+
+hide footbox
+skinparam sequenceMessageAlign center
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
+box listCreditCard()
+participant ":MMM" as MMM MMM_COLOUR
+participant "CommandType:ListCommand" as C COMMANDS_COLOUR
+end box
+
+MMM -> C: executeCommand()
+activate C COMMANDS_COLOUR
+
+C -> C: printCreditCardList()
+activate C COMMANDS_COLOUR
+
+C -> C: creditCardListToString()
+activate C COMMANDS_COLOUR
+
+C --> C: listInString
+deactivate C
+
+C --> C
+deactivate C
+
+C --> MMM
+deactivate C
+@enduml

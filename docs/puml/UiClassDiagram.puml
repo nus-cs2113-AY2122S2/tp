@@ -1,0 +1,35 @@
+@startuml
+!include Style.puml
+
+allowmixing
+skinparam componentStyle rectangle
+skinparam classAttributeIconSize 0
+hide circle
+
+skinparam class {
+ArrowColor black
+BorderColor black
+}
+
+component MMM MMM_COLOUR
+
+component Ui {
+class Ui
+class "{abstract}\nPrintStrings"
+}
+
+class Ui UI_COLOUR {
+{static} +PROMPT: String = ">"
+
++printIntro(): void
++readInput(): String
+}
+
+class "{abstract}\nPrintStrings" UI_COLOUR {
+{static} +tips:String[]
+}
+
+MMM --> "1" Ui
+Ui -> "{abstract}\nPrintStrings": uses tips >
+
+@enduml

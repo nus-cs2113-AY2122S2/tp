@@ -1,0 +1,29 @@
+@startuml
+!include Style.puml
+
+skinparam componentStyle rectangle
+skinparam ArrowColor black
+skinparam ActorBorderColor black
+
+actor User
+folder data.txt
+component MMM MMM_COLOUR
+component Ui UI_COLOUR
+component Parser PARSER_COLOUR
+component Commands COMMANDS_COLOUR
+component Storage STORAGE_COLOUR
+
+note bottom of MMM
+MMM refers to
+MindMyMoney
+end note
+
+User -d-> Ui
+Ui <-> MMM
+MMM <-u-> Parser
+MMM -r-> Commands
+Parser --> Commands
+MMM <-d-> Storage
+Storage <-d-> data.txt
+
+@enduml

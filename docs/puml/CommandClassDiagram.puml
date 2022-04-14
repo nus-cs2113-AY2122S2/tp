@@ -1,0 +1,38 @@
+@startuml
+!include Style.puml
+
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam ArrowColor black
+
+package Parser {
+component Parser as parser PARSER_COLOUR
+
+package Command {
+component "{abstract}\nCommand" as command COMMANDS_COLOUR
+component "AddCommand" as addCommand COMMANDS_COLOUR
+component "ByeCommand" as byeCommand COMMANDS_COLOUR
+component "DeleteCommand" as deleteCommand COMMANDS_COLOUR
+component "CalculateInputCommand" as calculateInputCommand COMMANDS_COLOUR
+component "HelpCommand" as helpCommand COMMANDS_COLOUR
+component "ListCommand" as listCommand COMMANDS_COLOUR
+component "UpdateCommand" as updateCommand COMMANDS_COLOUR
+
+}
+
+}
+component MMM MMM_COLOUR
+
+MMM .r.> parser
+
+parser ...> "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t0..1" command: "creates >"
+
+command <|-left- addCommand
+command <|-- byeCommand
+command <|-- deleteCommand
+command <|-- calculateInputCommand
+command <|-up- helpCommand
+command <|-up- listCommand
+command <|-right- updateCommand
+
+@enduml

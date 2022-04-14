@@ -1,0 +1,44 @@
+@startuml
+!include Style.puml
+
+hide footbox
+skinparam sequenceMessageAlign center
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
+box listExpenditure()
+participant ":MMM" as MMM MMM_COLOUR
+participant "CommandType:ListCommand" as C COMMANDS_COLOUR
+end box
+
+MMM -> C: executeCommand()
+activate C COMMANDS_COLOUR
+
+C -> C: printExpenditureList()
+activate C COMMANDS_COLOUR
+
+alt listInput.equals("/e")
+C -> C: listString()
+activate C COMMANDS_COLOUR
+C --> C: listInString
+deactivate C
+
+else else
+C -> C: listStringWithDate()
+activate C COMMANDS_COLOUR
+C --> C: listInString
+deactivate C
+end
+
+C --> C
+deactivate C
+
+C --> MMM
+deactivate C
+
+@enduml

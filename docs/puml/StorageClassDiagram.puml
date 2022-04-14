@@ -1,0 +1,30 @@
+@startuml
+!include Style.puml
+
+allowmixing
+skinparam componentStyle rectangle
+skinparam classAttributeIconSize 0
+hide circle
+
+skinparam class {
+ArrowColor black
+BorderColor black
+}
+
+component MMM MMM_COLOUR
+
+component Storage {
+class Storage
+}
+
+class Storage STORAGE_COLOUR {
+-storageFile: File
+
++load(): User
++save(User: user): void
+}
+
+
+MMM -right-> "1" Storage : loads/saves >
+
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+!include Style.puml
+
+hide footbox
+skinparam sequenceMessageAlign center
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
+box DeleteCommand
+participant ":MMM" as MMM MMM_COLOUR
+participant "CommandType:DeleteCommand" as C COMMANDS_COLOUR
+end box
+
+MMM -> C: executeCommand()
+activate C COMMANDS_COLOUR
+
+alt hasExpensesFlag()
+C -> C: deleteExpenditure()
+activate C COMMANDS_COLOUR
+C --> C
+deactivate C
+
+else hasCreditCardListFlag()
+C -> C: deleteCreditCard()
+activate C COMMANDS_COLOUR
+C --> C
+deactivate C
+
+else hasIncomeListFlag()
+C -> C: deleteIncome()
+activate C COMMANDS_COLOUR
+C --> C
+deactivate C
+
+else else
+C --> MMM
+note right
+An exception containing warning messages is thrown
+end note
+
+end
+C --> MMM
+deactivate C
+
+@enduml

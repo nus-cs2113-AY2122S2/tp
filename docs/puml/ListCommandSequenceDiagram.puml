@@ -1,0 +1,50 @@
+@startuml
+!include Style.puml
+
+hide footbox
+skinparam sequenceMessageAlign center
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
+box ListCommand
+participant ":MMM" as MMM MMM_COLOUR
+participant "CommandType:ListCommand" as C COMMANDS_COLOUR
+end box
+
+MMM -> C: executeCommand()
+activate C COMMANDS_COLOUR
+
+alt hasExpensesFlag()
+C -> C: printExpenditureList()
+activate C COMMANDS_COLOUR
+C --> C
+deactivate C
+
+else hasCreditCardListFlag()
+C -> C: printCreditCardList()
+activate C COMMANDS_COLOUR
+C --> C
+deactivate C
+
+else hasIncomeListFlag()
+C -> C: printIncomeList()
+activate C COMMANDS_COLOUR
+C --> C
+deactivate C
+
+else else
+C --> MMM
+note right
+An exception containing warning messages is thrown
+end note
+
+end
+C --> MMM
+deactivate C
+
+@enduml

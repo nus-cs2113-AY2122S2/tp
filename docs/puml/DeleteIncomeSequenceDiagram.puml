@@ -1,0 +1,43 @@
+@startuml
+!include Style.puml
+
+hide footbox
+skinparam sequenceMessageAlign center
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
+box deleteIncome()
+participant ":MMM" as MMM MMM_COLOUR
+participant "CommandType:DeleteCommand" as C COMMANDS_COLOUR
+participant ":IncomeList" as IL DATA_COLOUR
+end box
+
+MMM -> C: executeCommand()
+activate C COMMANDS_COLOUR
+
+C -> C: deleteIncome()
+activate C COMMANDS_COLOUR
+
+C -> IL: delete()
+activate IL DATA_COLOUR
+IL --> C
+deactivate IL
+
+C --> C
+
+note right
+Details of deleted
+Income is printed out
+end note
+
+deactivate C
+
+C --> MMM
+deactivate C
+
+@enduml

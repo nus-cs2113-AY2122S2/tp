@@ -1,0 +1,53 @@
+@startuml
+!include Style.puml
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
+box updateCreditCard()
+participant ":MMM" as MMM MMM_COLOUR
+participant "CommandType:UpdateCommand" as updateCommand COMMANDS_COLOUR
+participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
+participant ":CreditCard" as CreditCard USERFINANCIAL_COLOUR
+participant ":CreditCardList" as CreditCardList DATA_COLOUR
+
+end box
+hide footbox
+
+MMM -> updateCommand: executeCommand()
+activate updateCommand COMMANDS_COLOUR
+
+updateCommand -> updateCommand: updateCreditCard()
+activate updateCommand COMMANDS_COLOUR
+
+updateCommand -> GeneralFunctions: parseInputWithCommandFlag()
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> updateCommand
+deactivate GeneralFunctions
+
+create CreditCard
+updateCommand -> CreditCard: CreditCard()
+activate CreditCard USERFINANCIAL_COLOUR
+CreditCard --> updateCommand
+deactivate CreditCard
+
+updateCommand -> CreditCardList: set()
+activate CreditCardList DATA_COLOUR
+CreditCardList --> updateCommand
+deactivate CreditCardList
+
+updateCommand --> updateCommand
+deactivate updateCommand
+
+note left
+Details of newly updated
+expenditure is printed out
+end note
+
+updateCommand --> MMM
+deactivate updateCommand
+@enduml

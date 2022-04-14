@@ -1,0 +1,58 @@
+@startuml
+!include Style.puml
+
+skinparam sequence {
+ArrowColor black
+participantBorderColor black
+LifelineBorderColor black
+boxBorderColor black
+}
+
+box addCreditCard()
+participant ":MMM" as MMM MMM_COLOUR
+participant "CommandType:AddCommand" as AddCommand COMMANDS_COLOUR
+participant ":GeneralFunctions" as GeneralFunctions HELPER_COLOUR
+participant ":AddCommandInputTest" as AddCommandInputTest HELPER_COLOUR
+participant ":CreditCard" as CreditCard USERFINANCIAL_COLOUR
+participant ":CreditCardList" as CreditCardList DATA_COLOUR
+
+end box
+hide footbox
+MMM -> AddCommand: executeCommand()
+activate AddCommand COMMANDS_COLOUR
+
+AddCommand -> AddCommand: addCreditCard()
+activate AddCommand COMMANDS_COLOUR
+
+AddCommand -> GeneralFunctions: parseInputWithCommandFlag()
+activate GeneralFunctions HELPER_COLOUR
+GeneralFunctions --> AddCommand
+deactivate GeneralFunctions
+
+AddCommand -> AddCommandInputTest: testCreditCardParameters()
+activate AddCommandInputTest HELPER_COLOUR
+
+AddCommandInputTest --> AddCommand
+deactivate AddCommandInputTest
+
+create CreditCard
+AddCommand -> CreditCard: CreditCard()
+activate CreditCard USERFINANCIAL_COLOUR
+CreditCard --> AddCommand
+deactivate CreditCard
+
+AddCommand -> CreditCardList: add()
+activate CreditCardList DATA_COLOUR
+CreditCardList --> AddCommand
+deactivate CreditCardList
+
+note left
+Details of newly added
+Credit Card is printed out
+end note
+
+AddCommand --> AddCommand:
+deactivate AddCommand
+AddCommand --> MMM:
+deactivate AddCommand
+@enduml

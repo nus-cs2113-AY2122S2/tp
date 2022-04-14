@@ -1,0 +1,39 @@
+@startuml
+!include Style.puml
+
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam ArrowColor black
+
+package Parser {
+component Parser as P PARSER_COLOUR
+
+Package User {
+component User as U USERFINANCIAL_COLOUR
+component ExpenditureList DATA_COLOUR
+component Expenditure USERFINANCIAL_COLOUR
+component CreditCardList DATA_COLOUR
+component CreditCard USERFINANCIAL_COLOUR
+component IncomeList DATA_COLOUR
+component Income USERFINANCIAL_COLOUR
+}
+
+}
+component MMM MMM_COLOUR
+component Commands COMMANDS_COLOUR
+component GeneralFunctions HELPER_COLOUR
+
+MMM .d.> P
+P .r.> GeneralFunctions: "uses >"
+P .d.> Commands: "instantiates >"
+P .d.> U
+
+U -d-> "0..1" ExpenditureList: "has >"
+U -d-> "0..1" CreditCardList: "has >"
+U -d-> "0..1" IncomeList: "has >"
+
+ExpenditureList .d.> Expenditure
+CreditCardList .d.> CreditCard
+IncomeList .d.> Income
+
+@enduml
