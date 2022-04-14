@@ -6,7 +6,7 @@
 and orders. Simplst is optimised for use via a Command Line Interface (CLI).
 
 Simplst aims to improve efficiency and optimise standard warehouse tasks by having a CLI app which is simple to 
-setup and quick to use. Simplst will mainly be used to add, remove, list and view goods and orders for the warehouse.
+set up and quick to use. Simplst will mainly be used to add, remove, list and view goods and orders for the warehouse.
 
 ## Purpose
 
@@ -21,7 +21,7 @@ As a seasoned user of Simplst, the [command summary](#command-summary) section w
 of the commands available and how to call them.
 
 Lastly, the [FAQ](#faq) section will provide you with answers to questions that you might have while using Simplst.
-Otherwse, the contents page below will show all the features Simplst has to offer.
+Otherwise, the contents' page below will show all the features Simplst has to offer.
 
 ## Contents page
 * [Explanation of Key Terms or Symbols](#explanation-of-key-terms-or-symbols)
