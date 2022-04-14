@@ -79,9 +79,9 @@ it correctly and with ease. Here are some icons which we will use to convey impo
 1. Ensure that you have Java 11 or above installed. Click on this [link](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 to get an overview of how to install java if you are unsure of how to do so.
 2. Download the latest version of `Sherpass` 
-from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v1.0-Release).
+from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v2.1-Release).
 3. Copy the jar file to the folder you want to use as the home folder for Sherpass.
-4. Open a terminal and navigate to the folder containing the jar file.
+4. Open a [terminal](#glossary) and navigate to the folder containing the jar file.
 5. Start the application on the terminal using `java -jar Sherpass.jar`
 
 ## Command Guide
@@ -115,8 +115,6 @@ Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate 
 |     DUE_DATE     | Due date for the task           | d/M/yyyy format, must be equal to or after DUE_DATE                                | Yes                     |
 |     DUE_TIME     | Due time for the task           | HH:mm format, must be after END_TIME if DUE_DATE is the same as DO_DATE            | No if DUE_DATE is given |
 
-> **💡 Note**
-> When using the optional parameter shown in `[]`, both the`DEADLINE` and `END_TIME` to need be used together.
 
 **Examples**
 - `add write final essay /do 11/4/2022 /start 22:00 /end 24:00 /bydate 13/4/2022 /bytime 23:59`
@@ -362,7 +360,7 @@ monthly schedule.
 
 Format:
 - `show month`
-- `show MONTH`,
+- `show MONTH`
 
 | Parameters | Description                                 | Accepted inputs                                                                                                | Optional                                      |
 |:----------:|---------------------------------------------|----------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
@@ -692,7 +690,15 @@ rectify the problem or allow Sherpass to create a new save file.
 In the case for Sherpass, a parameter would be a valid input that accompanies a command. 
 For example, in the [`show`](#show-your-tasks-show) command,
 one of the options provided is `show all`. The `all` keyword would thus be the parameter.
+
+ 
 * *Extraneous* - Something that is unnecessary or irrelevant.
+
+
+* *Terminal* -  A **_text-based interface_** to the computer.
+In a terminal, you can type commands, manipulate files, execute programs, and open documents.
+When working in a terminal, the current directory (the text just beside your text cursor) 
+is called your working directory. A terminal will usually start in the top-level directory of your account.
 
 <div style="page-break-after: always;"></div>
 
