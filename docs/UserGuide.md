@@ -27,6 +27,8 @@ stopwatch to keep track of how long you've been studying for, if you're unsure o
 After your study session, you will be prompted to mark the tasks you've completed as done. If you're still not done with
 certain tasks, feel free to start another productive session!
 
+<div style="page-break-after: always;"></div>
+
 ### User Guide Target Audience
 New and inexperienced users who want to use Sherpass, as well as non-users who want to know more about what Sherpass
 can do.
@@ -42,6 +44,7 @@ it correctly and with ease. Here are some icons which we will use to convey impo
 > **⚠️Important Notes / Warnings️**
 >- **Essential** information you should take note of to be able to use the application correctly. 
 
+<div style="page-break-after: always;"></div>
 
 ## Table of Content
 - [Quick Start](#quick-start)
@@ -69,14 +72,16 @@ it correctly and with ease. Here are some icons which we will use to convey impo
 - [Glossary](#glossary)
 - [Command Summary](#command-summary)
 
+<div style="page-break-after: always;"></div>
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed. Click on this [link](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 to get an overview of how to install java if you are unsure of how to do so.
 2. Download the latest version of `Sherpass` 
-from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v1.0-Release).
+from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v2.1-Release).
 3. Copy the jar file to the folder you want to use as the home folder for Sherpass.
-4. Open a terminal and navigate to the folder containing the jar file.
+4. Open a [terminal](#glossary) and navigate to the folder containing the jar file.
 5. Start the application on the terminal using `java -jar Sherpass.jar`
 
 ## Command Guide
@@ -146,9 +151,11 @@ Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/bydate 
 - `add cs2113t weekly quiz /do 21/6/2022 /start 16:00 /end 18:00 /bydate 25/6/2022 /bytime 16:00 /repeat WEEKLY`
 
 Before adding (current schedule of all tasks):
+
 ![](images/scheduleBeforeAddingRecurringTasksOne.png)
 
 When adding the task:
+
 ![](images/addRecurringTasksWithDeadline.png)
 
 After adding :
@@ -169,12 +176,15 @@ Format: `delete TASK_NUMBER`
 - `delete 2`
 
 Before delete command:
+
 ![](images/scheduleAfterAddingRecurringTasksOne.png)
 
 When executing delete command:
+
 ![](images/deleteSingleTask.png)
 
 After delete command:
+
 ![](images/scheduleAfterDeletingASingleTask.png)
 
 ### Deleting your recurring tasks
@@ -225,12 +235,15 @@ Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE] [/start START_TIME] [/en
 - `edit 2 write draft essay`
 
 Before edit command:
+
 ![](images/scheduleAfterAddingRecurringTasksOne.png)
 
 When executing edit command:
+
 ![](images/editSingleTask.png)
 
 After edit command:
+
 ![](images/scheduleAfterEditingASingleTask.png)
 
 
@@ -349,7 +362,7 @@ monthly schedule.
 
 Format:
 - `show month`
-- `show MONTH`,
+- `show MONTH`
 
 | Parameters | Description                                 | Accepted inputs                                                                                                | Optional                                      |
 |:----------:|---------------------------------------------|----------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
@@ -656,6 +669,7 @@ The following fields are required to correctly load a task:
 |    status     | Status of the task                                          | `X` for completed, `-` for incomplete                      |
 
 
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -678,7 +692,17 @@ rectify the problem or allow Sherpass to create a new save file.
 In the case for Sherpass, a parameter would be a valid input that accompanies a command. 
 For example, in the [`show`](#show-your-tasks-show) command,
 one of the options provided is `show all`. The `all` keyword would thus be the parameter.
+
+ 
 * *Extraneous* - Something that is unnecessary or irrelevant.
+
+
+* *Terminal* -  A **_text-based interface_** to the computer.
+In a terminal, you can type commands, manipulate files, execute programs, and open documents.
+When working in a terminal, the current directory (the text just beside your text cursor) 
+is called your working directory. A terminal will usually start in the top-level directory of your account.
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 

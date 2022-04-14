@@ -33,7 +33,7 @@ Summary of code contributions:
 ### Contributions to User Guide:
 - Wrote the quick start section [(Link)](https://ay2122s2-cs2113t-t09-1.github.io/tp/UserGuide.html#editing-your-tasks-edit)
 - Wrote the command guide for [adding](https://ay2122s2-cs2113t-t09-1.github.io/tp/UserGuide.html#adding-your-tasks-add),
-  [editing](https://ay2122s2-cs2113t-t09-1.github.io/tp/UserGuide.html#editing-your-tasks-edit) and [deleting](https://ay2122s2-cs2113t-t09-1.github.io/tp/UserGuide.html#adding-your-tasks-add) tasks
+  [editing](https://ay2122s2-cs2113t-t09-1.github.io/tp/UserGuide.html#editing-your-tasks-edit) and [deleting](https://ay2122s2-cs2113t-t09-1.github.io/tp/UserGuide.html#deleting-your-tasks-delete) tasks
 - Wrote the section on Saving your tasks [(Link)](https://ay2122s2-cs2113t-t09-1.github.io/tp/UserGuide.html#saving-your-tasks)
 - Added some screenshots and example commands for the command guide section.
 - Wrote the FAQ section [(Link)](https://ay2122s2-cs2113t-t09-1.github.io/tp/UserGuide.html#faq)
