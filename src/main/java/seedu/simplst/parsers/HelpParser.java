@@ -26,12 +26,10 @@ public class HelpParser extends CommandParser {
 
     @Override
     public void initExtractParams() throws MissingFlagException, EmptyFieldException {
-        System.out.println(this.userInput);
-        System.out.println(isNoFlag);
         if (!this.userInput.equalsIgnoreCase("help")) { //for help commands with flag
             MatchKeywords matchKeywordsMatch;
             String regex;
-            regex = "(?<flag>[uog]{1,2})";
+            regex = " (?<flag>[uog]{1,2})$";
             matchKeywordsMatch = new MatchKeywords(this.userInput, regex);
             this.matches = matchKeywordsMatch.getGroupValues();
         } else {
@@ -56,7 +54,8 @@ public class HelpParser extends CommandParser {
                 Display.helpOrder();
                 break;
             default:
-                System.out.println("Refer to user guide for instructions on help command.");
+                System.out.println("Refer to user guide for instructions on help command flags.");
+                Display.help();
             }
         }
         isNoFlag = false; //reset

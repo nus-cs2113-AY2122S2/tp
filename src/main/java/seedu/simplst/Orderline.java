@@ -15,7 +15,7 @@ public class Orderline extends Good {
     private int quantityFulfilled = 0;
     private Boolean isCheckedOff = false;
 
-    public Orderline(UnitGood unitGood, int id, int quantity) {
+    public Orderline(UnitGood unitGood, int quantity) {
         super(unitGood, quantity);
     }
 
@@ -50,10 +50,6 @@ public class Orderline extends Good {
         return String.format("%d of %s - %s needed",
                 super.getQuantity(), super.getSku(), super.getName())
                 + isDone();
-    }
-
-    public int getId() {
-        return 0;
     }
 
     public JSONObject serialize() {

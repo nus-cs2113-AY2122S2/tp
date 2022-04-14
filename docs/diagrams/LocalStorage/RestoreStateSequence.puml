@@ -6,9 +6,11 @@ participant Warehouse as w
 participant LocalStorage as ls
 
 create w
-S -> w
+S -> w : create instance with 0  capacity
 activate w
-w -> w ++ : restoreWarehouseState()
+w --> S : return warehouse instance
+deactivate w
+S -> w ++ : restoreWarehouseState()
 w -> ls ++ : readSaveFile(fp)
 ls --> w -- : Raw savefile string
 w -> w ++ : setTotalCapacity(capacity)
@@ -21,8 +23,10 @@ w --> S : Boolean if successfully set
 deactivate w
 
 alt status == false
-
+destroy w
+create w
 S -> w
+activate w
 w --> S
 end
 
