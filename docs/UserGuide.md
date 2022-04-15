@@ -21,9 +21,9 @@ The guide also has [explanations](#explanation-of-key-terms-or-symbols) of certa
 As a seasoned user of Simplst, the [command summary](#command-summary) section would be useful to show you an overview
 of the commands available and how to use them.
 
-Lastly, the [FAQ](#faq) section will provide you with answers to questions that you might have while using Simplst.
-Otherwise, the [contents page](#contents-page) below displays all the features that Simplst has to offer. You can click
-on any section and you will be brought to that section directly.
+Lastly, the [FAQ](#faq) section will provide you with answers to the questions that you might have while using Simplst.
+Otherwise, the [content's page](#contents-page) below displays all the features that Simplst has to offer. You can click
+on any section, and you will be brought to that section directly.
 
 ## Contents page
 * [Explanation of Key Terms or Symbols](#explanation-of-key-terms-or-symbols)
@@ -534,7 +534,7 @@ to enhance usage of this program.
 
 Q: Can I edit the savefile directly?
 
-A: As mentioned in the section [Saving Program State](#saving-program-state), it is not recommended but you are able to 
+A: As mentioned in the section [Saving Program State](#saving-program-state), it is not recommended, but you are able to 
 do so by opening the file and editing its contents. However, and manual edits that are corrupt/incorrect/incomplete and the 
 problems that follow will not fall under the responsibility of the team. Do contact the team through email at 
 queriesforsimplst@gmail.com if there are any issues faced or if the file has accidentally been manually edited.
@@ -550,23 +550,23 @@ orderlines in that order is fulfilled.
 
 ## Command Summary
 
-| Action                                                                      | Command to be keyed into the terminal                             |
-|-----------------------------------------------------------------------------|-------------------------------------------------------------------|
-| [Help](#help-command-help)                                 | Display commands for ... <br/>General: `help` <br/> Unit Good: `help ug/`<br/> Good: `help g/`<br/>Order: `help o/` |  
-| [Add Unit Good](#adding-a-unit-good-add-ug)                                 | `add ug/ sku/[SKU] n/[NAME] d/*[DESCRIPTION]* size/[CAPACITY]`    |
-| [Remove Unit Good](#removing-a-unit-good-remove-ug)                         | `remove ug/ sku/[SKU]`                                            |
-| [List Unit Good](#listing-unit-goods-list-ug)                               | `list ug/`                                                        |
-| [Add Good quantity](#adding-quantity-of-a-good-add-g)                       | `add g/ sku/[SKU] qty/[QUANTITY]`                                 |
-| [Remove Good quantity](#removing-quantity-of-a-good-remove-g)               | `remove g/ sku/[SKU] qty/[QUANTITY]`                              |
-| [List Goods](#listing-available-goods-list-g) (with quantity displayed)     | `list g/`                                                         |
-| [Viewing a Good](#viewing-a-good-view-g)                                    | `view g/ sku/[SKU]`                                               |
-| [Find Good](#finding-a-good-find)                                           | `find n/[NAME]`                                                   |
-| [Add Order](#adding-an-order-add-o)                                         | `add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]` |
-| [Remove Order](#removing-an-order-remove-o)                                 | `remove o/ oid/[ORDER_ID]`                                        |
-| [List Orders](#listing-current-orders-list-o)                               | `list o/`                                                         |
-| [View Order](#view-order-view-o)                                            | `view o/ oid/[ORDER_ID]`                                          |
-| [Fulfill Order](#fulfill-order-fulfill)                                     | `fulfill oid/[ORDER_ID]`                                          |
-| [Add Orderline](#adding-an-orderline-add-og)                                | `add og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_NEEDED]`          |
-| [Remove Orderline Quantity](#removing-a-quantity-of-an-orderline-remove-og) | `remove og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_TO_REMOVE]`    |
-| [List Orderlines](#listing-orderlines-in-an-order-list-og)                  | `list og/ oid/[ORDER_ID]`                                         |
+| Action                                                                      | Command to be keyed into the terminal                                                                               |
+|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| [Help](#help-command-help)                                                  | Display commands for ... <br/>General: `help` <br/> Unit Good: `help ug/`<br/> Good: `help g/`<br/>Order: `help o/` |  
+| [Add Unit Good](#adding-a-unit-good-add-ug)                                 | `add ug/ sku/[SKU] n/[NAME] d/*[DESCRIPTION]* size/[CAPACITY]`                                                      |
+| [Remove Unit Good](#removing-a-unit-good-remove-ug)                         | `remove ug/ sku/[SKU]`                                                                                              |
+| [List Unit Good](#listing-unit-goods-list-ug)                               | `list ug/`                                                                                                          |
+| [Add Good quantity](#adding-quantity-of-a-good-add-g)                       | `add g/ sku/[SKU] qty/[QUANTITY]`                                                                                   |
+| [Remove Good quantity](#removing-quantity-of-a-good-remove-g)               | `remove g/ sku/[SKU] qty/[QUANTITY]`                                                                                |
+| [List Goods](#listing-available-goods-list-g) (with quantity displayed)     | `list g/`                                                                                                           |
+| [Viewing a Good](#viewing-a-good-view-g)                                    | `view g/ sku/[SKU]`                                                                                                 |
+| [Find Good](#finding-a-good-find)                                           | `find n/[NAME]`                                                                                                     |
+| [Add Order](#adding-an-order-add-o)                                         | `add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]`                                                   |
+| [Remove Order](#removing-an-order-remove-o)                                 | `remove o/ oid/[ORDER_ID]`                                                                                          |
+| [List Orders](#listing-current-orders-list-o)                               | `list o/`                                                                                                           |
+| [View Order](#view-order-view-o)                                            | `view o/ oid/[ORDER_ID]`                                                                                            |
+| [Fulfill Order](#fulfill-order-fulfill)                                     | `fulfill oid/[ORDER_ID]`                                                                                            |
+| [Add Orderline](#adding-an-orderline-add-og)                                | `add og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_NEEDED]`                                                            |
+| [Remove Orderline Quantity](#removing-a-quantity-of-an-orderline-remove-og) | `remove og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_TO_REMOVE]`                                                      |
+| [List Orderlines](#listing-orderlines-in-an-order-list-og)                  | `list og/ oid/[ORDER_ID]`                                                                                           |
 
