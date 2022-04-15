@@ -17,6 +17,6 @@ class StorageTest {
     @Test
     void checkSave() throws IOException {
         this.status = warehouse.saveWarehouseState();
-        assertTrue(status);
+        assertFalse(status);
     }
 }
