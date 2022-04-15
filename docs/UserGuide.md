@@ -21,10 +21,9 @@ The guide also has [explanations](#explanation-of-key-terms-or-symbols) of certa
 As a seasoned user of Simplst, the [command summary](#command-summary) section would be useful to show you an overview
 of the commands available and how to use them.
 
-Lastly, the [FAQ](#faq) section will provide you with answers to questions that you might have while using Simplst.
-Otherwise, the [contents page](#contents-page) below displays all the features that Simplst has to offer. You can click
-on any section and you will be brought to that section directly.
-
+Lastly, the [FAQ](#faq) section will provide you with answers to the questions that you might have while using Simplst.
+Otherwise, the [content's page](#contents-page) below displays all the features that Simplst has to offer. You can click
+on any section, and you will be brought to that section directly.
 
 ## Contents page
 * [Explanation of Key Terms or Symbols](#explanation-of-key-terms-or-symbols)
@@ -175,7 +174,7 @@ In addition to the details already present in the Unit Good, a Good will also co
 - Quantity of Good available in the warehouse
 
 ### Adding quantity of a Good `add g/`
-Adding a quantity of a Unit Good to be available at the warehouse.
+Adding a quantity of a [Unit Good](#unit-good-commands) to be available at the warehouse.
 
 Format: `add g/ sku/[SKU] qty/[QUANTITY]`
 
@@ -191,12 +190,12 @@ Another command?
 ```
 
 ### Removing quantity of a Good `remove g/`
-Removing a quantity of a Unit Good available in the warehouse.
+Removing a quantity of a [Unit Good](#unit-good-commands) available in the warehouse.
 
 Format: `remove g/ sku/[SKU] qty/[QUANTITY]`
 
 Note:
-* Used when certain units of the good has been shipped out or damanged and thus quantity has to be decreased.
+* Used when certain units of the good has been shipped out or damaged and thus quantity has to be decreased.
 
 Example of removing quantity of a specific Unit Good:<br/>
 Removing 10 of a good with its SKU being WC1<br/>
@@ -261,7 +260,7 @@ Another command?
 ```
 
 ### Finding a Good `find`
-Finding Goods in the warehouse through the name of the Unit Good. After finding the Goods, it will show the details of all the Goods found.
+Finding Goods in the warehouse through the name of the [Unit Good](#unit-good-commands). After finding the goods, it will show the details of all the goods found.
 
 Tips:
 * This command is good for finding the SKU of a Good or Unit Good which you only know the name for.
@@ -299,7 +298,7 @@ Another command?
 ```
 
 ### ***Order Commands***
-An order in Simplst records the name of the recipient of that Order and what Goods to deliver to his/her shipping address.
+An order in Simplst is used to know who made the order and what [Goods](#good-commands) to deliver to that shipping address.
 
 An Order contains:
 * Order ID which will be a unique positive number
@@ -331,7 +330,7 @@ Another command?
 
 <img src="img.png" alt="img" style="width:30px;"/>
 
-Removing the quantity of a Unit Good from its previous value.
+Removing an existing order in the Warehouse.
 
 Format: `remove o/ oid/[ORDER_ID]`
 
@@ -409,7 +408,7 @@ Another command?
 
 <img src="img.png" alt="img" style="width:30px;"/>
 
-To fulfill a currently unfulfilled order in the warehouse. To fulfill an order, Simplst will check if all the orderlines relating to the order have their required quantities met.<br/>
+Fulfill a currently unfulfilled order in the warehouse. To fulfill an order, Simplst will check if all the [Orderlines](#orderline-commands) relating to the order have their required quantities met.<br/>
 When all the orderlines quantities are fulfilled, the order will be considered as fulfilled.
 
 Format: `fulfill oid/[ORDER_ID]`
@@ -448,7 +447,7 @@ Another command?
 ```
 
 ### ***Orderline Commands***
-An orderline records the Goods required by an order. It is equivalent to a Good with the same SKU, and contains the quantity of the Good required to fulfill the particular order.
+An orderline records the Goods required by an [order](#order-commands). It is equivalent to a [Good](#good-commands) with the same SKU, and contains the quantity of the Good required to fulfill the particular order.
 
 In addition to the details in a Good. An orderline will also contain:
 - Quantity of Good required to fulfill the order
@@ -514,15 +513,15 @@ Bye
 ```
 
 ### Saving Program State
-The program uses a savefile to save all information before the program exits, and loads back everything when the program first starts up.
+The program uses a save-file to save all information before the program exits, and loads back everything when the program first starts up. 
 
-All you have to do is ensure that the jar file and the savefile are in a specific file directory structure as shown below:
+All you have to do is ensure that the jar file and the save-file are in a specific file directory structure as shown below:
 
 tp.main.jar
 output/
-WAREHOUSE.json
-
-You are strongly advised against editing the savefile structure. We did not design this system to handle manual edits to the savefile.
+	WAREHOUSE.json
+	
+You are strongly advised against editing the save-file structure. We did not design this system to handle manual edits to the save-file.
 
 ## FAQ
 Q: How to use the program effectively as a new user?
@@ -535,7 +534,7 @@ to enhance usage of this program.
 
 Q: Can I edit the savefile directly?
 
-A: As mentioned in the section [Saving Program State](#saving-program-state), it is not recommended but you are able to 
+A: As mentioned in the section [Saving Program State](#saving-program-state), it is not recommended, but you are able to 
 do so by opening the file and editing its contents. However, and manual edits that are corrupt/incorrect/incomplete and the 
 problems that follow will not fall under the responsibility of the team. Do contact the team through email at 
 queriesforsimplst@gmail.com if there are any issues faced or if the file has accidentally been manually edited.
@@ -551,23 +550,23 @@ orderlines in that order is fulfilled.
 
 ## Command Summary
 
-| Actions/Features                     | Command to be keyed into the terminal                                                                               |
-|--------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| Help                                 | Display commands for ... <br/>General: `help` <br/> Unit Good: `help ug/`<br/> Good: `help g/`<br/>Order: `help o/` |  
-| Add Unit Good                        | `add ug/ sku/[SKU] n/[NAME] d/*[DESCRIPTION]* size/[CAPACITY]`                                                      |
-| Remove Unit Good                     | `remove ug/ sku/[SKU]`                                                                                              |
-| List Unit Good                       | `list ug/`                                                                                                          |
-| Add Good quantity                    | `add g/ sku/[SKU] qty/[QUANTITY]`                                                                                   |
-| Remove Good quantity                 | `remove g/ sku/[SKU] qty/[QUANTITY]`                                                                                |
-| List Goods (with quantity displayed) | `list g/`                                                                                                           |
-| Viewing a Good                       | `view g/ sku/[SKU]`                                                                                                 |
-| Find Good                            | `find n/[NAME]`                                                                                                     |
-| Add Order                            | `add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]`                                                   |
-| Remove Order                         | `remove o/ oid/[ORDER_ID]`                                                                                          |
-| List Orders                          | `list o/`                                                                                                           |
-| View Order                           | `view o/ oid/[ORDER_ID]`                                                                                            |
-| Fulfill Order                        | `fulfill oid/[ORDER_ID]`                                                                                            |
-| Add Orderline                        | `add og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_NEEDED]`                                                            |
-| Remove Orderline Quantity            | `remove og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_TO_REMOVE]`                                                      |
-| List Orderlines                      | `list og/ oid/[ORDER_ID]`                                                                                           |
+| Action                                                                      | Command to be keyed into the terminal                                                                               |
+|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| [Help](#help-command-help)                                                  | Display commands for ... <br/>General: `help` <br/> Unit Good: `help ug/`<br/> Good: `help g/`<br/>Order: `help o/` |  
+| [Add Unit Good](#adding-a-unit-good-add-ug)                                 | `add ug/ sku/[SKU] n/[NAME] d/*[DESCRIPTION]* size/[CAPACITY]`                                                      |
+| [Remove Unit Good](#removing-a-unit-good-remove-ug)                         | `remove ug/ sku/[SKU]`                                                                                              |
+| [List Unit Good](#listing-unit-goods-list-ug)                               | `list ug/`                                                                                                          |
+| [Add Good quantity](#adding-quantity-of-a-good-add-g)                       | `add g/ sku/[SKU] qty/[QUANTITY]`                                                                                   |
+| [Remove Good quantity](#removing-quantity-of-a-good-remove-g)               | `remove g/ sku/[SKU] qty/[QUANTITY]`                                                                                |
+| [List Goods](#listing-available-goods-list-g) (with quantity displayed)     | `list g/`                                                                                                           |
+| [Viewing a Good](#viewing-a-good-view-g)                                    | `view g/ sku/[SKU]`                                                                                                 |
+| [Find Good](#finding-a-good-find)                                           | `find n/[NAME]`                                                                                                     |
+| [Add Order](#adding-an-order-add-o)                                         | `add o/ oid/[ORDER_ID] r/[RECEIVER_NAME] addr/[SHIPPING_ADDRESS]`                                                   |
+| [Remove Order](#removing-an-order-remove-o)                                 | `remove o/ oid/[ORDER_ID]`                                                                                          |
+| [List Orders](#listing-current-orders-list-o)                               | `list o/`                                                                                                           |
+| [View Order](#view-order-view-o)                                            | `view o/ oid/[ORDER_ID]`                                                                                            |
+| [Fulfill Order](#fulfill-order-fulfill)                                     | `fulfill oid/[ORDER_ID]`                                                                                            |
+| [Add Orderline](#adding-an-orderline-add-og)                                | `add og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_NEEDED]`                                                            |
+| [Remove Orderline Quantity](#removing-a-quantity-of-an-orderline-remove-og) | `remove og/ oid/[ORDER_ID] sku/[SKU] qty/[QUANTITY_TO_REMOVE]`                                                      |
+| [List Orderlines](#listing-orderlines-in-an-order-list-og)                  | `list og/ oid/[ORDER_ID]`                                                                                           |
 
