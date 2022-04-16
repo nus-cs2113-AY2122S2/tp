@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+'alt [no goods]
+'else [goods exists]
+'UserInterface -> Good ++ : listGoods()
+
+Actor ":User" as user
+participant ":UserInterface" as ui
+participant ":Warehouse" as wh
+participant ":Order" as order
+
+
+alt input flag is o/
+    user -> ui : list o/
+    ui -> wh ++ : listOrders()
+else input flag is g/
+user -> ui : list g/
+    ui -> wh ++ : listGoods()
+    wh -> order ++ : getGoods()
+end
+
+
+@enduml

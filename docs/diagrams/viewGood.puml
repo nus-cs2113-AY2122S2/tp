@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+Actor ":User" as user
+participant ":UserInterface" as ui
+participant ":Command" as command
+
+user -> ui ++ : view id/id
+create regex
+ui -> regex ++ : Regex(userInput, regex).getGroupValues()
+regex --> ui -- : Hashmap of results
+ui -> command ++ : viewGood(id, userOrderlines)
+command -> ui -- : Information of orderline based on id
+ui -> user -- : Information presented in a proper format
+@enduml

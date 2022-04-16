@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide empty members
+skinparam classAttributeIconSize 0
+
+Class Order {
+-orderId : int
+-receiver : String
+-shippingAddress : String
+-orderlines : ArrayList<Orderline>
+-isFulfilled : boolean
++getId() : int
++getReceiver() : String
++getShippingAddress() : String
++getOrderlines() : ArrayList<Orderline>
++getOrderline() : Orderline
++addOrderline(UnitGood unitGood, String qty) : void
++removeOrderlineByQty(String sku, String qty) : void
++getFulfilled() : boolean
++setFulfilled(boolean fulfilled) : void
++hasGood(String sku) : boolean
++toString() : String
+-completed() : String
+-checkPlural(int numberOfGoods) : String
+-removeOrderlineByQtyHelper(String sku, int qty) : void
+}
+
+Order ->"0..*" Orderline
+
+@enduml

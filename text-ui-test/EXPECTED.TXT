@@ -1,9 +1,39 @@
+File: output/WAREHOUSE.json is not a valid json file.
+Warehouse information can't restore.
+New login.
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
-What is your name?
-Hello James Gosling
+Simplst
+What would you like to do?
+Unit Good of SKU: WC1 added to warehouse
+Another command?
+Order 1 is added to the warehouse
+Another command?
+10 of Good with SKU: WC1 added to warehouse
+Another command?
+WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 10]
+Unit size of good: MEDIUM
+Another command?
+WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 10]
+Unit size of good: MEDIUM
+Another command?
+Wooden Chair is added to order. 8 required to fulfill
+8 of WC1 is added to order number 1
+Another command?
+List of available goods with its quantity:
+	WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 10]
+Another command?
+Orderline fulfilled
+2 Wooden Chair left in the warehouse
+Order 1 completed
+Another command?
+List of orders:
+	1 - Danny Phantom (Amity Park) : completed
+Another command?
+List of available goods with its quantity:
+	WC1 - Wooden Chair (Chair made of oak from Europe) [Qty: 2]
+Another command?
+Order 1 already completed
+Another command?
+Output Directory created at current directory!
+Warehouse information succesfully stored in output/WAREHOUSE.json
+Thanks for using Simplst 2.1!

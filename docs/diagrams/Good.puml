@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+hide empty member
+
+class Good {
+-quantity : int
++getId()
++getQuantity()
++setQuantity() : int
++removeQuantity() : void
++addQuantity() : void
++capacityTaken() : int
++String toString()
+}
+
+skinparam classAttributeIconSize 0
+
+class UnitGood {
+}
+
+UnitGood <|-down- Good
+
+@enduml

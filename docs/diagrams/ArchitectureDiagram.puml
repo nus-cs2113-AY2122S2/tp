@@ -1,0 +1,33 @@
+@startuml
+hide empty members
+skinparam classAttributeIconSize 0
+
+Class UI #green
+abstract "Command Parser"
+Class "Match Keywords"
+Class "Unit Good" {
+-Capacity capacity
+}
+Class Good
+Class Order
+Class Orderline
+Enum "<<enumeration>> \nCapacity" {
+SMALL
+MEDIUM
+LARGE
+}
+Class Warehouse
+
+User ..> UI
+UI -> "Command Parser"
+UI -down-> Warehouse
+"Command Parser" -> "Match Keywords"
+"Command Parser" -> Warehouse
+Warehouse "0..*"-> "Unit Good"
+Warehouse "0..*"--> Good
+Good -|> "Unit Good"
+Warehouse "0..*"--> Order
+Order "1..*"-> Orderline
+Orderline -|> Good
+
+@enduml

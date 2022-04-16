@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+participant Simplst as S
+participant Warehouse as w
+participant LocalStorage as ls
+
+create w
+S -> w : create instance with 0  capacity
+activate w
+w --> S : return warehouse instance
+deactivate w
+S -> w ++ : restoreWarehouseState()
+w -> ls ++ : readSaveFile(fp)
+ls --> w -- : Raw savefile string
+w -> w ++ : setTotalCapacity(capacity)
+w --> w -- : Boolean if successfully set
+w -> w ++ : : restoreOrders()
+w --> w -- : Boolean if successfully set
+w -> w ++ : :restoreGoods()
+w --> w -- : Boolean if successfully set
+w --> S : Boolean if successfully set
+deactivate w
+
+alt status == false
+destroy w
+create w
+S -> w
+activate w
+w --> S
+end
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+' !include Style.puml
+
+participant ":Duke"        as duke
+participant ":AddCommand" as addCommand
+participant ":NormalListDataManager" as normalListDataManager
+
+-> duke : add command
+activate duke
+
+duke -> addCommand : execute(normalFinanceManager:NormalFinanceManager,...):Command
+activate addCommand
+
+addCommand -> normalListDataManager : appendToEntryTextFIle (entry:Entry)
+activate normalListDataManager
+normalListDataManager --> addCommand
+deactivate normalListDataManager
+
+addCommand --> duke
+deactivate addCommand
+
+return
+
+
+@enduml
