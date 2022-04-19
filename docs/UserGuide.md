@@ -29,7 +29,7 @@ Usage: `packages`
 ### Viewing a package: `info`
 View a specified Travel Package from the list of Packages based on the package ID.
 
-Format: `info {package_id}`
+Format: `info {package_number}`
 
 Example of usage:
 
@@ -41,7 +41,8 @@ View list of packages sorted by ascending date or price and descending vacancies
 Format: `all` 
 
 Example of usage:
-`all` 
+```
+all
 
 Sort packages by:
 1. Date (Earliest to Latest) 
@@ -49,7 +50,8 @@ Sort packages by:
 3. Price
 4. Return to main menu.
 
-`Enter 1-4` 
+Enter 1-4
+```
 
 
 
@@ -57,11 +59,11 @@ Sort packages by:
 ### Adding a package: `add`
 Adds a new Travel Package to the list of Packages.
 
-Format: `add {package_name},{package_id},{startDate},{endDate},{hotel},{price},{country},{vacancies}`
+Format: `add {package_name},{package_number},{startDate},{endDate},{hotel},{price},{country},{vacancies}`
 
 * The `startDate` and `endDate` must be in the format DD/MM/YYYY.
 * The `price` can only contain numbers or decimal points.
-* `package_id` should be unique. 
+* `package_number` should be unique. 
 
 
 Example of usage: 
@@ -72,7 +74,7 @@ Example of usage:
 ### Deleting a package: `delete`
 Delete a Travel Package from the list of Packages based on the package ID.
 
-Format: `delete {package_id}`
+Format: `delete {package_number}`
 
 Example of usage: 
 
@@ -81,7 +83,7 @@ Example of usage:
 ### Placing a reservation: `reserve`
 Add a reservation to a Travel Package.
 
-Format: `reserve {package_id},{contact_name},{contact_number},{number_pax}`
+Format: `reserve {package_number},{contact_name},{contact_number},{number_pax}`
 
 Example of usage: 
 
@@ -90,7 +92,7 @@ Example of usage:
 ### Removing a reservation: `remove`
 Remove a reservation from a Travel Package using packageID and contact number. 
 
-Format: `remove {package_id},{contact_number}`
+Format: `remove {package_number},{contact_number}`
 
 Example of usage: 
 
@@ -99,11 +101,17 @@ Example of usage:
 ### View reservations: `reservations`
 View reservations booked in a Travel Package.
 
-Format: `reservations {package_id}`
+Format: `reservations {package_number}`
 
 Example of usage: 
 
 `reservations 2`
+
+### Exit application:
+Format and Usage:
+```
+bye
+```
 
 ## FAQ
 
@@ -116,17 +124,17 @@ Example of usage:
 ## Command Summary
 
 
-| Command | Syntax |
-| --- | :---  |
-| help | help |
-| packages | packages |
-| info | info {package_number} |
-| all | all | 
-| add | add {package_name},{package_id},{startDate},{endDate},{hotel},{price},{country},{max_vacancies} |
-| delete | delete {package_id} |
-| reserve  | reserve {package_id},{contact_name},{contact_number},{number_pax} |
-| remove | remove {package_id},{conact_number} |
-| reservations | reservations {package_id} |
+| Command | Syntax                                                                                          |
+| --- |:------------------------------------------------------------------------------------------------|
+| help | help                                                                                            |
+| packages | packages                                                                                        |
+| info | info {package_number}                                                                               |
+| all | all                                                                                             | 
+| add | add {package_name},{package_number},{startDate},{endDate},{hotel},{price},{country},{max_vacancies} |
+| delete | delete {package_number}                                                                             |
+| reserve  | reserve {package_number},{contact_name},{contact_number},{number_pax}                               |
+| remove | remove {package_number},{contact_number}                                                            |
+| reservations | reservations {package_number}                                                                       |
 
 
 

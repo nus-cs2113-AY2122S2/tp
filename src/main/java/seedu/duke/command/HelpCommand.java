@@ -52,6 +52,10 @@ public class HelpCommand extends Command {
                                                 "Format: hotels {package_number}" +
                                                 "\nUsage: hotels 1\n";
 
+    public static final String HELP_FORMAT = "QUICK HELP\nPrint detailed instructions on " +
+            "the available commands that user may input\nForma and Usage: help\n";
+    public static final String EXIT_FORMAT = "EXIT APPLICATION\nFormat and Usage: bye\n";
+
 
     @Override
     public void execute(Packages packages) {
@@ -64,6 +68,8 @@ public class HelpCommand extends Command {
                             DELETE_FORMAT + SEPARATOR +
                             RESERVATIONS_FORMAT + SEPARATOR +
                             RESERVE_FORMAT + SEPARATOR +
-                            REMOVE_FORMAT + SEPARATOR);
+                            REMOVE_FORMAT + SEPARATOR +
+                            HELP_FORMAT + SEPARATOR +
+                            EXIT_FORMAT + SEPARATOR);
     }
 }
